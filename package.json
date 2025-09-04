@@ -1,6 +1,6 @@
 {
   "name": "copilot-project",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Project configured for pnpm and Jest documentation integration.",
   "main": "index.js",
   "scripts": {
