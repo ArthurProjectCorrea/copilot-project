@@ -7,7 +7,7 @@
     "copilot-config": "scripts/copilot-config.js"
   },
   "scripts": {
-    "postinstall": "node scripts/init-github-config.js",
+    "postinstall": "node scripts/postinstall.js",
     "postupdate": "node scripts/init-github-config.js",
     "prepack": "node scripts/init-github-config.js",
     "init-config": "node scripts/init-github-config.js",
@@ -49,5 +49,8 @@
     "eslint": "^9.34.0",
     "husky": "^9.1.7",
     "prettier": "^3.6.2"
+  },
+  "dependencies": {
+    "copilot-project": "^1.1.0"
   }
 }

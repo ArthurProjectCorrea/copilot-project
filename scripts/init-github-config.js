@@ -176,7 +176,8 @@ function initGithubConfig(forceRun = false) {
     }
   }
 
-  if (isSourceProject && !forceRun) {
+  // Durante desenvolvimento do copilot-project, pula a execução a menos que seja forçada
+  if (isSourceProject && !forceRun && !isInstall) {
     console.log('💡 This appears to be the source copilot-project. Skipping initialization.');
     console.log('💡 Use --force flag to run anyway for testing purposes.');
     return;
