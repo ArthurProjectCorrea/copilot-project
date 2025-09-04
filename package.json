@@ -9,7 +9,7 @@
     "check-types": "tsc --noEmit",
     "build": "echo 'No build step required for plain JS. Add your build command here if needed.'",
     "format": "prettier --write .",
-    "commit": "cz",
+    "commit": "pnpm exec cz",
     "changeset": "changeset",
     "release": "changeset publish"
   },
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.6",
     "@types/node": "^24.3.1",
+    "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.34.0",
     "husky": "^9.1.7",
