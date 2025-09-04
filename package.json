@@ -49,6 +49,14 @@
     "scripts",
     "index.js"
   ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,md,html,vue}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
   "devDependencies": {
     "@changesets/cli": "^2.29.6",
     "@types/node": "^24.3.1",
@@ -56,6 +64,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.34.0",
     "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
