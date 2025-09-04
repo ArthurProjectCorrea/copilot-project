@@ -1,19 +1,21 @@
 {
   "name": "copilot-project",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Project configured for pnpm and Jest documentation integration.",
   "main": "index.js",
   "scripts": {
-  "postinstall": "node scripts/postinstall.js"
+  "postinstall": "node init-github-config.js"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
-  ,
+  "license": "MIT",
   "files": [
     ".github",
     "docs",
     "scripts",
     "index.js"
-  ]
+  ],
+  "dependencies": {
+    "copilot-project": "^1.0.2"
+  }
 }
