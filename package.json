@@ -9,4 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "MIT"
+  ,
+  "files": [
+    ".github",
+    "docs",
+    "scripts",
+    "index.js"
+  ]
 }
