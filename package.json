@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "Project configured for pnpm and Jest documentation integration.",
   "main": "index.js",
+  "bin": {
+    "copilot-config": "scripts/copilot-config.js"
+  },
   "scripts": {
-    "postinstall": "node init-github-config.js",
+    "postinstall": "node scripts/init-github-config.js",
+    "postupdate": "node scripts/init-github-config.js",
+    "prepack": "node scripts/init-github-config.js",
+    "init-config": "node scripts/init-github-config.js",
     "lint": "eslint . --ext .js",
     "check-types": "tsc --noEmit",
     "build": "echo 'No build step required for plain JS. Add your build command here if needed.'",
@@ -15,15 +21,25 @@
     "changeset:publish": "changeset publish",
     "release": "pnpm run build && pnpm run changeset:publish"
   },
-  "keywords": [],
+  "keywords": [
+    "github",
+    "copilot",
+    "ai",
+    "configuration",
+    "chatmodes",
+    "prompts",
+    "instructions",
+    "development",
+    "automation",
+    "setup"
+  ],
   "author": "",
   "license": "MIT",
   "files": [
     ".github",
     "docs",
     "scripts",
-    "index.js",
-    "init-github-config.js"
+    "index.js"
   ],
   "devDependencies": {
     "@changesets/cli": "^2.29.6",

@@ -32,21 +32,66 @@ Analyzes commit history to generate semantic versioning changesets and release n
 
 Universal development assistance with intelligent framework detection and contextual guidance.
 
+## Installation & Auto-Configuration
+
+### Automatic Setup
+
+The package automatically configures GitHub Copilot in your project:
+
+```bash
+# Install the package
+npm install copilot-project
+# or
+pnpm add copilot-project
+# or  
+yarn add copilot-project
+```
+
+**What happens automatically:**
+- ✅ Creates `.github/chatmodes/`, `.github/instructions/`, and `.github/prompts/` directories
+- ✅ Copies all GitHub Copilot configuration files
+- ✅ Sets up specialized chat modes for development
+- ✅ Maintains version control and automatic updates
+
+### Manual Configuration
+
+You can also run the configuration manually:
+
+```bash
+# Via npm script
+npm run init-config
+
+# Via direct execution  
+npx copilot-config
+
+# With options
+npx copilot-config --help
+npx copilot-config --force
+```
+
+### Auto-Update System
+
+The configuration automatically updates when you:
+- **Install** the package (`postinstall`)
+- **Update** the package (`postupdate`) 
+- **Build/Package** your project (`prepack`)
+
+The system intelligently detects changes and only updates files that need updating.
+
 ## Usage
 
-1. Install in your project:
-   ```sh
-   pnpm add copilot-project
-   # or
-   npm install copilot-project
-   ```
-2. After installation, the configuration files in `.github` will be automatically created/updated.
-3. Use GitHub Copilot chat modes:
-   - Type `@workspace /jest` for Jest assistance
+### Using GitHub Copilot Chat Modes
+
+1. **Install in your project** (see Installation section above)
+2. **Use GitHub Copilot chat modes:**
+   - Type `@workspace /jest` for Jest testing assistance
    - Type `@workspace /commit-analyzer` when using Commitizen
-   - Type `@workspace /changeset-analyzer` when creating changesets
+   - Type `@workspace /changeset-analyzer` when creating changesets  
    - Type `@workspace /dev` for general development help
-4. Access comprehensive local documentation for Jest and NestJS in `node_modules/copilot-project/docs/`
+3. **Access local documentation** in `node_modules/copilot-project/docs/`
+   - Jest documentation and examples
+   - NestJS comprehensive guides
+   - Framework-specific tutorials
 
 ## Development
 
