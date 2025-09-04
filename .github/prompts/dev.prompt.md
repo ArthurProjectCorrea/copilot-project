@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 ---
 
 **Task: Provide expert development assistance with context-aware documentation integration**

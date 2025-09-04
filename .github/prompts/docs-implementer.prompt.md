@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 ---
 
 **Task: Implement complete documentation synchronization system for new frameworks and tools**

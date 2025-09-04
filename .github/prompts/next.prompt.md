@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 ---
 
 **Task: Provide Next.js development guidance using comprehensive local documentation**

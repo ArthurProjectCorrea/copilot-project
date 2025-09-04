@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 ---
 
 **Task: Provide Jest testing guidance using comprehensive local documentation**

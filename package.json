@@ -15,6 +15,7 @@
     "check-types": "tsc --noEmit",
     "build": "echo 'No build step required for plain JS. Add your build command here if needed.'",
     "format": "prettier --write .",
+    "format:staged": "lint-staged",
     "commit": "pnpm exec cz",
     "changeset": "changeset",
     "changeset:version": "changeset version",

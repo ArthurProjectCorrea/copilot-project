@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 ---
 
 **Task: Provide NestJS development guidance using comprehensive local documentation**
