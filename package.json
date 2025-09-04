@@ -1,6 +1,6 @@
 {
   "name": "copilot-project",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "description": "Project configured for pnpm and Jest documentation integration.",
   "main": "index.js",
   "bin": {
@@ -50,5 +50,7 @@
     "husky": "^9.1.7",
     "prettier": "^3.6.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "copilot-project": "^1.1.0"
+  }
 }
