@@ -29,7 +29,7 @@ console.log('📂 Destination directory:', destGithub);
 if (!fs.existsSync(srcDir)) {
   console.error('❌ Source .github directory not found at:', srcDir);
   console.log('📍 Trying alternative source location...');
-  
+
   // Try alternative location
   const altSrcDir = path.join(__dirname, '..', '..', '..', 'copilot-project', '.github');
   if (fs.existsSync(altSrcDir)) {
@@ -46,11 +46,11 @@ function copyRecursive(src, dest) {
     fs.mkdirSync(dest, { recursive: true });
     console.log('📁 Created directory:', dest);
   }
-  
+
   fs.readdirSync(src).forEach((file) => {
     const srcFile = path.join(src, file);
     const destFile = path.join(dest, file);
-    
+
     if (fs.lstatSync(srcFile).isDirectory()) {
       copyRecursive(srcFile, destFile);
     } else {
