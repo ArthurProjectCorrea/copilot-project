@@ -1,6 +1,6 @@
 {
   "name": "copilot-project",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "description": "Project configured for pnpm and Jest documentation integration.",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,9 @@
     "format": "prettier --write .",
     "commit": "pnpm exec cz",
     "changeset": "changeset",
-    "release": "changeset publish"
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish",
+    "release": "pnpm run build && pnpm run changeset:publish"
   },
   "keywords": [],
   "author": "",

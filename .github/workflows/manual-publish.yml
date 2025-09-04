@@ -1,0 +1,127 @@
+name: Manual npm Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      dry_run:
+        description: 'Dry run (do not actually publish)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  manual-publish:
+    name: Manual Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run Quality Checks
+        run: |
+          pnpm run lint
+          pnpm run check-types
+          pnpm run format --check
+
+      - name: Build Package
+        run: pnpm run build
+
+      - name: Create Changeset (if not exists)
+        run: |
+          if [ ! "$(ls -A .changeset/*.md 2>/dev/null | grep -v README)" ]; then
+            echo "No changesets found. Creating one..."
+            cat > .changeset/manual-release.md << EOF
+          ---
+          "copilot-project": ${{ github.event.inputs.version }}
+          ---
+
+          Manual release triggered from GitHub Actions
+          EOF
+          fi
+
+      - name: Version Package
+        run: pnpm changeset:version
+
+      - name: Commit Version Changes
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(release): version packages [skip ci]"
+            git push origin main
+          fi
+
+      - name: Publish to npm (Dry Run)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          echo "🧪 DRY RUN: Would publish the following:"
+          pnpm changeset:publish --dry-run
+
+      - name: Publish to npm
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: pnpm changeset:publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const version = packageJson.version;
+
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: `v${version}`,
+              name: `Release v${version}`,
+              body: `🚀 Manual release v${version}\n\nPublished via GitHub Actions workflow.`,
+              draft: false,
+              prerelease: false
+            });
+
+      - name: Summary
+        run: |
+          echo "## 📋 Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ github.event.inputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Dry Run**: ${{ github.event.inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event.inputs.dry_run }}" == "false" ]; then
+            echo "- **Published**: 🎉 Package published to npm" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Published**: 🧪 Dry run only" >> $GITHUB_STEP_SUMMARY
+          fi

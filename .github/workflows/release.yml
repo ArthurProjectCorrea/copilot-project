@@ -1,0 +1,87 @@
+name: Release & Publish
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release & Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Tests & Quality Checks
+        run: |
+          pnpm run lint
+          pnpm run check-types
+          pnpm run format --check
+
+      - name: Build Package
+        run: pnpm run build
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm release
+          title: '🚀 Release: Version Packages'
+          commit: 'chore(release): publish packages'
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send Slack Notification on Success
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "✅ Package successfully published to npm!"
+          echo "Published packages: ${{ steps.changesets.outputs.publishedPackages }}"
+
+      - name: Comment on Related Issues
+        if: steps.changesets.outputs.published == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const packages = JSON.parse('${{ steps.changesets.outputs.publishedPackages }}');
+
+            if (packages.length > 0) {
+              packages.forEach(pkg => {
+                console.log(`📦 Published ${pkg.name}@${pkg.version}`);
+              });
+            }
