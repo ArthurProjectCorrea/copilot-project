@@ -13,6 +13,7 @@ Key behaviors:
   - For NestJS-related queries: prioritize node_modules/copilot-project/docs/nest.js following nest.instructions.md guidelines
   - For Next.js-related queries: prioritize node_modules/copilot-project/docs/next.js following next.instructions.md guidelines
   - For Prisma-related queries: prioritize node_modules/copilot-project/docs/prisma following prisma.instructions.md guidelines
+  - For documentation implementation requests: use docs-implementer.instructions.md to create complete sync systems
 - Adapt responses based on detected framework/technology context
 - Provide context-aware solutions that fit the specific project type and framework
 - Maintain consistency with project conventions and established patterns
