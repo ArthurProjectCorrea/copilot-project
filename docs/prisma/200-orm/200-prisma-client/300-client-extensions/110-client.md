@@ -1,0 +1,61 @@
+---
+title: '`client`: Add methods to Prisma Client'
+metaTitle: 'Prisma Client extensions: client component'
+metaDescription: 'Extend the functionality of Prisma Client, client component'
+toc_max_heading_level: 4
+---
+
+<!-- TopBlock -->
+
+<!-- Admonition -->
+
+Prisma Client extensions are Generally Available from versions 4.16.0 and later. They were introduced in Preview in version 4.7.0. Make sure you enable the `clientExtensions` Preview feature flag if you are running on a version earlier than 4.16.0.
+
+You can use the `client` [Prisma Client extensions](/orm/prisma-client/client-extensions) component to add top-level methods to Prisma Client.
+
+## Extend Prisma Client
+
+Use the `$extends` [client-level method](/orm/reference/prisma-client-reference#client-methods) to create an _extended client_. An extended client is a variant of the standard Prisma Client that is wrapped by one or more extensions. Use the `client` extension component to add top-level methods to Prisma Client.
+
+To add a top-level method to Prisma Client, use the following structure:
+
+```ts
+const prisma = new PrismaClient().$extends({
+  client?: { ... }
+})
+```
+
+### Example
+
+The following example uses the `client` component to add two methods to Prisma Client:
+
+- `$log` outputs a message.
+- `$totalQueries` returns the number of queries executed by the current client instance. It uses the [metrics](/orm/prisma-client/observability-and-logging/metrics) feature to collect this information.
+
+<!-- Admonition -->
+
+To use metrics in your project, you must enable the `metrics` feature flag in the `generator` block of your `schema.prisma` file. [Learn more](/orm/prisma-client/observability-and-logging/metrics#2-enable-the-feature-flag-in-the-prisma-schema-file).
+
+```ts
+const prisma = new PrismaClient().$extends({
+  client: {
+    $log: (s: string) => console.log(s),
+    async $totalQueries() {
+      const index_prisma_client_queries_total = 0;
+      // Prisma.getExtensionContext(this) in the following block
+      // returns the current client instance
+      const metricsCounters = await (
+        await Prisma.getExtensionContext(this).$metrics.json()
+      ).counters;
+
+      return metricsCounters[index_prisma_client_queries_total].value;
+    },
+  },
+});
+
+async function main() {
+  prisma.$log('Hello world');
+  const totalQueries = await prisma.$totalQueries();
+  console.log(totalQueries);
+}
+```

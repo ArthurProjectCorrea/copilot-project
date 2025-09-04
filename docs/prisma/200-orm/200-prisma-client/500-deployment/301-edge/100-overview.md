@@ -1,0 +1,96 @@
+---
+title: 'Deploying edge functions with Prisma ORM'
+metaTitle: 'Overview: Deploy Prisma ORM at the Edge'
+metaDescription: 'Learn how to deploy your Prisma-backed apps to edge functions like Cloudflare Workers or Vercel Edge Functions'
+sidebar_label: 'Overview'
+tocDepth: 2
+---
+
+You can deploy an application that uses Prisma ORM to the edge. Depending on which edge function provider and which database you use, there are different considerations and things to be aware of.
+
+Here is a brief overview of all the edge function providers that are currently supported by Prisma ORM:
+
+| Provider / Product     | Supported natively with Prisma ORM                      | Supported with Prisma Postgres (and Prisma Accelerate) |
+| ---------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Vercel Edge Functions  | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Vercel Edge Middleware | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Cloudflare Workers     | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Cloudflare Pages       | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Deno Deploy            | [Not yet](https://github.com/prisma/prisma/issues/2452) | ✅                                                     |
+
+Deploying edge functions that use Prisma ORM on Cloudflare and Vercel is currently in [Preview](/orm/more/releases#preview).
+
+:::note
+
+If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
+
+**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["queryCompiler", "driverAdapters"]
+}
+```
+
+Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+When using this architecture:
+
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+
+This setup can simplify deployments in:
+
+- Serverless functions
+- Edge runtimes
+- Read-only filesystem environments
+- CI/CD pipelines with strict size limits
+
+Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+
+:::
+
+## Edge-compatibility of database drivers
+
+### Why are there limitations around database drivers in edge functions?
+
+Edge functions typically don't use the standard Node.js runtime. For example, Vercel Edge Functions and Cloudflare Workers are running code in [V8 isolates](https://v8docs.nodesource.com/node-0.8/d5/dda/classv8_1_1_isolate.html). Deno Deploy is using the [Deno](https://deno.com/) JavaScript runtime. As a consequence, these edge functions only have access to a small subset of the standard Node.js APIs and also have constrained computing resources (CPU and memory).
+
+In particular, the constraint of not being able to freely open TCP connections makes it difficult to talk to a traditional database from an edge function. While Cloudflare has introduced a [`connect()`](https://developers.cloudflare.com/workers/runtime-apis/tcp-sockets/) API that enables limited TCP connections, this still only enables database access using specific database drivers that are compatible with that API.
+
+:::note
+
+We recommend using [Prisma Postgres](/postgres). It is fully supported on edge runtimes and does not require a specialized edge-compatible driver. For other databases, [Prisma Accelerate](/accelerate) extends edge compatibility so you can connect to _any_ database from _any_ edge function provider.
+
+:::
+
+### Which database drivers are edge-compatible?
+
+Here is an overview of the different database drivers and their compatibility with different edge function offerings:
+
+- [Neon Serverless](https://neon.tech/docs/serverless/serverless-driver) uses HTTP to access the database. It works with Cloudflare Workers and Vercel Edge Functions.
+- [PlanetScale Serverless](https://planetscale.com/docs/tutorials/planetscale-serverless-driver) uses HTTP to access the database. It works with Cloudflare Workers and Vercel Edge Functions.
+- [`node-postgres`](https://node-postgres.com/) (`pg`) uses Cloudflare's `connect()` (TCP) to access the database. It is only compatible with Cloudflare Workers, not with Vercel Edge Functions.
+- [`@libsql/client`](https://github.com/tursodatabase/libsql-client-ts) is used to access Turso databases. It works with Cloudflare Workers and Vercel Edge Functions.
+- [Cloudflare D1](https://developers.cloudflare.com/d1/) is used to access D1 databases. It is only compatible with Cloudflare Workers, not with Vercel Edge Functions.
+- [Prisma Postgres](/postgres) is used to access a PostgreSQL database built on bare-metal using unikernels. It is supported on both Cloudflare Workers and Vercel.
+
+There's [also work being done](https://github.com/sidorares/node-mysql2/pull/2289) on the `node-mysql2` driver which will enable access to traditional MySQL databases from Cloudflare Workers and Pages in the future as well.
+
+You can use all of these drivers with Prisma ORM using the respective [driver adapters](/orm/overview/databases/database-drivers).
+
+Depending on which deployment provider and database/driver you use, there may be special considerations. Please take a look at the deployment docs for your respective scenario to make sure you can deploy your application successfully:
+
+- Cloudflare
+  - [PostgreSQL (traditional)](/orm/prisma-client/deployment/edge/deploy-to-cloudflare#postgresql-traditional)
+  - [PlanetScale](/orm/prisma-client/deployment/edge/deploy-to-cloudflare#planetscale)
+  - [Neon](/orm/prisma-client/deployment/edge/deploy-to-cloudflare#neon)
+  - [Cloudflare D1](/guides/cloudflare-d1)
+  - [Prisma Postgres](https://developers.cloudflare.com/workers/tutorials/using-prisma-postgres-with-workers)
+- Vercel
+  - [Vercel Postgres](/orm/prisma-client/deployment/edge/deploy-to-vercel#vercel-postgres)
+  - [Neon](/orm/prisma-client/deployment/edge/deploy-to-vercel#neon)
+  - [PlanetScale](/orm/prisma-client/deployment/edge/deploy-to-vercel#planetscale)
+  - [Prisma Postgres](/guides/nextjs)
+
+If you want to deploy an app using Turso, you can follow the instructions [here](/orm/overview/databases/turso).

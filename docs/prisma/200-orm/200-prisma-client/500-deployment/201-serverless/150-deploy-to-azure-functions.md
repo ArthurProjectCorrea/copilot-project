@@ -1,0 +1,60 @@
+---
+title: 'Deploy to Azure Functions'
+metaTitle: 'How to deploy an app using Prisma ORM to Azure Functions'
+metaDescription: 'Learn how to deploy a Prisma Client based REST API to Azure Functions and connect to an Azure SQL database'
+---
+
+This guide explains how to avoid common issues when deploying a Node.js-based function app to Azure using [Azure Functions](https://azure.microsoft.com/en-us/products/functions/).
+
+Azure Functions is a serverless deployment platform. You do not need to maintain infrastructure to deploy your code. With Azure Functions, the fundamental building block is the [function app](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=blob&pivots=programming-language-typescript). A function app provides an execution context in Azure in which your functions run. It is comprised of one or more individual functions that Azure manages, deploys, and scales together. You can organize and collectively manage multiple functions as a single logical unit.
+
+:::tip Use Prisma ORM without Rust binaries
+
+If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
+
+**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["queryCompiler", "driverAdapters"]
+}
+```
+
+Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+When using this architecture:
+
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+
+This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+
+:::
+
+## Prerequisites
+
+- An existing function app project with Prisma ORM
+
+## Things to know
+
+While Prisma ORM works well with Azure functions, there are a few things to take note of before deploying your application.
+
+### Define multiple binary targets
+
+When deploying a function app, the operating system that Azure functions runs a remote build is different from the one used to host your functions. Therefore, we recommend specifying the following [`binaryTargets` options](/orm/reference/prisma-schema-reference#binarytargets-options) in your Prisma schema:
+
+```prisma file=schema.prisma highlight=3;normal showLineNumbers
+generator client {
+  provider      = "prisma-client-js"
+  //highlight-next-line
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+```
+
+### Connection pooling
+
+Generally, when you use a FaaS (Function as a Service) environment to interact with a database, every function invocation can result in a new connection to the database. This is not a problem with a constantly running Node.js server. Therefore, it is beneficial to pool DB connections to get better performance. To solve this issue, you can use the [Prisma Accelerate](/accelerate). For other solutions, see the [connection management guide for serverless environments](/orm/prisma-client/setup-and-configuration/databases-connections#serverless-environments-faas).
+
+## Summary
+
+For more insight into Prisma Client's API, explore the function handlers and check out the [Prisma Client API Reference](/orm/reference/prisma-client-reference)

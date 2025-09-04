@@ -1,0 +1,472 @@
+---
+title: 'Prisma Config reference'
+metaTitle: 'Reference documentation for the prisma config file'
+metaDescription: 'This page gives an overview of all Prisma config options available for use.'
+sidebar_label: 'Prisma Config'
+---
+
+## Overview
+
+The Prisma Config file configures the Prisma CLI, including subcommands like `migrate` and `studio`, using TypeScript.
+
+You can define your config in either of two ways:
+
+- Using the `defineConfig` helper:
+
+  ```ts
+  import path from 'node:path';
+  import { defineConfig } from 'prisma/config';
+
+  export default defineConfig({
+    schema: path.join('prisma', 'schema.prisma'),
+    migrations: {
+      path: path.join('db', 'migrations'),
+    },
+    views: {
+      path: path.join('db', 'views'),
+    },
+    typedSql: {
+      path: path.join('db', 'queries'),
+    },
+  });
+  ```
+
+- Using TypeScript's `satisfies` operator with the `PrismaConfig` type:
+
+  ```ts
+  import path from 'node:path';
+  import type { PrismaConfig } from 'prisma';
+
+  export default {
+    schema: path.join('db', 'schema.prisma'),
+    migrations: {
+      path: path.join('db', 'migrations'),
+    },
+    views: {
+      path: path.join('db', 'views'),
+    },
+    typedSql: {
+      path: path.join('db', 'queries'),
+    },
+  } satisfies PrismaConfig;
+  ```
+
+## Configuration interface
+
+Here is a simplified version of the `PrismaConfig` type:
+
+```ts
+export declare type PrismaConfig = {
+  // Whether features with an unstable API are enabled.
+  experimental: {
+    adapter: true,
+    externalTables: true,
+    studio: true,
+  },
+
+  // The path to the schema file, or path to a folder that shall be recursively searched for *.prisma files.
+  schema?: string;
+
+  // The Driver Adapter used for Prisma CLI.
+  adapter?: () => Promise<!-- SqlMigrationAwareDriverAdapterFactory -->;
+
+  // The configuration for Prisma Studio.
+  studio?: {
+    adapter: () => Promise<!-- SqlMigrationAwareDriverAdapterFactory -->;
+  };
+
+  // Configuration for Prisma migrations.
+  migrations?: {
+    path: string;
+    seed: string;
+    initShadowDb: string;
+  };
+
+  // Configuration for the database view entities.
+  views?: {
+    path: string;
+  };
+
+  // Configuration for the `typedSql` preview feature.
+  typedSql?: {
+    path: string;
+  };
+};
+```
+
+## Supported file extensions
+
+Prisma Config files can be named as `prisma.config.*` or `.config/prisma.*` with the extensions `js`, `ts`, `mjs`, `cjs`, `mts`, or `cts`. Other extensions are supported to ensure compatibility with different TypeScript compiler settings.
+
+:::tip[Recommendation]
+
+- Use **`prisma.config.ts`** for small TypeScript projects.
+- Use **`.config/prisma.ts`** for larger TypeScript projects with multiple configuration files (following the [`.config` directory proposal](https://github.com/pi0/config-dir)).
+
+:::
+
+## Options reference
+
+### `schema`
+
+Configures how Prisma ORM locates and loads your schema file(s). Can be a file or folder path. Relative paths are resolved relative to the `prisma.config.ts` file location. See [here](/orm/prisma-schema/overview/location#multi-file-prisma-schema) for more info about schema location options.
+
+| Property | Type     | Required | Default                                        |
+| -------- | -------- | -------- | ---------------------------------------------- |
+| `schema` | `string` | No       | `./prisma/schema.prisma` and `./schema.prisma` |
+
+### `migrate`
+
+Configures how Prisma Migrate communicates with your underlying database. See sub-options below for details.
+
+| Property  | Type     | Required | Default |
+| --------- | -------- | -------- | ------- |
+| `migrate` | `object` | No       | `{}`    |
+
+### `adapter`
+
+A function that returns a Prisma driver adapter instance which is used by the Prisma CLI to run migrations. The function should return a `Promise` that resolves to a valid Prisma driver adapter.
+
+| Property  | Type                                                          | Required | Default |
+| --------- | ------------------------------------------------------------- | -------- | ------- |
+| `adapter` | `() => Promise<!-- SqlMigrationAwareDriverAdapterFactory -->` | No       | none    |
+
+Example using the Prisma ORM D1 driver adapter:
+
+```ts
+// import your .env file
+
+export default {
+  experimental: {
+    adapter: true,
+  },
+  schema: path.join('prisma', 'schema.prisma'),
+  async adapter() {
+    return new PrismaD1({
+      CLOUDFLARE_D1_TOKEN: process.env.CLOUDFLARE_D1_TOKEN,
+      CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
+      CLOUDFLARE_DATABASE_ID: process.env.CLOUDFLARE_DATABASE_ID,
+    });
+  },
+} satisfies PrismaConfig;
+```
+
+:::note
+
+As of [Prisma ORM v6.11.0](https://github.com/prisma/prisma/releases/tag/6.11.0), the D1 adapter has been renamed from `PrismaD1HTTP` to `PrismaD1`.
+
+:::
+
+### `studio`
+
+Configures how Prisma Studio connects to your database. See sub-options below for details.
+
+| Property | Type     | Required | Default |
+| -------- | -------- | -------- | ------- |
+| `studio` | `object` | No       | none    |
+
+#### `studio.adapter`
+
+A function that returns a Prisma driver adapter instance. The function receives an `env` parameter containing environment variables and should return a `Promise` that resolves to a valid Prisma driver adapter.
+
+| Property          | Type                                                                  | Required | Default |
+| ----------------- | --------------------------------------------------------------------- | -------- | ------- |
+| `studio.adapter ` | `(env: Env) => Promise<!-- SqlMigrationAwareDriverAdapterFactory -->` | No       | none    |
+
+Example using the Prisma ORM LibSQL driver adapter:
+
+```ts
+export default {
+  experimental: {
+    studio: true,
+  },
+  studio: {
+    adapter: async (env: Env) => {
+      const { PrismaLibSQL } = await import('@prisma/adapter-libsql');
+      const { createClient } = await import('@libsql/client');
+
+      const libsql = createClient({
+        url: env.DOTENV_PRISMA_STUDIO_LIBSQL_DATABASE_URL,
+      });
+      return new PrismaLibSQL(libsql);
+    },
+  },
+} satisfies PrismaConfig;
+```
+
+### `tables.external` and `enums.external`
+
+These options declare tables and enums in your database that are **managed externally** (not by Prisma Migrate). You can still query them with Prisma Client, but they will be ignored by migrations.
+
+| Property          | Type       | Required | Default |
+| ----------------- | ---------- | -------- | ------- |
+| `tables.external` | `string[]` | No       | `[]`    |
+| `enums.external`  | `string[]` | No       | `[]`    |
+
+**Example:**
+
+```ts
+export default defineConfig({
+  experimental: {
+    externalTables: true,
+  },
+  tables: {
+    external: ['public.users'],
+  },
+  enums: {
+    external: ['public.role'],
+  },
+});
+```
+
+Learn more about the [`externalTables` feature here](/orm/prisma-schema/data-model/externally-managed-tables).
+
+### `migrations.path`
+
+The path to the directory where Prisma should store migration files, and look for them.
+
+| Property          | Type     | Required | Default |
+| ----------------- | -------- | -------- | ------- |
+| `migrations.path` | `string` | No       | none    |
+
+### `migrations.seed`
+
+This option allows you to define a script that Prisma runs to seed your database after running migrations or using the npx prisma db seed command. The string should be a command that can be executed in your terminal, such as with `node`, `ts-node`, or `tsx`.
+
+| Property          | Type     | Required | Default |
+| ----------------- | -------- | -------- | ------- |
+| `migrations.seed` | `string` | No       | none    |
+
+**Example:**
+
+```ts
+export default defineConfig({
+  migrations: {
+    seed: `tsx db/seed.ts`,
+  },
+});
+```
+
+### `migrations.initShadowDb`
+
+This option allows you to define SQL statements that Prisma runs on the **shadow database** before creating migrations. It is useful when working with [external managed tables](/orm/prisma-schema/data-model/externally-managed-tables), as Prisma needs to know about the structure of these tables to correctly generate migrations.
+
+| Property                  | Type     | Required | Default |
+| ------------------------- | -------- | -------- | ------- |
+| `migrations.initShadowDb` | `string` | No       | none    |
+
+**Example:**
+
+```ts
+export default defineConfig({
+  experimental: {
+    externalTables: true,
+  },
+  tables: {
+    external: ['public.users'],
+  },
+  migrations: {
+    initShadowDb: `
+      CREATE TABLE public.users (id SERIAL PRIMARY KEY);
+    `,
+  },
+});
+```
+
+Learn more about the [`externalTables` feature here](/orm/prisma-schema/data-model/externally-managed-tables).
+
+### `views.path`
+
+The path to the directory where Prisma should look for the SQL view definitions.
+
+| Property     | Type     | Required | Default |
+| ------------ | -------- | -------- | ------- |
+| `views.path` | `string` | No       | none    |
+
+### `typedSql.path`
+
+The path to the directory where Prisma should look for the SQL files used for generating typings via [`typedSql`](/orm/prisma-client/using-raw-sql/typedsql).
+
+| Property        | Type     | Required | Default |
+| --------------- | -------- | -------- | ------- |
+| `typedSql.path` | `string` | No       | none    |
+
+### `experimental`
+
+Enables specific experimental features in the Prisma CLI.
+
+| Property         | Type      | Required | Default |
+| ---------------- | --------- | -------- | ------- |
+| `adapter`        | `boolean` | No       | `false` |
+| `externalTables` | `boolean` | No       | `false` |
+| `studio`         | `boolean` | No       | `false` |
+
+Example:
+
+```ts
+export default defineConfig({
+  experimental: {
+    adapter: true,
+    externalTables: true,
+    studio: true,
+  },
+  schema: 'prisma/schema.prisma',
+});
+```
+
+:::note
+
+If you use features like `adapter`, `studio` or `externalTables` without enabling the corresponding experimental flag, Prisma will throw an error:
+
+```terminal
+Failed to load config file "~" as a TypeScript/JavaScript module. Error: Error: The `studio` configuration requires `experimental.studio` to be set to `true`.
+```
+
+:::
+
+## Common patterns
+
+### Setting up your project
+
+To get started with Prisma Config, create a `prisma.config.ts` file in your project root. You can use either of these approaches:
+
+Using `defineConfig`:
+
+```ts
+export default defineConfig({});
+```
+
+Using TypeScript types:
+
+```ts
+export default {} satisfies PrismaConfig;
+```
+
+### Using environment variables
+
+When using `prisma.config.ts`, environment variables from `.env` files are not automatically loaded. You'll need to:
+
+1. Install the `dotenv` package:
+
+```terminal
+npm install dotenv
+```
+
+2. Import `dotenv/config` in your config file:
+
+```ts
+export default {
+  // now you can use process.env variables
+} satisfies PrismaConfig;
+```
+
+### Using multi-file schemas
+
+If you want to split your Prisma schema into multiple files, you need to specify the path to your Prisma schema folder via the `schema` property:
+
+```ts
+export default {
+  schema: path.join('prisma', 'schema'),
+} satisfies PrismaConfig;
+```
+
+In that case, your `migrations` directory must be located next to the `.prisma` file that defines the `datasource` block.
+
+For example, assuming `schema.prisma` defines the `datasource`, here's how how need to place the migrations folder:
+
+```
+# `migrations` and `schema.prisma` are on the same level
+.
+├── migrations
+├── models
+│   ├── posts.prisma
+│   └── users.prisma
+└── schema.prisma
+```
+
+## Path resolution
+
+Prisma CLI commands such as `prisma validate` or `prisma migrate` use `prisma.config.ts` (or `.config/prisma.ts`) to locate your Prisma schema and other resources.
+
+**Key rules:**
+
+- Paths defined in the config file (e.g., `schema`, `migrations`) are always resolved **relative to the location of the config file**, not where you run the CLI command from.
+- The CLI must first **find the config file** itself, which depends on how Prisma is installed and the package manager used.
+
+### Behavior with `pnpm prisma`
+
+When Prisma is installed locally and run via `pnpm prisma`, the config file is detected automatically whether you run the command from the project root or a subdirectory.
+
+Example project tree:
+
+```
+.
+├── node_modules
+├── package.json
+├── prisma-custom
+│   └── schema.prisma
+├── prisma.config.ts
+└── src
+```
+
+Example run from the project root:
+
+```bash
+pnpm prisma validate
+# → Loaded Prisma config from ./prisma.config.ts
+# → Prisma schema loaded from prisma-custom/schema.prisma
+```
+
+Example run from a subdirectory:
+
+```bash
+cd src
+pnpm prisma validate
+# → Still finds prisma.config.ts and resolves schema correctly
+```
+
+### Behavior with `npm exec prisma` or `bun prisma`
+
+When running via `npm exec prisma` or `bun prisma`, the CLI only detects the config file if the command is run from the **project root** (where `package.json` declares Prisma).
+
+Example run from the project root:
+
+```bash
+npm exec prisma validate
+# → Works as expected
+```
+
+Run from a subdirectory (fails):
+
+```bash
+cd src
+npm exec prisma validate
+# → Error: Could not find Prisma Schema...
+```
+
+To fix this, you can use the `--config` flag:
+
+```bash
+npm exec prisma -- --config ../prisma.config.ts validate
+```
+
+### Global Prisma installations
+
+If Prisma is installed globally (`npm i -g prisma`), it may not find your `prisma.config.ts` or `prisma/config` module by default.
+To avoid issues:
+
+- Prefer local Prisma installations in your project.
+- Or use `@prisma/config` locally and pass `--config` to point to your config file.
+
+### Monorepos
+
+- If Prisma is installed in the **workspace root**, `pnpm prisma` will detect the config file from subdirectories.
+- If Prisma is installed in a **subpackage** (e.g., `./packages/db`), run commands from that package directory or deeper.
+
+### Custom config location
+
+You can specify a custom location for your config file when running Prisma CLI commands:
+
+```terminal
+prisma validate --config ./path/to/myconfig.ts
+```
