@@ -17,6 +17,6 @@
   "init-github-config.js"
   ],
   "dependencies": {
-    "copilot-project": "^1.0.3"
+    "copilot-project": "^1.0.4"
   }
 }
