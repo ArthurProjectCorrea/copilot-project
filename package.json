@@ -51,6 +51,5 @@
     "prettier": "^3.6.2"
   },
   "dependencies": {
-    "copilot-project": "^1.2.0"
   }
 }
