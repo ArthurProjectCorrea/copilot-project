@@ -43,11 +43,12 @@ The package automatically configures GitHub Copilot in your project:
 npm install copilot-project
 # or
 pnpm add copilot-project
-# or  
+# or
 yarn add copilot-project
 ```
 
 **What happens automatically:**
+
 - ✅ Creates `.github/chatmodes/`, `.github/instructions/`, and `.github/prompts/` directories
 - ✅ Copies all GitHub Copilot configuration files
 - ✅ Sets up specialized chat modes for development
@@ -61,7 +62,7 @@ You can also run the configuration manually:
 # Via npm script
 npm run init-config
 
-# Via direct execution  
+# Via direct execution
 npx copilot-config
 
 # With options
@@ -72,8 +73,9 @@ npx copilot-config --force
 ### Auto-Update System
 
 The configuration automatically updates when you:
+
 - **Install** the package (`postinstall`)
-- **Update** the package (`postupdate`) 
+- **Update** the package (`postupdate`)
 - **Build/Package** your project (`prepack`)
 
 The system intelligently detects changes and only updates files that need updating.
@@ -86,7 +88,7 @@ The system intelligently detects changes and only updates files that need updati
 2. **Use GitHub Copilot chat modes:**
    - Type `@workspace /jest` for Jest testing assistance
    - Type `@workspace /commit-analyzer` when using Commitizen
-   - Type `@workspace /changeset-analyzer` when creating changesets  
+   - Type `@workspace /changeset-analyzer` when creating changesets
    - Type `@workspace /dev` for general development help
 3. **Access local documentation** in `node_modules/copilot-project/docs/`
    - Jest documentation and examples

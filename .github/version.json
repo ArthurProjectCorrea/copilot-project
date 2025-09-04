@@ -4,7 +4,7 @@
   "files": {
     "chatmodes": [
       "changeset-analyzer.chatmode.md",
-      "commit-analyzer.chatmode.md", 
+      "commit-analyzer.chatmode.md",
       "dev.chatmode.md"
     ],
     "instructions": [

@@ -17,7 +17,7 @@ Este script automatiza a configuração dos arquivos necessários para o GitHub 
 O script é executado automaticamente em várias situações:
 
 - **🔧 Instalação**: `npm install copilot-project` (executa no `postinstall`)
-- **🔄 Atualização**: `npm update copilot-project` (executa no `postupdate`) 
+- **🔄 Atualização**: `npm update copilot-project` (executa no `postupdate`)
 - **📦 Preparação**: Durante empacotamento do projeto (executa no `prepack`)
 
 ```bash
@@ -92,7 +92,7 @@ Para usar este script automaticamente, ele já está configurado com os lifecycl
 {
   "scripts": {
     "postinstall": "node scripts/init-github-config.js",
-    "postupdate": "node scripts/init-github-config.js", 
+    "postupdate": "node scripts/init-github-config.js",
     "prepack": "node scripts/init-github-config.js",
     "init-config": "node scripts/init-github-config.js"
   },
@@ -107,7 +107,7 @@ Para usar este script automaticamente, ele já está configurado com os lifecycl
 O script detecta automaticamente o contexto e adapta suas mensagens:
 
 - **Installation**: Durante `npm install` - configura tudo pela primeira vez
-- **Update**: Durante `npm update` - verifica e atualiza configurações  
+- **Update**: Durante `npm update` - verifica e atualiza configurações
 - **Package preparation**: Durante `npm pack` - garante configuração atualizada
 - **Manual execution**: Quando executado manualmente pelo usuário
 
@@ -116,7 +116,7 @@ O script detecta automaticamente o contexto e adapta suas mensagens:
 O script é inteligente e:
 
 1. **Primeira execução**: Cria todos os arquivos
-2. **Execuções subsequentes**: 
+2. **Execuções subsequentes**:
    - Verifica se há atualizações disponíveis
    - Compara versões via `version.json`
    - Compara hashes SHA256 dos arquivos

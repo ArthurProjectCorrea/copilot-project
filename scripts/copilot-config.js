@@ -42,6 +42,9 @@ This script will:
 try {
   initGithubConfig(forceRun);
 } catch (error) {
-  console.error('❌ Error running GitHub Copilot configuration:', error instanceof Error ? error.message : String(error));
+  console.error(
+    '❌ Error running GitHub Copilot configuration:',
+    error instanceof Error ? error.message : String(error)
+  );
   process.exit(1);
 }
