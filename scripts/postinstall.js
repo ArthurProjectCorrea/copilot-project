@@ -54,11 +54,17 @@ if (fs.existsSync(packageJsonPath)) {
 if (!fs.existsSync(srcDir)) {
   console.error('❌ Source .github directory not found at:', srcDir);
   console.log('📍 Trying alternative source location...');
-  
+
   // Try alternative location for pnpm store structure
   const altSrcDir = path.join(__dirname, '..', '..', '..', 'copilot-project', '.github');
-  const pnpmStoreSrcDir = path.resolve(__dirname, '../../..', 'registry.npmjs.org', 'copilot-project', '*/node_modules/copilot-project/.github');
-  
+  const pnpmStoreSrcDir = path.resolve(
+    __dirname,
+    '../../..',
+    'registry.npmjs.org',
+    'copilot-project',
+    '*/node_modules/copilot-project/.github'
+  );
+
   if (fs.existsSync(altSrcDir)) {
     console.log('✅ Found alternative source:', altSrcDir);
     srcDir = altSrcDir;
@@ -67,10 +73,24 @@ if (!fs.existsSync(srcDir)) {
     try {
       const storePath = path.resolve(__dirname, '../../../..');
       const possiblePaths = [
-        path.join(storePath, 'copilot-project', '1.1.0', 'node_modules', 'copilot-project', '.github'),
-        path.join(storePath, 'copilot-project', '1.2.0', 'node_modules', 'copilot-project', '.github'),
+        path.join(
+          storePath,
+          'copilot-project',
+          '1.1.0',
+          'node_modules',
+          'copilot-project',
+          '.github'
+        ),
+        path.join(
+          storePath,
+          'copilot-project',
+          '1.2.0',
+          'node_modules',
+          'copilot-project',
+          '.github'
+        ),
       ];
-      
+
       for (const possiblePath of possiblePaths) {
         if (fs.existsSync(possiblePath)) {
           console.log('✅ Found pnpm store source:', possiblePath);
@@ -81,7 +101,7 @@ if (!fs.existsSync(srcDir)) {
     } catch (error) {
       console.log('⚠️ Could not locate in pnpm store');
     }
-    
+
     if (!fs.existsSync(srcDir)) {
       console.error('❌ No .github directory found in any expected location');
       process.exit(0); // Don't fail installation
@@ -94,11 +114,11 @@ function copyRecursive(src, dest) {
     fs.mkdirSync(dest, { recursive: true });
     console.log('📁 Created directory:', dest);
   }
-  
+
   fs.readdirSync(src).forEach((file) => {
     const srcFile = path.join(src, file);
     const destFile = path.join(dest, file);
-    
+
     if (fs.lstatSync(srcFile).isDirectory()) {
       copyRecursive(srcFile, destFile);
     } else {
