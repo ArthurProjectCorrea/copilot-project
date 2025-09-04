@@ -19,7 +19,15 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
-    "release": "pnpm run build && pnpm run changeset:publish"
+    "release": "pnpm run build && pnpm run changeset:publish",
+    "update:jest-docs": "node scripts/update-jest-docs-manual.js",
+    "docs:jest": "node scripts/update-jest-docs-manual.js",
+    "update:nest-docs": "node scripts/update-nest-docs-manual.js",
+    "docs:nest": "node scripts/update-nest-docs-manual.js",
+    "update:prisma-docs": "node scripts/update-prisma-docs-manual.js",
+    "docs:prisma": "node scripts/update-prisma-docs-manual.js",
+    "update:nextjs-docs": "node scripts/update-nextjs-docs-manual.js",
+    "docs:nextjs": "node scripts/update-nextjs-docs-manual.js"
   },
   "keywords": [
     "github",
