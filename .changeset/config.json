@@ -1,6 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/changeset.json",
-  "changelog": ["@changesets/changelog-github"],
+  "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
   "linked": [],
