@@ -1,8 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
+
+// Detect root project directory even if running from node_modules
+let destDir = process.cwd();
+if (destDir.includes('node_modules')) {
+  destDir = destDir.split('node_modules')[0];
+}
 const srcDir = path.join(__dirname, '..', '.github');
-const destDir = path.join(process.cwd(), '.github');
+const destGithub = path.join(destDir, '.github');
 
 function copyRecursive(src, dest) {
   if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
@@ -17,5 +23,5 @@ function copyRecursive(src, dest) {
   });
 }
 
-copyRecursive(srcDir, destDir);
-console.log('Copilot plugin: .github configuration files have been set up.');
+copyRecursive(srcDir, destGithub);
+console.log('Copilot plugin: .github configuration files have been set up in', destGithub);
