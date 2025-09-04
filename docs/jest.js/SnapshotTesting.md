@@ -16,9 +16,7 @@ import renderer from 'react-test-renderer';
 import Link from '../Link';
 
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Link page="http://www.facebook.com">Facebook</Link>)
-    .toJSON();
+  const tree = renderer.create(<Link page="http://www.facebook.com">Facebook</Link>).toJSON();
   expect(tree).toMatchSnapshot();
 });
 ```
@@ -61,9 +59,7 @@ One such situation can arise if we intentionally change the address the Link com
 ```tsx
 // Updated test case with a Link to a different address
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Link page="http://www.instagram.com">Instagram</Link>)
-    .toJSON();
+  const tree = renderer.create(<Link page="http://www.instagram.com">Instagram</Link>).toJSON();
   expect(tree).toMatchSnapshot();
 });
 ```
@@ -112,9 +108,7 @@ First, you write a test, calling `.toMatchInlineSnapshot()` with no arguments:
 
 ```tsx
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Link page="https://example.com">Example Site</Link>)
-    .toJSON();
+  const tree = renderer.create(<Link page="https://example.com">Example Site</Link>).toJSON();
   expect(tree).toMatchInlineSnapshot();
 });
 ```
@@ -123,9 +117,7 @@ The next time you run Jest, `tree` will be evaluated, and a snapshot will be wri
 
 ```tsx
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<Link page="https://example.com">Example Site</Link>)
-    .toJSON();
+  const tree = renderer.create(<Link page="https://example.com">Example Site</Link>).toJSON();
   expect(tree).toMatchInlineSnapshot(`
     <a
       className="normal"

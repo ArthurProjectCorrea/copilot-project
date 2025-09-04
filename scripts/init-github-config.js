@@ -26,7 +26,7 @@ function copyGithubFilesFromNodeModules() {
   // Copia todos os arquivos e subpastas
   function copyRecursive(src, dest) {
     ensureDir(dest);
-    fs.readdirSync(src).forEach(file => {
+    fs.readdirSync(src).forEach((file) => {
       const srcFile = path.join(src, file);
       const destFile = path.join(dest, file);
       if (fs.lstatSync(srcFile).isDirectory()) {

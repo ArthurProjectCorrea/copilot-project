@@ -38,12 +38,7 @@ module.exports = {
       react: './vendor/react-master',
     },
     extensions: ['.js', '.jsx'],
-    modules: [
-      'node_modules',
-      'bower_components',
-      'shared',
-      '/shared/vendor/modules',
-    ],
+    modules: ['node_modules', 'bower_components', 'shared', '/shared/vendor/modules'],
   },
 };
 ```
@@ -225,7 +220,7 @@ If you use dynamic imports (`import('some-file.js').then(module => ...)`), you n
 
 ```json title=".babelrc"
 {
-  "presets": [["env", {"modules": false}]],
+  "presets": [["env", { "modules": false }]],
 
   "plugins": ["syntax-dynamic-import"],
 

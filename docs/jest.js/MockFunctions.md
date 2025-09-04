@@ -22,9 +22,9 @@ export function forEach(items, callback) {
 To test this function, we can use a mock function, and inspect the mock's state to ensure the callback is invoked as expected.
 
 ```js title="forEach.test.js"
-import {forEach} from './forEach';
+import { forEach } from './forEach';
 
-const mockCallback = jest.fn(x => 42 + x);
+const mockCallback = jest.fn((x) => 42 + x);
 
 test('forEach mock function', () => {
   forEach([0, 1], mockCallback);
@@ -114,7 +114,7 @@ const filterTestFn = jest.fn();
 // and `false` for the second call
 filterTestFn.mockReturnValueOnce(true).mockReturnValueOnce(false);
 
-const result = [11, 12].filter(num => filterTestFn(num));
+const result = [11, 12].filter((num) => filterTestFn(num));
 
 console.log(result);
 // > [11]
@@ -133,7 +133,7 @@ import axios from 'axios';
 
 class Users {
   static all() {
-    return axios.get('/users.json').then(resp => resp.data);
+    return axios.get('/users.json').then((resp) => resp.data);
   }
 }
 
@@ -151,14 +151,14 @@ import Users from './users';
 jest.mock('axios');
 
 test('should fetch users', () => {
-  const users = [{name: 'Bob'}];
-  const resp = {data: users};
+  const users = [{ name: 'Bob' }];
+  const resp = { data: users };
   axios.get.mockResolvedValue(resp);
 
   // or you could use the following depending on your use case:
   // axios.get.mockImplementation(() => Promise.resolve(resp))
 
-  return Users.all().then(data => expect(data).toEqual(users));
+  return Users.all().then((data) => expect(data).toEqual(users));
 });
 ```
 
@@ -174,7 +174,7 @@ export default () => 'baz';
 
 ```js
 //test.js
-import defaultExport, {bar, foo} from '../foo-bar-baz';
+import defaultExport, { bar, foo } from '../foo-bar-baz';
 
 jest.mock('../foo-bar-baz', () => {
   const originalModule = jest.requireActual('../foo-bar-baz');
@@ -203,7 +203,7 @@ test('should do a partial mock', () => {
 Still, there are cases where it's useful to go beyond the ability to specify return values and full-on replace the implementation of a mock function. This can be done with `jest.fn` or the `mockImplementationOnce` method on mock functions.
 
 ```javascript
-const myMockFn = jest.fn(cb => cb(null, true));
+const myMockFn = jest.fn((cb) => cb(null, true));
 
 myMockFn((err, val) => console.log(val));
 // > true
@@ -232,8 +232,8 @@ When you need to recreate a complex behavior of a mock function such that multip
 ```javascript
 const myMockFn = jest
   .fn()
-  .mockImplementationOnce(cb => cb(null, true))
-  .mockImplementationOnce(cb => cb(null, false));
+  .mockImplementationOnce((cb) => cb(null, true))
+  .mockImplementationOnce((cb) => cb(null, false));
 
 myMockFn((err, val) => console.log(val));
 // > true
@@ -278,7 +278,7 @@ You can optionally provide a name for your mock functions, which will be display
 const myMockFn = jest
   .fn()
   .mockReturnValue('default')
-  .mockImplementation(scalar => 42 + scalar)
+  .mockImplementation((scalar) => 42 + scalar)
   .mockName('add42');
 ```
 
@@ -310,10 +310,7 @@ expect(mockFunc.mock.calls.length).toBeGreaterThan(0);
 expect(mockFunc.mock.calls).toContainEqual([arg1, arg2]);
 
 // The last call to the mock function was called with the specified args
-expect(mockFunc.mock.calls[mockFunc.mock.calls.length - 1]).toEqual([
-  arg1,
-  arg2,
-]);
+expect(mockFunc.mock.calls[mockFunc.mock.calls.length - 1]).toEqual([arg1, arg2]);
 
 // The first arg of the last call to the mock function was `42`
 // (note that there is no sugar helper for this specific of an assertion)

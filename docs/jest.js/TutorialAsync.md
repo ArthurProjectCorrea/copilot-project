@@ -11,7 +11,7 @@ Let's implement a module that fetches user data from an API and returns the user
 import request from './request';
 
 export function getUserName(userID) {
-  return request(`/users/${userID}`).then(user => user.name);
+  return request(`/users/${userID}`).then((user) => user.name);
 }
 ```
 
@@ -23,13 +23,13 @@ Now imagine an implementation of `request.js` that goes to the network and fetch
 const http = require('http');
 
 export default function request(url) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     // This is an example of an http request, for example to fetch
     // user data from an API.
     // This module is being mocked in __mocks__/request.js
-    http.get({path: url}, response => {
+    http.get({ path: url }, (response) => {
       let data = '';
-      response.on('data', _data => (data += _data));
+      response.on('data', (_data) => (data += _data));
       response.on('end', () => resolve(data));
     });
   });
@@ -40,8 +40,8 @@ Because we don't want to go to the network in our test, we are going to create a
 
 ```js title="__mocks__/request.js"
 const users = {
-  4: {name: 'Mark'},
-  5: {name: 'Paul'},
+  4: { name: 'Mark' },
+  5: { name: 'Paul' },
 };
 
 export default function request(url) {
@@ -52,7 +52,7 @@ export default function request(url) {
         ? resolve(users[userID])
         : reject({
             error: `User with ${userID} not found.`,
-          }),
+          })
     );
   });
 }
@@ -68,7 +68,7 @@ import * as user from '../user';
 // The assertion for a promise must be returned.
 it('works with promises', () => {
   expect.assertions(1);
-  return user.getUserName(4).then(data => expect(data).toBe('Mark'));
+  return user.getUserName(4).then((data) => expect(data).toBe('Mark'));
 });
 ```
 
@@ -114,10 +114,10 @@ Errors can be handled using the `.catch` method. Make sure to add `expect.assert
 // Testing for async errors using Promise.catch.
 it('tests error with promises', () => {
   expect.assertions(1);
-  return user.getUserName(2).catch(error =>
+  return user.getUserName(2).catch((error) =>
     expect(error).toEqual({
       error: 'User with 2 not found.',
-    }),
+    })
   );
 });
 

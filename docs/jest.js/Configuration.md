@@ -25,7 +25,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   verbose: true,
@@ -46,7 +46,7 @@ module.exports = async () => {
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 export default async (): Promise<Config> => {
   return {
@@ -64,7 +64,7 @@ To read TypeScript configuration files Jest by default requires [`ts-node`](http
 // or
 /** @jest-config-loader esbuild-register */
 
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   verbose: true,
@@ -79,7 +79,7 @@ You can also pass options to the loader, for instance to enable `transpileOnly`.
 /** @jest-config-loader ts-node */
 /** @jest-config-loader-options {"transpileOnly": true} */
 
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   verbose: true,
@@ -126,7 +126,7 @@ Also Jest's configuration json file can be referenced through the `"jest"` key i
 You can retrieve Jest's defaults from `jest-config` to extend them if needed:
 
 ```js tab
-const {defaults} = require('jest-config');
+const { defaults } = require('jest-config');
 
 /** @type {import('jest').Config} */
 const config = {
@@ -137,8 +137,8 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
-import {defaults} from 'jest-config';
+import type { Config } from 'jest';
+import { defaults } from 'jest-config';
 
 const config: Config = {
   moduleDirectories: [...defaults.moduleDirectories, 'bower_components'],
@@ -168,7 +168,7 @@ Example:
 ```js title="utils.js"
 export default {
   authorize: () => 'token',
-  isAuthorized: secret => secret === 'wizard',
+  isAuthorized: (secret) => secret === 'wizard',
 };
 ```
 
@@ -241,25 +241,17 @@ An array of [glob patterns](https://github.com/micromatch/micromatch) indicating
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  collectCoverageFrom: [
-    '**/*.{js,jsx}',
-    '!**/node_modules/**',
-    '!**/vendor/**',
-  ],
+  collectCoverageFrom: ['**/*.{js,jsx}', '!**/node_modules/**', '!**/vendor/**'],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  collectCoverageFrom: [
-    '**/*.{js,jsx}',
-    '!**/node_modules/**',
-    '!**/vendor/**',
-  ],
+  collectCoverageFrom: ['**/*.{js,jsx}', '!**/node_modules/**', '!**/vendor/**'],
 };
 
 export default config;
@@ -333,17 +325,17 @@ Additional options can be passed using the tuple form. For example, you may hide
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  coverageReporters: ['clover', 'json', 'lcov', ['text', {skipFull: true}]],
+  coverageReporters: ['clover', 'json', 'lcov', ['text', { skipFull: true }]],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  coverageReporters: ['clover', 'json', 'lcov', ['text', {skipFull: true}]],
+  coverageReporters: ['clover', 'json', 'lcov', ['text', { skipFull: true }]],
 };
 
 export default config;
@@ -376,7 +368,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   coverageThreshold: {
@@ -426,7 +418,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   coverageThreshold: {
@@ -479,10 +471,7 @@ module.exports = {
     return deps;
   },
   getCacheKey() {
-    return crypto
-      .createHash('md5')
-      .update(fs.readFileSync(__filename))
-      .digest('hex');
+    return crypto.createHash('md5').update(fs.readFileSync(__filename)).digest('hex');
   },
 };
 ```
@@ -507,7 +496,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   displayName: 'CLIENT',
@@ -531,7 +520,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   displayName: {
@@ -565,7 +554,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   extensionsToTreatAsEsm: ['.ts'],
@@ -601,7 +590,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   fakeTimers: {
@@ -618,7 +607,7 @@ export default config;
 jest.useFakeTimers();
 
 test('increase the limit of recursive timers for this and following tests', () => {
-  jest.useFakeTimers({timerLimit: 5000});
+  jest.useFakeTimers({ timerLimit: 5000 });
   // ...
 });
 ```
@@ -639,7 +628,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   fakeTimers: {
@@ -715,7 +704,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   fakeTimers: {
@@ -761,7 +750,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   forceCoverageMatch: ['**/*.t.js'],
@@ -790,7 +779,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   globals: {
@@ -896,7 +885,7 @@ Default: `true`
 Insert Jest's globals (`expect`, `test`, `describe`, `beforeEach` etc.) into the global environment. If you set this to `false`, you should import from `@jest/globals`, e.g.
 
 ```ts
-import {expect, jest, test} from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 
 jest.useFakeTimers();
 
@@ -933,7 +922,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   maxWorkers: '50%',
@@ -958,7 +947,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   moduleDirectories: ['node_modules', 'bower_components'],
@@ -1000,11 +989,7 @@ const config = {
     '^image![a-zA-Z0-9$_-]+$': 'GlobalImageStub',
     '^[./a-zA-Z0-9$_-]+\\.png$': '<rootDir>/RelativeImageStub.js',
     'module_name_(.*)': '<rootDir>/substituted_module_$1.js',
-    'assets/(.*)': [
-      '<rootDir>/images/$1',
-      '<rootDir>/photos/$1',
-      '<rootDir>/recipes/$1',
-    ],
+    'assets/(.*)': ['<rootDir>/images/$1', '<rootDir>/photos/$1', '<rootDir>/recipes/$1'],
   },
 };
 
@@ -1012,18 +997,14 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   moduleNameMapper: {
     '^image![a-zA-Z0-9$_-]+$': 'GlobalImageStub',
     '^[./a-zA-Z0-9$_-]+\\.png$': '<rootDir>/RelativeImageStub.js',
     'module_name_(.*)': '<rootDir>/substituted_module_$1.js',
-    'assets/(.*)': [
-      '<rootDir>/images/$1',
-      '<rootDir>/photos/$1',
-      '<rootDir>/recipes/$1',
-    ],
+    'assets/(.*)': ['<rootDir>/images/$1', '<rootDir>/photos/$1', '<rootDir>/recipes/$1'],
   },
 };
 
@@ -1056,7 +1037,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   modulePathIgnorePatterns: ['<rootDir>/build/'],
@@ -1081,7 +1062,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   modulePaths: ['<rootDir>/app/'],
@@ -1147,7 +1128,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   preset: 'foo-bar',
@@ -1168,7 +1149,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   preset: './node_modules/foo-bar/jest-preset.js',
@@ -1205,7 +1186,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   projects: ['<rootDir>', '<rootDir>/examples/*'],
@@ -1237,7 +1218,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   projects: [
@@ -1282,23 +1263,17 @@ Use this configuration option to add reporters to Jest. It must be a list of rep
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  reporters: [
-    'default',
-    ['<rootDir>/custom-reporter.js', {banana: 'yes', pineapple: 'no'}],
-  ],
+  reporters: ['default', ['<rootDir>/custom-reporter.js', { banana: 'yes', pineapple: 'no' }]],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  reporters: [
-    'default',
-    ['<rootDir>/custom-reporter.js', {banana: 'yes', pineapple: 'no'}],
-  ],
+  reporters: ['default', ['<rootDir>/custom-reporter.js', { banana: 'yes', pineapple: 'no' }]],
 };
 
 export default config;
@@ -1311,23 +1286,17 @@ If custom reporters are specified, the default Jest reporter will be overridden.
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  reporters: [
-    'default',
-    ['jest-junit', {outputDirectory: 'reports', outputName: 'report.xml'}],
-  ],
+  reporters: ['default', ['jest-junit', { outputDirectory: 'reports', outputName: 'report.xml' }]],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  reporters: [
-    'default',
-    ['jest-junit', {outputDirectory: 'reports', outputName: 'report.xml'}],
-  ],
+  reporters: ['default', ['jest-junit', { outputDirectory: 'reports', outputName: 'report.xml' }]],
 };
 
 export default config;
@@ -1340,17 +1309,17 @@ If included in the list, the built-in GitHub Actions Reporter will annotate chan
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  reporters: [['github-actions', {silent: false}], 'summary'],
+  reporters: [['github-actions', { silent: false }], 'summary'],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  reporters: [['github-actions', {silent: false}], 'summary'],
+  reporters: [['github-actions', { silent: false }], 'summary'],
 };
 
 export default config;
@@ -1370,7 +1339,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   reporters: ['jest-silent-reporter', 'summary'],
@@ -1384,17 +1353,17 @@ The `summary` reporter accepts options. Since it is included in the `default` re
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  reporters: [['default', {summaryThreshold: 10}]],
+  reporters: [['default', { summaryThreshold: 10 }]],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  reporters: [['default', {summaryThreshold: 10}]],
+  reporters: [['default', { summaryThreshold: 10 }]],
 };
 
 export default config;
@@ -1513,7 +1482,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   resolver: '<rootDir>/resolver.js',
@@ -1616,7 +1585,7 @@ async function runTests(
   onStart: OnTestStart,
   onResult: OnTestSuccess,
   onFailure: OnTestFailure,
-  options: TestRunnerOptions,
+  options: TestRunnerOptions
 ): Promise<void>;
 ```
 
@@ -1646,7 +1615,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   sandboxInjectedGlobals: ['Math'],
@@ -1700,7 +1669,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/setup-jest.js'],
@@ -1745,7 +1714,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   snapshotFormat: {
@@ -1759,7 +1728,7 @@ export default config;
 ```js title="some.test.js"
 test('does not show prototypes for object and array inline', () => {
   const object = {
-    array: [{hello: 'Danger'}],
+    array: [{ hello: 'Danger' }],
   };
   expect(object).toMatchInlineSnapshot(`
     {
@@ -1787,9 +1756,7 @@ module.exports = {
 
   // resolves from snapshot to test path
   resolveTestPath: (snapshotFilePath, snapshotExtension) =>
-    snapshotFilePath
-      .replace('__snapshots__', '__tests__')
-      .slice(0, -snapshotExtension.length),
+    snapshotFilePath.replace('__snapshots__', '__tests__').slice(0, -snapshotExtension.length),
 
   // Example test path, used for preflight consistency check of the implementation above
   testPathForConsistencyCheck: 'some/__tests__/example.test.js',
@@ -1830,7 +1797,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   snapshotSerializers: ['path/to/custom-serializer.js'],
@@ -1991,7 +1958,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'jsdom',
@@ -2020,7 +1987,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'jsdom',
@@ -2184,7 +2151,7 @@ function testRunner(
   config: ProjectConfig,
   environment: Environment,
   runtime: Runtime,
-  testPath: string,
+  testPath: string
 ): Promise<TestResult>;
 ```
 
@@ -2212,14 +2179,12 @@ class CustomSequencer extends Sequencer {
    * Select tests for shard requested via --shard=shardIndex/shardCount
    * Sharding is applied before sorting
    */
-  shard(tests, {shardIndex, shardCount}) {
+  shard(tests, { shardIndex, shardCount }) {
     const shardSize = Math.ceil(tests.length / shardCount);
     const shardStart = shardSize * (shardIndex - 1);
     const shardEnd = shardSize * shardIndex;
 
-    return [...tests]
-      .sort((a, b) => (a.path > b.path ? 1 : -1))
-      .slice(shardStart, shardEnd);
+    return [...tests].sort((a, b) => (a.path > b.path ? 1 : -1)).slice(shardStart, shardEnd);
   }
 
   /**
@@ -2249,7 +2214,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   testSequencer: 'path/to/custom-sequencer.js',
@@ -2293,7 +2258,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   transform: {
@@ -2325,7 +2290,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   transformIgnorePatterns: ['/node_modules/(?!(foo|bar)/)', '/bar/'],
@@ -2343,23 +2308,17 @@ These pattern strings match against the full path. Use the `<rootDir>` string to
 ```js tab
 /** @type {import('jest').Config} */
 const config = {
-  transformIgnorePatterns: [
-    '<rootDir>/bower_components/',
-    '<rootDir>/node_modules/',
-  ],
+  transformIgnorePatterns: ['<rootDir>/bower_components/', '<rootDir>/node_modules/'],
 };
 
 module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
-  transformIgnorePatterns: [
-    '<rootDir>/bower_components/',
-    '<rootDir>/node_modules/',
-  ],
+  transformIgnorePatterns: ['<rootDir>/bower_components/', '<rootDir>/node_modules/'],
 };
 
 export default config;
@@ -2375,10 +2334,7 @@ const config = {
   transformIgnorePatterns: [
     '<rootDir>/node_modules/.pnpm/(?!(package-a|@scope\\+pkg-b)@)',
     /* if config file is under '~/packages/lib-a/' */
-    `${path.join(
-      __dirname,
-      '../..',
-    )}/node_modules/.pnpm/(?!(package-a|@scope\\+pkg-b)@)`,
+    `${path.join(__dirname, '../..')}/node_modules/.pnpm/(?!(package-a|@scope\\+pkg-b)@)`,
     /* or using relative pattern to match the second 'node_modules/' in 'node_modules/.pnpm/@scope+pkg-b@x.x.x/node_modules/@scope/pkg-b/' */
     'node_modules/(?!.pnpm|package-a|@scope/pkg-b)',
   ],
@@ -2388,16 +2344,13 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   transformIgnorePatterns: [
     '<rootDir>/node_modules/.pnpm/(?!(package-a|@scope\\+pkg-b)@)',
     /* if config file is under '~/packages/lib-a/' */
-    `${path.join(
-      __dirname,
-      '../..',
-    )}/node_modules/.pnpm/(?!(package-a|@scope\\+pkg-b)@)`,
+    `${path.join(__dirname, '../..')}/node_modules/.pnpm/(?!(package-a|@scope\\+pkg-b)@)`,
     /* or using relative path to match the second 'node_modules/' in 'node_modules/.pnpm/@scope+pkg-b@x.x.x/node_modules/@scope/pkg-b/' */
     'node_modules/(?!.pnpm|package-a|@scope/pkg-b)',
   ],
@@ -2454,7 +2407,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   watchPathIgnorePatterns: ['<rootDir>/\\.tmp/', '<rootDir>/bar/'],
@@ -2525,7 +2478,7 @@ module.exports = config;
 ```
 
 ```ts tab
-import type {Config} from 'jest';
+import type { Config } from 'jest';
 
 const config: Config = {
   workerIdleMemoryLimit: 0.2,

@@ -83,7 +83,7 @@ Configure Babel to target your current version of Node by creating a `babel.conf
 
 ```javascript title="babel.config.js"
 module.exports = {
-  presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+  presets: [['@babel/preset-env', { targets: { node: 'current' } }]],
 };
 ```
 
@@ -95,7 +95,7 @@ The ideal configuration for Babel will depend on your project. See [Babel's docs
 Jest will set `process.env.NODE_ENV` to `'test'` if it's not set to something else. You can use that in your configuration to conditionally setup only the compilation needed for Jest, e.g.
 
 ```javascript title="babel.config.js"
-module.exports = api => {
+module.exports = (api) => {
   const isTest = api.env('test');
   // You can use isTest to determine what presets and plugins to use.
 
@@ -154,7 +154,7 @@ Then add `@babel/preset-typescript` to the list of presets in your `babel.config
 ```javascript title="babel.config.js"
 module.exports = {
   presets: [
-    ['@babel/preset-env', {targets: {node: 'current'}}],
+    ['@babel/preset-env', { targets: { node: 'current' } }],
     // highlight-next-line
     '@babel/preset-typescript',
   ],
@@ -186,8 +186,8 @@ npm install --save-dev @jest/globals
 And import the APIs from it:
 
 ```ts title="sum.test.ts"
-import {describe, expect, test} from '@jest/globals';
-import {sum} from './sum';
+import { describe, expect, test } from '@jest/globals';
+import { sum } from './sum';
 
 describe('sum module', () => {
   test('adds 1 + 2 to equal 3', () => {
@@ -221,7 +221,7 @@ Jest can be used with ESLint without any further configuration as long as you im
 If you'd like to avoid these imports, you can configure your [ESLint environment](https://eslint.org/docs/latest/use/configure/language-options#specifying-environments) to support these globals by adding the `jest` environment:
 
 ```js
-import {defineConfig} from 'eslint/config';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 
 export default defineConfig([

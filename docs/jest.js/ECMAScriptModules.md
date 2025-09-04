@@ -32,7 +32,7 @@ With the warnings out of the way, this is how you activate ESM support in your t
 Most of the differences are explained in [Node's documentation](https://nodejs.org/api/esm.html#esm_differences_between_es_modules_and_commonjs), but in addition to the things mentioned there, Jest injects a special variable into all executed files - the [`jest` object](JestObjectAPI.md). To access this object in ESM, you need to import it from the `@jest/globals` module or use `import.meta`.
 
 ```js
-import {jest} from '@jest/globals';
+import { jest } from '@jest/globals';
 
 jest.useFakeTimers();
 
@@ -53,14 +53,14 @@ ESM mocking is supported through `jest.unstable_mockModule`. As the name suggest
 The usage of `jest.unstable_mockModule` is essentially the same as `jest.mock` with two differences: the factory function is required and it can be sync or async:
 
 ```js
-import {jest} from '@jest/globals';
+import { jest } from '@jest/globals';
 
 jest.unstable_mockModule('node:child_process', () => ({
   execSync: jest.fn(),
   // etc.
 }));
 
-const {execSync} = await import('node:child_process');
+const { execSync } = await import('node:child_process');
 
 // etc.
 ```
@@ -78,7 +78,7 @@ export const namedFn = () => {
 ```
 
 ```js title="esm-module.test.mjs"
-import {jest, test} from '@jest/globals';
+import { jest, test } from '@jest/globals';
 
 test('test esm-module', async () => {
   jest.unstable_mockModule('./esm-module.js', () => ({
@@ -116,16 +116,16 @@ test('test esm-module', async () => {
 For mocking CJS modules, you should continue to use `jest.mock`. See the example below:
 
 ```js title="main.cjs"
-const {BrowserWindow, app} = require('electron');
+const { BrowserWindow, app } = require('electron');
 
 // etc.
 
-module.exports = {example};
+module.exports = { example };
 ```
 
 ```js title="main.test.cjs"
-import {createRequire} from 'node:module';
-import {jest} from '@jest/globals';
+import { createRequire } from 'node:module';
+import { jest } from '@jest/globals';
 
 const require = createRequire(import.meta.url);
 
@@ -139,11 +139,11 @@ jest.mock('electron', () => ({
   })),
 }));
 
-const {BrowserWindow} = require('electron');
+const { BrowserWindow } = require('electron');
 const exported = require('./main.cjs');
 
 // alternatively
-const {BrowserWindow} = (await import('electron')).default;
+const { BrowserWindow } = (await import('electron')).default;
 const exported = await import('./main.cjs');
 
 // etc.

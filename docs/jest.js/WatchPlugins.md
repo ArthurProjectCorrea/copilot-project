@@ -54,12 +54,12 @@ For example:
 ```javascript
 class MyWatchPlugin {
   apply(jestHooks) {
-    jestHooks.shouldRunTestSuite(testSuiteInfo => {
+    jestHooks.shouldRunTestSuite((testSuiteInfo) => {
       return testSuiteInfo.testPath.includes('my-keyword');
     });
 
     // or a promise
-    jestHooks.shouldRunTestSuite(testSuiteInfo => {
+    jestHooks.shouldRunTestSuite((testSuiteInfo) => {
       return Promise.resolve(testSuiteInfo.testPath.includes('my-keyword'));
     });
   }
@@ -75,7 +75,7 @@ For example:
 ```javascript
 class MyWatchPlugin {
   apply(jestHooks) {
-    jestHooks.onTestRunComplete(results => {
+    jestHooks.onTestRunComplete((results) => {
       this._hasSnapshotFailure = results.snapshot.failure;
     });
   }
@@ -93,7 +93,7 @@ For example:
 ```javascript
 class MyWatchPlugin {
   apply(jestHooks) {
-    jestHooks.onFileChange(({projects}) => {
+    jestHooks.onFileChange(({ projects }) => {
       this._projects = projects;
     });
   }
@@ -204,7 +204,7 @@ If the user provided a custom configuration, it will be passed as an argument to
 
 ```javascript
 class MyWatchPlugin {
-  constructor({config}) {}
+  constructor({ config }) {}
 }
 ```
 

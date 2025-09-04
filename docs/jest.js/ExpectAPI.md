@@ -11,7 +11,7 @@ For additional Jest matchers maintained by the Jest Community check out [`jest-e
 
 :::
 
-import TypeScriptExamplesNote from './_TypeScriptExamplesNote.md';
+import TypeScriptExamplesNote from './\_TypeScriptExamplesNote.md';
 
 <TypeScriptExamplesNote />
 
@@ -90,9 +90,7 @@ For example, this code tests that the promise rejects with reason `'octopus'`:
 ```js
 test('rejects to octopus', () => {
   // make sure to add a return statement
-  return expect(Promise.reject(new Error('octopus'))).rejects.toThrow(
-    'octopus',
-  );
+  return expect(Promise.reject(new Error('octopus'))).rejects.toThrow('octopus');
 });
 ```
 
@@ -270,8 +268,8 @@ For example, let's say you have a mock `drink` that returns the name of the beve
 
 ```js
 test('drink returns La Croix', () => {
-  const beverage = {name: 'La Croix'};
-  const drink = jest.fn(beverage => beverage.name);
+  const beverage = { name: 'La Croix' };
+  const drink = jest.fn((beverage) => beverage.name);
 
   drink(beverage);
 
@@ -287,9 +285,9 @@ For example, let's say you have a mock `drink` that returns the name of the beve
 
 ```js
 test('drink returns La Croix (Orange) last', () => {
-  const beverage1 = {name: 'La Croix (Lemon)'};
-  const beverage2 = {name: 'La Croix (Orange)'};
-  const drink = jest.fn(beverage => beverage.name);
+  const beverage1 = { name: 'La Croix (Lemon)' };
+  const beverage2 = { name: 'La Croix (Orange)' };
+  const drink = jest.fn((beverage) => beverage.name);
 
   drink(beverage1);
   drink(beverage2);
@@ -306,9 +304,9 @@ For example, let's say you have a mock `drink` that returns the name of the beve
 
 ```js
 test('drink returns expected nth calls', () => {
-  const beverage1 = {name: 'La Croix (Lemon)'};
-  const beverage2 = {name: 'La Croix (Orange)'};
-  const drink = jest.fn(beverage => beverage.name);
+  const beverage1 = { name: 'La Croix (Lemon)' };
+  const beverage2 = { name: 'La Croix (Orange)' };
+  const drink = jest.fn((beverage) => beverage.name);
 
   drink(beverage1);
   drink(beverage2);
@@ -359,8 +357,8 @@ const houseForSale = {
     amenities: [
       {
         couch: [
-          ['large', {dimensions: [20, 20]}],
-          ['small', {dimensions: [10, 10]}],
+          ['large', { dimensions: [20, 20] }],
+          ['small', { dimensions: [10, 10] }],
         ],
       },
     ],
@@ -377,25 +375,15 @@ test('this house has my desired features', () => {
 
   // Deep referencing using dot notation
   expect(houseForSale).toHaveProperty('kitchen.area', 20);
-  expect(houseForSale).toHaveProperty('kitchen.amenities', [
-    'oven',
-    'stove',
-    'washer',
-  ]);
+  expect(houseForSale).toHaveProperty('kitchen.amenities', ['oven', 'stove', 'washer']);
 
   expect(houseForSale).not.toHaveProperty('kitchen.open');
 
   // Deep referencing using an array containing the keyPath
   expect(houseForSale).toHaveProperty(['kitchen', 'area'], 20);
-  expect(houseForSale).toHaveProperty(
-    ['kitchen', 'amenities'],
-    ['oven', 'stove', 'washer'],
-  );
+  expect(houseForSale).toHaveProperty(['kitchen', 'amenities'], ['oven', 'stove', 'washer']);
   expect(houseForSale).toHaveProperty(['kitchen', 'amenities', 0], 'oven');
-  expect(houseForSale).toHaveProperty(
-    'livingroom.amenities[0].couch[0][1].dimensions[0]',
-    20,
-  );
+  expect(houseForSale).toHaveProperty('livingroom.amenities[0].couch[0][1].dimensions[0]', 20);
   expect(houseForSale).toHaveProperty(['kitchen', 'nice.oven']);
   expect(houseForSale).not.toHaveProperty(['kitchen', 'open']);
 
@@ -596,7 +584,7 @@ Use `.toContainEqual` when you want to check that an item with a specific struct
 ```js
 describe('my beverage', () => {
   test('is delicious and not sour', () => {
-    const myBeverage = {delicious: true, sour: false};
+    const myBeverage = { delicious: true, sour: false };
     expect(myBeverages()).toContainEqual(myBeverage);
   });
 });
@@ -704,14 +692,11 @@ test('the house has my desired features', () => {
 ```js
 describe('toMatchObject applied to arrays', () => {
   test('the number of elements must match exactly', () => {
-    expect([{foo: 'bar'}, {baz: 1}]).toMatchObject([{foo: 'bar'}, {baz: 1}]);
+    expect([{ foo: 'bar' }, { baz: 1 }]).toMatchObject([{ foo: 'bar' }, { baz: 1 }]);
   });
 
   test('.toMatchObject is called for each elements, so extra object properties are okay', () => {
-    expect([{foo: 'bar'}, {baz: 1, extra: 'quux'}]).toMatchObject([
-      {foo: 'bar'},
-      {baz: 1},
-    ]);
+    expect([{ foo: 'bar' }, { baz: 1, extra: 'quux' }]).toMatchObject([{ foo: 'bar' }, { baz: 1 }]);
   });
 });
 ```
@@ -754,8 +739,8 @@ class LaCroix {
 
 describe('the La Croix cans on my desk', () => {
   test('are not semantically the same', () => {
-    expect(new LaCroix('lemon')).toEqual({flavor: 'lemon'});
-    expect(new LaCroix('lemon')).not.toStrictEqual({flavor: 'lemon'});
+    expect(new LaCroix('lemon')).toEqual({ flavor: 'lemon' });
+    expect(new LaCroix('lemon')).not.toStrictEqual({ flavor: 'lemon' });
   });
 });
 ```
@@ -871,7 +856,7 @@ Check out the section on [Inline Snapshots](SnapshotTesting.md#inline-snapshots)
 ```js
 test('map calls its argument with a non-null argument', () => {
   const mock = jest.fn();
-  [1].map(x => mock(x));
+  [1].map((x) => mock(x));
   expect(mock).toHaveBeenCalledWith(expect.anything());
 });
 ```
@@ -928,14 +913,10 @@ describe('arrayContaining', () => {
 describe('Beware of a misunderstanding! A sequence of dice rolls', () => {
   const expected = [1, 2, 3, 4, 5, 6];
   it('matches even with an unexpected number 7', () => {
-    expect([4, 1, 6, 7, 3, 5, 2, 5, 4, 6]).toEqual(
-      expect.arrayContaining(expected),
-    );
+    expect([4, 1, 6, 7, 3, 5, 2, 5, 4, 6]).toEqual(expect.arrayContaining(expected));
   });
   it('does not match without an expected number 2', () => {
-    expect([4, 1, 6, 7, 3, 5, 7, 5, 4, 6]).not.toEqual(
-      expect.arrayContaining(expected),
-    );
+    expect([4, 1, 6, 7, 3, 5, 7, 5, 4, 6]).not.toEqual(expect.arrayContaining(expected));
   });
 });
 ```
@@ -951,9 +932,7 @@ describe('not.arrayContaining', () => {
   const expected = ['Samantha'];
 
   it('matches if the actual array does not contain the expected elements', () => {
-    expect(['Alice', 'Bob', 'Eve']).toEqual(
-      expect.not.arrayContaining(expected),
-    );
+    expect(['Alice', 'Bob', 'Eve']).toEqual(expect.not.arrayContaining(expected));
   });
 });
 ```
@@ -966,9 +945,7 @@ describe('not.arrayContaining', () => {
 
 ```js
 test('all elements in array are strings', () => {
-  expect(['apple', 'banana', 'cherry']).toEqual(
-    expect.arrayOf(expect.any(String)),
-  );
+  expect(['apple', 'banana', 'cherry']).toEqual(expect.arrayOf(expect.any(String)));
 });
 ```
 
@@ -977,15 +954,15 @@ This matcher is particularly useful for validating arrays containing complex str
 ```js
 test('array of objects with specific properties', () => {
   expect([
-    {id: 1, name: 'Alice'},
-    {id: 2, name: 'Bob'},
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
   ]).toEqual(
     expect.arrayOf(
       expect.objectContaining({
         id: expect.any(Number),
         name: expect.any(String),
-      }),
-    ),
+      })
+    )
   );
 });
 ```
@@ -998,9 +975,7 @@ test('array of objects with specific properties', () => {
 
 ```js
 test('not all elements in array are strings', () => {
-  expect(['apple', 123, 'cherry']).toEqual(
-    expect.not.arrayOf(expect.any(String)),
-  );
+  expect(['apple', 123, 'cherry']).toEqual(expect.not.arrayOf(expect.any(String)));
 });
 ```
 
@@ -1040,7 +1015,7 @@ test('onPress gets called with the right thing', () => {
     expect.objectContaining({
       x: expect.any(Number),
       y: expect.any(Number),
-    }),
+    })
   );
 });
 ```
@@ -1053,10 +1028,10 @@ It is the inverse of `expect.objectContaining`.
 
 ```js
 describe('not.objectContaining', () => {
-  const expected = {foo: 'bar'};
+  const expected = { foo: 'bar' };
 
   it('matches if the actual object does not contain expected key: value pairs', () => {
-    expect({bar: 'baz'}).toEqual(expect.not.objectContaining(expected));
+    expect({ bar: 'baz' }).toEqual(expect.not.objectContaining(expected));
   });
 });
 ```
@@ -1095,19 +1070,12 @@ This example also shows how you can nest multiple asymmetric matchers, with `exp
 
 ```js
 describe('stringMatching in arrayContaining', () => {
-  const expected = [
-    expect.stringMatching(/^Alic/),
-    expect.stringMatching(/^[BR]ob/),
-  ];
+  const expected = [expect.stringMatching(/^Alic/), expect.stringMatching(/^[BR]ob/)];
   it('matches even if received contains additional elements', () => {
-    expect(['Alicia', 'Roberto', 'Evelina']).toEqual(
-      expect.arrayContaining(expected),
-    );
+    expect(['Alicia', 'Roberto', 'Evelina']).toEqual(expect.arrayContaining(expected));
   });
   it('does not match if received does not contain expected elements', () => {
-    expect(['Roberto', 'Evelina']).not.toEqual(
-      expect.arrayContaining(expected),
-    );
+    expect(['Roberto', 'Evelina']).not.toEqual(expect.arrayContaining(expected));
   });
 });
 ```
@@ -1161,7 +1129,7 @@ For example, let's say that we have a few functions that all deal with state. `p
 ```js
 test('prepareState prepares a valid state', () => {
   expect.hasAssertions();
-  prepareState(state => {
+  prepareState((state) => {
     expect(validateState(state)).toBeTruthy();
   });
   return waitOnState();
@@ -1201,8 +1169,8 @@ export class Volume {
 ```
 
 ```js title="areVolumesEqual.js"
-import {expect} from '@jest/globals';
-import {Volume} from './Volume.js';
+import { expect } from '@jest/globals';
+import { Volume } from './Volume.js';
 
 function areVolumesEqual(a, b) {
   const isAVolume = a instanceof Volume;
@@ -1221,8 +1189,8 @@ expect.addEqualityTesters([areVolumesEqual]);
 ```
 
 ```js title="__tests__/Volume.test.js"
-import {expect, test} from '@jest/globals';
-import {Volume} from '../Volume.js';
+import { expect, test } from '@jest/globals';
+import { Volume } from '../Volume.js';
 import '../areVolumesEqual.js';
 
 test('are equal with different units', () => {
@@ -1258,8 +1226,8 @@ export class Volume {
 ```
 
 ```ts title="areVolumesEqual.ts"
-import {expect} from '@jest/globals';
-import {Volume} from './Volume.js';
+import { expect } from '@jest/globals';
+import { Volume } from './Volume.js';
 
 function areVolumesEqual(a: unknown, b: unknown): boolean | undefined {
   const isAVolume = a instanceof Volume;
@@ -1278,8 +1246,8 @@ expect.addEqualityTesters([areVolumesEqual]);
 ```
 
 ```ts title="__tests__/Volume.test.ts"
-import {expect, test} from '@jest/globals';
-import {Volume} from '../Volume.js';
+import { expect, test } from '@jest/globals';
+import { Volume } from '../Volume.js';
 import '../areVolumesEqual.js';
 
 test('are equal with different units', () => {
@@ -1336,9 +1304,7 @@ function areBooksEqual(a, b, customTesters) {
     // Books are the same if they have the same name and author array. We need
     // to pass customTesters to equals here so the Author custom tester will be
     // used when comparing Authors
-    return (
-      a.name === b.name && this.equals(a.authors, b.authors, customTesters)
-    );
+    return a.name === b.name && this.equals(a.authors, b.authors, customTesters);
   } else if (isABook === isBBook) {
     return undefined;
   } else {
@@ -1380,14 +1346,10 @@ See [configuring Jest](Configuration.md#snapshotserializers-arraystring) for mor
 You can use `expect.extend` to add your own matchers to Jest. For example, let's say that you're testing a number utility library and you're frequently asserting that numbers appear within particular ranges of other numbers. You could abstract that into a `toBeWithinRange` matcher:
 
 ```js tab={"span":3} title="toBeWithinRange.js"
-import {expect} from '@jest/globals';
+import { expect } from '@jest/globals';
 
 function toBeWithinRange(actual, floor, ceiling) {
-  if (
-    typeof actual !== 'number' ||
-    typeof floor !== 'number' ||
-    typeof ceiling !== 'number'
-  ) {
+  if (typeof actual !== 'number' || typeof floor !== 'number' || typeof ceiling !== 'number') {
     throw new TypeError('These must be of type number!');
   }
 
@@ -1396,19 +1358,15 @@ function toBeWithinRange(actual, floor, ceiling) {
     return {
       message: () =>
         `expected ${this.utils.printReceived(
-          actual,
-        )} not to be within range ${this.utils.printExpected(
-          `${floor} - ${ceiling}`,
-        )}`,
+          actual
+        )} not to be within range ${this.utils.printExpected(`${floor} - ${ceiling}`)}`,
       pass: true,
     };
   } else {
     return {
       message: () =>
-        `expected ${this.utils.printReceived(
-          actual,
-        )} to be within range ${this.utils.printExpected(
-          `${floor} - ${ceiling}`,
+        `expected ${this.utils.printReceived(actual)} to be within range ${this.utils.printExpected(
+          `${floor} - ${ceiling}`
         )}`,
       pass: false,
     };
@@ -1421,7 +1379,7 @@ expect.extend({
 ```
 
 ```js title="__tests__/ranges.test.js"
-import {expect, test} from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import '../toBeWithinRange';
 
 test('is within range', () => expect(100).toBeWithinRange(90, 110));
@@ -1429,7 +1387,7 @@ test('is within range', () => expect(100).toBeWithinRange(90, 110));
 test('is NOT within range', () => expect(101).not.toBeWithinRange(0, 100));
 
 test('asymmetric ranges', () => {
-  expect({apples: 6, bananas: 3}).toEqual({
+  expect({ apples: 6, bananas: 3 }).toEqual({
     apples: expect.toBeWithinRange(1, 10),
     bananas: expect.not.toBeWithinRange(11, 20),
   });
@@ -1451,18 +1409,14 @@ export {};
 ```
 
 ```ts tab={"span":2} title="toBeWithinRange.ts"
-import {expect} from '@jest/globals';
-import type {MatcherFunction} from 'expect';
+import { expect } from '@jest/globals';
+import type { MatcherFunction } from 'expect';
 
 const toBeWithinRange: MatcherFunction<[floor: unknown, ceiling: unknown]> =
   // `floor` and `ceiling` get types from the line above
   // it is recommended to type them as `unknown` and to validate the values
   function (actual, floor, ceiling) {
-    if (
-      typeof actual !== 'number' ||
-      typeof floor !== 'number' ||
-      typeof ceiling !== 'number'
-    ) {
+    if (typeof actual !== 'number' || typeof floor !== 'number' || typeof ceiling !== 'number') {
       throw new TypeError('These must be of type number!');
     }
 
@@ -1472,20 +1426,16 @@ const toBeWithinRange: MatcherFunction<[floor: unknown, ceiling: unknown]> =
         message: () =>
           // `this` context will have correct typings
           `expected ${this.utils.printReceived(
-            actual,
-          )} not to be within range ${this.utils.printExpected(
-            `${floor} - ${ceiling}`,
-          )}`,
+            actual
+          )} not to be within range ${this.utils.printExpected(`${floor} - ${ceiling}`)}`,
         pass: true,
       };
     } else {
       return {
         message: () =>
           `expected ${this.utils.printReceived(
-            actual,
-          )} to be within range ${this.utils.printExpected(
-            `${floor} - ${ceiling}`,
-          )}`,
+            actual
+          )} to be within range ${this.utils.printExpected(`${floor} - ${ceiling}`)}`,
         pass: false,
       };
     }
@@ -1506,7 +1456,7 @@ declare module 'expect' {
 ```
 
 ```ts tab title="__tests__/ranges.test.ts"
-import {expect, test} from '@jest/globals';
+import { expect, test } from '@jest/globals';
 import '../toBeWithinRange';
 
 test('is within range', () => expect(100).toBeWithinRange(90, 110));
@@ -1514,7 +1464,7 @@ test('is within range', () => expect(100).toBeWithinRange(90, 110));
 test('is NOT within range', () => expect(101).not.toBeWithinRange(0, 100));
 
 test('asymmetric ranges', () => {
-  expect({apples: 6, bananas: 3}).toEqual({
+  expect({ apples: 6, bananas: 3 }).toEqual({
     apples: expect.toBeWithinRange(1, 10),
     bananas: expect.not.toBeWithinRange(11, 20),
   });
@@ -1532,9 +1482,9 @@ The type declaration of the matcher can live in a `.d.ts` file or in an imported
 Instead of importing `toBeWithinRange` module to the test file, you can enable the matcher for all tests by moving the `expect.extend` call to a [`setupFilesAfterEnv`](Configuration.md#setupfilesafterenv-array) script:
 
 ```js
-import {expect} from '@jest/globals';
+import { expect } from '@jest/globals';
 // remember to export `toBeWithinRange` as well
-import {toBeWithinRange} from './toBeWithinRange';
+import { toBeWithinRange } from './toBeWithinRange';
 
 expect.extend({
   toBeWithinRange,
@@ -1554,14 +1504,12 @@ expect.extend({
     const pass = received % externalValue === 0;
     if (pass) {
       return {
-        message: () =>
-          `expected ${received} not to be divisible by ${externalValue}`,
+        message: () => `expected ${received} not to be divisible by ${externalValue}`,
         pass: true,
       };
     } else {
       return {
-        message: () =>
-          `expected ${received} to be divisible by ${externalValue}`,
+        message: () => `expected ${received} to be divisible by ${externalValue}`,
         pass: false,
       };
     }
@@ -1620,7 +1568,7 @@ There are a number of helpful tools exposed on `this.utils` primarily consisting
 The most useful ones are `matcherHint`, `printExpected` and `printReceived` to format the error messages nicely. For example, take a look at the implementation for the `toBe` matcher:
 
 ```js
-const {diff} = require('jest-diff');
+const { diff } = require('jest-diff');
 expect.extend({
   toBe(received, expected) {
     const options = {
@@ -1653,7 +1601,7 @@ expect.extend({
           );
         };
 
-    return {actual: received, message, pass};
+    return { actual: received, message, pass };
   },
 });
 ```
@@ -1682,15 +1630,11 @@ To use snapshot testing inside of your custom matcher you can import `jest-snaps
 Here's a snapshot matcher that trims a string to store for a given length, `.toMatchTrimmedSnapshot(length)`:
 
 ```js
-const {toMatchSnapshot} = require('jest-snapshot');
+const { toMatchSnapshot } = require('jest-snapshot');
 
 expect.extend({
   toMatchTrimmedSnapshot(received, length) {
-    return toMatchSnapshot.call(
-      this,
-      received.slice(0, length),
-      'toMatchTrimmedSnapshot',
-    );
+    return toMatchSnapshot.call(this, received.slice(0, length), 'toMatchTrimmedSnapshot');
   },
 });
 
@@ -1708,7 +1652,7 @@ exports[`stores only 10 characters: toMatchTrimmedSnapshot 1`] = `"extra long"`;
 It's also possible to create custom matchers for inline snapshots, the snapshots will be correctly added to the custom matchers. However, inline snapshot will always try to append to the first argument or the second when the first argument is the property matcher, so it's not possible to accept custom arguments in the custom matchers.
 
 ```js
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const { toMatchInlineSnapshot } = require('jest-snapshot');
 
 expect.extend({
   toMatchTrimmedInlineSnapshot(received, ...rest) {
@@ -1732,7 +1676,7 @@ it('stores only 10 characters', () => {
 If your custom inline snapshot matcher is async i.e. uses `async`-`await` you might encounter an error like "Multiple inline snapshots for the same call are not supported". Jest needs additional context information to find where the custom inline snapshot matcher was used to update the snapshots properly.
 
 ```js
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const { toMatchInlineSnapshot } = require('jest-snapshot');
 
 expect.extend({
   async toMatchObservationInlineSnapshot(fn, ...rest) {
@@ -1771,7 +1715,7 @@ Sometimes it might not make sense to continue the test if a prior snapshot faile
 In that case you can implement a custom snapshot matcher that throws on the first mismatch instead of collecting every mismatch.
 
 ```js
-const {toMatchInlineSnapshot} = require('jest-snapshot');
+const { toMatchInlineSnapshot } = require('jest-snapshot');
 
 expect.extend({
   toMatchStateInlineSnapshot(...args) {
@@ -1813,7 +1757,7 @@ Serializable properties is a set of properties that are considered serializable 
 You can add your own properties to this set to make sure that your objects are printed correctly. For example, if you have a `Volume` class, and you want to make sure that only the `amount` and `unit` properties are printed, you can add it to `SERIALIZABLE_PROPERTIES`:
 
 ```js
-import {SERIALIZABLE_PROPERTIES} from 'jest-matcher-utils';
+import { SERIALIZABLE_PROPERTIES } from 'jest-matcher-utils';
 
 class Volume {
   constructor(amount, unit) {

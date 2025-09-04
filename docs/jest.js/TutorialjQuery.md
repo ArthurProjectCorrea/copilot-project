@@ -12,7 +12,7 @@ const $ = require('jquery');
 const fetchCurrentUser = require('./fetchCurrentUser.js');
 
 $('#button').click(() => {
-  fetchCurrentUser(user => {
+  fetchCurrentUser((user) => {
     const loggedText = 'Logged ' + (user.loggedIn ? 'In' : 'Out');
     $('#username').text(user.fullName + ' - ' + loggedText);
   });
@@ -29,10 +29,7 @@ jest.mock('../fetchCurrentUser');
 test('displays a user after a click', () => {
   // Set up our document body
   document.body.innerHTML =
-    '<div>' +
-    '  <span id="username" />' +
-    '  <button id="button" />' +
-    '</div>';
+    '<div>' + '  <span id="username" />' + '  <button id="button" />' + '</div>';
 
   // This module has a side-effect
   require('../displayUser');
@@ -42,7 +39,7 @@ test('displays a user after a click', () => {
 
   // Tell the fetchCurrentUser mock function to automatically invoke
   // its callback with some data
-  fetchCurrentUser.mockImplementation(cb => {
+  fetchCurrentUser.mockImplementation((cb) => {
     cb({
       fullName: 'Johnny Cash',
       loggedIn: true,

@@ -21,9 +21,9 @@ In this code, `expect(2 + 2)` returns an "expectation" object. You typically won
 
 ```js
 test('object assignment', () => {
-  const data = {one: 1};
+  const data = { one: 1 };
   data['two'] = 2;
-  expect(data).toEqual({one: 1, two: 2});
+  expect(data).toEqual({ one: 1, two: 2 });
 });
 ```
 
@@ -128,13 +128,7 @@ test('but there is a "stop" in Christoph', () => {
 You can check if an array or iterable contains a particular item using `toContain`:
 
 ```js
-const shoppingList = [
-  'diapers',
-  'kleenex',
-  'trash bags',
-  'paper towels',
-  'milk',
-];
+const shoppingList = ['diapers', 'kleenex', 'trash bags', 'paper towels', 'milk'];
 
 test('the shopping list has milk on it', () => {
   expect(shoppingList).toContain('milk');

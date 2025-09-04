@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-
 // Detect root project directory even if running from node_modules
 let destDir = process.cwd();
 if (destDir.includes('node_modules')) {
@@ -12,7 +11,7 @@ const destGithub = path.join(destDir, '.github');
 
 function copyRecursive(src, dest) {
   if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
-  fs.readdirSync(src).forEach(file => {
+  fs.readdirSync(src).forEach((file) => {
     const srcFile = path.join(src, file);
     const destFile = path.join(dest, file);
     if (fs.lstatSync(srcFile).isDirectory()) {
