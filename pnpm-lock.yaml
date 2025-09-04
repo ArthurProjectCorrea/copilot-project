@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       copilot-project:
-        specifier: ^1.0.2
-        version: 1.0.2
+        specifier: ^1.0.3
+        version: 1.0.3
 
 packages:
 
-  copilot-project@1.0.2:
-    resolution: {integrity: sha512-oW4KZbnuV+p49Pn2RxGp2TMDSHWwg32xUxKYjfScyzWHTsSSsjW9CuHm44qALI+d1iGuQjc1BKf4TP1s+vfeJw==}
+  copilot-project@1.0.3:
+    resolution: {integrity: sha512-86m76QZRDl0xNUhCpKX7IAfjyGi28EsZYKZ8QEgRYet4kdxWXXheKDWpoGiFkS5s7CjLfkakRLdmE62MUHmq/A==}
 
 snapshots:
 
-  copilot-project@1.0.2: {}
+  copilot-project@1.0.3: {}

@@ -4,7 +4,7 @@
   "description": "Project configured for pnpm and Jest documentation integration.",
   "main": "index.js",
   "scripts": {
-  "postinstall": "node init-github-config.js"
+    "postinstall": "node init-github-config.js"
   },
   "keywords": [],
   "author": "",
@@ -13,9 +13,10 @@
     ".github",
     "docs",
     "scripts",
-    "index.js"
+  "index.js",
+  "init-github-config.js"
   ],
   "dependencies": {
-    "copilot-project": "^1.0.2"
+    "copilot-project": "^1.0.3"
   }
 }
