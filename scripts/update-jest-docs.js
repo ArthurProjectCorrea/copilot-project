@@ -32,7 +32,7 @@ function runCommand(command, options = {}) {
     return output;
   } catch (error) {
     console.error(`❌ Erro ao executar comando: ${command}`);
-    console.error(error.message);
+    console.error(error instanceof Error ? error.message : String(error));
     throw error;
   }
 }

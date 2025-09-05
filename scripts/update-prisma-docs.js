@@ -66,9 +66,13 @@ async function convertMdxToMd(inputPath, outputPath, hasUnified) {
 
       const content = fs.readFileSync(inputPath, 'utf-8');
 
+      // @ts-ignore - remark plugin types are incompatible in this context
       const file = await unified()
+        // @ts-ignore
         .use(remarkParse)
+        // @ts-ignore
         .use(remarkMdx)
+        // @ts-ignore
         .use(remarkStringify, {
           bullet: '-',
           fences: true,
