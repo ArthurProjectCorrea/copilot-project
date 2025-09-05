@@ -1,5 +1,11 @@
 # copilot-project
 
+## 1.2.1
+
+### Patch Changes
+
+- ea01e4f: Fix TypeScript errors in documentation scripts and improve prettier integration with husky. Includes dependency updates and lint-staged optimization for better performance.
+
 ## 1.2.0
 
 ### Minor Changes
