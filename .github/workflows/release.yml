@@ -68,8 +68,10 @@ jobs:
           title: '🚀 Release: Version Packages'
           commit: 'chore(release): publish packages'
           createGithubReleases: true
+          setupGitUser: true
+          commitMode: git-cli
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Send Slack Notification on Success
