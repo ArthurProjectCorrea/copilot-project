@@ -11,7 +11,7 @@
     "copilot-setup": "src/core/cli/copilot-config.js"
   },
   "scripts": {
-    "postinstall": "node -e \"if (process.env.CI === 'true') { console.log('🚫 Skipping postinstall in CI'); process.exit(0); }\" && node src/core/setup/postinstall.js && node scripts/install-husky.js",
+    "postinstall": "node scripts/postinstall.js",
     "postupdate": "node src/core/setup/init-github-config.js",
     "prepack": "node src/core/setup/init-github-config.js",
     "init-config": "node src/core/setup/init-github-config.js",
