@@ -59,7 +59,19 @@ jobs:
       - name: Build Package
         run: pnpm run build
 
+      - name: Check for changesets
+        id: check-changesets
+        run: |
+          if [ -n "$(find .changeset -name '*.md' -not -name 'README.md' -not -name 'config.json' 2>/dev/null)" ]; then
+            echo "has-changesets=true" >> $GITHUB_OUTPUT
+            echo "📦 Changesets found - proceeding with release process"
+          else
+            echo "has-changesets=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No changesets found - skipping release process"
+          fi
+
       - name: Create Release Pull Request or Publish to npm
+        if: steps.check-changesets.outputs.has-changesets == 'true'
         id: changesets
         uses: changesets/action@v1
         with:
@@ -73,6 +85,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: No changesets message
+        if: steps.check-changesets.outputs.has-changesets == 'false'
+        run: |
+          echo "✅ Build and tests passed successfully"
+          echo "📝 No changesets found - no release needed at this time"
+          echo "💡 Create a changeset using 'pnpm changeset' when ready to release"
 
       - name: Send Slack Notification on Success
         if: steps.changesets.outputs.published == 'true'

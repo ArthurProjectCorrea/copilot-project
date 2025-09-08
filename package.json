@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "🤖 Essential npm/pnpm plugin that enhances GitHub Copilot Chat with intelligent framework documentation, automated commit standards, and seamless development workflow integration",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "copilot-chat": "src/core/cli/copilot-cli.js",
     "copilot-setup": "src/core/cli/copilot-config.js"
