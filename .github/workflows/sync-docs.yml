@@ -10,10 +10,12 @@ on:
     - cron: '0 4 * * 1'
     # Prisma: Mondays at 5:00 AM UTC
     - cron: '0 5 * * 1'
+    # Tailwind CSS: Mondays at 6:00 AM UTC
+    - cron: '0 6 * * 1'
   workflow_dispatch:
     inputs:
       framework:
-        description: 'Framework to sync (jest, nest, next, prisma, or all)'
+        description: 'Framework to sync (jest, nest, next, prisma, tailwindcss, or all)'
         required: true
         default: 'all'
         type: choice
@@ -23,6 +25,7 @@ on:
           - nest
           - next
           - prisma
+          - tailwindcss
 
 jobs:
   sync-docs:
@@ -86,6 +89,7 @@ jobs:
               03) FRAMEWORK="nest" ;;
               04) FRAMEWORK="next" ;;
               05) FRAMEWORK="prisma" ;;
+              06) FRAMEWORK="tailwindcss" ;;
               *) FRAMEWORK="all" ;;
             esac
           fi
@@ -98,7 +102,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 Syncing Jest documentation..."
-          node scripts/sync-docs.js jest
+          node src/core/sync/sync-docs.js jest
         continue-on-error: true
 
       - name: Sync NestJS documentation
@@ -107,7 +111,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 Syncing NestJS documentation..."
-          node scripts/sync-docs.js nest
+          node src/core/sync/sync-docs.js nest
         continue-on-error: true
 
       - name: Sync Next.js documentation
@@ -116,7 +120,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 Syncing Next.js documentation..."
-          node scripts/sync-docs.js next
+          node src/core/sync/sync-docs.js next
         continue-on-error: true
 
       - name: Sync Prisma documentation
@@ -125,7 +129,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 Syncing Prisma documentation..."
-          node scripts/sync-docs.js prisma
+          node src/core/sync/sync-docs.js prisma
+        continue-on-error: true
+
+      - name: Sync Tailwind CSS documentation
+        if: steps.determine-framework.outputs.framework == 'tailwindcss' || steps.determine-framework.outputs.framework == 'all'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🚀 Syncing Tailwind CSS documentation..."
+          node src/core/sync/sync-docs.js tailwindcss
         continue-on-error: true
 
       - name: Check for changes
