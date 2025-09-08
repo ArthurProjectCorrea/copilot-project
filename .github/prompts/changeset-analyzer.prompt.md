@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 ---
 
 **Task: Analyze commit history and generate changeset entries for semantic versioning**

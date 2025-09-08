@@ -36,7 +36,8 @@
     "docs:sync:next": "node src/core/sync/sync-docs.js next",
     "docs:sync:prisma": "node src/core/sync/sync-docs.js prisma",
     "docs:sync:tailwindcss": "node src/core/sync/sync-docs.js tailwindcss",
-    "docs:sync:all": "node src/core/sync/sync-docs.js jest && node src/core/sync/sync-docs.js nest && node src/core/sync/sync-docs.js next && node src/core/sync/sync-docs.js prisma && node src/core/sync/sync-docs.js tailwindcss"
+    "docs:sync:all": "node src/core/sync/sync-docs.js jest && node src/core/sync/sync-docs.js nest && node src/core/sync/sync-docs.js next && node src/core/sync/sync-docs.js prisma && node src/core/sync/sync-docs.js tailwindcss",
+    "prepare": "husky"
   },
   "keywords": [
     "github-copilot",
