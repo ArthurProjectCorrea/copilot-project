@@ -11,7 +11,7 @@
     "copilot-setup": "src/core/cli/copilot-config.js"
   },
   "scripts": {
-    "postinstall": "node src/core/setup/postinstall.js",
+    "postinstall": "node src/core/setup/postinstall.js && node scripts/install-husky.js",
     "postupdate": "node src/core/setup/init-github-config.js",
     "prepack": "node src/core/setup/init-github-config.js",
     "init-config": "node src/core/setup/init-github-config.js",
@@ -30,7 +30,6 @@
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
     "release": "pnpm run build && pnpm run changeset:publish",
-    "prepare": "node -e \"if (process.env.CI !== 'true') require('child_process').exec('husky')\"",
     "docs:sync": "node src/core/sync/sync-docs.js",
     "docs:sync:jest": "node src/core/sync/sync-docs.js jest",
     "docs:sync:nest": "node src/core/sync/sync-docs.js nest",
