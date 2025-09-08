@@ -265,9 +265,11 @@ function initGithubConfig(forceRun = false) {
     }
   }
 
-  // Durante desenvolvimento do copilot-project, pula a execução a menos que seja forçada
+  // Durante desenvolvimento do @copilot-kit/chat-integration, pula a execução a menos que seja forçada
   if (isSourceProject && !forceRun && !isInstall) {
-    console.log('💡 This appears to be the source copilot-project. Skipping initialization.');
+    console.log(
+      '💡 This appears to be the source @copilot-kit/chat-integration. Skipping initialization.'
+    );
     console.log('💡 Use --force flag to run anyway for testing purposes.');
     return;
   }
@@ -286,7 +288,9 @@ function initGithubConfig(forceRun = false) {
     console.error('❌ Source .github configuration not found.');
     console.error(`Expected path: ${sourceGithubPath}`);
     if (!isSourceProject) {
-      console.log('💡 Make sure copilot-project is properly installed as a dependency.');
+      console.log(
+        '💡 Make sure @copilot-kit/chat-integration is properly installed as a dependency.'
+      );
     }
     process.exit(1);
   }
