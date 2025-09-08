@@ -1,37 +1,21 @@
 # Next.js Documentation Sync
 
-This documentation is automatically synchronized from the official Next.js documentation repository.
+## Configuration
 
-- **Source**: https://github.com/vercel/next.js
-- **Last Updated**: 2025-09-04T20:03:38.275Z
-- **Sync Process**: Automated via GitHub Actions
-- **Conversion**: MDX → Markdown
+- **Framework:** Next.js (framework)
+- **Repository:** [vercel/next.js](https://github.com/vercel/next.js)
+- **Source Path:** `docs/`
+- **Last Sync:** 2025-09-08T01:53:10.683Z
+- **MDX Conversion:** Enabled
+- **File Extensions:** .md, .mdx
 
-## Important Notes
+## Sync Settings
 
-1. **Do not edit these files directly** - Changes will be overwritten on next sync
-2. **For contributions** - Submit changes to the official Next.js docs repository
-3. **Local Documentation** - Always prioritize this local version when developing with Next.js
-4. **Format Conversion** - Original MDX files are converted to Markdown for compatibility
+- **Exclude Patterns:** None
+- **Include Patterns:** All files
 
-## Coverage
+## About
 
-This local documentation includes comprehensive Next.js topics:
+This documentation is automatically synchronized from the official repository using the copilot-project documentation sync system.
 
-- Getting started guides
-- App Router and Pages Router
-- API Routes and Server Components
-- Styling and optimizations
-- Deployment guides
-- Advanced features
-- Best practices and examples
-
-## MDX Conversion
-
-The original documentation uses MDX format with React components. During sync:
-
-- MDX files are converted to standard Markdown
-- Next.js-specific JSX components are converted to appropriate Markdown equivalents
-- Interactive elements are converted to static documentation
-- Code examples are preserved with proper syntax highlighting
-- Images and assets are preserved
+For more information about this sync process, see the [documentation sync guide](../documentation-sync.md).

@@ -1,0 +1,9 @@
+{
+  "framework": "nest",
+  "name": "NestJS",
+  "filesProcessed": 136,
+  "targetPath": "docs/nest.js/",
+  "duration": "2s",
+  "repository": "nestjs/docs.nestjs.com",
+  "syncDate": "2025-09-08T01:52:59.591Z"
+}

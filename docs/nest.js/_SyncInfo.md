@@ -1,30 +1,21 @@
 # NestJS Documentation Sync
 
-This documentation is automatically synchronized from the official NestJS documentation repository.
+## Configuration
 
-- **Source**: https://github.com/nestjs/docs.nestjs.com
-- **Last Updated**: 2025-09-04T19:37:24.875Z
-- **Sync Process**: Automated via GitHub Actions
+- **Framework:** NestJS (backend)
+- **Repository:** [nestjs/docs.nestjs.com](https://github.com/nestjs/docs.nestjs.com)
+- **Source Path:** `content/`
+- **Last Sync:** 2025-09-08T01:52:57.307Z
+- **MDX Conversion:** Disabled
+- **File Extensions:** .md, .mdx
 
-## Important Notes
+## Sync Settings
 
-1. **Do not edit these files directly** - Changes will be overwritten on next sync
-2. **For contributions** - Submit changes to the official NestJS docs repository
-3. **Local Documentation** - Always prioritize this local version when developing with NestJS
+- **Exclude Patterns:** None
+- **Include Patterns:** All files
 
-## Coverage
+## About
 
-This local documentation includes comprehensive NestJS topics:
+This documentation is automatically synchronized from the official repository using the copilot-project documentation sync system.
 
-- Core concepts (Controllers, Modules, Providers)
-- Advanced features (Guards, Interceptors, Pipes)
-- GraphQL integration
-- Microservices
-- Security features
-- Recipes and best practices
-- CLI tools and workflows
-
-## TypeScript Support
-
-All examples in this documentation work with TypeScript by default.
-NestJS is built with TypeScript and provides excellent type safety.
+For more information about this sync process, see the [documentation sync guide](../documentation-sync.md).
