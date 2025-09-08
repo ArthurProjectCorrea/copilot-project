@@ -2,7 +2,7 @@
   "framework": "prisma",
   "name": "Prisma",
   "filesProcessed": 525,
-  "targetPath": "docs/prisma/",
+  "targetPath": "docs/frameworks/prisma/",
   "duration": "7s",
   "repository": "prisma/docs",
   "syncDate": "2025-09-08T01:53:34.559Z"

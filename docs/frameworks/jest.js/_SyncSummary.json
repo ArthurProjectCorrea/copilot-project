@@ -2,7 +2,7 @@
   "framework": "jest",
   "name": "Jest",
   "filesProcessed": 37,
-  "targetPath": "docs/jest.js/",
+  "targetPath": "docs/frameworks/jest.js/",
   "duration": "1s",
   "repository": "jestjs/jest",
   "syncDate": "2025-09-08T01:52:50.908Z"

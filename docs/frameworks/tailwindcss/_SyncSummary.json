@@ -2,7 +2,7 @@
   "framework": "tailwindcss",
   "name": "Tailwind CSS",
   "filesProcessed": 185,
-  "targetPath": "docs/tailwindcss/",
+  "targetPath": "docs/frameworks/tailwindcss/",
   "duration": "3s",
   "repository": "tailwindlabs/tailwindcss.com",
   "syncDate": "2025-09-08T01:54:01.947Z"

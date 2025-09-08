@@ -694,7 +694,9 @@ it('isLocalhost should detect localhost environment', () => {
 });
 
 it('isLocalhost should detect non-localhost environment', () => {
-  replacedEnv = jest.replaceProperty(process, 'env', { HOSTNAME: 'example.com' });
+  replacedEnv = jest.replaceProperty(process, 'env', {
+    HOSTNAME: 'example.com',
+  });
 
   expect(isLocalhost()).toBe(false);
 });
