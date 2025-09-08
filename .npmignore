@@ -24,6 +24,7 @@ coverage/
 
 # Documentation development
 docs-dev/
+docs/private/
 temp/
 tmp/
 

@@ -1,22 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { execSync } = require('child_process');
 
 // Load environment variables from .env file
 try {
   require('dotenv').config();
-} catch (error) {
+} catch {
   // dotenv is optional, continue without it
 }
 
 // Load documentation configurations with error handling
 function loadDocsConfig() {
   try {
-    const configPath = path.resolve('docs-config.json');
+    const configPath = path.resolve('config/docs-config.json');
     if (!fs.existsSync(configPath)) {
       throw new Error(
-        'docs-config.json not found. Please ensure the file exists in the project root.'
+        'docs-config.json not found. Please ensure the file exists in the config/ directory.'
       );
     }
     return JSON.parse(fs.readFileSync(configPath, 'utf8'));
@@ -552,7 +551,7 @@ For more information about this sync process, see the [documentation sync guide]
         cwd: path.resolve(__dirname, '..'),
       });
       console.log('✅ Formatação concluída com sucesso!');
-    } catch (formatError) {
+    } catch {
       console.warn(
         '⚠️  Aviso: Não foi possível formatar automaticamente. Execute manualmente: pnpm run format'
       );

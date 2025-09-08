@@ -3,7 +3,7 @@
     "name": "Jest",
     "repository": "jestjs/jest",
     "sourcePath": "docs/",
-    "targetPath": "docs/jest.js/",
+    "targetPath": "docs/frameworks/jest.js/",
     "convertMdx": false,
     "schedule": "0 2 * * 1",
     "type": "testing"
@@ -12,7 +12,7 @@
     "name": "NestJS",
     "repository": "nestjs/docs.nestjs.com",
     "sourcePath": "content/",
-    "targetPath": "docs/nest.js/",
+    "targetPath": "docs/frameworks/nest.js/",
     "convertMdx": false,
     "schedule": "0 3 * * 1",
     "type": "backend"
@@ -21,7 +21,7 @@
     "name": "Next.js",
     "repository": "vercel/next.js",
     "sourcePath": "docs/",
-    "targetPath": "docs/next.js/",
+    "targetPath": "docs/frameworks/next.js/",
     "convertMdx": true,
     "schedule": "0 4 * * 1",
     "type": "framework"
@@ -30,7 +30,7 @@
     "name": "Prisma",
     "repository": "prisma/docs",
     "sourcePath": "content/",
-    "targetPath": "docs/prisma/",
+    "targetPath": "docs/frameworks/prisma/",
     "convertMdx": true,
     "schedule": "0 5 * * 1",
     "type": "database"
@@ -39,7 +39,7 @@
     "name": "Tailwind CSS",
     "repository": "tailwindlabs/tailwindcss.com",
     "sourcePath": "src/docs",
-    "targetPath": "docs/tailwindcss/",
+    "targetPath": "docs/frameworks/tailwindcss/",
     "convertMdx": true,
     "schedule": "0 6 * * 1",
     "type": "css-framework"

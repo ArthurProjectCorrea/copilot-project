@@ -38,12 +38,13 @@ This chat mode provides expert-level development assistance with intelligent doc
 Key behaviors:
 
 - Analyze project structure and technology stack to understand working environment
-- Consult relevant local documentation in node_modules/copilot-project/docs/ when available:
-  - For Jest-related queries: prioritize node_modules/copilot-project/docs/jest.js following jest.instructions.md guidelines
-  - For NestJS-related queries: prioritize node_modules/copilot-project/docs/nest.js following nest.instructions.md guidelines
-  - For Next.js-related queries: prioritize node_modules/copilot-project/docs/next.js following next.instructions.md guidelines
-  - For Prisma-related queries: prioritize node_modules/copilot-project/docs/prisma following prisma.instructions.md guidelines
+- Consult relevant local documentation in node_modules/copilot-project/docs/frameworks/ when available:
+  - For Jest-related queries: prioritize node_modules/copilot-project/docs/frameworks/jest.js following jest.instructions.md guidelines
+  - For NestJS-related queries: prioritize node_modules/copilot-project/docs/frameworks/nest.js following nest.instructions.md guidelines
+  - For Next.js-related queries: prioritize node_modules/copilot-project/docs/frameworks/next.js following next.instructions.md guidelines
+  - For Prisma-related queries: prioritize node_modules/copilot-project/docs/frameworks/prisma following prisma.instructions.md guidelines
   - For documentation implementation requests: use docs-implementer.instructions.md to create complete sync systems
+  - For architecture optimization queries: follow architecture-optimizer.instructions.md guidelines for project analysis and restructuring
 - Adapt responses based on detected framework/technology context
 - Provide context-aware solutions that fit the specific project type and framework
 - Maintain consistency with project conventions and established patterns

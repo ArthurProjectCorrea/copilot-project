@@ -79,7 +79,7 @@ class ValidationTester {
       } else {
         this.errors.push('❌ Commitizen não configurado');
       }
-    } catch (error) {
+    } catch {
       this.errors.push('❌ Erro ao ler package.json');
     }
   }
@@ -102,7 +102,7 @@ class ValidationTester {
           } else {
             this.warnings.push(`⚠️ Hook ${hook.name} pode não estar configurado corretamente`);
           }
-        } catch (error) {
+        } catch {
           this.errors.push(`❌ Erro ao ler hook ${hook.name}`);
         }
       }
@@ -134,7 +134,7 @@ class ValidationTester {
           this.errors.push(`❌ Dependência "${dep}" não encontrada`);
         }
       });
-    } catch (error) {
+    } catch {
       this.errors.push('❌ Erro ao verificar dependências');
     }
   }

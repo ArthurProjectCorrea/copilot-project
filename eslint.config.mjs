@@ -1,6 +1,6 @@
 export default [
   {
-    files: ['scripts/**/*.js'],
+    files: ['src/**/*.js', 'scripts/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',
@@ -17,16 +17,16 @@ export default [
       },
     },
     rules: {
-      // Very relaxed rules for CLI scripts
+      // Very relaxed rules for CLI scripts and core modules
       'no-console': 'off',
-      'no-unused-vars': 'off', // Disable for scripts
+      'no-unused-vars': 'error',
       'no-var': 'error',
       'prefer-const': 'error',
     },
   },
   {
     files: ['**/*.js'],
-    ignores: ['scripts/**/*.js'],
+    ignores: ['scripts/**/*.js', 'src/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',

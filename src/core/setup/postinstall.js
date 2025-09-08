@@ -45,7 +45,7 @@ if (fs.existsSync(packageJsonPath)) {
       console.log('🔄 Detected installation in source project, skipping postinstall...');
       process.exit(0);
     }
-  } catch (error) {
+  } catch {
     console.log('⚠️ Could not read package.json, continuing with installation...');
   }
 }
@@ -57,13 +57,7 @@ if (!fs.existsSync(srcDir)) {
 
   // Try alternative location for pnpm store structure
   const altSrcDir = path.join(__dirname, '..', '..', '..', 'copilot-project', '.github');
-  const pnpmStoreSrcDir = path.resolve(
-    __dirname,
-    '../../..',
-    'registry.npmjs.org',
-    'copilot-project',
-    '*/node_modules/copilot-project/.github'
-  );
+  // Removed unused pnpmStoreSrcDir variable
 
   if (fs.existsSync(altSrcDir)) {
     console.log('✅ Found alternative source:', altSrcDir);
@@ -98,7 +92,7 @@ if (!fs.existsSync(srcDir)) {
           break;
         }
       }
-    } catch (error) {
+    } catch {
       console.log('⚠️ Could not locate in pnpm store');
     }
 

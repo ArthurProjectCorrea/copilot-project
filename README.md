@@ -1,6 +1,10 @@
-# 🤖 Copilot Chat Integration Plugin
+# 🤖 Copilot Project - Framework Documentation Automation
 
-**Essential npm/pnpm plugin that supercharges GitHub Copilot Chat with intelligent framework documentation, automated commit standards, and seamless development workflow integration.**
+[![npm version](https://badge.fury.io/js/@copilot-kit%2Fchat-integration.svg)](https://www.npmjs.com/package/@copilot-kit/chat-integration)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js CI](https://github.com/ArthurProjectCorrea/copilot-project/workflows/CI/badge.svg)](https://github.com/ArthurProjectCorrea/copilot-project/actions)
+
+**Essential npm plugin that supercharges GitHub Copilot Chat with intelligent framework documentation, automated commit standards, and seamless development workflow integration.**
 
 Transform your development experience with AI-powered assistance that understands your project's specific frameworks, maintains consistent code quality, and automates tedious setup tasks.
 
@@ -22,7 +26,7 @@ Transform your development experience with AI-powered assistance that understand
 - **📦 Changesets**: Semantic versioning with automated changelog generation
 - **🎨 Lint-staged**: Pre-commit validation that prevents bad code from entering your repo
 
-### � **Automated Documentation Sync**
+### 📚 **Automated Documentation Sync**
 
 - **⚡ Real-time Updates**: Latest framework documentation always available locally
 - **🔄 MDX → Markdown**: Seamless conversion for Copilot Chat compatibility
@@ -39,6 +43,9 @@ npm install -g @copilot-kit/chat-integration
 
 # Using pnpm
 pnpm add -g @copilot-kit/chat-integration
+
+# Using yarn
+yarn global add @copilot-kit/chat-integration
 ```
 
 ### One-Command Setup
@@ -48,20 +55,20 @@ pnpm add -g @copilot-kit/chat-integration
 cd my-awesome-project
 
 # Complete setup with Copilot Chat integration
-npx @copilot-kit/chat-integration setup
-
-# Or use the global command
 copilot-chat setup
+
+# Or use npx for one-time usage
+npx @copilot-kit/chat-integration setup
 ```
 
 ### Chat-Only Integration
 
 ```bash
 # Only configure GitHub Copilot Chat enhancements
-npx @copilot-kit/chat-integration config
+copilot-chat config
 
-# Global command
-copilot-setup config
+# Or using npx
+npx @copilot-kit/chat-integration config
 ```
 
 ## 📋 Available Commands
@@ -69,22 +76,21 @@ copilot-setup config
 ### Main CLI Interface
 
 ```bash
-npx @copilot-kit/chat-integration <command>
+copilot-chat <command>
 ```
 
-| Command            | Description                                                                        |
-| ------------------ | ---------------------------------------------------------------------------------- |
-| `setup`            | Complete project setup (Husky, CommitLint, Prettier, ESLint, Changesets + Copilot) |
-| `config`           | Configure only GitHub Copilot Chat enhancements (Instructions, Prompts, Chatmodes) |
-| `validate`         | Validate existing configuration and integration status                             |
-| `demo`             | Interactive demonstration of all features                                          |
-| `sync <framework>` | Sync documentation for specific framework (jest, next, nest, prisma, tailwindcss)  |
+| Command    | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `setup`    | Complete project setup (Husky, CommitLint, Prettier, ESLint, Changesets + Copilot) |
+| `config`   | Configure only GitHub Copilot Chat enhancements (Instructions, Prompts, Chatmodes) |
+| `validate` | Validate existing configuration and integration status                             |
+| `demo`     | Interactive demonstration of all features                                          |
+| `sync`     | Sync documentation for frameworks (jest, next, nest, prisma, tailwindcss)          |
 
-### Global Commands
+### Alternative CLI
 
 ```bash
-copilot-chat <command>    # Main CLI
-copilot-setup <command>   # Alternative config command
+copilot-setup <command>   # Alternative configuration command
 ```
 
 ### NPM Scripts Available
@@ -93,7 +99,7 @@ copilot-setup <command>   # Alternative config command
 npm run setup          # Complete setup
 npm run validate       # Validate configuration
 npm run demo           # Interactive demo
-npm run docs:sync      # Sync all framework documentation
+npm run docs:sync:all  # Sync all framework documentation
 npm run commit         # Commitizen interface
 npm run changeset      # Create new changeset
 ```
@@ -108,7 +114,8 @@ mkdir my-ai-app && cd my-ai-app
 npm init -y
 
 # Install and configure everything
-npx @copilot-kit/chat-integration setup
+npm install -g @copilot-kit/chat-integration
+copilot-chat setup
 
 # Make your first standardized commit
 git add .
@@ -119,10 +126,10 @@ npm run commit  # Interactive Commitizen interface
 
 ```bash
 # Check current configuration
-npx @copilot-kit/chat-integration validate
+copilot-chat validate
 
 # Add missing integrations
-npx @copilot-kit/chat-integration setup
+copilot-chat setup
 
 # Test Copilot Chat with enhanced context
 # Open GitHub Copilot Chat and ask framework-specific questions
@@ -132,8 +139,8 @@ npx @copilot-kit/chat-integration setup
 
 ```bash
 # Sync specific framework docs for Copilot Chat
-npx @copilot-kit/chat-integration sync jest
-npx @copilot-kit/chat-integration sync tailwindcss
+copilot-chat sync jest
+copilot-chat sync tailwindcss
 
 # Sync all supported frameworks
 npm run docs:sync:all
@@ -148,241 +155,136 @@ npm run commit
 # Create changeset for release
 npm run changeset
 
-# Generate release with automated changelog
-npm run changeset:version
-npm run changeset:publish
+# Automated release (configured in CI/CD)
+git push origin main
 ```
 
-## 🔧 Advanced Configuration
+## 🧠 Enhanced Copilot Chat Modes
 
-### Copilot Chat Customization
+Access specialized assistance directly in GitHub Copilot Chat:
 
-The plugin installs specialized `.github/instructions/*.instructions.md` files that enhance GitHub Copilot Chat:
+### Framework-Specific Help
 
 ```bash
-.github/
-  instructions/
-    jest.instructions.md           # Jest-specific guidance
-    next.instructions.md           # Next.js expertise
-    nest.instructions.md           # NestJS patterns
-    prisma.instructions.md         # Database operations
-    tailwindcss.instructions.md    # Styling utilities
-    dev.instructions.md            # General development
-    commit-analyzer.instructions.md # Commit standards
-    changeset-analyzer.instructions.md # Release management
+@workspace /jest        # Jest testing assistance with local docs
+@workspace /nest        # NestJS development guidance
+@workspace /next        # Next.js framework help
+@workspace /prisma      # Prisma ORM assistance
+@workspace /tailwindcss # Tailwind CSS styling help
 ```
 
-### Custom Copy Rules
-
-Edit `scripts/copy-rules.json` to customize file copying behavior:
-
-````json
-{
-  ".github": {
-    "include": ["instructions/**", "chatmodes/**"],
-    "exclude": ["workflows/**"]
-  },
-  "docs": {
-    "include": ["**/*.md"],
-    "exclude": ["_*/**"]
-  }
-}
-### Documentation Sync Configuration
-
-Edit `docs-config.json` to add new frameworks for Copilot Chat integration:
-
-```json
-{
-  "frameworks": {
-    "my-framework": {
-      "repository": "owner/framework-repo",
-      "source": "docs/",
-      "destination": "docs/my-framework/",
-      "schedule": "0 6 * * 1",
-      "enabled": true
-    }
-  }
-}
-````
-
-### Environment Variables
+### Development Workflow
 
 ```bash
-# Optional: Custom GitHub token for private repos
-GITHUB_TOKEN=your_token_here
-
-# Optional: Custom documentation paths
-DOCS_BASE_PATH=./custom-docs
+@workspace /commit-analyzer      # Analyze staged changes for commit messages
+@workspace /changeset-analyzer   # Generate changesets for releases
+@workspace /architecture-optimizer # Analyze and optimize project architecture
+@workspace /dev                 # General development assistance
 ```
 
-## 🤖 GitHub Copilot Chat Features
+## 🔧 Configuration
 
-### Enhanced Framework Knowledge
+### Automatic Configuration
 
-Once installed, GitHub Copilot Chat will have access to:
+The plugin automatically creates:
 
-- **📖 Local Documentation**: Framework docs available at `node_modules/@copilot-kit/chat-integration/docs/`
-- **🎯 Specialized Instructions**: Context-aware responses for each framework
-- **💡 Best Practices**: Curated patterns and examples
-- **🔧 Integration Guidance**: How frameworks work together
+- `.github/chatmodes/` - Copilot Chat mode definitions
+- `.github/instructions/` - Framework-specific instruction files
+- `.github/prompts/` - Custom prompts for specialized tasks
+- `.github/workflows/` - Documentation sync automation
+- Development tools configuration (Husky, ESLint, Prettier, etc.)
 
-### Chat Mode Examples
-
-```typescript
-// Ask Copilot Chat:
-'Help me create a Next.js API route with Prisma database integration';
-
-// Copilot will reference:
-// - node_modules/@copilot-kit/chat-integration/docs/next.js/
-// - node_modules/@copilot-kit/chat-integration/docs/prisma/
-// - .github/instructions/next.instructions.md
-// - .github/instructions/prisma.instructions.md
-```
-
-### Commit Analysis
+### Manual Configuration
 
 ```bash
-# Stage your changes
-git add .
+# Configure specific frameworks
+copilot-chat config
 
-# Ask Copilot Chat:
-"Analyze my staged changes and suggest a conventional commit message"
+# Validate current setup
+copilot-chat validate
 
-# Copilot will use .github/instructions/commit-analyzer.instructions.md
-# to provide precise commit type, scope, and message suggestions
+# View demonstration of features
+copilot-chat demo
 ```
 
-## 📊 Supported Frameworks
+## 🏗️ Supported Frameworks
 
-| Framework    | Documentation | Instructions | Status |
-| ------------ | ------------- | ------------ | ------ |
-| **Jest**     | ✅            | ✅           | Active |
-| **Next.js**  | ✅            | ✅           | Active |
-| **NestJS**   | ✅            | ✅           | Active |
-| **Prisma**   | ✅            | ✅           | Active |
-| **Tailwind** | ✅            | ✅           | Active |
+| Framework        | Documentation Source         | Local Path                                                                | Chat Mode                 |
+| ---------------- | ---------------------------- | ------------------------------------------------------------------------- | ------------------------- |
+| **Jest**         | facebook/jest                | `node_modules/@copilot-kit/chat-integration/docs/frameworks/jest.js/`     | `@workspace /jest`        |
+| **NestJS**       | nestjs/docs.nestjs.com       | `node_modules/@copilot-kit/chat-integration/docs/frameworks/nest.js/`     | `@workspace /nest`        |
+| **Next.js**      | vercel/next.js               | `node_modules/@copilot-kit/chat-integration/docs/frameworks/next.js/`     | `@workspace /next`        |
+| **Prisma**       | prisma/docs                  | `node_modules/@copilot-kit/chat-integration/docs/frameworks/prisma/`      | `@workspace /prisma`      |
+| **Tailwind CSS** | tailwindlabs/tailwindcss.com | `node_modules/@copilot-kit/chat-integration/docs/frameworks/tailwindcss/` | `@workspace /tailwindcss` |
 
-## 🎓 How It Works
+## 🔄 Documentation Sync
 
-### 1. **Intelligent Detection**
+### Automatic Sync
 
-The plugin automatically detects:
+- **Schedule**: Weekly automatic updates via GitHub Actions
+- **Conversion**: MDX → Markdown for Copilot Chat compatibility
+- **Caching**: Smart incremental updates for performance
+- **Sources**: Official framework repositories
 
-- **Project Type**: React, Node.js, Next.js, NestJS, etc.
-- **Package Manager**: npm, pnpm, yarn compatibility
-- **Existing Configuration**: What's already set up vs. what needs installation
-- **Framework Usage**: Active frameworks in your project
+### Manual Sync
 
-### 2. **Smart Configuration**
+```bash
+# Sync all frameworks
+npm run docs:sync:all
 
-- **Non-Destructive**: Only adds missing configurations, preserves existing setups
-- **Framework-Aware**: Adapts configuration based on detected frameworks
-- **Best Practices**: Applies industry-standard patterns automatically
-- **Customizable**: All configurations can be tweaked post-installation
+# Sync specific framework
+npm run docs:sync:jest
+npm run docs:sync:nest
+npm run docs:sync:next
+npm run docs:sync:prisma
+npm run docs:sync:tailwindcss
+```
 
-### 3. **Copilot Chat Enhancement**
+## 🛠️ Development Tools Integration
 
-- **Local Documentation**: Syncs framework docs to `node_modules/@copilot-kit/chat-integration/docs/`
-- **Instruction Files**: Installs specialized `.github/instructions/*.instructions.md`
-- **Context Awareness**: Copilot Chat references local docs first for accuracy
-- **Framework Expertise**: Each framework gets dedicated AI guidance patterns
+### Code Quality
 
-### 4. **Continuous Updates**
+- **ESLint**: Automatic linting with fix-on-save
+- **Prettier**: Consistent code formatting
+- **Husky**: Git hooks for quality gates
+- **Lint-staged**: Pre-commit validation
 
-- **Automated Sync**: GitHub Actions keep documentation current
-- **Version Compatibility**: Updates respect your framework versions
-- **Zero Maintenance**: Set it once, works continuously
+### Commit Standards
 
-## 🚀 Performance Benefits
+- **Commitizen**: Interactive commit interface
+- **Conventional Commits**: Standardized commit messages
+- **Commitlint**: Commit message validation
 
-### Before vs. After Installation
+### Release Management
 
-| Aspect                   | Before Plugin | After Plugin       |
-| ------------------------ | ------------- | ------------------ |
-| **Copilot Accuracy**     | Generic       | Framework-specific |
-| **Setup Time**           | Hours         | Minutes            |
-| **Commit Consistency**   | Manual        | Automated          |
-| **Code Quality**         | Inconsistent  | Standardized       |
-| **Documentation Access** | External      | Local + Current    |
-| **Release Management**   | Manual        | Automated          |
+- **Changesets**: Semantic versioning
+- **Automated Changelogs**: Generated from commits
+- **CI/CD Integration**: Automated releases
+
+## 🔍 Validation and Debugging
+
+### Verify Configuration
+
+```bash
+copilot-chat validate
+```
+
+### Interactive Demo
+
+```bash
+copilot-chat demo
+```
+
+### Debug Documentation Sync
+
+```bash
+# Verbose logging
+DEBUG=* copilot-chat sync jest
+```
 
 ## 🤝 Contributing
 
-We welcome contributions! This plugin benefits every developer using GitHub Copilot Chat.
-
-### Adding New Frameworks
-
-1. **Fork the repository**
-2. **Add framework configuration** in `docs-config.json`
-3. **Create instruction file** following existing patterns
-4. **Test documentation sync**
-5. **Submit pull request**
-
 ### Development Setup
-
-```bash
-# Clone and setup
-git clone https://github.com/your-username/copilot-chat-integration
-cd copilot-chat-integration
-npm install
-
-# Test local installation
-npm link
-npx @copilot-kit/chat-integration setup
-```
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🙋‍♂️ Support
-
-- **Issues**: [GitHub Issues](https://github.com/your-username/copilot-chat-integration/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/copilot-chat-integration/discussions)
-- **Documentation**: [Wiki](https://github.com/your-username/copilot-chat-integration/wiki)
-
----
-
-**Made with ❤️ for the GitHub Copilot community**
-
-_Transform your AI-assisted development workflow today!_
-
-- Instala apenas dependências necessárias
-- Configura ferramentas compatíveis
-- Evita conflitos com configurações existentes
-- Mantém configurações customizadas
-
-### 3. **Integração Contínua**
-
-- Hooks Git automáticos
-- Validação em tempo real
-- Sync de documentação agendado
-- Atualizações automáticas
-
-## 🔍 Validação e Debugging
-
-### Verificar Configuração
-
-```bash
-npx copilot-project validate
-```
-
-### Demonstração Interativa
-
-```bash
-npx copilot-project demo
-```
-
-### Debug de Sincronização
-
-```bash
-# Ver logs detalhados
-DEBUG=* npx copilot-project sync jest
-```
-
-## 🤝 Contribuindo
-
-### Desenvolvimento Local
 
 ```bash
 git clone https://github.com/ArthurProjectCorrea/copilot-project
@@ -391,23 +293,81 @@ npm install
 npm run setup
 ```
 
-### Adicionando Novos Frameworks
+### Adding New Frameworks
 
-1. Adicionar configuração em `docs-config.json`
-2. Criar workflow de sincronização
-3. Desenvolver arquivo de instruções
-4. Testar integração completa
+1. Add configuration to `docs-config.json`
+2. Create sync workflow in `.github/workflows/`
+3. Develop instruction file in `.github/instructions/`
+4. Test complete integration
 
-## 📄 Licença
+### Code Standards
 
-MIT License - veja [LICENSE](LICENSE) para detalhes.
+- Follow existing code style (ESLint + Prettier)
+- Write conventional commit messages
+- Add tests for new functionality
+- Update documentation
 
-## 🆘 Suporte
+## 🚨 Troubleshooting
+
+### Common Issues
+
+**Installation Problems**
+
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Check Node.js version (requires 16+)
+node --version
+
+# Reinstall with verbose logging
+npm install -g @copilot-kit/chat-integration --verbose
+```
+
+**Copilot Chat Not Recognizing Modes**
+
+```bash
+# Verify configuration
+copilot-chat validate
+
+# Recreate configuration
+copilot-chat config
+
+# Check file permissions
+ls -la .github/chatmodes/
+```
+
+**Documentation Sync Failing**
+
+```bash
+# Check GitHub token
+echo $GITHUB_TOKEN
+
+# Manual sync with debug
+DEBUG=* copilot-chat sync jest
+
+# Verify repository access
+curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/facebook/jest
+```
+
+### Getting Help
 
 - **Issues**: [GitHub Issues](https://github.com/ArthurProjectCorrea/copilot-project/issues)
-- **Discussões**: [GitHub Discussions](https://github.com/ArthurProjectCorrea/copilot-project/discussions)
-- **Wiki**: [Documentação Completa](https://github.com/ArthurProjectCorrea/copilot-project/wiki)
+- **Discussions**: [GitHub Discussions](https://github.com/ArthurProjectCorrea/copilot-project/discussions)
+- **Documentation**: [Project Wiki](https://github.com/ArthurProjectCorrea/copilot-project/wiki)
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🙏 Acknowledgments
+
+- GitHub Copilot team for the amazing AI assistance platform
+- Framework maintainers for excellent documentation
+- Open source community for continuous improvements
 
 ---
 
-**Desenvolvido para automatizar a excelência em desenvolvimento. 🚀**
+**Made with ❤️ for the GitHub Copilot community**
+
+_Transform your AI-assisted development workflow today!_

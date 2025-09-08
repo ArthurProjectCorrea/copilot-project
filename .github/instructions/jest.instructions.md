@@ -7,7 +7,7 @@ This project extensively uses Jest for testing. The AI is a Jest expert that mus
 
 Guidelines:
 
-**Mandatory Documentation Priority:** ALWAYS consult the local documentation in `node_modules/copilot-project/docs/jest.js` first before any response. This contains the most relevant and up-to-date information. When responding, explicitly cite the local file used (e.g., "According to GettingStarted.md" or "As documented in ExpectAPI.md"). Only refer to external Jest documentation (https://jestjs.io/docs/) when the local docs are insufficient.
+**Mandatory Documentation Priority:** ALWAYS consult the local documentation in `node_modules/copilot-project/docs/frameworks/jest.js` first before any response. This contains the most relevant and up-to-date information. When responding, explicitly cite the local file used (e.g., "According to GettingStarted.md" or "As documented in ExpectAPI.md"). Only refer to external Jest documentation (https://jestjs.io/docs/) when the local docs are insufficient.
 
 **Comprehensive Jest Knowledge Areas:** The local docs provide extensive coverage including:
 

@@ -92,7 +92,7 @@ class StandardsDemo {
       execSync(`${this.packageManager} run format`, { stdio: 'inherit' });
 
       console.log('\n✅ Verificação de qualidade concluída!');
-    } catch (error) {
+    } catch {
       console.error('❌ Erro na verificação de qualidade');
     }
   }
@@ -110,7 +110,7 @@ class StandardsDemo {
       } else {
         console.log('❌ Commit cancelado.');
       }
-    } catch (error) {
+    } catch {
       console.error('❌ Erro no commit. Certifique-se de ter mudanças staged.');
     }
   }
@@ -128,7 +128,7 @@ class StandardsDemo {
       } else {
         console.log('❌ Criação de changeset cancelada.');
       }
-    } catch (error) {
+    } catch {
       console.error('❌ Erro ao criar changeset');
     }
   }
@@ -142,10 +142,12 @@ class StandardsDemo {
 
       console.log('\n📝 Testando commitlint...');
       console.log('Exemplo de mensagem válida: "feat: add new feature"');
-      execSync('echo "feat: test commit message" | npx commitlint', { stdio: 'inherit' });
+      execSync('echo "feat: test commit message" | npx commitlint', {
+        stdio: 'inherit',
+      });
 
       console.log('\n✅ Hooks funcionando corretamente!');
-    } catch (error) {
+    } catch {
       console.error('❌ Erro nos hooks');
     }
   }
@@ -154,8 +156,10 @@ class StandardsDemo {
     console.log('📊 Validando configuração...\n');
 
     try {
-      execSync('node scripts/validate-project-standards.js', { stdio: 'inherit' });
-    } catch (error) {
+      execSync('node scripts/validate-project-standards.js', {
+        stdio: 'inherit',
+      });
+    } catch {
       console.error('❌ Erro na validação');
     }
   }

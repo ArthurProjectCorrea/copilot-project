@@ -4,18 +4,18 @@
   "description": "🤖 Essential npm/pnpm plugin that enhances GitHub Copilot Chat with intelligent framework documentation, automated commit standards, and seamless development workflow integration",
   "main": "index.js",
   "bin": {
-    "copilot-chat": "scripts/copilot-cli.js",
-    "copilot-setup": "scripts/copilot-config.js"
+    "copilot-chat": "src/core/cli/copilot-cli.js",
+    "copilot-setup": "src/core/cli/copilot-config.js"
   },
   "scripts": {
-    "postinstall": "node scripts/postinstall.js",
-    "postupdate": "node scripts/init-github-config.js",
-    "prepack": "node scripts/init-github-config.js",
-    "init-config": "node scripts/init-github-config.js",
-    "setup": "node scripts/setup-project-standards.js",
-    "validate": "node scripts/validate-project-standards.js",
-    "demo": "node scripts/demo-project-standards.js",
-    "cli": "node scripts/copilot-cli.js",
+    "postinstall": "node src/core/setup/postinstall.js",
+    "postupdate": "node src/core/setup/init-github-config.js",
+    "prepack": "node src/core/setup/init-github-config.js",
+    "init-config": "node src/core/setup/init-github-config.js",
+    "setup": "node src/core/setup/setup-project-standards.js",
+    "validate": "node src/core/setup/validate-project-standards.js",
+    "demo": "node src/core/setup/demo-project-standards.js",
+    "cli": "node src/core/cli/copilot-cli.js",
     "lint": "eslint . --fix",
     "check-types": "tsc --noEmit",
     "build": "echo 'No build step required for plain JS.'",
@@ -28,13 +28,13 @@
     "changeset:publish": "changeset publish",
     "release": "pnpm run build && pnpm run changeset:publish",
     "prepare": "husky",
-    "docs:sync": "node scripts/sync-docs.js",
-    "docs:sync:jest": "node scripts/sync-docs.js jest",
-    "docs:sync:nest": "node scripts/sync-docs.js nest",
-    "docs:sync:next": "node scripts/sync-docs.js next",
-    "docs:sync:prisma": "node scripts/sync-docs.js prisma",
-    "docs:sync:tailwindcss": "node scripts/sync-docs.js tailwindcss",
-    "docs:sync:all": "node scripts/sync-docs.js jest && node scripts/sync-docs.js nest && node scripts/sync-docs.js next && node scripts/sync-docs.js prisma && node scripts/sync-docs.js tailwindcss"
+    "docs:sync": "node src/core/sync/sync-docs.js",
+    "docs:sync:jest": "node src/core/sync/sync-docs.js jest",
+    "docs:sync:nest": "node src/core/sync/sync-docs.js nest",
+    "docs:sync:next": "node src/core/sync/sync-docs.js next",
+    "docs:sync:prisma": "node src/core/sync/sync-docs.js prisma",
+    "docs:sync:tailwindcss": "node src/core/sync/sync-docs.js tailwindcss",
+    "docs:sync:all": "node src/core/sync/sync-docs.js jest && node src/core/sync/sync-docs.js nest && node src/core/sync/sync-docs.js next && node src/core/sync/sync-docs.js prisma && node src/core/sync/sync-docs.js tailwindcss"
   },
   "keywords": [
     "github-copilot",
@@ -76,8 +76,11 @@
   "license": "MIT",
   "files": [
     ".github",
-    "docs",
-    "scripts",
+    "src",
+    "config",
+    "docs/architecture.md",
+    "docs/frameworks",
+    "docs/public",
     "index.js"
   ],
   "lint-staged": {

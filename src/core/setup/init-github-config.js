@@ -5,7 +5,7 @@ const crypto = require('crypto');
 // Configuração dos diretórios e arquivos
 const CONFIG = {
   directories: ['chatmodes', 'instructions', 'prompts'],
-  packageName: 'copilot-project',
+  packageName: '@copilot-kit/chat-integration',
   copyRulesFile: 'copy-rules.json',
 };
 
@@ -32,7 +32,11 @@ function loadCopyRules(basePath) {
   console.log('📋 Using default copy rules');
   return {
     copyRules: {
-      instructions: { enabled: true, files: ['*.instructions.md'], exclude: [] },
+      instructions: {
+        enabled: true,
+        files: ['*.instructions.md'],
+        exclude: [],
+      },
       prompts: { enabled: true, files: ['*.prompt.md'], exclude: [] },
       chatmodes: { enabled: true, files: ['*.chatmode.md'], exclude: [] },
     },
@@ -256,7 +260,7 @@ function initGithubConfig(forceRun = false) {
         fs.existsSync(path.join(base, '.github', dir))
       );
       isSourceProject = hasCopilotProjectName && hasConfigDirs;
-    } catch (error) {
+    } catch {
       // Ignore package.json parsing errors
     }
   }
