@@ -78,10 +78,7 @@ jobs:
           "
 
       - name: Install dependencies
-        run: |
-          pnpm install --frozen-lockfile
-          # Install documentation processing dependencies
-          npm install unified remark-parse remark-mdx remark-stringify --save-dev
+        run: pnpm install --frozen-lockfile
 
       - name: Restore package.json
         run: |
