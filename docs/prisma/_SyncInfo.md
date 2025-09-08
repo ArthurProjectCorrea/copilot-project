@@ -1,37 +1,21 @@
 # Prisma Documentation Sync
 
-This documentation is automatically synchronized from the official Prisma documentation repository.
+## Configuration
 
-- **Source**: https://github.com/prisma/docs
-- **Last Updated**: 2025-09-04T19:56:00.838Z
-- **Sync Process**: Automated via GitHub Actions
-- **Conversion**: MDX → Markdown
+- **Framework:** Prisma (database)
+- **Repository:** [prisma/docs](https://github.com/prisma/docs)
+- **Source Path:** `content/`
+- **Last Sync:** 2025-09-08T01:53:28.249Z
+- **MDX Conversion:** Enabled
+- **File Extensions:** .md, .mdx
 
-## Important Notes
+## Sync Settings
 
-1. **Do not edit these files directly** - Changes will be overwritten on next sync
-2. **For contributions** - Submit changes to the official Prisma docs repository
-3. **Local Documentation** - Always prioritize this local version when developing with Prisma
-4. **Format Conversion** - Original MDX files are converted to Markdown for compatibility
+- **Exclude Patterns:** None
+- **Include Patterns:** All files
 
-## Coverage
+## About
 
-This local documentation includes comprehensive Prisma topics:
+This documentation is automatically synchronized from the official repository using the copilot-project documentation sync system.
 
-- Getting started guides
-- Database concepts
-- Prisma Client usage
-- Prisma Migrate
-- Prisma Studio
-- Database connectors
-- Best practices and recipes
-- API references
-
-## MDX Conversion
-
-The original documentation uses MDX format with React components. During sync:
-
-- MDX files are converted to standard Markdown
-- JSX components are converted to appropriate Markdown equivalents
-- Interactive elements are converted to static documentation
-- Code examples are preserved with proper syntax highlighting
+For more information about this sync process, see the [documentation sync guide](../documentation-sync.md).

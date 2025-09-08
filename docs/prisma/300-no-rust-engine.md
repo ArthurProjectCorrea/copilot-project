@@ -1,0 +1,52 @@
+---
+title: 'No Rust engine'
+metaTitle: 'Use Prisma ORM without Rust engines'
+metaDescription: 'Learn how to use Prisma ORM without Rust engines'
+sidebar_class_name: preview-badge
+---
+
+As of [v6.7.0](https://pris.ly/release/6.7.0), you can use Prisma ORM without [Rust engine](/orm/more/under-the-hood/engines) binaries on PostgreSQL, CockroachDB, Neon, MySQL, PlanetScale, SQLite, D1 & MS SQL Server databases.
+
+This page gives an overview of how to use this version of Prisma ORM.
+
+## Prisma ORM without Rust engines
+
+The main technical differences if you're using Prisma ORM without a Rust engine are:
+
+- no `binaryTargets` and `engineType` fields on the `generator` block
+- no query engine binary that's downloaded into the directory with your generated Prisma Client
+- required usage of [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) for database connection management
+
+## Usage
+
+### Prerequisites
+
+- Prisma ORM v6.7.0 (or later)
+
+### 1. Set feature flags
+
+Usage of the new architecture requires the `driverAdapters` and `queryCompiler` feature flags to be set:
+
+```prisma file=schema.prisma
+generator client
+```
+
+### 2. Re-generate Prisma Client
+
+To make the feature flags take effect, you need re-generate Prisma Client:
+
+```terminal
+npx prisma generate
+```
+
+### 3. Install the driver adapter
+
+Depending on the database you use, you need to install a different driver adapter library:
+
+### 4. Instantiate Prisma Client
+
+Finally, you need to instantiate Prisma Client which you can do using the driver adapter and the connection URL for the database instance you're using.
+
+### 5. Query your database
+
+If you went through the previous steps, you can query your database as you're used to with Prisma Client. No other changes are needed.

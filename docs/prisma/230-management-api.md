@@ -1,0 +1,388 @@
+---
+title: 'Management API'
+metaTitle: 'Prisma Postgres: Management API Reference'
+metaDescription: 'Management API reference documentation for Prisma Postgres.'
+---
+
+## Overview
+
+This page covers the Prisma Management API which enables you to programmatically manage [platform](/platform/about) resources (e.g. projects or Prisma Postgres instances) in [Prisma Console](https://console.prisma.io).
+
+:::tip OpenAPI
+An interactive [**OpenAPI 3.1 specification** is available here](https://api.prisma.io/v1/swagger-editor), where you can explore endpoints, request/response bodies, and detailed examples.
+:::
+
+:::tip Guides
+We have three guides to help you use the Management API for common scenarios:
+
+- [Getting started with the Prisma Management API](/guides/management-api-basic)
+- [Provisioning preview databases with GitHub Actions and Prisma Postgres](/guides/github-actions)
+- [Partner database provisioning & user claim flow](/guides/management-api)
+  :::
+
+## Base URL
+
+The base URL for a Prisma Postgres API request is:
+
+```
+https://api.prisma.io/v1
+```
+
+Append an endpoint path to the base URL to construct the full URL for a request. For example:
+
+```
+https://api.prisma.io/v1/projects/
+```
+
+## Authentication
+
+### Bearer tokens
+
+The Prisma Postgres API uses _Bearer Token Authentication_ and supports two kinds of tokens:
+
+- Service tokens (manually created in your [Prisma Console](https://console.prisma.io) workspace)
+- OAuth 2 access tokens
+
+To adhere to the Bearer Token Authentication, you need to format your `Authorization` header like this:
+
+```
+Authorization: Bearer $TOKEN
+```
+
+#### Creating a service token
+
+You can create a service token to use the Management API like this:
+
+1. Open the [Prisma Console](https://console.prisma.io/).
+2. Navigate to your workspace.
+3. Navigate to the **Settings** page of your workspace and select **Service Tokens**.
+4. Click **New Service Token**.
+5. Copy the generated token and store it in a safe location for future use.
+
+#### Creating OAuth credentials
+
+To obtain a client ID and client secret, go through this flow:
+
+1. Open the [Prisma Console](https://console.prisma.io).
+1. Click the 🧩 **Integrations** tab in the sidenav.
+1. In the **Published Applications** section, click the **New Application** button to start creating a new OAuth app.
+1. Enter a **Name**, **Description**, and **Callback URL** for your OAuth app.
+1. Click **Continue**.
+
+On the next screen, copy and store the client ID and client secret for your OAuth app in a secure location.
+
+### Example
+
+```terminal
+curl --location "https://api.prisma.io/v1/projects" \
+  -H "Accept: application/json" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  --data \
+  ""
+```
+
+### Instructions
+
+<details>
+<summary>Authentication in Postman</summary>
+
+#### Using a Service token
+
+1. Create a new request.
+2. Go to the **Authorization** tab.
+3. Set type to **Bearer Token**.
+4. Paste your service token.
+
+#### Using OAuth 2
+
+1. In the **Authorization** tab, set type to **OAuth 2.0**.
+2. Click **Get New Access Token** and fill in the details:
+   - **Token Name**: Any name
+   - **Grant Type**: Authorization Code
+   - **Callback URL**: `http://localhost:8789/swagger/oauth2-redirect.html`
+   - **Auth URL** / **Access Token URL**: Your local OAuth URLs
+   - **Client ID / Secret**: From the script output
+   - **Scope**: (as needed)
+3. After completing the flow, use the token in your requests.
+
+</details>
+
+<details>
+<summary>Authentication in SwaggerUI</summary>
+
+#### Using a Service token
+
+1. Click **Authorize**.
+2. Paste the service token into the relevant input.
+3. Click **Authorize** again.
+
+> The Swagger spec supports a Bearer token via the `Authorization` header.
+
+#### Using OAuth 2
+
+1. Click **Authorize**.
+2. Choose the OAuth2 flow.
+3. Provide your `clientId`, `clientSecret`, and redirect URI.
+4. Complete the authorization flow to acquire access.
+
+</details>
+
+## Endpoints
+
+### Workspaces
+
+#### `GET /workspaces`
+
+Retrieve information about the workspaces accessible by the current user.
+
+- **Query parameters**:
+  - `cursor` (optional): Cursor for pagination
+  - `limit` (optional, default: 100): Limit number of results
+- **Responses**:
+  - `200 OK`: List of workspaces
+  - `401 Unauthorized`: Invalid or missing authentication token
+
+### Projects
+
+#### `GET /projects`
+
+Retrieve all projects.
+
+- **Query parameters**:
+  - `cursor` (optional): Cursor for pagination
+  - `limit` (optional, default: 100): Limit number of results
+- **Responses**:
+  - `200 OK`: List of projects
+  - `401 Unauthorized`
+
+#### `POST /projects`
+
+Create a new project.
+
+- **Request body**:
+
+  ```json
+
+  ```
+
+- **Responses**:
+  - `201 Created`: Project created
+  - `401 Unauthorized`
+
+#### `GET /projects/`
+
+Retrieve a specific project by ID.
+
+- **Path parameters**:
+  - `id`: Project ID
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+#### `DELETE /projects/`
+
+Deletes a project.
+
+- **Path parameters**:
+  - `id`: Project ID
+- **Responses**:
+  - `204 No Content`
+  - `400 Bad Request`: Dependencies prevent deletion
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+#### `POST /projects//transfer`
+
+Transfer a project to a new workspace owner.
+
+- **Path parameters**:
+  - `id`: Project ID
+- **Request body**:
+
+  ```json
+
+  ```
+
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+### Databases
+
+#### `GET /projects//databases`
+
+Retrieve all databases for a project.
+
+- **Path parameters**:
+  - `projectId`: Project ID
+- **Query parameters**:
+  - `cursor` (optional): Cursor for pagination
+  - `limit` (optional, default: 100): Limit number of results
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+#### `POST /projects//databases`
+
+Create a new database.
+
+- **Path parameters**:
+  - `projectId`: Project ID
+- **Request body**:
+
+  ```json
+
+  }
+  ```
+
+  :::note
+  Use `fromDatabase` only when creating the database from an existing one or a backup.
+  :::
+
+- **Responses**:
+  - `201 Created`
+  - `400 Default database already exists`
+  - `401 Unauthorized`
+  - `403 Forbidden`
+
+#### `GET /databases/`
+
+Retrieve a specific database.
+
+- **Path parameters**:
+  - `databaseId`: Database ID
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+#### `DELETE /databases/`
+
+Delete a database.
+
+- **Path parameters**:
+  - `databaseId`: Database ID
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `403 Cannot delete default environment`
+  - `404 Not Found`
+
+### Connection strings
+
+#### `GET /databases//connections`
+
+Retrieve all database connection strings.
+
+- **Path parameters**:
+  - `databaseId`: Database ID
+- **Query parameters**:
+  - `cursor` (optional): Cursor for pagination
+  - `limit` (optional, default: 100): Limit number of results
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+
+#### `POST /databases//connections`
+
+Create a new connection string.
+
+- **Path parameters**:
+  - `databaseId`: Database ID
+- **Request body**:
+
+  ```json
+
+  ```
+
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+#### `DELETE /connections/`
+
+Delete a connection string.
+
+- **Path parameters**:
+  - `id`: Connection ID
+- **Responses**:
+  - `204 No Content`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+### Backups
+
+#### `GET /databases//backups`
+
+Retrieve database backups.
+
+- **Path parameters**:
+  - `databaseId`: Database ID
+- **Query parameters**:
+  - `limit` (optional, default: 25): Limit number of results
+- **Responses**:
+  - `200 OK`
+  - `401 Unauthorized`
+  - `404 Not Found`
+
+### Integrations
+
+#### `GET /workspaces//integrations`
+
+Retrieve integrations for the given workspace.
+
+- **Path parameters**:
+  - `workspaceId`: Workspace ID
+- **Query parameters**:
+  - `cursor` (optional): Cursor for pagination
+  - `limit` (optional, default: 100): Limit number of results
+- **Responses**:
+  - `200 OK`: List of integrations with details:
+    - `id`: Integration ID
+    - `createdAt`: Creation timestamp
+    - `scopes`: Array of granted scopes
+    - `client`: Object containing `id`, `name`, `createdAt`
+    - `createdByUser`: Object containing `id`, `email`, `displayName`
+  - `401 Unauthorized`: Missing or invalid authentication token
+  - `404 Not Found`: Workspace not found
+
+#### `DELETE /workspaces//integrations/`
+
+Revokes the integration tokens with the given client ID.
+
+- **Path parameters**:
+  - `workspaceId`: Workspace ID (e.g. `wksp_1234`)
+  - `clientId`: Integration client ID (e.g. `itgr_5678`)
+- **Responses**:
+  - `204 No Content`: Integration tokens revoked successfully
+  - `401 Unauthorized`: Missing or invalid authentication token
+  - `404 Not Found`: Workspace or integration not found
+
+### Misc
+
+#### `GET /regions/postgres`
+
+Retrieve all available regions.
+
+- **Responses**:
+  - `200 OK`: Returns list of available/unsupported regions
+  - `401 Unauthorized`
+
+<!-- ## Management API playground
+
+You can explore and interact with all endpoints in a live Swagger UI playground.
+
+:::note
+Use your service token or OAuth 2.0 access token to authorize requests in the UI.
+:::
+
+<iframe
+  src="https://api.prisma.io/v0/swagger-editor"
+  style=}
+  title="Prisma API Swagger Editor"
+></iframe> -->

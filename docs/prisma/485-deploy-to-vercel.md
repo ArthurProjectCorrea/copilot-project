@@ -1,0 +1,447 @@
+---
+title: 'Deploy to Vercel Edge Functions & Middleware'
+metaTitle: 'Deploy to Vercel Edge Functions & Middleware'
+metaDescription: 'Learn the things you need to know in order to deploy an Edge function that uses Prisma Client for talking to a database.'
+sidebar_label: 'Deploy to Vercel'
+tocDepth: 3
+sidebar_class_name: preview-badge
+---
+
+This page covers everything you need to know to deploy an app that uses Prisma Client for talking to a database in [Vercel Edge Middleware](https://vercel.com/docs/functions/edge-middleware) or a [Vercel Function](https://vercel.com/docs/functions) deployed to the [Vercel Edge Runtime](https://vercel.com/docs/functions/runtimes/edge-runtime).
+
+To deploy a Vercel Function to the Vercel Edge Runtime, you can set `export const runtime = 'edge'` outside the request handler of the Vercel Function.
+
+:::tip Use Prisma ORM without Rust binaries
+
+If Prisma's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
+
+**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+
+```prisma
+generator client
+```
+
+Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+When using this architecture:
+
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+
+This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+:::
+
+## General considerations when deploying to Vercel Edge Functions & Edge Middleware
+
+### Using Prisma Postgres
+
+You can use Prisma Postgres in Vercel's edge runtime. Follow this guide for an end-to-end tutorial on [deploying an application to Vercel using Prisma Postgres](/guides/nextjs).
+
+### Using an edge-compatible driver
+
+Vercel's Edge Runtime currently only supports a limited set of database drivers:
+
+- [Neon Serverless](https://neon.tech/docs/serverless/serverless-driver) uses HTTP to access the database (also compatible with [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres))
+- [PlanetScale Serverless](https://planetscale.com/docs/tutorials/planetscale-serverless-driver) uses HTTP to access the database
+- [`@libsql/client`](https://github.com/tursodatabase/libsql-client-ts) is used to access Turso databases
+
+Note that [`node-postgres`](https://node-postgres.com/) (`pg`) is currently _not_ supported on Vercel Edge Functions.
+
+When deploying a Vercel Edge Function that uses Prisma ORM, you need to use one of these [edge-compatible drivers](/orm/prisma-client/deployment/edge/overview#edge-compatibility-of-database-drivers) and its respective [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) for Prisma ORM.
+
+:::note
+
+If your application uses PostgreSQL, we recommend using [Prisma Postgres](/postgres). It is fully supported on edge runtimes and does not require a specialized edge-compatible driver. For other databases, [Prisma Accelerate](/accelerate) extends edge compatibility so you can connect to _any_ database from _any_ edge function provider.
+
+:::
+
+### Setting your database connection URL as an environment variable
+
+First, ensure that the `DATABASE_URL` is set as the `url` of the `datasource` in your Prisma schema:
+
+```prisma
+datasource db
+```
+
+#### Development
+
+When in **development**, you can configure your database connection via the `DATABASE_URL` environment variable (e.g. [using `.env` files](/orm/more/development-environment/environment-variables)).
+
+#### Production
+
+When deploying your Edge Function to **production**, you'll need to set the database connection using the `vercel` CLI:
+
+```terminal
+npx vercel env add DATABASE_URL
+```
+
+This command is interactive and will ask you to select environments and provide the value for the `DATABASE_URL` in subsequent steps.
+
+Alternatively, you can configure the environment variable [via the UI](https://vercel.com/docs/projects/environment-variables#creating-environment-variables) of your project in the Vercel Dashboard.
+
+### Generate Prisma Client in `postinstall` hook
+
+In your `package.json`, you should add a `"postinstall"` section as follows:
+
+```js file=package.json showLineNumbers
+
+```
+
+### Size limits on free accounts
+
+Vercel has a [size limit of 1 MB on free accounts](https://vercel.com/docs/functions/limitations). If your application bundle with Prisma ORM exceeds that size, we recommend upgrading to a paid account or using Prisma Accelerate to deploy your application.
+
+## Database-specific considerations & examples
+
+This section provides database-specific instructions for deploying a Vercel Edge Functions with Prisma ORM.
+
+### Prerequisites
+
+As a prerequisite for the following section, you need to have a Vercel Edge Function (which typically comes in the form of a Next.js API route) running locally and the Prisma and Vercel CLIs installed.
+
+If you don't have that yet, you can run these commands to set up a Next.js app from scratch (following the instructions of the [Vercel Functions Quickstart](https://vercel.com/docs/functions/quickstart)):
+
+```terminal
+npm install -g vercel
+npx create-next-app@latest
+npm install prisma --save-dev && npm install @prisma/client
+npx prisma init --output ../app/generated/prisma
+```
+
+We'll use the default `User` model for the example below:
+
+```prisma
+model User
+```
+
+### Vercel Postgres
+
+If you are using Vercel Postgres, you need to:
+
+- use the `@prisma/adapter-neon` database adapter (via the `driverAdapters` Preview feature) because Vercel Postgres uses [Neon](https://neon.tech/) under the hood
+- be aware that Vercel by default calls the environment variable for the database connection string `POSTGRES_PRISMA_URL` while the default name used in the Prisma docs is typically `DATABASE_URL`; using Vercel's naming, you need to set the following fields on your `datasource` block:
+  ```prisma
+  datasource db
+  ```
+
+#### 1. Configure Prisma schema & database connection
+
+:::note
+
+If you don't have a project to deploy, follow the instructions in the [Prerequisites](#prerequisites) to bootstrap a basic Next.js app with Prisma ORM in it.
+
+:::
+
+First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `POSTGRES_PRISMA_URL` and the `directUrl` to the `POSTGRES_URL_NON_POOLING` environment variable. You also need to enable the `driverAdapters` feature flag:
+
+```prisma file=schema.prisma showLineNumbers
+generator client
+
+datasource db
+```
+
+Next, you need to set the `POSTGRES_PRISMA_URL` and `POSTGRES_URL_NON_POOLING` environment variable to the values of your database connection.
+
+If you ran `npx prisma init`, you can use the `.env` file that was created by this command to set these:
+
+```bash file=.env showLineNumbers
+POSTGRES_PRISMA_URL="postgres://user:password@host-pooler.region.postgres.vercel-storage.com:5432/name?pgbouncer=true&connect_timeout=15"
+POSTGRES_URL_NON_POOLING="postgres://user:password@host.region.postgres.vercel-storage.com:5432/name"
+```
+
+#### 2. Install dependencies
+
+Next, install the required packages:
+
+```terminal
+npm install @prisma/adapter-neon
+```
+
+#### 3. Configure `postinstall` hook
+
+Next, add a new key to the `scripts` section in your `package.json`:
+
+```js file=package.json
+
+}
+```
+
+#### 4. Migrate your database schema (if applicable)
+
+If you ran `npx prisma init` above, you need to migrate your database schema to create the `User` table that's defined in your Prisma schema (if you already have all the tables you need in your database, you can skip this step):
+
+```terminal
+npx prisma migrate dev --name init
+```
+
+#### 5. Use Prisma Client in your Vercel Edge Function to send a query to the database
+
+If you created the project from scratch, you can create a new edge function as follows.
+
+First, create a new API route, e.g. by using these commands:
+
+```terminal
+mkdir src/app/api
+mkdir src/app/api/edge
+touch src/app/api/edge/route.ts
+```
+
+Here is a sample code snippet that you can use to instantiate `PrismaClient` and send a query to your database in the new `app/api/edge/route.ts` file you just created:
+
+```ts file=app/api/edge/route.ts showLineNumbers
+
+  const adapter = new PrismaNeon()
+  const prisma = new PrismaClient()
+
+  const users = await prisma.user.findMany()
+
+  return NextResponse.json(users, )
+}
+```
+
+#### 6. Run the Edge Function locally
+
+Run the app with the following command:
+
+```terminal
+npm run dev
+```
+
+You can now access the Edge Function via this URL: [`http://localhost:3000/api/edge`](http://localhost:3000/api/edge).
+
+#### 7. Set the `POSTGRES_PRISMA_URL` environment variable and deploy the Edge Function
+
+Run the following command to deploy your project with Vercel:
+
+```terminal
+npx vercel deploy
+```
+
+Note that once the project was created on Vercel, you will need to set the `POSTGRES_PRISMA_URL` environment variable (and if this was your first deploy, it likely failed). You can do this either via the Vercel UI or by running the following command:
+
+```
+npx vercel env add POSTGRES_PRISMA_URL
+```
+
+At this point, you can get the URL of the deployed application from the Vercel Dashboard and access the edge function via the `/api/edge` route.
+
+### PlanetScale
+
+If you are using a PlanetScale database, you need to:
+
+- use the `@prisma/adapter-planetscale` database adapter (via the `driverAdapters` Preview feature)
+
+#### 1. Configure Prisma schema & database connection
+
+:::note
+
+If you don't have a project to deploy, follow the instructions in the [Prerequisites](#prerequisites) to bootstrap a basic Next.js app with Prisma ORM in it.
+
+:::
+
+First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
+
+```prisma file=schema.prisma showLineNumbers
+generator client
+
+datasource db
+```
+
+Next, you need to set the `DATABASE_URL` environment variable in your `.env` file that's used both by Prisma and Next.js to read your env vars:
+
+```bash file=.env
+DATABASE_URL="mysql://32qxa2r7hfl3102wrccj:password@us-east.connect.psdb.cloud/demo-cf-worker-ps?sslaccept=strict"
+```
+
+#### 2. Install dependencies
+
+Next, install the required packages:
+
+```terminal
+npm install @prisma/adapter-planetscale
+```
+
+#### 3. Configure `postinstall` hook
+
+Next, add a new key to the `scripts` section in your `package.json`:
+
+```js file=package.json
+
+}
+```
+
+#### 4. Migrate your database schema (if applicable)
+
+If you ran `npx prisma init` above, you need to migrate your database schema to create the `User` table that's defined in your Prisma schema (if you already have all the tables you need in your database, you can skip this step):
+
+```terminal
+npx prisma db push
+```
+
+#### 5. Use Prisma Client in an Edge Function to send a query to the database
+
+If you created the project from scratch, you can create a new edge function as follows.
+
+First, create a new API route, e.g. by using these commands:
+
+```terminal
+mkdir src/app/api
+mkdir src/app/api/edge
+touch src/app/api/edge/route.ts
+```
+
+Here is a sample code snippet that you can use to instantiate `PrismaClient` and send a query to your database in the new `app/api/edge/route.ts` file you just created:
+
+```ts file=app/api/edge/route.ts showLineNumbers
+
+  const adapter = new PrismaPlanetScale()
+  const prisma = new PrismaClient()
+
+  const users = await prisma.user.findMany()
+
+  return NextResponse.json(users, )
+}
+```
+
+#### 6. Run the Edge Function locally
+
+Run the app with the following command:
+
+```terminal
+npm run dev
+```
+
+You can now access the Edge Function via this URL: [`http://localhost:3000/api/edge`](http://localhost:3000/api/edge).
+
+#### 7. Set the `DATABASE_URL` environment variable and deploy the Edge Function
+
+Run the following command to deploy your project with Vercel:
+
+```terminal
+npx vercel deploy
+```
+
+Note that once the project was created on Vercel, you will need to set the `DATABASE_URL` environment variable (and if this was your first deploy, it likely failed). You can do this either via the Vercel UI or by running the following command:
+
+```
+npx vercel env add DATABASE_URL
+```
+
+At this point, you can get the URL of the deployed application from the Vercel Dashboard and access the edge function via the `/api/edge` route.
+
+### Neon
+
+If you are using a Neon database, you need to:
+
+- use the `@prisma/adapter-neon` database adapter (via the `driverAdapters` Preview feature)
+
+#### 1. Configure Prisma schema & database connection
+
+:::note
+
+If you don't have a project to deploy, follow the instructions in the [Prerequisites](#prerequisites) to bootstrap a basic Next.js app with Prisma ORM in it.
+
+:::
+
+First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
+
+```prisma file=schema.prisma showLineNumbers
+generator client
+
+datasource db
+```
+
+Next, you need to set the `DATABASE_URL` environment variable in your `.env` file that's used both by Prisma and Next.js to read your env vars:
+
+```bash file=.env showLineNumbers
+DATABASE_URL="postgresql://janedoe:password@ep-nameless-pond-a23b1mdz.eu-central-1.aws.neon.tech/neondb?sslmode=require"
+```
+
+#### 2. Install dependencies
+
+Next, install the required packages:
+
+```terminal
+npm install @prisma/adapter-neon
+```
+
+#### 3. Configure `postinstall` hook
+
+Next, add a new key to the `scripts` section in your `package.json`:
+
+```js file=package.json
+
+}
+```
+
+#### 4. Migrate your database schema (if applicable)
+
+If you ran `npx prisma init` above, you need to migrate your database schema to create the `User` table that's defined in your Prisma schema (if you already have all the tables you need in your database, you can skip this step):
+
+```terminal
+npx prisma migrate dev --name init
+```
+
+#### 5. Use Prisma Client in an Edge Function to send a query to the database
+
+If you created the project from scratch, you can create a new edge function as follows.
+
+First, create a new API route, e.g. by using these commands:
+
+```terminal
+mkdir src/app/api
+mkdir src/app/api/edge
+touch src/app/api/edge/route.ts
+```
+
+Here is a sample code snippet that you can use to instantiate `PrismaClient` and send a query to your database in the new `app/api/edge/route.ts` file you just created:
+
+```ts file=app/api/edge/route.ts showLineNumbers
+
+  const adapter = new PrismaNeon()
+  const prisma = new PrismaClient()
+
+  const users = await prisma.user.findMany()
+
+  return NextResponse.json(users, )
+}
+```
+
+#### 6. Run the Edge Function locally
+
+Run the app with the following command:
+
+```terminal
+npm run dev
+```
+
+You can now access the Edge Function via this URL: [`http://localhost:3000/api/edge`](http://localhost:3000/api/edge).
+
+#### 7. Set the `DATABASE_URL` environment variable and deploy the Edge Function
+
+Run the following command to deploy your project with Vercel:
+
+```terminal
+npx vercel deploy
+```
+
+Note that once the project was created on Vercel, you will need to set the `DATABASE_URL` environment variable (and if this was your first deploy, it likely failed). You can do this either via the Vercel UI or by running the following command:
+
+```
+npx vercel env add DATABASE_URL
+```
+
+At this point, you can get the URL of the deployed application from the Vercel Dashboard and access the edge function via the `/api/edge` route.
+
+## Using Prisma ORM with Vercel Fluid
+
+[Fluid compute](https://vercel.com/fluid) is a compute model from Vercel that combines the flexibility of serverless with the stability of servers, making it ideal for dynamic workloads such as streaming data and AI APIs. Vercel's Fluid compute [supports both edge and Node.js runtimes](https://vercel.com/docs/fluid-compute#available-runtime-support). A common challenge in traditional serverless platforms is leaked database connections when functions are suspended and pools can't close idle connections. Fluid provides [`attachDatabasePool`](https://vercel.com/blog/the-real-serverless-compute-to-database-connection-problem-solved) to ensure idle connections are released before a function is suspended.
+
+Use `attachDatabasePool` together with [Prisma's driver adapters](/orm/overview/databases/database-drivers) to safely manage connections in Fluid:
+
+```ts
+const pool = new Pool();
+
+attachDatabasePool(pool);
+
+const prisma = new PrismaClient();
+```

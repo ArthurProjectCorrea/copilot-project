@@ -1,0 +1,60 @@
+---
+title: 'Read replicas'
+metaTitle: 'Read replicas'
+metaDescription: 'Learn how to set up and use read replicas with Prisma Client'
+tocDepth: 3
+---
+
+## Setup the read replicas extension
+
+Install the extension:
+
+```terminal
+npm install @prisma/extension-read-replicas
+```
+
+Initialize the extension by extending your Prisma Client instance and provide the extension a connection string that points to your read replica in the `url` option of the extension.
+
+```ts
+
+const prisma = new PrismaClient().$extends(
+  readReplicas()
+)
+
+// Query is run against the database replica
+await prisma.post.findMany()
+
+// Query is run against the primary database
+await prisma.post.create(,
+})
+```
+
+All read operations, e.g. `findMany`, will be executed against the database replica with the above setup. All write operations — e.g. `create`, `update` — and `$transaction` queries, will be executed against your primary database.
+
+If you run into a bug or have feedback, create a GitHub issue [here](https://github.com/prisma/extension-read-replicas/issues/new).
+
+## Configure multiple database replicas
+
+The `url` property also accepts an array of values, i.e. an array of all your database replicas you would like to configure:
+
+```ts
+const prisma = new PrismaClient().$extends(readReplicas());
+```
+
+If you have more than one read replica configured, a database replica will be randomly selected to execute your query.
+
+## Executing read operations against your primary database
+
+You can use the `$primary()` method to explicitly execute a read operation against your primary database:
+
+```ts
+const posts = await prisma.$primary().post.findMany();
+```
+
+## Executing operations against a database replica
+
+You can use the `$replica()` method to explicitly execute your query against a replica instead of your primary database:
+
+```ts
+const result = await prisma.$replica().user.findFirst(...)
+```

@@ -1,0 +1,183 @@
+---
+title: 'Local development with Prisma Postgres'
+sidebar_label: 'Local development'
+metaTitle: 'Local development with Prisma Postgres (Early Access)'
+metaDescription: 'Guide to setting up local development using Prisma Postgres (Early Access)'
+tocDepth: 3
+toc: true
+sidebar_class_name: preview-badge
+---
+
+[Prisma Postgres](/postgres) is a production-grade, cloud-native database and is ideal for staging and production environments. For rapid iteration and isolated testing, you can run a _local_ Prisma Postgres instance (powered by [PGlite](https://pglite.dev)) via the `prisma dev` command. This page explains how to install and launch a local Prisma Postgres database.
+
+:::note
+
+Local Prisma Postgres is in [Preview](/orm/more/releases#preview) and is being actively developed.
+
+:::
+
+## Setting up local development for Prisma Postgres
+
+Follow these steps to set up local Prisma Postgres for development.
+
+:::note
+
+Please ensure you're running Node.js 20 or later, as it's required for local Prisma Postgres.
+
+:::
+
+### 1. Launching local Prisma Postgres
+
+Navigate into your project and start the local Prisma Postgres server using the following command:
+
+```terminal
+npx prisma dev
+```
+
+This starts a local Prisma Postgres server that you can connect to using Prisma ORM or another tool. The output of the command looks like this:
+
+```no-copy
+$ npx prisma dev
+✔  Great Success! 😉👍
+
+   Your  prisma dev  server default is ready and listening on ports 63567-63569.
+
+╭──────────────────────────────╮
+│[q]uit  [h]ttp url  [t]cp urls│
+╰──────────────────────────────╯
+```
+
+Now hit:
+
+- <kbd>q</kbd> to quit
+- <kbd>h</kbd> to view the connection URL enabling connections via **Prisma ORM**
+- <kbd>t</kbd> to view the connection URL enabling connections via **any tool**
+
+If you want to connect via Prisma ORM, hit <kbd>h</kbd> on your keyboard, copy the `DATABASE_URL` and store it in your `.env` file. This will be used to connect to the local Prisma Postgres server:
+
+```bash file=.env
+DATABASE_URL="prisma+postgres://localhost:51213/?api_key=__API_KEY__"
+```
+
+The `DATABASE_URL` is a connection string that Prisma uses to connect to the local Prisma Postgres server and is compatible with the [Prisma Postgres extension](https://www.npmjs.com/package/@prisma/extension-accelerate):
+
+```ts
+const prisma = new PrismaClient().$extends(withAccelerate());
+```
+
+This ensures no additional code changes are needed when switching from local Prisma Postgres to Prisma Postgres in production.
+
+Keep the local Prisma Postgres server running in the background while you work on your application.
+
+### 2. Applying migrations and seeding data
+
+Then in a separate terminal tab, run the `prisma migrate dev` command to create the database and run the migrations:
+
+```terminal
+npx prisma migrate dev
+```
+
+:::note
+
+Make sure the local Prisma Postgres server is running before running the `prisma migrate dev` command.
+
+If you must use a different port, append [`--port <number>`](/orm/reference/prisma-cli-reference#dev) (for example, `npx prisma migrate dev --port 5422`) and update your `DATABASE_URL` (or other connection settings) to match.
+
+:::
+
+This will create the database and run the migrations.
+
+If you have a seeder script to seed the database, you should also run it in this step.
+
+### 3. Running your application locally
+
+Start your application's development server. You can now perform queries against the local Prisma Postgres instance using Prisma ORM.
+
+To transition to production, you only need to update the database URL in the `.env` file with a Prisma Postgres connection url without additional application logic changes.
+
+## Using different local Prisma Postgres instances
+
+You can target a specific, local Prisma Postgres instance via the `--name` (`-n`) option of the `prisma dev` command, for example:
+
+```terminal
+npx prisma dev --name mydb1
+```
+
+Whenever you pass the `--name mydb1` to `prisma dev`, the command will return the same connection string pointing to a local instance called `mydb1`.
+
+## Stopping Prisma Postgres instances
+
+You can stop a running Prisma Postgres instance with this command:
+
+```terminal
+npx prisma dev stop <glob>
+```
+
+`<glob>` is a placeholder for a glob pattern to specify which local Prisma Postgres instances should be stopped, for example:
+
+```terminal
+npx prisma dev stop mydb # stops a DB called `mydb`
+```
+
+To stop all databases that begin with `mydb` (e.g. `mydb-dev` and `mydb-prod`), you can use a glob:
+
+```
+npx prisma dev stop mydb* # stops all DBs starting with `mydb`
+```
+
+## Removing Prisma Postgres instances
+
+Prisma Postgres saves the information and data from your local Prisma Postgres instances on your file system. To remove any trace from a database that's not in use any more, you can run the following command:
+
+```terminal
+npx prisma dev rm <glob>
+```
+
+`<glob>` is a placeholder for a glob pattern to specify which local Prisma Postgres instances should be removed, for example:
+
+```terminal
+npx prisma dev rm mydb # removes a DB called `mydb`
+```
+
+To stop all databases that begin with `mydb` (e.g. `mydb-dev` and `mydb-prod`), you can use a glob:
+
+```
+npx prisma dev rm mydb* # removes all DBs starting with `mydb`
+```
+
+## Using local Prisma Postgres with any ORM
+
+Local Prisma Postgres supports [direct TCP connections](/postgres/database/direct-connections), allowing you to connect to it via any tool.
+
+In order to connect to your local Prisma Postgres instance, use the `postgres://` connection string that's returned by `prisma dev`.
+
+## Managing local Prisma Postgres instances via the Prisma VS Code extension
+
+The [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) has a dedicated UI managing Prisma Postgres instances.
+
+To use it, install the VS Code extension and find the **Prisma logo** in the activity bar of your VS Code editor. It enables the following workflows:
+
+- creating and deleting databases
+- starting and stopping the server for a particular database
+- "push to cloud": move a database from local to remote
+
+## Known limitations
+
+### Caching is mocked locally
+
+[Prisma Postgres caching](/postgres/database/caching) is simulated locally. Queries always directly interact with the local Prisma Postgres instance, bypassing cache configurations:
+
+```typescript
+const users = await prisma.user.findMany(,
+});
+```
+
+Caching works normally when you're using Prisma Postgres in staging and production.
+
+### Single connection only
+
+The local Prisma Postgres database server accepts one connection at a time. Additional connection attempts queue until the active connection closes. This constraint is sufficient for most local development and testing scenarios.
+
+### No HTTPS connections
+
+The local Prisma Postgres server doesn't use HTTPS. We advise against self-hosting it.

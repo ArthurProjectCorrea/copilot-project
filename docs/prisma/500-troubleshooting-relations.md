@@ -1,0 +1,112 @@
+---
+title: Troubleshooting relations
+metaDescriptions: Common problems and solutions when defining relations in the Prisma schema.
+---
+
+## Implicit many-to-many self-relations return incorrect data if order of relation fields change
+
+### Problem
+
+In the following implicit many-to-many self-relation, the lexicographic order of relation fields in `a_eats` (1) and `b_eatenBy` (2):
+
+```prisma highlight=4,5;normal
+model Animal
+```
+
+The resulting relation table in SQL looks as follows, where `A` represents prey (`a_eats`) and `B` represents predators (`b_eatenBy`):
+
+| A            | B          |
+| :----------- | :--------- |
+| 8 (Plankton) | 7 (Salmon) |
+| 7 (Salmon)   | 9 (Bear)   |
+
+The following query returns a salmon's prey and predators:
+
+Now change the order of the relation fields:
+
+```prisma highlight=4,5;normal
+model Animal
+```
+
+Migrate your changes and re-generate Prisma Client. When you run the same query with the updated field names, Prisma Client returns incorrect data (salmon now eats bears and gets eaten by plankton):
+
+Although the lexicographic order of the relation fields in the Prisma schema changed, columns `A` and `B` in the database **did not change** (they were not renamed and data was not moved). Therefore, `A` now represents predators (`a_eatenBy`) and `B` represents prey (`b_eats`):
+
+| A            | B          |
+| :----------- | :--------- |
+| 8 (Plankton) | 7 (Salmon) |
+| 7 (Salmon)   | 9 (Bear)   |
+
+### Solution
+
+If you rename relation fields in an implicit many-to-many self-relations, make sure that you maintain the alphabetic order of the fields - for example, by prefixing with `a_` and `b_`.
+
+## How to use a relation table with a many-to-many relationship
+
+There are a couple of ways to define an m-n relationship, implicitly or explicitly. Implicitly means letting Prisma ORM handle the relation table (JOIN table) under the hood, all you have to do is define an array/list for the non scalar types on each model, see [implicit many-to-many relations](/orm/prisma-schema/data-model/relations/many-to-many-relations#implicit-many-to-many-relations).
+
+Where you might run into trouble is when creating an [explicit m-n relationship](/orm/prisma-schema/data-model/relations/many-to-many-relations#explicit-many-to-many-relations), that is, to create and handle the relation table yourself. **It can be overlooked that Prisma ORM requires both sides of the relation to be present**.
+
+Take the following example, here a relation table is created to act as the JOIN between the `Post` and `Category` tables. This will not work however as the relation table (`PostCategories`) must form a 1-to-many relationship with the other two models respectively.
+
+The back relation fields are missing from the `Post` to `PostCategories` and `Category` to `PostCategories` models.
+
+```prisma
+// This example schema shows how NOT to define an explicit m-n relation
+
+model Post
+
+model PostCategories
+
+model Category
+```
+
+To fix this the `Post` model needs to have a many relation field defined with the relation table `PostCategories`. The same applies to the `Category` model.
+
+This is because the relation model forms a 1-to-many relationship with the other two models its joining.
+
+```prisma highlight=5,21;add|4,20;delete
+model Post
+
+model PostCategories
+
+model Category
+```
+
+## Using the `@relation` attribute with a many-to-many relationship
+
+It might seem logical to add a `@relation("Post")` annotation to a relation field on your model when composing an implicit many-to-many relationship.
+
+```prisma
+model Post
+
+model Category
+```
+
+This however tells Prisma ORM to expect **two** separate one-to-many relationships. See [disambiguating relations](/orm/prisma-schema/data-model/relations#disambiguating-relations) for more information on using the `@relation` attribute.
+
+The following example is the correct way to define an implicit many-to-many relationship.
+
+```prisma highlight=4,11;delete|5,12;add
+model Post
+
+model Category
+```
+
+The `@relation` annotation can also be used to [name the underlying relation table](/orm/prisma-schema/data-model/relations/many-to-many-relations#configuring-the-name-of-the-relation-table-in-implicit-many-to-many-relations) created on a implicit many-to-many relationship.
+
+```prisma
+model Post
+
+model Category
+```
+
+## Using m-n relations in databases with enforced primary keys
+
+### Problem
+
+Some cloud providers enforce the existence of primary keys in all tables. However, any relation tables (JOIN tables) created by Prisma ORM (expressed via `@relation`) for many-to-many relations using implicit syntax do not have primary keys.
+
+### Solution
+
+You need to use [explicit relation syntax](/orm/prisma-schema/data-model/relations/many-to-many-relations#explicit-many-to-many-relations), manually create the join model, and verify that this join model has a primary key.
