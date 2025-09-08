@@ -593,7 +593,58 @@ Secrets:
     Description: Token for Codecov integration
     Value: xxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx
     Scope: Repository
+```
 
+### Personal Access Token (PAT) Setup
+
+**Issue**: Default `GITHUB_TOKEN` cannot create Pull Requests automatically.
+
+**Solution**: Configure a Personal Access Token with enhanced permissions.
+
+#### Step 1: Create Personal Access Token
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Click "Generate new token" → "Generate new token (classic)"
+3. Configure the token:
+   - **Name**: `Copilot Project Release Token`
+   - **Expiration**: Choose appropriate duration (90 days, 1 year, or no expiration)
+   - **Scopes**: Select the following permissions:
+     - ✅ `repo` (Full control of private repositories)
+     - ✅ `workflow` (Update GitHub Action workflows)
+     - ✅ `write:packages` (Upload packages to GitHub Package Registry)
+
+#### Step 2: Add Token as Repository Secret
+
+1. Go to repository → Settings → Secrets and variables → Actions
+2. Click "New repository secret"
+3. Configure the secret:
+   - **Name**: `GH_PAT`
+   - **Secret**: Paste your personal access token
+4. Click "Add secret"
+
+#### Step 3: Workflow Configuration
+
+The workflows are configured to use PAT when available:
+
+```yaml
+# Enhanced permissions for release workflow
+- name: Checkout Repository
+  uses: actions/checkout@v4
+  with:
+    token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+- name: Create Release Pull Request or Publish to npm
+  uses: changesets/action@v1
+  env:
+    GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+```
+
+**Fallback Behavior**:
+
+- If `GH_PAT` is configured: Uses personal access token with full permissions
+- If `GH_PAT` is not configured: Falls back to default `GITHUB_TOKEN` (limited permissions)
+
+```yaml
 # Repository Variables (Settings > Secrets and variables > Actions)
 Variables:
   NODE_VERSION:
