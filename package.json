@@ -1,48 +1,78 @@
 {
-  "name": "copilot-project",
-  "version": "1.2.1",
-  "description": "Project configured for pnpm and Jest documentation integration.",
+  "name": "@copilot-kit/chat-integration",
+  "version": "2.0.0",
+  "description": "🤖 Essential npm/pnpm plugin that enhances GitHub Copilot Chat with intelligent framework documentation, automated commit standards, and seamless development workflow integration",
   "main": "index.js",
   "bin": {
-    "copilot-config": "scripts/copilot-config.js"
+    "copilot-chat": "scripts/copilot-cli.js",
+    "copilot-setup": "scripts/copilot-config.js"
   },
   "scripts": {
     "postinstall": "node scripts/postinstall.js",
     "postupdate": "node scripts/init-github-config.js",
     "prepack": "node scripts/init-github-config.js",
     "init-config": "node scripts/init-github-config.js",
-    "lint": "eslint . --ext .js",
+    "setup": "node scripts/setup-project-standards.js",
+    "validate": "node scripts/validate-project-standards.js",
+    "demo": "node scripts/demo-project-standards.js",
+    "cli": "node scripts/copilot-cli.js",
+    "lint": "eslint . --fix",
     "check-types": "tsc --noEmit",
-    "build": "echo 'No build step required for plain JS. Add your build command here if needed.'",
+    "build": "echo 'No build step required for plain JS.'",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "format:staged": "lint-staged",
-    "commit": "pnpm exec cz",
+    "commit": "cz",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
     "release": "pnpm run build && pnpm run changeset:publish",
-    "update:jest-docs": "node scripts/update-jest-docs-manual.js",
-    "docs:jest": "node scripts/update-jest-docs-manual.js",
-    "update:nest-docs": "node scripts/update-nest-docs-manual.js",
-    "docs:nest": "node scripts/update-nest-docs-manual.js",
-    "update:prisma-docs": "node scripts/update-prisma-docs-manual.js",
-    "docs:prisma": "node scripts/update-prisma-docs-manual.js",
-    "update:nextjs-docs": "node scripts/update-nextjs-docs-manual.js",
-    "docs:nextjs": "node scripts/update-nextjs-docs-manual.js"
+    "prepare": "husky",
+    "docs:sync": "node scripts/sync-docs.js",
+    "docs:sync:jest": "node scripts/sync-docs.js jest",
+    "docs:sync:nest": "node scripts/sync-docs.js nest",
+    "docs:sync:next": "node scripts/sync-docs.js next",
+    "docs:sync:prisma": "node scripts/sync-docs.js prisma",
+    "docs:sync:tailwindcss": "node scripts/sync-docs.js tailwindcss",
+    "docs:sync:all": "node scripts/sync-docs.js jest && node scripts/sync-docs.js nest && node scripts/sync-docs.js next && node scripts/sync-docs.js prisma && node scripts/sync-docs.js tailwindcss"
   },
   "keywords": [
-    "github",
-    "copilot",
-    "ai",
-    "configuration",
+    "github-copilot",
+    "copilot-chat",
+    "copilot-plugin",
+    "ai-development",
+    "chat-integration",
+    "npm-plugin",
+    "pnpm-plugin",
+    "development-tools",
+    "commit-standards",
+    "changesets",
+    "documentation-sync",
+    "ai-assistant",
+    "developer-productivity",
+    "framework-docs",
+    "husky",
+    "commitizen",
+    "prettier",
+    "eslint",
+    "workflow-automation",
     "chatmodes",
     "prompts",
-    "instructions",
-    "development",
-    "automation",
-    "setup"
+    "instructions"
   ],
-  "author": "",
+  "author": {
+    "name": "Arthur",
+    "email": "your-email@example.com",
+    "url": "https://github.com/your-username"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/copilot-chat-integration.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/copilot-chat-integration/issues"
+  },
+  "homepage": "https://github.com/your-username/copilot-chat-integration#readme",
   "license": "MIT",
   "files": [
     ".github",
@@ -51,25 +81,38 @@
     "index.js"
   ],
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,scss,md,html,vue}": [
+    "*.{js,jsx,ts,tsx,mjs}": [
+      "eslint --fix",
       "prettier --write"
     ],
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+    "*.{json,css,scss,md,yml,yaml}": [
+      "prettier --write"
     ]
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.6",
-    "@types/node": "^24.3.1",
-    "commitizen": "^4.3.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.34.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.6",
-    "prettier": "^3.6.2",
+    "@changesets/cli": "2.29.6",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@eslint/js": "9.34.0",
+    "@types/node": "^22.2.0",
+    "commitizen": "4.3.1",
+    "cz-conventional-changelog": "3.3.0",
+    "dotenv": "^17.2.2",
+    "eslint": "9.34.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.4",
+    "globals": "16.3.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.6",
+    "prettier": "3.6.2",
     "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
     "remark-stringify": "^11.0.0",
     "unified": "^11.0.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

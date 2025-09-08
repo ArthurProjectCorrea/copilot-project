@@ -2,58 +2,73 @@
 mode: ask
 ---
 
-# Changeset Analyzer
+**Task: Analyze commit history and generate changeset entries for semantic versioning**
 
-You are an expert at analyzing Git commit history and generating changeset entries for semantic versioning and automated releases.
+**Input Requirements:** Provide repository context or git status output. No specific input format required - the AI will analyze the commit history automatically.
 
-## Your Task
+**Analysis Process:**
 
-Analyze the recent commit history and current changes to provide structured responses for the changeset CLI form.
+1. Execute git log analysis to identify the last release commit using multiple detection strategies
+2. Review all commits since last release to understand cumulative changes
+3. Assess impact on each package and determine cross-package dependencies
+4. Classify version bump requirements using strict semantic versioning criteria
+5. Generate user-focused changeset descriptions with clear migration guidance for breaking changes
 
-## Analysis Process
-
-1. **Find Last Release**: Use git log to identify the last release commit by searching for:
-   - Commit messages with "Release", "Version", "chore(release)", "Releasing using changesets"
-   - Git tags with semantic versioning (v1.0.0, 1.0.0)
-   - Automated release commits from GitHub Actions or Changesets
-   - Package.json version updates or CHANGELOG modifications
-2. **Review Recent Commits**: Examine all commits since the last release to understand changes
-3. **Assess Package Impact**: Identify which packages are affected by the changes
-4. **Determine Version Bumps**: Classify changes as patch, minor, or major for each affected package
-5. **Generate Changelog Content**: Create clear, user-facing descriptions of changes
-6. **Detect Breaking Changes**: Identify any changes that would break existing functionality
-
-## Expected Output Format
+**Standard Response Format:**
 
 ```
-## Last Release Detection
-- Last Release Commit: [commit hash] - [commit message]
-- Release Date: [date]
-- Changes Since: [number] commits analyzed
+📦 **CHANGESET ANALYSIS**
 
-## Affected Packages
-- [package-name]: [patch|minor|major]
+**Release Detection:**
+- Last Release: [commit hash] - [message] ([date])
+- Commits Analyzed: [number] commits since last release
+- Detection Method: [tag|commit-message|changelog|package.json]
 
-## Changeset Summary
-[Clear description of what changed and user impact]
+**Package Impact Assessment:**
+- [package-name]: [patch|minor|major] - [reasoning]
 
-## Reasoning
-- [Explanation of why each version bump level was chosen]
-- [Details about breaking changes if any]
-- [Context about the changes and their significance]
+**Summary for Changelog:**
+[Clear, user-focused description of changes and their impact]
 
-## Changeset CLI Responses
-1. **Which packages should be included?**: [list of affected packages]
-2. **Change type for [package]**: [patch|minor|major]
-3. **Summary**: [changelog entry text]
+**Breaking Changes:** [yes/no]
+[If yes: detailed migration instructions]
+
+🔧 **CHANGESET CLI RESPONSES:**
+1. **Packages to include:** [comma-separated list]
+2. **Change type for [package]:** [patch|minor|major]
+3. **Summary:** [single-line changelog description]
+
+📋 **ANALYSIS DETAILS:**
+- Version bump reasoning: [detailed explanation]
+- Breaking change assessment: [systematic check results]
+- Dependencies impact: [cross-package analysis]
+- User impact: [what users will experience]
 ```
 
-## Guidelines
+**Version Classification Criteria:**
 
-- Focus on user-facing impact, not implementation details
-- Be conservative with version bumps when uncertain
-- Clearly identify and explain breaking changes
-- Provide complete information for immediate use in changeset form
-- Consider monorepo package relationships and dependencies
+- **PATCH**: Bug fixes, docs, security patches, internal refactoring, dependency updates (no API impact)
+- **MINOR**: New features, new exports, optional parameters, backward-compatible additions
+- **MAJOR**: Breaking changes, API removals, signature changes, behavior modifications, incompatible updates
 
-Begin your analysis by first identifying the last release commit, then reviewing all subsequent changes in the git history.
+**Breaking Change Checklist:**
+□ Removed/modified exports or public APIs
+□ Changed function/method signatures
+□ Altered configuration schemas or formats
+□ Modified existing behavior or defaults
+□ CLI command changes or removals
+□ Peer dependency version requirements
+□ Database schema or environment changes
+
+**Quality Standards:**
+
+- Always identify last release using multiple strategies
+- Analyze actual code changes, not just commit messages
+- Provide specific reasoning for each version bump decision
+- Include clear migration paths for breaking changes
+- Focus on user impact in changelog descriptions
+- Ensure all affected packages are identified
+- Cross-reference with project versioning patterns
+
+**Success Criteria:**
+Accurate release detection, precise version bump classification, comprehensive package impact analysis, clear user-focused changelog entries, complete breaking change assessment with migration guidance, standardized format for immediate changeset CLI usage.

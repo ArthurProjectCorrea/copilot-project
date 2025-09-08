@@ -6,7 +6,81 @@ const crypto = require('crypto');
 const CONFIG = {
   directories: ['chatmodes', 'instructions', 'prompts'],
   packageName: 'copilot-project',
+  copyRulesFile: 'copy-rules.json',
 };
+
+/**
+ * Carrega as regras de cópia do arquivo JSON
+ */
+function loadCopyRules(basePath) {
+  const rulesPath = path.join(basePath, 'scripts', CONFIG.copyRulesFile);
+
+  try {
+    if (fs.existsSync(rulesPath)) {
+      const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8'));
+      console.log('📋 Copy rules loaded from:', rulesPath);
+      return rules;
+    }
+  } catch (error) {
+    console.warn(
+      '⚠️ Could not load copy rules:',
+      error instanceof Error ? error.message : String(error)
+    );
+  }
+
+  // Regras padrão se não conseguir carregar o arquivo
+  console.log('📋 Using default copy rules');
+  return {
+    copyRules: {
+      instructions: { enabled: true, files: ['*.instructions.md'], exclude: [] },
+      prompts: { enabled: true, files: ['*.prompt.md'], exclude: [] },
+      chatmodes: { enabled: true, files: ['*.chatmode.md'], exclude: [] },
+    },
+    globalExcludes: ['version.json', '*.log', '*.tmp', '.DS_Store'],
+  };
+}
+
+/**
+ * Verifica se um arquivo deve ser copiado baseado nas regras
+ */
+function shouldCopyFile(fileName, directory, copyRules) {
+  // Verifica exclusões globais
+  if (
+    copyRules.globalExcludes &&
+    copyRules.globalExcludes.some((pattern) => matchPattern(fileName, pattern))
+  ) {
+    return false;
+  }
+
+  // Verifica regras específicas do diretório
+  const dirRule = copyRules.copyRules[directory];
+  if (!dirRule || !dirRule.enabled) {
+    return false;
+  }
+
+  // Verifica exclusões específicas do diretório
+  if (dirRule.exclude && dirRule.exclude.some((pattern) => matchPattern(fileName, pattern))) {
+    return false;
+  }
+
+  // Verifica se o arquivo corresponde aos padrões permitidos
+  if (dirRule.files && dirRule.files.length > 0) {
+    return dirRule.files.some((pattern) => matchPattern(fileName, pattern));
+  }
+
+  return true;
+}
+
+/**
+ * Função simples para correspondência de padrões (suporte básico a wildcards)
+ */
+function matchPattern(fileName, pattern) {
+  // Converte padrão em regex simples
+  const regexPattern = pattern.replace(/\./g, '\\.').replace(/\*/g, '.*').replace(/\?/g, '.');
+
+  const regex = new RegExp(`^${regexPattern}$`, 'i');
+  return regex.test(fileName);
+}
 
 /**
  * Utilitários
@@ -94,9 +168,10 @@ function needsUpdate(sourceFile, targetFile, sourceVersion, targetVersion) {
 /**
  * Copia arquivos de configuração de um diretório para outro
  */
-function copyConfigFiles(sourceDir, targetDir, sourceVersion, targetVersion) {
+function copyConfigFiles(sourceDir, targetDir, sourceVersion, targetVersion, copyRules) {
   let updatedFiles = 0;
   let createdFiles = 0;
+  let skippedFiles = 0;
 
   CONFIG.directories.forEach((dir) => {
     const sourceDirPath = path.join(sourceDir, dir);
@@ -111,6 +186,13 @@ function copyConfigFiles(sourceDir, targetDir, sourceVersion, targetVersion) {
 
     const files = fs.readdirSync(sourceDirPath);
     files.forEach((file) => {
+      // Verifica se o arquivo deve ser copiado baseado nas regras
+      if (!shouldCopyFile(file, dir, copyRules)) {
+        console.log(`⏭️ Skipped (rule): ${path.join(dir, file)}`);
+        skippedFiles++;
+        return;
+      }
+
       if (file.endsWith('.md')) {
         const sourceFile = path.join(sourceDirPath, file);
         const targetFile = path.join(targetDirPath, file);
@@ -127,11 +209,14 @@ function copyConfigFiles(sourceDir, targetDir, sourceVersion, targetVersion) {
         } else {
           console.log('ℹ️ File up to date:', targetFile);
         }
+      } else {
+        console.log(`⏭️ Skipped (not .md): ${path.join(dir, file)}`);
+        skippedFiles++;
       }
     });
   });
 
-  return { updatedFiles, createdFiles };
+  return { updatedFiles, createdFiles, skippedFiles };
 }
 
 /**
@@ -206,15 +291,20 @@ function initGithubConfig(forceRun = false) {
   const versionSourcePath = isSourceProject && forceRun ? base : packagePath;
   const { sourceVersion, targetVersion } = loadVersionInfo(versionSourcePath, base);
 
+  // Carrega regras de cópia
+  const copyRulesSourcePath = isSourceProject && forceRun ? base : packagePath;
+  const copyRules = loadCopyRules(copyRulesSourcePath);
+
   // Cria diretório .github se não existir
   ensureDir(targetGithubPath);
 
   // Copia arquivos de configuração
-  const { updatedFiles, createdFiles } = copyConfigFiles(
+  const { updatedFiles, createdFiles, skippedFiles } = copyConfigFiles(
     sourceGithubPath,
     targetGithubPath,
     sourceVersion,
-    targetVersion
+    targetVersion,
+    copyRules
   );
 
   // Copia o arquivo version.json
@@ -231,9 +321,14 @@ function initGithubConfig(forceRun = false) {
   console.log('\n📊 Summary:');
   console.log(`📄 Files created: ${createdFiles}`);
   console.log(`🔄 Files updated: ${updatedFiles}`);
+  console.log(`⏭️ Files skipped: ${skippedFiles}`);
 
   if (sourceVersion) {
     console.log(`📦 Package version: ${sourceVersion.version} (${sourceVersion.lastUpdated})`);
+  }
+
+  if (copyRules.version) {
+    console.log(`📋 Copy rules version: ${copyRules.version}`);
   }
 
   if (isUpdate && updatedFiles > 0) {

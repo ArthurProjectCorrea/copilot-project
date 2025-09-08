@@ -1,0 +1,161 @@
+name: Sync Documentation
+
+on:
+  schedule:
+    # Jest: Mondays at 2:00 AM UTC
+    - cron: '0 2 * * 1'
+    # NestJS: Mondays at 3:00 AM UTC
+    - cron: '0 3 * * 1'
+    # Next.js: Mondays at 4:00 AM UTC
+    - cron: '0 4 * * 1'
+    # Prisma: Mondays at 5:00 AM UTC
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+    inputs:
+      framework:
+        description: 'Framework to sync (jest, nest, next, prisma, or all)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - jest
+          - nest
+          - next
+          - prisma
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18]
+      fail-fast: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          # Install documentation processing dependencies
+          npm install unified remark-parse remark-mdx remark-stringify --save-dev
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Determine framework to sync
+        id: determine-framework
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            FRAMEWORK="${{ github.event.inputs.framework }}"
+          else
+            # Determine framework based on schedule
+            CURRENT_HOUR=$(date -u +%H)
+            case $CURRENT_HOUR in
+              02) FRAMEWORK="jest" ;;
+              03) FRAMEWORK="nest" ;;
+              04) FRAMEWORK="next" ;;
+              05) FRAMEWORK="prisma" ;;
+              *) FRAMEWORK="all" ;;
+            esac
+          fi
+          echo "framework=$FRAMEWORK" >> $GITHUB_OUTPUT
+          echo "Selected framework: $FRAMEWORK"
+
+      - name: Sync Jest documentation
+        if: steps.determine-framework.outputs.framework == 'jest' || steps.determine-framework.outputs.framework == 'all'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          echo "🚀 Syncing Jest documentation..."
+          node scripts/sync-docs.js jest
+        continue-on-error: true
+
+      - name: Sync NestJS documentation
+        if: steps.determine-framework.outputs.framework == 'nest' || steps.determine-framework.outputs.framework == 'all'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          echo "🚀 Syncing NestJS documentation..."
+          node scripts/sync-docs.js nest
+        continue-on-error: true
+
+      - name: Sync Next.js documentation
+        if: steps.determine-framework.outputs.framework == 'next' || steps.determine-framework.outputs.framework == 'all'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          echo "🚀 Syncing Next.js documentation..."
+          node scripts/sync-docs.js next
+        continue-on-error: true
+
+      - name: Sync Prisma documentation
+        if: steps.determine-framework.outputs.framework == 'prisma' || steps.determine-framework.outputs.framework == 'all'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          echo "🚀 Syncing Prisma documentation..."
+          node scripts/sync-docs.js prisma
+        continue-on-error: true
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No documentation changes detected"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Documentation changes detected"
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          FRAMEWORK="${{ steps.determine-framework.outputs.framework }}"
+          if [ "$FRAMEWORK" = "all" ]; then
+            COMMIT_MSG="docs: sync all framework documentation"
+          else
+            COMMIT_MSG="docs: sync $FRAMEWORK documentation"
+          fi
+
+          git commit -m "$COMMIT_MSG
+
+          - Automated documentation sync from upstream repositories
+          - Triggered by: ${{ github.event_name }}
+          - Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+          git push
+
+      - name: Create summary
+        run: |
+          echo "## 📚 Documentation Sync Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Framework:** ${{ steps.determine-framework.outputs.framework }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Changes detected:** ${{ steps.check-changes.outputs.changes }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.check-changes.outputs.changes }}" = "true" ]; then
+            echo "✅ Documentation successfully synchronized and committed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No changes detected - documentation is up to date" >> $GITHUB_STEP_SUMMARY
+          fi

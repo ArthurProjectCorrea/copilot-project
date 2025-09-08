@@ -6,10 +6,52 @@ mode: ask
 
 **Input Requirements:** Provide the git status output showing staged files that will be committed.
 
-**Analysis Process:** 1. Examine each staged file to understand its content and purpose 2. Determine the type of modifications made 3. Assess the impact and scope of changes 4. Categorize the commit type according to conventional commits specification 5. Check for breaking changes 6. Generate complete cz form responses
+**Analysis Process:**
 
-**Expected Output Format:** Provide complete answers for cz form: 1) Type of change (feat/fix/docs/style/refactor/test/chore/ci/perf/build) 2) Scope of change (component/module affected) 3) Short description (imperative mood, under 72 chars) 4) Long description (single line, no line breaks, detailed explanation) 5) Breaking changes (yes/no, if yes provide details) 6) Issues closed (if applicable)
+1. Read and analyze each staged file content to understand the exact nature of changes
+2. Identify the functional impact and scope of modifications
+3. Determine the most precise commit type based on actual code changes
+4. Assess breaking changes using comprehensive criteria
+5. Generate standardized cz form responses
 
-**Success Criteria:** Accurate commit type classification, appropriate scope identification, clear descriptions in single lines, thorough breaking change analysis, complete form responses ready for immediate use with cz.
+**Standard Response Format:**
 
-**Additional Context:** Always analyze file contents when possible to understand the true nature of changes rather than relying solely on filenames. Consider the broader project impact, check for API changes, configuration modifications, or functionality removals that could be breaking changes.
+```
+📋 **COMMIT ANALYSIS**
+
+**Type:** [feat|fix|docs|style|refactor|test|chore|ci|perf|build|revert]
+**Scope:** [specific-component]
+**Short Description:** [imperative mood, <72 chars, no period]
+**Long Description:** [single line detailed explanation with context]
+**Breaking Changes:** [yes/no - if yes, include migration details]
+**Issues Closed:** [closes #xxx format if applicable]
+
+🔍 **ANALYSIS DETAILS:**
+- Files analyzed: [list]
+- Change type reasoning: [explanation]
+- Scope selection reasoning: [explanation]
+- Breaking change assessment: [detailed check results]
+```
+
+**Quality Standards:**
+
+- Always read file contents for accurate analysis
+- Use the most specific scope possible
+- Differentiate between functional vs cosmetic changes
+- Check multiple breaking change criteria systematically
+- Provide migration guidance for breaking changes
+- Maintain consistency with project conventions
+- Format responses for immediate cz usage
+
+**Breaking Change Checklist:**
+□ API signature changes (parameters, return types)
+□ Removed/renamed public functions/classes/interfaces  
+□ Configuration format modifications
+□ Environment variable changes
+□ CLI command alterations
+□ Peer dependency version changes
+□ Database schema modifications
+□ Public API endpoint changes
+
+**Success Criteria:**
+Precise commit type classification, specific scope identification, clear single-line descriptions, comprehensive breaking change analysis, standardized format for immediate cz form usage, detailed reasoning for all decisions.

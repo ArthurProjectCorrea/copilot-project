@@ -1,0 +1,47 @@
+{
+  "jest": {
+    "name": "Jest",
+    "repository": "jestjs/jest",
+    "sourcePath": "docs/",
+    "targetPath": "docs/jest.js/",
+    "convertMdx": false,
+    "schedule": "0 2 * * 1",
+    "type": "testing"
+  },
+  "nest": {
+    "name": "NestJS",
+    "repository": "nestjs/docs.nestjs.com",
+    "sourcePath": "content/",
+    "targetPath": "docs/nest.js/",
+    "convertMdx": false,
+    "schedule": "0 3 * * 1",
+    "type": "backend"
+  },
+  "next": {
+    "name": "Next.js",
+    "repository": "vercel/next.js",
+    "sourcePath": "docs/",
+    "targetPath": "docs/next.js/",
+    "convertMdx": true,
+    "schedule": "0 4 * * 1",
+    "type": "framework"
+  },
+  "prisma": {
+    "name": "Prisma",
+    "repository": "prisma/docs",
+    "sourcePath": "content/",
+    "targetPath": "docs/prisma/",
+    "convertMdx": true,
+    "schedule": "0 5 * * 1",
+    "type": "database"
+  },
+  "tailwindcss": {
+    "name": "Tailwind CSS",
+    "repository": "tailwindlabs/tailwindcss.com",
+    "sourcePath": "src/docs",
+    "targetPath": "docs/tailwindcss/",
+    "convertMdx": true,
+    "schedule": "0 6 * * 1",
+    "type": "css-framework"
+  }
+}

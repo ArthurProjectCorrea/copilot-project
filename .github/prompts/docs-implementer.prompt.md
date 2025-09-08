@@ -2,33 +2,96 @@
 mode: agent
 ---
 
-**Task: Implement complete documentation synchronization system for new frameworks and tools**
+**Task: Integrate new documentation into the unified sync system**
 
-**Primary Function:** When provided with a GitHub repository URL and local documentation folder path, automatically create a comprehensive documentation sync system including workflows, scripts, and Copilot Chat integration.
+**Input Requirements:**
 
-**Required Input Format:** User should specify: "implement documentation for [GitHub repository URL] using documentation in folder '[target folder path]'"
+- GitHub repository URL
+- Documentation folder path in the repository
+- MDX to MD conversion required (yes/no)
+- Framework/tool name
 
-**Implementation Components:**
+**Mandatory process:**
 
-1. **GitHub Actions Workflow**: Create scheduled workflow (.github/workflows/{framework}-docs-sync.yml) with proper timing to avoid conflicts with existing workflows (avoid 02:00, 03:00, 04:00, 05:00 UTC)
-2. **Sync Scripts**: Generate both automated (scripts/sync-{framework}-docs.js) and manual (scripts/manual-{framework}-sync.js) Node.js scripts with MDX→MD conversion
-3. **Copilot Instructions**: Create framework-specific .github/instructions/{framework}.instructions.md following established documentation priority patterns
-4. **Copilot Prompts**: Generate .github/prompts/{framework}.prompt.md with comprehensive task descriptions and success criteria
-5. **Universal Integration**: Update .github/chatmodes/dev.chatmode.md to include new framework in documentation consultation list
-6. **Package Scripts**: Add npm scripts to package.json for manual synchronization following the pattern `sync:{framework}:manual`
+1. Update the `docs-config.json` file with the provided data
+2. Run the unified script to:
 
-**Technical Standards:**
+- Create the local documentation folder
+- Synchronize files from the remote repository
+- Generate the instructions file `.github/instructions/[framework].instructions.md` based on the synchronized documentation
+- Format all synchronized files according to project standards
 
-- All scripts must be cross-platform compatible (Windows/Unix)
-- Use CommonJS module format for Node.js scripts
-- Implement unified/remark for MDX conversion with regex fallback
-- Filter files to copy only .md and convert .mdx to .md
-- Preserve documentation folder structure during sync
-- Include comprehensive error handling and logging
-- Follow established naming conventions and file patterns
+3. Update `.github/instructions/dev.instructions.md` to include the new framework in the Documentation Integration section
+4. Confirm that the documentation is accessible and properly formatted
 
-**Framework Detection:** Automatically identify framework type from repository structure (package.json, file patterns, documentation organization) and adjust templates accordingly for optimal integration.
+**Critical Pattern Requirements for .instructions.md files:**
+All generated instruction files MUST follow the EXACT pattern established by Jest, Next.js, NestJS, Prisma, and Tailwind CSS:
 
-**Quality Assurance Requirements:** Validate GitHub Actions workflow syntax, test Node.js script functionality, verify Copilot file formatting matches existing patterns, ensure all components integrate seamlessly with existing project infrastructure, and confirm cross-platform compatibility.
+1. **Header:** `---\napplyTo: '**'\n---`
+2. **Project Context:** Framework description and AI expert role
+3. **Mandatory Documentation Priority:** MUST specify `node_modules/copilot-project/docs/[framework]/` as the PRIMARY source
+4. **Comprehensive Knowledge Areas:** Detailed framework capabilities breakdown
+5. **Development Excellence Standards:** 6-8 best practices and quality guidelines
+6. **Best Practices Implementation:** 5-6 practical implementation patterns
+7. **Framework Integration Expertise:** Integration with other tools and frameworks
+8. **Performance Optimization:** Speed and efficiency strategies
+9. **Problem-Solving Approach:** Numbered 5-step methodology
+10. **Response Quality Standards:** Clear formatting and citation requirements
+11. **Local Documentation Navigation:** File-specific guidance for different question types
+12. **Quality Assurance:** Cross-referencing and consistency requirements
 
-**Success Criteria:** Complete working documentation sync system ready for immediate use, proper integration with existing Copilot Chat infrastructure, consistent code quality and patterns across all generated files, and comprehensive documentation coverage following established project standards.
+**Expected Response Format:**
+
+```
+📚 **NEW DOCUMENTATION INTEGRATION**
+
+1. Updated `docs-config.json`:
+  - name: [Framework Name]
+  - repository: [owner/repo]
+  - sourcePath: [docs path]
+  - targetPath: [local path]
+  - convertMdx: [true/false]
+  - schedule: [cron]
+  - type: [type]
+
+2. Sync executed:
+  - Folder created: [local path]
+  - Files synchronized: [quantity]
+  - Instructions file generated: .github/instructions/[framework].instructions.md
+  - Files formatted
+
+3. Dev instructions updated:
+  - Added [framework] to Documentation Integration section in dev.instructions.md
+  - Framework now available for universal development assistance
+
+4. Documentation ready for npm packaging and node_modules distribution
+
+**Pattern Compliance Verified:**
+✅ Header structure matches established pattern
+✅ Mandatory Documentation Priority specifies node_modules path
+✅ All 12 required sections included
+✅ Technical English throughout
+✅ Local documentation navigation included
+✅ Quality assurance standards met
+```
+
+**Mandatory sequence:**
+
+- Update config → Sync → Generate instructions following EXACT pattern → Update dev.instructions.md → Format files
+
+**Success criteria:**
+
+- Local documentation updated and formatted
+- Instructions file generated following the EXACT 12-section pattern used by Jest/Next.js/NestJS/Prisma/Tailwind CSS
+- Documentation path correctly references `node_modules/copilot-project/docs/[framework]/`
+- Dev instructions updated to include new framework for universal development assistance
+- All content in technical English
+- Ready for npm distribution and consumption by other projects
+
+**Quality standards:**
+
+- Always base the instructions file on the generated local documentation
+- Ensure all files are formatted according to project standards
+- Instructions file MUST match the established pattern exactly
+- All generated files must be written in technical English
+- Documentation paths must reference node_modules structure for portability

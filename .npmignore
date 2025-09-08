@@ -1,0 +1,49 @@
+# Development files
+.git/
+.gitignore
+.vscode/
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Development dependencies
+node_modules/
+.pnpm-lock.yaml
+pnpm-lock.yaml
+yarn.lock
+
+# Test files
+test/
+tests/
+spec/
+*.test.js
+*.spec.js
+coverage/
+
+# Documentation development
+docs-dev/
+temp/
+tmp/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Keep only essential files for package distribution
+# Include: .github/, docs/, scripts/, index.js, package.json, README.md

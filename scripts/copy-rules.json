@@ -1,0 +1,32 @@
+{
+  "copyRules": {
+    "instructions": {
+      "enabled": true,
+      "files": ["*.instructions.md"],
+      "exclude": ["docs-implementer.instructions.md"]
+    },
+    "prompts": {
+      "enabled": true,
+      "files": ["*.prompt.md"],
+      "exclude": ["docs-implementer.prompt.md"]
+    },
+    "chatmodes": {
+      "enabled": true,
+      "files": ["*.chatmode.md"],
+      "exclude": []
+    },
+    "workflows": {
+      "enabled": false,
+      "files": ["*.yml", "*.yaml"],
+      "exclude": []
+    },
+    "docs": {
+      "enabled": true,
+      "files": ["*.md"],
+      "exclude": ["README.md"]
+    }
+  },
+  "globalExcludes": ["version.json", "*.log", "*.tmp", ".DS_Store"],
+  "version": "1.1.0",
+  "lastUpdated": "2025-09-07T12:00:00.000Z"
+}

@@ -2,24 +2,22 @@
   "version": "1.0.0",
   "lastUpdated": "2025-09-04",
   "files": {
-    "chatmodes": [
-      "changeset-analyzer.chatmode.md",
-      "commit-analyzer.chatmode.md",
-      "dev.chatmode.md"
-    ],
+    "chatmodes": [],
     "instructions": [
       "changeset-analyzer.instructions.md",
       "commit-analyzer.instructions.md",
       "dev.instructions.md",
+      "docs-implementer.instructions.md",
       "jest.instructions.md",
-      "nest.instructions.md"
+      "nest.instructions.md",
+      "next.instructions.md",
+      "prisma.instructions.md"
     ],
     "prompts": [
       "changeset-analyzer.prompt.md",
       "commit-analyzer.prompt.md",
       "dev.prompt.md",
-      "jest.prompt.md",
-      "nest.prompt.md"
+      "docs-implementer.prompt.md"
     ]
   }
 }

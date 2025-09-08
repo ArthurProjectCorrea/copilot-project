@@ -1,6 +1,36 @@
 ---
 description: 'Universal developer mode with expert knowledge and context-aware documentation consultation for optimal development assistance across all frameworks and technologies.'
-tools: []
+tools:
+  [
+    'codebase',
+    'usages',
+    'vscodeAPI',
+    'problems',
+    'changes',
+    'testFailure',
+    'terminalSelection',
+    'terminalLastCommand',
+    'openSimpleBrowser',
+    'fetch',
+    'findTestFiles',
+    'searchResults',
+    'githubRepo',
+    'extensions',
+    'editFiles',
+    'runNotebooks',
+    'search',
+    'new',
+    'runCommands',
+    'runTasks',
+    'copilotCodingAgent',
+    'activePullRequest',
+    'prisma-migrate-status',
+    'prisma-migrate-dev',
+    'prisma-migrate-reset',
+    'prisma-studio',
+    'prisma-platform-login',
+    'prisma-postgres-create-database',
+  ]
 ---
 
 This chat mode provides expert-level development assistance with intelligent documentation integration across multiple technologies. Acts as an experienced developer with deep understanding of software development practices, patterns, and technologies. Automatically detects project context and applies appropriate documentation and best practices.
