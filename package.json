@@ -30,7 +30,7 @@
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
     "release": "pnpm run build && pnpm run changeset:publish",
-    "prepare": "husky",
+    "prepare": "node -e \"if (process.env.CI !== 'true') require('child_process').exec('husky')\"",
     "docs:sync": "node src/core/sync/sync-docs.js",
     "docs:sync:jest": "node src/core/sync/sync-docs.js jest",
     "docs:sync:nest": "node src/core/sync/sync-docs.js nest",
