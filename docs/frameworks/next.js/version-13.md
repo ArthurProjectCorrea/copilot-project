@@ -51,14 +51,13 @@ Starting in Next.js 13, this new behavior is now the default for `next/image`.
 There are two codemods to help you migrate to the new Image Component:
 
 - [next-image-to-legacy-image](/docs/pages/guides/upgrading/codemods#next-image-to-legacy-image): This codemod will safely and automatically rename `next/image` imports to `next/legacy/image` to maintain the same behavior as Next.js 12. We recommend running this codemod to quickly update to Next.js 13 automatically.
-- [next-image-experimental](/docs/pages/guides/upgrading/codemods#next-image-experimental): After running the previous codemod, you can optionally run this experimental codemod to upgrade `next/legacy/image` to the new `next/image`, which will remove unused props and add inline styles. Please note this codemod is experimental and only covers static usage (such as `) but not dynamic usage (such as `).
+- [next-image-experimental](/docs/pages/guides/upgrading/codemods#next-image-experimental): After running the previous codemod, you can optionally run this experimental codemod to upgrade `next/legacy/image` to the new `next/image`, which will remove unused props and add inline styles. Please note this codemod is experimental and only covers static usage (such as ``) but not dynamic usage (such as ``).
 
 Alternatively, you can manually update by following the [migration guide](/docs/pages/guides/upgrading/codemods#next-image-experimental) and also see the [legacy comparison](/docs/pages/api-reference/components/image-legacy#comparison).
 
 ### `
 
 // Next.js 13: `
-
 ```
 
 To upgrade your links to Next.js 13, you can use the [`new-link` codemod](/docs/pages/guides/upgrading/codemods#new-link).
@@ -72,4 +71,3 @@ The behavior of [`next/script`](/docs/pages/api-reference/components/script) has
 Previously, Next.js helped you optimize fonts by inlining font CSS. Version 13 introduces the new [`next/font`](/docs/pages/api-reference/components/font) module which gives you the ability to customize your font loading experience while still ensuring great performance and privacy.
 
 See [Optimizing Fonts](/docs/pages/api-reference/components/font) to learn how to use `next/font`.
-```

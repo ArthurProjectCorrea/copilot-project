@@ -19,7 +19,7 @@ If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api
 The `permanentRedirect` function accepts two arguments:
 
 ```js
-permanentRedirect(path, type);
+permanentRedirect(path, type)
 ```
 
 | Parameter | Type                                                          | Description                                                 |
@@ -41,11 +41,11 @@ Invoking the `permanentRedirect()` function throws a `NEXT_REDIRECT` error and t
 
 ```jsx filename="app/team/[id]/page.js"
 
-async function fetchTeam(id)
+async function fetchTeam(id) 
 
   const  = await params
   const team = await fetchTeam(id)
-  if (!team)
+  if (!team) 
 
   // ...
 }

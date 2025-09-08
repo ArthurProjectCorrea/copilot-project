@@ -81,14 +81,14 @@ In addition to creating the tables that represent the entities from your applica
 There often is a strong correlation between the tables in your database and the models you define in your code. For example, to represent records from the aforementioned `users` table in your application, you might define a JavaScript (ES6) class looking similar to this:
 
 ```js
-class User
+class User 
 }
 ```
 
 When using TypeScript, you might define an interface instead:
 
 ```js
-interface User
+interface User 
 ```
 
 Notice how the `User` model in both cases has the same properties as the `users` table in the previous example. While it's often the case that there's a 1:1 mapping between database tables and application models, it can also happen that models are represented completely differently in the database and your application.
@@ -96,10 +96,15 @@ Notice how the `User` model in both cases has the same properties as the `users`
 With this setup, you can retrieve records from the `users` table and store them as instances of your `User` type. The following example code snippet uses [`pg`](https://node-postgres.com/) as the driver for PostgreSQL and creates a `User` instance based on the above defined JavaScript class:
 
 ```js
-const resultRows = await client.query('SELECT * FROM users WHERE user_id = 1');
-const userData = resultRows[0];
-const user = new User(userData.user_id, userData.name, userData.email, userData.isAdmin);
-// user =
+const resultRows = await client.query('SELECT * FROM users WHERE user_id = 1')
+const userData = resultRows[0]
+const user = new User(
+  userData.user_id,
+  userData.name,
+  userData.email,
+  userData.isAdmin
+)
+// user = 
 ```
 
 Notice that in these examples, the application models are "dumb", meaning they don't implement any logic but their sole purpose is to carry data as _plain old JavaScript objects_.
@@ -115,14 +120,14 @@ This means, you don't write SQL statements to read and write data in the databas
 [Sequelize](https://sequelize.org/) is a popular ORM in the Node.js ecosystem, this is how you'd define the same `User` model from the sections before using Sequelize's modeling approach:
 
 ```js
-class User extends Model
+class User extends Model 
 User.init(
   ,
     name: Sequelize.STRING(255),
     email: ,
     isAdmin: Sequelize.BOOLEAN,
   },
-
+  
 )
 ```
 
@@ -134,7 +139,7 @@ To get an example with this `User` class to work, you still need to create the c
 Note that you'll never instantiate the `User` class manually (using `new User(...)`) as was shown in the previous section, but rather call _static_ methods on the `User` class which then return the `User` model instances:
 
 ```js
-const user = await User.findByPk(42);
+const user = await User.findByPk(42)
 ```
 
 The call to `findByPk` creates a SQL statement to retrieve the `User` record that's identified by the ID value `42`.
@@ -153,7 +158,7 @@ No matter which approach though, with Prisma ORM you never create application mo
 As an example, the `User` model from the previous example would be represented as follows in the Prisma schema:
 
 ```prisma
-model User
+model User 
 ```
 
 Once the application models are in your Prisma schema (whether they were added through introspection or manually by you), the next step typically is to generate Prisma Client which provides a programmatic and type-safe API to read and write data in the shape of your application models.

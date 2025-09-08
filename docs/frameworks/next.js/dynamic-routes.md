@@ -33,11 +33,11 @@ A Dynamic Segment can be created by wrapping a folder's name in square brackets:
 
 Dynamic Segments are passed as the `params` prop to [`layout`](/docs/app/api-reference/file-conventions/layout), [`page`](/docs/app/api-reference/file-conventions/page), [`route`](/docs/app/api-reference/file-conventions/route), and [`generateMetadata`](/docs/app/api-reference/functions/generate-metadata#generatemetadata-function) functions.
 
-| Route                     | Example URL | `params` |
-| ------------------------- | ----------- | -------- |
-| `app/blog/[slug]/page.js` | `/blog/a`   | ``       |
-| `app/blog/[slug]/page.js` | `/blog/b`   | ``       |
-| `app/blog/[slug]/page.js` | `/blog/c`   | ``       |
+| Route                     | Example URL | `params`        |
+| ------------------------- | ----------- | --------------- |
+| `app/blog/[slug]/page.js` | `/blog/a`   | `` |
+| `app/blog/[slug]/page.js` | `/blog/b`   | `` |
+| `app/blog/[slug]/page.js` | `/blog/c`   | `` |
 
 ### In Client Components
 
@@ -79,11 +79,11 @@ Dynamic Segments can be extended to **catch-all** subsequent segments by adding 
 
 For example, `app/shop/[...slug]/page.js` will match `/shop/clothes`, but also `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`, and so on.
 
-| Route                        | Example URL   | `params` |
-| ---------------------------- | ------------- | -------- |
-| `app/shop/[...slug]/page.js` | `/shop/a`     | ``       |
-| `app/shop/[...slug]/page.js` | `/shop/a/b`   | ``       |
-| `app/shop/[...slug]/page.js` | `/shop/a/b/c` | ``       |
+| Route                        | Example URL   | `params`                    |
+| ---------------------------- | ------------- | --------------------------- |
+| `app/shop/[...slug]/page.js` | `/shop/a`     | ``           |
+| `app/shop/[...slug]/page.js` | `/shop/a/b`   | ``      |
+| `app/shop/[...slug]/page.js` | `/shop/a/b/c` | `` |
 
 ### Optional Catch-all Segments
 
@@ -93,23 +93,23 @@ For example, `app/shop/[[...slug]]/page.js` will **also** match `/shop`, in addi
 
 The difference between **catch-all** and **optional catch-all** segments is that with optional, the route without the parameter is also matched (`/shop` in the example above).
 
-| Route                          | Example URL   | `params` |
-| ------------------------------ | ------------- | -------- |
+| Route                          | Example URL   | `params`                    |
+| ------------------------------ | ------------- | --------------------------- |
 | `app/shop/[[...slug]]/page.js` | `/shop`       | ``       |
-| `app/shop/[[...slug]]/page.js` | `/shop/a`     | ``       |
-| `app/shop/[[...slug]]/page.js` | `/shop/a/b`   | ``       |
-| `app/shop/[[...slug]]/page.js` | `/shop/a/b/c` | ``       |
+| `app/shop/[[...slug]]/page.js` | `/shop/a`     | ``           |
+| `app/shop/[[...slug]]/page.js` | `/shop/a/b`   | ``      |
+| `app/shop/[[...slug]]/page.js` | `/shop/a/b/c` | `` |
 
 ### TypeScript
 
 When using TypeScript, you can add types for `params` depending on your configured route segment — use [`PageProps<'/route'>`](/docs/app/api-reference/file-conventions/page#page-props-helper), [`LayoutProps<'/route'>`](/docs/app/api-reference/file-conventions/layout#layout-props-helper), or [`RouteContext<'/route'>`](/docs/app/api-reference/file-conventions/route#route-context-helper) to type `params` in `page`, `layout`, and `route` respectively.
 
-| Route                               | `params` Type Definition |
-| ----------------------------------- | ------------------------ |
+| Route                               | `params` Type Definition                 |
+| ----------------------------------- | ---------------------------------------- |
 | `app/blog/[slug]/page.js`           | ``                       |
-| `app/shop/[...slug]/page.js`        | ``                       |
-| `app/shop/[[...slug]]/page.js`      | ``                       |
-| `app/[categoryId]/[itemId]/page.js` | ``                       |
+| `app/shop/[...slug]/page.js`        | ``                     |
+| `app/shop/[[...slug]]/page.js`      | ``                    |
+| `app/[categoryId]/[itemId]/page.js` | `` |
 
 ## Behavior
 

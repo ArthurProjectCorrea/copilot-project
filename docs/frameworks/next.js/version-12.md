@@ -65,7 +65,7 @@ In order to prioritize transforms that will help you adopt SWC, please provide y
 You can opt-in to replacing Terser with SWC for minifying JavaScript up to 7x faster using a flag in `next.config.js`:
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```
 
 Minification using SWC is an opt-in flag to ensure it can be tested against more real-world Next.js applications before it becomes the default in Next.js 12.1. If you have feedback about minification, please leave it on [this feedback thread](https://github.com/vercel/next.js/discussions/30237).
@@ -95,7 +95,7 @@ Previously, Next.js used a [server-sent events](https://developer.mozilla.org/do
 In some cases when proxying requests to the Next.js dev server, you will need to ensure the upgrade request is handled correctly. For example, in `nginx` you would need to add the following configuration:
 
 ```nginx
-location /_next/webpack-hmr
+location /_next/webpack-hmr 
 ```
 
 If you are using Apache (2.x), you can add the following configuration to enable web sockets to the server. Review the port, host name and server names.

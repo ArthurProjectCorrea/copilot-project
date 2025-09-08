@@ -13,7 +13,7 @@ The following example demonstrates how to install the `pgcrypto` extension as pa
 1. Add the field with the native database function to your schema:
 
    ```prisma
-   model User
+   model User 
    ```
 
    If you include a cast operator (such as `::TEXT`), you must surround the entire function with parentheses:

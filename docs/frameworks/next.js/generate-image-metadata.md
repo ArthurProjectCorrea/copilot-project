@@ -21,8 +21,8 @@ An object containing the [dynamic route parameters](/docs/app/api-reference/file
 ```tsx filename="icon.tsx" switcher
 
   params,
-}:
-})
+}: 
+}) 
 ```
 
 ```jsx filename="icon.js" switcher
@@ -31,22 +31,22 @@ An object containing the [dynamic route parameters](/docs/app/api-reference/file
 }
 ```
 
-| Route                           | URL         | `params`    |
-| ------------------------------- | ----------- | ----------- |
-| `app/shop/icon.js`              | `/shop`     | `undefined` |
-| `app/shop/[slug]/icon.js`       | `/shop/1`   | ``          |
-| `app/shop/[tag]/[item]/icon.js` | `/shop/1/2` | ``          |
+| Route                           | URL         | `params`                  |
+| ------------------------------- | ----------- | ------------------------- |
+| `app/shop/icon.js`              | `/shop`     | `undefined`               |
+| `app/shop/[slug]/icon.js`       | `/shop/1`   | ``           |
+| `app/shop/[tag]/[item]/icon.js` | `/shop/1/2` | `` |
 
 ## Returns
 
 The `generateImageMetadata` function should return an `array` of objects containing the image's metadata such as `alt` and `size`. In addition, each item **must** include an `id` value which will be passed to the props of the image generating function.
 
-| Image Metadata Object | Type                |
-| --------------------- | ------------------- |
-| `id`                  | `string` (required) |
-| `alt`                 | `string`            |
-| `size`                | ``                  |
-| `contentType`         | `string`            |
+| Image Metadata Object | Type                                |
+| --------------------- | ----------------------------------- |
+| `id`                  | `string` (required)                 |
+| `alt`                 | `string`                            |
+| `size`                | `` |
+| `contentType`         | `string`                            |
 
 ```tsx filename="icon.tsx" switcher
 
@@ -65,7 +65,7 @@ The `generateImageMetadata` function should return an `array` of objects contain
       <div
         style=}
       >
-        Icon
+        Icon 
       </div>
     )
   )
@@ -89,7 +89,7 @@ The `generateImageMetadata` function should return an `array` of objects contain
       <div
         style=}
       >
-        Icon
+        Icon 
       </div>
     )
   )
@@ -105,7 +105,7 @@ This example uses the `params` object and external data to generate multiple [Op
 ```tsx filename="app/products/[id]/opengraph-image.tsx" switcher
 
   params,
-}:
+}: 
 }) ,
     alt: image.text,
     contentType: 'image/png',
@@ -114,12 +114,12 @@ This example uses the `params` object and external data to generate multiple [Op
 
   params,
   id,
-}:
+}: 
   id: number
-})
+}) 
         }
       >
-
+        
       </div>
     )
   )
@@ -146,7 +146,7 @@ This example uses the `params` object and external data to generate multiple [Op
         style=
         }
       >
-
+        
       </div>
     )
   )

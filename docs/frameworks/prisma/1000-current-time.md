@@ -9,7 +9,7 @@ toc: true
 The following raw SQL query uses the `CURRENT_TIME` function:
 
 ```ts
-prisma.$queryRaw`SELECT CURRENT_TIME;`;
+prisma.$queryRaw`SELECT CURRENT_TIME;`
 ```
 
 ### Why this is a problem

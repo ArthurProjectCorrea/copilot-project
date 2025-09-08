@@ -27,7 +27,7 @@ const  = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -35,7 +35,7 @@ main()
 ```
 
 ```js file=index.js showLineNumbers
-async function main()
+async function main() 
 ```
 
 Now run the code with this command:

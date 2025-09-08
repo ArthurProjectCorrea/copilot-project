@@ -27,7 +27,7 @@ Support for views is currently a [Preview](/orm/more/releases#preview) feature. 
 Support for views is currently in an early preview. To enable the `views` preview feature, add the `views` feature flag to the `previewFeatures` field of the `generator` block in your Prisma Schema:
 
 ```prisma file=schema.prisma highlight=3;add showLineNumbers
-generator client
+generator client 
 ```
 
 Please leave feedback about this preview feature in our dedicated preview feature [feedback issue](https://github.com/prisma/prisma/issues/17335) for `views`.
@@ -87,7 +87,7 @@ These two pieces allow you to define the name of your view in the generated Pris
 To define the `UserInfo` view from the example above, begin by using the `view` keyword to define a `view` block in your schema named `UserInfo`:
 
 ```prisma
-view UserInfo
+view UserInfo 
 ```
 
 #### Define fields
@@ -118,7 +118,7 @@ npx prisma db pull
 The resulting `view` block will be defined as follows:
 
 ```prisma
-view UserInfo
+view UserInfo 
 ```
 
 :::warning
@@ -203,7 +203,7 @@ Because views are virtual tables, they cannot have indexes. Therefore, `@index` 
 
 While Prisma ORM lets you place `@unique` and `@@unique` attributes on views, the underlying database and Prisma do not enforce those constraints. Multiple rows can therefore share the same value for a supposedly unique field.
 
-Neither the database nor Prisma ORM enforce the unique constraint expressed by that attribute.
+Neither the database nor Prisma ORM enforce the unique constraint expressed by that attribute. 
 
 The purpose of the `@unique` attribute in this case is only to enable relationships across views as well as `findUnique` queries and cursor-based pagination in Prisma Client.
 

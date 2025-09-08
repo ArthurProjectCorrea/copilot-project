@@ -15,11 +15,11 @@ Given a name, set a cookie with the given value on the response.
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next();
+let response = NextResponse.next()
 // Set a cookie to hide the banner
-response.cookies.set('show-banner', 'false');
+response.cookies.set('show-banner', 'false')
 // Response will have a `Set-Cookie:show-banner=false;path=/home` header
-return response;
+return response
 ```
 
 ### `get(name)`
@@ -28,9 +28,9 @@ Given a cookie name, return the value of the cookie. If the cookie is not found,
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next();
-//
-response.cookies.get('show-banner');
+let response = NextResponse.next()
+// 
+response.cookies.get('show-banner')
 ```
 
 ### `getAll()`
@@ -39,14 +39,14 @@ Given a cookie name, return the values of the cookie. If no name is given, retur
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next();
+let response = NextResponse.next()
 // [
 //   ,
 //   ,
 // ]
-response.cookies.getAll('experiments');
+response.cookies.getAll('experiments')
 // Alternatively, get all cookies for the response
-response.cookies.getAll();
+response.cookies.getAll()
 ```
 
 ### `delete(name)`
@@ -55,9 +55,9 @@ Given a cookie name, delete the cookie from the response.
 
 ```ts
 // Given incoming request /home
-let response = NextResponse.next();
+let response = NextResponse.next()
 // Returns true for deleted, false if nothing is deleted
-response.cookies.delete('experiments');
+response.cookies.delete('experiments')
 ```
 
 ## `json()`
@@ -81,18 +81,20 @@ Produce a response with the given JSON body.
 Produce a response that redirects to a [URL](https://developer.mozilla.org/docs/Web/API/URL).
 
 ```ts
-return NextResponse.redirect(new URL('/new', request.url));
+
+return NextResponse.redirect(new URL('/new', request.url))
 ```
 
 The [URL](https://developer.mozilla.org/docs/Web/API/URL) can be created and modified before being used in the `NextResponse.redirect()` method. For example, you can use the `request.nextUrl` property to get the current URL, and then modify it to redirect to a different URL.
 
 ```ts
+
 // Given an incoming request...
-const loginUrl = new URL('/login', request.url);
+const loginUrl = new URL('/login', request.url)
 // Add ?from=/incoming-url to the /login URL
-loginUrl.searchParams.set('from', request.nextUrl.pathname);
+loginUrl.searchParams.set('from', request.nextUrl.pathname)
 // And redirect to the new URL
-return NextResponse.redirect(loginUrl);
+return NextResponse.redirect(loginUrl)
 ```
 
 ## `rewrite()`
@@ -100,9 +102,10 @@ return NextResponse.redirect(loginUrl);
 Produce a response that rewrites (proxies) the given [URL](https://developer.mozilla.org/docs/Web/API/URL) while preserving the original URL.
 
 ```ts
+
 // Incoming request: /about, browser shows /about
 // Rewritten request: /proxy, browser shows /about
-return NextResponse.rewrite(new URL('/proxy', request.url));
+return NextResponse.rewrite(new URL('/proxy', request.url))
 ```
 
 ## `next()`
@@ -110,7 +113,8 @@ return NextResponse.rewrite(new URL('/proxy', request.url));
 The `next()` method is useful for Middleware, as it allows you to return early and continue routing.
 
 ```ts
-return NextResponse.next();
+
+return NextResponse.next()
 ```
 
 You can also forward `headers` upstream when producing the response, using `NextResponse.next( })`:
@@ -142,7 +146,7 @@ Prefer a defensive approach by creating a subset of incoming request headers usi
 
 ```ts
 
-function middleware(request: NextRequest)
+function middleware(request: NextRequest) 
   }
 
   return NextResponse.next(,

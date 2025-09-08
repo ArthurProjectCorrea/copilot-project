@@ -201,7 +201,7 @@ consumer
   .exclude(
     { path: 'cats', method: RequestMethod.GET },
     { path: 'cats', method: RequestMethod.POST },
-    'cats/{*splat}'
+    'cats/{*splat}',
   )
   .forRoutes(CatsController);
 ```

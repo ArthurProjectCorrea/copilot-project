@@ -322,13 +322,15 @@ For more advanced use cases, you may need to access the underlying driver instan
 To do so, you can use the `unwrap()` method, which returns the underlying driver instance. The generic type parameter should specify the type of driver instance you expect.
 
 ```typescript
-const managerRef = this.client.unwrap<import('amqp-connection-manager').AmqpConnectionManager>();
+const managerRef =
+  this.client.unwrap<import('amqp-connection-manager').AmqpConnectionManager>();
 ```
 
 Similarly, you can access the server's underlying driver instance:
 
 ```typescript
-const managerRef = server.unwrap<import('amqp-connection-manager').AmqpConnectionManager>();
+const managerRef =
+  server.unwrap<import('amqp-connection-manager').AmqpConnectionManager>();
 ```
 
 #### Wildcards
@@ -340,14 +342,17 @@ For example, the routing key `cats.#` matches `cats`, `cats.meow`, and `cats.meo
 To enable wildcard support in your RabbitMQ microservice, set the `wildcards` configuration option to `true` in the options object:
 
 ```typescript
-const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-  transport: Transport.RMQ,
-  options: {
-    urls: ['amqp://localhost:5672'],
-    queue: 'cats_queue',
-    wildcards: true,
+const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  AppModule,
+  {
+    transport: Transport.RMQ,
+    options: {
+      urls: ['amqp://localhost:5672'],
+      queue: 'cats_queue',
+      wildcards: true,
+    },
   },
-});
+);
 ```
 
 With this configuration, you can use wildcards in your routing keys when subscribing to events/messages. For example, to listen for messages with the routing key `cats.#`, you can use the following code:

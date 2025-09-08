@@ -14,7 +14,7 @@ The below example asks `Prisma` to return the `email` of the user whose `id` is 
 
 ```ts
 
-const userEmail: Prisma.UserSelect =
+const userEmail: Prisma.UserSelect = 
 
 // Run inside async function
 const user = await prisma.user.findUnique(,
@@ -41,7 +41,7 @@ The following example passes the `UserSelect` generated type into the `Prisma.va
 ```ts highlight=3,4,5;delete|7-9;add
 
 //delete-start
-const userEmail: Prisma.UserSelect =
+const userEmail: Prisma.UserSelect = 
 //delete-end
 
 //add-start
@@ -57,7 +57,13 @@ const user = await prisma.user.findUnique(,
 Alternatively, you can use the following syntax that uses a "selector" pattern using an existing instance of Prisma Client:
 
 ```ts
-const userEmail = Prisma.validator(prisma, 'user', 'findUnique', 'select')();
+
+const userEmail = Prisma.validator(
+  prisma,
+  'user',
+  'findUnique',
+  'select'
+)()
 ```
 
 The big difference is that the `userEmail` object is now type-safe. If you hover your mouse over it TypeScript will tell you the object's key/value pair. If you use dot notation to access the object's properties you will only be able to access the `email` property of the object.

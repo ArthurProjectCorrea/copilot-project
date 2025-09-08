@@ -1,28 +1,28 @@
 <ApiTable
-rows=,
-,
-,
-,
-,
-,
-,
-,
-,
-].flatMap(() =>
-[
-["<number>", "calc(var(--spacing) * <number>)"],
-["<number>", "calc(var(--spacing) * -<number>)", true],
-["<fraction>", "calc(<fraction> * 100%)"],
-["<fraction>", "calc(<fraction> * -100%)", true],
-["px", "1px"],
-["px", "-1px", true],
-["full", "100%"],
-["full", "-100%", true],
-["auto", "auto"],
-["(<custom-property>)", "var(<custom-property>)"],
-["[<value>]", "<value>"],
-].map(([suffix, value, negative]) => [`$$-$`, `$: $;`]),
-)}
+  rows=,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+    ,
+  ].flatMap(() =>
+    [
+      ["<number>", "calc(var(--spacing) * <number>)"],
+      ["<number>", "calc(var(--spacing) * -<number>)", true],
+      ["<fraction>", "calc(<fraction> * 100%)"],
+      ["<fraction>", "calc(<fraction> * -100%)", true],
+      ["px", "1px"],
+      ["px", "-1px", true],
+      ["full", "100%"],
+      ["full", "-100%", true],
+      ["auto", "auto"],
+      ["(<custom-property>)", "var(<custom-property>)"],
+      ["[<value>]", "<value>"],
+    ].map(([suffix, value, negative]) => [`$$-$`, `$: $;`]),
+  )}
 />
 
 ## Examples

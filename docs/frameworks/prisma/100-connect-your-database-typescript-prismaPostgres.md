@@ -37,10 +37,10 @@ Copy the `DATABASE_URL` environment variable from the Console UI and paste it in
 DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=ey..."
 ```
 
-By setting the `DATABASE_URL` in the `.env` file, you're ensuring that Prisma ORM can connect to your database. The `DATABASE_URL` is used in the `datasource` block in your Prisma schema:
+By setting the  `DATABASE_URL` in the `.env` file, you're ensuring that Prisma ORM can connect to your database. The `DATABASE_URL` is used in the `datasource` block in your Prisma schema:
 
 ```prisma file=prisma/schema.prisma
-datasource db
+datasource db 
 ```
 
 That's it! You can now start using the Prisma CLI to interact with your Prisma Postgres database. In the next section, you'll learn how to use the Prisma CLI to create and run migrations against your database to update its schema.

@@ -63,11 +63,11 @@ The `params` object contains the populated `params` from the parent `generateSta
 - Each property in the object is a dynamic segment to be filled in for the route.
 - The properties name is the segment's name, and the properties value is what that segment should be filled in with.
 
-| Example Route                    | `generateStaticParams` Return Type |
-| -------------------------------- | ---------------------------------- |
-| `/product/[id]`                  | `[]`                               |
-| `/products/[category]/[product]` | `[]`                               |
-| `/products/[...slug]`            | `[]`                               |
+| Example Route                    | `generateStaticParams` Return Type        |
+| -------------------------------- | ----------------------------------------- |
+| `/product/[id]`                  | `[]`                        |
+| `/products/[category]/[product]` | `[]` |
+| `/products/[...slug]`            | `[]`                    |
 
 ## Single Dynamic Segment
 
@@ -296,7 +296,7 @@ Generate multiple dynamic segments from the child route segment.
 
   params,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/products/[category]/[product]/page.js" switcher
@@ -325,7 +325,7 @@ Generate the parent segments first and use the result to generate the child segm
 
   params,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/products/[category]/layout.js" switcher
@@ -349,7 +349,7 @@ The child `generateStaticParams` function can use the `params` returned from the
 // the parent segment's `generateStaticParams` function
 
   params: ,
-}:
+}: 
 }) `
   ).then((res) => res.json())
 
@@ -358,7 +358,7 @@ The child `generateStaticParams` function can use the `params` returned from the
 
   params,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/products/[category]/[product]/page.js" switcher

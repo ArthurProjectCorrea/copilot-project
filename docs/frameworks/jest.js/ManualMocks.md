@@ -64,7 +64,7 @@ Here's a contrived example where we have a module that provides a summary of all
 const fs = require('fs');
 
 function summarizeFilesInDirectorySync(directory) {
-  return fs.readdirSync(directory).map((fileName) => ({
+  return fs.readdirSync(directory).map(fileName => ({
     directory,
     fileName,
   }));
@@ -130,7 +130,8 @@ describe('listFilesInDirectorySync', () => {
 
   test('includes all files in the directory in the summary', () => {
     const FileSummarizer = require('../FileSummarizer');
-    const fileSummary = FileSummarizer.summarizeFilesInDirectorySync('/path/to');
+    const fileSummary =
+      FileSummarizer.summarizeFilesInDirectorySync('/path/to');
 
     expect(fileSummary.length).toBe(2);
   });
@@ -162,7 +163,7 @@ In this case, mocking `matchMedia` in the test file should solve the issue:
 ```js
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
@@ -179,7 +180,7 @@ This works if `window.matchMedia()` is used in a function (or method) which is i
 
 ```js
 import './matchMedia.mock'; // Must be imported before the tested file
-import { myMethod } from './file-to-test';
+import {myMethod} from './file-to-test';
 
 describe('myMethod()', () => {
   // Test the method here...

@@ -21,7 +21,7 @@ app.use(
     secret: 'my-secret',
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 ```
 
@@ -73,7 +73,10 @@ Once the installation is complete, register the `fastify-secure-session` plugin:
 import secureSession from '@fastify/secure-session';
 
 // somewhere in your initialization file
-const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+const app = await NestFactory.create<NestFastifyApplication>(
+  AppModule,
+  new FastifyAdapter(),
+);
 await app.register(secureSession, {
   secret: 'averylogphrasebiggerthanthirtytwochars',
   salt: 'mq9hDxBVDbspDR6n',

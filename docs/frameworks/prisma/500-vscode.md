@@ -1,9 +1,9 @@
 ---
-title: 'VS Code'
-description: 'The Prisma VS Code extension provides a management UI for Prisma Postgres and superpowers for Copilot agent mode.'
-metaTitle: 'Prisma VS Code extension'
-metaDescription: 'The Prisma VS Code extension provides a management UI for Prisma Postgres and superpowers for Copilot agent mode.'
-tocDepth: 3
+title: 'VS Code' 
+description: 'The Prisma VS Code extension provides a management UI for Prisma Postgres and superpowers for Copilot agent mode.' 
+metaTitle: 'Prisma VS Code extension' 
+metaDescription: 'The Prisma VS Code extension provides a management UI for Prisma Postgres and superpowers for Copilot agent mode.' 
+tocDepth: 3 
 toc: true
 ---
 
@@ -20,7 +20,7 @@ The Prisma VS Code extension includes a dedicated UI to manage Prisma Postgres i
 The UI enables the following workflows:
 
 - Authenticate with the [Prisma Console](https://console.prisma.io)
-- View, create and delete Prisma Postgres instances (local & remote)
+- View, create and delete  Prisma Postgres instances (local & remote)
 - "Push to cloud": Easily deploy a local Prisma Postgres instance
 - View and edit data via an embedded Prisma Studio
 - Visualize your database schema
@@ -40,19 +40,17 @@ Beyond managing your database instances, the Prisma VS Code extension embeds Pri
 
 ## Prisma MCP server
 
-Prisma provides its own [Model Context Protocol](/postgres/integrations/mcp-server) (MCP) server that lets you manage Prisma Postgres databases, model database schemas and chat through migrations.
+Prisma provides its own [Model Context Protocol](/postgres/integrations/mcp-server) (MCP) server that lets you manage Prisma Postgres databases, model database schemas and chat through migrations. 
 
 You can add the Prisma MCP server to VS Code using the one-click installation by clicking on the following link:
 
 <a
-href="vscode:mcp/install?%7B%22name%22%3A%22prisma-postgres%22%2C%22gallery%22%3Atrue%2C%22url%22%3A%22https%3A%2F%2Fmcp.prisma.io%2Fmcp%22%7D"
-aria-label="Install Prisma MCP server in VS Code"
-style=}
-
->   <span style=}>
-
+  href="vscode:mcp/install?%7B%22name%22%3A%22prisma-postgres%22%2C%22gallery%22%3Atrue%2C%22url%22%3A%22https%3A%2F%2Fmcp.prisma.io%2Fmcp%22%7D"
+  aria-label="Install Prisma MCP server in VS Code"
+  style=}
+>
+  <span style=}>
     VS CODE
-
   </span>
   <span style=}>
     INSTALL PRISMA MCP SERVER
@@ -65,7 +63,7 @@ If your browser blocks the link, [you can set it up manually](https://code.visua
 
 ```json file=.vscode/mcp.json
 ,
-    "Prisma-Remote":
+    "Prisma-Remote": 
   }
 }
 ```
@@ -78,7 +76,7 @@ VS Code includes an [agent mode](https://pris.ly/vs-code-docs) (powered by GitHu
 
 ### Capabilities
 
-The [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) enables support for VS Code agent mode.
+The [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) enables support for VS Code agent mode. 
 
 VS Code agent mode can perform the following tasks:
 

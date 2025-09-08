@@ -7,7 +7,7 @@ search: true
 sidebar_class_name: hidden-sidebar
 dbSwitcher: ['prismaPostgres', 'sqlite']
 slugSwitch: /getting-started/quickstart-
-sidebar_custom_props:
+sidebar_custom_props: 
 community_section: true
 ---
 
@@ -71,9 +71,9 @@ This creates a new `prisma` directory with a `schema.prisma` file and configures
 The Prisma schema provides an intuitive way to model data. Add the following models to your `schema.prisma` file:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 Models in the Prisma schema have two main purposes:
@@ -123,7 +123,7 @@ Then, paste the following boilerplate into it:
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -169,7 +169,7 @@ Delete the previous Prisma Client query and add the new `findMany` query instead
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -191,7 +191,7 @@ First, adjust your script to include the nested query:
 const prisma = new PrismaClient()
 
 async function main() ,
-
+          
         ],
       },
     },
@@ -265,14 +265,14 @@ Check out the [`prisma-examples`](https://github.com/prisma/prisma-examples/) re
 
 [Prisma Accelerate](/accelerate) is a connection pooler and global database cache that can drastically speed up your database queries. Check out the [Speed Test](https://accelerate-speed-test.prisma.io/) or try Accelerate with your favorite framework:
 
-| Demo                                                                                                        | Description                                                                   |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [`nextjs-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/nextjs-starter)         | A Next.js project using Prisma Accelerate's caching and connection pooling    |
-| [`svelte-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/svelte-starter)         | A SvelteKit project using Prisma Accelerate's caching and connection pooling  |
+| Demo                                            | Description                                                                |
+| ----------------------------------------------- | -------------------------------------------------------------------------- |
+| [`nextjs-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/nextjs-starter) | A Next.js project using Prisma Accelerate's caching and connection pooling |
+| [`svelte-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/svelte-starter) | A SvelteKit project using Prisma Accelerate's caching and connection pooling |
 | [`solidstart-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/solidstart-starter) | A Solidstart project using Prisma Accelerate's caching and connection pooling |
-| [`remix-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/remix-starter)           | A Remix project using Prisma Accelerate's caching and connection pooling      |
-| [`nuxt-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/nuxtjs-starter)           | A Nuxt.js project using Prisma Accelerate's caching and connection pooling    |
-| [`astro-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/astro-starter)           | An Astro project using Prisma Accelerate's caching and connection pooling     |
+| [`remix-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/remix-starter) | A Remix project using Prisma Accelerate's caching and connection pooling |
+| [`nuxt-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/nuxtjs-starter) | A Nuxt.js project using Prisma Accelerate's caching and connection pooling |
+| [`astro-starter`](https://github.com/prisma/prisma-examples/tree/latest/accelerate/astro-starter) | An Astro project using Prisma Accelerate's caching and connection pooling |
 
 ### Build an app with Prisma ORM
 

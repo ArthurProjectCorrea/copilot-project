@@ -61,7 +61,7 @@ DIRECT_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.
 You can then update your `schema.prisma` to use the new direct URL:
 
 ```prisma file=schema.prisma highlight=4;add showLineNumbers
-datasource db
+datasource db 
 ```
 
 More information about the `directUrl` field can be found [here](/orm/reference/prisma-schema-reference#fields).
@@ -112,9 +112,9 @@ This feature is available in Preview from Prisma ORM versions 5.4.2 and later.
 To get started, enable the `driverAdapters` Preview feature flag:
 
 ```prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Generate Prisma Client:
@@ -132,11 +132,12 @@ npm install @prisma/adapter-neon
 Update your Prisma Client instance:
 
 ```ts
-dotenv.config();
-const connectionString = `$`;
 
-const adapter = new PrismaNeon();
-const prisma = new PrismaClient();
+dotenv.config()
+const connectionString = `$`
+
+const adapter = new PrismaNeon()
+const prisma = new PrismaClient()
 ```
 
 You can then use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the connection string defined in the Prisma schema.

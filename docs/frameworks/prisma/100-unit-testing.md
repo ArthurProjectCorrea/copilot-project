@@ -54,7 +54,7 @@ The singleton file tells Jest to mock a default export (the Prisma Client instan
 Next, add the `setupFilesAfterEnv` property to your `jest.config.js` file with the path to your `singleton.ts` file.
 
 ```js file=jest.config.js highlight=5;add showLineNumbers
-module.exports =
+module.exports = 
 ```
 
 ### Dependency injection
@@ -67,11 +67,11 @@ Another popular pattern that can be used is dependency injection.
    import  from '@prisma/client'
    import  from 'jest-mock-extended'
 
-   export type Context =
+   export type Context = 
 
-   export type MockContext =
+   export type MockContext = 
 
-   export const createMockContext = (): MockContext =>
+   export const createMockContext = (): MockContext => 
    }
    ```
 
@@ -102,7 +102,7 @@ A real world use case for unit testing Prisma ORM might be a signup form. Your u
 All of the examples that follow use the following schema model:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 The following unit tests will mock the process of
@@ -115,13 +115,13 @@ The functions that use the dependency injection pattern will have the context in
 
 ```ts file=functions-with-context.ts
 
-interface CreateUser
+interface CreateUser 
 
   if (user.acceptTermsAndConditions) )
-  } else
+  } else 
 }
 
-interface UpdateUser
+interface UpdateUser 
 
   return await ctx.prisma.user.update(,
     data: user,
@@ -131,13 +131,13 @@ interface UpdateUser
 
 ```ts file=functions-without-context.ts
 
-interface CreateUser
+interface CreateUser 
 
   if (user.acceptTermsAndConditions) )
-  } else
+  } else 
 }
 
-interface UpdateUser
+interface UpdateUser 
 
   return await prisma.user.update(,
     data: user,
@@ -153,21 +153,21 @@ The **_singleton_** example uses the singleton client instance to call the mock 
 
 ```ts file=__tests__/with-singleton.ts
 
-test('should create new user ', async () =>
+test('should create new user ', async () => 
 
   prismaMock.user.create.mockResolvedValue(user)
 
   await expect(createUser(user)).resolves.toEqual()
 })
 
-test('should update a users name ', async () =>
+test('should update a users name ', async () => 
 
   prismaMock.user.update.mockResolvedValue(user)
 
   await expect(updateUsername(user)).resolves.toEqual()
 })
 
-test('should fail if user does not accept terms', async () =>
+test('should fail if user does not accept terms', async () => 
 
   prismaMock.user.create.mockImplementation()
 
@@ -184,19 +184,19 @@ let ctx: Context
 
 beforeEach(() => )
 
-test('should create new user ', async () =>
+test('should create new user ', async () => 
   mockCtx.prisma.user.create.mockResolvedValue(user)
 
   await expect(createUser(user, ctx)).resolves.toEqual()
 })
 
-test('should update a users name ', async () =>
+test('should update a users name ', async () => 
   mockCtx.prisma.user.update.mockResolvedValue(user)
 
   await expect(updateUsername(user, ctx)).resolves.toEqual()
 })
 
-test('should fail if user does not accept terms', async () =>
+test('should fail if user does not accept terms', async () => 
 
   mockCtx.prisma.user.create.mockImplementation()
 

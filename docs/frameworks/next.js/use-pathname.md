@@ -36,7 +36,7 @@ For example, a Client Component with `usePathname` will be rendered into HTML on
 ## Parameters
 
 ```tsx
-const pathname = usePathname();
+const pathname = usePathname()
 ```
 
 `usePathname` does not take any parameters.

@@ -176,7 +176,7 @@ You need to provide the cache tag in the `$accelerate.invalidate` API:
 ```ts
 try );
   // highlight-end
-} catch (e)
+} catch (e) 
   }
   throw e;
 }

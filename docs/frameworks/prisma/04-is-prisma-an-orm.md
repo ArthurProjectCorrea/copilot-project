@@ -89,9 +89,9 @@ Let's take a look at how that would look like with a TypeORM migration:
 
 ```ts
 
-  async up(queryRunner: QueryRunner): Promise<void>
+  async up(queryRunner: QueryRunner): Promise<void> 
 
-  async down(queryRunner: QueryRunner): Promise<void>
+  async down(queryRunner: QueryRunner): Promise<void> 
 }
 ```
 
@@ -206,13 +206,13 @@ Models in Prisma ORM mean something slightly different to Active Record ORMs. Wi
 As an example, here's a Prisma schema for a blog:
 
 ```prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Here's a break down of the example above:
@@ -265,9 +265,9 @@ In practice, these are the steps necessary to introspect an existing DB and gene
 1. Create a `schema.prisma` defining the `datasource` (in this case, your existing DB) and `generator`:
 
 ```prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 2. Run `prisma db pull` to populate the Prisma schema with models derived from your database schema.
@@ -290,13 +290,13 @@ This example demonstrates using Prisma ORM in a new project with a new database 
 
 ```prisma
 // schema.prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 2. Run `prisma migrate` to generate the SQL for the migration, apply it to the database, and generate Prisma Client.
@@ -345,7 +345,7 @@ Prisma Client maps queries and results to [structural types](https://en.wikipedi
 This ensures that accessing a non-existent field will raise a type error. More broadly, it means that the result's type for every query is known ahead of running the query, which helps catch errors. For example, the following code snippet will raise a type error:
 
 ```ts
-console.log(user.lastName); // Property 'lastName' does not exist on type 'User'.
+console.log(user.lastName) // Property 'lastName' does not exist on type 'User'.
 ```
 
 ### Fetching relations
@@ -361,7 +361,7 @@ const user = await prisma.user.findUnique(,
 With this query, `user`'s type will also include `Post`s which can be accessed with the `posts` array field:
 
 ```ts
-console.log(user.posts[0].title);
+console.log(user.posts[0].title)
 ```
 
 The example only scratches the surface of Prisma Client's API for [CRUD operations](/orm/prisma-client/queries/crud) which you can learn more about in the docs. The main idea is that all queries and results are backed by types and you have full control over how relations are fetched.

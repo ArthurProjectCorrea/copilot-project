@@ -42,7 +42,7 @@ const prisma = new PrismaClient()
 async function main() ,
       },
     }
-  } else
+  } else 
   }
 
   // Pass 'user' object into query
@@ -133,7 +133,7 @@ const user = await prisma.user.findUnique(,
 The following [`findMany()`](/orm/reference/prisma-client-reference#findmany) query returns _all_ `User` records:
 
 ```ts
-const users = await prisma.user.findMany();
+const users = await prisma.user.findMany()
 ```
 
 You can also [paginate your results](/orm/prisma-client/queries/pagination).
@@ -307,7 +307,7 @@ Attempting to delete a user with one or more posts result in an error, as every 
 The following query uses [`deleteMany()`](/orm/reference/prisma-client-reference#deletemany) to delete all `User` records:
 
 ```ts
-const deleteUsers = await prisma.user.deleteMany();
+const deleteUsers = await prisma.user.deleteMany()
 ```
 
 Be aware that this query will fail if the user has any related records (such as posts). In this case, you need to [delete the related records first](#cascading-deletes-deleting-related-records).
@@ -332,7 +332,7 @@ To resolve this error, you can:
 - Make the relation optional:
 
   ```prisma highlight=3,4;add|5,6;delete
-  model Post
+  model Post 
   ```
 
 - Change the author of the posts to another user before deleting the user.
@@ -360,12 +360,12 @@ The following shows how to delete all records from all tables with Prisma Client
 When you know the order in which your tables should be deleted, you can use the [`deleteMany`](/orm/reference/prisma-client-reference#deletemany) function. This is executed synchronously in a [`$transaction`](/orm/prisma-client/queries/transactions) and can be used with all types of databases.
 
 ```ts
-const deletePosts = prisma.post.deleteMany();
-const deleteProfile = prisma.profile.deleteMany();
-const deleteUsers = prisma.user.deleteMany();
+const deletePosts = prisma.post.deleteMany()
+const deleteProfile = prisma.profile.deleteMany()
+const deleteUsers = prisma.user.deleteMany()
 
 // The transaction runs synchronously so deleteUsers must run last.
-await prisma.$transaction([deleteProfile, deletePosts, deleteUsers]);
+await prisma.$transaction([deleteProfile, deletePosts, deleteUsers])
 ```
 
 ✅ **Pros**:

@@ -132,7 +132,7 @@ Track Time to Interactive and navigation performance using the Performance Obser
 const startTime = performance.now()
 
 const observer = new PerformanceObserver(
-  (list: PerformanceObserverEntryList) =>
+  (list: PerformanceObserverEntryList) => 
     }
   }
 )
@@ -146,7 +146,7 @@ observer.observe()
 ```js filename="instrumentation-client.js" switcher
 const startTime = performance.now()
 
-const observer = new PerformanceObserver((list) =>
+const observer = new PerformanceObserver((list) => 
   }
 })
 

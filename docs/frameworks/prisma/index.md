@@ -1,216 +1,94 @@
 ---
-title: 'Extensions'
-metaTitle: 'Prisma Client extensions'
-metaDescription: 'Extend the functionality of Prisma Client'
-toc_max_heading_level: 4
+title: 'Upgrade to Prisma ORM 3'
+metaTitle: 'Upgrade to Prisma ORM 3'
+metaDescription: 'Guides on how to upgrade to Prisma ORM 3'
+tocDepth: 3
+toc: true
 ---
 
-## About Prisma Client extensions
+## Breaking changes
 
-When you use a Prisma Client extension, you create an _extended client_. An extended client is a lightweight variant of the standard Prisma Client that is wrapped by one or more extensions. The standard client is not mutated. You can add as many extended clients as you want to your project. [Learn more about extended clients](#extended-clients).
+### [Referential actions](/orm/prisma-schema/data-model/relations/referential-actions)
 
-You can associate a single extension, or multiple extensions, with an extended client. [Learn more about multiple extensions](#multiple-extensions).
+The introduction of referential actions in version 3.x removes the safety net in Prisma Client that had previously prevented cascading deletes at runtime.
 
-You can [share your Prisma Client extensions](/orm/prisma-client/client-extensions/shared-extensions) with other Prisma ORM users, and [import Prisma Client extensions developed by other users](/orm/prisma-client/client-extensions/shared-extensions#install-a-shared-packaged-extension) into your Prisma ORM project.
+As a result, depending on which workflow you are using to work on your application, you could be impacted. We advise you to check your schema and decide if you need to define referential actions explicitly.
 
-### Extended clients
+See [Referential action upgrade path](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-3/referential-actions) to understand how to proceed.
 
-Extended clients interact with each other, and with the standard client, as follows:
+### [Named constraints](/orm/prisma-schema/data-model/database-mapping)
 
-- Each extended client operates independently in an isolated instance.
-- Extended clients cannot conflict with each other, or with the standard client.
-- All extended clients and the standard client communicate with the same [Prisma ORM query engine](/orm/more/under-the-hood/engines).
-- All extended clients and the standard client share the same connection pool.
+We changed the convention followed by Prisma ORM to name constraints and indexes. We also introduced a clear distinction between the `map` attribute (database-level name) and `name` attribute (Prisma Client API name) in the PSL to explicitly control how constraints are defined in the Prisma schema.
 
-> **Note**: The author of an extension can modify this behavior since they're able to run arbitrary code as part of an extension. For example, an extension might actually create an entirely new `PrismaClient` instance (including its own query engine and connection pool). Be sure to check the documentation of the extension you're using to learn about any specific behavior it might implement.
+This means that you will notice an impact when running Prisma `migrate` or `db pull` which will follow this new convention. We advise you to adjust your schema to reflect the names of your constraints and indexes appropriately.
 
-### Example use cases for extended clients
+You can check out the [Named constraints upgrade path](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-3/named-constraints) for more information on how to proceed.
 
-Because extended clients operate in isolated instances, they can be a good way to do the following, for example:
+### [$queryRaw](/orm/prisma-client/using-raw-sql/raw-queries)
 
-- Implement row-level security (RLS), where each HTTP request has its own client with its own RLS extension, customized with session data. This can keep each user entirely separate, each in a separate client.
-- Add a `user.current()` method for the `User` model to get the currently logged-in user.
-- Enable more verbose logging for requests if a debug cookie is set.
-- Attach a unique request id to all logs so that you can correlate them later, for example to help you analyze the operations that Prisma Client carries out.
-- Remove a `delete` method from models unless the application calls the admin endpoint and the user has the necessary privileges.
+From version 3.x onwards, the `$queryRaw` method now only supports a template literal.
 
-## Add an extension to Prisma Client
+This means that if your application relied on `$queryRaw` calls using _strings_, those calls will **not** work anymore. We advise you to use template literals wherever possible for security reasons or resort to `$queryRawUnsafe` otherwise, after carefully escaping queries to prevent SQL injections.
 
-You can create an extension using two primary ways:
+You can learn more about the new `$queryRaw` and `$queryRawUnsafe` methods in the [Raw database access](/orm/prisma-client/using-raw-sql/raw-queries) section of the docs.
 
-- Use the client-level [`$extends`](/orm/reference/prisma-client-reference#client-methods) method
+### [Json Null Equality](/orm/prisma-client/special-fields-and-types/working-with-json-fields#filtering-by-null-values)
 
-  ```ts
-  const prisma = new PrismaClient().$extends( // The extension logic for the `user` model goes inside the curly braces
-    },
-  })
-  ```
+You cannot filter a `Json` field by a null value. [See this GitHub issue](https://github.com/prisma/prisma/issues/8399).
+This is because `` checks if the column value in the database is `NULL`, not if the JSON value inside the column equals `null`.
 
-- Use the `Prisma.defineExtension` method to define an extension and assign it to a variable, and then pass the extension to the client-level `$extends` method
+To fix this problem, we decided to split null on Json fields into `JsonNull`, `DbNull` and `AnyNull`.
 
-  ```ts
-  import  from '@prisma/client'
+- **JsonNull**: Selects the null value in JSON.
+- **DbNull**: Selects the NULL value in the database.
+- **AnyNull:** Selects both null JSON values and NULL database values.
 
-  // Define the extension
-  const myExtension = Prisma.defineExtension( // The extension logic for the `user` model goes inside the curly braces
-    },
-  })
-
-  // Pass the extension to a Prisma Client instance
-  const prisma = new PrismaClient().$extends(myExtension)
-  ```
-
-  :::tip
-
-  This pattern is useful for when you would like to separate extensions into multiple files or directories within a project.
-
-  :::
-
-The above examples use the [`model` extension component](/orm/prisma-client/client-extensions/model) to extend the `User` model.
-
-In your `$extends` method, use the appropriate extension component or components ([`model`](/orm/prisma-client/client-extensions/model), [`client`](/orm/prisma-client/client-extensions/client), [`result`](/orm/prisma-client/client-extensions/result) or [`query`](/orm/prisma-client/client-extensions/query)).
-
-## Name an extension for error logs
-
-You can name your extensions to help identify them in error logs. To do so, use the optional field `name`. For example:
+Given the following model in your Prisma Schema:
 
 ```ts
-const prisma = new PrismaClient().$extends(
- },
-})
+model Log 
 ```
 
-## Multiple extensions
-
-You can associate an extension with an [extended client](#about-prisma-client-extensions) in one of two ways:
-
-- You can associate it with an extended client on its own, or
-- You can combine the extension with other extensions and associate all of these extensions with an extended client. The functionality from these combined extensions applies to the same extended client.
-  Note: [Combined extensions can conflict](#conflicts-in-combined-extensions).
-
-You can combine the two approaches above. For example, you might associate one extension with its own extended client and associate two other extensions with another extended client. [Learn more about how client instances interact](#extended-clients).
-
-### Apply multiple extensions to an extended client
-
-In the following example, suppose that you have two extensions, `extensionA` and `extensionB`. There are two ways to combine these.
-
-#### Option 1: Declare the new client in one line
-
-With this option, you apply both extensions to a new client in one line of code.
+Starting in 3.0.1, you'll see a TypeError if you try to filter by null on a `Json` field:
 
 ```ts
-// First of all, store your original Prisma Client in a variable as usual
-const prisma = new PrismaClient();
-
-// Declare an extended client that has an extensionA and extensionB
-const prismaAB = prisma.$extends(extensionA).$extends(extensionB);
-```
-
-You can then refer to `prismaAB` in your code, for example `prismaAB.myExtensionMethod()`.
-
-#### Option 2: Declare multiple extended clients
-
-The advantage of this option is that you can call any of the extended clients separately.
-
-```ts
-// First of all, store your original Prisma Client in a variable as usual
-const prisma = new PrismaClient();
-
-// Declare an extended client that has extensionA applied
-const prismaA = prisma.$extends(extensionA);
-
-// Declare an extended client that has extensionB applied
-const prismaB = prisma.$extends(extensionB);
-
-// Declare an extended client that is a combination of clientA and clientB
-const prismaAB = prismaA.$extends(extensionB);
-```
-
-In your code, you can call any of these clients separately, for example `prismaA.myExtensionMethod()`, `prismaB.myExtensionMethod()`, or `prismaAB.myExtensionMethod()`.
-
-### Conflicts in combined extensions
-
-When you combine two or more extensions into a single extended client, then the _last_ extension that you declare takes precedence in any conflict. In the example in option 1 above, suppose there is a method called `myExtensionMethod()` defined in `extensionA` and a method called `myExtensionMethod()` in `extensionB`. When you call `prismaAB.myExtensionMethod()`, then Prisma Client uses `myExtensionMethod()` as defined in `extensionB`.
-
-## Type of an extended client
-
-You can infer the type of an extended Prisma Client instance using the [`typeof`](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html) utility as follows:
-
-```ts
-const extendedPrismaClient = new PrismaClient().$extends();
-
-type ExtendedPrismaClient = typeof extendedPrismaClient;
-```
-
-If you're using Prisma Client as a singleton, you can get the type of the extended Prisma Client instance using the `typeof` and [`ReturnType`](https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype) utilities as follows:
-
-```ts
-function getExtendedClient() )
-}
-
-type ExtendedPrismaClient = ReturnType<typeof getExtendedClient>
-```
-
-## Extending model types with `Prisma.Result`
-
-You can use the `Prisma.Result` type utility to extend model types to include properties added via client extensions. This allows you to infer the type of the extended model, including the extended properties.
-
-### Example
-
-The following example demonstrates how to use `Prisma.Result` to extend the `User` model type to include a `__typename` property added via a client extension.
-
-```ts
-
-const prisma = new PrismaClient().$extends(,
-        compute() ,
-      },
+prisma.log.findMany(
     },
   },
-})
-
-type ExtendedUser = Prisma.Result<typeof prisma.user,  }, 'findFirstOrThrow'>
-
-async function main() ,
-  })
-
-  console.log(user.__typename) // Output: 'User'
-}
-
-main()
+});
 ```
 
-The `Prisma.Result` type utility is used to infer the type of the extended `User` model, including the `__typename` property added via the client extension.
+To fix this, you'll import and use one of the new null types:
 
-## Limitations
+```ts highlight=7;normal
 
-### Usage of `$on` and `$use` with extended clients
-
-`$on` and `$use` are not available in extended clients. If you would like to continue using these [client-level methods](/orm/reference/prisma-client-reference#client-methods) with an extended client, you will need to hook them up before extending the client.
-
-```ts
-const prisma = new PrismaClient()
-
-prisma.$use(async (params, next) => )
-
-const xPrisma = prisma.$extends( })
-      },
+prisma.log.findMany(,
     },
   },
 })
 ```
 
-To learn more, see our documentation on [`$on`](/orm/reference/prisma-client-reference#on) and [`$use`](/orm/reference/prisma-client-reference#use)
+This also applies to `create`, `update` and `upsert`. To insert a `null` value
+into a `Json` field, you would write:
 
-### Usage of client-level methods in extended clients
+```ts highlight=5;normal
 
-[Client-level methods](/orm/reference/prisma-client-reference#client-methods) do not necessarily exist on extended clients. For these clients you will need to first check for existence before using.
-
-```ts
-const xPrisma = new PrismaClient().$extends(...);
-
-if (xPrisma.$connect)
+prisma.log.create(,
+})
 ```
 
-### Usage with nested operations
+And to insert a database `NULL` into a Json field, you would write:
 
-The `query` extension type does not support nested read and write operations.
+```ts highlight=5;normal
+
+prisma.log.create(,
+})
+```
+
+## Specific upgrade paths
+
+## Upgrading the `prisma` and `@prisma/client` packages to Prisma ORM 3
+
+To upgrade from version 2.x to 3.x, you need to update both the `prisma` and `@prisma/client` packages. Both the `prisma` and `@prisma/client` packages install with a caret `^` in their version number to safe guard against breaking changes.
+
+To ignore the caret `^` and upgrade across major versions, you can use the `@3` tag when upgrading with `npm`, or `yarn` .

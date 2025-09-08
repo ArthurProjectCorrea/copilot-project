@@ -85,6 +85,6 @@ export class FileController {
   getFileUsingStaticValues(): StreamableFile {
     const file = createReadStream(join(process.cwd(), 'package.json'));
     return new StreamableFile(file);
-  }
+  }  
 }
 ```

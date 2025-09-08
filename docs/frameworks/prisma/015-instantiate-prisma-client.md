@@ -23,6 +23,7 @@ If you use the **MongoDB connector**, connections are managed by the MongoDB dri
 
 1. Each client creates its own instance of the [query engine](/orm/more/under-the-hood/engines).
 1. Each query engine creates a [connection pool](/orm/prisma-client/setup-and-configuration/databases-connections/connection-pool) with a default pool size of:
+
    - `num_physical_cpus * 2 + 1` for relational databases
    - [`100` for MongoDB](https://www.mongodb.com/docs/manual/reference/connection-string-options/#mongodb-urioption-urioption.maxPoolSize)
 

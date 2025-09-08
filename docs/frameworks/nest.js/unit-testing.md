@@ -183,8 +183,12 @@ describe('CatsController', () => {
           return { findAll: jest.fn().mockResolvedValue(results) };
         }
         if (typeof token === 'function') {
-          const mockMetadata = moduleMocker.getMetadata(token) as MockMetadata<any, any>;
-          const Mock = moduleMocker.generateFromMetadata(mockMetadata) as ObjectConstructor;
+          const mockMetadata = moduleMocker.getMetadata(
+            token,
+          ) as MockMetadata<any, any>;
+          const Mock = moduleMocker.generateFromMetadata(
+            mockMetadata,
+          ) as ObjectConstructor;
           return new Mock();
         }
       })
@@ -286,7 +290,9 @@ describe('Cats', () => {
 > let app: NestFastifyApplication;
 >
 > beforeAll(async () => {
->   app = moduleRef.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
+>   app = moduleRef.createNestApplication<NestFastifyApplication>(
+>     new FastifyAdapter(),
+>   );
 >
 >   await app.init();
 >   await app.getHttpAdapter().getInstance().ready();
@@ -443,7 +449,9 @@ To accomplish this, use `jest.spyOn()` on the `ContextIdFactory`:
 
 ```typescript
 const contextId = ContextIdFactory.create();
-jest.spyOn(ContextIdFactory, 'getByRequest').mockImplementation(() => contextId);
+jest
+  .spyOn(ContextIdFactory, 'getByRequest')
+  .mockImplementation(() => contextId);
 ```
 
 Now we can use the `contextId` to access a single generated DI container sub-tree for any subsequent request.

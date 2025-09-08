@@ -266,7 +266,9 @@ With this setup, you have to tell the `MongooseModule.forFeature()` function whi
 
 ```typescript
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }], 'cats')],
+  imports: [
+    MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }], 'cats'),
+  ],
 })
 export class CatsModule {}
 ```

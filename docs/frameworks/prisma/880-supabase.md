@@ -62,7 +62,7 @@ DIRECT_URL="postgresql://postgres:password@db.[your-project-ref].supabase.co:543
 You can then update your `schema.prisma` to use the new direct URL:
 
 ```prisma file=schema.prisma highlight=4;add showLineNumbers
-datasource db
+datasource db 
 ```
 
 More information about the `directUrl` field can be found [here](/orm/reference/prisma-schema-reference#fields).

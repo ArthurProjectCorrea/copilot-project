@@ -165,7 +165,7 @@ Once the video is uploaded and stored, you can display it in your Next.js applic
 ```jsx filename="app/page.jsx"
 
   return (
-
+    
   )
 }
 

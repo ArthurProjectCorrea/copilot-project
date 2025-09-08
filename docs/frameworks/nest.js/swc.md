@@ -42,7 +42,7 @@ To customize builder's behavior, you can pass an object containing two attribute
     "builder": {
       "type": "swc",
       "options": {
-        "swcrcPath": "infrastructure/.swcrc"
+        "swcrcPath": "infrastructure/.swcrc",
       }
     }
   }
@@ -112,8 +112,7 @@ $ npm i --save-dev swc-loader
 Once the installation is complete, create a `webpack.config.js` file in the root directory of your application with the following content:
 
 ```js
-const swcDefaultConfig =
-  require('@nestjs/cli/lib/compiler/defaults/swc-defaults').swcDefaultsFactory().swcOptions;
+const swcDefaultConfig = require('@nestjs/cli/lib/compiler/defaults/swc-defaults').swcDefaultsFactory().swcOptions;
 
 module.exports = {
   module: {
@@ -202,8 +201,8 @@ For all [circular dependency injections](/fundamentals/circular-dependency) in y
 export class UsersService {
   constructor(
     @Inject(forwardRef(() => ProfileService))
-    private readonly profileService: WrapperType<ProfileService>
-  ) {}
+    private readonly profileService: WrapperType<ProfileService>,
+  ) {};
 }
 ```
 
@@ -286,7 +285,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Ensure Vitest correctly resolves TypeScript path aliases
-      src: resolve(__dirname, './src'),
+      'src': resolve(__dirname, './src'),
     },
   },
 });
@@ -345,12 +344,11 @@ import { resolve } from 'path';
 export default defineConfig({
   resolve: {
     alias: {
-      src: resolve(__dirname, './src'),
+      'src': resolve(__dirname, './src'),
     },
   },
 });
 ```
-
 This ensures that Vitest correctly resolves module imports, preventing errors related to missing dependencies.
 
 #### Update imports in E2E tests
@@ -370,6 +368,7 @@ Lastly, update the test scripts in your package.json file to the following:
   }
 }
 ```
+
 
 These scripts configure Vitest for running tests, watching for changes, generating code coverage reports, and debugging. The test:e2e script is specifically for running E2E tests with a custom configuration file.
 

@@ -79,7 +79,7 @@ export class CharacterInterfaceResolver {
   friends(
     @Parent() character, // Resolved object that implements Character
     @Info() { parentType }, // Type of the object that implements Character
-    @Args('search', { type: () => String }) searchTerm: string
+    @Args('search', { type: () => String }) searchTerm: string,
   ) {
     // Get character's friends
     return [];

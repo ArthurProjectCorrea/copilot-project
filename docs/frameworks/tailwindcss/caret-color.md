@@ -1,12 +1,11 @@
 <ApiTable
-rows=`,
-      `caret-color: var(--color-$); /_ $ _/`,
-]),
-["caret-<custom-property>", "caret-color: var(<custom-property>);"],
-["caret-[<value>]", "caret-color: <value>;"],
-]}
+  rows=`,
+      `caret-color: var(--color-$); /* $ */`,
+    ]),
+    ["caret-<custom-property>", "caret-color: var(<custom-property>);"],
+    ["caret-[<value>]", "caret-color: <value>;"],
+  ]}
 />
-
 ## Examples
 
 ### Basic example

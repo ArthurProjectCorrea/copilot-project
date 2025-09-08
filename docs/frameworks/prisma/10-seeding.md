@@ -78,7 +78,7 @@ const options = ,
 async function main() ,
   } = parseArgs()
 
-  switch (environment)
+  switch (environment) 
 }
 
 main()

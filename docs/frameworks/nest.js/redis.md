@@ -182,13 +182,15 @@ For more advanced use cases, you may need to access the underlying driver instan
 To do so, you can use the `unwrap()` method, which returns the underlying driver instance. The generic type parameter should specify the type of driver instance you expect.
 
 ```typescript
-const [pub, sub] = this.client.unwrap<[import('ioredis').Redis, import('ioredis').Redis]>();
+const [pub, sub] =
+  this.client.unwrap<[import('ioredis').Redis, import('ioredis').Redis]>();
 ```
 
 Similarly, you can access the server's underlying driver instance:
 
 ```typescript
-const [pub, sub] = server.unwrap<[import('ioredis').Redis, import('ioredis').Redis]>();
+const [pub, sub] =
+  server.unwrap<[import('ioredis').Redis, import('ioredis').Redis]>();
 ```
 
 Note that, in contrary to other transporters, the Redis transporter returns a tuple of two `ioredis` instances: the first one is used for publishing messages, and the second one is used for subscribing to messages.

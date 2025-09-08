@@ -20,9 +20,9 @@ In the previous example, the `user` relation field of the `Profile` model refere
 In **relational databases only**, you can also use [multi-field IDs](/orm/reference/prisma-schema-reference#id-1) to define a 1-1 relation:
 
 ```prisma
-model User
+model User 
 
-model Profile
+model Profile 
 ```
 
 ## 1-1 relations in the database
@@ -76,7 +76,7 @@ The following MongoDB document represents a `Profile` - notice the `userId` fiel
 ```json
 ,
   "bio": "I'm Bob, and I like drawing.",
-  "userId":
+  "userId": 
 }
 ```
 
@@ -85,7 +85,7 @@ The following MongoDB document represents a `Profile` - notice the `userId` fiel
 In a one-to-one relation, the side of the relation _without_ a relation scalar (the field representing the foreign key in the database) _must_ be optional:
 
 ```prisma highlight=3;normal
-model User
+model User 
 ```
 
 This restriction was introduced in 2.12.0.
@@ -97,9 +97,9 @@ However, you can choose if the side of the relation _with_ a relation scalar sho
 In the following example, `profile` and `profileId` are mandatory. This means that you cannot create a `User` without connecting or creating a `Profile`:
 
 ```prisma
-model User
+model User 
 
-model Profile
+model Profile 
 ```
 
 ### Optional 1-1 relation
@@ -107,9 +107,9 @@ model Profile
 In the following example, `profile` and `profileId` are optional. This means that you can create a user without connecting or creating a `Profile`:
 
 ```prisma
-model User
+model User 
 
-model Profile
+model Profile 
 ```
 
 ## Choosing which side should store the foreign key in a 1-1 relation

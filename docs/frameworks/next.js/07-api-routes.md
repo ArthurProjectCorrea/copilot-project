@@ -23,7 +23,7 @@ For example, the following API route returns a JSON response with a status code 
 
 ```ts filename="pages/api/hello.ts" switcher
 
-type ResponseData =
+type ResponseData = 
 
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
@@ -61,13 +61,13 @@ To handle different HTTP methods in an API route, you can use `req.method` in yo
 
 ```ts filename="pages/api/hello.ts" switcher
 
-  if (req.method === 'POST')  else
+  if (req.method === 'POST')  else 
 }
 ```
 
 ```js filename="pages/api/hello.js" switcher
 
-  if (req.method === 'POST')  else
+  if (req.method === 'POST')  else 
 }
 ```
 
@@ -158,7 +158,7 @@ The following example sets the status code of the response to `200` (`OK`) and r
 
 ```ts filename="pages/api/hello.ts" switcher
 
-type ResponseData =
+type ResponseData = 
 
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
@@ -257,7 +257,7 @@ You can make your API Routes more type-safe by importing the `NextApiRequest` an
 
 ```ts
 
-type ResponseData =
+type ResponseData = 
 
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>

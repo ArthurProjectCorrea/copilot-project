@@ -1,6 +1,6 @@
 ---
 title: 'What is introspection?'
-sidebar_label: 'Introspection'
+sidebar_label:  'Introspection'
 metaTitle: 'What is introspection? (Reference)'
 metaDescription: 'Learn how you can introspect your database to generate a data model into your Prisma schema.'
 ---
@@ -101,7 +101,7 @@ CREATE TABLE "42User" (
 Because the leading `42` in the table name as well as the leading underscores and the `$` on the columns are forbidden in Prisma ORM, introspection adds the `@map` and `@@map` attributes so that these names adhere to Prisma ORM's naming conventions:
 
 ```prisma
-model User
+model User 
 ```
 
 #### Duplicate Identifiers after Sanitization
@@ -123,9 +123,9 @@ CREATE TABLE "24User" (
 This would result in the following introspection result:
 
 ```prisma
-model User
+model User 
 
-model User
+model User 
 ```
 
 Trying to generate your Prisma Client with `prisma generate` you would get the following error:
@@ -165,9 +165,9 @@ CREATE TABLE "Profile" (
 Prisma ORM translates this into the following data model:
 
 ```prisma
-model User
+model User 
 
-model Profile
+model Profile 
 ```
 
 #### One-to-many relations
@@ -188,9 +188,9 @@ CREATE TABLE "Post" (
 These tables are transformed into the following models:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 #### Many-to-many relations
@@ -211,7 +211,7 @@ This topic is covered extensively on the docs page about [Relations](/orm/prisma
 Prisma ORM generally omits the `name` argument on the [`@relation`](/orm/prisma-schema/data-model/relations#the-relation-attribute) attribute if it's not needed. Consider the `User` ↔ `Post` example from the previous section. The `@relation` attribute only has the `references` argument, `name` is omitted because it's not needed in this case:
 
 ```prisma
-model Post
+model Post 
 ```
 
 It would be needed if there were _two_ foreign keys defined on the `Post` table:
@@ -232,9 +232,9 @@ CREATE TABLE "Post" (
 In this case, Prisma ORM needs to [disambiguate the relation](/orm/prisma-schema/data-model/relations#disambiguating-relations) using a dedicated relation name:
 
 ```prisma
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Note that you can rename the [Prisma-ORM level](/orm/prisma-schema/data-model/relations#relation-fields) relation field to anything you like so that it looks friendlier in the generated Prisma Client API.

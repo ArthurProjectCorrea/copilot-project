@@ -17,7 +17,10 @@ First, let's define a class representing our custom transporter.
 ```typescript
 import { CustomTransportStrategy, Server } from '@nestjs/microservices';
 
-class GoogleCloudPubSubServer extends Server implements CustomTransportStrategy {
+class GoogleCloudPubSubServer
+  extends Server
+  implements CustomTransportStrategy
+{
   /**
    * Triggered when you run "app.listen()".
    */
@@ -59,9 +62,12 @@ Conventionally, we added the `"Server"` suffix to our class as it will be respon
 With this in place, we can now use our custom strategy instead of using a built-in transporter, as follows:
 
 ```typescript
-const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-  strategy: new GoogleCloudPubSubServer(),
-});
+const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  AppModule,
+  {
+    strategy: new GoogleCloudPubSubServer(),
+  },
+);
 ```
 
 Basically, instead of passing the normal transporter options object with `transport` and `options` properties, we pass a single property, `strategy`, whose value is an instance of our custom transporter class.
@@ -146,7 +152,10 @@ class GoogleCloudPubSubClient extends ClientProxy {
   async connect(): Promise<any> {}
   async close() {}
   async dispatchEvent(packet: ReadPacket<any>): Promise<any> {}
-  publish(packet: ReadPacket<any>, callback: (packet: WritePacket<any>) => void): Function {}
+  publish(
+    packet: ReadPacket<any>,
+    callback: (packet: WritePacket<any>) => void,
+  ): Function {}
   unwrap<T = never>(): T {
     throw new Error('Method not implemented.');
   }
@@ -174,7 +183,10 @@ class GoogleCloudPubSubClient extends ClientProxy {
     return console.log('event to dispatch: ', packet);
   }
 
-  publish(packet: ReadPacket<any>, callback: (packet: WritePacket<any>) => void): Function {
+  publish(
+    packet: ReadPacket<any>,
+    callback: (packet: WritePacket<any>) => void,
+  ): Function {
     console.log('message:', packet);
 
     // In a real-world application, the "callback" function should be executed
@@ -183,14 +195,10 @@ class GoogleCloudPubSubClient extends ClientProxy {
     //
     // The "isDisposed" bool on the WritePacket tells the response that no further data is
     // expected. If not sent or is false, this will simply emit data to the Observable.
-    setTimeout(
-      () =>
-        callback({
-          response: packet.data,
-          isDisposed: true,
-        }),
-      5000
-    );
+    setTimeout(() => callback({ 
+      response: packet.data,
+      isDisposed: true,
+    }), 5000);
 
     return () => console.log('teardown');
   }
@@ -205,7 +213,9 @@ With this in place, let's create an instance of `GoogleCloudPubSubClient` class 
 
 ```typescript
 const googlePubSubClient = new GoogleCloudPubSubClient();
-googlePubSubClient.send('pattern', 'Hello world!').subscribe((response) => console.log(response));
+googlePubSubClient
+  .send('pattern', 'Hello world!')
+  .subscribe((response) => console.log(response));
 ```
 
 Now, you should see the following output in your terminal:
@@ -225,7 +235,7 @@ googlePubSubClient
   .pipe(timeout(2000))
   .subscribe(
     (response) => console.log(response),
-    (error) => console.error(error.message)
+    (error) => console.error(error.message),
   );
 ```
 

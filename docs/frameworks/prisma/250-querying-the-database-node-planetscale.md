@@ -10,7 +10,7 @@ sidebar_class_name: hidden-sidebar
 pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases/install-prisma-client-node-postgresql
 pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/evolve-your-schema-node-postgresql
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-
----
+--- 
 
 ## Write your first query with Prisma Client
 
@@ -27,7 +27,7 @@ const  = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -49,7 +49,7 @@ The following examples are all based on the models in the Prisma schema.
 Inside the `main` function, add the following query to read all `User` records from the database and print the result:
 
 ```js file=index.js showLineNumbers
-async function main()
+async function main() 
 ```
 
 Now run the code with this command:

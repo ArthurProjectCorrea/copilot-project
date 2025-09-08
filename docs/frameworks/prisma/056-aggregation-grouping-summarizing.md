@@ -71,7 +71,7 @@ The following example groups all users by the `country` field and returns the to
 If you have a single element in the `by` option, you can use the following shorthand syntax to express your query:
 
 ```ts
-const groupUsers = await prisma.user.groupBy();
+const groupUsers = await prisma.user.groupBy()
 ```
 
 ### `groupBy()` and filtering
@@ -187,7 +187,7 @@ Both `distinct` and `groupBy()` group records by one or more unique field values
 Use [`count()`](/orm/reference/prisma-client-reference#count) to count the number of records or non-`null` field values. The following example query counts all users:
 
 ```ts
-const userCount = await prisma.user.count();
+const userCount = await prisma.user.count()
 ```
 
 ### Count relations
@@ -299,11 +299,11 @@ The following example selects distinct on `gameId` and `playerId`, ordered by `s
 <summary>Expand for sample schema</summary>
 
 ```prisma
-model User
+model User 
 
-model Game
+model Game 
 
-model Play
+model Play 
 ```
 
 </details>
@@ -313,6 +313,6 @@ Without `select` and `distinct`, the query would return:
 ```
 [
   ,
-
+  
 ]
 ```

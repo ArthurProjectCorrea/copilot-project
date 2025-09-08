@@ -94,9 +94,10 @@ Moment.js includes translations for a lot of locales by default. Next.js now aut
 To load a specific locale use this snippet:
 
 ```js
-import 'moment/locale/ja';
 
-moment.locale('ja');
+import 'moment/locale/ja'
+
+moment.locale('ja')
 ```
 
 You can opt-out of this new default by adding `excludeDefaultMomentLocales: false` to `next.config.js` if you do not want the new behavior, do note it's highly recommended to not disable this new optimization as it significantly reduces the size of Moment.js.
@@ -114,7 +115,7 @@ useEffect(() => ) =>  $ shallow routing`
 
   // If the component is unmounted, unsubscribe
   // from the event with the `off` method:
-  return () =>
+  return () => 
 }, [router])
 ```
 

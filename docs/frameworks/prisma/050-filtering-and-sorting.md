@@ -51,9 +51,9 @@ const posts = await prisma.post.findMany(,
 Prisma Client supports [filtering on related records](/orm/prisma-client/queries/relation-queries#relation-filters). For example, in the following schema, a user can have many blog posts:
 
 ```prisma highlight=5,12-13;normal
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 The one-to-many relation between `User` and `Post` allows you to query users based on their posts - for example, the following query returns all users where _at least one_ post (`some`) has more than 10 views:
@@ -162,10 +162,10 @@ This feature is further explain in [the PostgreSQL documentation](https://www.po
 **For PostgreSQL**, you need to enable order by relevance with the `fullTextSearchPostgres` [preview feature](/orm/prisma-client/queries/full-text-search):
 
 ```prisma
-generator client
+generator client 
 ```
 
-Ordering by relevance can be used either separately from or together with the `search` filter: `_relevance` is used to order the list, while `search` filters the unordered list.
+Ordering by relevance can be used either separately from or together with the `search` filter: `_relevance` is used to order the list, while `search` filters the unordered list. 
 
 For example, the following query uses `_relevance` to filter by the term `developer` in the `bio` field, and then sorts the result by relevance in a _descending_ manner:
 

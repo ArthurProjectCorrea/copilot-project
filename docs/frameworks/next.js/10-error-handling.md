@@ -33,7 +33,7 @@ For these errors, avoid using `try`/`catch` blocks and throw errors. Instead, mo
   })
   const json = await res.json()
 
-  if (!res.ok)
+  if (!res.ok) 
   }
 }
 ```
@@ -48,7 +48,7 @@ For these errors, avoid using `try`/`catch` blocks and throw errors. Instead, mo
   })
   const json = await res.json()
 
-  if (!res.ok)
+  if (!res.ok) 
   }
 }
 ```
@@ -58,7 +58,7 @@ You can pass your action to the `useActionState` hook and use the returned `stat
 ```tsx filename="app/ui/form.tsx" highlight= switcher
 'use client'
 
-const initialState =
+const initialState = 
 
   const [state, formAction, pending] = useActionState(createPost, initialState)
 
@@ -78,7 +78,7 @@ const initialState =
 ```jsx filename="app/ui/form.js" highlight= switcher
 'use client'
 
-const initialState =
+const initialState = 
 
   const [state, formAction, pending] = useActionState(createPost, initialState)
 
@@ -104,7 +104,7 @@ When fetching data inside of a Server Component, you can use the response to con
   const res = await fetch(`https://...`)
   const data = await res.json()
 
-  if (!res.ok)
+  if (!res.ok) 
 
   return '...'
 }
@@ -115,7 +115,7 @@ When fetching data inside of a Server Component, you can use the response to con
   const res = await fetch(`https://...`)
   const data = await res.json()
 
-  if (!res.ok)
+  if (!res.ok) 
 
   return '...'
 }
@@ -130,7 +130,7 @@ You can call the [`notFound`](/docs/app/api-reference/functions/not-found) funct
   const  = await params
   const post = getPostBySlug(slug)
 
-  if (!post)
+  if (!post) 
 
   return <div></div>
 }
@@ -141,7 +141,7 @@ You can call the [`notFound`](/docs/app/api-reference/functions/not-found) funct
   const  = await params
   const post = getPostBySlug(slug)
 
-  if (!post)
+  if (!post) 
 
   return <div></div>
 }
@@ -174,7 +174,7 @@ Create an error boundary by adding an [`error.js`](/docs/app/api-reference/file-
 
   error,
   reset,
-}:
+}: 
   reset: () => void
 }) , [error])
 
@@ -222,10 +222,10 @@ To handle these cases, catch the error manually and store it using `useState` or
 
   const [error, setError] = useState(null)
 
-  const handleClick = () =>  catch (reason)
+  const handleClick = () =>  catch (reason) 
   }
 
-  if (error)
+  if (error) 
 
   return (
     <button type="button" onClick=>
@@ -262,7 +262,7 @@ While less common, you can handle errors in the root layout using the [`global-e
 
   error,
   reset,
-}:
+}: 
   reset: () => void
 }) >Try again</button>
       </body>

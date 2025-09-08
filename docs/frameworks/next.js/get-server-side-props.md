@@ -7,7 +7,7 @@ When exporting a function called `getServerSideProps` (Server-Side Rendering) fr
 
 ```tsx filename="pages/index.tsx" switcher
 
-type Repo =
+type Repo = 
 
   // Fetch data from external API
   const res = await fetch('https://api.github.com/repos/vercel/next.js')
@@ -46,19 +46,19 @@ You can import modules in top-level scope for use in `getServerSideProps`. Impor
 
 The `context` parameter is an object containing the following keys:
 
-| Name            | Description                                                                                                                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `params`        | If this page uses a [dynamic route](/docs/pages/building-your-application/routing/dynamic-routes), `params` contains the route parameters. If the page name is `[id].js`, then `params` will look like ``.         |
-| `req`           | [The `HTTP` IncomingMessage object](https://nodejs.org/api/http.html#http_class_http_incomingmessage), with an additional `cookies` prop, which is an object with string keys mapping to string values of cookies. |
-| `res`           | [The `HTTP` response object](https://nodejs.org/api/http.html#http_class_http_serverresponse).                                                                                                                     |
-| `query`         | An object representing the query string, including dynamic route parameters.                                                                                                                                       |
-| `preview`       | (Deprecated for `draftMode`) `preview` is `true` if the page is in the [Preview Mode](/docs/pages/guides/preview-mode) and `false` otherwise.                                                                      |
-| `previewData`   | (Deprecated for `draftMode`) The [preview](/docs/pages/guides/preview-mode) data set by `setPreviewData`.                                                                                                          |
-| `draftMode`     | `draftMode` is `true` if the page is in the [Draft Mode](/docs/pages/guides/draft-mode) and `false` otherwise.                                                                                                     |
-| `resolvedUrl`   | A normalized version of the request `URL` that strips the `_next/data` prefix for client transitions and includes original query values.                                                                           |
-| `locale`        | Contains the active locale (if enabled).                                                                                                                                                                           |
-| `locales`       | Contains all supported locales (if enabled).                                                                                                                                                                       |
-| `defaultLocale` | Contains the configured default locale (if enabled).                                                                                                                                                               |
+| Name            | Description                                                                                                                                                                                                           |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `params`        | If this page uses a [dynamic route](/docs/pages/building-your-application/routing/dynamic-routes), `params` contains the route parameters. If the page name is `[id].js`, then `params` will look like ``. |
+| `req`           | [The `HTTP` IncomingMessage object](https://nodejs.org/api/http.html#http_class_http_incomingmessage), with an additional `cookies` prop, which is an object with string keys mapping to string values of cookies.    |
+| `res`           | [The `HTTP` response object](https://nodejs.org/api/http.html#http_class_http_serverresponse).                                                                                                                        |
+| `query`         | An object representing the query string, including dynamic route parameters.                                                                                                                                          |
+| `preview`       | (Deprecated for `draftMode`) `preview` is `true` if the page is in the [Preview Mode](/docs/pages/guides/preview-mode) and `false` otherwise.                                                                         |
+| `previewData`   | (Deprecated for `draftMode`) The [preview](/docs/pages/guides/preview-mode) data set by `setPreviewData`.                                                                                                             |
+| `draftMode`     | `draftMode` is `true` if the page is in the [Draft Mode](/docs/pages/guides/draft-mode) and `false` otherwise.                                                                                                        |
+| `resolvedUrl`   | A normalized version of the request `URL` that strips the `_next/data` prefix for client transitions and includes original query values.                                                                              |
+| `locale`        | Contains the active locale (if enabled).                                                                                                                                                                              |
+| `locales`       | Contains all supported locales (if enabled).                                                                                                                                                                          |
+| `defaultLocale` | Contains the configured default locale (if enabled).                                                                                                                                                                  |
 
 ## getServerSideProps return values
 
@@ -84,7 +84,7 @@ The `notFound` boolean allows the page to return a `404` status and [404 Page](/
   const res = await fetch(`https://.../data`)
   const data = await res.json()
 
-  if (!data)
+  if (!data) 
   }
 
   return , // will be passed to the page component as props
@@ -94,7 +94,7 @@ The `notFound` boolean allows the page to return a `404` status and [404 Page](/
 
 ### `redirect`
 
-The `redirect` object allows redirecting to internal and external resources. It should match the shape of ``. In some rare cases, you might need to assign a custom status code for older `HTTP`clients to properly redirect. In these cases, you can use the`statusCode`property instead of the`permanent` property, but not both.
+The `redirect` object allows redirecting to internal and external resources. It should match the shape of ``. In some rare cases, you might need to assign a custom status code for older `HTTP` clients to properly redirect. In these cases, you can use the `statusCode` property instead of the `permanent` property, but not both.
 
 ```js
 

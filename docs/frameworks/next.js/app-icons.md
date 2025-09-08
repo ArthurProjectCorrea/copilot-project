@@ -38,7 +38,12 @@ Add a `favicon.ico` image file to the root `/app` route segment.
 Add an `icon.(ico|jpg|jpeg|png|svg)` image file.
 
 ```html filename="<head> output"
-<link rel="icon" href="/icon?<generated>" type="image/<generated>" sizes="<generated>" />
+<link
+  rel="icon"
+  href="/icon?<generated>"
+  type="image/<generated>"
+  sizes="<generated>"
+/>
 ```
 
 ### `apple-icon`
@@ -95,7 +100,7 @@ The easiest way to generate an icon is to use the [`ImageResponse`](/docs/app/ap
       </div>
     ),
     // ImageResponse options
-
+    
   )
 }
 ```
@@ -120,7 +125,7 @@ The easiest way to generate an icon is to use the [`ImageResponse`](/docs/app/ap
       </div>
     ),
     // ImageResponse options
-
+    
   )
 }
 ```
@@ -156,11 +161,11 @@ An object containing the [dynamic route parameters](/docs/app/api-reference/file
 }
 ```
 
-| Route                           | URL         | `params`    |
-| ------------------------------- | ----------- | ----------- |
-| `app/shop/icon.js`              | `/shop`     | `undefined` |
-| `app/shop/[slug]/icon.js`       | `/shop/1`   | ``          |
-| `app/shop/[tag]/[item]/icon.js` | `/shop/1/2` | ``          |
+| Route                           | URL         | `params`                  |
+| ------------------------------- | ----------- | ------------------------- |
+| `app/shop/icon.js`              | `/shop`     | `undefined`               |
+| `app/shop/[slug]/icon.js`       | `/shop/1`   | ``           |
+| `app/shop/[tag]/[item]/icon.js` | `/shop/1/2` | `` |
 
 ### Returns
 
@@ -174,7 +179,7 @@ You can optionally configure the icon's metadata by exporting `size` and `conten
 
 | Option                        | Type                                                                                                            |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [`size`](#size)               | ``                                                                                                              |
+| [`size`](#size)               | ``                                                                             |
 | [`contentType`](#contenttype) | `string` - [image MIME type](https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types) |
 
 #### `size`

@@ -18,28 +18,30 @@ Prisma Accelerate is chosen and loved by many for a number of key reasons which 
 
 Prisma Accelerate offers a powerful global cache, so you can serve data to your users at the edge — the closest point to where the users are located — no matter where your database is hosted. This not only speeds up the experience for users, but also reduces read load on your database as well by avoiding roundtrips.
 
-|                                     | Accelerate | Hyperdrive | Planetscale Boost |
-| ----------------------------------- | ---------- | ---------- | ----------------- |
-| **Fully Managed**                   | ✅         | ✅         | ✅                |
-| **Globally distributed edge infra** | ✅         | ✅         | ✅                |
-| **Control cache policy from code**  | ✅         | ❌         | ❌                |
-| **Query-level cache policies**      | ✅         | ❌         | ❌                |
-| **Authenticate with API key**       | ✅         | ❌         | ❌                |
-| **Postgres compatible**             | ✅         | ✅         | ❌                |
-| **MySQL compatible**                | ✅         | ❌         | ✅                |
-| **MongoDB compatible**              | ✅         | ❌         | ❌                |
-| **Automatic cache updates**         | ❌         | ❌         | ✅                |
+|  | Accelerate | Hyperdrive | Planetscale Boost |
+| --- | --- | --- | --- |
+| **Fully Managed** | ✅ | ✅ | ✅ |
+| **Globally distributed edge infra** | ✅ | ✅ | ✅ |
+| **Control cache policy from code** | ✅ | ❌ | ❌ |
+| **Query-level cache policies** | ✅ | ❌ | ❌ |
+| **Authenticate with API key** | ✅ | ❌ | ❌ |
+| **Postgres compatible** | ✅ | ✅ | ❌ |
+| **MySQL compatible** | ✅ | ❌ | ✅ |
+| **MongoDB compatible** | ✅ | ❌ | ❌ |
+| **Automatic cache updates** | ❌ | ❌ | ✅ |
 
 **Why are these important?**
 
 - Since Accelerate extends the Prisma client, you can control caching policies directly from your codebase with just an extra line of code. Integration is seamless. Here is an example using [the stale-while-revalidating caching strategy](/postgres/database/caching#stale-while-revalidate-swr):
-  ```jsx
-  await prisma.user.findMany(,
-  });
-  ```
+    
+    ```jsx
+    await prisma.user.findMany(,
+    });
+    ```
+    
 - Query level cache policies are critical for serious applications, so that you can control which queries are cached, and the characteristics of the policy. You may want certain data in your app to be cached for several days, other data to be cached for a just a few minutes, and other data to be not cached at all. This is only possible with Prisma Accelerate.
 - Authenticating with an API key can be a helpful security measure, allowing you to decouple database credentials from application secrets. Easily rotate API keys as often as you like, without needing any credential changes in your database
-- Automatic cache updates means that the cache is automatically updated when a change in the database occurs. With Accelerate, you are in control of how the cache is invalidated, using [various caching strategies](/postgres/database/caching).
+- Automatic cache updates means that the cache is automatically updated when a change in the database occurs. With Accelerate, you are in control of how the cache is invalidated, using [various caching strategies](/postgres/database/caching). 
 
 ## Accelerate connection pool
 
@@ -47,13 +49,13 @@ Prisma Accelerate includes a globally hosted connection pooler, which allows you
 
 ### Management
 
-|                                | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
-| ------------------------------ | ---------- | --------- | ----- | ------------------------- | ---------------- | --------- | ---------- |
-| **Fully managed**              | ✅         | ❌        | ❌    | 🟠                        | ✅               | ❌        | ✅         |
-| **Globally distributed**       | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ✅         |
-| **Integrated with ORM client** | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
-| **Authenticate with API key**  | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
-| **Redundancy**                 | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
+|  | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Fully managed** | ✅ | ❌ | ❌ | 🟠 | ✅ | ❌ | ✅ |
+| **Globally distributed** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Integrated with ORM client** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Authenticate with API key** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Redundancy** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 **Why are these important?**
 
@@ -64,12 +66,12 @@ Prisma Accelerate includes a globally hosted connection pooler, which allows you
 
 ### Performance
 
-|                                 | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
-| ------------------------------- | ---------- | --------- | ----- | ------------------------- | ---------------- | --------- | ---------- |
-| **Auto scaling**                | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
-| **Globally distributed**        | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ✅         |
-| **Optimized queries over HTTP** | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ✅         |
-| **Isolated compute**            | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
+|  | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Auto scaling** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Globally distributed** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Optimized queries over HTTP** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Isolated compute** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 **Why are these important?**
 
@@ -79,10 +81,10 @@ Prisma Accelerate includes a globally hosted connection pooler, which allows you
 
 ### Database Support
 
-|                 | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
-| --------------- | ---------- | --------- | ----- | ------------------------- | ---------------- | --------- | ---------- |
-| **PostgreSQL**  | ✅         | ✅        | ✅    | ✅                        | ✅               | ✅        | ✅         |
-| **MySQL**       | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
-| **Planetscale** | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
-| **CockroachDB** | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
-| **MongoDB**     | ✅         | ❌        | ❌    | ❌                        | ❌               | ❌        | ❌         |
+|  | Accelerate | pgbouncer | pgcat | Digital Ocean (pgbouncer) | Neon (pgbouncer) | Supavisor | Hyperdrive |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **PostgreSQL** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **MySQL** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Planetscale** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **CockroachDB** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **MongoDB** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |

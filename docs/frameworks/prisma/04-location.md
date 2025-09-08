@@ -19,10 +19,11 @@ The Prisma CLI looks for the Prisma Schema in the following locations, in the fo
 2.  The location specified in the `package.json` file (version 2.7.0 and later):
 
     ```json
-    "prisma":
+    "prisma": 
     ```
 
 3.  Default locations:
+
     - `./prisma/schema.prisma`
     - `./schema.prisma`
 
@@ -62,25 +63,22 @@ Multi-file Prisma schemas are Generally Available since [v6.7.0](https://pris.ly
 
 ### Usage
 
-When using a multi-file Prisma schema, you must always explicitly specify the location of the directory that contains the `.prisma` file with your `datasource` block.
+When using a multi-file Prisma schema, you must always explicitly specify the location of the directory that contains the `.prisma` file with your `datasource` block. 
 
 You can do this in either of three ways:
 
-- pass the the `--schema` option to your Prisma CLI command (e.g. `prisma migrate dev --schema ./prisma`)
+- pass the the `--schema` option to your Prisma CLI command (e.g. `prisma migrate dev --schema ./prisma`) 
 - set the `prisma.schema` field in `package.json`:
-
   ```jsonc
   // package.json
-
+  
   }
   ```
-
 - set the `schema` property in [`prisma.config.ts`](/orm/reference/prisma-config-reference#schema):
-
   ```ts
   import path from 'node:path'
   import type  from 'prisma'
-
+  
   export default  satisfies PrismaConfig
   ```
 
@@ -110,7 +108,7 @@ For example, assuming `schema.prisma` defines the `datasource`, here's how how n
 
 We've found that a few patterns work well with this feature and will help you get the most out of it:
 
-- Organize your files by domain: group related models into the same file. For example, keep all user-related models in `user.prisma` while post-related models go in `post.prisma`.
+- Organize your files by domain: group related models into the same file. For example, keep all user-related models in `user.prisma` while post-related models go in `post.prisma`. 
 - Use clear naming conventions: schema files should be named clearly and succinctly. Use names like `user.prisma` and `post.prisma` and not `myModels.prisma` or `CommentFeaturesSchema.prisma`.
 - Have an obvious "main" schema file: while you can now have as many schema files as you want, you'll still need a place where you define `datasource` and `generator` blocks. We recommend having a single schema file that's obviously the "main" file so that these blocks are easy to find. `main.prisma`, `schema.prisma`, and `base.prisma` are a few we've seen that work well.
 

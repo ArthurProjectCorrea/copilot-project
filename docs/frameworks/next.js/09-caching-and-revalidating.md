@@ -113,7 +113,7 @@ The function accepts a third optional object to define how the cache should be r
 const getCachedUser = unstable_cache(
   async () => ,
   [userId],
-
+  
 )
 ```
 
@@ -121,7 +121,7 @@ const getCachedUser = unstable_cache(
 const getCachedUser = unstable_cache(
   async () => ,
   [userId],
-
+  
 )
 ```
 
@@ -152,7 +152,7 @@ Alternatively, you can mark an `unstable_cache` function with the `tags` option:
   async (id: string) => )
   },
   ['user'], // Needed if variables are not passed as parameters
-
+  
 )
 ```
 
@@ -161,7 +161,7 @@ Alternatively, you can mark an `unstable_cache` function with the `tags` option:
   async (id) => )
   },
   ['user'], // Needed if variables are not passed as parameters
-
+  
 )
 ```
 
@@ -190,13 +190,15 @@ See the [`revalidateTag` API reference](/docs/app/api-reference/functions/revali
 `revalidatePath` is used to revalidate a route and following an event. To use it, call it in a [Route Handler](/docs/app/api-reference/file-conventions/route) or Server Action:
 
 ```tsx filename="app/lib/actions.ts" highlight= switcher
-// Mutate data
-revalidatePath('/profile');
+
+  // Mutate data
+  revalidatePath('/profile')
 ```
 
 ```jsx filename="app/lib/actions.js" highlight= switcher
-// Mutate data
-revalidatePath('/profile');
+
+  // Mutate data
+  revalidatePath('/profile')
 ```
 
 See the [`revalidatePath` API reference](/docs/app/api-reference/functions/revalidatePath) to learn more.

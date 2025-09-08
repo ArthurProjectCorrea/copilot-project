@@ -11,7 +11,7 @@ pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb/in
 pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/next-steps
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/querying-the-database-
 ---
-
+ 
 ## Write your first query with Prisma Client
 
 Now that you have generated Prisma Client, you can start writing queries to read and write data in your database. For the purpose of this guide, you'll use a plain Node.js script to explore some basic features of Prisma Client.
@@ -27,7 +27,7 @@ const  = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -46,7 +46,7 @@ Here's a quick overview of the different parts of the code snippet:
 Inside the `main` function, add the following query to read all `User` records from the database and print the result:
 
 ```js file=index.js showLineNumbers
-async function main()
+async function main() 
 ```
 
 Now run the code with this command:

@@ -125,7 +125,6 @@ It can feel excessive to include the UI term for each UI element when you write 
 To make UI steps easier to read, in most cases you can omit the UI term for each UI element.
 
 ### Example 1: drop-down menu
-
 ```md
 <!-- Bad -->
 
@@ -137,7 +136,6 @@ From **GitHub Accounts & Organizations**, select a GitHub account or an organiza
 ```
 
 ### Example 2: text box
-
 ```md
 <!-- Bad -->
 
@@ -149,7 +147,6 @@ In **Display Name**, enter a name for your project.
 ```
 
 ### Example 3: select the option
-
 ```md
 <!-- Bad -->
 
@@ -161,7 +158,6 @@ Select **Create a repository**.
 ```
 
 ### Example 4: clear the checkbox
-
 ```md
 <!-- Bad -->
 

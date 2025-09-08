@@ -18,7 +18,7 @@ If you use the `FastifyAdapter`, create the application as follows:
 ```typescript
 const app = await NestFactory.create<NestFastifyApplication>(
   AppModule,
-  new FastifyAdapter({ https: httpsOptions })
+  new FastifyAdapter({ https: httpsOptions }),
 );
 ```
 
@@ -63,8 +63,8 @@ export class ShutdownObserver implements OnApplicationShutdown {
                 resolve(null);
               }
             });
-          })
-      )
+          }),
+      ),
     );
   }
 }

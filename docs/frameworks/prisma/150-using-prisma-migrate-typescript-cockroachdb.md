@@ -11,17 +11,17 @@ pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-data
 pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-cockroachdb
 slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-
 ---
-
+ 
 ## Creating the database schema
 
 In this guide, you'll use [Prisma Migrate](/orm/prisma-migrate) to create the tables in your database. Add the following Prisma data model to your Prisma schema in `prisma/schema.prisma`:
 
 ```prisma file=prisma/schema.prisma copy showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 To map your data model to the database schema, you need to use the `prisma migrate` CLI commands:

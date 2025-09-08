@@ -41,7 +41,7 @@ You can set cookies inside an API Route using the `setHeader` method on the resp
 
   req: NextApiRequest,
   res: NextApiResponse
-)
+) 
 ```
 
 ```js filename="pages/api/cookie.js" switcher
@@ -59,7 +59,7 @@ You can read cookies inside an API Route using the [`cookies`](/docs/pages/build
 
   req: NextApiRequest,
   res: NextApiResponse
-)
+) 
 ```
 
 ```js filename="pages/api/cookie.js" switcher
@@ -77,7 +77,7 @@ You can delete cookies inside an API Route using the `setHeader` method on the r
 
   req: NextApiRequest,
   res: NextApiResponse
-)
+) 
 ```
 
 ```js filename="pages/api/cookie.js" switcher

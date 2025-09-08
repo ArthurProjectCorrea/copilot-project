@@ -33,7 +33,7 @@ By default, renaming a field in the schema results in a migration that will:
 To actually **rename** a field and avoid data loss when you run the migration in production, you need to modify the generated migration SQL before applying it to the database. Consider the following schema fragment - the `biograpy` field is spelled wrong.
 
 ```prisma highlight=3;normal;
-model Profile
+model Profile 
 ```
 
 To rename the `biograpy` field to `biography`:
@@ -41,7 +41,7 @@ To rename the `biograpy` field to `biography`:
 1. Rename the field in the schema:
 
    ```prisma highlight=3;delete|4;add;
-   model Profile
+   model Profile 
    ```
 
 1. Run the following command to create a **draft migration** that you can edit before applying to the database:
@@ -73,7 +73,7 @@ With the _expand and contract_ pattern, renaming the field `bio` to `biography` 
 1. Add the new `biography` field to your Prisma schema and create a migration
 
    ```prisma highlight=4;add;
-   model Profile
+   model Profile 
    ```
 
 2. _Expand_: update the application code and write to both the `bio` and `biography` fields, but continue reading from the `bio` field, and deploy the code
@@ -93,7 +93,7 @@ With the _expand and contract_ pattern, renaming the field `bio` to `biography` 
 7. _Contract_: remove the `bio` from the Prisma schema, and create a migration to remove the `bio` field
 
    ```prisma highlight=3;delete;
-   model Profile
+   model Profile 
    ```
 
    ```terminal
@@ -113,9 +113,9 @@ To change the direction of a 1-1 relation:
 1. Make the change in the schema:
 
    ```prisma
-   model User
-
-   model Profile
+   model User 
+   
+   model Profile 
    ```
 
 1. Run the following command to create a **draft migration** that you can edit before applying to the database:

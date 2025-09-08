@@ -34,7 +34,7 @@ const prisma = new PrismaClient().$extends( })
 You would call `signUp` in your application as follows:
 
 ```ts
-const user = await prisma.user.signUp('john@prisma.io');
+const user = await prisma.user.signUp('john@prisma.io')
 ```
 
 ### Add a custom method to all models in your schema
@@ -79,7 +79,7 @@ For example:
 
 ```ts
 const prisma = new PrismaClient().$extends(,
-      secondMethod()
+      secondMethod() 
     }
   }
 })
@@ -93,13 +93,13 @@ For example:
 
 ```ts
 // `context` refers to the current model
-const context = Prisma.getExtensionContext(this);
+const context = Prisma.getExtensionContext(this)
 
 // `context.$name` returns the name of the current model
-console.log(context.$name);
+console.log(context.$name)
 
 // Usage
-await (context as any).findFirst();
+await(context as any).findFirst()
 ```
 
 Refer to [Add a custom method to all models in your schema](#example-1) for a concrete example for retrieving the current model name at runtime.

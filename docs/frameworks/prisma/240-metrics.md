@@ -13,6 +13,7 @@ You can export metrics in JSON or Prometheus formats and view them in a console 
 Prisma Client provides the following metrics:
 
 - Counters (always increase):
+
   - `prisma_client_queries_total`: The total number of Prisma Client queries executed.
   - `prisma_datasource_queries_total`: The total number of datasource queries executed (SQL queries in relational databases, and commands in MongoDB).
     - The value returned by `prisma_datasource_queries_total` can be greater than `prisma_client_queries_total`, because some Prisma Client operations create multiple queries.
@@ -20,6 +21,7 @@ Prisma Client provides the following metrics:
   - `prisma_pool_connections_opened_total`: The number of currently open pool connections.
 
 - Gauges (can increase or decrease):
+
   - `prisma_client_queries_active`: The number of currently active Prisma Client queries.
   - `prisma_client_queries_wait`: The number of Prisma Client queries currently waiting for a connection because all connections are in use.
   - `prisma_pool_connections_busy`: The number of currently busy pool connections. These pool connections are currently executing a datasource query.
@@ -27,6 +29,7 @@ Prisma Client provides the following metrics:
   - `prisma_pool_connections_open`: The number of [pool connections](/orm/prisma-client/setup-and-configuration/databases-connections/connection-pool#default-connection-pool-size) open.
 
 - Histograms (metrics data divided into a collection of values; we call each container in the collection a "bucket"):
+
   - `prisma_client_queries_wait_histogram_ms`: The time waiting for a pool connection for all Prisma Client queries in ms.
   - `prisma_client_queries_duration_histogram_ms`: The execution time for all executed Prisma Client queries in ms. This includes the time taken to execute all database queries, and to carry out all database engine activities, such as joining data and transforming data to the correct format.
   - `prisma_datasource_queries_duration_histogram_ms`: The execution time for all executed Datasource queries in ms.
@@ -54,7 +57,7 @@ npm install @prisma/client@latest
 In the `generator` block of your `schema.prisma` file, enable the `metrics` feature flag:
 
 ```prisma
-generator client
+generator client 
 ```
 
 ## Retrieve metrics in JSON format
@@ -64,8 +67,8 @@ When you retrieve metrics in JSON format, you can use them in the format they ar
 To retrieve metrics in JSON format, add the following lines to your application code:
 
 ```ts
-const metrics = await prisma.$metrics.json();
-console.log(metrics);
+const metrics = await prisma.$metrics.json()
+console.log(metrics)
 ```
 
 This returns metrics as follows:
@@ -178,7 +181,7 @@ In the following example, we send metrics to StatsD every 10 seconds. This timin
 
 let statsd = new StatsD()
 
-const diffMetrics = (metrics: Metric<MetricHistogram>[]) =>
+const diffMetrics = (metrics: Metric<MetricHistogram>[]) => 
     )
 
     metric.value.buckets = diffBuckets
@@ -194,11 +197,11 @@ const statsdSender = async () => )
   metrics.gauges.forEach((counter: any) => )
   })
 
-  if (!previousHistograms.length)
+  if (!previousHistograms.length) 
 
   const diffHistograms = diffMetrics(metrics.histograms);
 
-  diffHistograms.forEach((diffHistogram, histogramIndex) =>
+  diffHistograms.forEach((diffHistogram, histogramIndex) => 
     })
   })
 
@@ -215,8 +218,8 @@ When you retrieve Prisma Client metrics in Prometheus format, you can use them i
 To retrieve metrics in Prometheus format, add the following lines to your application code:
 
 ```ts
-const metrics = await prisma.$metrics.prometheus();
-console.log(metrics);
+const metrics = await prisma.$metrics.prometheus()
+console.log(metrics)
 ```
 
 This returns metrics as follows:

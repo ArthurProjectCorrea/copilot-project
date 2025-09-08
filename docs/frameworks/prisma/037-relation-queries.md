@@ -29,7 +29,7 @@ Since version [5.10.0](https://github.com/prisma/prisma/releases/tag/5.10.0), th
 Because the `relationLoadStrategy` option is currently in Preview, you need to enable it via the `relationJoins` preview feature flag in your Prisma schema file:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 ```
 
 After adding this flag, you need to run `prisma generate` again to re-generate Prisma Client. The `relationJoins` feature is currently available on PostgreSQL, CockroachDB and MySQL.
@@ -148,12 +148,12 @@ There are two ways to create or update a single record and multiple related reco
 
 In most cases, a nested `create` will be preferable unless the [`skipDuplicates` query option](/orm/reference/prisma-client-reference#nested-createmany-options) is required. Here's a quick table describing the differences between the two options:
 
-| Feature                               | `create` | `createMany` | Notes                                                                                                                                                                             |
-| :------------------------------------ | :------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Supports nesting additional relations | ✔       | ✘ \*         | For example, you can create a user, several posts, and several comments per post in one query.<br />\* You can manually set a foreign key in a has-one relation - for example: `` |
-| Supports 1-n relations                | ✔       | ✔           | For example, you can create a user and multiple posts (one user has many posts)                                                                                                   |
-| Supports m-n relations                | ✔       | ✘            | For example, you can create a post and several categories (one post can have many categories, and one category can have many posts)                                               |
-| Supports skipping duplicate records   | ✘        | ✔           | Use `skipDuplicates` query option.                                                                                                                                                |
+| Feature                               | `create` | `createMany` | Notes                                                                                                                                                                                           |
+| :------------------------------------ | :------- | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Supports nesting additional relations | ✔        | ✘ \*         | For example, you can create a user, several posts, and several comments per post in one query.<br />\* You can manually set a foreign key in a has-one relation - for example: `` |
+| Supports 1-n relations           | ✔        | ✔            | For example, you can create a user and multiple posts (one user has many posts)                                                                                                                 |
+| Supports m-n relations       | ✔        | ✘            | For example, you can create a post and several categories (one post can have many categories, and one category can have many posts)                                                             |
+| Supports skipping duplicate records   | ✘        | ✔            | Use `skipDuplicates` query option.                                                                                                                                                              |
 
 #### Using nested `create`
 
@@ -185,9 +185,9 @@ As a workaround, you can send a query to create the records that will be connect
 ```ts
 const categories = await prisma.category.createManyAndReturn(,
     ,
-
+    
   ],
-  select:
+  select: 
 });
 
 const posts = await prisma.post.createManyAndReturn(, ,
@@ -485,5 +485,5 @@ The following query is **not possible** because `findMany` does not return a sin
 
 ```ts
 // This query is illegal
-const posts = await prisma.user.findMany().posts();
+const posts = await prisma.user.findMany().posts()
 ```

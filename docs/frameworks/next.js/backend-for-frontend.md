@@ -229,7 +229,7 @@ You can also offload heavy computations to the server and reduce client battery 
 
   try ?$`)
 
-    if (!weatherResponse.ok)
+    if (!weatherResponse.ok) 
 
     const weatherData = await weatherResponse.text()
     const payload = parseWeatherData.asJSON(weatherData)
@@ -247,7 +247,7 @@ You can also offload heavy computations to the server and reduce client battery 
 
   try ?$`)
 
-    if (!weatherResponse.ok)
+    if (!weatherResponse.ok) 
 
     const weatherData = await weatherResponse.text()
     const payload = parseWeatherData.asJSON(weatherData)
@@ -321,9 +321,9 @@ You can pass `NextRequest` to any function expecting `Request`. Likewise, you ca
 
   const nextUrl = request.nextUrl
 
-  if (nextUrl.searchParams.get('redirect'))
+  if (nextUrl.searchParams.get('redirect')) 
 
-  if (nextUrl.searchParams.get('rewrite'))
+  if (nextUrl.searchParams.get('rewrite')) 
 
   return NextResponse.json()
 }
@@ -333,9 +333,9 @@ You can pass `NextRequest` to any function expecting `Request`. Likewise, you ca
 
   const nextUrl = request.nextUrl
 
-  if (nextUrl.searchParams.get('redirect'))
+  if (nextUrl.searchParams.get('redirect')) 
 
-  if (nextUrl.searchParams.get('rewrite'))
+  if (nextUrl.searchParams.get('rewrite')) 
 
   return NextResponse.json()
 }
@@ -441,7 +441,7 @@ Use `middleware` to generate a response before the request reaches a route path.
 }
 
   if (!isAuthenticated(request)) ,
-
+      
     )
   }
 }
@@ -453,7 +453,7 @@ Use `middleware` to generate a response before the request reaches a route path.
 }
 
   if (!isAuthenticated(request)) ,
-
+      
     )
   }
 }
@@ -463,13 +463,13 @@ You can also proxy requests using `middleware`:
 
 ```ts filename="middleware.ts" switcher
 
-  if (request.nextUrl.pathname === '/proxy-this-path')
+  if (request.nextUrl.pathname === '/proxy-this-path') 
 }
 ```
 
 ```js filename="middleware.js" switcher
 
-  if (request.nextUrl.pathname === '/proxy-this-path')
+  if (request.nextUrl.pathname === '/proxy-this-path') 
 }
 ```
 
@@ -477,13 +477,13 @@ Another type of response `middleware` can produce are redirects:
 
 ```ts filename="middleware.ts" switcher
 
-  if (request.nextUrl.pathname === '/v1/docs')
+  if (request.nextUrl.pathname === '/v1/docs') 
 }
 ```
 
 ```js filename="middleware.js" switcher
 
-  if (request.nextUrl.pathname === '/v1/docs')
+  if (request.nextUrl.pathname === '/v1/docs') 
 }
 ```
 
@@ -553,9 +553,11 @@ If `OPTIONS` is not defined, Next.js adds it automatically and sets the `Allow` 
 Community libraries often use the factory pattern for Route Handlers.
 
 ```ts filename="/app/api/[...path]/route.ts"
-const handler = createHandler();
+
+const handler = createHandler()
 
 // or
+
 ```
 
 This creates a shared handler for `GET` and `POST` requests. The library customizes behavior based on the `method` and `pathname` in the request.

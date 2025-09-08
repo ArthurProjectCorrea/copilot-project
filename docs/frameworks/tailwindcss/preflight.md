@@ -8,10 +8,10 @@ When you import `tailwindcss` into your project, Preflight is automatically inje
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
+@import "tailwindcss/theme.css" layer(theme);
 /* [!code highlight:2] */
-@import 'tailwindcss/preflight.css' layer(base);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
 ```
 
 While most of the styles in Preflight are meant to go unnoticed—they simply make things behave more like you'd expect them to—some are more opinionated and can be surprising when you first encounter them.
@@ -28,7 +28,7 @@ Preflight removes all of the default margins from all elements including heading
 ::after,
 ::before,
 ::backdrop,
-::file-selector-button
+::file-selector-button 
 ```
 
 This makes it harder to accidentally rely on margin values applied by the user-agent stylesheet that are not part of your spacing scale.
@@ -43,7 +43,7 @@ In order to make it easy to add a border by simply adding the `border` class, Ta
 ::after,
 ::before,
 ::backdrop,
-::file-selector-button
+::file-selector-button 
 ```
 
 Since the `border` class only sets the `border-width` property, this reset ensures that adding that class always adds a solid `1px` border that uses `currentColor`.
@@ -54,7 +54,7 @@ When you run into situations like this, you can work around them by overriding t
 
 ```css
 /* [!code filename:CSS] */
-@layer base
+@layer base 
 }
 ```
 
@@ -69,7 +69,7 @@ h2,
 h3,
 h4,
 h5,
-h6
+h6 
 ```
 
 The reason for this is two-fold:
@@ -87,7 +87,7 @@ Ordered and unordered lists are unstyled by default, with no bullets or numbers:
 /* [!code filename:CSS] */
 ol,
 ul,
-menu
+menu 
 ```
 
 If you'd like to style a list, you can do so using the [list-style-type](/docs/list-style-type) and [list-style-position](/docs/list-style-position) utilities:
@@ -129,7 +129,7 @@ canvas,
 audio,
 iframe,
 embed,
-object
+object 
 ```
 
 This helps to avoid unexpected alignment issues that you often run into using the browser default of `display: inline`.
@@ -148,7 +148,7 @@ Images and videos are constrained to the parent width in a way that preserves th
 ```css
 /* [!code filename:CSS] */
 img,
-video
+video 
 ```
 
 This prevents them from overflowing their containers and makes them responsive by default. If you ever need to override this behavior, use the `max-w-none` utility:
@@ -164,10 +164,10 @@ If you'd like to add your own base styles on top of Preflight, add them to the `
 
 ```css
 /* [!code filename:CSS] */
-@layer base
-  h2
-  h3
-  a
+@layer base 
+  h2 
+  h3 
+  a 
 }
 ```
 
@@ -183,9 +183,9 @@ By default, this is what `@import "tailwindcss";` injects:
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/preflight.css' layer(base);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
 ```
 
 To disable Preflight, simply omit its import while keeping everything else:
@@ -194,9 +194,9 @@ To disable Preflight, simply omit its import while keeping everything else:
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/preflight.css' layer(base); /* [!code --] */
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base); /* [!code --] */
+@import "tailwindcss/utilities.css" layer(utilities);
 ```
 
 When importing Tailwind CSS' files individually, features like `source()`, `theme()`, and `prefix()` should go on their respective imports.
@@ -207,9 +207,9 @@ For example, source detection affects generated utilities, so `source(…)` shou
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities); /* [!code --] */
-@import 'tailwindcss/utilities.css' layer(utilities) source(none); /* [!code ++] */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities); /* [!code --] */
+@import "tailwindcss/utilities.css" layer(utilities) source(none); /* [!code ++] */
 ```
 
 The same goes for `important`, which also affects utilities:
@@ -218,9 +218,9 @@ The same goes for `important`, which also affects utilities:
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities); /* [!code --] */
-@import 'tailwindcss/utilities.css' layer(utilities) important; /* [!code ++] */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities); /* [!code --] */
+@import "tailwindcss/utilities.css" layer(utilities) important; /* [!code ++] */
 ```
 
 Similarly, `theme(static)` and `theme(inline)` affect the generated theme variables and should be placed on the `theme.css` import:
@@ -229,9 +229,9 @@ Similarly, `theme(static)` and `theme(inline)` affect the generated theme variab
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme); /* [!code --] */
-@import 'tailwindcss/theme.css' layer(theme) theme(static); /* [!code ++] */
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "tailwindcss/theme.css" layer(theme); /* [!code --] */
+@import "tailwindcss/theme.css" layer(theme) theme(static); /* [!code ++] */
+@import "tailwindcss/utilities.css" layer(utilities);
 ```
 
 Finally, using a prefix with `prefix(tw)` affects the utilities and variables, so it should go on both imports:
@@ -240,8 +240,8 @@ Finally, using a prefix with `prefix(tw)` affects the utilities and variables, s
 /* [!code filename:CSS] */
 @layer theme, base, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme); /* [!code --] */
-@import 'tailwindcss/utilities.css' layer(utilities); /* [!code --] */
-@import 'tailwindcss/theme.css' layer(theme) prefix(tw); /* [!code ++] */
-@import 'tailwindcss/utilities.css' layer(utilities) prefix(tw); /* [!code ++] */
+@import "tailwindcss/theme.css" layer(theme); /* [!code --] */
+@import "tailwindcss/utilities.css" layer(utilities); /* [!code --] */
+@import "tailwindcss/theme.css" layer(theme) prefix(tw); /* [!code ++] */
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw); /* [!code ++] */
 ```

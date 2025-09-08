@@ -1,27 +1,27 @@
 ---
-title: 'Prisma Client & Prisma schema'
-metaTitle: 'Prisma Client & Prisma schema'
-metaDescription: 'Prisma Client and Prisma schema features that are currently in Preview.'
+title: "Prisma Client & Prisma schema"
+metaTitle: "Prisma Client & Prisma schema"
+metaDescription: "Prisma Client and Prisma schema features that are currently in Preview."
 ---
 
 ## Currently active Preview features
 
 The following [Preview](/orm/more/releases#preview) feature flags are available for Prisma Client and Prisma schema:
 
-| Feature                                                                         | Released into Preview                                          |                            Feedback issue                             |
-| ------------------------------------------------------------------------------- | :------------------------------------------------------------- | :-------------------------------------------------------------------: |
-| [`metrics`](/orm/prisma-client/observability-and-logging/metrics)               | [3.15.0](https://github.com/prisma/prisma/releases/tag/3.15.0) |   [Submit feedback](https://github.com/prisma/prisma/issues/13579)    |
-| [`postgresqlExtensions`](/orm/prisma-schema/postgresql-extensions)              | [4.5.0](https://github.com/prisma/prisma/releases/tag/4.5.0)   |   [Submit feedback](https://github.com/prisma/prisma/issues/15835)    |
-| [`views`](/orm/prisma-schema/data-model/views)                                  | [4.9.0](https://github.com/prisma/prisma/releases/tag/4.9.0)   |   [Submit feedback](https://github.com/prisma/prisma/issues/17335)    |
-| `driverAdapters`                                                                | [5.4.0](https://github.com/prisma/prisma/releases/tag/5.4.0)   |    [Submit feedback](https://github.com/prisma/prisma/issues/3108)    |
-| `relationJoins`                                                                 | [5.7.0](https://github.com/prisma/prisma/releases/tag/5.7.0)   | [Submit feedback](https://github.com/prisma/prisma/discussions/22288) |
-| `nativeDistinct`                                                                | [5.7.0](https://github.com/prisma/prisma/releases/tag/5.7.0)   | [Submit feedback](https://github.com/prisma/prisma/discussions/22287) |
-| `typedSql`                                                                      | [5.19.0](https://github.com/prisma/prisma/releases/tag/5.19.0) | [Submit feedback](https://github.com/prisma/prisma/discussions/25106) |
-| `strictUndefinedChecks`                                                         | [5.20.0](https://github.com/prisma/prisma/releases/tag/5.20.0) | [Submit feedback](https://github.com/prisma/prisma/discussions/25271) |
-| [`fullTextSearchPostgres`](/orm/prisma-client/queries/full-text-search)         | [6.0.0](https://github.com/prisma/prisma/releases/tag/6.0.0)   |   [Submit feedback](https://github.com/prisma/prisma/issues/25773)    |
-| [`prisma-client`](/orm/prisma-schema/overview/generators#prisma-client-preview) | [6.6.0](https://pris.ly/release/6.6.0)                         |   [Submit feedback](https://github.com/prisma/prisma/issues/25773)    |
-| `queryCompiler`                                                                 | [6.7.0](https://pris.ly/release/6.7.0)                         |      [Submit feedback](https://github.com/prisma/prisma/issues/)      |
-| `shardKeys`                                                                     | [6.10.0](https://pris.ly/release/6.10.0)                       |      [Submit feedback](https://github.com/prisma/prisma/issues/)      |
+| Feature                                                                               | Released into Preview                                          |                            Feedback issue                             |
+| ------------------------------------------------------------------------------------- | :------------------------------------------------------------- | :-------------------------------------------------------------------: |
+| [`metrics`](/orm/prisma-client/observability-and-logging/metrics)                     | [3.15.0](https://github.com/prisma/prisma/releases/tag/3.15.0) |   [Submit feedback](https://github.com/prisma/prisma/issues/13579)    |
+| [`postgresqlExtensions`](/orm/prisma-schema/postgresql-extensions)                    | [4.5.0](https://github.com/prisma/prisma/releases/tag/4.5.0)   |   [Submit feedback](https://github.com/prisma/prisma/issues/15835)    |
+| [`views`](/orm/prisma-schema/data-model/views)                                        | [4.9.0](https://github.com/prisma/prisma/releases/tag/4.9.0)   |   [Submit feedback](https://github.com/prisma/prisma/issues/17335)    |
+| `driverAdapters`                                                                      | [5.4.0](https://github.com/prisma/prisma/releases/tag/5.4.0)   |    [Submit feedback](https://github.com/prisma/prisma/issues/3108)    |
+| `relationJoins`                                                                       | [5.7.0](https://github.com/prisma/prisma/releases/tag/5.7.0)   | [Submit feedback](https://github.com/prisma/prisma/discussions/22288) |
+| `nativeDistinct`                                                                      | [5.7.0](https://github.com/prisma/prisma/releases/tag/5.7.0)   | [Submit feedback](https://github.com/prisma/prisma/discussions/22287) |
+| `typedSql`                                                                            | [5.19.0](https://github.com/prisma/prisma/releases/tag/5.19.0) | [Submit feedback](https://github.com/prisma/prisma/discussions/25106) |
+| `strictUndefinedChecks`                                                               | [5.20.0](https://github.com/prisma/prisma/releases/tag/5.20.0) | [Submit feedback](https://github.com/prisma/prisma/discussions/25271) |
+| [`fullTextSearchPostgres`](/orm/prisma-client/queries/full-text-search)               | [6.0.0](https://github.com/prisma/prisma/releases/tag/6.0.0)   |   [Submit feedback](https://github.com/prisma/prisma/issues/25773)    |
+| [`prisma-client`](/orm/prisma-schema/overview/generators#prisma-client-preview)  | [6.6.0](https://pris.ly/release/6.6.0)                         |   [Submit feedback](https://github.com/prisma/prisma/issues/25773)    |
+| `queryCompiler`                                                                       | [6.7.0](https://pris.ly/release/6.7.0)                         |      [Submit feedback](https://github.com/prisma/prisma/issues/)      |
+| `shardKeys`                                                                           | [6.10.0](https://pris.ly/release/6.10.0)                       |      [Submit feedback](https://github.com/prisma/prisma/issues/)      |
 
 To enable a Preview feature, [add the feature flag to the `generator` block](#enabling-a-prisma-client-preview-feature) in your `schema.prisma` file. [Share your feedback on all Preview features on GitHub](https://github.com/prisma/prisma/issues/3108).
 
@@ -32,7 +32,7 @@ To enable a Prisma Client Preview feature:
 1. Add the Preview feature flag to the `generator` block:
 
    ```prisma
-   generator client
+   generator client 
    ```
 
 2. Re-generate Prisma Client:

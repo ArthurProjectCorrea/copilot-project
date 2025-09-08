@@ -1,7 +1,7 @@
 ---
 title: 'Unnecessary indexes'
 metaTitle: 'Optimize Recommendations: Unnecessary indexes'
-metaDescription: 'Learn about the recommendation provided by Optimize for using Unnecessary indexes'
+metaDescription: "Learn about the recommendation provided by Optimize for using Unnecessary indexes"
 tocDepth: 3
 toc: true
 ---

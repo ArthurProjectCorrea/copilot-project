@@ -10,12 +10,10 @@ related:
 ---
 
 The `useLinkStatus` hook lets you track the **pending** state of a `
-
-</header>
-)
+    </header>
+  )
 }
-
-````
+```
 
 ```jsx filename="app/hint.js" switcher
 'use client'
@@ -28,11 +26,11 @@ function Hint()  = useLinkStatus()
 
   return (
     <header>
-
+      
     </header>
   )
 }
-````
+```
 
 > **Good to know**:
 >
@@ -102,7 +100,7 @@ const links = [
   ,
 ]
 
-function Menubar()
+function Menubar() 
     </div>
   )
 }
@@ -123,7 +121,7 @@ const links = [
   ,
 ]
 
-function Menubar()
+function Menubar() 
     </div>
   )
 }
@@ -141,13 +139,13 @@ function Menubar()
 If the navigation to a new route is fast, users may see an unnecessary flash of the hint. One way to improve the user experience and only show the hint when the navigation takes time to complete is to add an initial animation delay (e.g. 100ms) and start the animation as invisible (e.g. `opacity: 0`).
 
 ```css filename="app/styles/global.css"
-.link-hint
+.link-hint 
 
-.link-hint.is-pending
+.link-hint.is-pending 
 
-@keyframes fadeIn
+@keyframes fadeIn 
 }
-@keyframes pulse
+@keyframes pulse 
 }
 ```
 

@@ -48,5 +48,5 @@ module.exports = ,
 In addition, you can disable the development logging by setting `logging` to `false`.
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```

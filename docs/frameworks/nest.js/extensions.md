@@ -27,7 +27,7 @@ For illustration purposes, let's define a `checkRoleMiddleware` that compares a 
 ```typescript
 export const checkRoleMiddleware: FieldMiddleware = async (
   ctx: MiddlewareContext,
-  next: NextFn
+  next: NextFn,
 ) => {
   const { info } = ctx;
   const { extensions } = info.parentType.getFields()[info.fieldName];
@@ -40,7 +40,7 @@ export const checkRoleMiddleware: FieldMiddleware = async (
   if (userRole === extensions.role) {
     // or just "return null" to ignore
     throw new ForbiddenException(
-      `User does not have sufficient permissions to access "${info.fieldName}" field.`
+      `User does not have sufficient permissions to access "${info.fieldName}" field.`,
     );
   }
   return next();

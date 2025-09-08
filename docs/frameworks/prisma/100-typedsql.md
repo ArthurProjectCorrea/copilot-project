@@ -19,14 +19,14 @@ To start using TypedSQL in your Prisma project, follow these steps:
 1. Add the `typedSql` preview feature flag to your `schema.prisma` file:
 
    ```prisma
-   generator client
+   generator client 
    ```
+  
+    :::tip[Using driver adapters with TypedSQL]
 
-   :::tip[Using driver adapters with TypedSQL]
+    If you are deploying Prisma in serverless or edge environments, you can use [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) to connect through JavaScript database drivers. Driver adapters are compatible with TypedSQL, with the exception of `@prisma/adapter-better-sqlite3`. For SQLite support, use [`@prisma/adapter-libsql`](https://www.npmjs.com/package/@prisma/adapter-libsql) instead. All other driver adapters are supported.
 
-   If you are deploying Prisma in serverless or edge environments, you can use [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) to connect through JavaScript database drivers. Driver adapters are compatible with TypedSQL, with the exception of `@prisma/adapter-better-sqlite3`. For SQLite support, use [`@prisma/adapter-libsql`](https://www.npmjs.com/package/@prisma/adapter-libsql) instead. All other driver adapters are supported.
-
-   :::
+    :::
 
 1. Create a `sql` directory inside your `prisma` directory. This is where you'll write your SQL queries.
 
@@ -82,7 +82,7 @@ To pass arguments to your TypedSQL queries, you can use parameterized queries. T
 1. In your SQL file, use placeholders for the parameters you want to pass. The syntax for placeholders depends on your database engine:
 
    :::note
-
+   
    See below for information on how to [define argument types in your SQL files](#defining-argument-types-in-your-sql-files).
 
    :::
@@ -114,11 +114,12 @@ WHERE id = ANY($1)
 ```
 
 ```typescript title="/src/index.ts"
-const prisma = new PrismaClient();
 
-const userIds = [1, 2, 3];
-const users = await prisma.$queryRawTyped(getUsersByIds(userIds));
-console.log(users);
+const prisma = new PrismaClient()
+
+const userIds = [1, 2, 3]
+const users = await prisma.$queryRawTyped(getUsersByIds(userIds))
+console.log(users)
 ```
 
 TypedSQL will generate the appropriate TypeScript types for the array parameter, ensuring type safety for both the input and the query results.
@@ -140,7 +141,6 @@ Argument typing in TypedSQL is accomplished via specific comments in your SQL fi
 Where `Type` is a valid database type, `N` is the position of the argument in the query, and `alias` is an optional alias for the argument that is used in the TypeScript type.
 
 As an example, if you needed to type a single string argument with the alias `name` and the description "The name of the user", you would add the following comment to your SQL file:
-
 ```sql
 -- @param  $1:name The name of the user
 ```
@@ -195,7 +195,9 @@ TypedSQL does not natively support constructing SQL queries with dynamically add
 
 ```typescript
 const columns = 'name, email, age'; // Columns determined at runtime
-const result = await prisma.$queryRawUnsafe(`SELECT $ FROM Users WHERE active = true`);
+const result = await prisma.$queryRawUnsafe(
+  `SELECT $ FROM Users WHERE active = true`
+);
 ```
 
 In this example, the columns to be selected are defined dynamically and included in the SQL query. While this approach provides flexibility, it requires careful attention to security, particularly to [avoid SQL injection vulnerabilities](/orm/prisma-client/using-raw-sql/raw-queries#sql-injection-prevention). Additionally, using raw SQL queries means foregoing the type-safety and DX of TypedSQL.

@@ -17,7 +17,7 @@ As of [v6.7.0](https://pris.ly/release/6.7.0), Prisma ORM has the `queryCompiler
 **When enabled, your Prisma Client will be generated [without a Rust-based query engine binary](/orm/prisma-client/setup-and-configuration/no-rust-engine)**:
 
 ```prisma
-generator client
+generator client 
 ```
 
 > Note that the [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is required alongside `queryCompiler`.
@@ -35,7 +35,6 @@ Prisma Client will use the Query Engine to transform the Prisma Client query to 
 ![Query flow from the user application to the database using Prisma Client and driver adapters](./images/drivers/qe-query-engine-adapter.png)
 
 There are two different types of driver adapters:
-
 - [Database driver adapters](#database-driver-adapters)
 - [Serverless driver adapters](#serverless-driver-adapters)
 
@@ -60,7 +59,6 @@ You can connect to your database using a Node.js-based driver from Prisma Client
 Database providers, such as Neon and PlanetScale, allow you to connect to your database using other protocols besides TCP, such as HTTP and WebSockets. These database drivers are optimized for connecting to your database in serverless and edge environments.
 
 Prisma ORM maintains the following serverless driver adapters:
-
 - [Neon](/orm/overview/databases/neon#how-to-use-neons-serverless-driver-with-prisma-orm-preview) (and Vercel Postgres)
 - [PlanetScale](/orm/overview/databases/planetscale#how-to-use-the-planetscale-serverless-driver-with-prisma-orm-preview)
 - [Cloudflare D1](/orm/overview/databases/cloudflare-d1)
@@ -68,7 +66,6 @@ Prisma ORM maintains the following serverless driver adapters:
 ### Community-maintained database driver adapters
 
 You can also build your own driver adapter for the database you're using. The following is a list of community-maintained driver adapters:
-
 - [TiDB Cloud Serverless Driver](https://github.com/tidbcloud/prisma-adapter)
 - [PGlite - Postgres in WASM](https://github.com/lucasthevenet/pglite-utils/tree/main/packages/prisma-adapter)
 
@@ -77,25 +74,23 @@ You can also build your own driver adapter for the database you're using. The fo
 To use this feature:
 
 1. Update the `previewFeatures` block in your schema to include the `driverAdapters` Preview feature:
-
-   ```prisma
-   generator client
-   ```
+    ```prisma
+    generator client 
+    ```
 
 2. Generate Prisma Client:
-
-   ```terminal
-   npx prisma generate
-   ```
+    ```terminal
+    npx prisma generate
+    ```
 
 3. Refer to the following pages to learn more about how to use the specific driver adapters with the specific database providers:
-   - [PostgreSQL](/orm/overview/databases/postgresql#using-the-node-postgres-driver)
-   - [MySQL/MariaDB](/orm/overview/databases/mysql#using-the-mariadb-driver)
-   - [MS SQL Server](/orm/overview/databases/sql-server#using-the-node-mssql-driver)
-   - [Neon](/orm/overview/databases/neon#how-to-use-neons-serverless-driver-with-prisma-orm-preview)
-   - [PlanetScale](/orm/overview/databases/planetscale#how-to-use-the-planetscale-serverless-driver-with-prisma-orm-preview)
-   - [Turso](/orm/overview/databases/turso#how-to-connect-and-query-a-turso-database)
-   - [Cloudflare D1](/orm/overview/databases/cloudflare-d1)
+    - [PostgreSQL](/orm/overview/databases/postgresql#using-the-node-postgres-driver)
+    - [MySQL/MariaDB](/orm/overview/databases/mysql#using-the-mariadb-driver)
+    - [MS SQL Server](/orm/overview/databases/sql-server#using-the-node-mssql-driver)
+    - [Neon](/orm/overview/databases/neon#how-to-use-neons-serverless-driver-with-prisma-orm-preview)
+    - [PlanetScale](/orm/overview/databases/planetscale#how-to-use-the-planetscale-serverless-driver-with-prisma-orm-preview)
+    - [Turso](/orm/overview/databases/turso#how-to-connect-and-query-a-turso-database)
+    - [Cloudflare D1](/orm/overview/databases/cloudflare-d1)
 
 ## Notes about using driver adapters
 
@@ -110,11 +105,12 @@ Here is an example using the `@prisma/adapter-libsql` adapter:
 Earlier versions of Prisma ORM required you to first instantiate the driver itself, and then use that instance to create the Prisma driver adapter. Here is an example using the `@libsql/client` driver for LibSQL:
 
 ```typescript
-// Old way of using driver adapters (before 6.6.0)
-const driver = createClient();
-const adapter = new PrismaLibSQL(driver);
 
-const prisma = new PrismaClient();
+// Old way of using driver adapters (before 6.6.0)
+const driver = createClient()
+const adapter = new PrismaLibSQL(driver)
+
+const prisma = new PrismaClient()
 ```
 
 #### 6.6.0 and later
@@ -122,9 +118,10 @@ const prisma = new PrismaClient();
 As of the 6.6.0 release, you instantiate the driver adapter _directly_ with the options of your preferred JS-native driver.:
 
 ```typescript
-const adapter = new PrismaLibSQL();
 
-const prisma = new PrismaClient();
+const adapter = new PrismaLibSQL()
+
+const prisma = new PrismaClient()
 ```
 
 ### Driver adapters don't read the connection string from the Prisma schema
@@ -134,8 +131,9 @@ When using Prisma ORM's built-in drivers, the connection string is read from the
 On the other hand, when using a driver adapter, the connection string needs to be provided in your _application code_ when the driver adapter is set up initially. Here is how this is done for the `pg` driver and the `@prisma/adapter-pg` adapter:
 
 ```ts
-const adapter = new PrismaPg();
-const prisma = new PrismaClient();
+
+const adapter = new PrismaPg()
+const prisma = new PrismaClient()
 ```
 
 See the docs for the driver adapter you're using for concrete setup instructions.
@@ -147,7 +145,7 @@ Since Prisma 5.9.0, when using the driver adapters Preview feature along with a 
 Let's assume you had `output` in your Prisma schema set to `../src/generated/client`:
 
 ```prisma
-generator client
+generator client 
 ```
 
 What you should _not_ do is reference that path relatively:
@@ -155,7 +153,7 @@ What you should _not_ do is reference that path relatively:
 ```ts no-copy
 // what not to do!
 
-const client = new PrismaClient();
+const client = new PrismaClient()
 ```
 
 Instead, you will need to use a linked dependency.
@@ -163,7 +161,8 @@ Instead, you will need to use a linked dependency.
 Now, you should be able to reference your generated client using `db`!
 
 ```ts
-const client = new PrismaClient();
+
+const client = new PrismaClient()
 ```
 
 ### Driver adapters and specific frameworks

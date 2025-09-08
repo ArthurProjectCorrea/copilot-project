@@ -11,11 +11,11 @@ In some cases, you may need to disable native CSS linting/validations if your ed
 The official [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension for Visual Studio Code enhances the Tailwind development experience by providing users with advanced features such as autocomplete, syntax highlighting, and linting.
 
 <img
-src=
-alt="Tailwind CSS IntelliSense extension for Visual Studio Code"
-width=
-height=
-className="rounded-lg"
+  src=
+  alt="Tailwind CSS IntelliSense extension for Visual Studio Code"
+  width=
+  height=
+  className="rounded-lg"
 />
 
 - **Autocomplete** — providing intelligent suggestions for utility classes, as well as [CSS functions and directives](/docs/functions-and-directives).

@@ -55,11 +55,10 @@ The Prisma schema currently looks as follows:
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
-
 <br/>
 
 :::tip
@@ -93,13 +92,13 @@ npx prisma db pull
 This will create a `schema.prisma` file with your database schema.
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-type UsersProfile
+type UsersProfile 
 
-model categories
+model categories 
 
-model posts
+model posts 
 
-model users
+model users 
 ```
 
 ### 2.2. Update relations
@@ -115,13 +114,13 @@ Update the 1-n relationship between `posts` \<-> `users` as follows:
 Your schema should now look like this:
 
 ```prisma file=schema.prisma
-type UsersProfile
+type UsersProfile 
 
-model categories
+model categories 
 
-model posts
+model posts 
 
-model users
+model users 
 ```
 
 Then, update the m-n between `posts` \<-\> `categories` references as follows:
@@ -136,13 +135,13 @@ Then, update the m-n between `posts` \<-\> `categories` references as follows:
 Your schema should now look like this:
 
 ```prisma file=schema.prisma
-type UsersProfile
+type UsersProfile 
 
-model categories
+model categories 
 
-model posts
+model posts 
 
-model users
+model users 
 ```
 
 ## 3. Update your application code
@@ -172,10 +171,10 @@ Update your Express controllers to use Prisma Client. For example, here's how to
 ```typescript
 
   async create(req: Request, res: Response)  = req.body
-
+    
     const result = await prisma.user.create(,
     })
-
+    
     return res.json(result)
   }
 }
@@ -191,6 +190,5 @@ Now that you've migrated to Prisma ORM, you can:
 - Add automated tests using Prisma's testing utilities
 
 For more information:
-
 - [Prisma ORM documentation](/orm)
 - [Prisma Client API reference](/orm/prisma-client)

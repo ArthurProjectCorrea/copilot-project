@@ -590,7 +590,10 @@ There may be times where you want to conditionally load in a module and specify 
 
 ```typescript
 @Module({
-  imports: [ConfigModule.forRoot(), ConditionalModule.registerWhen(FooModule, 'USE_FOO')],
+  imports: [
+    ConfigModule.forRoot(),
+    ConditionalModule.registerWhen(FooModule, 'USE_FOO'),
+  ],
 })
 export class AppModule {}
 ```
@@ -603,7 +606,7 @@ The above module would only load in the `FooModule` if in the `.env` file there 
     ConfigModule.forRoot(),
     ConditionalModule.registerWhen(
       FooBarModule,
-      (env: NodeJS.ProcessEnv) => !!env['foo'] && !!env['bar']
+      (env: NodeJS.ProcessEnv) => !!env['foo'] && !!env['bar'],
     ),
   ],
 })

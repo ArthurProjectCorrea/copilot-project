@@ -1,7 +1,7 @@
 ---
 title: 'Long-running transactions'
 metaTitle: 'Optimize Recommendations: Avoid long-running transactions'
-metaDescription: 'Learn about the recommendation provided by Optimize for long-running transaction.'
+metaDescription: "Learn about the recommendation provided by Optimize for long-running transaction."
 tocDepth: 3
 toc: true
 ---

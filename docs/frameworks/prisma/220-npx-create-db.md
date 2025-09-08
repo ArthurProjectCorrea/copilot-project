@@ -157,11 +157,11 @@ When you claim a database:
 
 Here are the CLI flags for the `npx create-db` command:
 
-| Flag            | Shorthand | Description                                                                                                                               |
-| --------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `--region`      | `-r`      | Specify a region. <br /> **Available regions:** `ap-southeast-1`, `ap-northeast-1`, `eu-central-1`, `eu-west-3`, `us-east-1`, `us-west-1` |
-| `--interactive` | `-i`      | Run in interactive mode (select region from a list).                                                                                      |
-| `--json`        | `-j`      | Output machine-readable JSON and exit.                                                                                                    |
-| `--help`        | `-h`      | Show this help message.                                                                                                                   |
+| Flag        | Shorthand | Description                                                                                  |
+|---------------|-----------|----------------------------------------------------------------------------------------------|
+| `--region`    | `-r`      | Specify a region. <br /> **Available regions:** `ap-southeast-1`, `ap-northeast-1`, `eu-central-1`, `eu-west-3`, `us-east-1`, `us-west-1` |
+| `--interactive` | `-i`    | Run in interactive mode (select region from a list).                                         |
+| `--json` | `-j`    | Output machine-readable JSON and exit.                                         |
+| `--help`      | `-h`      | Show this help message.                                                                      |
 
 To view all CLI options use the `--help` or `-h` flag:

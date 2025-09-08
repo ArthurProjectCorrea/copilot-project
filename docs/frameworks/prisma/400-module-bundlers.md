@@ -1,7 +1,7 @@
 ---
-title: 'Module bundlers'
-metaTitle: 'Module bundlers (Reference)'
-metaDescription: 'This page gives an overview of the most important things to be aware of when using a module bundler to bundle an application that uses Prisma Client.'
+title: "Module bundlers"
+metaTitle: "Module bundlers (Reference)"
+metaDescription: "This page gives an overview of the most important things to be aware of when using a module bundler to bundle an application that uses Prisma Client."
 ---
 
 ## Overview
@@ -17,7 +17,7 @@ As of [v6.7.0](https://pris.ly/release/6.7.0), Prisma ORM has the `queryCompiler
 **When enabled, your Prisma Client will be generated [without a Rust-based query engine binary](/orm/prisma-client/setup-and-configuration/no-rust-engine)**:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is required alongside `queryCompiler`. When using the `queryCompiler` Preview feature, the connection pool is maintained by the native JS database driver you're using.

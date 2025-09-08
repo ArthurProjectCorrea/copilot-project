@@ -1,5 +1,5 @@
 <ApiTable
-rows=-xs`, properties.map((property) => `$: var(--radius-xs); /* 0.125rem (2px) */`).join("\n")],
+  rows=-xs`, properties.map((property) => `$: var(--radius-xs); /* 0.125rem (2px) */`).join("\n")],
     [`$-sm`, properties.map((property) => `$: var(--radius-sm); /* 0.25rem (4px) */`).join("\n")],
     [`$-md`, properties.map((property) => `$: var(--radius-md); /* 0.375rem (6px) */`).join("\n")],
     [`$-lg`, properties.map((property) => `$: var(--radius-lg); /* 0.5rem (8px) */`).join("\n")],
@@ -17,7 +17,7 @@ rows=-xs`, properties.map((property) => `$: var(--radius-xs); /* 0.125rem (2px) 
       properties.map((property) => `$: var(<custom-property>);`).join("\n"),
     ],
     [`$-[<value>]`, properties.map((property) => `$: <value>;`).join("\n")],
-])}
+  ])}
 />
 
 ## Examples

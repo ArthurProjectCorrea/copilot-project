@@ -45,7 +45,7 @@ npm install @prisma/extension-optimize
 For versions of Prisma ORM between `4.2.0` and `6.1.0`, you need to enable the `tracing` preview feature in your Prisma schema file.
 
 ```prisma
-generator client
+generator client 
 ```
 
 </details>
@@ -63,7 +63,10 @@ OPTIMIZE_API_KEY="YOUR_OPTIMIZE_API_KEY"
 Extend your existing Prisma Client instance with the Optimize extension:
 
 ```ts
-const prisma = new PrismaClient().$extends(withOptimize()).$extends(withAccelerate());
+
+const prisma = new PrismaClient().$extends(
+  withOptimize(),
+).$extends(withAccelerate());
 ```
 
 #### Using the Optimize extension with other extensions or middleware
@@ -71,16 +74,13 @@ const prisma = new PrismaClient().$extends(withOptimize()).$extends(withAccelera
 Since [extensions are applied one after another](/orm/prisma-client/client-extensions#conflicts-in-combined-extensions), make sure you apply them in the correct order. Extensions cannot share behavior and the last extension applied takes precedence.
 
 ```ts
-const prisma = new PrismaClient().$extends(withOptimize()).$extends(withAccelerate());
+const prisma = new PrismaClient().$extends(withOptimize()).$extends(withAccelerate())
 ```
 
 If you are using [Prisma Middleware](/orm/prisma-client/client-extensions/middleware) in your application, make sure they are added before any Prisma Client extensions (like Optimize). For example:
 
 ```ts
-const prisma = new PrismaClient()
-  .$use(middleware)
-  .$extends(withOptimize())
-  .$extends(withAccelerate());
+const prisma = new PrismaClient().$use(middleware).$extends(withOptimize()).$extends(withAccelerate())
 ```
 
 ### 2.5. Use Prisma Optimize to generate insights

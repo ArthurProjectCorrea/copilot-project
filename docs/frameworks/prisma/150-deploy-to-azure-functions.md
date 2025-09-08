@@ -15,14 +15,14 @@ If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or dep
 **When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
 When using this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
 
@@ -41,7 +41,7 @@ While Prisma ORM works well with Azure functions, there are a few things to take
 When deploying a function app, the operating system that Azure functions runs a remote build is different from the one used to host your functions. Therefore, we recommend specifying the following [`binaryTargets` options](/orm/reference/prisma-schema-reference#binarytargets-options) in your Prisma schema:
 
 ```prisma file=schema.prisma highlight=3;normal showLineNumbers
-generator client
+generator client 
 ```
 
 ### Connection pooling

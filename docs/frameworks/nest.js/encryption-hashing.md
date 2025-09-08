@@ -23,7 +23,10 @@ const key = (await promisify(scrypt)(password, 'salt', 32)) as Buffer;
 const cipher = createCipheriv('aes-256-ctr', key, iv);
 
 const textToEncrypt = 'Nest';
-const encryptedText = Buffer.concat([cipher.update(textToEncrypt), cipher.final()]);
+const encryptedText = Buffer.concat([
+  cipher.update(textToEncrypt),
+  cipher.final(),
+]);
 ```
 
 Now to decrypt `encryptedText` value:
@@ -32,7 +35,10 @@ Now to decrypt `encryptedText` value:
 import { createDecipheriv } from 'crypto';
 
 const decipher = createDecipheriv('aes-256-ctr', key, iv);
-const decryptedText = Buffer.concat([decipher.update(encryptedText), decipher.final()]);
+const decryptedText = Buffer.concat([
+  decipher.update(encryptedText),
+  decipher.final(),
+]);
 ```
 
 #### Hashing

@@ -14,7 +14,8 @@ Here is an example action that will run your migrations against your database:
 name: Deploy
 on:
   push:
-    paths: //highlight-next-line
+    paths:
+      //highlight-next-line
       - prisma/migrations/**
     branches:
       - main

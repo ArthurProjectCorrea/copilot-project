@@ -95,7 +95,7 @@ Example:
 // Import required dependencies
 
 // Initialize Prisma Client
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 ```
 
 ### Formatting conventions
@@ -201,14 +201,12 @@ DEVELOPER CHECKLIST - Remove upon completion
 
 - [ ] List all necessary or recommended prerequisites, including specific software versions and any required accounts or services.
 
-- [ ] Name project _<u>framework</u>_-prisma (ie. _<u>\***\*\_\_\*\***</u>_-prisma)
+- [ ] Name project *<u>framework</u>*-prisma (ie. *<u>__________</u>*-prisma)
 
 - [ ] Project creation options should be detailed in an info admonition in this format:
-
 ```markdown
-markdown - _Which package manager would you like to use?_ `npm`
+markdown - *Which package manager would you like to use?* `npm` 
 ```
-
 - [ ] Ensure the appropriate admonitions (note, warning, tip) are used for important information.
 
 - [ ] Include links to related guides and resources throughout the content.
@@ -221,18 +219,17 @@ markdown - _Which package manager would you like to use?_ `npm`
 
 ## Introduction
 
-Prisma ORM streamlines database access with type-safe queries, and when paired with [\***\*\_\_\*\***](https://example.com/), it creates a...
+Prisma ORM streamlines database access with type-safe queries, and when paired with [__________](https://example.com/), it creates a...
 
 :::warning
 
-**_DEV NOTE:_** Above, briefly explain the benefits of using Prisma ORM with the specified framework after `it creates a...`
+***DEV NOTE:*** Above, briefly explain the benefits of using Prisma ORM with the specified framework after `it creates a...`
 
 :::
 
-In this guide, you'll learn to integrate Prisma ORM with a Prisma Postgres database in a \***\*\_\_\*\*** project from scratch. You can find a complete example of this guide on [GitHub](https://github.com/prisma/prisma-examples/tree/latest/orm/__________).
+In this guide, you'll learn to integrate Prisma ORM with a Prisma Postgres database in a __________ project from scratch. You can find a complete example of this guide on [GitHub](https://github.com/prisma/prisma-examples/tree/latest/orm/__________).
 
 ## Prerequisites
-
 - [Node.js 18+](https://nodejs.org)
 
 ## 1. Set up your project
@@ -246,15 +243,14 @@ To get started with Prisma, you'll need to install a few dependencies:
 Once installed, initialize Prisma in your project:
 
 :::warning
-**_DEV NOTE:_** Make sure you update the output path accordingly with the framework (ie. Next.js is `../app/generated/prisma`). and follow through with the proper import paths going forward. This template will be using `../generated/prisma`.
+***DEV NOTE:*** Make sure you update the output path accordingly with the framework (ie. Next.js is `../app/generated/prisma`). and follow through with the proper import paths going forward. This template will be using `../generated/prisma`.
 :::
 
 ```terminal
 npx prisma init --db --output ../generated/prisma
 ```
-
 :::info
-You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My \***\*\_\_\*\*** Project"
+You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My __________ Project"
 :::
 
 This will create:
@@ -270,25 +266,25 @@ In the `prisma/schema.prisma` file, add the following models:
 
 :::warning
 
-**_DEV NOTE:_** If using Vite, the generator client should not include `-js` in the provider:
+***DEV NOTE:*** If using Vite, the generator client should not include `-js` in the provider:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 ```
 
-In addition, update the text above this and add "_and change the generator to use the `prisma-client` provider_"
+In addition, update the text above this and add "*and change the generator to use the `prisma-client` provider*"
 
 :::
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -301,7 +297,6 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
-
 ### 2.4. Seed the database
 
 Add some seed data to populate the database with sample users and posts.
@@ -336,7 +331,7 @@ Now, tell Prisma how to run this script by updating your `package.json`:
 ```json file=package.json
 ... rest of the file
 //add-start
-"prisma":
+"prisma": 
 //add-end
 ... rest of the file
 ```
@@ -353,7 +348,7 @@ And open Prisma Studio to inspect your data:
 npx prisma studio
 ```
 
-## 3. Integrate Prisma into \***\*\_\_\*\***
+## 3. Integrate Prisma into __________
 
 ### 3.1. Create a Prisma Client
 
@@ -370,14 +365,14 @@ If you choose not to use one, **avoid** instantiating `PrismaClient` globally in
 ### 3.2.
 
 :::warning
-**_DEV NOTE:_** How do you implement prisma into the framework?
+***DEV NOTE:*** How do you implement prisma into the framework?
 :::
 
-You're done! You've just created a \***\*\_\_\*\*** app with Prisma ORM. Below are some next steps to explore, as well as some more resources to help you get started expanding your project.
+You're done! You've just created a __________ app with Prisma ORM. Below are some next steps to explore, as well as some more resources to help you get started expanding your project.
 
 ## Next Steps
 
-Now that you have a working \***\*\_\_\*\*** app connected to a Prisma Postgres database, you can:
+Now that you have a working __________ app connected to a Prisma Postgres database, you can:
 
 - Extend your Prisma schema with more models and relationships
 - Add create/update/delete routes and forms
@@ -387,7 +382,7 @@ Now that you have a working \***\*\_\_\*\*** app connected to a Prisma Postgres 
 ### More Info
 
 - [Prisma Documentation](/orm/overview/introduction)
-- [\***\*\_\_\*\*** Documentation](https://example.com/)
+- [__________ Documentation](https://example.com/)
 ````
 
 ## Next steps
@@ -400,6 +395,5 @@ After reading this guide, you can:
 - Submit your guide for review
 
 For more information:
-
 - [Prisma documentation style guide](/about/style-guide)
 - [Documentation components](/about/docs-components)

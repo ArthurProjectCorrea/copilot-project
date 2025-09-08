@@ -10,7 +10,7 @@ community_section: true
 
 ## Introduction
 
-This guides teaches you how to add connection pooling to a PostgreSQL database hosted on [Neon](https://neon.tech/) using [Prisma Accelerate](/accelerate).
+This guides teaches you how to add connection pooling to a PostgreSQL database hosted on [Neon](https://neon.tech/) using [Prisma Accelerate](/accelerate). 
 
 Prisma Accelerate is a robust and mature connection pooler enabling your database to function properly during traffic spikes and high load scenarios. Check out this [video](https://www.youtube.com/watch?v=cnL75if6Aq0) demonstrating how it performs in a load test or [learn why connection pooling is important](https://www.prisma.io/blog/saving-black-friday-with-connection-pooling).
 
@@ -58,7 +58,7 @@ This command reads your database schema and creates new models in your `schema.p
 
 :::note
 
-If you want to use Prisma Migrate in the future, you also need to [baseline your database](/orm/prisma-migrate/workflows/baselining).
+If you want to use Prisma Migrate in the future, you also need to [baseline your database](/orm/prisma-migrate/workflows/baselining). 
 
 :::
 
@@ -98,7 +98,7 @@ DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=ey..."
 If you want to use Prisma Migrate with Prisma Accelerate, you can set the `directUrl` field on the `datasource` block:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 Accordingly, you'll need to set the `DIRECT_URL` in your `.env` file:
@@ -125,7 +125,8 @@ The `--no-engine` option is used to omit the [query engine](/orm/more/under-the-
 In your application code, you now need to apply the Accelerate extension to your Prisma Client instance:
 
 ```ts
-const prisma = new PrismaClient().$extends(withAccelerate());
+
+const prisma = new PrismaClient().$extends(withAccelerate())
 ```
 
 At this point, you can now start sending queries which will be routed through the connection pool to your database.

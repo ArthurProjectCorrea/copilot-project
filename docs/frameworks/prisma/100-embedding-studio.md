@@ -65,7 +65,7 @@ function App() );
   }, []);
 
   return (
-
+    
   );
 }
 ```
@@ -79,7 +79,7 @@ Here's what an implementation with custom headers/payload looks like:
 import "@prisma/studio-core/ui/index.css"
 
 function App() ,
-      customPayload:
+      customPayload: 
     });
 
     // 2. Create a Postgres adapter with the executor
@@ -88,7 +88,7 @@ function App() ,
   }, []);
 
   return (
-
+    
   );
 }
 ```
@@ -104,9 +104,9 @@ Here's an example of applying a custom theme:
 import "@prisma/studio-core/ui/index.css";
 
 const customTheme = `
-@layer base
+@layer base 
 
-  .dark
+  .dark 
 }
 `;
 
@@ -115,7 +115,7 @@ function App() );
   }, []);
 
   return (
-
+    
   );
 }
 ```
@@ -125,7 +125,6 @@ With this setup, Studio inherits your custom colors, borders, and typography rul
 ### Concepts
 
 Here's an overview of the key concepts in your frontend:
-
 - **Executor**: The bridge between Studio and your backend, it's created using the `createStudioBFFClient` function
 - **Adapter**: Handles Postgres-specific query formatting
 - **Custom headers**: Pass authentication tokens, user info, etc.
@@ -133,7 +132,7 @@ Here's an overview of the key concepts in your frontend:
 
 ## Backend setup
 
-Your backend needs to expose a `/studio` endpoint where the frontend sends its requests. The implementation below uses `createPrismaPostgresHttpClient` from `@prisma/studio-core`.
+Your backend needs to expose a `/studio` endpoint where the frontend sends its requests. The implementation below uses `createPrismaPostgresHttpClient` from `@prisma/studio-core`. 
 
 The backend also needs to have access to the Prisma Postgres API key, we recommend setting it as an environment variable as a best practice.
 
@@ -141,23 +140,23 @@ The backend also needs to have access to the Prisma Postgres API key, we recomme
 
 ### Minimal implementation
 
-Here's what a minimal implementation for the `/studio` endpoint looks like with [Hono](https://hono.dev/). This assumes that your connection URL is available via the `DATABASE_URL` env var:
+Here's what a minimal implementation for the `/studio` endpoint looks like with [Hono](https://hono.dev/). This assumes that your connection URL is available via the `DATABASE_URL` env var: 
 
 ```ts
 
 const app = new Hono().use("*", cors());
 
 app.post("/studio", async (c) =>  = await c.req.json();
-
+  
   // 2. Read DB URL from env vars
   const url = process.env.DATABASE_URL;
-
+  
   // 3. Execute the query against Prisma Postgres
   const [error, results] = await createPrismaPostgresHttpClient().execute(query);
-
+  
   // 6. Return results or errors
-  if (error)
-
+  if (error) 
+  
   return c.json([null, results]);
 });
 ```
@@ -172,23 +171,23 @@ Here's what a slightly more advanced implementation for the `/studio` endpoint l
 const app = new Hono().use("*", cors());
 
 app.post("/studio", async (c) =>  = await c.req.json();
-
+  
   // 2. Access custom headers (great for auth!)
   const customHeader = c.req.header("X-Custom-Header");
   console.log("Received headers:", );
-
+  
   // 3. Use custom payload data
   console.log("Received value:", customPayload.customValue);
-
+  
   // 4. Determine the URL (this is where you'd implement your auth logic)
   const url = determineUrlFromContext(customHeader, customPayload);
-
+  
   // 5. Execute the query using Prisma Postgres or Prisma Accelerate
   const [error, results] = await createPrismaPostgresHttpClient().execute(query);
-
+  
   // 6. Return results or errors
-  if (error)
-
+  if (error) 
+  
   return c.json([null, results]);
 });
 ```
@@ -241,8 +240,8 @@ const executor = createStudioBFFClient(`,
 In your server-side implementation, you can then retrieve these values from the incoming request and extract the Prisma Postgres API key that's needed for this user's query:
 
 ```typescript
-const userId = c.req.header('X-User-ID');
-const token = c.req.header('Authorization');
+const userId = c.req.header("X-User-ID");
+const token = c.req.header("Authorization");
 
 const userApiKey = await getUserApiKey(userId, token);
 ```

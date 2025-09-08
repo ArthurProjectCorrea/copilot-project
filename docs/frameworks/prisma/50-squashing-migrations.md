@@ -56,6 +56,7 @@ Then follow these steps:
    ```
 
    This creates a single migration that takes you:
+
    - from the state of the `main` branch as described in your reset migration history
    - to the state of your local feature as described in your `./prisma/schema.prisma` file
    - and outputs this to a new `migration.sql` file in a new directory ending with `squashed_migrations` (specified with the `--name` flag)
@@ -77,6 +78,7 @@ Then follow these steps, either on your `main` branch or on a newly checked out 
 2. Create a new empty directory in the `./prisma/migrations` directory. In this guide this will be called `000000000000_squashed_migrations`. Inside this, add a new empty `migration.sql` file.
 
 3. Create a single migration that takes you:
+
    - from an empty database
    - to the current state of the production database schema as described in your `./prisma/schema.prisma` file
    - and outputs this to the `migration.sql` file created above

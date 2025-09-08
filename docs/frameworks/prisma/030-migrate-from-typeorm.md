@@ -99,10 +99,10 @@ Update your Express controllers to use Prisma Client. For example, here's how to
 ```typescript
 
   async run(req: Request, res: Response)  = req.body
-
+    
     const result = await prisma.user.create(,
     })
-
+    
     return res.json(result)
   }
 }
@@ -121,7 +121,6 @@ npm test
 ### 5.2. Deploy your changes
 
 1. Deploy your schema changes:
-
 ```bash
 npx prisma migrate deploy
 ```
@@ -138,6 +137,5 @@ Now that you've migrated to Prisma ORM, you can:
 - Add automated tests using Prisma's testing utilities
 
 For more information:
-
 - [Prisma ORM documentation](/orm)
 - [Prisma Client API reference](/orm/prisma-client)

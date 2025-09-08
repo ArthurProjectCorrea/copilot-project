@@ -5,7 +5,7 @@ title: Mock Functions
 
 Mock functions are also known as "spies", because they let you spy on the behavior of a function that is called indirectly by some other code, rather than only testing the output. You can create a mock function with `jest.fn()`. If no implementation is given, the mock function will return `undefined` when invoked.
 
-import TypeScriptExamplesNote from './\_TypeScriptExamplesNote.md';
+import TypeScriptExamplesNote from './_TypeScriptExamplesNote.md';
 
 <TypeScriptExamplesNote />
 
@@ -34,7 +34,7 @@ mockFn.getMockImplementation(); // () => 42
 ```
 
 ```ts tab
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 const mockFn = jest.fn<() => number>();
 
@@ -183,26 +183,26 @@ Accepts a function that should be used as the implementation of the mock. The mo
 :::
 
 ```js tab
-const mockFn = jest.fn((scalar) => 42 + scalar);
+const mockFn = jest.fn(scalar => 42 + scalar);
 
 mockFn(0); // 42
 mockFn(1); // 43
 
-mockFn.mockImplementation((scalar) => 36 + scalar);
+mockFn.mockImplementation(scalar => 36 + scalar);
 
 mockFn(2); // 38
 mockFn(3); // 39
 ```
 
 ```ts tab
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 const mockFn = jest.fn((scalar: number) => 42 + scalar);
 
 mockFn(0); // 42
 mockFn(1); // 43
 
-mockFn.mockImplementation((scalar) => 36 + scalar);
+mockFn.mockImplementation(scalar => 36 + scalar);
 
 mockFn(2); // 38
 mockFn(3); // 39
@@ -241,8 +241,8 @@ export class SomeClass {
 ```
 
 ```ts title="SomeClass.test.ts"
-import { jest } from '@jest/globals';
-import { SomeClass } from './SomeClass';
+import {jest} from '@jest/globals';
+import {SomeClass} from './SomeClass';
 
 jest.mock('./SomeClass'); // this happens automatically with automocking
 
@@ -266,20 +266,20 @@ Accepts a function that will be used as an implementation of the mock for one ca
 ```js tab
 const mockFn = jest
   .fn()
-  .mockImplementationOnce((cb) => cb(null, true))
-  .mockImplementationOnce((cb) => cb(null, false));
+  .mockImplementationOnce(cb => cb(null, true))
+  .mockImplementationOnce(cb => cb(null, false));
 
 mockFn((err, val) => console.log(val)); // true
 mockFn((err, val) => console.log(val)); // false
 ```
 
 ```ts tab
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 const mockFn = jest
   .fn<(cb: (a: null, b: boolean) => void) => void>()
-  .mockImplementationOnce((cb) => cb(null, true))
-  .mockImplementationOnce((cb) => cb(null, false));
+  .mockImplementationOnce(cb => cb(null, true))
+  .mockImplementationOnce(cb => cb(null, false));
 
 mockFn((err, val) => console.log(val)); // true
 mockFn((err, val) => console.log(val)); // false
@@ -352,7 +352,7 @@ mock(); // 43
 ```
 
 ```ts tab
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 const mock = jest.fn<() => number>();
 
@@ -387,7 +387,7 @@ mockFn(); // 'default'
 ```
 
 ```ts tab
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 const mockFn = jest
   .fn<() => string>()
@@ -420,7 +420,7 @@ test('async test', async () => {
 ```
 
 ```ts tab
-import { jest, test } from '@jest/globals';
+import {jest, test} from '@jest/globals';
 
 test('async test', async () => {
   const asyncMock = jest.fn<() => Promise<number>>().mockResolvedValue(43);
@@ -455,7 +455,7 @@ test('async test', async () => {
 ```
 
 ```ts tab
-import { jest, test } from '@jest/globals';
+import {jest, test} from '@jest/globals';
 
 test('async test', async () => {
   const asyncMock = jest
@@ -483,14 +483,16 @@ Useful to create async mock functions that will always reject:
 
 ```js tab
 test('async test', async () => {
-  const asyncMock = jest.fn().mockRejectedValue(new Error('Async error message'));
+  const asyncMock = jest
+    .fn()
+    .mockRejectedValue(new Error('Async error message'));
 
   await asyncMock(); // throws 'Async error message'
 });
 ```
 
 ```ts tab
-import { jest, test } from '@jest/globals';
+import {jest, test} from '@jest/globals';
 
 test('async test', async () => {
   const asyncMock = jest
@@ -524,7 +526,7 @@ test('async test', async () => {
 ```
 
 ```ts tab
-import { jest, test } from '@jest/globals';
+import {jest, test} from '@jest/globals';
 
 test('async test', async () => {
   const asyncMock = jest
@@ -549,7 +551,7 @@ test('test', () => {
     () => 'inside callback',
     () => {
       mock(); // 'inside callback'
-    }
+    },
   );
 
   mock(); // 'outside callback'
@@ -567,7 +569,7 @@ test('async test', async () => {
     () => 'inside callback',
     async () => {
       mock(); // 'inside callback'
-    }
+    },
   );
 
   mock(); // 'outside callback'
@@ -597,7 +599,7 @@ The [`restoreMocks`](configuration#restoremocks-boolean) configuration option is
 Correct mock typings will be inferred if implementation is passed to [`jest.fn()`](JestObjectAPI.md#jestfnimplementation). There are many use cases where the implementation is omitted. To ensure type safety you may pass a generic type argument (also see the examples above for more reference):
 
 ```ts
-import { expect, jest, test } from '@jest/globals';
+import {expect, jest, test} from '@jest/globals';
 import type add from './add';
 import calculate from './calc';
 
@@ -627,9 +629,9 @@ test('calculate calls add', () => {
 Constructs the type of a mock function, e.g. the return type of `jest.fn()`. It can be useful if you have to defined a recursive mock function:
 
 ```ts
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
-const sumRecursively: jest.Mock<(value: number) => number> = jest.fn((value) => {
+const sumRecursively: jest.Mock<(value: number) => number> = jest.fn(value => {
   if (value === 0) {
     return 0;
   } else {
@@ -643,8 +645,8 @@ const sumRecursively: jest.Mock<(value: number) => number> = jest.fn((value) => 
 The `jest.Mocked<Source>` utility type returns the `Source` type wrapped with type definitions of Jest mock function.
 
 ```ts
-import { expect, jest, test } from '@jest/globals';
-import type { fetch } from 'node-fetch';
+import {expect, jest, test} from '@jest/globals';
+import type {fetch} from 'node-fetch';
 
 jest.mock('node-fetch');
 
@@ -678,8 +680,8 @@ export function isLocalhost(): boolean {
 ```
 
 ```ts title="src/__tests__/utils.test.ts"
-import { afterEach, expect, it, jest } from '@jest/globals';
-import { isLocalhost } from '../utils';
+import {afterEach, expect, it, jest} from '@jest/globals';
+import {isLocalhost} from '../utils';
 
 let replacedEnv: jest.Replaced<typeof process.env> | undefined = undefined;
 
@@ -688,15 +690,13 @@ afterEach(() => {
 });
 
 it('isLocalhost should detect localhost environment', () => {
-  replacedEnv = jest.replaceProperty(process, 'env', { HOSTNAME: 'localhost' });
+  replacedEnv = jest.replaceProperty(process, 'env', {HOSTNAME: 'localhost'});
 
   expect(isLocalhost()).toBe(true);
 });
 
 it('isLocalhost should detect non-localhost environment', () => {
-  replacedEnv = jest.replaceProperty(process, 'env', {
-    HOSTNAME: 'example.com',
-  });
+  replacedEnv = jest.replaceProperty(process, 'env', {HOSTNAME: 'example.com'});
 
   expect(isLocalhost()).toBe(false);
 });
@@ -721,8 +721,8 @@ export const song = {
 ```
 
 ```ts title="song.test.ts"
-import { expect, jest, test } from '@jest/globals';
-import { song } from './song';
+import {expect, jest, test} from '@jest/globals';
+import {song} from './song';
 
 jest.mock('./song');
 jest.spyOn(console, 'log');
@@ -754,7 +754,7 @@ test('direct usage', () => {
 Constructs the type of a spied class or function (i.e. the return type of `jest.spyOn()`).
 
 ```ts title="__utils__/setDateNow.ts"
-import { jest } from '@jest/globals';
+import {jest} from '@jest/globals';
 
 export function setDateNow(now: number): jest.Spied<typeof Date.now> {
   return jest.spyOn(Date, 'now').mockReturnValue(now);
@@ -762,8 +762,8 @@ export function setDateNow(now: number): jest.Spied<typeof Date.now> {
 ```
 
 ```ts
-import { afterEach, expect, type jest, test } from '@jest/globals';
-import { setDateNow } from './__utils__/setDateNow';
+import {afterEach, expect, type jest, test} from '@jest/globals';
+import {setDateNow} from './__utils__/setDateNow';
 
 let spiedDateNow: jest.Spied<typeof Date.now> | undefined = undefined;
 

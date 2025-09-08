@@ -46,7 +46,7 @@ In Next.js, you can statically generate pages **with or without data**. Let's ta
 By default, Next.js pre-renders pages using Static Generation without fetching data. Here's an example:
 
 ```jsx
-function About()
+function About() 
 
 ```
 
@@ -125,7 +125,7 @@ So your page **paths** that are pre-rendered depend on external data. To handle 
 
   // We'll pre-render only these paths at build time.
   //  means other routes should 404.
-  return
+  return 
 }
 ```
 

@@ -10,7 +10,7 @@ To override the default `Document`, create the file `pages/_document` as shown b
 ```tsx filename="pages/_document.tsx" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -18,7 +18,7 @@ To override the default `Document`, create the file `pages/_document` as shown b
 ```jsx filename="pages/_document.jsx" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -27,13 +27,11 @@ To override the default `Document`, create the file `pages/_document` as shown b
 >
 > - `_document` is only rendered on the server, so event handlers like `onClick` cannot be used in this file.
 > - `
-
     )
-
+  }
 }
-}
 
-````
+```
 
 ```jsx filename="pages/_document.jsx" switcher
 
@@ -45,10 +43,10 @@ class MyDocument extends Document )
     return initialProps
   }
 
-  render()
+  render() 
 }
 
-````
+```
 
 > **Good to know**:
 >

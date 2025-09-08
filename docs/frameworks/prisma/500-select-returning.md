@@ -1,7 +1,7 @@
 ---
 title: 'Overfetching'
 metaTitle: 'Optimize Recommendations: `SELECT/RETURNING *`'
-metaDescription: 'Learn about the recommendation provided by Optimize for queries that are overfetching data.'
+metaDescription: "Learn about the recommendation provided by Optimize for queries that are overfetching data."
 tocDepth: 3
 toc: true
 ---

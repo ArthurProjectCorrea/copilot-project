@@ -1,7 +1,7 @@
 ---
-title: 'System requirements'
-metaTitle: 'System requirements (Reference)'
-metaDescription: 'System requirements for running Prisma ORM'
+title: "System requirements"
+metaTitle: "System requirements (Reference)"
+metaDescription: "System requirements for running Prisma ORM"
 tocDepth: 3
 ---
 
@@ -99,7 +99,7 @@ You see the following error when you try type-checking a project after you run `
 ```terminal wrap
 ./node_modules/.prisma/client/index.d.ts:10:33
 Type error: Type expected.
-   8 | export type PrismaPromise<A> = Promise<A> &
+   8 | export type PrismaPromise<A> = Promise<A> & 
    9 | type UnwrapTuple<Tuple extends readonly unknown[]> = ` ? Tuple[K] extends PrismaPromise<infer X> ? X : never : never
      |                                 ^
   11 | };

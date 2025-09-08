@@ -26,7 +26,7 @@ Create a new file named `index.ts` and add the following code to it:
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -48,7 +48,7 @@ The following examples are all based on the models in the Prisma schema.
 Inside the `main` function, add the following query to read all `User` records from the database and print the result:
 
 ```ts file=index.ts showLineNumbers
-async function main();
+async function main() 
 ```
 
 Now run the code with your current TypeScript setup. If you're using `tsx`, you can run it like this:

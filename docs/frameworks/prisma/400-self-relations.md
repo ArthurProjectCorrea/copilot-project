@@ -73,7 +73,7 @@ The following MongoDB documents represent a one-to-one self-relation between two
 ```json
 ,
   "name": "Elsa",
-  "successorId":
+  "successorId": 
 }
 ```
 
@@ -121,14 +121,14 @@ The following MongoDB documents represent a one-to-many self-relation between th
 ```json
 ,
   "name": "Student 8",
-  "teacherId":
+  "teacherId": 
 }
 ```
 
 ```json
 ,
   "name": "Student 9",
-  "teacherId":
+  "teacherId": 
 }
 ```
 
@@ -146,9 +146,9 @@ Note that for relational databases, this many-to-many-relation is [implicit](/or
 If you need the relation to hold other fields, you can create an [explicit](/orm/prisma-schema/data-model/relations/many-to-many-relations#explicit-many-to-many-relations) many-to-many self relation as well. The explicit version of the self relation shown previously is as follows:
 
 ```prisma
-model User
+model User 
 
-model Follows
+model Follows 
 ```
 
 ### Many-to-many self-relations in the database
@@ -179,11 +179,11 @@ The following MongoDB documents represent a many-to-many self-relation between f
   "name": "Bob",
   "followedByIDs": [
     ,
-
+    
   ],
   "followingIDs": [
     ,
-
+    
   ]
 }
 ```

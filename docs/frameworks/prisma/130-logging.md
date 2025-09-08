@@ -9,7 +9,7 @@ metaDescription: 'Learn how to configure Prisma Client to log the raw SQL querie
 The simplest way to print _all_ log levels to stdout is to pass in an array `LogLevel` objects:
 
 ```ts
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 ```
 
 This is the short form of passing in an array of `LogDefinition` objects where the value of `emit` is always `stdout`:

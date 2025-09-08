@@ -53,7 +53,7 @@ CREATE TABLE public."Post" (
 After introspecting your database with `npx prisma db pull`, you will have a new `Post` model in your Prisma Schema:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 Notice that the `title` field has been annotated with `@db.String(200)` — this differs from PostgreSQL where the annotation would be `@db.VarChar(200)`.
@@ -67,7 +67,7 @@ When generating unique identifiers for records in a distributed database like Co
 Instead, Prisma ORM provides the [`autoincrement()`](/orm/reference/prisma-schema-reference#autoincrement) attribute function, which uses CockroachDB's [`unique_rowid()` function](https://www.cockroachlabs.com/docs/stable/serial.html) for generating unique identifiers. For example, the following `User` model has an `id` primary key, generated using the `autoincrement()` function:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 For compatibility with existing databases, you may sometimes still need to generate a fixed sequence of integer key values. In these cases, you can use Prisma ORM's inbuilt [`sequence()`](/orm/reference/prisma-schema-reference#sequence) function for CockroachDB. For a list of available options for the `sequence()` function, see our [reference documentation](/orm/reference/prisma-schema-reference#sequence).
@@ -79,7 +79,7 @@ For more information on generating database keys, see CockroachDB's [Primary key
 To connect to a CockroachDB database server, you need to configure a [`datasource`](/orm/prisma-schema/overview/data-sources) block in your [Prisma schema](/orm/prisma-schema):
 
 ```prisma file=schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 The fields passed to the `datasource` block are:
@@ -115,13 +115,13 @@ The CockroachDB connector maps the [scalar types](/orm/prisma-schema/data-model/
 
 The following table lists any other current known limitations of CockroachDB compared to PostgreSQL:
 
-| Issue                                                                | Area   | Notes                                                                                                                                                                                                                                                           |
-| -------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Index types `Hash`, `Gist`, `SpGist` or `Brin` are not supported.    | Schema | In PostgreSQL, Prisma ORM allows [configuration of indexes](/orm/prisma-schema/data-model/indexes#configuring-the-access-type-of-indexes-with-type-postgresql) to use the different index access method. CockroachDB only currently supports `BTree` and `Gin`. |
-| Pushing to `Enum` types not supported                                | Client | Pushing to `Enum` types (e.g. `data: , }`) is currently [not supported in CockroachDB](https://github.com/cockroachdb/cockroach/issues/71388)                                                                                                                   |
-| Searching on `String` fields without a full text index not supported | Client | Searching on `String` fields without a full text index (e.g. `where: , },`) is currently [not supported in CockroachDB](https://github.com/cockroachdb/cockroach/issues/7821)                                                                                   |
-| Integer division not supported                                       | Client | Integer division (e.g. `data: , }`) is currently [not supported in CockroachDB](https://github.com/cockroachdb/cockroach/issues/41448)                                                                                                                          |
-| Limited filtering on `Json` fields                                   | Client | Currently CockroachDB [only supports](https://github.com/cockroachdb/cockroach/issues/49144) `equals` and `not` filtering on `Json` fields                                                                                                                      |
+| Issue                                                                                                | Area          | Notes                                                                                                                                                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Index types `Hash`, `Gist`, `SpGist` or `Brin` are not supported.                                    | Schema        | In PostgreSQL, Prisma ORM allows [configuration of indexes](/orm/prisma-schema/data-model/indexes#configuring-the-access-type-of-indexes-with-type-postgresql) to use the different index access method. CockroachDB only currently supports `BTree` and `Gin`. |
+| Pushing to `Enum` types not supported                                                                | Client        | Pushing to `Enum` types (e.g. `data: , }`) is currently [not supported in CockroachDB](https://github.com/cockroachdb/cockroach/issues/71388)                                                                                               |
+| Searching on `String` fields without a full text index not supported                                 | Client        | Searching on `String` fields without a full text index (e.g. `where: , },`) is currently [not supported in CockroachDB](https://github.com/cockroachdb/cockroach/issues/7821)                                                   |
+| Integer division not supported                                                                       | Client        | Integer division (e.g. `data: , }`) is currently [not supported in CockroachDB](https://github.com/cockroachdb/cockroach/issues/41448)                                                                                                    |
+| Limited filtering on `Json` fields                                                                   | Client        | Currently CockroachDB [only supports](https://github.com/cockroachdb/cockroach/issues/49144) `equals` and `not` filtering on `Json` fields                                                                                                                      |
 
 ## Type mapping between CockroachDB and the Prisma schema
 
@@ -176,7 +176,7 @@ When introspecting a CockroachDB database, the database types are mapped to Pris
 [Introspection](/orm/prisma-schema/introspection) adds native database types that are **not yet supported** as [`Unsupported`](/orm/reference/prisma-schema-reference#unsupported) fields:
 
 ```prisma file=schema.prisma showLineNumbers
-model Device
+model Device 
 ```
 
 ## More on using CockroachDB with Prisma ORM

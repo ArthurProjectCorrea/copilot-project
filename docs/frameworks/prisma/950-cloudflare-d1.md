@@ -46,7 +46,6 @@ If you want to deploy a Cloudflare Worker with D1 and Prisma ORM, follow these [
 ## Schema migrations with Prisma ORM on D1
 
 You can use two approaches for migrating your database schema with Prisma ORM and D1:
-
 - Using `prisma db push` via a driver adapter in `prisma.config.ts`
 - Using the Wrangler CLI
 
@@ -85,7 +84,7 @@ CLOUDFLARE_D1_TOKEN="F8Cg..."
 
 #### 3. Set up Prisma Config file
 
-Make sure that you have a [`prisma.config.ts`](/orm/reference/prisma-config-reference) file for your project. Then, set up the [migration driver adapter](/orm/reference/prisma-config-reference#adapter) to reference D1:
+Make sure that you have a [`prisma.config.ts`](/orm/reference/prisma-config-reference)  file for your project. Then, set up the [migration driver adapter](/orm/reference/prisma-config-reference#adapter) to reference D1:
 
 ```ts file=prisma.config.ts
 
@@ -129,7 +128,7 @@ Note that for querying the database, you keep using the `PrismaD1` driver adapte
 
 :::
 
-### Using the Wrangler CLI
+### Using the Wrangler CLI 
 
 Cloudflare D1 comes with its own [migration system](https://developers.cloudflare.com/d1/reference/migrations/). While we recommend that you use the [native Prisma Migrate workflow](#using-prisma-migrate-via-a-driver-adapter-in-prisma-config), this migration system via the `wrangler d1 migrations` command is available.
 
@@ -146,7 +145,7 @@ The workflow for creating an initial migration looks as follows. Assume you have
 This is your initial version of the Prisma schema that you want to map to your D1 instance:
 
 ```prisma
-model User
+model User 
 ```
 
 ##### 2. Create migration file using `wrangler` CLI
@@ -228,9 +227,9 @@ For any further migrations, you can use the same workflow but instead of using `
 Assume you have updated your Prisma schema with another model:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 ##### 2. Create migration file using `wrangler` CLI

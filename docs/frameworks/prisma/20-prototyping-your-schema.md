@@ -12,6 +12,7 @@ The Prisma CLI has a dedicated command for prototyping schemas: [`db push`](/orm
 1. Introspects the database to infer and executes the changes required to make your database schema reflect the state of your Prisma schema.
 2. By default, after changes have been applied to the database schema, generators are triggered (for example, Prisma Client). You do not need to manually invoke `prisma generate`.
 3. If `db push` anticipates that the changes could result in data loss, it will:
+
    - Throw an error
    - Require the `--accept-data-loss` option if you still want to make the changes
 
@@ -51,17 +52,17 @@ The following scenario demonstrates how to use `db push` to synchronize a new sc
 1.  Create a first draft of your schema:
 
     ```prisma
-    generator client
-
-    datasource db
-
-    model User
-
-    model Profile
-
-    model Post
-
-    model Category
+    generator client 
+    
+    datasource db 
+    
+    model User 
+    
+    model Profile 
+    
+    model Post 
+    
+    model Category 
     ```
 
 2.  Use `db push` to push the initial schema to the database:
@@ -83,9 +84,9 @@ The following scenario demonstrates how to use `db push` to synchronize a new sc
 
     ```prisma highlight=6;add
     // ... //
-
-    model Post
-
+    
+    model Post 
+    
     // ... //
     ```
 
@@ -126,20 +127,21 @@ The following scenario demonstrates how to use `db push` to prototype a change t
 1. Check out the latest Prisma schema and migration history:
 
    ```prisma
-   generator client
-
-   datasource db
-
-   model User
-
-   model Profile
-
-   model Post
-
-   model Category
+   generator client 
+   
+   datasource db 
+   
+   model User 
+   
+   model Profile 
+   
+   model Post 
+   
+   model Category 
    ```
 
 2. Prototype your new feature, which can involve any number of steps. For example, you might:
+
    - Create a `tags String[]` field, then run `db push`
    - Change the field type to `tags Tag[]` and add a new model named `Tag`, then run `db push`
    - Change your mind and restore the original `tags String[]` field, then call `db push`
@@ -148,7 +150,7 @@ The following scenario demonstrates how to use `db push` to prototype a change t
    After experimenting with several solutions, the final schema change looks like this:
 
    ```prisma
-   model Post
+   model Post 
    ```
 
 3. To create a migration that adds the new `tags` field, run the `migrate dev` command:

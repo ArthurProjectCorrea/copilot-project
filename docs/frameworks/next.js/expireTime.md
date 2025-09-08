@@ -8,7 +8,7 @@ You can specify a custom `stale-while-revalidate` expire time for CDNs to consum
 Open `next.config.js` and add the `expireTime` config:
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```
 
 Now when sending the `Cache-Control` header the expire time will be calculated depending on the specific revalidate period.

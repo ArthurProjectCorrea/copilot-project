@@ -73,7 +73,7 @@ import { EntityManager, MikroORM } from '@mikro-orm/sqlite';
 export class MyService {
   constructor(
     private readonly orm: MikroORM,
-    private readonly em: EntityManager
+    private readonly em: EntityManager,
   ) {}
 }
 ```
@@ -114,7 +114,7 @@ In this way we can inject the `PhotoRepository` to the `PhotoService` using the 
 export class PhotoService {
   constructor(
     @InjectRepository(Photo)
-    private readonly photoRepository: EntityRepository<Photo>
+    private readonly photoRepository: EntityRepository<Photo>,
   ) {}
 }
 ```

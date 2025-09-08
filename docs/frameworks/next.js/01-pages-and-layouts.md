@@ -45,9 +45,9 @@ The React model allows us to deconstruct a [page](/docs/pages/building-your-appl
 
   return (
     <>
-
+      
       <main></main>
-
+      
     </>
   )
 }
@@ -58,10 +58,9 @@ The React model allows us to deconstruct a [page](/docs/pages/building-your-appl
 ### Single Shared Layout with Custom App
 
 If you only have one layout for your entire application, you can create a [Custom App](/docs/pages/building-your-application/routing/custom-app) and wrap your application with the layout. Since the `
-)
+  )
 }
-
-````
+```
 
 ### Per-Page Layouts
 
@@ -74,8 +73,8 @@ If you need multiple layouts, you can add a property `getLayout` to your page, a
   )
 }
 
-Page.getLayout = function getLayout(page)
-````
+Page.getLayout = function getLayout(page) 
+```
 
 ```jsx filename="pages/_app.js"
 
@@ -98,17 +97,17 @@ When using TypeScript, you must first create a new type for your pages which inc
 
 ```tsx filename="pages/index.tsx" switcher
 
-const Page: NextPageWithLayout = () =>
+const Page: NextPageWithLayout = () => 
 
-Page.getLayout = function getLayout(page: ReactElement)
+Page.getLayout = function getLayout(page: ReactElement) 
 
 ```
 
 ```jsx filename="pages/index.js" switcher
 
-const Page = () =>
+const Page = () => 
 
-Page.getLayout = function getLayout(page)
+Page.getLayout = function getLayout(page) 
 
 ```
 
@@ -117,7 +116,7 @@ Page.getLayout = function getLayout(page)
   getLayout?: (page: ReactElement) => ReactNode
 }
 
-type AppPropsWithLayout = AppProps &
+type AppPropsWithLayout = AppProps & 
 
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page)
@@ -148,9 +147,9 @@ Inside your layout, you can fetch data on the client-side using `useEffect` or a
 
   return (
     <>
-
+      
       <main></main>
-
+      
     </>
   )
 }

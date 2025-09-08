@@ -39,9 +39,9 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 }
 ```
 
-| Example                                    | URL          | `params`    |
-| ------------------------------------------ | ------------ | ----------- |
-| `app/[artist]/@sidebar/default.js`         | `/zack`      | `Promise<>` |
+| Example                                    | URL          | `params`                                     |
+| ------------------------------------------ | ------------ | -------------------------------------------- |
+| `app/[artist]/@sidebar/default.js`         | `/zack`      | `Promise<>`                |
 | `app/[artist]/[album]/@sidebar/default.js` | `/zack/next` | `Promise<>` |
 
 - Since the `params` prop is a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access the values.

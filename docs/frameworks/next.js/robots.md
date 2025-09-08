@@ -90,7 +90,7 @@ Sitemap: https://acme.com/sitemap.xml
 ### Robots object
 
 ```tsx
-type Robots =
+type Robots = 
     | Array<>
   sitemap?: string | string[]
   host?: string

@@ -266,7 +266,9 @@ If you run Swagger now, the generated `swagger.json` for this specific endpoint 
 To make it reusable, we can create a custom decorator for `PaginatedDto`, as follows:
 
 ```ts
-export const ApiPaginatedResponse = <TModel extends Type<any>>(model: TModel) => {
+export const ApiPaginatedResponse = <TModel extends Type<any>>(
+  model: TModel,
+) => {
   return applyDecorators(
     ApiExtraModels(PaginatedDto, model),
     ApiOkResponse({
@@ -283,7 +285,7 @@ export const ApiPaginatedResponse = <TModel extends Type<any>>(model: TModel) =>
           },
         ],
       },
-    })
+    }),
   );
 };
 ```
@@ -309,7 +311,9 @@ findAll(): Observable<{ total: number, limit: number, offset: number, results: C
 As you can see, the **Return Type** here is ambiguous. To workaround this issue, you can add a `title` property to the `schema` for `ApiPaginatedResponse`:
 
 ```typescript
-export const ApiPaginatedResponse = <TModel extends Type<any>>(model: TModel) => {
+export const ApiPaginatedResponse = <TModel extends Type<any>>(
+  model: TModel,
+) => {
   return applyDecorators(
     ApiOkResponse({
       schema: {
@@ -318,7 +322,7 @@ export const ApiPaginatedResponse = <TModel extends Type<any>>(model: TModel) =>
           // ...
         ],
       },
-    })
+    }),
   );
 };
 ```

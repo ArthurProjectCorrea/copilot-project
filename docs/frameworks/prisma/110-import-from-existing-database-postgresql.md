@@ -6,11 +6,11 @@ metaDescription: 'Learn how to import data from an existing database into Prisma
 tocDepth: 3
 toc: true
 search: true
-dbSwitcher: ['mysql', 'postgresql']
+dbSwitcher: [ "mysql", "postgresql"]
 slugSwitch: /getting-started/prisma-postgres/import-from-existing-database-
 ---
 
-This guide provides step-by-step instructions for importing data from an existing PostgreSQL database into Prisma Postgres.
+This guide provides step-by-step instructions for importing data from an existing PostgreSQL database into Prisma Postgres. 
 
 You can accomplish this migration in three steps:
 
@@ -42,7 +42,7 @@ With your Prisma Postgres instance being created, you can move to the next step.
 
 ## 2. Export data from your existing database
 
-In this step, you're going to export the data from your existing database and store it in a `.bak` file on your local machine.
+In this step, you're going to export the data from your existing database and store it in a `.bak` file on your local machine. 
 
 Make sure to have the connection URL for your existing database ready, it should be [structured](/orm/overview/databases/postgresql#connection-url) like this:
 
@@ -58,11 +58,11 @@ Expand below for provider-specific instructions that help you determine the righ
 <br />
 
 - Make sure to select non-pooled connection string by switching off the **Connection pooling** toggle.
-- The `sslmode` has to be set to `require` and appended to your Neon database url for the command to work.
+- The `sslmode` has to be set to `require` and appended to your Neon database url for the command to work. 
 - The connection URL should look similar to this:
-  ```no-copy
-  postgresql://USER:PASSWORD@YOUR-NEON-HOST/DATABASE?sslmode=require
-  ```
+    ```no-copy
+    postgresql://USER:PASSWORD@YOUR-NEON-HOST/DATABASE?sslmode=require
+    ```
 
 </details>
 
@@ -71,9 +71,9 @@ Expand below for provider-specific instructions that help you determine the righ
 
 - Use a database connection URL that uses [Supavisor session mode](https://supabase.com/docs/guides/database/connecting-to-postgres#supavisor-session-mode).
 - The connection URL should look similar to this:
-  ```no-copy
-  postgres://postgres.apbkobhfnmcqqzqeeqss:[YOUR-PASSWORD]@aws-0-ca-central-1.pooler.supabase.com:5432/postgres
-  ```
+    ```no-copy
+    postgres://postgres.apbkobhfnmcqqzqeeqss:[YOUR-PASSWORD]@aws-0-ca-central-1.pooler.supabase.com:5432/postgres
+    ```
 
 </details>
 
@@ -104,14 +104,13 @@ In this section, you'll use a [TCP Tunnel](/postgres/database/direct-connections
 
 ### 3.1. Connecting to the Prisma Postgres Database with `@prisma/ppg-tunnel`
 
-Open a new terminal and set the environment variable for your Prisma Postgres database connection URL.
+Open a new terminal and set the environment variable for your Prisma Postgres database connection URL. 
 
 ```bash
 
 ```
 
 Run the tunnel:
-
 ```bash
 npx @prisma/ppg-tunnel --host 127.0.0.1 --port 5432
 ```
@@ -168,7 +167,7 @@ If you already using Prisma ORM, the only things you need to do are:
 - add the Prisma Accelerate extension to your project
 - update the database connection URL and re-generate Prisma Client
 
-#### 4.A.1. Add the Prisma Accelerate extension
+#### 4.A.1. Add the Prisma Accelerate extension 
 
 Th Prisma Accelerate extension is [required](/postgres/introduction/overview#using-the-client-extension-for-prisma-accelerate-required) when using Prisma Postgres. If you are not currently using Prisma Accelerate with Prisma ORM, go through the following steps to make Prisma ORM work with Prisma Postgres.
 
@@ -181,7 +180,8 @@ npm install @prisma/extension-accelerate
 Then, add the extension to your Prisma Client instance:
 
 ```ts
-const prisma = new PrismaClient().$extends(withAccelerate());
+
+const prisma = new PrismaClient().$extends(withAccelerate())
 ```
 
 #### 4.A.2. Update the database connection URL
@@ -189,7 +189,7 @@ const prisma = new PrismaClient().$extends(withAccelerate());
 The database connection URL is configured via the `url` of the `datasource` block in your `schema.prisma` file. Most commonly, it is set via an environment variable called `DATABASE_URL`:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 The next steps assumes that you're a `.env` file to set the `DATABASE_URL` environment variable (if that's not the case, you can set the environment variable in your preferred way).

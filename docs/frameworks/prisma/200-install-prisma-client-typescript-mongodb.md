@@ -10,7 +10,7 @@ pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb/in
 pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/querying-the-database-typescript-mongodb
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/install-prisma-client-
 ---
-
+ 
 ## Install and generate Prisma Client
 
 To get started with Prisma Client, you need to install the `@prisma/client` package:

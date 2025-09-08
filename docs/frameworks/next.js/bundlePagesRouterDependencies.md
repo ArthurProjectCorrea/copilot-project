@@ -7,7 +7,9 @@ Enable automatic server-side dependency bundling for Pages Router applications. 
 
 ```js filename="next.config.js"
 /** @type  */
-const nextConfig = (module.exports = nextConfig);
+const nextConfig = 
+
+module.exports = nextConfig
 ```
 
 Explicitly opt-out certain packages from being bundled using the [`serverExternalPackages`](/docs/pages/api-reference/config/next-config-js/serverExternalPackages) option.

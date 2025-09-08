@@ -64,9 +64,9 @@ Creating multiple instances of `PrismaClient` can exhaust your database connecti
 For applications with a traditional server, instantiate `PrismaClient` once and reuse it throughout your app instead of creating multiple instances. For example, instead of:
 
 ```ts file=query.ts
-async function getPosts();
+async function getPosts() 
 
-async function getUsers();
+async function getUsers() 
 ```
 
 Define a single `PrismaClient` instance in a dedicated file and re-export it for reuse:
@@ -78,9 +78,10 @@ Define a single `PrismaClient` instance in a dedicated file and re-export it for
 Then import the shared instance:
 
 ```ts file=query.ts
-async function getPosts();
 
-async function getUsers();
+async function getPosts() 
+
+async function getUsers() 
 ```
 
 For serverless development environments with frameworks that use HMR (Hot Module Replacement), ensure you properly handle a [single instance of Prisma in development](/orm/more/help-and-troubleshooting/nextjs-help#best-practices-for-using-prisma-client-in-development).
@@ -115,7 +116,7 @@ Automatic batching of `findUnique()` is particularly useful in a **GraphQL conte
 For example - the following GraphQL runs the `allUsers` resolver to get all users, and the `posts` resolver **once per user** to get each user's posts (n+1):
 
 ```js
-query
+query 
   }
 }
 ```
@@ -149,7 +150,7 @@ The **only** reason you need to use the fluent API (`user.findUnique(...).posts(
 
 When the dataloader batches `findMany()` queries or your query has the `relationStrategy` set to `join`, you no longer need to use `findUnique()` with the fluent API in this way.
 
-:::
+::: 
 
 If the `posts` resolver is invoked once per user, the dataloader in Prisma Client groups `findUnique()` queries with the same parameters and selection set. Each group is optimized into a single `findMany()`.
 

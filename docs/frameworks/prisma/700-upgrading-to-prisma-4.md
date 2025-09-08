@@ -117,17 +117,17 @@ After you upgrade to Prisma ORM 4, any one-to-one or one-to-many relations witho
 When using [implicit many-to-many relations](/orm/prisma-schema/data-model/relations/many-to-many-relations#implicit-many-to-many-relations) in Prisma ORM 4, you will no longer be able to use the `references` argument, which was previously optional. For example, the following relation would now trigger a validation error:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 Instead, you can write:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 This is because the only valid value for `references` was `id`, so removing this argument makes it clearer what can and cannot be changed.
@@ -163,8 +163,9 @@ Raw queries now deserialize scalar values to their corresponding JavaScript type
 Example query and response:
 
 ```ts
-const res = await prisma.$queryRaw`SELECT bigint, bytes, decimal, date FROM "Table";`;
-console.log(res); // []
+const res =
+  await prisma.$queryRaw`SELECT bigint, bytes, decimal, date FROM "Table";`
+console.log(res) // []
 ```
 
 ##### Upgrade path
@@ -200,7 +201,7 @@ We recommend that you re-test your use of `$queryRaw` to ensure that the types y
 For example, in version 4.0.0, the following query fails:
 
 ```js
-await prisma.$queryRaw`select length($);`;
+await prisma.$queryRaw`select length($);`
 // ERROR: function length(integer) does not exist
 // HINT: No function matches the given name and argument types. You might need to add explicit type casts.
 ```
@@ -208,7 +209,7 @@ await prisma.$queryRaw`select length($);`;
 This is because PostgreSQL’s `length` function expects `text` as input. Prisma ORM used to silently coerce `42` to `text`, but does not do this in version 4.0.0. To fix this, explicitly cast `42` to `text` as follows:
 
 ```js
-await prisma.$queryRaw`select length($::text);`;
+await prisma.$queryRaw`select length($::text);`
 ```
 
 #### Raw query mapping: PostgreSQL and JavaScript integers
@@ -233,6 +234,7 @@ See [Filtering by null values](/orm/prisma-client/special-fields-and-types/worki
 ##### Upgrade path
 
 1. If you use literal strings to address these values, then you must replace them with the following named constants:
+
    - `DbNull`: replace with `Prisma.DbNull`
    - `JsonNull`: replace with `Prisma.JsonNull`
    - `AnyNull`: replace with `Prisma.AnyNull`

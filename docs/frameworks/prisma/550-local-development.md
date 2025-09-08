@@ -48,12 +48,11 @@ $ npx prisma dev
 ```
 
 Now hit:
-
 - <kbd>q</kbd> to quit
 - <kbd>h</kbd> to view the connection URL enabling connections via **Prisma ORM**
 - <kbd>t</kbd> to view the connection URL enabling connections via **any tool**
 
-If you want to connect via Prisma ORM, hit <kbd>h</kbd> on your keyboard, copy the `DATABASE_URL` and store it in your `.env` file. This will be used to connect to the local Prisma Postgres server:
+If you want to connect via Prisma ORM, hit <kbd>h</kbd> on your keyboard, copy the `DATABASE_URL` and  store it in your `.env` file. This will be used to connect to the local Prisma Postgres server:
 
 ```bash file=.env
 DATABASE_URL="prisma+postgres://localhost:51213/?api_key=__API_KEY__"
@@ -62,12 +61,13 @@ DATABASE_URL="prisma+postgres://localhost:51213/?api_key=__API_KEY__"
 The `DATABASE_URL` is a connection string that Prisma uses to connect to the local Prisma Postgres server and is compatible with the [Prisma Postgres extension](https://www.npmjs.com/package/@prisma/extension-accelerate):
 
 ```ts
-const prisma = new PrismaClient().$extends(withAccelerate());
+
+const prisma = new PrismaClient().$extends(withAccelerate())
 ```
 
 This ensures no additional code changes are needed when switching from local Prisma Postgres to Prisma Postgres in production.
 
-Keep the local Prisma Postgres server running in the background while you work on your application.
+Keep the local Prisma Postgres server running in the background while you work on your application. 
 
 ### 2. Applying migrations and seeding data
 
@@ -79,19 +79,19 @@ npx prisma migrate dev
 
 :::note
 
-Make sure the local Prisma Postgres server is running before running the `prisma migrate dev` command.
+Make sure the local Prisma Postgres server is running before running the `prisma migrate dev` command. 
 
-If you must use a different port, append [`--port <number>`](/orm/reference/prisma-cli-reference#dev) (for example, `npx prisma migrate dev --port 5422`) and update your `DATABASE_URL` (or other connection settings) to match.
+If you must use a different port, append [`--port <number>`](/orm/reference/prisma-cli-reference#dev) (for example, `npx prisma migrate dev --port 5422`) and update your `DATABASE_URL` (or other connection settings) to match. 
 
 :::
 
-This will create the database and run the migrations.
+This will create the database and run the migrations. 
 
 If you have a seeder script to seed the database, you should also run it in this step.
 
 ### 3. Running your application locally
 
-Start your application's development server. You can now perform queries against the local Prisma Postgres instance using Prisma ORM.
+Start your application's development server. You can now perform queries against the local Prisma Postgres instance using Prisma ORM. 
 
 To transition to production, you only need to update the database URL in the `.env` file with a Prisma Postgres connection url without additional application logic changes.
 
@@ -147,7 +147,7 @@ npx prisma dev rm mydb* # removes all DBs starting with `mydb`
 
 ## Using local Prisma Postgres with any ORM
 
-Local Prisma Postgres supports [direct TCP connections](/postgres/database/direct-connections), allowing you to connect to it via any tool.
+Local Prisma Postgres supports [direct TCP connections](/postgres/database/direct-connections), allowing you to connect to it via any tool. 
 
 In order to connect to your local Prisma Postgres instance, use the `postgres://` connection string that's returned by `prisma dev`.
 
@@ -156,7 +156,6 @@ In order to connect to your local Prisma Postgres instance, use the `postgres://
 The [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) has a dedicated UI managing Prisma Postgres instances.
 
 To use it, install the VS Code extension and find the **Prisma logo** in the activity bar of your VS Code editor. It enables the following workflows:
-
 - creating and deleting databases
 - starting and stopping the server for a particular database
 - "push to cloud": move a database from local to remote

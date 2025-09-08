@@ -6,15 +6,15 @@ tocDepth: 3
 toc: true
 ---
 
-When working with Prisma Postgres, you may encounter errors often highlighted by specific error codes during development and operations.
+When working with Prisma Postgres, you may encounter errors often highlighted by specific error codes during development and operations. 
 
 It is important to understand the meaning of these errors, why they occur, and how to resolve them in order to ensure the smooth operation of your applications. This guide aims to provide insights and steps to troubleshoot specific error codes encountered with Prisma Postgres.
 
 ## [`P6009`](/orm/reference/error-reference#p6009-responsesizelimitexceeded) (`ResponseSizeLimitExceeded`)
 
-This error is triggered when the response size from a database query exceeds [the configured query response size limit](/postgres/database/connection-pooling#response-size-limit). We've implemented this restriction to safeguard your application performance, as retrieving data over `5MB` can significantly slow down your application due to multiple network layers.
+This error is triggered when the response size from a database query exceeds [the configured query response size limit](/postgres/database/connection-pooling#response-size-limit). We've implemented this restriction to safeguard your application performance, as retrieving data over `5MB` can significantly slow down your application due to multiple network layers. 
 
-Typically, transmitting more than `5MB` of data is common when conducting ETL (Extract, Transform, Load) operations. However, for other scenarios such as transactional queries, real-time data fetching for user interfaces, bulk data updates, or aggregating large datasets for analytics outside of ETL contexts, it should generally be avoided. These use cases, while essential, can often be optimized to work within [the configured query response size limit](/postgres/database/connection-pooling#response-size-limit), ensuring smoother performance and a better user experience.
+Typically, transmitting more than `5MB` of data is common when conducting ETL (Extract, Transform, Load) operations.  However, for other scenarios such as transactional queries, real-time data fetching for user interfaces, bulk data updates, or aggregating large datasets for analytics outside of ETL contexts, it should generally be avoided. These use cases, while essential, can often be optimized to work within [the configured query response size limit](/postgres/database/connection-pooling#response-size-limit), ensuring smoother performance and a better user experience.
 
 ### Possible causes for [`P6009`](/orm/reference/error-reference#p6009-responsesizelimitexceeded)
 
@@ -104,7 +104,7 @@ If your application retries queries immediately or with minimal delay, especiall
 
 **Suggested solution:**
 
-- Implement an exponential backoff strategy. Rather than retrying immediately or with a fixed delay, gradually increase the delay period after each failed attempt.
+- Implement an exponential backoff strategy. Rather than retrying immediately or with a fixed delay, gradually increase the delay period after each failed attempt.  
 - This allows the system time to recover and reduces the likelihood of overwhelming Prisma Accelerate and your database.
 
 #### Sudden traffic spikes
@@ -112,8 +112,7 @@ If your application retries queries immediately or with minimal delay, especiall
 Unpredicted traffic surges (for example, during product launches, flash sales, or viral growth events) can cause the threshold to be met and result into `P5011`.
 
 **Suggested solution:**
-
-- Consider proactive scaling strategies for both Prisma Accelerate and your database.
+- Consider proactive scaling strategies for both Prisma Accelerate and your database.  
 - Monitor traffic and resource usage. If you anticipate a surge, please contact [support](/platform/support) for capacity planning and potential configuration adjustments.
 
 #### Prolonged or planned high workloads
@@ -121,6 +120,5 @@ Unpredicted traffic surges (for example, during product launches, flash sales, o
 Certain processes, such as bulk data imports, ETL operations, or extended CRON jobs, can generate continuous high query volume over time.
 
 **Suggested solution:**
-
-- Use batching or chunking techniques to break large operations into smaller parts.
+- Use batching or chunking techniques to break large operations into smaller parts.  
 - Establish throttling or scheduling to distribute the load more evenly.

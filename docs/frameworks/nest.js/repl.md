@@ -122,7 +122,7 @@ Fortunately, there is a very simple solution. Modify your `bootstrap` function l
 ```typescript
 async function bootstrap() {
   const replServer = await repl(AppModule);
-  replServer.setupHistory('.nestjs_repl_history', (err) => {
+  replServer.setupHistory(".nestjs_repl_history", (err) => {
     if (err) {
       console.error(err);
     }

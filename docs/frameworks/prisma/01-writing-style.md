@@ -69,6 +69,7 @@ When you use jargon, follow these guidelines:
 - If you can explain the jargon in a few words, then you might prefer to explain it there and then. Use your judgement to decide whether that is best for this doc.
 
 - For longer explanations, link to a definition elsewhere.
+
   - If the jargon is specific to Prisma, then link to a definition in our docs.
 
   - If the jargon is _not_ specific to Prisma, check if you can find the definition quickly with a web search. If so, then do not explain the term or link to a definition. We can reasonably expect users to know the jargon or to find an explanation for themselves.
@@ -162,5 +163,5 @@ Start all query examples with a constant. This gives you a noun to refer to late
 Example:
 
 ```ts
-const aggregations = await prisma.user.aggregate();
+const aggregations = await prisma.user.aggregate()
 ```

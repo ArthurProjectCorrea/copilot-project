@@ -1,8 +1,8 @@
 ---
-title: 'Prisma schema reference'
-metaTitle: 'Prisma Schema API'
-metaDescription: 'API reference documentation for the Prisma Schema Language (PSL).'
-sidebar_label: 'Prisma Schema'
+title: "Prisma schema reference"
+metaTitle: "Prisma Schema API"
+metaDescription: "API reference documentation for the Prisma Schema Language (PSL)."
+sidebar_label: "Prisma Schema"
 tocDepth: 3
 toc: true
 ---
@@ -52,7 +52,7 @@ In this example, the target database is available with the following credentials
 - Schema name: `public`
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 Learn more about PostgreSQL connection strings [here](/orm/overview/databases/postgresql).
@@ -69,7 +69,7 @@ In this example, the target database is available with the following credentials
 - Schema name: `public`
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 When running a Prisma CLI command that needs the database connection URL (e.g. `prisma generate`), you need to make sure that the `DATABASE_URL` environment variable is set.
@@ -91,7 +91,7 @@ In this example, the target database is available with the following credentials
 - Database name: `mydb`
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 Learn more about MySQL connection strings [here](/orm/overview/databases/mysql).
@@ -105,7 +105,7 @@ Learn more about MySQL connection strings [here](/orm/overview/databases/mysql).
 - Database name: `testing`
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 Learn more about MongoDB connection strings [here](/orm/overview/databases/mongodb).
@@ -115,7 +115,7 @@ Learn more about MongoDB connection strings [here](/orm/overview/databases/mongo
 In this example, the target database is located in a file called `dev.db`:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 Learn more about SQLite connection strings [here](/orm/overview/databases/sqlite).
@@ -132,7 +132,7 @@ In this example, the target database is available with the following credentials
 - Schema name: `public`
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 The format for connection strings is the same as for PostgreSQL. Learn more about PostgreSQL connection strings [here](/orm/overview/databases/postgresql).
@@ -147,14 +147,14 @@ This is the default generator for Prisma ORM 6.x and earlier versions. Learn mor
 
 A `generator` block accepts the following fields:
 
-| Name              | Required | Type                         | Description                                                                                                                                                                                                |
-| :---------------- | :------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `provider`        | **Yes**  | `prisma-client-js`           | Describes which [generator](/orm/prisma-schema/overview/generators) to use. This can point to a file that implements a generator or specify a built-in generator directly.                                 |
-| `output`          | No       | String (file path)           | Determines the location for the generated client, [learn more](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path). **Default**: `node_modules/.prisma/client` |
-| `previewFeatures` | No       | List of Enums                | Use intellisense to see list of currently available Preview features (`Ctrl+Space` in Visual Studio Code) **Default**: none                                                                                |
-| `engineType`      | No       | Enum (`library` or `binary`) | Defines the [query engine](/orm/more/under-the-hood/engines) type to download and use. **Default**: `library`                                                                                              |
-| `binaryTargets`   | No       | List of Enums (see below)    | Specify the OS on which the Prisma Client will run to ensure compatibility of the [query engine](/orm/more/under-the-hood/engines). **Default**: `native`                                                  |
-| `moduleFormat`    | No       | Enum (`cjs` or `esm`)        | Defines the module format of the generated Prisma Client. This field is available only with `prisma-client` generator.                                                                                     |
+| Name              | Required | Type                                     | Description                                                                                                                                                                                                |
+| :---------------- | :------- | :--------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| `provider`        | **Yes**  | `prisma-client-js`                       | Describes which [generator](/orm/prisma-schema/overview/generators) to use. This can point to a file that implements a generator or specify a built-in generator directly.                                 |
+| `output`          | No       | String (file path)                       | Determines the location for the generated client, [learn more](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path). **Default**: `node_modules/.prisma/client` |
+| `previewFeatures` | No       | List of Enums                            | Use intellisense to see list of currently available Preview features (`Ctrl+Space` in Visual Studio Code) **Default**: none                                                                                |    
+| `engineType`      | No       | Enum (`library` or `binary`)             | Defines the [query engine](/orm/more/under-the-hood/engines) type to download and use. **Default**: `library`                                                                                              |
+| `binaryTargets`   | No       | List of Enums (see below)                | Specify the OS on which the Prisma Client will run to ensure compatibility of the [query engine](/orm/more/under-the-hood/engines). **Default**: `native`                                                  |
+| `moduleFormat`    | No       | Enum (`cjs` or `esm`)                           | Defines the module format of the generated Prisma Client. This field is available only with `prisma-client` generator.                                                                                                                         |
 
 :::note[important]
 
@@ -174,15 +174,15 @@ The `prisma-client` generator will be the default generator in Prisma ORM 7.0 an
 
 A `generator` block accepts the following fields:
 
-| Name                     | Required | Type                                                                                                               | Description                                                                                                                                                                                                                 |
-| :----------------------- | :------- | :----------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `provider`               | **Yes**  | `prisma-client`                                                                                                    | Describes which [generator](/orm/prisma-schema/overview/generators) to use. This can point to a file that implements a generator or specify a built-in generator directly.                                                  |
-| `output`                 | **Yes**  | String (file path)                                                                                                 | Determines the location for the generated client, [learn more](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path).                                                             |
-| `previewFeatures`        | No       | List of Enums                                                                                                      | Use intellisense to see list of currently available Preview features (`Ctrl+Space` in Visual Studio Code) **Default**: none                                                                                                 |
-| `runtime`                | No       | Enum (`nodejs`, `deno`, `bun`, `workerd` (alias `cloudflare`), `vercel-edge` (alias `edge-light`), `react-native`) | Target runtime environment. **Default**: `nodejs`                                                                                                                                                                           |
-| `moduleFormat`           | No       | Enum (`esm` or `cjs`)                                                                                              | Determines whether the generated code supports ESM (uses `import`) or CommonJS (uses `require(...)`) modules. We always recommend `esm` unless you have a good reason to use `cjs`. **Default**: Inferred from environment. |
-| `generatedFileExtension` | No       | Enum (`ts` or `mts` or `cts`)                                                                                      | File extension for generated TypeScript files. **Default**: `ts`                                                                                                                                                            |
-| `importFileExtension`    | No       | Enum (`ts`,`mts`,`cts`,`js`,`mjs`,`cjs`, empty (for bare imports))                                                 | File extension used in import statements **Default**: Inferred from environment.                                                                                                                                            |
+| Name                     | Required | Type                                                                                                                                        | Description                                                                                                                                                                                                                 |
+| :----------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `provider`               | **Yes**  | `prisma-client`                                                                                                                            | Describes which [generator](/orm/prisma-schema/overview/generators) to use. This can point to a file that implements a generator or specify a built-in generator directly.                                                  |
+| `output`                 | **Yes**  | String (file path)                                                                                                                          | Determines the location for the generated client, [learn more](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path).                                                             |
+| `previewFeatures`        | No       | List of Enums                                                                                                                               | Use intellisense to see list of currently available Preview features (`Ctrl+Space` in Visual Studio Code) **Default**: none                                                                                                 |
+| `runtime`                | No       | Enum (`nodejs`, `deno`, `bun`, `workerd` (alias `cloudflare`), `vercel-edge` (alias `edge-light`), `react-native`) | Target runtime environment. **Default**: `nodejs` |
+| `moduleFormat`           | No       | Enum (`esm` or `cjs`)                                                                                                                       | Determines whether the generated code supports ESM (uses `import`) or CommonJS (uses `require(...)`) modules. We always recommend `esm` unless you have a good reason to use `cjs`. **Default**: Inferred from environment. |
+| `generatedFileExtension` | No       | Enum (`ts` or `mts` or `cts`)                                                                                                               | File extension for generated TypeScript files. **Default**: `ts`                                                                                                                                                            |
+| `importFileExtension`    | No       | Enum (`ts`,`mts`,`cts`,`js`,`mjs`,`cjs`, empty (for bare imports))                                                                          | File extension used in import statements **Default**: Inferred from environment.                                                                                                                                            |
 
 #### `binaryTargets` options
 
@@ -291,13 +291,13 @@ Unless specified otherwise, the default supported CPU architecture is x86_64.
 #### Specify the `prisma-client-js` generator with the default `output`, `previewFeatures`, `engineType` and `binaryTargets`
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the above `generator` definition is **equivalent** to the following because it uses the default values for `output`, `engineType` and `binaryTargets` (and implicitly `previewFeatures`):
 
 ```prisma
-generator client
+generator client 
 ```
 
 #### Specify a custom `output` location for Prisma Client
@@ -305,7 +305,7 @@ generator client
 This example shows how to define a custom `output` location of the generated asset to override the default one.
 
 ```prisma
-generator client
+generator client 
 ```
 
 #### Specify custom `binaryTargets` to ensure compatibility with the OS
@@ -313,7 +313,7 @@ generator client
 This example shows how to configure Prisma Client to run on `Ubuntu 19.04 (disco)` based on the table [above](#linux-ubuntu-x86_64).
 
 ```prisma
-generator client
+generator client 
 ```
 
 #### Specify a `provider` pointing to some custom generator implementation
@@ -321,7 +321,7 @@ generator client
 This example shows how to use a custom generator that's located in a directory called `my-generator`.
 
 ```prisma
-generator client
+generator client 
 ```
 
 ## `model`
@@ -416,7 +416,7 @@ Variable length text.
 You can use Prisma Migrate to map `@db.Bit(1)` to `String`:
 
 ```prisma
-model Model
+model Model 
 ```
 
 #### MongoDB
@@ -996,7 +996,7 @@ The `Unsupported` type was introduced in [2.17.0](https://github.com/prisma/pris
 #### Examples
 
 ```prisma
-model Star
+model Star 
 ```
 
 ## `model` field type modifiers
@@ -1038,7 +1038,7 @@ Makes a field optional.
 ##### Optional `name` field
 
 ```prisma highlight=3;normal
-model User
+model User 
 ```
 
 ## Attributes
@@ -1067,6 +1067,7 @@ Defines a single-field ID on the model.
 
 - Corresponding database construct: `PRIMARY KEY`
 - Can be annotated with a [`@default`](#default) attribute that uses [functions](#attribute-functions) to auto-generate an ID:
+
   - [`autoincrement()`](#autoincrement)
   - [`cuid()`](#cuid)
   - [`uuid()`](#uuid)
@@ -1081,6 +1082,7 @@ Defines a single-field ID on the model.
 - The [underlying ID field name is always `_id`](https://www.mongodb.com/docs/manual/core/document/#the-_id-field), and must be mapped with `@map("_id")`
 - Can be defined on any scalar field (`String`, `Int`, `enum`) unless you want to use `ObjectId` in your database
 - To use an [`ObjectId`](https://www.mongodb.com/docs/manual/reference/method/ObjectId/) as your ID, you must:
+
   - Use the `String` or `Bytes` field type
   - Annotate your field with `@db.ObjectId`:
 
@@ -1131,13 +1133,13 @@ In most cases, you want your database to create the ID. To do this, annotate the
 ##### Generate autoincrementing integers as IDs (Relational databases only)
 
 ```prisma
-model User
+model User 
 ```
 
 ##### Generate `ObjectId` as IDs (MongoDB only)
 
 ```prisma
-model User
+model User 
 ```
 
 ##### Generate `cuid()` values as IDs
@@ -1199,7 +1201,7 @@ Defines a multi-field ID (composite ID) on the model.
 | Name        | Required | Type               | Description                                                                                                                                                                                                                                                    |
 | ----------- | -------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `fields`    | **Yes**  | `FieldReference[]` | A list of field names - for example, `["firstname", "lastname"]`                                                                                                                                                                                               |
-| `name`      | **No**   | `String`           | The name that Prisma Client will expose for the argument covering all fields, e.g. `fullName` in `fullName: `                                                                                                                                                  |
+| `name`      | **No**   | `String`           | The name that Prisma Client will expose for the argument covering all fields, e.g. `fullName` in `fullName: `                                                                                                           |
 | `map`       | **No**   | `String`           | The name of the underlying primary key constraint in the database.<br /><br />Not supported for MySQL.                                                                                                                                                         |
 | `length`    | **No**   | `number`           | Allows you to specify a maximum length for the subpart of the value to be indexed.<br /><br />MySQL only. In preview in versions 3.5.0 and later, and in general availability in versions 4.0.0 and later.                                                     |
 | `sort`      | **No**   | `String`           | Allows you to specify in what order the entries of the ID are stored in the database. The available options are `Asc` and `Desc`.<br /><br />SQL Server only. In preview in versions 3.5.0 and later, and in general availability in versions 4.0.0 and later. |
@@ -1229,7 +1231,7 @@ The name of the `fields` argument on the `@@id` attribute can be omitted:
 ##### Specify a multi-field ID on two `String` fields (Relational databases only)
 
 ```prisma
-model User
+model User 
 ```
 
 When you create a user, you must provide a unique combination of `firstName` and `lastName`:
@@ -1250,7 +1252,7 @@ const user = await prisma.user.findUnique(,
 ##### Specify a multi-field ID on two `String` fields and one `Boolean` field (Relational databases only)
 
 ```prisma
-model User
+model User 
 ```
 
 When creating new `User` records, you now must provide a unique combination of values for `firstName`, `lastName` and `isAdmin`:
@@ -1263,9 +1265,9 @@ const user = await prisma.user.create(,
 ##### Specify a multi-field ID that includes a relation field (Relational databases only)
 
 ```prisma
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 When creating new `Post` records, you now must provide a unique combination of values for `authorId` (foreign key) and `title`:
@@ -1440,7 +1442,7 @@ Defines a compound [unique constraint](/orm/prisma-schema/data-model/models#defi
 - All fields that make up the unique constraint **must** be mandatory fields. The following model is **not** valid because `id` could be `null`:
 
   ```prisma
-  model User
+  model User 
   ```
 
   The reason for this behavior is that all connectors consider `null` values to be distinct, which means that two rows that _look_ identical are considered unique:
@@ -1559,7 +1561,7 @@ Defines an index in the database.
 | Name        | Required | Type                         | Description                                                                                                                                                                                                                                                                                                              |
 | ----------- | -------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `fields`    | **Yes**  | `FieldReference[]`           | A list of field names - for example, `["firstname", "lastname"]`                                                                                                                                                                                                                                                         |
-| `name`      | **No**   | `String`                     | The name that Prisma Client will expose for the argument covering all fields, e.g. `fullName` in `fullName: `                                                                                                                                                                                                            |
+| `name`      | **No**   | `String`                     | The name that Prisma Client will expose for the argument covering all fields, e.g. `fullName` in `fullName: `                                                                                                                                                                     |
 | `map`       | **No**   | `map`                        | The name of the index in the underlying database (Prisma generates an index name that respects identifier length limits if you do not specify a name. Prisma uses the following naming convention: `tablename.field1_field2_field3_unique`)                                                                              |
 | `length`    | **No**   | `number`                     | Allows you to specify a maximum length for the subpart of the value to be indexed.<br /><br />MySQL only. In preview in versions 3.5.0 and later, and in general availability in versions 4.0.0 and later.                                                                                                               |
 | `sort`      | **No**   | `String`                     | Allows you to specify in what order the entries of the index or constraint are stored in the database. The available options are `asc` and `desc`.<br /><br />In preview in versions 3.5.0 and later, and in general availability in versions 4.0.0 and later.                                                           |
@@ -1602,27 +1604,27 @@ Assume you want to add an index for the `title` field of the `Post` model
 ##### Define a single-column index (Relational databases only)
 
 ```prisma
-model Post
+model Post 
 ```
 
 ##### Define a multi-column index (Relational databases only)
 
 ```prisma
-model Post
+model Post 
 ```
 
 ##### Define an index with a name (Relational databases only)
 
 ```prisma
-model Post
+model Post 
 ```
 
 ##### Define an index on a composite type field (Relational databases only)
 
 ```prisma
-type Address
+type Address 
 
-model User
+model User 
 ```
 
 ### `@relation`
@@ -1702,7 +1704,7 @@ Maps a field name or enum value from the Prisma schema to a column or document f
 Your `@id` field must include `@map("_id")`. For example:
 
 ```prisma
-model User
+model User 
 ```
 
 #### Arguments
@@ -1738,7 +1740,7 @@ await prisma.user.create(,
 ##### Map an enum named `ADMIN` to a database enum named `admin`
 
 ```prisma
-enum Role
+enum Role 
 ```
 
 ### `@@map`
@@ -1780,7 +1782,7 @@ await prisma.user.create(,
 ##### Map the `Role` enum to a native enum in the database named `_Role` its values to lowercase values in the database
 
 ```prisma
-enum Role
+enum Role 
 ```
 
 ### `@updatedAt`
@@ -1835,7 +1837,7 @@ Add `@ignore` to a field that you want to exclude from Prisma Client (for exampl
 The following example demonstrates manually adding `@ignore` to exclude the `email` field from Prisma Client:
 
 ```prisma file=schema.prisma highlight=4;normal
-model User
+model User 
 ```
 
 ### `@@ignore`
@@ -1852,16 +1854,16 @@ In the following example, the `Post` model is invalid because it does not have a
 
 ```prisma file=schema.prisma highlight=7;normal
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model Post
+model Post 
 ```
 
 In the following example, the `Post` model is invalid because it does not have a unique identifier, and the `posts` relation field on `User` is invalid because it refers to the invalid `Post` model. Use `@@ignore` on the `Post` model and `@ignore` on the `posts` relation field in `User` to exclude both the model and the relation field from the generated Prisma Client API:
 
 ```prisma file=schema.prisma highlight=7,13;normal
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 ### `@@schema`
@@ -1898,45 +1900,41 @@ The name of the `name` argument on the `@@schema` attribute can be omitted
 ##### Map the `User` model to a database schema named `auth`
 
 ```prisma highlight=3,9,16;normal
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model User
+model User 
 ```
 
 ### `@shardKey`
 
 :::note
 This features requires the `shardKeys` Preview feature flag on your `generator`:
-
 ```prisma
-generator client
+generator client 
 ```
-
 :::
 
 The `@shardKey` attribute is only compatible with [PlanetScale](http://planetscale.com/) databases. It enables you define a [shard key](https://planetscale.com/docs/vitess/sharding) on a field of your model:
 
 ```prisma
-model User
+model User 
 ```
 
 ### `@@shardKey`
 
 :::note
 This features requires the `shardKeys` Preview feature flag on your `generator`:
-
 ```prisma
-generator client
+generator client 
 ```
-
 :::
 
 The `@shardKey` attribute is only compatible with [PlanetScale](http://planetscale.com/) databases. It enables you define a [shard key](https://planetscale.com/docs/vitess/sharding) on multiple fields of your model:
 
 ```prisma
-model User
+model User 
 ```
 
 ## Attribute functions
@@ -1964,7 +1962,7 @@ The `auto()` function is not available on relational databases.
 ##### Generate `ObjectId` (MongoDB only)
 
 ```prisma
-model User
+model User 
 ```
 
 ### `autoincrement()`
@@ -1988,7 +1986,7 @@ Create a sequence of integers in the underlying database and assign the incremen
 ##### Generate autoincrementing integers as IDs (Relational databases only)
 
 ```prisma
-model User
+model User 
 ```
 
 ### `sequence()`
@@ -2011,7 +2009,7 @@ Create a sequence of integers in the underlying database and assign the incremen
 ##### Generate sequencing integers as IDs
 
 ```prisma
-model User
+model User 
 ```
 
 ### `cuid()`
@@ -2137,6 +2135,7 @@ Represents **default values** that cannot be expressed in the Prisma schema (suc
 - Compatible with any scalar type
 - Can not be an empty string `dbgenerated("")` in [2.21.0](https://github.com/prisma/prisma/releases/tag/2.21.0) and later
 - Accepts a `String` value in [2.17.0](https://github.com/prisma/prisma/releases/tag/2.17.0) and later, which allows you to:
+
   - [Set default values for `Unsupported` types](#set-default-value-for-unsupported-type)
   - [Override default value behavior for supported types](#override-default-value-behavior-for-supported-types)
 
@@ -2155,7 +2154,7 @@ circle     Unsupported("circle")?   @default(dbgenerated("'<(10,4),11>'::circle"
 You can also use `dbgenerated(...)` to set the default value for supported types. For example, in PostgreSQL you can generate UUIDs at the database level rather than rely on Prisma ORM's `uuid()`:
 
 ```prisma highlight=2;add|3;delete
-model User
+model User 
 ```
 
 ## Attribute argument types
@@ -2209,7 +2208,7 @@ Type names must:
 #### Define a `Product` model with a list of `Photo` composite types
 
 ```prisma
-model Product
+model Product 
 
-type Photo
+type Photo 
 ```

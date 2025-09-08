@@ -11,7 +11,7 @@ pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-data
 pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/next-steps
 slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-
 ---
-
+ 
 ## Write your first query with Prisma Client
 
 Now that you have generated [Prisma Client](/orm/prisma-client), you can start writing queries to read and write data in your database. For the purpose of this guide, you'll use a plain TypeScript script to explore some basic features of Prisma Client.
@@ -26,7 +26,7 @@ const prisma = new PrismaClient()
   .$extends(withAccelerate())
 
 // 3
-async function main()
+async function main() 
 
 // 4
 main()
@@ -45,7 +45,7 @@ Here's a quick overview of the different parts of the code snippet:
 Inside the `main` function, add the following query to read all `User` records from the database and log the result:
 
 ```ts file=queries.ts
-async function main();
+async function main() 
 ```
 
 Now run the code with this command:
@@ -62,7 +62,7 @@ This should print an empty array because there are no `User` records in the data
 
 ## Write data into the database
 
-The `findMany` query you used in the previous section only _reads_ data from the database (although it was still empty).
+The `findMany` query you used in the previous section only _reads_ data from the database (although it was still empty). 
 
 In this section, you'll learn how to write a query to _write_ new records into the `Post`, `User` and `Profile` tables all at once.
 
@@ -83,7 +83,7 @@ async function main() ,
 }
 ```
 
-This code creates a new `User` record together with new `Post` and `Profile` records using a [nested write](/orm/prisma-client/queries/relation-queries#nested-writes) query.
+This code creates a new `User` record together with new `Post` and `Profile` records using a [nested write](/orm/prisma-client/queries/relation-queries#nested-writes) query. 
 
 The records are connected via the [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) that you defined in your Prisma schema.
 
@@ -99,9 +99,9 @@ The output should look similar to this:
 
 ```js no-copy showLineNumbers
 [
-
+  
     ],
-    profile:
+    profile: 
   }
 ]
 ```

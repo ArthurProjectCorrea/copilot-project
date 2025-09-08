@@ -14,9 +14,9 @@ In the example below, you'll see how you can wrap the `user` model in the Prisma
 
 ```tsx
 
-type Signup =
+type Signup = 
 
-class Users
+class Users 
 
   // Signup a new user
   async signup(data: Signup): Promise<User> )
@@ -39,7 +39,7 @@ But what if you don't want to hide existing functionality but still want to grou
 
 ```tsx
 
-type Signup =
+type Signup = 
 
 function Users(prismaUser: PrismaClient['user']) )
     },

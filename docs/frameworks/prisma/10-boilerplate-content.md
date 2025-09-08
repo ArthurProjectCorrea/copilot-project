@@ -14,7 +14,7 @@ toc: true
 To enable this feature, add `namedConstraints` to `previewFeatures` in your schema:
 
 ```prisma highlight=3;normal
-generator client
+generator client 
 ```
 ````
 

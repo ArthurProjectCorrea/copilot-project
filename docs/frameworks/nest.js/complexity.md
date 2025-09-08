@@ -21,9 +21,17 @@ Once the installation process is complete, we can define the `ComplexityPlugin` 
 ```typescript
 import { GraphQLSchemaHost } from '@nestjs/graphql';
 import { Plugin } from '@nestjs/apollo';
-import { ApolloServerPlugin, BaseContext, GraphQLRequestListener } from '@apollo/server';
+import {
+  ApolloServerPlugin,
+  BaseContext,
+  GraphQLRequestListener,
+} from '@apollo/server';
 import { GraphQLError } from 'graphql';
-import { fieldExtensionsEstimator, getComplexity, simpleEstimator } from 'graphql-query-complexity';
+import {
+  fieldExtensionsEstimator,
+  getComplexity,
+  simpleEstimator,
+} from 'graphql-query-complexity';
 
 @Plugin()
 export class ComplexityPlugin implements ApolloServerPlugin {
@@ -40,11 +48,14 @@ export class ComplexityPlugin implements ApolloServerPlugin {
           operationName: request.operationName,
           query: document,
           variables: request.variables,
-          estimators: [fieldExtensionsEstimator(), simpleEstimator({ defaultComplexity: 1 })],
+          estimators: [
+            fieldExtensionsEstimator(),
+            simpleEstimator({ defaultComplexity: 1 }),
+          ],
         });
         if (complexity > maxComplexity) {
           throw new GraphQLError(
-            `Query is too complex: ${complexity}. Maximum allowed complexity: ${maxComplexity}`
+            `Query is too complex: ${complexity}. Maximum allowed complexity: ${maxComplexity}`,
           );
         }
         console.log('Query Complexity:', complexity);

@@ -43,9 +43,9 @@ Prisma Client supports write operations on models with a required `Unsupported` 
 If you haven't already, enable the `postgresqlExtensions` Preview feature and add the `postgis` PostgreSQL extension in your Prisma schema:
 
 ```prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, create a migration and execute a migration to enable the extension:
@@ -68,7 +68,7 @@ You can double-check that the migration has been applied by running `prisma migr
 Add a new model with a column with a `geography` data type once the migration is applied. For this guide, we'll use a model called `PointOfInterest`.
 
 ```prisma
-model PointOfInterest
+model PointOfInterest 
 ```
 
 You'll notice that the `location` field uses an [`Unsupported`](/orm/reference/prisma-schema-reference#unsupported) type. This means that we lose a lot of the benefits of Prisma ORM when working with `PointOfInterest`. We'll be using [SafeQL](https://safeql.dev/) to fix this.
@@ -110,7 +110,7 @@ Next, add `@ts-safeql/eslint-plugin` to your list of ESLint plugins. In our exam
 
 ```js file=.eslintrc.js highlight=3
 /** @type  */
-module.exports =
+module.exports = 
 ```
 
 ### 3.3 Add `@ts-safeql/check-sql` rules
@@ -179,9 +179,9 @@ The `PointOfInterest` model in the Prisma schema uses an `Unsupported` type. As 
 We will resolve this by defining two custom types that better represent our model in TypeScript:
 
 ```ts
-type MyPoint =
+type MyPoint = 
 
-type MyPointOfInterest =
+type MyPointOfInterest = 
 ```
 
 Next, you can add a `create` query to the `pointOfInterest` property of your Prisma Client:
@@ -215,7 +215,7 @@ This also works with the column names `name` and `location`.
 You can now create new `PointOfInterest` records in your code as follows:
 
 ```ts
-const poi = await prisma.pointOfInterest.create();
+const poi = await prisma.pointOfInterest.create()
 ```
 
 ### 4.2. Adding an extension to query for closest to `PointOfInterest` records
@@ -226,8 +226,8 @@ Now let's make a Prisma Client extension in order to query this model. We will b
 const prisma = new PrismaClient().$extends() ,
 
       async findClosestPoints(latitude: number, longitude: number) []
-        >`SELECT id, name, ST_X(location::geometry), ST_Y(location::geometry)
-            FROM "PointOfInterest"
+        >`SELECT id, name, ST_X(location::geometry), ST_Y(location::geometry) 
+            FROM "PointOfInterest" 
             ORDER BY ST_DistanceSphere(location::geometry, ST_MakePoint($, $)) DESC`
 
         // Transform to our custom type
@@ -246,7 +246,10 @@ const prisma = new PrismaClient().$extends() ,
 Now, you can use our Prisma Client as normal to find close points of interest to a given longitude and latitude using the custom method created on the `PointOfInterest` model.
 
 ```ts
-const closestPointOfInterest = await prisma.pointOfInterest.findClosestPoints(53.5488, 9.9872);
+const closestPointOfInterest = await prisma.pointOfInterest.findClosestPoints(
+  53.5488,
+  9.9872
+)
 ```
 
 Similar to before, we again have the benefit of SafeQL to add extra type safety to our raw queries. For example, if we removed the cast to `geometry` for `location` by changing `location::geometry` to just `location`, we would get linting errors in the `ST_X`, `ST_Y` or `ST_DistanceSphere` functions respectively.

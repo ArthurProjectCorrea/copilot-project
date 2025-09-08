@@ -34,9 +34,9 @@ To use Error Boundaries for your Next.js application, you must create a class co
 You can create an `ErrorBoundary` class component by extending `React.Component`. For example:
 
 ```jsx
-class ErrorBoundary extends React.Component
+class ErrorBoundary extends React.Component 
   }
-  static getDerivedStateFromError(error)
+  static getDerivedStateFromError(error) 
   }
   componentDidCatch(error, errorInfo) )
   }
@@ -63,7 +63,7 @@ After creating an `ErrorBoundary` component, import it in the `pages/_app.js` fi
 ```jsx
 // Import the ErrorBoundary component
 
-function MyApp()
+function MyApp() 
 
 ```
 

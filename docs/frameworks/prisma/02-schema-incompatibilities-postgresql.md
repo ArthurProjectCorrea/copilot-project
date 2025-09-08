@@ -7,7 +7,7 @@ dbSwitcher: ['postgresql', 'mysql']
 pagination_next: orm/more/upgrade-guides/upgrade-from-prisma-1/upgrading-the-prisma-layer-postgresql
 slugSwitch: /orm/more/upgrade-guides/upgrade-from-prisma-1/schema-incompatibilities-
 ---
-
+ 
 ## Overview
 
 Each section on this page describes a potential problem when upgrading from Prisma 1 to Prisma ORM 2._x_ and later and explains the available workarounds.
@@ -23,7 +23,7 @@ When adding the `@default` directive in a Prisma 1 datamodel, the default values
 #### Prisma 1 datamodel
 
 ```graphql
-type Post
+type Post 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -38,7 +38,7 @@ CREATE TABLE "Post" (
 #### Result of introspection in Prisma ORM versions 2._x_ and later
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 Because the `DEFAULT` constraint has not been added to the database when mapping the Prisma 1 datamodel to the database with `prisma deploy`, Prisma ORM v2 (and later versions) doesn't recognize it during introspection.
@@ -57,7 +57,7 @@ ALTER TABLE "Post"
 After this adjustment, you can re-introspect your database and the `@default` attribute will be added to the `published` field:
 
 ```prisma line-number file=schema.prisma highlight=3;normal showLineNumbers
-model Post
+model Post 
 ```
 
 #### Manually add a `@default` attribute to the Prisma model
@@ -65,7 +65,7 @@ model Post
 You can add the `@default` attribute to the Prisma model:
 
 ```prisma line-number file=schema.prisma highlight=3;add showLineNumbers
-model Post
+model Post 
 ```
 
 If the `@default` attribute is set in the Prisma schema and you run `prisma generate`, the resulting Prisma Client code will generate the specified default values at runtime (similar to what the Prisma 1 server did in Prisma 1).
@@ -81,7 +81,7 @@ Prisma 1 auto-generates ID values as CUIDs for `ID` fields when they're annotate
 #### Prisma 1 datamodel
 
 ```graphql
-type Post
+type Post 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -95,7 +95,7 @@ CREATE TABLE "Post" (
 #### Result of introspection in Prisma ORM versions 2._x_ and later
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 Because there's no indication of the CUID behavior in the database, Prisma ORM's introspection doesn't recognize it.
@@ -105,7 +105,7 @@ Because there's no indication of the CUID behavior in the database, Prisma ORM's
 As a workaround, you can manually add the `@default(cuid())` attribute to the Prisma model:
 
 ```prisma line-number file=schema.prisma highlight=2;add showLineNumbers
-model Post
+model Post 
 ```
 
 If the `@default` attribute is set in the Prisma schema and you run `prisma generate`, the resulting Prisma Client code will generate the specified default values at runtime (similar to what the Prisma 1 server did in Prisma 1).
@@ -123,7 +123,7 @@ Prisma 1 auto-generates values for `DateTime` fields when they're annotated with
 #### Prisma 1 datamodel
 
 ```graphql line-number highlight=3;normal
-type Post
+type Post 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -138,7 +138,7 @@ CREATE TABLE "Post" (
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 ### Workarounds
@@ -155,7 +155,7 @@ ALTER TABLE "Post"
 After this adjustment, you can re-introspect your database and the `@default` attribute will be added to the `createdAt` field:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 #### Manually add the `@default(now())` attribute to the Prisma model
@@ -163,7 +163,7 @@ model Post
 As a workaround, you can manually add the `@default(now())` attribute to the Prisma model:
 
 ```prisma line-number file=schema.prisma highlight=3;normal
-model Post
+model Post 
 ```
 
 If the `@default` attribute is set in the Prisma schema and you run `prisma generate`, the resulting Prisma Client code will generate the specified default values at runtime (similar to what the Prisma 1 server did in Prisma 1).
@@ -181,7 +181,7 @@ Prisma 1 auto-generates values for `DateTime` fields when they're annotated with
 #### Prisma 1 datamodel
 
 ```graphql
-type Post
+type Post 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -196,7 +196,7 @@ CREATE TABLE "Post" (
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 ### Workarounds
@@ -206,7 +206,7 @@ model Post
 As a workaround, you can manually add the `@updatedAt` attribute to the Prisma model:
 
 ```prisma line-number file=schema.prisma highlight=3;add
-model Post
+model Post 
 ```
 
 If the `@updatedAt` attribute is set in the Prisma schema and you run `prisma generate`, the resulting Prisma Client code will automatically generate values for this column when an existing record is updated (similar to what the Prisma 1 server did in Prisma 1).
@@ -226,9 +226,9 @@ When this approach is used, Prisma ORM doesn't add a `UNIQUE` constraint to the 
 #### Prisma ORM datamodel v1.1 (available from Prisma ORM v1.31)
 
 ```graphql
-type User
+type User 
 
-type Profile
+type Profile 
 ```
 
 Note that omitting the `@relation` directive in this case would result in the same behavior because `link: INLINE` is the _default_ for 1-1 relations.
@@ -250,9 +250,9 @@ CREATE TABLE "Profile" (
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Profile
+model Profile 
 ```
 
 Because there's no `UNIQUE` constraint defined on the `user` column (which represents the foreign key in this relation), Prisma ORM's introspection recognizes the relation as 1-n.
@@ -271,9 +271,9 @@ ALTER TABLE "Profile"
 After this adjustment, you can re-introspect your database and the 1-1 relation will be properly recognized:
 
 ```prisma line-number file=schema.prisma highlight=3;normal
-model User
+model User 
 
-model Profile
+model Profile 
 ```
 
 ## _All_ non-inline relations are recognized as m-n
@@ -292,9 +292,9 @@ Because of this representation, introspection in Prisma ORM version 2._x_ and la
 #### Prisma 1 datamodel
 
 ```graphql
-type User
+type User 
 
-type Post
+type Post 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -319,9 +319,9 @@ CREATE INDEX "_PostToUser_B" ON "_PostToUser"("B" text_ops);
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 Because the relation table that was created by Prisma 1 uses the same [conventions for relation tables](/orm/prisma-schema/data-model/relations/many-to-many-relations#conventions-for-relation-tables-in-implicit-m-n-relations) as in Prisma ORM version 2._x_ and later, the relation now gets recognized as a m-n relation.
@@ -355,9 +355,9 @@ As a workaround, you can migrate the data into a structure that's compatible wit
 After that you can introspect your database and the relation will now be recognized as 1-n:
 
 ```prisma line-number file=schema.prisma highlight=3,8,9;normal
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 ## `Json` type is represented as `TEXT` in database
@@ -371,7 +371,7 @@ Prisma 1 supports the `Json` data type in its datamodel. However, in the underly
 #### Prisma 1 datamodel
 
 ```graphql
-type User
+type User 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -386,7 +386,7 @@ CREATE TABLE "User" (
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 ### Workaround
@@ -400,7 +400,7 @@ ALTER TABLE "User" ALTER COLUMN "jsonData" TYPE JSON  USING "jsonData"::json;
 After this adjustment, you can re-introspect your database and the field will now be recognized as `Json`:
 
 ```prisma line-number file=schema.prisma highlight=3;normal showLineNumbers
-model User
+model User 
 ```
 
 ## Enums are represented as `TEXT` in database
@@ -414,9 +414,9 @@ Prisma 1 supports the `enum` data type in its datamodel. However, in the underly
 #### Prisma 1 datamodel
 
 ```graphql
-type User
+type User 
 
-enum Role
+enum Role 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -431,7 +431,7 @@ CREATE TABLE "User" (
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 ### Workaround
@@ -451,10 +451,10 @@ You can manually turn the `role` column into an enum with your desired values:
 After introspection, the type is now properly recognized as an enum:
 
 ```prisma line-number file=schema.prisma highlight=3,6-9;normal showLineNumbers
-model User
+model User 
 
 //highlight-start
-enum Role
+enum Role 
 //highlight-end
 ```
 
@@ -469,7 +469,7 @@ Prisma 1 uses CUIDs as ID values for all database records. In the underlying dat
 #### Prisma 1 datamodel
 
 ```graphql
-type User
+type User 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -483,7 +483,7 @@ CREATE TABLE "User" (
 #### Result of introspection in Prisma ORM 2._x_ and later versions
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 ### Workaround
@@ -511,7 +511,7 @@ With PostgreSQL, you therefore can keep using scalar lists in Prisma ORM 2._x_ a
 #### Prisma 1 datamodel
 
 ```graphql
-type User
+type User 
 ```
 
 #### Prisma 1 generated SQL migration
@@ -533,9 +533,9 @@ CREATE UNIQUE INDEX "User_coinflips_pkey" ON "User_coinflips"("nodeId" text_ops,
 #### Result of Prisma ORM 2 introspection
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model User_coinflips
+model User_coinflips 
 ```
 
 Note that you can now generate Prisma Client and you'll be able to access the data from the scalar lists through the extra table. PostgreSQL users can alternatively migrate the data into a native PostgreSQL array and continue to benefit from the slicker Prisma Client API for scalar lists (read the section below for more info).
@@ -564,7 +564,7 @@ This is the `result of the query:
     ,
     ,
     ,
-
+    
   ]
 }
 ```
@@ -572,7 +572,7 @@ This is the `result of the query:
 To access just the boolean values from the list, you can `map` over the `coinflips` on `user` as follows:
 
 ```ts
-const currentCoinflips = user!.coinflips.map((cf) => cf.value);
+const currentCoinflips = user!.coinflips.map((cf) => cf.value)
 ```
 
 > **Note**: The exclamation mark above means that you're _force unwrapping_ the `user` value. This is necessary because the `user` returned from the previous query might be `null`.
@@ -616,7 +616,7 @@ However, in order to do so you need to manually migrate the underlying data from
 You can now introspect your database and the `coinflips` field will be represented as an array in your new Prisma schema:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 You can keep using Prisma Client as before:

@@ -36,7 +36,7 @@ For the names of GUI elements (buttons, drop-down menus, and so on), use **bold*
 
 ### Avoid exclamation points
 
-In keeping with our calm tone, do not use exclamation points (exclamation marks).
+In keeping with our calm tone, do not use exclamation points (exclamation marks). 
 
 Exception: they are acceptable in congratulatory or welcome messages, for example: "Congratulations - you've completed the tutorial!"
 
@@ -58,7 +58,7 @@ If you're not sure about the spelling of a proper noun, check its official web s
 - Use sentence case for titles and headings: only the initial word is uppercase (exception: [capitalize proper nouns](#capitalize-and-spell-out-proper-nouns))
 - [Avoid gerunds](/about/style-guide/word-choice#avoid-gerunds-ing-verb-forms) ("Configure the database", not "Configuring the database")
 - Do not use punctuation at the end of a title or heading unless a question mark is required
-- Use `code` for code in headings - this is required by our navigation elements
+- Use ``code`` for code in headings - this is required by our navigation elements
 
 ## Tables, bullet lists, and numbered lists
 
@@ -174,7 +174,7 @@ If you need to highlight lines in your code samples, use the [`highlight` magic 
 
 ````
 ```prisma
-generator client
+generator client 
 ```
 ````
 
@@ -193,13 +193,13 @@ Placeholders are a tricky topic in technical documentation and are one of the mo
 As an example, consider the following code block where `__DATABASE_CONNECTION_URL__` is a placeholder for the PostgreSQL connection URL:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 Whenever you use a placeholder, explain how to obtain a value for the placeholder, or link to another resource that explains this. Explicitly call out that this is a placeholder that must be replaced with a "real value". Include an example of what that real value might look like:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 ### Use expressive variable names

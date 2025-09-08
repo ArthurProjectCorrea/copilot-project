@@ -1,7 +1,7 @@
-import from "@/components/content.tsx";
+import  from "@/components/content.tsx";
 
 <ApiTable
-rows=`],
+  rows=`],
       ["border-x", (value) => `border-inline-color: $`],
       ["border-y", (value) => `border-block-color: $`],
       ["border-s", (value) => `border-inline-start-color: $`],
@@ -21,8 +21,8 @@ rows=`],
       ]),
       [`$-(<custom-property>)`, css("var(<custom-property>);")],
       [`$-[<value>]`, css("<value>;")],
-]),
-]}
+    ]),
+  ]}
 />
 
 ## Examples

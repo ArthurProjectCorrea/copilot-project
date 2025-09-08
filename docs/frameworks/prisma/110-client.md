@@ -28,5 +28,5 @@ const prisma = new PrismaClient().$extends(,
   },
 })
 
-async function main()
+async function main() 
 ```

@@ -1,8 +1,8 @@
 <ApiTable
-rows=`, `fill: var(--color-$); /_ $ _/`]),
-["fill-(<custom-property>)", "fill: var(<custom-property>);"],
-["fill-[<color>]", "fill: <color>;"],
-]}
+  rows=`, `fill: var(--color-$); /* $ */`]),
+    ["fill-(<custom-property>)", "fill: var(<custom-property>);"],
+    ["fill-[<color>]", "fill: <color>;"],
+  ]}
 />
 
 ## Examples

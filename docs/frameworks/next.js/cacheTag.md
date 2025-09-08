@@ -75,7 +75,7 @@ You can then purge the cache on-demand using [`revalidateTag`](/docs/app/api-ref
 - **Multiple Tags**: You can assign multiple tags to a single cache entry by passing multiple string values to `cacheTag`.
 
 ```tsx
-cacheTag('tag-one', 'tag-two');
+cacheTag('tag-one', 'tag-two')
 ```
 
 ## Examples
@@ -86,7 +86,7 @@ Tag your cached data by calling `cacheTag` within a cached function or component
 
 ```tsx filename="app/components/bookings.tsx" switcher
 
-interface BookingsProps
+interface BookingsProps 
 
   'use cache'
   cacheTag('bookings-data')
@@ -118,7 +118,7 @@ You can use the data returned from an async function to tag the cache entry.
 
 ```tsx filename="app/components/bookings.tsx" switcher
 
-interface BookingsProps
+interface BookingsProps 
 
   async function getBookingsData() `)
     cacheTag('bookings-data', data.id)

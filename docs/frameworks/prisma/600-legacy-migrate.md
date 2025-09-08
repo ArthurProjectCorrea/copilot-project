@@ -81,7 +81,7 @@ The second command _executes_ the migration against your database.
 Add the model to your Prisma schema:
 
 ```prisma
-model User
+model User 
 ```
 
 Now run the two commands mentioned above:
@@ -96,11 +96,11 @@ prisma migrate up --experimental
 Add two models with [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) to your Prisma schema:
 
 ```prisma
-model User
+model User 
 
-model Profile
+model Profile 
 
-model Post
+model Post 
 ```
 
 Notice that in addition to the [annotated relation fields](/orm/prisma-schema/data-model/relations#annotated-relation-fields) and its relation scalar field (which represent the foreign keys), you must also specify the Prisma-level [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) on the other side of the relation.
@@ -117,11 +117,11 @@ prisma migrate up --experimental
 Add a [field](/orm/prisma-schema/data-model/models#defining-fields) to the `Post` model:
 
 ```prisma
-model User
+model User 
 
-model Profile
+model Profile 
 
-model Post
+model Post 
 ```
 
 Now run the two commands mentioned above:
@@ -135,23 +135,23 @@ prisma migrate up --experimental
 
 The following table shows which SQL operations are currently supported by legacy Prisma Migrate.
 
-| Operation                         | SQL                             |                                Supported                                |
-| :-------------------------------- | :------------------------------ | :---------------------------------------------------------------------: |
-| Create a new table                | `CREATE TABLE`                  |                                   ✔️                                    |
-| Rename an existing table          | `ALTER TABLE` + `RENAME`        |                                   No                                    |
-| Delete an existing table          | `DROP TABLE`                    |                                   ✔️                                    |
-| Add a column to an existing table | `ALTER TABLE` + `ADD COLUMN`    |                                   ✔️                                    |
-| Rename an existing column         | `ALTER TABLE` + `RENAME COLUMN` |                                   No                                    |
-| Delete an existing column         | `ALTER TABLE` + `DROP COLUMN`   |                                   ✔️                                    |
-| Set primary keys (IDs)            | `PRIMARY KEY`                   |                                   ✔️                                    |
-| Define relations (foreign keys)   | `FOREIGN KEY` + `REFERENCES`    |                                   ✔️                                    |
-| Make columns optional/required    | `NOT NULL`                      |                                   ✔️                                    |
-| Set unique constraints            | `UNIQUE`                        |                                   ✔️                                    |
-| Set default values                | `DEFAULT`                       |                                   ✔️                                    |
-| Define enums                      | `ENUM`                          |                                   ✔️                                    |
-| Create indexes                    | `CREATE INDEX`                  |                                   ✔️                                    |
-| Cascading deletes                 | `ON DELETE`                     |           No (workaround: manually add in SQL and introspect)           |
-| Cascading updates                 | `ON UPDATE`                     |                                   No                                    |
+| Operation                         | SQL                             |                                       Supported                                       |
+| :-------------------------------- | :------------------------------ | :-----------------------------------------------------------------------------------: |
+| Create a new table                | `CREATE TABLE`                  |                                          ✔️                                           |
+| Rename an existing table          | `ALTER TABLE` + `RENAME`        |                                          No                                           |
+| Delete an existing table          | `DROP TABLE`                    |                                          ✔️                                           |
+| Add a column to an existing table | `ALTER TABLE` + `ADD COLUMN`    |                                          ✔️                                           |
+| Rename an existing column         | `ALTER TABLE` + `RENAME COLUMN` |                                          No                                           |
+| Delete an existing column         | `ALTER TABLE` + `DROP COLUMN`   |                                          ✔️                                           |
+| Set primary keys (IDs)            | `PRIMARY KEY`                   |                                          ✔️                                           |
+| Define relations (foreign keys)   | `FOREIGN KEY` + `REFERENCES`    |                                          ✔️                                           |
+| Make columns optional/required    | `NOT NULL`                      |                                          ✔️                                           |
+| Set unique constraints            | `UNIQUE`                        |                                          ✔️                                           |
+| Set default values                | `DEFAULT`                       |                                          ✔️                                           |
+| Define enums                      | `ENUM`                          |                                          ✔️                                           |
+| Create indexes                    | `CREATE INDEX`                  |                                          ✔️                                           |
+| Cascading deletes                 | `ON DELETE`                     |                  No (workaround: manually add in SQL and introspect)                  |
+| Cascading updates                 | `ON UPDATE`                     |                                          No                                           |
 | Data validation                   | `CHECK`                         | No ([workaround](/orm/more/help-and-troubleshooting/check-constraints)) |
 
 Note that this table assumes that the operation is also supported by the underlying database. For example, `ENUM` is not supported in SQLite. This means that you also can't use `enum` when using legacy Prisma Migrate.
@@ -217,7 +217,7 @@ Before using the `migrate save` command, you must define a valid [`datasource`](
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 #### Options
@@ -282,7 +282,7 @@ Before using the `migrate up` command, you must define a valid [`datasource`](/o
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 #### Arguments
@@ -356,7 +356,7 @@ Before using the `migrate down` command, you must define a valid [`datasource`](
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 #### Arguments

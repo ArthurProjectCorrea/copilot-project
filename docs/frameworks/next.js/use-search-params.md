@@ -36,7 +36,7 @@ description: API Reference for the useSearchParams hook.
 ## Parameters
 
 ```tsx
-const searchParams = useSearchParams();
+const searchParams = useSearchParams()
 ```
 
 `useSearchParams` does not take any parameters.
@@ -78,14 +78,12 @@ If a route is [statically rendered](/docs/app/getting-started/partial-prerenderi
 This allows a part of the route to be statically rendered while the dynamic part that uses `useSearchParams` is client-side rendered.
 
 We recommend wrapping the Client Component that uses `useSearchParams` in a `
-
-</nav>
-<h1>Dashboard</h1>
-</>
-)
+      </nav>
+      <h1>Dashboard</h1>
+    </>
+  )
 }
-
-````
+```
 
 ```jsx filename="app/dashboard/page.js" switcher
 
@@ -93,18 +91,18 @@ We recommend wrapping the Client Component that uses `useSearchParams` in a `
 // will be rendered in place of the search bar in the initial HTML.
 // When the value is available during React hydration the fallback
 // will be replaced with the `<SearchBar>` component.
-function SearchBarFallback()
+function SearchBarFallback() 
 
   return (
     <>
       <nav>
-
+        
       </nav>
       <h1>Dashboard</h1>
     </>
   )
 }
-````
+```
 
 > **Good to know**:
 >
@@ -156,7 +154,7 @@ For example:
   return (
     <>
       <nav>
-
+        
       </nav>
       <h1>Dashboard</h1>
     </>
@@ -170,7 +168,7 @@ For example:
   return (
     <>
       <nav>
-
+        
       </nav>
       <h1>Dashboard</h1>
     </>

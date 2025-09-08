@@ -479,7 +479,7 @@ export const { ConfigurableModuleClass, MODULE_OPTIONS_TOKEN } =
       (definition, extras) => ({
         ...definition,
         global: extras.isGlobal,
-      })
+      }),
     )
     .build();
 ```
@@ -505,7 +505,9 @@ However, since `isGlobal` is declared as an "extra" property, it won't be availa
 ```typescript
 @Injectable()
 export class ConfigService {
-  constructor(@Inject(MODULE_OPTIONS_TOKEN) private options: ConfigModuleOptions) {
+  constructor(
+    @Inject(MODULE_OPTIONS_TOKEN) private options: ConfigModuleOptions,
+  ) {
     // "options" object will not have the "isGlobal" property
     // ...
   }
@@ -549,6 +551,10 @@ export class ConfigModule extends ConfigurableModuleClass {
 Note the use of `OPTIONS_TYPE` and `ASYNC_OPTIONS_TYPE` types that must be exported from the module definition file:
 
 ```typescript
-export const { ConfigurableModuleClass, MODULE_OPTIONS_TOKEN, OPTIONS_TYPE, ASYNC_OPTIONS_TYPE } =
-  new ConfigurableModuleBuilder<ConfigModuleOptions>().build();
+export const {
+  ConfigurableModuleClass,
+  MODULE_OPTIONS_TOKEN,
+  OPTIONS_TYPE,
+  ASYNC_OPTIONS_TYPE,
+} = new ConfigurableModuleBuilder<ConfigModuleOptions>().build();
 ```

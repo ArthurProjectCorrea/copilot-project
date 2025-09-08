@@ -13,12 +13,11 @@ community_section: true
 
 ## Introduction
 
-This guide shows you how to use Prisma with Next.js 15, a fullstack React framework. You'll learn how to create a [Prisma Postgres](/postgres/) instance, set up Prisma ORM with Next.js, handle migrations, and deploy your application to Vercel.
+This guide shows you how to use Prisma with Next.js 15, a fullstack React framework. You'll learn how to create a [Prisma Postgres](/postgres/) instance, set up Prisma ORM with Next.js, handle migrations, and deploy your application to Vercel. 
 
 You can find a [deployment-ready example on GitHub](https://github.com/prisma/prisma-examples/blob/latest/orm/nextjs).
 
 ## Prerequisites
-
 - [Node.js 18+](https://nodejs.org)
 - A Vercel account (if you want to deploy your application)
 
@@ -63,9 +62,8 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../app/generated/prisma
 ```
-
 :::info
-You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My \***\*\_\_\*\*** Project"
+You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My __________ Project"
 :::
 
 This will create:
@@ -80,14 +78,14 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -100,7 +98,6 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
-
 ### 2.4. Seed the database
 
 Add some seed data to populate the database with sample users and posts.
@@ -138,18 +135,16 @@ Now, tell Prisma how to run this script by updating your `package.json`:
   "prisma": ,
   // add-end
   "dependencies": ,
-  "devDependencies":
+  "devDependencies": 
 }
 ```
 
 :::warning
 
 Before starting the development server, note that if you are using Next.js v15.2.0 or v15.2.1, do not use Turbopack as there is a known [issue](https://github.com/vercel/next.js/issues/76497). Remove Turbopack from your dev script by updating your `package.json`
-
 ```json file=package.json
 "script":
 ```
-
 This change is not needed on any versions before or after.
 
 :::
@@ -220,7 +215,7 @@ This gives you a basic page with a title and a list of users. However, that list
       </h1>
       <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)]">
          className="mb-2">
-
+            
           </li>
         ))}
       </ol>
@@ -245,7 +240,7 @@ Just reload the page and you'll see the changes.
 
 ## 4. Add a new Posts list page
 
-You have your home page working, but you should add a new page that displays all of your posts.
+You have your home page working, but you should add a new page that displays all of your posts. 
 
 First create a new `posts` directory in the `app` directory and create a new `page.tsx` file inside of it.
 
@@ -286,7 +281,7 @@ Now `localhost:3000/posts` will load, but the content is hardcoded again. Let's 
         >
             <span className="font-semibold"></span>
             <span className="text-sm text-gray-600 ml-2">
-              by
+              by 
             </span>
           </li>
         ))}
@@ -337,7 +332,7 @@ As before, this page is static with hardcoded content. Let's update it to be dyn
     include: ,
   });
 
-  if (!post)
+  if (!post) 
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
@@ -345,7 +340,7 @@ As before, this page is static with hardcoded content. Let's update it to be dyn
         <h1 className="text-4xl font-bold mb-8 text-[#333333]"></h1>
         <p className="text-gray-600 text-center">by </p>
         <div className="prose prose-gray mt-8">
-
+          
         </div>
       </article>
     </div>
@@ -363,7 +358,7 @@ It's not the prettiest page, but it's a good start. Try it out by navigating to 
 
 ## 6. Add a new Posts create page
 
-To round out your application, you'll add a "create" page for posts. This will let you write your own posts and save them to the database.
+To round out your application, you'll add a "create" page for posts. This will let you write your own posts and save them to the database. 
 
 As with the other pages, you'll start with a static page and then update it to be dynamic.
 
@@ -375,12 +370,12 @@ Now, add the following code to the `app/posts/new/page.tsx` file:
 
 ```tsx file=app/posts/new/page.tsx
 
-  async function createPost(formData: FormData)
+  async function createPost(formData: FormData) 
 
   return (
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Create New Post</h1>
-
+      
     </div>
   );
 }
@@ -400,13 +395,13 @@ This form looks good, but it doesn't do anything yet. Let's update the `createPo
   return (
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Create New Post</h1>
-
+      
     </div>
   );
 }
 ```
 
-This page now has a functional form! When you submit the form, it will create a new post in the database and redirect you to the posts list page.
+This page now has a functional form! When you submit the form, it will create a new post in the database and redirect you to the posts list page. 
 
 You also added a `revalidatePath` call to revalidate the posts list page so that it will be updated with the new post. That way everyone can read the new post immediately.
 
@@ -434,7 +429,7 @@ Before you deploy, you also need to tell Vercel to make sure that the Prisma Cli
 ,
   "prisma": ,
   "dependencies": ,
-  "devDependencies":
+  "devDependencies": 
 }
 ```
 
@@ -460,7 +455,6 @@ Now that you have a working Next.js application with Prisma ORM, here are some w
 - Use [Prisma Studio](/orm/tools/prisma-studio) for visual database management
 
 For more information:
-
 - [Prisma ORM documentation](/orm)
 - [Prisma Client API reference](/orm/prisma-client)
 - [Next.js documentation](https://nextjs.org/docs)

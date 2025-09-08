@@ -11,29 +11,27 @@ pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-data
 pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-prismaPostgres
 slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-
 ---
-
+ 
 ## Creating the database schema
 
-In this guide, you'll use [Prisma Migrate](/orm/prisma-migrate) to create the tables in your database.
+In this guide, you'll use [Prisma Migrate](/orm/prisma-migrate) to create the tables in your database. 
 
 To do so, first add the following Prisma data model to your Prisma schema in `prisma/schema.prisma`:
 
 ```prisma file=prisma/schema.prisma copy
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 This data model defines three [models](/orm/prisma-schema/data-model/models) (which will be mapped to _tables_ in the underlying database):
-
 - `Post`
 - `Profile`
 - `User`
 
 It also defines two [relations](/orm/prisma-schema/data-model/relations):
-
 - A one-to-many relation between `User` and `Post` (i.e. "_one_ user can have _many_ posts")
 - A one-to-one relation between `User` and `Profile` (i.e. "_one_ user can have _one_ profile")
 

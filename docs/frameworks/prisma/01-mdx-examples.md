@@ -19,14 +19,14 @@ Required at the top of the page to avoid styling issues:
 Example:
 
 ```js
-async function main()
+async function main() 
 ```
 
 Code:
 
 ````
 ```js
-async function main()
+async function main() 
 ```
 ````
 
@@ -35,26 +35,26 @@ async function main()
 Example:
 
 ```prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Code:
 
 ````
 ```prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 ````
 
@@ -63,26 +63,26 @@ model User
 Example:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Code:
 
 ````
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 ````
 
@@ -93,14 +93,14 @@ By default, all the code blocks will have a `copy` icon for copying the code. If
 Example:
 
 ```js no-copy
-async function main()
+async function main() 
 ```
 
 Code:
 
 ````no-copy
 ```js no-copy
-async function main()
+async function main() 
 ```
 ````
 
@@ -109,14 +109,14 @@ async function main()
 Example:
 
 ```js no-lines
-async function main()
+async function main() 
 ```
 
 Code:
 
 ````
 ```js no-lines
-async function main()
+async function main() 
 ```
 ````
 
@@ -165,7 +165,7 @@ $ this is a single, really long line of code that shouldn't need to be scrollabl
 Example:
 
 ```js file=test.ts highlight=2;add|4;delete|6,7;edit|9-12;normal
-async function main()
+async function main() 
 ```
 
 Code:
@@ -201,17 +201,17 @@ Example:
 
 Code:
 
-```
+````
 
-```
+````
 
 Example with custom output text
 
 Code:
 
-```
+````
 
-```
+````
 
 ## Parallel blocks
 
@@ -219,6 +219,6 @@ Example:
 
 Code:
 
-```
+````
 
-```
+````

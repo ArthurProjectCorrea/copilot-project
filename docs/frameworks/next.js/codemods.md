@@ -58,12 +58,17 @@ Becomes:
 And creates:
 
 ```js filename="eslint.config.mjs"
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
-const compat = new FlatCompat();
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-const eslintConfig = [...compat.extends('next/core-web-vitals', 'next/typescript'), ,];
+const compat = new FlatCompat()
+
+const eslintConfig = [
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ,
+]
+
 ```
 
 ### 15.0
@@ -111,12 +116,12 @@ For example:
 
 const token = cookies().get('token')
 
-function useToken()
+function useToken() 
 
   const name = cookies().get('name')
 }
 
-function getHeader()
+function getHeader() 
 ```
 
 Transforms into:
@@ -126,12 +131,12 @@ Transforms into:
 import  from 'next/headers'
 const token = (cookies() as unknown as UnsafeUnwrappedCookies).get('token')
 
-function useToken()
+function useToken() 
 
   const name = (await cookies()).get('name')
 }
 
-function getHeader()
+function getHeader() 
 ```
 
 When we detect property access on the `params` or `searchParams` props in the page / route entries (`page.js`, `layout.js`, `route.js`, or `default.js`) or the `generateMetadata` / `generateViewport` APIs,
@@ -144,10 +149,10 @@ For example:
 
   params,
   searchParams,
-}:
-  searchParams:
+}: 
+  searchParams: 
 })  = searchParams
-  if (value === 'foo')
+  if (value === 'foo') 
 }
 
   const  = params
@@ -164,7 +169,7 @@ Transforms into:
   params: Promise<>
   searchParams: Promise<>
 })  = searchParams
-  if (value === 'foo')
+  if (value === 'foo') 
 }
 
   params: Promise<>
@@ -350,9 +355,11 @@ npx @next/codemod@latest new-link .
 For example:
 
 ```jsx
+
 // transforms into
 
 // transforms into
+
 ```
 
 ### 11
@@ -385,7 +392,7 @@ For example:
 
 ```jsx filename="my-component.js"
 
-  render()
+  render() 
 }
 ```
 
@@ -393,7 +400,7 @@ Transforms into:
 
 ```jsx filename="my-component.js"
 
-  render()
+  render() 
 }
 ```
 
@@ -446,7 +453,7 @@ For example:
 ```js
 // Before
 
-function Home()
+function Home() 
 
 ```
 

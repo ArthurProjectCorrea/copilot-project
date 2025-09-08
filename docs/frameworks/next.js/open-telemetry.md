@@ -58,13 +58,13 @@ Unlike `@vercel/otel`, `NodeSDK` is not compatible with edge runtime, so you nee
 
 ```ts filename="instrumentation.ts" switcher
 
-  if (process.env.NEXT_RUNTIME === 'nodejs')
+  if (process.env.NEXT_RUNTIME === 'nodejs') 
 }
 ```
 
 ```js filename="instrumentation.js" switcher
 
-  if (process.env.NEXT_RUNTIME === 'nodejs')
+  if (process.env.NEXT_RUNTIME === 'nodejs') 
 }
 ```
 
@@ -136,7 +136,7 @@ The following example demonstrates a function that fetches GitHub stars and adds
 
   return await trace
     .getTracer('nextjs-example')
-    .startActiveSpan('fetchGithubStars', async (span) =>  finally
+    .startActiveSpan('fetchGithubStars', async (span) =>  finally 
     })
 }
 ```

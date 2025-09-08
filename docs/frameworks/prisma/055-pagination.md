@@ -9,7 +9,7 @@ metaDescription: 'Prisma Client supports both offset pagination and cursor-based
 Offset pagination uses `skip` and `take` to skip a certain number of results and select a limited range. The following query skips the first 3 `Post` records and returns records 4 - 7:
 
 ```ts line-number
-const results = await prisma.post.findMany();
+const results = await prisma.post.findMany()
 ```
 
 ![](/img/orm/offset-skip-take.png)

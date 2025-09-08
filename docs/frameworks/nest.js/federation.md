@@ -61,7 +61,10 @@ export class UsersResolver {
 Finally, we hook everything up by registering the `GraphQLModule` passing the `ApolloFederationDriver` driver in the configuration object:
 
 ```typescript
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UsersResolver } from './users.resolver';
@@ -122,7 +125,10 @@ export class UsersResolver {
 Finally, we hook everything up by registering the `GraphQLModule` passing the `ApolloFederationDriver` driver in the configuration object:
 
 ```typescript
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service'; // Not included in this example
@@ -193,7 +199,10 @@ export class PostsResolver {
 Lastly, we must register the `GraphQLModule`, similarly to what we did in the "Users service" section.
 
 ```typescript
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PostsResolver } from './posts.resolver';
@@ -305,7 +314,10 @@ export class PostsResolver {
 And finally, tie it together in a module. Note the schema build options, where we specify that `User` is an orphaned (external) type.
 
 ```ts
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { User } from './user.entity';
 import { PostsResolvers } from './posts.resolvers';
@@ -419,7 +431,10 @@ export class UsersResolver {
 Finally, we hook everything up by registering the `GraphQLModule` passing the `MercuriusFederationDriver` driver in the configuration object:
 
 ```typescript
-import { MercuriusFederationDriver, MercuriusFederationDriverConfig } from '@nestjs/mercurius';
+import {
+  MercuriusFederationDriver,
+  MercuriusFederationDriverConfig,
+} from '@nestjs/mercurius';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UsersResolver } from './users.resolver';
@@ -481,7 +496,10 @@ export class UsersResolver {
 Finally, we hook everything up by registering the `GraphQLModule` passing the `MercuriusFederationDriver` driver in the configuration object:
 
 ```typescript
-import { MercuriusFederationDriver, MercuriusFederationDriverConfig } from '@nestjs/mercurius';
+import {
+  MercuriusFederationDriver,
+  MercuriusFederationDriverConfig,
+} from '@nestjs/mercurius';
 import { Module } from '@nestjs/common';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service'; // Not included in this example
@@ -551,7 +569,10 @@ export class PostsResolver {
 Lastly, we must register the `GraphQLModule`, similarly to what we did in the "Users service" section.
 
 ```typescript
-import { MercuriusFederationDriver, MercuriusFederationDriverConfig } from '@nestjs/mercurius';
+import {
+  MercuriusFederationDriver,
+  MercuriusFederationDriverConfig,
+} from '@nestjs/mercurius';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PostsResolver } from './posts.resolver';
@@ -664,7 +685,10 @@ export class PostsResolver {
 And finally, tie it together in a module. Note the schema build options, where we specify that `User` is an orphaned (external) type.
 
 ```ts
-import { MercuriusFederationDriver, MercuriusFederationDriverConfig } from '@nestjs/mercurius';
+import {
+  MercuriusFederationDriver,
+  MercuriusFederationDriverConfig,
+} from '@nestjs/mercurius';
 import { Module } from '@nestjs/common';
 import { User } from './user.entity';
 import { PostsResolvers } from './posts.resolvers';
@@ -692,7 +716,10 @@ export class AppModule {}
 The gateway requires a list of endpoints to be specified and it will auto-discover the corresponding schemas. Therefore the implementation of the gateway service will remain the same for both code and schema first approaches.
 
 ```typescript
-import { MercuriusGatewayDriver, MercuriusGatewayDriverConfig } from '@nestjs/mercurius';
+import {
+  MercuriusGatewayDriver,
+  MercuriusGatewayDriverConfig,
+} from '@nestjs/mercurius';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
@@ -744,7 +771,10 @@ type Query {
 To use Federation 2, we need to specify the federation version in `autoSchemaFile` option.
 
 ```ts
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service'; // Not included in this example
@@ -811,7 +841,10 @@ export class User {
 Also, similarly to the User service, we need to specify in the `GraphQLModule` to use Federation 2.
 
 ```ts
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { User } from './user.entity';
 import { PostsResolvers } from './posts.resolvers';

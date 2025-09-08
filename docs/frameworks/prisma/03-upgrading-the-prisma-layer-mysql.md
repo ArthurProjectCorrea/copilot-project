@@ -8,7 +8,7 @@ sidebar_class_name: hidden-sidebar
 pagination_next: orm/more/upgrade-guides/upgrade-from-prisma-1/upgrading-nexus-prisma-to-nexus
 slugSwitch: /orm/more/upgrade-guides/upgrade-from-prisma-1/upgrading-the-prisma-layer-
 ---
-
+ 
 ## Overview
 
 This page explains the first step of your upgrade process: Taking your Prisma 1 configuration and upgrading it to Prisma ORM 2. Concretely, you will learn how to:
@@ -146,9 +146,9 @@ Your initial Prisma schema looks as follows:
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 With Prisma 1, you specify which language variant of Prisma Client you wanted to use in your `prisma.yml`. With Prisma ORM 2, this information is now specified inside the Prisma schema via a `generator` block.
@@ -237,13 +237,13 @@ Here's a graphical illustration for what happens when `db pull` is invoked:
 For the above Prisma 1 datamodel, this results in the following Prisma ORM 2 schema (note that the models have been reordered to match the initial order of the Prisma 1 datamodel):
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model Category
+model Category 
 ```
 
 While this is already a valid Prisma ORM 2 schema, it lacks a number of _features_ that were part of its Prisma 1 equivalent:
@@ -612,15 +612,15 @@ npx prisma db pull
 This time, the resulting Prisma schema looks as follows:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 
-model Category
+model Category 
 
-model Profile
+model Profile 
 
-enum Role
+enum Role 
 ```
 
 This schema has most issues resolved, but it still lacks the following:
@@ -737,15 +737,15 @@ https://pris.ly/d/upgrade-from-prisma-1
 The final version of the Prisma schema should look as follows:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model Category
+model Category 
 
-enum Role
+enum Role 
 ```
 
 ### 5.4. Rename relation fields
@@ -753,13 +753,13 @@ enum Role
 One thing you'll notice with this version of the Prisma ORM 2 schema is that all [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) are named after their respective models, e.g:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model Category
+model Category 
 ```
 
 This is not ideal and you can in fact manually rename all of them to their previous versions!
@@ -769,13 +769,13 @@ Because all relation fields are _virtual_, meaning they don't _manifest_ in the 
 Here's what they look like after the rename:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model Category
+model Category 
 ```
 
 > **Note**: For the 1-1-relation between `User` and `Profile` it was not possible to set the old name `user` for the relation field. This is because there'd be a naming conflict with the already existing [relation scalar](/orm/prisma-schema/data-model/relations#annotated-relation-fields) field that holds the foreign key. In that case, you can choose a different name or alternatively rename the foreign key column directly in the database via SQL.

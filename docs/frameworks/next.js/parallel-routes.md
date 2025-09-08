@@ -23,7 +23,7 @@ Slots are passed as props to the shared parent layout. For the example above, th
   children,
   team,
   analytics,
-}: )
+}: ) 
 
     </>
   )
@@ -101,7 +101,7 @@ You can use Parallel Routes to conditionally render routes based on certain cond
 
   user,
   admin,
-}: )
+}: ) 
 ```
 
 ```jsx filename="app/dashboard/layout.js" switcher
@@ -160,13 +160,13 @@ To implement this pattern, start by creating a `/login` route that renders your 
 
 ```tsx filename="app/login/page.tsx" switcher
 
-  return
+  return 
 }
 ```
 
 ```jsx filename="app/login/page.js" switcher
 
-  return
+  return 
 }
 ```
 
@@ -185,18 +185,17 @@ Then, inside the `@auth` slot, add [`default.js`](/docs/app/api-reference/file-c
 ```
 
 Inside your `@auth` slot, intercept the `/login` route by importing the `
-)
+  )
 }
-
-````
+```
 
 ```jsx filename="app/@auth/(.)login/page.js" switcher
 
   return (
-
+    
   )
 }
-````
+```
 
 > **Good to know:**
 >
@@ -225,7 +224,7 @@ To open the modal, pass the `@auth` slot as a prop to the parent layout and rend
   return (
     <>
       <nav>
-
+        
       </nav>
       <div></div>
       <div></div>
@@ -235,24 +234,22 @@ To open the modal, pass the `@auth` slot as a prop to the parent layout and rend
 ```
 
 When the user clicks the `
-
-<div></div>
-</>
-)
+      <div></div>
+    </>
+  )
 }
-
-````
+```
 
 ```jsx filename="app/ui/modal.js" switcher
 
   return (
     <>
-
+      
       <div></div>
     </>
   )
 }
-````
+```
 
 ```tsx filename="app/@auth/page.tsx" switcher
 

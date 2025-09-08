@@ -106,7 +106,7 @@ Here is an example of using a custom loader:
 const myLoader = () => ?w=$&q=$`
 }
 
-const MyImage = (props) =>
+const MyImage = (props) => 
 ```
 
 ### sizes
@@ -122,7 +122,12 @@ Second, the `sizes` value is parsed and used to trim the values in the automatic
 For example, if you know your styling will cause an image to be full-width on mobile devices, in a 2-column layout on tablets, and a 3-column layout on desktop displays, you should include a sizes property such as the following:
 
 ```js
-const Example = () => <div className="grid-element"></div>;
+
+const Example = () => (
+  <div className="grid-element">
+    
+  </div>
+)
 ```
 
 This example `sizes` could have a dramatic effect on performance metrics. Without the `33vw` sizes, the image selected from the server would be 3 times as wide as it needs to be. Because file size is proportional to the square of the width, without `sizes` the user would download an image that's 9 times larger than necessary.
@@ -252,12 +257,12 @@ const Example = () =>  style=}>
 ```jsx
 
 const Container = React.forwardRef((props, ref) =>  style=}>
-
+      
     </div>
   )
 })
 
-const Example = () =>
+const Example = () => 
 ```
 
 [Learn more](https://developer.mozilla.org/docs/Web/API/IntersectionObserver/root)
@@ -270,7 +275,7 @@ This is useful for images that do not benefit from optimization such as small im
 
 ```js
 
-const UnoptimizedImage = (props) =>
+const UnoptimizedImage = (props) => 
 ```
 
 Since Next.js 12.3.0, this prop can be assigned to all images by updating `next.config.js` with the following configuration:
@@ -282,7 +287,8 @@ module.exports = ,
 
 ## Other Props
 
-Other properties on the ``component will be passed to the underlying`img` element with the exception of the following:
+Other properties on the `` component will be passed to the underlying
+`img` element with the exception of the following:
 
 - `srcSet`. Use
   [Device Sizes](#device-sizes)

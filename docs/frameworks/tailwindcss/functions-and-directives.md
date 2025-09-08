@@ -10,7 +10,7 @@ Use the `@import` directive to inline import CSS files, including Tailwind itsel
 
 ```css
 /* [!code filename:CSS] */
-@import 'tailwindcss';
+@import "tailwindcss";
 ```
 
 <h3 id="theme-directive">
@@ -21,7 +21,7 @@ Use the `@theme` directive to define your project's custom design tokens, like f
 
 ```css
 /* [!code filename:CSS] */
-@theme;
+@theme 
 ```
 
 Learn more about customizing your theme in the [theme variables documentation](/docs/theme).
@@ -47,7 +47,7 @@ Use the `@utility` directive to add custom utilities to your project that work w
 
 ```css
 /* [!code filename:CSS] */
-@utility tab-4;
+@utility tab-4 
 ```
 
 Learn more about registering custom utilities in the [adding custom utilities documentation](/docs/adding-custom-styles#adding-custom-utilities).
@@ -60,7 +60,7 @@ Use the `@variant` directive to apply a Tailwind variant to styles in your CSS:
 
 ```css
 /* [!code filename:CSS] */
-.my-element
+.my-element 
 }
 ```
 
@@ -89,11 +89,11 @@ Use the `@apply` directive to inline any existing utility classes into your own 
 
 ```css
 /* [!code filename:CSS] */
-.select2-dropdown
+.select2-dropdown 
 
-.select2-search
+.select2-search 
 
-.select2-results__group
+.select2-results__group 
 ```
 
 This is useful when you need to write custom CSS (like to override the styles in a third-party library) but still want to work with your design tokens and use the same syntax you’re used to using in your HTML.
@@ -116,7 +116,7 @@ To do this without duplicating any CSS in your output, use the `@reference` dire
   /* [!code highlight:2] */
   @reference "../../app.css";
 
-  h1
+  h1 
 </style>
 ```
 
@@ -132,7 +132,7 @@ If you’re just using the default theme with no customizations, you can import 
   /* [!code highlight:2] */
   @reference "tailwindcss";
 
-  h1
+  h1 
 </style>
 ```
 
@@ -202,7 +202,7 @@ Use the `theme()` function to access your Tailwind theme values using dot notati
 
 ```css
 /* [!code filename:CSS] */
-.my-element
+.my-element 
 ```
 
 This function is deprecated, and we recommend [using CSS theme variables](/docs/theme#using-your-theme-variables) instead.

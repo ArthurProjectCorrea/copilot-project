@@ -76,11 +76,11 @@ You can consider a `route` the lowest level routing primitive.
 - They **do not** participate in layouts or client-side navigations like `page`.
 - There **cannot** be a `route.js` file at the same route as `page.js`.
 
-| Page                 | Route              | Result   |
-| -------------------- | ------------------ | -------- |
-| `app/page.js`        | `app/route.js`     | Conflict |
-| `app/page.js`        | `app/api/route.js` | Valid    |
-| `app/[user]/page.js` | `app/api/route.js` | Valid    |
+| Page                 | Route              | Result                       |
+| -------------------- | ------------------ | ---------------------------- |
+| `app/page.js`        | `app/route.js`     |  Conflict |
+| `app/page.js`        | `app/api/route.js` |  Valid    |
+| `app/[user]/page.js` | `app/api/route.js` |  Valid    |
 
 Each `route.js` or `page.js` file takes over all HTTP verbs for that route.
 

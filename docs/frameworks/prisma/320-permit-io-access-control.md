@@ -10,12 +10,12 @@ community_section: true
 
 ## Introduction
 
-[Permit.io](https://www.permit.io/) is an authorization-as-a-service platform that lets you implement fine-grained access control
+[Permit.io](https://www.permit.io/) is an authorization-as-a-service platform that lets you implement fine-grained access control 
 rules based on real-world relationships.
 
-This guide explains how to connect Permit.io to a new Express + Prisma app, define a
-[Relationship-Based Access Control (ReBAC)](https://www.permit.io/blog/what-is-rebac) policy,
-and automatically filter Prisma queries so users only see the data they're allowed to access.
+This guide explains how to connect Permit.io to a new Express + Prisma app, define a 
+[Relationship-Based Access Control (ReBAC)](https://www.permit.io/blog/what-is-rebac) policy, 
+and automatically filter Prisma queries so users only see the data they're allowed to access. 
 
 You'll build a small project-task API to demonstrate access inheritance in action - no manual `WHERE` clauses required.
 
@@ -31,7 +31,7 @@ You can find a complete example of this guide [here](https://www.permit.io/blog/
 
 ## 1. Set up your project
 
-First of all, you'll create a new Express + Prisma project from scratch using TypeScript.
+First of all, you'll create a new Express + Prisma project from scratch using TypeScript. 
 You'll also install the tools needed to support ReBAC filtering with Permit.io.
 
 ### 1.1 Create the project folder
@@ -81,9 +81,9 @@ You're now ready to define your Prisma data model.
 
 ## 2. The authorization model
 
-Before we continue with the setup, it's important to define how access control will work in your application.
+Before we continue with the setup, it's important to define how access control will work in your application. 
 
-This guide uses **Relationship-Based Access Control (ReBAC)** to automatically restrict database queries based on a user's relationship to the data.
+This guide uses **Relationship-Based Access Control (ReBAC)** to automatically restrict database queries based on a user's relationship to the data. 
 
 Let's see what this looks like:
 
@@ -115,10 +115,10 @@ These are the main data entities you'll protect:
 
 Instance-level roles describe what users can do with specific resources:
 
-| Role             | Description                           |
-| ---------------- | ------------------------------------- |
-| `project#Member` | User can access a specific project    |
-| `task#Member`    | User can access tasks in that project |
+| Role | Description |
+| --- | --- |
+| `project#Member` | User can access a specific project |
+| `task#Member` | User can access tasks in that project |
 
 ### Role derivation
 
@@ -131,17 +131,17 @@ ReBAC lets you **automatically derive roles** based on relationships. In this ca
 
 Once relationships and roles are defined, access policies determine what users can do:
 
-| Role             | Action | Resource |
-| ---------------- | ------ | -------- |
-| `project#Member` | `read` | Project  |
-| `task#Member`    | `read` | Task     |
+| Role | Action | Resource |
+| --- | --- | --- |
+| `project#Member` | `read` | Project |
+| `task#Member` | `read` | Task |
 
 This model ensures that:
 
 - Users can only access the projects and tasks they're assigned to
 - No cross-team visibility
 - Access automatically stays in sync with the business structure
-
+    
 ![Access control planning](/img/guides/permitio/planning.png)
 
 ## 3. Define your data model
@@ -153,13 +153,13 @@ To support permission-aware data filtering, you need to structure your database 
 Open `prisma/schema.prisma` and replace the contents with the following:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model Project
+model Project 
 
-model Task
+model Task 
 ```
 
 ### 3.2 Run your first migration
@@ -234,8 +234,7 @@ npx tsx scripts/seed.ts
 If successful, you'll see:
 
 ✅ Seeded 2 projects and 4 tasks with distinct ownership
-
-````
+```
 
 At this point, if you run a query like `prisma.task.findMany()`, it will return all tasks. In the next steps, you'll connect Permit.io to filter these results automatically based on the user's access rights.
 
@@ -249,7 +248,7 @@ Install the `permit-prisma` package:
 
 ```terminal
 npm install @permitio/permit-prisma
-````
+```
 
 ### 5.2 Configure the Permit client
 
@@ -315,8 +314,8 @@ This will create:
 - **Resources**: `project`, `task`
 - **Relationships**: `project` is the parent of `task`
 - **Roles**:
-  - `project#Member`: User can access a specific project
-  - `task#Member`: Derived from project membership
+    - `project#Member`: User can access a specific project
+    - `task#Member`: Derived from project membership
 - **Access policies**: Users with the appropriate roles can `read` each resource
 
 ### 6.4 View the policy in the Permit UI
@@ -412,6 +411,7 @@ Create a controller file: `src/controllers/project.controller.ts`
 ```
 
 > Even though this is a raw findMany() query, only authorized records will be returned for the current user.
+> 
 
 ### 8.2 Get user-visible tasks
 
@@ -429,7 +429,7 @@ Create another controller: `src/controllers/task.controller.ts`
 };
 ```
 
-:::info projectId
+:::info projectId 
 Even if you provide a projectId manually, the query results are still filtered by permissions.
 :::
 
@@ -500,7 +500,7 @@ curl -H "x-user-email: mary@company.com" http://localhost:3000/api/tasks
 
 This should only return tasks from Project Beta.
 
-:::tip
+:::tip 
 If you haven't yet assigned users to project memberships in the Permit.io UI, visit the Policy Editor and assign users to roles (project#Member).
 :::
 

@@ -63,13 +63,20 @@ First enable the option when creating your Nest Fastify application:
 
 ```typescript
 import { NestFactory } from '@nestjs/core';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 
 // in the "bootstrap" function
-const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
-  rawBody: true,
-});
+const app = await NestFactory.create<NestFastifyApplication>(
+  AppModule,
+  new FastifyAdapter(),
+  {
+    rawBody: true,
+  },
+);
 await app.listen(process.env.PORT ?? 3000);
 ```
 

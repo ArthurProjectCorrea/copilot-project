@@ -47,7 +47,7 @@ export class CatsController {
   updateCat(
     @Body() body: UpdateCatDTO,
     @Param() params: UpdateCatParams,
-    @Query() query: UpdateCatQuery
+    @Query() query: UpdateCatQuery,
   ) {
     return this.catsService.updateCat(body, params, query);
   }

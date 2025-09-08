@@ -14,11 +14,10 @@ community_section: true
 ## Prisma: Built for Teams
 
 Prisma is designed to help teams ship faster—especially when not everyone is a SQL expert.
-
-- **No SQL bottlenecks**: With Prisma, you don’t need deep SQL knowledge to be productive. Your entire team can contribute to backend code—without relying on one person to write raw queries or debug database logic.
-- **Shared mental model**: Prisma’s schema is human-readable and easy to reason about. It provides a single, consistent view of your application’s data model.
-- **Easier code reviews**: Schema changes and data access patterns are transparent and consistent, making it easier for reviewers to understand and approve backend changes.
-- **Predictable workflows**: Prisma automates migration generation, client typing, and query construction—so your team doesn’t have to.
+* **No SQL bottlenecks**: With Prisma, you don’t need deep SQL knowledge to be productive. Your entire team can contribute to backend code—without relying on one person to write raw queries or debug database logic.
+* **Shared mental model**: Prisma’s schema is human-readable and easy to reason about. It provides a single, consistent view of your application’s data model.
+* **Easier code reviews**: Schema changes and data access patterns are transparent and consistent, making it easier for reviewers to understand and approve backend changes.
+* **Predictable workflows**: Prisma automates migration generation, client typing, and query construction—so your team doesn’t have to.
 
 Drizzle can be great in the hands of a single developer who knows SQL or prefers learning it. But once you have a team, Prisma removes the friction and knowledge risk that slows you down.
 
@@ -31,10 +30,9 @@ With Prisma, you get _full_ type safety thanks to the generated types. This mean
 ## Prisma Schema as a Single Source of Truth
 
 With Prisma, your data model lives in a single file: schema.prisma.
-
-- **It’s explicit**: No need to infer types or decipher SQL-generating functions—your schema is right there.
-- **It’s readable**: Even non-technical teammates can understand your models and relationships.
-- **It powers everything**: Migrations, TypeScript types, autocompletion, ERD generation, and more all come from your schema.
+* **It’s explicit**: No need to infer types or decipher SQL-generating functions—your schema is right there.
+* **It’s readable**: Even non-technical teammates can understand your models and relationships.
+* **It powers everything**: Migrations, TypeScript types, autocompletion, ERD generation, and more all come from your schema.
 
 In contrast, Drizzle’s schema is built via TypeScript code, which makes it harder to visualize your full data model, increases cognitive load, and can lead to inconsistencies in how models are defined across the codebase. [Read more](https://www.prisma.io/blog/prisma-schema-language-the-best-way-to-define-your-data) about why we are bullish on PSL (Prisma Schema Language).
 
@@ -106,9 +104,8 @@ These products work hand-in-hand with Prisma ORM to offer comprehensive data too
 ## Safer Changes and Fewer Bugs
 
 Prisma minimizes the risk of human error when working with your database.
-
-- **Renaming a field?** Prisma updates the schema, the database, and the generated client. You stay in sync automatically.
-- **Changing a relationship?** Prisma generates a safe migration and enforces correctness via full type safety.
+* **Renaming a field?** Prisma updates the schema, the database, and the generated client. You stay in sync automatically.
+* **Changing a relationship?** Prisma generates a safe migration and enforces correctness via full type safety.
 
 Teams choose Prisma because it enforces correctness and helps you move fast without breaking things.
 
@@ -131,11 +128,10 @@ Thanks to its maturity, Prisma's community has developed a [plethora of useful t
 - [`@cerbos/orm-prisma`](https://github.com/cerbos/query-plan-adapters/tree/main/prisma): Filter data based on authorization policies from [Cerbos](https://www.cerbos.dev).
 
 Prisma isn’t just an ORM—it’s a complete type-safe data toolkit:
-
-- Prisma Schema → migrations, types, and documentation
-- Prisma Client → auto-completed, fully type-safe queries
-- Prisma Studio → a [GUI](https://prisma.io/studio) to inspect and edit data
-- Native integrations → PlanetScale, Vercel, Cloudflare D1, Neon, and more
+* Prisma Schema → migrations, types, and documentation
+* Prisma Client → auto-completed, fully type-safe queries
+* Prisma Studio → a [GUI](https://prisma.io/studio) to inspect and edit data
+* Native integrations → PlanetScale, Vercel, Cloudflare D1, Neon, and more
 
 ## Database support
 
@@ -146,7 +142,6 @@ Prisma ORM has begun adding support for [third-party database drivers](https://w
 Additionally, Prisma ORM supports CockroachDB, Microsoft SQL Server, and MongoDB, which Drizzle does not currently support. Prisma ORM also offers the [relation mode](/orm/prisma-schema/data-model/relations/relation-mode) that allows Prisma ORM to emulate foreign key constraints for those database engines that do not support it. Drizzle currently supports Cloudflare D1, `bun:sqlite`, and SQLite via HTTP Proxy, which Prisma ORM currently does not.
 
 ## Benchmarks
-
 We understand that performance is a key consideration when selecting an ORM. To compare performance of various ORMs, you can use the open-source [database latency benchmark tool](https://pris.ly/benchmark) hosted by Vercel. This tool allows you to evaluate the latency and throughput of various ORMs under different workloads and configurations. By running the benchmarks against the databases or database providers you are considering, you can get a clear picture of their relative performance characteristics to help make an informed decision.
 
 Alternatively, you can also review findings on the [benchmark tool](https://benchmarks.prisma.io) that we have built that compares popular TypeScript ORMs, including Drizzle. This benchmark is open source and aims to be a fair comparison of database query latencies across database providers and ORM libraries in the Node.js and TypeScript ecosystem.
@@ -154,11 +149,10 @@ Alternatively, you can also review findings on the [benchmark tool](https://benc
 ## Conclusion
 
 Yes, we are biased, but this is also what we have heard from our users and customers:
-
-- "We switched from Drizzle to Prisma because schema drift was killing us. Prisma just works."
-- "I onboarded a junior dev in 2 hours thanks to Prisma’s schema. With Drizzle, it would’ve taken days."
-- "I trust Prisma to keep our database sane. No one on our team needs to be a Postgres expert."
-- "The pace of updates and new features from the Prisma team has been nothing short of outstanding."
+* "We switched from Drizzle to Prisma because schema drift was killing us. Prisma just works."
+* "I onboarded a junior dev in 2 hours thanks to Prisma’s schema. With Drizzle, it would’ve taken days."
+* "I trust Prisma to keep our database sane. No one on our team needs to be a Postgres expert."
+* "The pace of updates and new features from the Prisma team has been nothing short of outstanding."
 
 Both Drizzle ORM and Prisma ORM are tools for data access and migrations. Drizzle is focused on being a thin wrapper around a SQL-like syntax while Prisma is focused on a convenient and expressive API. Other important differences include Prisma ORM's support of MSSQL and MongoDB, support for additional features via [Prisma Client extensions](/orm/prisma-client/client-extensions), additional cloud-ready products, and a robust ecosystem.
 

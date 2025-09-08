@@ -24,9 +24,9 @@ In the previous example, the `author` relation field of the `Post` model referen
 In **relational databases only**, you can also define this relation using [multi-field IDs](/orm/reference/prisma-schema-reference#id-1)/composite key:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 ## 1-n relations in the database
@@ -84,11 +84,11 @@ Each of the following `Post` MongoDB documents has an `authorId` field which ref
 [
   ,
     "title": "How to make sushi",
-    "authorId":
+    "authorId": 
   },
   ,
     "title": "How to re-install Windows",
-    "authorId":
+    "authorId": 
   }
 ]
 ```

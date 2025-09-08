@@ -78,9 +78,9 @@ This approach centralizes all data access logic, making it easier to enforce con
 ```tsx filename="data/user-dto.tsx"
 import 'server-only'
 
-function canSeeUsername(viewer: User)
+function canSeeUsername(viewer: User) 
 
-function canSeePhoneNumber(viewer: User, team: string)
+function canSeePhoneNumber(viewer: User, team: string) 
 
   // Don't pass values, read back cached values, also solves context and easier to make it lazy
 
@@ -92,7 +92,7 @@ function canSeePhoneNumber(viewer: User, team: string)
 
   // only return the data relevant for this query and not everything
   // <https://www.w3.org/2001/tag/doc/APIMinimization>
-  return
+  return 
 }
 ```
 
@@ -119,7 +119,7 @@ This approach, however, makes it easier to accidentally expose private data to t
   const userData = rows[0]
   // EXPOSED: This exposes all the fields in userData to the client because
   // we are passing the data from the Server Component to the Client.
-  return
+  return 
 }
 ```
 
@@ -148,15 +148,15 @@ You should sanitize the data before passing it to the Client Component:
   const user = rows[0]
 
   // Return only the public fields
-  return
+  return 
 }
 ```
 
 ```tsx filename="app/page.tsx"
 
   params: ,
-}:
-})
+}: 
+}) 
 ```
 
 ## Reading data
@@ -215,7 +215,7 @@ pnpm add server-only
 ```
 
 ```ts filename="lib/data.ts"
-import 'server-only';
+import 'server-only'
 
 //...
 ```
@@ -242,7 +242,7 @@ To improve security, Next.js has the following built-in features:
 
 ```jsx
 // app/actions.js
-'use server';
+'use server'
 
 // If this action **is** used in our application, Next.js
 // will create a secure ID to allow the client to reference
@@ -251,6 +251,7 @@ To improve security, Next.js has the following built-in features:
 // If this action **is not** used in our application, Next.js
 // will automatically remove this code during `next build`
 // and will not create a public endpoint.
+
 ```
 
 ### Validating client input
@@ -261,7 +262,7 @@ You should always validate input from client, as they can be easily modified. Fo
 // BAD: Trusting searchParams directly
 
   const isAdmin = searchParams.get('isAdmin')
-  if (isAdmin === 'true')
+  if (isAdmin === 'true') 
 }
 
 // GOOD: Re-verify every time
@@ -269,7 +270,7 @@ You should always validate input from client, as they can be easily modified. Fo
   const token = cookies().get('AUTH_TOKEN')
   const isAdmin = await verifyAdmin(token)
 
-  if (isAdmin)
+  if (isAdmin) 
 }
 ```
 
@@ -281,7 +282,7 @@ You should always ensure that a user is authorized to perform an action. For exa
 'use server'
 
   const  = auth()
-  if (!user)
+  if (!user) 
 
   // ...
 }
@@ -297,7 +298,7 @@ Defining a Server Action inside a component creates a [closure](https://develope
 
   const publishVersion = await getLatestVersion();
 
-  async function publish()
+  async function publish() 
     ...
   }
 
@@ -313,7 +314,7 @@ Defining a Server Action inside a component creates a [closure](https://develope
 
   const publishVersion = await getLatestVersion();
 
-  async function publish()
+  async function publish() 
     ...
   }
 
@@ -367,9 +368,9 @@ Mutations (e.g. logging out users, updating databases, invalidating caches) shou
 ```tsx filename="app/page.tsx"
 // BAD: Triggering a mutation during rendering
 
-  if (searchParams.get('logout'))
+  if (searchParams.get('logout')) 
 
-  return
+  return 
 }
 ```
 
@@ -380,7 +381,7 @@ Instead, you should use Server Actions to handle mutations.
 
   return (
     <>
-
+      
       <form action=>
         <button type="submit">Logout</button>
       </form>

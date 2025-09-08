@@ -1,7 +1,7 @@
 ---
 title: 'Full table scans caused by LIKE operations'
 metaTitle: 'Optimize Recommendations: Full table scans caused by LIKE operations'
-metaDescription: 'Learn about the recommendation provided by Optimize for full table scans caused by Like operations.'
+metaDescription: "Learn about the recommendation provided by Optimize for full table scans caused by Like operations."
 tocDepth: 3
 toc: true
 ---
@@ -11,9 +11,9 @@ Optimize provides recommendations to help you identify and resolve performance i
 The following query targeting the `User` model provides `contains` and `endsWith` as options, which translate to `LIKE` and `ILIKE` SQL operators.
 
 ```jsx
-await prisma.user.findMany(,
-    name:
-  }
+await prisma.user.findMany(, 
+    name:  
+  } 
 })
 ```
 

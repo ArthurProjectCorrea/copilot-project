@@ -171,7 +171,7 @@ const mockFs = jest.createMockFromModule('fs');
 The type changes are only applicable if you explicitly import Jest APIs:
 
 ```ts
-import { expect, jest, test } from '@jest/globals';
+import {expect, jest, test} from '@jest/globals';
 ```
 
 :::

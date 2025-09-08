@@ -14,12 +14,11 @@ It supports the following workflows:
 - Schema migrations and queries (via [Prisma ORM](https://www.prisma.io/orm))
 - Connection pooling and caching (via [Prisma Accelerate](https://www.prisma.io/accelerate))
 
-## Billing
+## Billing 
 
 ### Usage-based pricing
 
 Prisma Postgres charges for:
-
 - number of operations
 - storage (in GiB)
 
@@ -44,14 +43,16 @@ This is temporary. In the future, there won't be any downtime when up- or downgr
 
 ## Bundling with Prisma Accelerate
 
-Prisma Postgres comes bundled with [Prisma Accelerate](/accelerate).
+Prisma Postgres comes bundled with [Prisma Accelerate](/accelerate). 
 
 ### Using the Client extension for Prisma Accelerate (required)
 
 Because all traffic to Prisma Postgres is routed through Accelerate's connection pool, your project must have the [`@prisma/extension-accelerate`](https://www.npmjs.com/package/@prisma/extension-accelerate) npm package installed. The extension then needs to be applied to the `PrismaClient` instance you use to interact with your database:
 
 ```ts
-const prisma = new PrismaClient().$extends(withAccelerate());
+
+const prisma = new PrismaClient()
+  .$extends(withAccelerate())
 ```
 
 ## Technical details

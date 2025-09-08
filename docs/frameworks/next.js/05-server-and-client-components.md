@@ -220,7 +220,7 @@ You can pass data from Server Components to Client Components using props.
 })  = await params
   const post = await getPost(id)
 
-  return
+  return 
 }
 ```
 
@@ -228,7 +228,7 @@ You can pass data from Server Components to Client Components using props.
 
   const post = await getPost(params.id)
 
-  return
+  return 
 }
 ```
 
@@ -255,18 +255,17 @@ Alternatively, you can stream data from a Server Component to a Client Component
 You can pass Server Components as a prop to a Client Component. This allows you to visually nest server-rendered UI within Client components.
 
 A common pattern is to use `children` to create a _slot_ in a `<ClientComponent>`. For example, a `<Cart>` component that fetches data on the server, inside a `
-)
+  )
 }
-
-````
+```
 
 ```jsx filename="app/page.js" highlight= switcher
 
   return (
-
+    
   )
 }
-````
+```
 
 In this pattern, all Server Components will be rendered on the server ahead of time, including those as props. The resulting RSC payload will contain references of where Client Components should be rendered within the component tree.
 
@@ -296,7 +295,7 @@ Then, import it into a Server Component (e.g. `layout`):
 ```tsx filename="app/layout.tsx" switcher
 
   children,
-}: )
+}: ) 
 ```
 
 ```jsx filename="app/layout.js" switcher
@@ -304,7 +303,7 @@ Then, import it into a Server Component (e.g. `layout`):
   return (
     <html>
       <body>
-
+        
       </body>
     </html>
   )
@@ -313,13 +312,13 @@ Then, import it into a Server Component (e.g. `layout`):
 
 Your Server Component will now be able to directly render your provider, and all other Client Components throughout your app will be able to consume this context.
 
-> **Good to know**: You should render providers as deep as possible in the tree – notice how `ThemeProvider` only wraps ``instead of the entire`<html>` document. This makes it easier for Next.js to optimize the static parts of your Server Components.
+> **Good to know**: You should render providers as deep as possible in the tree – notice how `ThemeProvider` only wraps `` instead of the entire `<html>` document. This makes it easier for Next.js to optimize the static parts of your Server Components.
 
 ### Third-party components
 
 When using a third-party component that relies on client-only features, you can wrap it in a Client Component to ensure it works as expected.
 
-For example, the ``can be imported from the`acme-carousel`package. This component uses`useState`, but it doesn't yet have the `"use client"` directive.
+For example, the `` can be imported from the `acme-carousel` package. This component uses `useState`, but it doesn't yet have the `"use client"` directive.
 
 If you use `` within a Client Component, it will work as expected:
 
@@ -356,11 +355,13 @@ However, if you try to use it directly within a Server Component, you'll see an 
 To fix this, you can wrap third-party components that rely on client-only features in your own Client Components:
 
 ```tsx filename="app/carousel.tsx" switcher
-'use client';
+'use client'
+
 ```
 
 ```jsx filename="app/carousel.js" switcher
-'use client';
+'use client'
+
 ```
 
 Now, you can use `` directly within a Server Component:

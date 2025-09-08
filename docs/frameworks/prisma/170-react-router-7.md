@@ -17,7 +17,6 @@ This guide shows you how to use Prisma ORM with [React Router 7](https://reactro
 You'll learn how to set up Prisma ORM and Prisma Postgres with React Router 7 and handle migrations. You can find a [deployment-ready example on GitHub](https://github.com/prisma/prisma-examples/blob/latest/orm/react-router-7).
 
 ## Prerequisites
-
 - [Node.js 20+](https://nodejs.org)
 
 ## 1. Set up your project
@@ -31,10 +30,9 @@ npx create-react-router@latest react-router-7-prisma
 You'll be prompted to select the following, select `Yes` for both:
 
 :::info
-
-- _Initialize a new git repository?_ `Yes`
-- _Install dependencies with npm?_ `Yes`
-  :::
+- *Initialize a new git repository?* `Yes`
+- *Install dependencies with npm?* `Yes`
+:::
 
 Now, navigate to the project directory:
 
@@ -53,7 +51,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../app/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My React Router 7 Project"
 :::
@@ -70,14 +67,14 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models and change the generator to use the `prisma-client` provider:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -90,7 +87,6 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
-
 ### 2.4. Seed the database
 
 Add some seed data to populate the database with sample users and posts.
@@ -128,7 +124,7 @@ Now, tell Prisma how to run this script by updating your `package.json`:
   "prisma": ,
   //add-end
   "dependencies": ,
-  "devDependencies":
+  "devDependencies": 
 }
 ```
 
@@ -228,7 +224,7 @@ This gives you a basic page with a title and a list of users. However, the list 
       <ol className="list-decimal list-inside font-[family-name:var(--font-geist-sans)]">
         //add-start
          className="mb-2">
-
+            
           </li>
         ))}
         //add-end
@@ -254,7 +250,7 @@ Just reload the page and you'll see the changes.
 
 ## 4. Add a new Posts list page
 
-You have your home page working, but you should add a new page that displays all of your posts.
+You have your home page working, but you should add a new page that displays all of your posts. 
 
 First, create a new `posts` directory under the `app/routes` directory and add a `home.tsx` file:
 
@@ -318,7 +314,7 @@ Now `localhost:5173/posts` will load, but the content is static. Update it to be
         >
             <span className="font-semibold"></span>
             <span className="text-sm text-gray-600 ml-2">
-              by
+              by 
             </span>
           </li>
         ))}
@@ -403,7 +399,7 @@ As before, this page is static. Update it to be dynamic based on the `params` pa
         <h1 className="text-4xl font-bold mb-8"></h1>
         <p className="text-gray-600 text-center">by </p>
         <div className="prose prose-gray mt-8">
-
+          
         </div>
         //add-end
       </article>
@@ -422,7 +418,7 @@ It's not the prettiest page, but it's a good start. Try it out by navigating to 
 
 ## 6. Add a new Posts create page
 
-To round out your application, you'll add a "create" page for posts. This will allow you to write your own posts and save them to the database.
+To round out your application, you'll add a "create" page for posts. This will allow you to write your own posts and save them to the database. 
 
 As with the other pages, you'll start with a static page and then update it to be dynamic.
 
@@ -442,7 +438,7 @@ Now, add the following code to the `app/routes/posts/new.tsx` file:
   return (
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Create New Post</h1>
-
+      
     </div>
   );
 }
@@ -471,7 +467,7 @@ Now you can view the form at the new URL. It looks good, but it doesn't do anyth
 
   const formData = await request.formData();
   const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+  const content = formData.get("content") as string;  
 
   //add-start
   try ,
@@ -486,13 +482,13 @@ Now you can view the form at the new URL. It looks good, but it doesn't do anyth
   return (
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Create New Post</h1>
-
+      
     </div>
   );
 }
 ```
 
-This page now has a functional form! When you submit the form, it will create a new post in the database and redirect you to the posts list page.
+This page now has a functional form! When you submit the form, it will create a new post in the database and redirect you to the posts list page. 
 
 Try it out by navigating to `localhost:5173/posts/new` and submitting the form.
 
@@ -506,7 +502,6 @@ Now that you have a working React Router application with Prisma ORM, here are s
 - Use [Prisma Studio](/orm/tools/prisma-studio) for visual database management
 
 For more information and updates:
-
 - [Prisma ORM documentation](/orm)
 - [Prisma Client API reference](/orm/prisma-client)
 - [React Router documentation](https://reactrouter.com/home)

@@ -37,7 +37,7 @@ See ["Customizing Plugins"](#customizing-plugins) below for more information.
 ```json filename="postcss.config.json"
 ,
         "stage": 3,
-        "features":
+        "features": 
       }
     ]
   ]
@@ -80,7 +80,7 @@ This is the default configuration used by Next.js:
 ```json filename="postcss.config.json"
 ,
         "stage": 3,
-        "features":
+        "features": 
       }
     ]
   ]

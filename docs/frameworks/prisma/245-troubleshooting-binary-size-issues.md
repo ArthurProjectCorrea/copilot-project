@@ -11,22 +11,22 @@ As of [v6.7.0](https://pris.ly/release/6.7.0), you can resolve these issues by e
 When enabled, Prisma Client is generated **without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies.
 
 ```prisma
-generator client
-```
+generator client 
+````
 
 :::note
-The [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+The [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`. 
 :::
 
 With this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JavaScript database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JavaScript database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can help if you are:
 
-- Deploying to serverless functions or edge runtimes
-- Running in read-only filesystem environments
-- Working within CI/CD pipelines with strict size limits
+* Deploying to serverless functions or edge runtimes
+* Running in read-only filesystem environments
+* Working within CI/CD pipelines with strict size limits
 
 Visit [this page](/orm/prisma-client/setup-and-configuration/no-rust-engine) for complete setup instructions and supported databases. Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).

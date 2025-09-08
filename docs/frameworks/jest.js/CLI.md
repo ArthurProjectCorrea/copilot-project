@@ -198,9 +198,9 @@ Path to a module exporting a filtering function. This asynchronous function rece
 
 ```js title="my-filter.js"
 // This filter when applied will only run tests ending in .spec.js (not the best way to do it, but it's just an example):
-const filteringFunction = (testPath) => testPath.endsWith('.spec.js');
+const filteringFunction = testPath => testPath.endsWith('.spec.js');
 
-module.exports = (testPaths) => {
+module.exports = testPaths => {
   const allowedPaths = testPaths.filter(filteringFunction); // ["path1.spec.js", "path2.spec.js", etc]
 
   return {
@@ -236,7 +236,7 @@ Ignore the tests of the specified projects. Jest uses the attribute `displayName
 Insert Jest's globals (`expect`, `test`, `describe`, `beforeEach` etc.) into the global environment. If you set this to `false`, you should import from `@jest/globals`, e.g.
 
 ```ts
-import { expect, jest, test } from '@jest/globals';
+import {expect, jest, test} from '@jest/globals';
 
 jest.useFakeTimers();
 

@@ -124,7 +124,7 @@ describe('infiniteTimerGame', () => {
 For debugging or any other reason you can change the limit of timers that will be run before throwing an error:
 
 ```js
-jest.useFakeTimers({ timerLimit: 100 });
+jest.useFakeTimers({timerLimit: 100});
 ```
 
 :::
@@ -204,7 +204,7 @@ const mockPerformanceMark = jest.fn();
 window.performance.mark = mockPerformanceMark;
 
 test('allows mocking `performance.mark()`', () => {
-  jest.useFakeTimers({ doNotFake: ['performance'] });
+  jest.useFakeTimers({doNotFake: ['performance']});
 
   expect(window.performance.mark).toBe(mockPerformanceMark);
 });

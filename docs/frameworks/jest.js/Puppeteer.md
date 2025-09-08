@@ -58,7 +58,7 @@ You can also hook up puppeteer from scratch. The basic idea is to:
 Here's an example of the GlobalSetup script
 
 ```js title="setup.js"
-const { mkdir, writeFile } = require('fs').promises;
+const {mkdir, writeFile} = require('fs').promises;
 const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
@@ -72,7 +72,7 @@ module.exports = async function () {
   globalThis.__BROWSER_GLOBAL__ = browser;
 
   // use the file system to expose the wsEndpoint for TestEnvironments
-  await mkdir(DIR, { recursive: true });
+  await mkdir(DIR, {recursive: true});
   await writeFile(path.join(DIR, 'wsEndpoint'), browser.wsEndpoint());
 };
 ```
@@ -80,7 +80,7 @@ module.exports = async function () {
 Then we need a custom Test Environment for puppeteer
 
 ```js title="puppeteer_environment.js"
-const { readFile } = require('fs').promises;
+const {readFile} = require('fs').promises;
 const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer');
@@ -135,7 +135,7 @@ module.exports = async function () {
   await globalThis.__BROWSER_GLOBAL__.close();
 
   // clean-up the wsEndpoint file
-  await fs.rm(DIR, { recursive: true, force: true });
+  await fs.rm(DIR, {recursive: true, force: true});
 };
 ```
 
@@ -158,7 +158,7 @@ describe(
       expect(text).toContain('google');
     });
   },
-  timeout
+  timeout,
 );
 ```
 

@@ -78,7 +78,7 @@ In the following example, `use server` is used inline at the top of a function t
   async function updatePost(formData: FormData) `)
   }
 
-  return
+  return 
 }
 ```
 
@@ -89,7 +89,7 @@ In the following example, `use server` is used inline at the top of a function t
   async function updatePost(formData) `)
   }
 
-  return
+  return 
 }
 ```
 
@@ -109,7 +109,7 @@ import  from '@/lib/auth' // Your authentication library
 
   data: ,
   token: string
-)
+) 
   const newUser = await db.user.create()
   return newUser
 }
@@ -122,7 +122,7 @@ import  from '@/lib/db' // Your database client
 import  from '@/lib/auth' // Your authentication library
 
   const user = authenticate(token)
-  if (!user)
+  if (!user) 
   const newUser = await db.user.create()
   return newUser
 }

@@ -53,6 +53,7 @@ The following example demonstrates how to roll back a migration, optionally make
    ```
 
 1. If the migration was partially run, you can either:
+
    - Modify the migration to check if a step was already completed (for example: `CREATE TABLE ... IF NOT EXISTS`) _OR_
    - Manually revert the steps that were completed (for example, delete created tables)
 
@@ -94,7 +95,7 @@ This section gives an example scenario of a failed migration, and explains how t
 Imagine that you have the following `User` model in your schema, in both your local development environment and your production environment:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 At this point, your schemas are in sync, but the data in the two environments is different.
@@ -102,9 +103,9 @@ At this point, your schemas are in sync, but the data in the two environments is
 You then decide to make changes to your data model, adding another `Post` model and making the `name` field on `User` unique:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 You create a migration called 'Unique' with the command `npx prisma migrate dev -n Unique` which is saved in your local migrations history. Applying the migration succeeds in your dev environment and now it is time to release to production.
@@ -130,6 +131,7 @@ In this case, you need to create a migration that takes your production database
 
 - First you need your migration history at the time before the failed migration. You can either get this from your git history, or locally delete the folder of the last failed migration in your migration history.
 - You now want to take your production environment from its current failed state back to the state specified in your local migrations history:
+
   - Run the following `prisma migrate diff` command:
 
     ```terminal wrap
@@ -167,6 +169,7 @@ In this case, you need to fix the non-unique data and then go ahead with the res
 
 - The error message from trying to deploy the migration to production already told you there was duplicate data in the column `name`. You need to either alter or delete the offending rows.
 - Continue applying the rest of the failed migration to get to the data model defined in your `schema.prisma` file:
+
   - Run the following `prisma migrate diff` command:
 
     ```bash

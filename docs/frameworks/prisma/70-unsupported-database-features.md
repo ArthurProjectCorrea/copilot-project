@@ -12,13 +12,13 @@ toc_max_heading_level: 2
 Prisma Schema Language supports several [functions](/orm/reference/prisma-schema-reference#attribute-functions) that you can use to set the default value of a field. The following example uses the Prisma ORM-level `uuid()` function to set the value of the `id` field:
 
 ```prisma
-model Post
+model Post 
 ```
 
 However, you can also use **native database functions** to define default values with [`dbgenerated(...)`](/orm/reference/prisma-schema-reference#dbgenerated) on relational databases (MongoDB does not have the concept of database-level functions). The following example uses the PostgreSQL `gen_random_uuid()` function to populate the `id` field:
 
 ```prisma
-model User
+model User 
 ```
 
 ### When to use a database-level function
@@ -31,7 +31,7 @@ There are two reasons to use a database-level function:
   Consider the following example, which sets the `id` field to a randomly generated `UUID`:
 
   ```prisma
-  model Post
+  model Post 
   ```
 
   The UUID is _only_ generated if you use Prisma Client to create the `Post`. If you create posts in any other way, such as a bulk import script written in plain SQL, you must generate the UUID yourself.
@@ -45,9 +45,9 @@ To use a PostgreSQL extension, you must first install it on the file system of y
 In Prisma ORM versions 4.5.0 and later, you can then activate the extension by declaring it in your Prisma schema with the [`postgresqlExtensions` preview feature](/orm/prisma-schema/postgresql-extensions):
 
 ```prisma file=schema.prisma highlight=3,9;add showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 In earlier versions of Prisma ORM, you must instead run a SQL command to activate the extension:
@@ -70,7 +70,7 @@ Database error: Error querying the database: db error: ERROR: type "pgcrypto" do
 Some database types of relational databases, such as `polygon` or `geometry`, do not have a Prisma Schema Language equivalent. Use the [`Unsupported`](/orm/reference/prisma-schema-reference#unsupported) field type to represent the field in your Prisma schema:
 
 ```prisma highlight=3;normal
-model Star
+model Star 
 ```
 
 The `prisma migrate dev` and `prisma db push` command will both create a `position` field of type `circle` in the database. However, the field will not be available in the generated Prisma Client.

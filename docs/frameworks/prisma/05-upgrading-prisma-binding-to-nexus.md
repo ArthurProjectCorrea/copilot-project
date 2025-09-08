@@ -150,7 +150,7 @@ const prisma = new PrismaClient()
   prisma: PrismaClient
 }
 
-  return
+  return 
 }
 ```
 
@@ -290,11 +290,11 @@ For this guide, the following sample GraphQL schema will be used:
 # import User from './generated/prisma.graphql'
 # import Category from './generated/prisma.graphql'
 
-input UserUniqueInput
+input UserUniqueInput 
 
-type Query
+type Query 
 
-type Mutation
+type Mutation 
 ```
 
 ### 3.1. Migrate GraphQL queries
@@ -308,7 +308,7 @@ In our sample API, the `users` query from the sample GraphQL schema is defined a
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Query
+type Query 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -338,14 +338,14 @@ const Query = queryType()
 If you have the Nexus development server running, you can save the file and your GraphQL API will be updated to expose the new `users` query. You can also observe this by looking at the `Query` type inside the generated `schema.graphql` file:
 
 ```graphql
-type Query
+type Query 
 ```
 
 You can now write your first query against the new API, e.g.:
 
 ```graphql
 
-    posts
+    posts 
     }
   }
 }
@@ -360,7 +360,7 @@ The `posts` query is defined and implemented as follows.
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Query
+type Query 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -394,7 +394,7 @@ const Query = queryType(,
 Although this code gives probably gives you a type error in your editor, you can already look at the generated SDL version of your GraphQL schema inside `schema.graphql`. You'll notice that this has added the correct _definition_ to your GraphQL schema already:
 
 ```graphql line-number
-type Query
+type Query 
 ```
 
 However, the code is missing the actual resolver logic. This is what you're going to add next.
@@ -435,9 +435,9 @@ In our sample app, the `user` query is defined and implemented as follows.
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Query
+type Query 
 
-input UserUniqueInput
+input UserUniqueInput 
 ```
 
 Note that this is a bit of a contrived example to demonstrate the usage of `input` types with Nexus.
@@ -491,17 +491,17 @@ Since `UserUniqueInput` is a new type in your GraphQL schema, you again need to 
 If you look at the generated SDL version of your GraphQL schema inside `schema.graphql`, you'll notice that this change already added the correct _definition_ to your GraphQL schema:
 
 ```graphql line-number highlight=3,7-10;normal
-type Query
+type Query 
 
 //highlight-start
-input UserUniqueInput
+input UserUniqueInput 
 //highlight-end
 ```
 
 You can even send the respective query via the GraphQL Playground already:
 
 ```graphql
-)
+) 
 }
 ```
 
@@ -564,7 +564,7 @@ In the sample app, the `createUser` mutation from the sample GraphQL schema is d
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -596,13 +596,13 @@ Note that the default name for the mutation in your GraphQL schema is `createOne
 If you have the Nexus development server running, you can save the file and your GraphQL API will be updated to expose the new `createUser` mutation. You can also observe this by looking at the `Mutation` type inside the generated `schema.graphql` file:
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 You can now write your first mutation against the new API, e.g.:
 
 ```graphql
-mutation )
+mutation ) 
 }
 ```
 
@@ -615,7 +615,7 @@ In the sample app, the `createDraft` mutation is defined and implemented as foll
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -651,13 +651,13 @@ const Mutation = mutationType(),
 If you look at the generated SDL version of your GraphQL schema inside `schema.graphql`, you'll notice that this has added the correct _definition_ to your GraphQL schema already:
 
 ```graphql line-number highlight=3;normal
-type Mutation
+type Mutation 
 ```
 
 You can even send the respective mutation via the GraphQL Playground already:
 
 ```graphql
-mutation
+mutation 
   }
 }
 ```
@@ -694,7 +694,7 @@ In the sample app, the `updateBio` mutation is defined and implemented as follow
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -730,15 +730,15 @@ const Mutation = mutationType(),
 If you look at the generated SDL version of your GraphQL schema inside `schema.graphql`, you'll notice that this has added the correct _definition_ to your GraphQL schema already:
 
 ```graphql line-number highlight=4;normal
-type Mutation
+type Mutation 
 ```
 
 You can even send the respective mutation via the GraphQL Playground already:
 
 ```graphql
-mutation
+mutation 
     bio: "I like turtles"
-  )
+  ) 
   }
 }
 ```
@@ -755,7 +755,7 @@ const Mutation = mutationType(),
       },
       //add-start
       resolve: (_, args, context) => ,
-          data:
+          data: 
             }
           }
         })
@@ -775,7 +775,7 @@ In our sample app, the `addPostToCategories` mutation is defined and implemented
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -812,13 +812,13 @@ const Mutation = mutationType(),
 If you look at the generated SDL version of your GraphQL schema inside `schema.graphql`, you'll notice that this has added the correct _definition_ to your GraphQL schema already:
 
 ```graphql line-number highlight=5;normal
-type Mutation
+type Mutation 
 ```
 
 You can even send the respective query via the GraphQL Playground already:
 
 ```graphql
-mutation
+mutation 
   }
 }
 ```

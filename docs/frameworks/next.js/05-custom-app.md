@@ -15,13 +15,13 @@ To override the default `App`, create the file `pages/_app` as shown below:
 
 ```tsx filename="pages/_app.tsx" switcher
 
-  return
+  return 
 }
 ```
 
 ```jsx filename="pages/_app.jsx" switcher
 
-  return
+  return 
 }
 ```
 
@@ -42,20 +42,20 @@ Using [`getInitialProps`](/docs/pages/api-reference/functions/get-initial-props)
 
 ```tsx filename="pages/_app.tsx" switcher
 
-type AppOwnProps =
+type AppOwnProps = 
 
   Component,
   pageProps,
   example,
 }: AppProps & AppOwnProps) </p>
-
+      
     </>
   )
 }
 
 MyApp.getInitialProps = async (
   context: AppContext
-): Promise<AppOwnProps & AppInitialProps> =>
+): Promise<AppOwnProps & AppInitialProps> => 
 }
 ```
 
@@ -64,11 +64,11 @@ MyApp.getInitialProps = async (
   return (
     <>
       <p>Data: </p>
-
+      
     </>
   )
 }
 
-MyApp.getInitialProps = async (context) =>
+MyApp.getInitialProps = async (context) => 
 }
 ```

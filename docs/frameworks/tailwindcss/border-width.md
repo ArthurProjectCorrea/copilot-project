@@ -1,52 +1,52 @@
 <ApiTable
-rows=
-`,
+  rows=
+    `,
     ],
     [
       "divide-x-<number>",
       dedent`
-& > :not(:last-child)
-`,
+        & > :not(:last-child) 
+    `,
     ],
     [
       "divide-x-(length:<custom-property>)",
       dedent`
-& > :not(:last-child)
-`,
+        & > :not(:last-child) 
+    `,
     ],
     [
       "divide-x-[<value>]",
       dedent`
-& > :not(:last-child)
-`,
+        & > :not(:last-child) 
+    `,
     ],
     [
       "divide-y",
       dedent`
-& > :not(:last-child)
-`,
+        & > :not(:last-child) 
+    `,
     ],
     [
       "divide-y-<number>",
       dedent`
-& > :not(:last-child)
-`,
+        & > :not(:last-child) 
+    `,
     ],
     [
       "divide-y-(length:<custom-property>)",
       dedent`
-& > :not(:last-child)
-`,
+        & > :not(:last-child) 
+    `,
     ],
     [
       "divide-y-[<value>]",
       dedent`
-& > :not(:last-child)
-`,
-],
-["divide-x-reverse", "--tw-divide-x-reverse: 1;"],
-["divide-y-reverse", "--tw-divide-y-reverse: 1;"],
-]}
+        & > :not(:last-child) 
+    `,
+    ],
+    ["divide-x-reverse", "--tw-divide-x-reverse: 1;"],
+    ["divide-y-reverse", "--tw-divide-y-reverse: 1;"],
+  ]}
 />
 
 ## Examples

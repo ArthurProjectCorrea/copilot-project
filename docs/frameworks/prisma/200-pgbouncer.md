@@ -37,7 +37,7 @@ postgresql://USER:PASSWORD@HOST:PORT/DATABASE?pgbouncer=true
 
 :::info
 `PORT` specified for PgBouncer pooling is sometimes different from the default `5432` port. Check your database provider docs for the correct port number.
-:::
+::: 
 
 ### Configure `max_prepared_statements` in PgBouncer to be greater than zero
 
@@ -61,7 +61,7 @@ To work around this issue, you must connect directly to the database rather than
 For example, consider the following `datasource` block:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 The block above uses a PgBouncer connection string as the primary URL using `url`, allowing Prisma Client to take advantage of the PgBouncer connection pooler.

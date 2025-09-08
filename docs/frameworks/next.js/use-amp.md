@@ -31,7 +31,7 @@ Take a look at the following example:
 
 ```jsx filename="pages/about.js"
 
-function About(props)
+function About(props) 
 
 ```
 
@@ -47,7 +47,7 @@ Take a look at the following example:
 
 ```jsx filename="pages/about.js"
 
-function About(props)
+function About(props) 
     </div>
   )
 }

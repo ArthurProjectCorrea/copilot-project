@@ -39,7 +39,7 @@ To add presets/plugins **with custom configuration**, do it on the `next/babel` 
 ,
         "transform-runtime": ,
         "styled-jsx": ,
-        "class-properties":
+        "class-properties": 
       }
     ]
   ],

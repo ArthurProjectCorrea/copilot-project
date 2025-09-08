@@ -40,15 +40,15 @@ The data type for each field is indicated with an icon in the header.
 
 The table below lists all data types and their identifying icon.
 
-| Field data type | Description                                                                                               |
-| :-------------: | --------------------------------------------------------------------------------------------------------- |
-|                 | Text                                                                                                      |
-|                 | Integer                                                                                                   |
-|                 | Date-time<br /><br />                                                                                     |
-|                 | Boolean<br />                                                                                             |
-|                 | Pre-defined list of values (`enum` data type)                                                             |
-|                 | List of related records from another model                                                                |
-|                 | The `` symbol can refer to one of the two types of fields.<br /><br /> • Relation field<br />• JSON field |
+| Field data type | Description |
+| :-------------------------------------------------------------------------------: | ------------------------------------ |
+|      | Text                                                                                                        |
+|      | Integer                                                                                                     |
+|  | Date-time<br /><br />                                                                                       |
+|    | Boolean<br />                                                                                               |
+|          | Pre-defined list of values (`enum` data type)                                                               |
+|        | List of related records from another model                                                                  |
+|      | The `` symbol can refer to one of the two types of fields.<br /><br /> • Relation field<br />• JSON field |
 
 ### Keyboard shortcuts in models
 
@@ -67,7 +67,7 @@ Prisma Studio offers two mechanisms for editing existing data: [in-line editing]
 
 ### In-line editing
 
-To edit data in-line, double-click a cell to enter edit mode. Doing so will place your cursor in the cell and allow you to edit the data. Data can be copied and pasted into cells.
+To edit data in-line, double-click a cell to enter edit mode. Doing so will place your cursor in the cell and allow you to edit the data. Data can be copied and pasted into cells. 
 
 All changes (add, edit, or delete) must be confirmed before they will take effect. Confirm added and edited records with the **Save change** button. When you select records and click **Delete records**, confirm the deletion in a dialog box.
 
@@ -132,15 +132,15 @@ To paste in another cell, first double-click the cell to enter edit mode, and th
 1. In the model view, click **Add record**.
 2. Based on the data allowed in each field, type the data for the record.
 
-   | Field data type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-   | :-------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |                 | Text                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-   |                 | Integer<br /><br />If such a field has `autoincrement()` pre-filled, do not edit the cell and do not add a number manually.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-   |                 | Date-time<br /><br />Date-time fields contain a long string of numbers, letters, and others. As a best practice, copy the value of another date-time cell and modify it as necessary before pasting in the field.                                                                                                                                                                                                                                                                                                                                                        |
-   |                 | Boolean<br /><br />Select `true` or `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-   |                 | Pre-defined list<br /><br />Double-click a cell in the field and select one of the pre-defined options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-   |                 | List of related records from another model<br /><br />It typically refers to a list of records that exist in another model in the database. If you are adding a new record and records from the related model do not yet exist, you do not need to enter anything in the current model.                                                                                                                                                                                                                                                                                  |
-   |                 | The `` symbol can refer to one of the two types of fields.<br /><br /> • Relation field<br />• JSON field<br /><br />**Relation with a model defined separately in the database**<br /><br />Typically, you need to select the same value as any of the previous records<br />Click the name of the model to see the list of values which you can then select for the related field.<br /><br />**JSON field**<br /><br /> Double-click the field to edit the JSON data. As a best practice, validate the edited JSON data in a validator and paste it back in the cell. |
+   |                                  Field data type                                  | Description        |
+   | :-------------------------------------------------------------------------------: | ------------------ |
+   |      | Text               |
+   |      | Integer<br /><br />If such a field has `autoincrement()` pre-filled, do not edit the cell and do not add a number manually.                                                                        |
+   |  | Date-time<br /><br />Date-time fields contain a long string of numbers, letters, and others. As a best practice, copy the value of another date-time cell and modify it as necessary before pasting in the field.                                                                                                                                                                        |
+   |    | Boolean<br /><br />Select `true` or `false`.                  |
+   |          | Pre-defined list<br /><br />Double-click a cell in the field and select one of the pre-defined options. |
+   |        | List of related records from another model<br /><br />It typically refers to a list of records that exist in another model in the database. If you are adding a new record and records from the related model do not yet exist, you do not need to enter anything in the current model. |
+   |      | The `` symbol can refer to one of the two types of fields.<br /><br /> • Relation field<br />• JSON field<br /><br />**Relation with a model defined separately in the database**<br /><br />Typically, you need to select the same value as any of the previous records<br />Click the name of the model to see the list of values which you can then select for the related field.<br /><br />**JSON field**<br /><br /> Double-click the field to edit the JSON data. As a best practice, validate the edited JSON data in a validator and paste it back in the cell. |
 
 3. (Optional) If you are unhappy with your changes, click **Discard changes** and start over.
 4. Click **Save 1 change**.

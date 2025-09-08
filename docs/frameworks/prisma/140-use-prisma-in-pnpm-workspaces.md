@@ -41,16 +41,16 @@ Add the following configuration to `pnpm-workspace.yaml`:
 
 ```yaml file=pnpm-workspace.yaml
 packages:
-  - 'apps/*'
-  - 'packages/*'
+  - "apps/*"
+  - "packages/*"
 catalogs:
   prisma:
     prisma: latest
 ```
 
-:::note
+:::note 
 
-The `catalogs` help you pin a certain version of prisma across your repositories. You can learn more about them [here](https://pnpm.io/catalogs). _Explictly_ pin the lastest version of [prisma](https://www.npmjs.com/package/prisma) in the `pnpm-workspace.yaml` file. At the time of writing, this is version `6.3.1`.
+The `catalogs` help you pin a certain version of prisma across your repositories. You can learn more about them [here](https://pnpm.io/catalogs). *Explictly* pin the lastest version of [prisma](https://www.npmjs.com/package/prisma) in the `pnpm-workspace.yaml` file. At the time of writing, this is version `6.3.1`.
 
 :::
 
@@ -71,15 +71,15 @@ Navigate to the `packages/database` directory and initialize a new package:
 
 ```terminal
 cd packages/database
-pnpm init
+pnpm init 
 ```
 
 Add Prisma as a development dependency in your `package.json` using the pinned `catalog`:
 
 ```json file=database/package.json
 // add-start
-"devDependencies":
-// add-end
+"devDependencies": 
+// add-end 
 ```
 
 Then install Prisma:
@@ -114,7 +114,7 @@ pnpm tsc --init
 
 ### 2.2. Setup Prisma ORM in your database package
 
-Initialize Prisma ORM with an instance of [Prisma Postgres](/postgres) in the `database` package by running the following command:
+Initialize Prisma ORM with an instance of [Prisma Postgres](/postgres) in the `database` package by running the following command: 
 
 ```terminal
 pnpm prisma init --db
@@ -137,12 +137,12 @@ This command:
 Edit the `schema.prisma` file to define a `User` model in your database and specify a [custom `output` directory](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path) to generate the Prisma Client. This ensures that generated types are resolved correctly:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 //add-end
 ```
 
@@ -183,7 +183,7 @@ const globalForPrisma = globalThis as typeof globalThis & ;
 
   globalForPrisma.prisma ?? extendedPrisma;
 
-if (process.env.NODE_ENV !== "production")
+if (process.env.NODE_ENV !== "production") 
 // add-end
 ```
 
@@ -223,7 +223,7 @@ pnpm create next-app@latest web --yes
 
 :::note[important]
 
-The `--yes` flag uses default configurations to bootstrap the Next.js app (which in this guide uses the app router without a `src/` directory and `pnpm` as the installer).
+The `--yes` flag uses default configurations to bootstrap the Next.js app (which in this guide uses the app router without a `src/` directory and `pnpm` as the installer). 
 
 Additionally, the flag may automatically initialize a Git repository in the `web` folder. If that happens, please remove the `.git` directory by running `rm -r .git`.
 
@@ -244,7 +244,7 @@ cp ../../packages/database/.env .
 Open the `package.json` file of your Next.js app and add the shared `database` package as a dependency:
 
 ```json file=web/package.json
-"dependencies":
+"dependencies": 
 ```
 
 Run the following command to install the `database` package:
@@ -266,7 +266,7 @@ Modify your Next.js application code to use Prisma Client from the database pack
   return (
     <div>
       </p>}
-
+      
     </div>
   );
 }
@@ -280,7 +280,7 @@ This code demonstrates importing and using the shared Prisma Client to query you
 Add the following scripts to the root `package.json` of your monorepo. They ensure that database migrations, type generation, and app builds run in the proper order:
 
 ```package.json
-"scripts":
+"scripts": 
 ```
 
 ### 3.4. Run your application
@@ -305,6 +305,6 @@ There shouldn't be data in your database yet. You can execute `pnpm run studio` 
 
 ## Next Steps
 
-You have now created a monorepo that uses Prisma ORM effectively, with a shared database package integrated into a Next.js application.
+You have now created a monorepo that uses Prisma ORM effectively, with a shared database package integrated into a Next.js application. 
 
 For further exploration and to enhance your setup, consider reading the [How to use Prisma ORM with Turborepo](/guides/turborepo) guide.

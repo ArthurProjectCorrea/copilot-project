@@ -24,11 +24,15 @@ Route Handlers allow you to create custom request handlers for a given route usi
 A **route** file allows you to create custom request handlers for a given route. The following [HTTP methods](https://developer.mozilla.org/docs/Web/HTTP/Methods) are supported: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`.
 
 ```ts filename="route.ts" switcher
+
 // If `OPTIONS` is not defined, Next.js will automatically implement `OPTIONS` and set the appropriate Response `Allow` header depending on the other methods defined in the Route Handler.
+
 ```
 
 ```js filename="route.js" switcher
+
 // If `OPTIONS` is not defined, Next.js will automatically implement `OPTIONS` and set the appropriate Response `Allow` header depending on the other methods defined in the Route Handler.
+
 ```
 
 ### Parameters
@@ -67,11 +71,11 @@ The `request` object is a [NextRequest](/docs/app/api-reference/functions/next-r
 }
 ```
 
-| Example                          | URL            | `params`    |
-| -------------------------------- | -------------- | ----------- |
-| `app/dashboard/[team]/route.js`  | `/dashboard/1` | `Promise<>` |
+| Example                          | URL            | `params`                           |
+| -------------------------------- | -------------- | ---------------------------------- |
+| `app/dashboard/[team]/route.js`  | `/dashboard/1` | `Promise<>`           |
 | `app/shop/[tag]/[item]/route.js` | `/shop/1/2`    | `Promise<>` |
-| `app/blog/[...slug]/route.js`    | `/blog/1/2`    | `Promise<>` |
+| `app/blog/[...slug]/route.js`    | `/blog/1/2`    | `Promise<>`    |
 
 ### Route Context Helper
 
@@ -258,8 +262,8 @@ Route Handlers can use [Dynamic Segments](/docs/app/api-reference/file-conventio
 }
 ```
 
-| Route                       | Example URL | `params`    |
-| --------------------------- | ----------- | ----------- |
+| Route                       | Example URL | `params`                 |
+| --------------------------- | ----------- | ------------------------ |
 | `app/items/[slug]/route.js` | `/items/a`  | `Promise<>` |
 | `app/items/[slug]/route.js` | `/items/b`  | `Promise<>` |
 | `app/items/[slug]/route.js` | `/items/c`  | `Promise<>` |
@@ -312,7 +316,7 @@ These abstractions use the Web APIs to create a stream. You can also use the und
 // https://developer.mozilla.org/docs/Web/API/ReadableStream#convert_async_iterator_to_stream
 function iteratorToStream(iterator: any)  = await iterator.next()
 
-      if (done)  else
+      if (done)  else 
     },
   })
 }
@@ -322,7 +326,7 @@ function sleep(time: number) )
 
 const encoder = new TextEncoder()
 
-async function* makeIterator()
+async function* makeIterator() 
 
   const iterator = makeIterator()
   const stream = iteratorToStream(iterator)
@@ -335,7 +339,7 @@ async function* makeIterator()
 // https://developer.mozilla.org/docs/Web/API/ReadableStream#convert_async_iterator_to_stream
 function iteratorToStream(iterator)  = await iterator.next()
 
-      if (done)  else
+      if (done)  else 
     },
   })
 }
@@ -345,7 +349,7 @@ function sleep(time) )
 
 const encoder = new TextEncoder()
 
-async function* makeIterator()
+async function* makeIterator() 
 
   const iterator = makeIterator()
   const stream = iteratorToStream(iterator)

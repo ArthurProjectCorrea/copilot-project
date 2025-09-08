@@ -9,9 +9,9 @@ tocDepth: 3
 Prisma ORM uses _types_ to define the kind of data that a field can hold. To make it easy to get started, Prisma ORM provides a small number of core [scalar types](/orm/reference/prisma-schema-reference#model-field-scalar-types) that should cover most default use cases. For example, take the following blog post model:
 
 ```prisma file=schema.prisma showLineNumbers
-datasource db
+datasource db 
 
-model Post
+model Post 
 ```
 
 The `title` field of the `Post` model uses the `String` scalar type, while the `createdAt` field uses the `DateTime` scalar type.
@@ -35,7 +35,7 @@ To see the default type mappings for all databases for a specific given Prisma O
 Sometimes you may need to use a more specific database type that is not one of the default type mappings for your Prisma ORM type. For this purpose, Prisma ORM provides [native type attributes](/orm/prisma-schema/data-model/models#native-types-mapping) to refine the core scalar types. For example, in the `createdAt` field of your `Post` model above you may want to use a date-only column in your underlying PostgreSQL database, by using the `date` type instead of the default type mapping of `timestamp(3)`. To do this, add a `@db.Date` native type attribute to the `createdAt` field:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 Native type mappings allow you to express all the types in your database. However, you do not need to use them if the Prisma ORM defaults satisfy your needs. This leads to a shorter, more readable Prisma schema for common use cases.
@@ -69,7 +69,7 @@ npx prisma db pull
 You will get the following Prisma schema:
 
 ```prisma file=schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 The `id`, `name` and `isActive` columns in the database are mapped respectively to the `Int`, `String` and `Boolean` Prisma ORM types. The database types are the _default_ database types for these Prisma ORM types, so Prisma ORM does not add any native type attributes.
@@ -90,7 +90,7 @@ npx prisma db pull
 Your Prisma schema now includes the new `createdAt` field with a Prisma ORM type of `DateTime`. The `createdAt` field also has a `@db.Date` native type attribute, because PostgreSQL's `date` is not the default type for the `DateTime` type:
 
 ```prisma file=schema.prisma highlight=5;add showLineNumbers
-model User
+model User 
 ```
 
 ## How to use types when you apply schema changes to your database
@@ -100,7 +100,7 @@ When you apply schema changes to your database using Prisma Migrate or `db push`
 As an example, create a Prisma schema with the following `Post` model:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 This `Post` model has:

@@ -1,5 +1,5 @@
 <ApiTable
-rows=-<number>`, `$: calc(var(--spacing) * <number>);`],
+  rows=-<number>`, `$: calc(var(--spacing) * <number>);`],
       [`-$-<number>`, `$: calc(var(--spacing) * -<number>);`],
       [`$-auto`, `$: auto;`],
       [`$-px`, `$: 1px;`],
@@ -14,44 +14,44 @@ rows=-<number>`, `$: calc(var(--spacing) * <number>);`],
       [
         `$-<number>`,
         dedent`& > :not(:last-child) -reverse: 0;
-$-start: calc(calc(var(--spacing) * <number>) * var(--tw-$-reverse));
-$-end: calc(calc(var(--spacing) * <number>) * calc(1 - var(--tw-$-reverse)));
-};`,
+          $-start: calc(calc(var(--spacing) * <number>) * var(--tw-$-reverse));
+          $-end: calc(calc(var(--spacing) * <number>) * calc(1 - var(--tw-$-reverse)));
+        };`,
       ],
       [
         `-$-<number>`,
         dedent`& > :not(:last-child) -reverse: 0;
           $-start: calc(calc(var(--spacing) * -<number>) * var(--tw-$-reverse));
-$-end: calc(calc(var(--spacing) * -<number>) * calc(1 - var(--tw-$-reverse)));
-};`,
+          $-end: calc(calc(var(--spacing) * -<number>) * calc(1 - var(--tw-$-reverse)));
+        };`,
       ],
       [
         `$-px`,
         dedent`& > :not(:last-child) -reverse: 0;
           $-start: calc(1px * var(--tw-$-reverse));
-$-end: calc(1px * calc(1 - var(--tw-$-reverse)));
-};`,
+          $-end: calc(1px * calc(1 - var(--tw-$-reverse)));
+        };`,
       ],
       [
         `-$-px`,
         dedent`& > :not(:last-child) -reverse: 0;
           $-start: calc(-1px * var(--tw-$-reverse));
-$-end: calc(-1px * calc(1 - var(--tw-$-reverse)));
-};`,
+          $-end: calc(-1px * calc(1 - var(--tw-$-reverse)));
+        };`,
       ],
       [
         `$-(<custom-property>)`,
         dedent`& > :not(:last-child) -reverse: 0;
           $-start: calc(var(<custom-property>) * var(--tw-$-reverse));
-$-end: calc(var(<custom-property>) * calc(1 - var(--tw-$-reverse)));
-};`,
+          $-end: calc(var(<custom-property>) * calc(1 - var(--tw-$-reverse)));
+        };`,
       ],
       [
         `$-[<value>]`,
         dedent`& > :not(:last-child) -reverse: 0;
           $-start: calc(<value> * var(--tw-$-reverse));
-$-end: calc(<value> * calc(1 - var(--tw-$-reverse)));
-};`,
+          $-end: calc(<value> * calc(1 - var(--tw-$-reverse)));
+        };`,
       ],
     ]),
     [
@@ -61,7 +61,7 @@ $-end: calc(<value> * calc(1 - var(--tw-$-reverse)));
     [
       "space-y-reverse",
       dedent`& > :not(:last-child)) `,
-],
+    ],
 
 ]}
 />

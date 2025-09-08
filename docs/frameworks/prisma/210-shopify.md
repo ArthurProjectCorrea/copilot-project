@@ -13,7 +13,6 @@ community_section: true
 [Shopify](https://www.shopify.com/) is a popular platform for building e-commerce stores. This guide will show you how to connect a Shopify app to a [Prisma Postgres](https://www.prisma.io/postgres) database in order to create internal notes for products.
 
 ## Prerequisites
-
 - [Node.js](https://nodejs.org/en/download/)
 - [Shopify CLI](https://shopify.dev/docs/api/shopify-cli)
 - [Shopify Partner Account](https://www.shopify.com/partners) and a [development store](https://shopify.dev/docs/api/development-stores#create-a-development-store-to-test-your-app)
@@ -34,9 +33,9 @@ During setup, you'll be prompted to customize your app. Don't worry—just follo
 
 :::info
 
-- _Get started building your app:_ `Build a Remix app (recommended)`
-- _For your Remix template, which language do you want:_ `JavaScript`
-- _App Name:_ `prisma-store` _(name cannot contain `shopify`)_
+- *Get started building your app:* `Build a Remix app (recommended)`
+- *For your Remix template, which language do you want:* `JavaScript`
+- *App Name:* `prisma-store` *(name cannot contain `shopify`)*
 
 :::
 
@@ -53,35 +52,33 @@ Prisma comes pre-installed in your project, but let's take a moment to update it
 You will be swapping to a Prisma Postgres database, so delete the `migrations` folder along with the `dev.sqlite` file, inside of the `prisma` directory.
 
 You need to update a few things in the `schema.prisma` file to get it working with Remix and Prisma Postgres.
-
 - Swap to the new `prisma-client` generator.
 - Update the provider to `postgresql`.
 - Update the url to the new database url.
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model Session
+model Session 
 ```
 
-To enable your app to store notes for each product, let's add a new `ProductNote` model to your Prisma schema.
+To enable your app to store notes for each product, let's add a new `ProductNote` model to your Prisma schema. 
 
 This model will allow you to save and organize notes linked to individual products in your database through the `productGid` field.
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model Session
+model Session 
 
 //add-start
-model ProductNote
+model ProductNote 
 //add-end
 ```
-
 Next, Prisma will need to be updated to the latest version. Run:
 
 ```terminal
@@ -120,7 +117,7 @@ Now, before moving on, let's update your `db.server.ts` file to use the newly ge
 
 //add-next-line
 
-if (process.env.NODE_ENV !== "production")
+if (process.env.NODE_ENV !== "production") 
 }
 
 const prisma = global.prismaGlobal ?? new PrismaClient();
@@ -136,7 +133,6 @@ It is recommended to add `app/generated/prisma` to your `.gitignore` file.
 To keep your project organized, let's create a new `models/` folder. Inside this folder, add a file named `notes.server.js`. This will be the home for all your note-related logic and make your codebase easier to manage as your app grows.
 
 The `notes.server.js` file will contain two functions:
-
 - `getNotes` - This will get all the notes for a given product.
 - `createNote` - This will create a new note for a given product.
 
@@ -184,7 +180,7 @@ Start by creating the the folder `routes/app.product-notes.jsx` and adding the `
 //add-start
 
   return (
-
+    
   );
 }
 //add-end
@@ -209,12 +205,12 @@ Next, create the `selectProduct` function and a `Button` to let the user pick a 
   //add-end
 
   return (
-
+    
   );
 }
 ```
 
-Remix renders provides the ability to render a nested route. Add an ``to the`routes/app.product-notes.jsx`file where the`ProductNotes` route will be rendered:
+Remix renders provides the ability to render a nested route. Add an `` to the `routes/app.product-notes.jsx` file where the `ProductNotes` route will be rendered:
 
 ```jsx file=app/routes/app.product-notes.jsx
 //delete-next-line
@@ -229,7 +225,7 @@ Remix renders provides the ability to render a nested route. Add an ``to the`rou
   }
 
   return (
-
+    
   );
 }
 ```
@@ -248,7 +244,7 @@ If you run `npm run dev`, you won't be able to see the `Product Notes` route. To
   const  = useLoaderData();
 
   return (
-
+    
   );
 }
 
@@ -323,7 +319,7 @@ Map out the notes in the `ProductNotes` component, using Polaris components:
     <>
       //add-start
       <Layout.Section>
-
+        
               </Card>
             ))
           )}
@@ -340,7 +336,6 @@ You should be seeing "No notes yet.". If so, you're on the right track.
 ### 5.2. Add the form
 
 A few things need to be added to the route in order to create a new note:
-
 - Add an `action` function to the route.
 - Display a `Toast` notification when a note is created.
 - Import the `createNote` function from `models/note.server.js`.
@@ -390,7 +385,7 @@ A few things need to be added to the route in order to create a new note:
   return (
     <>
       <Layout.Section>
-
+        
               </Card>
             ))
           )}
@@ -439,11 +434,11 @@ Now, you can build out the form that will call the `action` function:
     <>
       //add-start
       <Layout.Section>
-
+        
       </Layout.Section>
       //add-end
       <Layout.Section>
-
+        
               </Card>
             ))
           )}
@@ -458,8 +453,7 @@ You should now be able to add a note to a product and see it displayed.
 
 ### 6. Test your route
 
-Run `npm run dev` and navigate to the `Product Notes` route.
-
+Run `npm run dev` and navigate to the `Product Notes` route. 
 - Navigate to Product Notes on the sidebar
 - Select a product
 - Add a note
@@ -468,7 +462,6 @@ Run `npm run dev` and navigate to the `Product Notes` route.
 ## Next Steps
 
 Now that you have a working Shopify app connected to a Prisma Postgres database, you can:
-
 - Extend your Prisma schema with more models and relationships
 - Add create/update/delete routes and forms
 - Enable query caching with [Prisma Postgres](/postgres/database/caching) for better performance

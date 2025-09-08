@@ -19,7 +19,7 @@ If a resource doesn't exist, you can use the [`notFound` function](/docs/app/api
 The `redirect` function accepts two arguments:
 
 ```js
-redirect(path, type);
+redirect(path, type)
 ```
 
 | Parameter | Type                                                          | Description                                                 |
@@ -32,9 +32,10 @@ By default, `redirect` will use `push` (adding a new entry to the browser histor
 The `RedirectType` object contains the available options for the `type` parameter.
 
 ```ts
-redirect('/redirect-to', RedirectType.replace);
+
+redirect('/redirect-to', RedirectType.replace)
 // or
-redirect('/redirect-to', RedirectType.push);
+redirect('/redirect-to', RedirectType.push)
 ```
 
 The `type` parameter has no effect when used in Server Components.
@@ -60,14 +61,14 @@ Invoking the `redirect()` function throws a `NEXT_REDIRECT` error and terminates
 
 ```tsx filename="app/team/[id]/page.tsx" switcher
 
-async function fetchTeam(id: string)
+async function fetchTeam(id: string) 
 
   params,
 }: >
 })  = await params
   const team = await fetchTeam(id)
 
-  if (!team)
+  if (!team) 
 
   // ...
 }
@@ -75,12 +76,12 @@ async function fetchTeam(id: string)
 
 ```jsx filename="app/team/[id]/page.js" switcher
 
-async function fetchTeam(id)
+async function fetchTeam(id) 
 
   const  = await params
   const team = await fetchTeam(id)
 
-  if (!team)
+  if (!team) 
 
   // ...
 }
@@ -97,7 +98,7 @@ async function fetchTeam(id)
 
   const pathname = usePathname()
 
-  if (pathname.startsWith('/admin') && !pathname.includes('/login'))
+  if (pathname.startsWith('/admin') && !pathname.includes('/login')) 
 
   return <div>Login Page</div>
 }
@@ -108,7 +109,7 @@ async function fetchTeam(id)
 
   const pathname = usePathname()
 
-  if (pathname.startsWith('/admin') && !pathname.includes('/login'))
+  if (pathname.startsWith('/admin') && !pathname.includes('/login')) 
 
   return <div>Login Page</div>
 }

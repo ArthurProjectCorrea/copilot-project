@@ -488,15 +488,18 @@ async function bootstrap() {
   const key = fs.readFileSync('<pathToKeyFile>', 'utf8').toString();
   const cert = fs.readFileSync('<pathToCertFile>', 'utf8').toString();
 
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.TCP,
-    options: {
-      tlsOptions: {
-        key,
-        cert,
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.TCP,
+      options: {
+        tlsOptions: {
+          key,
+          cert,
+        },
       },
     },
-  });
+  );
 
   await app.listen();
 }
@@ -543,16 +546,19 @@ import { AsyncMicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<AsyncMicroserviceOptions>(AppModule, {
-    useFactory: (configService: ConfigService) => ({
-      transport: Transport.TCP,
-      options: {
-        host: configService.get<string>('HOST'),
-        port: configService.get<number>('PORT'),
-      },
-    }),
-    inject: [ConfigService],
-  });
+  const app = await NestFactory.createMicroservice<AsyncMicroserviceOptions>(
+    AppModule,
+    {
+      useFactory: (configService: ConfigService) => ({
+        transport: Transport.TCP,
+        options: {
+          host: configService.get<string>('HOST'),
+          port: configService.get<number>('PORT'),
+        },
+      }),
+      inject: [ConfigService],
+    },
+  );
 
   await app.listen();
 }

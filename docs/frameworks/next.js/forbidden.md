@@ -30,7 +30,7 @@ module.exports = ,
   const session = await verifySession()
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin')
+  if (session.role !== 'admin') 
 
   // Render the admin page for authorized users
   return <></>
@@ -42,7 +42,7 @@ module.exports = ,
   const session = await verifySession()
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin')
+  if (session.role !== 'admin') 
 
   // Render the admin page for authorized users
   return <></>
@@ -64,7 +64,7 @@ You can use `forbidden` to restrict access to certain routes based on user roles
   const session = await verifySession()
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin')
+  if (session.role !== 'admin') 
 
   // Render the admin page for authorized users
   return (
@@ -81,7 +81,7 @@ You can use `forbidden` to restrict access to certain routes based on user roles
   const session = await verifySession()
 
   // Check if the user has the 'admin' role
-  if (session.role !== 'admin')
+  if (session.role !== 'admin') 
 
   // Render the admin page for authorized users
   return (
@@ -103,7 +103,7 @@ When implementing mutations in Server Actions, you can use `forbidden` to only a
   const session = await verifySession()
 
   // Ensure only admins can update roles
-  if (session.role !== 'admin')
+  if (session.role !== 'admin') 
 
   // Perform the role update for authorized users
   // ...
@@ -116,7 +116,7 @@ When implementing mutations in Server Actions, you can use `forbidden` to only a
   const session = await verifySession()
 
   // Ensure only admins can update roles
-  if (session.role !== 'admin')
+  if (session.role !== 'admin') 
 
   // Perform the role update for authorized users
   // ...

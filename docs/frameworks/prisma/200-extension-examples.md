@@ -8,10 +8,10 @@ metaDescription: 'Explore the Prisma Client extensions that have been built by P
 
 The following is a list of extensions we've built at Prisma:
 
-| Extension                                                                                    | Description                                                                                                                                  |
-| :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`@prisma/extension-accelerate`](https://www.npmjs.com/package/@prisma/extension-accelerate) | Enables [Accelerate](https://www.prisma.io/accelerate), a global database cache available in 300+ locations with built-in connection pooling |
-| [`@prisma/extension-read-replicas`](https://github.com/prisma/extension-read-replicas)       | Adds read replica support to Prisma Client                                                                                                   |
+| Extension                                                                                    | Description                                                                                                                                              |
+| :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@prisma/extension-accelerate`](https://www.npmjs.com/package/@prisma/extension-accelerate) | Enables [Accelerate](https://www.prisma.io/accelerate), a global database cache available in 300+ locations with built-in connection pooling             |
+| [`@prisma/extension-read-replicas`](https://github.com/prisma/extension-read-replicas)       | Adds read replica support to Prisma Client                                                                                                               |
 
 ## Extensions made by Prisma's community
 
@@ -23,16 +23,16 @@ The following is a list of extensions created by the community. If you want to c
 | [`prisma-extension-bark`](https://github.com/adamjkb/bark)                                     | Implements the Materialized Path pattern that allows you to easily create and interact with tree structures in Prisma |
 | [`prisma-cursorstream`](https://github.com/etabits/prisma-cursorstream)                        | Adds cursor-based streaming                                                                                           |
 | [`prisma-gpt`](https://github.com/aliyeysides/prisma-gpt)                                      | Lets you query your database using natural language                                                                   |
-| [`prisma-extension-caching`](https://github.com/isaev-the-poetry/prisma-extension-caching)     | Adds the ability to cache complex queries                                                                             |
+| [`prisma-extension-caching`](https://github.com/isaev-the-poetry/prisma-extension-caching)     | Adds the ability to cache complex queries                                  |
 | [`prisma-extension-cache-manager`](https://github.com/random42/prisma-extension-cache-manager) | Caches model queries with any [cache-manager](https://www.npmjs.com/package/cache-manager) compatible cache           |
 | [`prisma-extension-random`](https://github.com/nkeil/prisma-extension-random)                  | Lets you query for random rows in your database                                                                       |
 | [`prisma-paginate`](https://github.com/sandrewTx08/prisma-paginate)                            | Adds support for paginating read queries                                                                              |
-| [`prisma-extension-streamdal`](https://github.com/streamdal/prisma-extension-streamdal)        | Adds support for Code-Native data pipelines using Streamdal                                                           |
-| [`prisma-rbac`](https://github.com/multipliedtwice/prisma-rbac)                                | Adds customizable role-based access control                                                                           |
+| [`prisma-extension-streamdal`](https://github.com/streamdal/prisma-extension-streamdal) | Adds support for Code-Native data pipelines using Streamdal |
+| [`prisma-rbac`](https://github.com/multipliedtwice/prisma-rbac) | Adds customizable role-based access control |
 | [`prisma-extension-redis`](https://github.com/yxx4c/prisma-extension-redis)                    | Extensive Prisma extension designed for efficient caching and cache invalidation using Redis and Dragonfly Databases  |
-| [`prisma-cache-extension`](https://github.com/Shikhar97/prisma-cache)                          | Prisma extension for caching and invalidating cache with Redis(other Storage options to be supported)                 |
-| [`prisma-extension-casl`](https://github.com/dennemark/prisma-extension-casl)                  | Prisma client extension that utilizes CASL to enforce authorization logic on most simple and nested queries.          |
-| [`prisma-emitter-extension`](https://github.com/feggaa/prisma-emitter-extension)               | Prisma extension for emit events on CRUD operations based on configurable listeners.                                  |
+| [`prisma-cache-extension`](https://github.com/Shikhar97/prisma-cache)                    | Prisma extension for caching and invalidating cache with Redis(other Storage options to be supported)  |
+| [`prisma-extension-casl`](https://github.com/dennemark/prisma-extension-casl)            | Prisma client extension that utilizes CASL to enforce authorization logic on most simple and nested queries. |
+| [`prisma-emitter-extension`](https://github.com/feggaa/prisma-emitter-extension)            | Prisma extension for emit events on CRUD operations based on configurable listeners. |
 
 If you have built an extension and would like to see it featured, feel free to add it to the list by opening a pull request.
 

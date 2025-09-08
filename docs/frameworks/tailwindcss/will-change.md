@@ -22,8 +22,8 @@ The `will-change` property is intended to be used as a last resort when dealing 
 ### Using a custom value
 
 <UsingACustomValue
-utility="will-change"
-name=
-value="top,left"
-variable="properties"
+  utility="will-change"
+  name=
+  value="top,left"
+  variable="properties"
 />

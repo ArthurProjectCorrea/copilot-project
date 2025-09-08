@@ -77,6 +77,6 @@ const microservice = app.connectMicroservice<MicroserviceOptions>(
   {
     transport: Transport.TCP,
   },
-  { inheritAppConfig: true }
+  { inheritAppConfig: true },
 );
 ```

@@ -7,7 +7,7 @@ description: Configure the Next.js cache used for storing and revalidating data 
 You can configure the Next.js cache location if you want to persist cached pages and data to durable storage, or share the cache across multiple containers or instances of your Next.js application.
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```
 
 View an example of a [custom cache handler](/docs/app/guides/self-hosting#configuring-caching) and learn more about the implementation.
@@ -30,7 +30,7 @@ Returns the cached value or `null` if not found.
 | --------- | -------------- | -------------------------------- |
 | `key`     | `string`       | The key to store the data under. |
 | `data`    | Data or `null` | The data to be cached.           |
-| `ctx`     | ``             | The cache tags provided.         |
+| `ctx`     | `` | The cache tags provided.         |
 
 Returns `Promise<void>`.
 

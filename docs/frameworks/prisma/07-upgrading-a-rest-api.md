@@ -114,7 +114,7 @@ Import the generated `@prisma/client` node module as shown:
 Note that this only imports the `PrismaClient` constructor, so you also need to instantiate a Prisma Client 2 instance:
 
 ```ts
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 ```
 
 ### 1.2. Adjusting the `/user` route (`POST`)

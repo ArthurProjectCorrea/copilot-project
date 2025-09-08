@@ -87,7 +87,7 @@ module.exports = ,
 To turn off AMP validation add the following code to `next.config.js`
 
 ```js
-experimental:
+experimental: 
 }
 ```
 

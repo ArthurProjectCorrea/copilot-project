@@ -19,13 +19,13 @@ To start using `<Image>`, import it from `next/image` and render it within your 
 
 ```tsx filename="app/page.tsx" switcher
 
-  return
+  return 
 }
 ```
 
 ```jsx filename="app/page.js" switcher
 
-  return
+  return 
 }
 ```
 
@@ -40,7 +40,7 @@ You can store static files, like images and fonts, under a folder called [`publi
 ```tsx filename="app/page.tsx" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -48,7 +48,7 @@ You can store static files, like images and fonts, under a folder called [`publi
 ```jsx filename="app/page.js" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -58,7 +58,7 @@ If the image is statically imported, Next.js will automatically determine the in
 ```tsx filename="app/page.tsx" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -66,7 +66,7 @@ If the image is statically imported, Next.js will automatically determine the in
 ```jsx filename="app/page.js" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -78,7 +78,7 @@ To use a remote image, you can provide a URL string for the `src` property.
 ```tsx filename="app/page.tsx" switcher
 
   return (
-
+    
   )
 }
 ```
@@ -86,7 +86,7 @@ To use a remote image, you can provide a URL string for the `src` property.
 ```jsx filename="app/page.js" switcher
 
   return (
-
+    
   )
 }
 ```

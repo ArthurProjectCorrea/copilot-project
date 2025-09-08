@@ -44,11 +44,11 @@ Before starting this guide, make sure you have:
 Start with a basic schema containing a Post model:
 
 ```prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model Post
+model Post 
 ```
 
 ### 1.2. Create a development branch
@@ -66,9 +66,9 @@ git checkout -b create-status-field
 Update your schema to add the new Status enum and field:
 
 ```prisma
-model Post
+model Post 
 
-enum Status
+enum Status 
 ```
 
 ### 2.2. Create migration
@@ -134,9 +134,9 @@ git checkout -b drop-published-column
 Update your schema to remove the published field:
 
 ```prisma
-model Post
+model Post 
 
-enum Status
+enum Status 
 ```
 
 ### 4.3. Generate cleanup migration
@@ -186,6 +186,5 @@ Now that you've completed your first expand and contract migration, you can:
 - Understand [customizing migrations](/orm/prisma-migrate/workflows/customizing-migrations)
 
 For more information:
-
 - [Expand and Contract Pattern Documentation](https://www.prisma.io/dataguide/types/relational/expand-and-contract-pattern)
 - [Prisma Migrate Workflows](/orm/prisma-migrate/workflows)

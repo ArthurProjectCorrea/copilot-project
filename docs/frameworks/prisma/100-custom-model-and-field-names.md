@@ -40,15 +40,15 @@ CREATE UNIQUE INDEX post_id_category_id_unique ON post_in_categories(post_id int
 When introspecting a database with that schema, you'll get a Prisma schema looking similar to this:
 
 ```prisma
-model categories
+model categories 
 
-model post_in_categories
+model post_in_categories 
 
-model posts
+model posts 
 
-model profiles
+model profiles 
 
-model users
+model users 
 ```
 
 There are a few "issues" with this Prisma schema when the Prisma Client API is generated:
@@ -58,13 +58,13 @@ There are a few "issues" with this Prisma schema when the Prisma Client API is g
 Prisma ORM has a [naming convention](/orm/reference/prisma-schema-reference#naming-conventions) of **camelCasing** and using the **singular form** for Prisma models. If these naming conventions are not met, the Prisma schema can become harder to interpret and the generated Prisma Client API will feel less natural. Consider the following, generated model:
 
 ```prisma
-model users
+model users 
 ```
 
 Although `profiles` refers to a 1:1 relation, its type is currently called `profiles` in plural, suggesting that there might be many `profiles` in this relation. With Prisma ORM conventions, the models and fields were _ideally_ named as follows:
 
 ```prisma
-model User
+model User 
 ```
 
 Because these fields are "Prisma ORM-level" [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) that do not manifest you can manually rename them in your Prisma schema.
@@ -74,15 +74,15 @@ Because these fields are "Prisma ORM-level" [relation fields](/orm/prisma-schema
 Foreign keys are represented as a combination of a [annotated relation fields](/orm/prisma-schema/data-model/relations#relation-fields) and its corresponding relation scalar field in the Prisma schema. Here's how all the relations from the SQL schema are currently represented:
 
 ```prisma
-model categories
+model categories 
 
-model post_in_categories
+model post_in_categories 
 
-model posts
+model posts 
 
-model profiles
+model profiles 
 
-model users
+model users 
 ```
 
 ## Using `@map` and `@@map` to rename fields and models in the Prisma Client API
@@ -92,15 +92,15 @@ You can "rename" fields and models that are used in Prisma Client by mapping the
 _After_ you introspected your database with `prisma db pull`, you can manually adjust the resulting Prisma schema as follows:
 
 ```prisma
-model Category
+model Category 
 
-model PostInCategories
+model PostInCategories 
 
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 With these changes, you're now adhering to Prisma ORM's naming conventions and the generated Prisma Client API feels more "natural":
@@ -147,17 +147,17 @@ CREATE TABLE "Post" (
 Prisma ORM's introspection will output the following Prisma schema:
 
 ```prisma
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Because the names of the virtual relation fields `Post_Post_authorToUser` and `Post_Post_favoritedByToUser` are based on the generated relation names, they don't look very friendly in the Prisma Client API. In that case, you can rename the relation fields. For example:
 
 ```prisma highlight=11-12;edit
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 :::info

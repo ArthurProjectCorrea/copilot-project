@@ -74,7 +74,7 @@ You can disable this behavior by adding a [custom Webpack configuration](/docs/a
 
 ```js filename="next.config.mjs"
 /** @type  */
-const nextConfig =
+const nextConfig = 
   ) => )
     }
     // Important: return the modified config

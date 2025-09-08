@@ -5,7 +5,7 @@ metaTitle: 'Next steps after adding Prisma ORM to your existing project'
 metaDescription: 'Next steps to take now that you have successfully added Prisma ORM to your relational database project'
 hide_table_of_contents: true
 ---
-
+ 
 This section lists a number of potential next steps you can now take from here. Feel free to explore these or read the [Introduction](/orm/overview/introduction/what-is-prisma) page to get a high-level overview of Prisma ORM.
 
 ### Continue exploring the Prisma Client API
@@ -94,10 +94,10 @@ To evolve the app, you need to follow the same flow of the tutorial:
 
 The [`prisma-examples`](https://github.com/prisma/prisma-examples/) repository contains a number of ready-to-run examples:
 
-| Demo                                                    | Stack        | Description                                                                                  |
-| :------------------------------------------------------ | :----------- | -------------------------------------------------------------------------------------------- |
-| [`nextjs`](https://pris.ly/e/orm/nextjs)                | Fullstack    | Simple [Next.js](https://nextjs.org/) app                                                    |
-| [`nextjs-graphql`](https://pris.ly/e/ts/graphql-nextjs) | Fullstack    | Simple [Next.js](https://nextjs.org/) app (React) with a GraphQL API                         |
-| [`graphql-nexus`](https://pris.ly/e/ts/graphql-nexus)   | Backend only | GraphQL server based on [`@apollo/server`](https://www.apollographql.com/docs/apollo-server) |
-| [`express`](https://pris.ly/e/ts/rest-express)          | Backend only | Simple REST API with Express.JS                                                              |
-| [`grpc`](https://pris.ly/e/ts/grpc)                     | Backend only | Simple gRPC API                                                                              |
+| Demo                                                                                                                | Stack        | Description                                                                                         |
+| :------------------------------------------------------------------------------------------------------------------ | :----------- | --------------------------------------------------------------------------------------------------- |
+| [`nextjs`](https://pris.ly/e/orm/nextjs) | Fullstack    | Simple [Next.js](https://nextjs.org/) app                                |
+| [`nextjs-graphql`](https://pris.ly/e/ts/graphql-nextjs)                 | Fullstack    | Simple [Next.js](https://nextjs.org/) app (React) with a GraphQL API                                |
+| [`graphql-nexus`](https://pris.ly/e/ts/graphql-nexus) | Backend only | GraphQL server based on [`@apollo/server`](https://www.apollographql.com/docs/apollo-server) |
+| [`express`](https://pris.ly/e/ts/rest-express)                     | Backend only | Simple REST API with Express.JS                                                                     |
+| [`grpc`](https://pris.ly/e/ts/grpc)                                     | Backend only | Simple gRPC API                                                                                     |

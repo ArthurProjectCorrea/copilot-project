@@ -98,66 +98,60 @@ RBAC uses roles to determine access permissions. For example, "Admin" roles can 
    - Define actions (e.g., "create", "read", "update", "delete")
    - Create roles with permission sets (e.g., "admin", "editor", "viewer")
 2. **Set the active user in your code**:
+  ```typescript
+  // Set the current user context before performing operations
+  prisma.$permit.setUser("john@example.com");
 
-```typescript
-// Set the current user context before performing operations
-prisma.$permit.setUser('john@example.com');
-
-// All subsequent operations will be checked against this user's permissions
-const documents = await prisma.document.findMany();
-```
+  // All subsequent operations will be checked against this user's permissions
+  const documents = await prisma.document.findMany();
+  ```
 
 ## Implementing ABAC (Attribute-Based Access Control)
 
 ABAC extends access control by considering user attributes, resource attributes, and context.
 
 1. **Configure the extension for ABAC**:
-
-```typescript
-const prisma = new PrismaClient().$extends(
-  createPermitClientExtension(,
-    enableAutomaticChecks: true,
-  })
-);
-```
-
+  ```typescript
+  const prisma = new PrismaClient().$extends(
+    createPermitClientExtension(,
+      enableAutomaticChecks: true,
+    })
+  );
+  ```
 2. **Set user with attributes:**
+  ```typescript
+  prisma.$permit.setUser(
+  });
 
-```typescript
-prisma.$permit.setUser(
-});
-
-// Will succeed only if user department matches record department (per policy)
-const records = await prisma.medicalRecord.findMany(
-});
-```
+  // Will succeed only if user department matches record department (per policy)
+  const records = await prisma.medicalRecord.findMany(
+  });
+  ```
 
 ## Implementing ReBAC (Relationship-Based Access Control)
 
 ReBAC models permissions based on relationships between users and specific resource instances.
 
 1. **Configure the extension for ReBAC**:
-
-```typescript
-const prisma = new PrismaClient().$extends(
-  createPermitClientExtension(,
-    accessControlModel: "rebac",
-    enableAutomaticChecks: true,
-    enableResourceSync: true, // Sync resource instances with Permit.io
-    enableDataFiltering: true  // Filter queries by permissions
-  })
-);
-```
+  ```typescript
+  const prisma = new PrismaClient().$extends(
+    createPermitClientExtension(,
+      accessControlModel: "rebac",
+      enableAutomaticChecks: true,
+      enableResourceSync: true, // Sync resource instances with Permit.io
+      enableDataFiltering: true  // Filter queries by permissions
+    })
+  );
+  ```
 
 2. ** Access instance-specific resources:**
+  ```typescript
+  prisma.$permit.setUser("owner@example.com");
 
-```typescript
-prisma.$permit.setUser("owner@example.com");
-
-// Will only succeed if the user has permission on this specific file
-const file = await prisma.file.findUnique(
-});
-```
+  // Will only succeed if the user has permission on this specific file
+  const file = await prisma.file.findUnique(
+  });
+  ```
 
 ## Manual permission checks
 
@@ -172,7 +166,7 @@ const canUpdate = await prisma.$permit.check(
 );
 
 if (canUpdate) ,
-    data:
+    data: 
   });
 }
 
@@ -180,7 +174,7 @@ if (canUpdate) ,
 await prisma.$permit.enforceCheck(
   "john@example.com",
   "delete",
-
+  
 );
 ```
 

@@ -1,7 +1,7 @@
 ---
 title: 'Storing large objects or BLOBs in the database'
 metaTitle: 'Optimize recommendations: Avoid storing large objects or BLOBs in the database'
-metaDescription: 'Learn about the recommendations for avoiding the storage of large objects or BLOBs in the database.'
+metaDescription: "Learn about the recommendations for avoiding the storage of large objects or BLOBs in the database."
 tocDepth: 3
 toc: true
 ---
@@ -11,7 +11,7 @@ Optimize provides recommendations to help identify and resolve performance issue
 The following model uses the `Bytes` type:
 
 ```prisma
-model User
+model User 
 ```
 
 ## What is the problem?

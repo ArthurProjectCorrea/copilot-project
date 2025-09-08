@@ -48,37 +48,40 @@ To ease the burden of migration, a [codemod is available](/docs/app/guides/upgra
 #### Recommended Async Usage
 
 ```tsx
+
 // Before
-const cookieStore = cookies();
-const token = cookieStore.get('token');
+const cookieStore = cookies()
+const token = cookieStore.get('token')
 
 // After
-const cookieStore = await cookies();
-const token = cookieStore.get('token');
+const cookieStore = await cookies()
+const token = cookieStore.get('token')
 ```
 
 #### Temporary Synchronous Usage
 
 ```tsx filename="app/page.tsx" switcher
+
 // Before
-const cookieStore = cookies();
-const token = cookieStore.get('token');
+const cookieStore = cookies()
+const token = cookieStore.get('token')
 
 // After
-const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies;
+const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies
 // will log a warning in dev
-const token = cookieStore.get('token');
+const token = cookieStore.get('token')
 ```
 
 ```jsx filename="app/page.js" switcher
+
 // Before
-const cookieStore = cookies();
-const token = cookieStore.get('token');
+const cookieStore = cookies()
+const token = cookieStore.get('token')
 
 // After
-const cookieStore = cookies();
+const cookieStore = cookies()
 // will log a warning in dev
-const token = cookieStore.get('token');
+const token = cookieStore.get('token')
 ```
 
 ### `headers`
@@ -86,37 +89,40 @@ const token = cookieStore.get('token');
 #### Recommended Async Usage
 
 ```tsx
+
 // Before
-const headersList = headers();
-const userAgent = headersList.get('user-agent');
+const headersList = headers()
+const userAgent = headersList.get('user-agent')
 
 // After
-const headersList = await headers();
-const userAgent = headersList.get('user-agent');
+const headersList = await headers()
+const userAgent = headersList.get('user-agent')
 ```
 
 #### Temporary Synchronous Usage
 
 ```tsx filename="app/page.tsx" switcher
+
 // Before
-const headersList = headers();
-const userAgent = headersList.get('user-agent');
+const headersList = headers()
+const userAgent = headersList.get('user-agent')
 
 // After
-const headersList = headers() as unknown as UnsafeUnwrappedHeaders;
+const headersList = headers() as unknown as UnsafeUnwrappedHeaders
 // will log a warning in dev
-const userAgent = headersList.get('user-agent');
+const userAgent = headersList.get('user-agent')
 ```
 
 ```jsx filename="app/page.js" switcher
+
 // Before
-const headersList = headers();
-const userAgent = headersList.get('user-agent');
+const headersList = headers()
+const userAgent = headersList.get('user-agent')
 
 // After
-const headersList = headers();
+const headersList = headers()
 // will log a warning in dev
-const userAgent = headersList.get('user-agent');
+const userAgent = headersList.get('user-agent')
 ```
 
 ### `draftMode`
@@ -160,7 +166,7 @@ const  = draftMode()
 
 ```tsx filename="app/layout.tsx" switcher
 // Before
-type Params =
+type Params = 
 
   const  = params
 }
@@ -204,7 +210,7 @@ type Params = Promise<>
 
 ```tsx filename="app/layout.tsx" switcher
 // Before
-type Params =
+type Params = 
 
   children,
   params,
@@ -217,7 +223,7 @@ type Params = Promise<>
 
   children: React.ReactNode
   params: Params
-})
+}) 
 ```
 
 ```jsx filename="app/layout.js" switcher
@@ -238,8 +244,8 @@ type Params = Promise<>
 
 ```tsx filename="app/page.tsx" switcher
 // Before
-type Params =
-type SearchParams =
+type Params = 
+type SearchParams = 
 
   params,
   searchParams,
@@ -259,11 +265,11 @@ type SearchParams = Promise<>
 
   params: Params
   searchParams: SearchParams
-})
+}) 
 
   params: Params
   searchParams: SearchParams
-})
+}) 
 ```
 
 ```jsx filename="app/page.js" switcher
@@ -298,8 +304,8 @@ type SearchParams = Promise<>
 'use client'
 
 // Before
-type Params =
-type SearchParams =
+type Params = 
+type SearchParams = 
 
   params,
   searchParams,
@@ -314,7 +320,7 @@ type SearchParams = Promise<>
 
   params: Params
   searchParams: SearchParams
-})
+}) 
 ```
 
 ```jsx
@@ -338,7 +344,7 @@ type SearchParams = Promise<>
 
 ```tsx filename="app/api/route.ts" switcher
 // Before
-type Params =
+type Params = 
 
   const params = segmentData.params
   const slug = params.slug
@@ -427,6 +433,7 @@ The `@next/font` package has been removed in favor of the built-in [`next/font`]
 // Before
 
 // After
+
 ```
 
 ## bundlePagesRouterDependencies

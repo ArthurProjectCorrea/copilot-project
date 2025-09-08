@@ -10,7 +10,7 @@ When you export a function called `getStaticPaths` (Static Site Generation) from
 ```tsx filename="pages/repo/[name].tsx" switcher
 import type  from 'next'
 
-type Repo =
+type Repo = 
 
   return ,
       }, // See the "paths" section below
@@ -25,7 +25,7 @@ type Repo =
 }) satisfies GetStaticProps<>
 
   repo,
-}: InferGetStaticPropsType<typeof getStaticProps>)
+}: InferGetStaticPropsType<typeof getStaticProps>) 
 ```
 
 ```jsx filename="pages/repo/[name].js" switcher
@@ -91,7 +91,7 @@ You can defer generating all pages on-demand by returning an empty array for `pa
   // When this is true (in preview environments) don't
   // prerender any static pages
   // (faster builds, but slower initial page load)
-  if (process.env.SKIP_BUILD_STATIC_GENERATION)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) 
   }
 
   // Call an external API endpoint to get posts
@@ -105,6 +105,6 @@ You can defer generating all pages on-demand by returning an empty array for `pa
   }))
 
   //  means other routes should 404
-  return
+  return 
 }
 ```

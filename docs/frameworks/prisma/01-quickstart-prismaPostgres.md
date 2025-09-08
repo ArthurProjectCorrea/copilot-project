@@ -7,7 +7,7 @@ search: true
 sidebar_class_name: hidden-sidebar
 dbSwitcher: ['prismaPostgres', 'sqlite']
 slugSwitch: /getting-started/quickstart-
-sidebar_custom_props:
+sidebar_custom_props: 
 community_section: true
 ---
 
@@ -26,7 +26,6 @@ If you want to use Prisma Postgres with another ORM or database library (like Dr
 ## Prerequisites
 
 To successfully complete this tutorial, you need:
-
 - a [Prisma Data Platform](https://console.prisma.io/) (PDP) account
 - [Node.js](https://nodejs.org/en/) installed on your machine (see [system requirements](/orm/reference/system-requirements) for officially supported versions)
 
@@ -144,7 +143,7 @@ Prisma ORM comes with a built-in GUI to view and edit the data in your database.
 npx prisma studio
 ```
 
-With Prisma Postgres, you can also directly use Prisma Studio inside the [Console](https://console.prisma.io) by selecting the **Studio** tab in your project.
+With Prisma Postgres, you can also directly use Prisma Studio inside the [Console](https://console.prisma.io) by selecting the **Studio** tab in your project. 
 
 ### Build a fullstack app with Next.js
 

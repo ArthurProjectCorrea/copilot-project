@@ -211,7 +211,7 @@ Error messages can be helpful to explain what was incorrect in a request. Howeve
 app.useGlobalPipes(
   new ValidationPipe({
     disableErrorMessages: true,
-  })
+  }),
 );
 ```
 
@@ -225,7 +225,7 @@ Our `ValidationPipe` can also filter out properties that should not be received 
 app.useGlobalPipes(
   new ValidationPipe({
     whitelist: true,
-  })
+  }),
 );
 ```
 
@@ -254,7 +254,7 @@ To enable this behavior globally, set the option on a global pipe:
 app.useGlobalPipes(
   new ValidationPipe({
     transform: true,
-  })
+  }),
 );
 ```
 
@@ -370,7 +370,10 @@ export class AdditionalCatInfo {
 We can generate a new type that combines all properties in both types.
 
 ```typescript
-export class UpdateCatDto extends IntersectionType(CreateCatDto, AdditionalCatInfo) {}
+export class UpdateCatDto extends IntersectionType(
+  CreateCatDto,
+  AdditionalCatInfo,
+) {}
 ```
 
 > info **Hint** The `IntersectionType()` function is imported from the `@nestjs/mapped-types` package.
@@ -378,7 +381,9 @@ export class UpdateCatDto extends IntersectionType(CreateCatDto, AdditionalCatIn
 The type mapping utility functions are composable. For example, the following will produce a type (class) that has all of the properties of the `CreateCatDto` type except for `name`, and those properties will be set to optional:
 
 ```typescript
-export class UpdateCatDto extends PartialType(OmitType(CreateCatDto, ['name'] as const)) {}
+export class UpdateCatDto extends PartialType(
+  OmitType(CreateCatDto, ['name'] as const),
+) {}
 ```
 
 #### Parsing and validating arrays

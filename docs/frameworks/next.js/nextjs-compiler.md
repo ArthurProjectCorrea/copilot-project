@@ -57,15 +57,16 @@ The Next.js Compiler transpiles your tests and simplifies configuring Jest toget
 First, update to the latest version of Next.js: `npm install next@latest`. Then, update your `jest.config.js` file:
 
 ```js filename="jest.config.js"
-const nextJest = require('next/jest');
+const nextJest = require('next/jest')
 
 // Providing the path to your Next.js app which will enable loading next.config.js and .env files
-const createJestConfig = nextJest();
+const createJestConfig = nextJest()
 
 // Any custom config you want to pass to Jest
-const customJestConfig =
-  // createJestConfig is exported in this way to ensure that next/jest can load the Next.js configuration, which is async
-  (module.exports = createJestConfig(customJestConfig));
+const customJestConfig = 
+
+// createJestConfig is exported in this way to ensure that next/jest can load the Next.js configuration, which is async
+module.exports = createJestConfig(customJestConfig)
 ```
 
 ### Relay
@@ -150,7 +151,7 @@ First, update to the latest version of Next.js: `npm install next@latest`. Then,
 
 ```js filename="next.config.js"
 
-module.exports =
+module.exports = 
         }
       },
     },
@@ -169,7 +170,7 @@ Next.js' swc compiler is used for minification by default since v13. This is 7x 
 Next.js can automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`node_modules`). This replaces the `next-transpile-modules` package.
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```
 
 ### Modularize Imports

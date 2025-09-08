@@ -40,7 +40,7 @@ To define the viewport options, export a `viewport` object from a `layout.jsx` o
 
 ```tsx filename="layout.tsx | page.tsx" switcher
 
-  return
+  return 
 }
 ```
 
@@ -48,7 +48,7 @@ In TypeScript, the `params` argument can be typed via [`PageProps<'/route'>`](/d
 
 ```jsx filename="layout.js | page.js" switcher
 
-  return
+  return 
 }
 ```
 
@@ -176,7 +176,7 @@ You can add type safety to your viewport object by using the `Viewport` type. If
 
 ```tsx
 
-  return
+  return 
 }
 ```
 
@@ -188,7 +188,7 @@ type Props = >
   searchParams: Promise<>
 }
 
-  return
+  return 
 }
 
 ```

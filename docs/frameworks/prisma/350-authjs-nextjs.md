@@ -31,13 +31,13 @@ It will prompt you to customize your setup. Choose the defaults:
 
 :::info
 
-- _Would you like to use TypeScript?_ `Yes`
-- _Would you like to use ESLint?_ `Yes`
-- _Would you like to use Tailwind CSS?_ `Yes`
-- _Would you like your code inside a `src/` directory?_ `No`
-- _Would you like to use App Router?_ (recommended) `Yes`
-- _Would you like to use Turbopack for `next dev`?_ `Yes`
-- _Would you like to customize the import alias (`@/_`by default)?*`No`
+- *Would you like to use TypeScript?* `Yes`
+- *Would you like to use ESLint?* `Yes`
+- *Would you like to use Tailwind CSS?* `Yes`
+- *Would you like your code inside a `src/` directory?* `No`
+- *Would you like to use App Router?* (recommended) `Yes`
+- *Would you like to use Turbopack for `next dev`?* `Yes`
+- *Would you like to customize the import alias (`@/*` by default)?* `No`
 
 :::
 
@@ -75,22 +75,22 @@ This will create:
 In the `prisma/schema.prisma` file, swap the provider to `prisma-client` and add the runtime `vercel-edge` to the generator:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Add the following models to the `schema.prisma` file, these models are provided by Auth.js:
 
 ```prisma file=prisma/schema.prisma
 //add-start
-model Account
+model Account 
 
-model Session
+model Session 
 
-model User
+model User 
 
-model VerificationToken
+model VerificationToken 
 //add-end
 ```
 
@@ -156,11 +156,9 @@ To get the `CLIENT_ID` and `CLIENT_SECRET`, you can create a new OAuth applicati
 1. Navigate to [Github Developer Settings](https://github.com/settings/developers)
 2. Click on `New OAuth App`
 3. Enter a name for your app, a home page URL, and a callback URL
-
 - Name: `Auth.js + Prisma` (Or anything you want)
 - Homepage URL: `http://localhost:3000`
 - Callback URL: `http://localhost:3000/api/auth/callback/github`
-
 4. Click `Register application`
 5. Click `Generate new client secret` and copy the `Client ID` and `Client Secret`.
 6. Add the `Client ID` and `Client Secret` to the `.env` file:
@@ -242,6 +240,7 @@ Start by importing the `signIn` and `signOut` functions from the `auth` file:
 
 ```tsx file=components/auth-components.tsx
 //add-next-line
+
 ```
 
 Next, create the `SignIn` and `SignOut` components:
@@ -253,7 +252,7 @@ Next, create the `SignIn` and `SignOut` components:
   return (
     <form>
       <button className="bg-neutral-700 text-white p-2 rounded-md">
-        Sign In with
+        Sign In with 
       </button>
     </form>
   )
@@ -281,7 +280,7 @@ To add functionality to both of the buttons, add an action to the form that call
       //add-end
     >
       <button className="bg-neutral-700 text-white p-2 rounded-md">
-        Sign In with
+        Sign In with 
       </button>
     </form>
   )
@@ -342,7 +341,7 @@ const Page = async () => </p>
             </div>
 
             <div className="text-center">
-
+              
             </div>
           </div>
         )}
@@ -361,7 +360,7 @@ If the user is signed in, you can fetch the user data from the database and disp
 
 //add-next-line
 
-const Page = async () =>
+const Page = async () => 
     });
   }
   //add-end
@@ -381,13 +380,13 @@ const Page = async () =>
             //add-start
             <div className="bg-neutral-900 rounded p-3">
               <pre className="text-xs text-gray-300">
-
+                
               </pre>
             </div>
             //add-end
 
             <div className="text-center">
-
+              
             </div>
           </div>
         )}
@@ -403,11 +402,9 @@ const Page = async () =>
 :::warning
 
 Before starting the development server, note that if you are using Next.js v15.2.0 or v15.2.1, do not use Turbopack as there is a known [issue](https://github.com/vercel/next.js/issues/76497). Remove Turbopack from your dev script by updating your `package.json`
-
 ```json file=package.json
 "script":
 ```
-
 This change is not needed on any versions before or after.
 
 :::

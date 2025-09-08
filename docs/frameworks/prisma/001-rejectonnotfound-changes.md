@@ -42,7 +42,7 @@ You will need to modify your code to handle the errors thrown by `...OrThrow` me
 ```js
 try ,
   })
-} catch (err)
+} catch (err) 
   throw err
 }
 ```
@@ -50,7 +50,7 @@ try ,
 If your error handler is used in multiple places, you can also create a reusable error adapter which could then be used within a `.catch()` called on your function.
 
 ```js
-const adaptError = (customThrowFn) => (error) =>
+const adaptError = (customThrowFn) => (error) => 
   throw error
 }
 

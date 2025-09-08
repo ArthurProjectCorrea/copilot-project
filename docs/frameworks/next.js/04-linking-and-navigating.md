@@ -39,17 +39,15 @@ The trade-off of server rendering is that the client must wait for the server to
 Prefetching is the process of loading a route in the background before the user navigates to it. This makes navigation between routes in your application feel instant, because by the time a user clicks on a link, the data to render the next route is already available client side.
 
 Next.js automatically prefetches routes linked with the [`
-
+          
           <a href="/contact">Contact</a>
         </nav>
-
+        
       </body>
     </html>
-
-)
+  )
 }
-
-````
+```
 
 ```jsx filename="app/layout.js" switcher
 
@@ -60,12 +58,12 @@ Next.js automatically prefetches routes linked with the [`
 
           <a href="/contact">Contact</a>
         </nav>
-
+        
       </body>
     </html>
   )
 }
-````
+```
 
 How much of the route is prefetched depends on whether it's static or dynamic:
 
@@ -87,14 +85,14 @@ To use streaming, create a `loading.tsx` in your route folder:
 ```tsx filename="app/dashboard/loading.tsx" switcher
 
   // Add fallback UI that will be shown while the route is loading.
-  return
+  return 
 }
 ```
 
 ```jsx filename="app/dashboard/loading.js" switcher
 
   // Add fallback UI that will be shown while the route is loading.
-  return
+  return 
 }
 ```
 
@@ -109,8 +107,7 @@ Benefits of `loading.tsx`:
 - Improved Core Web Vitals: [TTFB](https://web.dev/articles/ttfb), [FCP](https://web.dev/articles/fcp), and [TTI](https://web.dev/articles/tti).
 
 To further improve the navigation experience, Next.js performs a [client-side transition](#client-side-transitions) with the `
-
-````
+```
 
 However, disabling prefetching comes with trade-offs:
 
@@ -122,13 +119,13 @@ To reduce resource usage without fully disabling prefetch, you can prefetch only
 ```tsx filename="app/ui/hover-prefetch-link.tsx" switcher
 'use client'
 
-function HoverPrefetchLink(: )
-````
+function HoverPrefetchLink(: ) 
+```
 
 ```jsx filename="app/ui/hover-prefetch-link.js" switcher
 'use client'
 
-function HoverPrefetchLink()
+function HoverPrefetchLink() 
 ```
 
 ### Hydration not completed

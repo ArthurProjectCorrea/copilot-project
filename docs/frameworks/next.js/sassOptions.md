@@ -7,7 +7,7 @@ description: Configure Sass options.
 
 ```ts filename="next.config.ts" switcher
 
-const sassOptions =
+const sassOptions = 
 
 const nextConfig: NextConfig = ,
 }
@@ -17,7 +17,7 @@ const nextConfig: NextConfig = ,
 ```js filename="next.config.js" switcher
 /** @type  */
 
-const sassOptions =
+const sassOptions = 
 
 const nextConfig = ,
 }

@@ -74,7 +74,7 @@ Server Functions can be inlined in Server Components by adding the `"use server"
 ```tsx filename="app/page.tsx" switcher
 
   // Server Action
-  async function createPost(formData: FormData)
+  async function createPost(formData: FormData) 
 
   return <></>
 }
@@ -83,7 +83,7 @@ Server Functions can be inlined in Server Components by adding the `"use server"
 ```jsx filename="app/page.js" switcher
 
   // Server Action
-  async function createPost(formData: FormData)
+  async function createPost(formData: FormData) 
 
   return <></>
 }
@@ -96,11 +96,13 @@ Server Functions can be inlined in Server Components by adding the `"use server"
 It's not possible to define Server Functions in Client Components. However, you can invoke them in Client Components by importing them from a file that has the `"use server"` directive at the top of it:
 
 ```ts filename="app/actions.ts" switcher
-'use server';
+'use server'
+
 ```
 
 ```js filename="app/actions.js" switcher
-'use server';
+'use server'
+
 ```
 
 ```tsx filename="app/ui/button.tsx" switcher
@@ -256,7 +258,7 @@ While executing a Server Function, you can show a loading indicator with React's
 
   return (
     <button onClick=>
-
+      
     </button>
   )
 }
@@ -269,7 +271,7 @@ While executing a Server Function, you can show a loading indicator with React's
 
   return (
     <button onClick=>
-
+      
     </button>
   )
 }

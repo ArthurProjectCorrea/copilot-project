@@ -435,7 +435,10 @@ To filter out exceptions, we can use the `ofType` operator, as follows:
 
 ```typescript
 this.unhandledExceptionsBus
-  .pipe(takeUntil(this.destroy$), UnhandledExceptionBus.ofType(TransactionNotAllowedException))
+  .pipe(
+    takeUntil(this.destroy$),
+    UnhandledExceptionBus.ofType(TransactionNotAllowedException),
+  )
   .subscribe((exceptionInfo) => {
     // Handle exception here
   });
@@ -446,7 +449,10 @@ Where `TransactionNotAllowedException` is the exception we want to filter out.
 The `UnhandledExceptionInfo` object contains the following properties:
 
 ```typescript
-export interface UnhandledExceptionInfo<Cause = IEvent | ICommand, Exception = any> {
+export interface UnhandledExceptionInfo<
+  Cause = IEvent | ICommand,
+  Exception = any,
+> {
   /**
    * The exception that was thrown.
    */
@@ -519,7 +525,10 @@ When executing a command, pass the custom request context as the second argument
 
 ```typescript
 const myRequest = new MyRequest(user);
-await this.commandBus.execute(new KillDragonCommand(heroId, killDragonDto.dragonId), myRequest);
+await this.commandBus.execute(
+  new KillDragonCommand(heroId, killDragonDto.dragonId),
+  myRequest,
+);
 ```
 
 This makes the `MyRequest` instance available as the `REQUEST` provider to the corresponding handler:
@@ -530,7 +539,7 @@ This makes the `MyRequest` instance available as the `REQUEST` provider to the c
 })
 export class KillDragonHandler {
   constructor(
-    @Inject(REQUEST) private request: MyRequest // Inject the request context
+    @Inject(REQUEST) private request: MyRequest, // Inject the request context
   ) {}
 
   // Handler implementation here
@@ -552,7 +561,7 @@ And in the query handler:
 })
 export class GetHeroHandler {
   constructor(
-    @Inject(REQUEST) private request: MyRequest // Inject the request context
+    @Inject(REQUEST) private request: MyRequest, // Inject the request context
   ) {}
 
   // Handler implementation here
@@ -564,7 +573,7 @@ For events, while you can pass the request provider to `EventBus#publish`, this 
 ```typescript
 const hero = this.publisher.mergeObjectContext(
   await this.repository.findOneById(+heroId),
-  this.request // Inject the request context here
+  this.request, // Inject the request context here
 );
 ```
 

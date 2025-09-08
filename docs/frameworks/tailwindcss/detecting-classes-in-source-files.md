@@ -41,7 +41,7 @@ Instead it just looks for any tokens in your file that could be classes based on
 
   return (
     <button className= rounded-full px-2 py-1.5 font-sans text-sm/6 font-medium shadow`}>
-
+      
     </button>
   );
 }
@@ -117,7 +117,7 @@ Use `@source` to explicitly register source paths relative to the stylesheet:
 
 ```css
 /* [!code filename:CSS] */
-@import 'tailwindcss';
+@import "tailwindcss";
 /* [!code highlight:2] */
 @source "../node_modules/@acmecorp/ui-lib";
 ```
@@ -133,7 +133,7 @@ To set the base path for source detection explicitly, use the `source()` functio
 ```css
 /* [!code filename:CSS] */
 /* [!code word:source("../src")] */
-@import 'tailwindcss' source('../src');
+@import "tailwindcss" source("../src");
 ```
 
 This can be useful when working with monorepos where your build commands run from the root of the monorepo instead of the root of each project.
@@ -144,7 +144,7 @@ Use `@source not` to ignore specific paths, relative to the stylesheet, when sca
 
 ```css
 /* [!code filename:CSS] */
-@import 'tailwindcss';
+@import "tailwindcss";
 /* [!code highlight:2] */
 @source not "../src/components/legacy";
 ```
@@ -158,7 +158,7 @@ Use `source(none)` to completely disable automatic source detection if you want 
 ```css
 /* [!code filename:CSS] */
 /* [!code word:source("../src")] */
-@import 'tailwindcss' source(none);
+@import "tailwindcss" source(none);
 
 @source "../admin";
 @source "../shared";
@@ -186,7 +186,7 @@ Use `@source not inline()` to prevent specific classes from being generated, eve
 
 ```css
 /* [!code filename:CSS] */
-@import 'tailwindcss';
+@import "tailwindcss";
 /* [!code highlight:2] */
 @source not inline("bg-red-,950}");
 ```

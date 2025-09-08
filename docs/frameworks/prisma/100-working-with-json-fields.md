@@ -8,14 +8,14 @@ tocDepth: 3
 Use the [`Json`](/orm/reference/prisma-schema-reference#json) Prisma ORM field type to read, write, and perform basic filtering on JSON types in the underlying database. In the following example, the `User` model has an optional `Json` field named `extendedPetsData`:
 
 ```prisma highlight=6;normal
-model User
+model User 
 ```
 
 Example field value:
 
 ```json
 ,
-  "pet2":
+  "pet2": 
 }
 ```
 
@@ -55,7 +55,7 @@ if (
   user?.extendedPetsData &&
   typeof user?.extendedPetsData === 'object' &&
   Array.isArray(user?.extendedPetsData)
-)
+) 
 ```
 
 See also: [Advanced example: Update a nested JSON key value](#advanced-example-update-a-nested-json-key-value)
@@ -153,7 +153,7 @@ You can filter on nested JSON properties. In the following examples, the value o
 
 ```json
 ,
-  "pet2":
+  "pet2": 
   }
 }
 ```
@@ -187,7 +187,7 @@ You can filter on the presence of a specific value in a scalar array (strings, i
 
 ```json
 ,
-  "dogs":
+  "dogs": 
 }
 ```
 
@@ -209,7 +209,7 @@ The following query returns all users that foster cats named `"Fido"` _and_ `"Bo
   If you are using MySQL, you must pass in a single object to match:
 
   ```json5
-
+  
   // MySQL
   ```
 
@@ -218,7 +218,7 @@ The following query returns all users that foster cats named `"Fido"` _and_ `"Bo
 - You must set `array_contains` to a JSON object, not a string. If you use a string, Prisma Client escapes the quotation marks and the query will not return results. For example:
 
   ```ts
-  array_contains: '[]';
+  array_contains: '[]'
   ```
 
   is sent to the database as:
@@ -244,12 +244,12 @@ In the following example, the value of `extendedPetsData` is an array of objects
 ```json
 [
   ,
-
+      
     ]
   },
   ,
   ,
-
+  
 ]
 ```
 
@@ -282,7 +282,7 @@ The following example assumes that the value of `extendedPetsData` is some varia
 
 ```json
 ,
-
+    
   ]
 }
 ```
@@ -309,7 +309,7 @@ To differentiate between these possibilities, we've introduced three _null enums
 For example:
 
 ```prisma
-model Log
+model Log 
 ```
 
 Here is an example of using `AnyNull`:
@@ -363,15 +363,15 @@ Prisma's `Json` fields are untyped by default. To add strong typing, you can use
     ```
 
     ```prisma file=schema.prisma
-    generator client
+    generator client 
 
-    generator json
+    generator json 
     ```
 
 2.  Next, link a field to a TypeScript type using an [AST comment](/orm/prisma-schema/overview#comments).
 
     ```prisma highlight=4;normal file=schema.prisma showLineNumbers
-    model Log
+    model Log 
     ```
 
 3.  Then, define `LogMetaType` in a type declaration file (e.g., `types.ts`) that is included in your `tsconfig.json`.
@@ -392,7 +392,7 @@ Now, `Log.meta` will be strongly typed as ``.
 You can also apply these techniques to `String` fields. This is especially useful for creating string-based enums directly in your schema when your database does not support enum types.
 
 ```prisma
-model Post
+model Post 
 ```
 
 This results in `post.status` being strongly typed as `'draft' | 'published'` and `post.meta` as `LogMetaType[]`.

@@ -45,6 +45,7 @@ Libraries like `@material-ui/icons`, `@phosphor-icons/react`, or `react-icons` c
 // Instead of this:
 
 // Do this:
+
 ```
 
 You can often find what import pattern to use in the documentation for the icon library you're using. This example follows [`@phosphor-icons/react`](https://www.npmjs.com/package/@phosphor-icons/react#import-performance-optimization) recommendation.

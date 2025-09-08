@@ -32,7 +32,11 @@ While [Prisma AI](/postgres/query-optimization/prisma-ai) can provide helpful gu
 When using the [Optimize client extension](https://www.npmjs.com/package/@prisma/extension-optimize) with the [Accelerate client extension](https://www.npmjs.com/package/@prisma/extension-accelerate), ensure the Accelerate client extension is added last to your extended `PrismaClient`. This allows cacheable operations to be received by Optimize.
 
 ```ts
-const prisma = new PrismaClient().$extends(withOptimize()).$extends(withAccelerate());
+const prisma = new PrismaClient()
+  .$extends(
+    withOptimize(),
+  )
+  .$extends(withAccelerate());
 ```
 
 ### SQL references in MongoDB recommendations

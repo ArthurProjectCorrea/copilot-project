@@ -6,7 +6,7 @@ metaDescription: 'Learn how to add Prisma ORM to an existing TypeScript project 
 hide_table_of_contents: true
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-sidebar_custom_props:
+sidebar_custom_props: 
 sidebar_class_name: hidden-sidebar
 pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-cockroachdb
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases-

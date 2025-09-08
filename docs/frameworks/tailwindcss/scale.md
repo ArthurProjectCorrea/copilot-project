@@ -1,5 +1,5 @@
 <ApiTable
-rows=-<number>`, `scale: <number>% <number>%;`],
+  rows=-<number>`, `scale: <number>% <number>%;`],
       [`-$-<number>`, `scale: calc(<number>% * -1) calc(<number>% * -1);`],
       [`$-(<custom-property>)`, `scale: var(<custom-property>) var(<custom-property>);`],
       [`$-[<value>]`, `scale: <value>;`],
@@ -13,9 +13,9 @@ rows=-<number>`, `scale: <number>% <number>%;`],
       [`-$-<number>`, `scale: $;`],
       [`$-(<custom-property>)`, `scale: $;`],
       [`$-[<value>]`, `scale: $;`],
-]),
-["scale-3d", "scale: var(--tw-scale-x) var(--tw-scale-y) var(--tw-scale-z);"],
-]}
+    ]),
+    ["scale-3d", "scale: var(--tw-scale-x) var(--tw-scale-y) var(--tw-scale-z);"],
+  ]}
 />
 
 ## Examples

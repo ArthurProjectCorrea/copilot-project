@@ -22,7 +22,11 @@ async function generateSchema() {
 The `gqlSchemaFactory.create()` method takes an array of resolver class references. For example:
 
 ```typescript
-const schema = await gqlSchemaFactory.create([RecipesResolver, AuthorsResolver, PostsResolvers]);
+const schema = await gqlSchemaFactory.create([
+  RecipesResolver,
+  AuthorsResolver,
+  PostsResolvers,
+]);
 ```
 
 It also takes a second optional argument with an array of scalar classes:
@@ -30,7 +34,7 @@ It also takes a second optional argument with an array of scalar classes:
 ```typescript
 const schema = await gqlSchemaFactory.create(
   [RecipesResolver, AuthorsResolver, PostsResolvers],
-  [DurationScalar, DateScalar]
+  [DurationScalar, DateScalar],
 );
 ```
 

@@ -1,11 +1,11 @@
 <ApiTable
-rows="],
-["divide-dashed", "& > :not(:last-child) "],
-["divide-dotted", "& > :not(:last-child) "],
-["divide-double", "& > :not(:last-child) "],
-["divide-hidden", "& > :not(:last-child) "],
-["divide-none", "& > :not(:last-child) "],
-]}
+  rows="],
+    ["divide-dashed", "& > :not(:last-child) "],
+    ["divide-dotted", "& > :not(:last-child) "],
+    ["divide-double", "& > :not(:last-child) "],
+    ["divide-hidden", "& > :not(:last-child) "],
+    ["divide-none", "& > :not(:last-child) "],
+  ]}
 />
 
 ## Examples

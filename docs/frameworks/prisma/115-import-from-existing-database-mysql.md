@@ -6,11 +6,11 @@ metaDescription: 'Learn how to import data from an existing MySQL database into 
 tocDepth: 3
 toc: true
 search: true
-dbSwitcher: ['mysql', 'postgresql']
+dbSwitcher: ["mysql", "postgresql"]
 slugSwitch: /getting-started/prisma-postgres/import-from-existing-database-
 ---
 
-This guide provides step-by-step instructions for importing data from an existing MySQL database into Prisma Postgres.
+This guide provides step-by-step instructions for importing data from an existing MySQL database into Prisma Postgres. 
 
 You can accomplish this migration in four steps:
 
@@ -39,7 +39,7 @@ Follow these steps to create a new Prisma Postgres database:
 1. In the **Region** dropdown, select the region that's closest to your current location, e.g. **US East (N. Virginia)**.
 1. Click the **Create project** button.
 
-Once your database was provisioned, find your direct Prisma Postgres connection string:
+Once your database was provisioned, find your direct Prisma Postgres connection string:  
 
 1. Navigate to your active Prisma Postgres instance.
 1. Click the **API Keys** tab in the project's sidenav.
@@ -90,9 +90,9 @@ Make sure to update the following details in the `config.load` file:
 - `FROM` url (MySQL database URL):
   - Replace `username`, `password`, `host`, `PORT`, and `database_name` with the actual connection details for your MySQL database.
   - Ensure that your connection string includes `useSSL=true` if SSL is required, for example: `mysql://username:password@host:PORT/database_name?useSSL=true`. Note that when using PlanetScale, appending `sslaccept=strict` will not work.
-- `INTO` url (Postgres database URL):
+- `INTO` url (Postgres database URL): 
   - Update this with your direct connection string from above, replacing the `__USER__` and `__PASSWORD__` placeholders.
-- Update the `database_name` in `ALTER SCHEMA 'database_name' RENAME TO 'public';` to exactly match the `database_name` in your MySQL connection string.
+- Update the `database_name` in `ALTER SCHEMA 'database_name' RENAME TO 'public';` to exactly match the `database_name` in your MySQL connection string. 
 
 After saving the configuration file with your updated credentials, in the same terminal window, execute the following command:
 
@@ -137,7 +137,6 @@ You also can use [Prisma Studio](/postgres/database/tooling#viewing-and-editing-
 ```terminal
 npx prisma studio
 ```
-
 :::
 
 ## 4. Configure your Prisma project for Prisma Postgres
@@ -150,7 +149,7 @@ Initialize Prisma in your project by running `npx prisma init` in your project d
 
 In the generated `.env` file, update `DATABASE_URL` to match your Prisma Postgres connection string that you received in [step 1](/getting-started/prisma-postgres/import-from-existing-database-mysql#1-create-a-new-prisma-postgres-database):
 
-```terminal file=.env no-copy
+```terminal  file=.env no-copy
 DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=__API_KEY__"
 ```
 
@@ -175,7 +174,7 @@ For a comprehensive guide on getting started with Prisma and Prisma Postgres, se
 In your `schema.prisma` file, change the `provider` in the `datasource` block from `mysql` to `postgresql`:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 In the generated `.env` file, update `DATABASE_URL` to match your new Prisma Postgres connection string that you received in [step 1](/getting-started/prisma-postgres/import-from-existing-database-mysql#1-create-a-new-prisma-postgres-database):

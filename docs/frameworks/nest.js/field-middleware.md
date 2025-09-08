@@ -13,7 +13,10 @@ Let's start off by creating a simple middleware that will log a field value befo
 ```typescript
 import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql';
 
-const loggerMiddleware: FieldMiddleware = async (ctx: MiddlewareContext, next: NextFn) => {
+const loggerMiddleware: FieldMiddleware = async (
+  ctx: MiddlewareContext,
+  next: NextFn,
+) => {
   const value = await next();
   console.log(value);
   return value;

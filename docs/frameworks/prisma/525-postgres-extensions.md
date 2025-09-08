@@ -1,7 +1,7 @@
 ---
-title: 'Postgres extensions'
-metaTitle: 'Postgres extensions'
-metaDescription: 'Learn about using Postgres extensions with Prisma Postgres'
+title: "Postgres extensions"
+metaTitle: "Postgres extensions"
+metaDescription: "Learn about using Postgres extensions with Prisma Postgres"
 tocDepth: 3
 toc: true
 sidebar_class_name: early-access-badge
@@ -29,7 +29,7 @@ Postgres extensions support in Prisma Postgres is currently in [Early Access](/p
 
 ## Using extensions with Prisma ORM
 
-Some extensions may already be supported by Prisma Postgres but not yet by Prisma ORM. Native support for some Postgres extensions in Prisma ORM is coming soon. In the meantime, you can still use these extensions with Prisma ORM by using [customized migrations](/orm/prisma-migrate/workflows/customizing-migrations) and [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) (or another mechanism to send [raw SQL](/orm/prisma-client/using-raw-sql) via in Prisma ORM).
+Some extensions may already be supported by Prisma Postgres but not yet by Prisma ORM. Native support for some Postgres extensions in Prisma ORM is coming soon. In the meantime, you can still use these extensions with Prisma ORM by using [customized migrations](/orm/prisma-migrate/workflows/customizing-migrations) and [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) (or another mechanism to send [raw SQL](/orm/prisma-client/using-raw-sql) via in Prisma ORM). 
 
 Let's walk through an example with `pgvector`.
 
@@ -59,7 +59,6 @@ CREATE TABLE "Document" (
 ```
 
 In this case, you:
-
 - install the `pgvector` extension in your database using the `CREATE EXTENSION` statement
 - create a `Document` table that uses the `VECTOR` type from that extension
 
@@ -82,7 +81,7 @@ The [warning in the CLI output of the command is expected](/orm/prisma-schema/in
 You Prisma schema will now contain the `Document` model:
 
 ```prisma
-model Document
+model Document 
 ```
 
 Because the `VECTOR` type is not yet natively supported by Prisma ORM, it's represented as an [`Unsupported`](/orm/prisma-schema/data-model/models#unsupported-types) type.
@@ -104,7 +103,7 @@ You can also use [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) for type-
 
 ### `pgvector` is only available on newly created Prisma Postgres instances
 
-For now, `pgvector` is only available on _newly created_ Prisma Postgres instances. It will be rolled out for _existing_ instances soon.
+For now, `pgvector` is only available on *newly created* Prisma Postgres instances. It will be rolled out for *existing* instances soon.
 
 ### No Prisma Studio support for `pgvector`
 

@@ -9,7 +9,7 @@ A React component called `Link` is provided to do this client-side route transit
 
 ```jsx
 
-function Home()
+function Home() 
 
 ```
 
@@ -20,14 +20,13 @@ The example above uses multiple links. Each one maps a path (`href`) to a known 
 - `/blog/hello-world` → `pages/blog/[slug].js`
 
 Any `
-
-</li>
-))}
-</ul>
-)
+        </li>
+      ))}
+    </ul>
+  )
 }
 
-````
+```
 
 > [`encodeURIComponent`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) is used in the example to keep the path utf-8 compatible.
 
@@ -36,14 +35,14 @@ Alternatively, using a URL Object:
 ```jsx
 
 function Posts() >
-
+          
         </li>
       ))}
     </ul>
   )
 }
 
-````
+```
 
 Now, instead of using interpolation to create the path, we use a URL object in `href` where:
 
@@ -107,7 +106,7 @@ You can also watch for URL changes via [`componentDidUpdate`](https://react.dev/
 ```jsx
 componentDidUpdate(prevProps)  = this.props.router
   // verify props have changed to avoid an infinite loop
-  if (query.counter !== prevProps.router.query.counter)
+  if (query.counter !== prevProps.router.query.counter) 
 }
 ```
 
@@ -116,7 +115,7 @@ componentDidUpdate(prevProps)  = this.props.router
 Shallow routing **only** works for URL changes in the current page. For example, let's assume we have another page called `pages/about.js`, and you run this:
 
 ```js
-router.push('/?counter=10', '/about?counter=10');
+router.push('/?counter=10', '/about?counter=10', )
 ```
 
 Since that's a new page, it'll unload the current page, load the new one and wait for data fetching even though we asked to do shallow routing.

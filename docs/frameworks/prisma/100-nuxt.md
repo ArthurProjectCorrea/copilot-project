@@ -22,42 +22,40 @@ Here's what you'll learn:
 
 ## Prerequisites
 
-To follow this guide, ensure you have the following:
+To follow this guide, ensure you have the following:  
 
-- Node.js version: A [compatible Node.js version](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-6#minimum-supported-nodejs-versions) required for Prisma 6.
-- Accounts:
-  - [GitHub](https://github.com)
-  - [Vercel](https://vercel.com)
-- Basic knowledge of Git and Vercel deployment (helpful but not required).
+- Node.js version: A [compatible Node.js version](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-6#minimum-supported-nodejs-versions) required for Prisma 6.  
+- Accounts:  
+  - [GitHub](https://github.com)  
+  - [Vercel](https://vercel.com)  
+- Basic knowledge of Git and Vercel deployment (helpful but not required).  
 
 ## 1. Create a New Nuxt Project and set up the Prisma Nuxt module
 
 1. Initialize [a new Nuxt project](https://nuxt.com/docs/getting-started/installation#new-project), select `npm` as the package manager and initialize git:
-
-   ```terminal
-   npm create nuxt hello-world
-   ```
-
-   :::note
-   We recommend using `npm` as it is the most stable option with the `@prisma/nuxt` module.
-   :::
+    ```terminal
+    npm create nuxt hello-world
+    ```
+    :::note
+    We recommend using `npm` as it is the most stable option with the `@prisma/nuxt` module.
+    :::
 
 2. Navigate into the project directory and install the `@prisma/nuxt` module:
-   ```terminal
-   cd hello-world
-   npm i @prisma/nuxt
-   ```
+    ```terminal
+    cd hello-world
+    npm i @prisma/nuxt
+    ```
 3. Install the [Prisma Accelerate client extension](https://www.npmjs.com/package/@prisma/extension-accelerate) as it's required to use Prisma Postgres:
-   ```terminal
-   npm i @prisma/extension-accelerate
-   ```
+    ```terminal
+    npm i @prisma/extension-accelerate
+    ```
 4. Add the `@prisma/nuxt` module with the following configuration to your `nuxt.config.ts` file:
-   ```typescript
-   // https://nuxt.com/docs/api/configuration/nuxt-config
-   export default defineNuxtConfig(,
-     devtools: ,
-   });
-   ```
+    ```typescript
+    // https://nuxt.com/docs/api/configuration/nuxt-config
+    export default defineNuxtConfig(,
+      devtools: ,
+    });
+    ```
 
 ## 2. Setup Prisma ORM by running the development server locally
 
@@ -69,7 +67,7 @@ Run the following command to start the development server:
 npm run dev
 ```
 
-After running this command, you will be prompted to run a database migration with [Prisma Migrate](/orm/prisma-migrate/understanding-prisma-migrate/overview):
+After running this command, you will be prompted to run a database migration with [Prisma Migrate](/orm/prisma-migrate/understanding-prisma-migrate/overview): 
 
 ```terminal
 ? Do you want to migrate database changes to your database? › (Y/n)
@@ -82,28 +80,26 @@ Once the setup flow has terminated, it:
 1. Installed the [Prisma CLI](/orm/reference/prisma-cli-reference).
 2. Initialized a Prisma project with a SQLite database.
 3. Created sample `User` and `Post` models in the `schema.prisma` file:
+    ```prisma file=prisma/schema.prisma
+    // This is your Prisma schema file,
+    // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-   ```prisma file=prisma/schema.prisma
-   // This is your Prisma schema file,
-   // learn more about it in the docs: https://pris.ly/d/prisma-schema
+    generator client 
 
-   generator client
+    datasource db 
 
-   datasource db
+    model User 
 
-   model User
-
-   model Post
-   ```
-
+    model Post 
+    ```
 4. Created the database tables for the `User` and `Post` models from the previous steps.
-   :::note
-   The database migrates automatically the first time you start the module if there isn't a `migrations` folder. After that, you need to run `npx prisma migrate dev` manually in the CLI to apply any schema changes. Running the `npx prisma migrate dev` command manually makes it easier and safer to manage migrations and also to [troubleshoot](/orm/prisma-migrate/workflows/troubleshooting) any migration-related errors.
-   :::
+    :::note
+    The database migrates automatically the first time you start the module if there isn't a `migrations` folder. After that, you need to run `npx prisma migrate dev` manually in the CLI to apply any schema changes. Running the `npx prisma migrate dev` command manually makes it easier and safer to manage migrations and also to [troubleshoot](/orm/prisma-migrate/workflows/troubleshooting) any migration-related errors.
+    :::
 5. Installed and generated [Prisma Client](https://da-2255.docs-51g.pages.dev/orm/reference/prisma-client-reference) which enables you to query your DB.
 6. Installed [Prisma Studio](/orm/tools/prisma-studio).
 
-When the Prisma setup is complete, the development server should start on `https://localhost:3000`.
+When the Prisma setup is complete, the development server should start on `https://localhost:3000`. 
 
 Next, stop the server, as we need to make some code changes.
 
@@ -113,38 +109,38 @@ With Prisma configured, the next step is to update your application code to fetc
 
 1. In the root directory of your project, create a folder named `components`.
 
-2. Inside the `components` folder, create a file named `User.server.vue`. This server component will fetch and display the name of the first user from the database:
-
+2. Inside the `components` folder, create a file named `User.server.vue`. This server component will fetch and display the name of the first user from the database:  
    ```html file=components/User.server.vue
    <script setup>
-     import  from "@prisma/extension-accelerate";
-     const prisma = usePrismaClient().$extends(withAccelerate());
-     const user = await prisma.user.findFirst();
+      import  from "@prisma/extension-accelerate";
+      const prisma = usePrismaClient().$extends(withAccelerate());
+      const user = await prisma.user.findFirst();
    </script>
 
    <template>
      <p>}</p>
    </template>
    ```
-
+   
    :::note
-   We're extending the `usePrismaClient()` composable with the `withAccelerate()` extension method to ensure [compatibility with Prisma Postgres](/postgres/introduction/overview#using-the-client-extension-for-prisma-accelerate-required). This extension will also allow you to [cache your queries](/postgres/database/caching).
+     We're extending the `usePrismaClient()` composable with the `withAccelerate()` extension method to ensure [compatibility with Prisma Postgres](/postgres/introduction/overview#using-the-client-extension-for-prisma-accelerate-required). This extension will also allow you to [cache your queries](/postgres/database/caching).
    :::
 
-3. Modify the `app.vue` file in the root directory to include the new server component using Nuxt Islands:
-
+3. Modify the `app.vue` file in the root directory to include the new server component using Nuxt Islands:  
    ```html file=app.vue
    <template>
-     <div></div>
+     <div>
+       
+     </div>
    </template>
    ```
 
-4. Run the following command to start the development server again:
+4. Run the following command to start the development server again:  
    ```terminal
    npm run dev
    ```
 5. Verify the application code is working by opening your application in a browser at `https://localhost:3000`.  
-   As there are no users in the database yet, the application will display:
+   As there are no users in the database yet, the application will display:  
    ```no-copy
    No user has been added yet.
    ```
@@ -175,22 +171,21 @@ Then, find your database credentials in the **Set up database access** section, 
 DATABASE_URL=<your-database-url>
 ```
 
-The `DATABASE_URL` environment variable will be required in the next steps.
+The `DATABASE_URL` environment variable will be required in the next steps. 
 
 ## 6. Set up Prisma Postgres in your Nuxt app
 
 Now that the Prisma Postgres instance is ready, update your Nuxt application to use this database:
 
 1. Update the `.env` file by replacing the existing `DATABASE_URL` value with the one you previously copied. It will look similar to this:
-
-   ```terminal file=.env
-   // edit-next-line
-   DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=PRISMA_POSTGRES_API_KEY"
-   ```
+    ```terminal file=.env
+    // edit-next-line
+    DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=PRISMA_POSTGRES_API_KEY"
+    ```
 
 2. Modify the `schema.prisma` file by changing the database provider in the `datasource` block of the `schema.prisma` file located in the `prisma` folder:
    ```prisma file=prisma/schema.prisma
-   datasource db
+   datasource db 
    ```
 3. Delete the SQLite database files (`dev.db` and `dev.db-journal`) along with the `migrations` folder, all located in the `prisma` directory. This cleans up the existing SQLite setup and prepares your project to migrate to PostgreSQL.
 4. Manually create a new migration for the Postgres database by running the `prisma migrate` command:
@@ -219,18 +214,18 @@ Deploy your Nuxt application with Prisma Postgres integration to Vercel by follo
    git push -u origin main
    ```
    :::note
-   Replace `<your-username>` and `<repository-name>` with your GitHub username and the name of your repository.
+    Replace `<your-username>` and `<repository-name>` with your GitHub username and the name of your repository.
    :::
 2. Log in to [Vercel](https://vercel.com/) and navigate to your [Dashboard](https://vercel.com/docs/dashboard-features).
-3. Create a new project. Follow Vercel's [Import an existing project](https://vercel.com/docs/getting-started-with-vercel/import) guide, but stop at [step 3](https://vercel.com/docs/getting-started-with-vercel/import#optionally-configure-any-settings) where you will configure environment variables _before_ clicking **Deploy**.
+3.  Create a new project. Follow Vercel's [Import an existing project](https://vercel.com/docs/getting-started-with-vercel/import) guide, but stop at [step 3](https://vercel.com/docs/getting-started-with-vercel/import#optionally-configure-any-settings) where you will configure environment variables _before_ clicking **Deploy**.
 4. Configure the `DATABASE_URL` environment variable:
    1. Expand the **Environment variables** section.
    2. Add the `DATABASE_URL` environment variable:
-      - **Key**: `DATABASE_URL`
-      - **Value**: Paste your Prisma Postgres connection URL, e.g. by copying it from the `.env` file in your Nuxt project.
-        :::warning
-        Do not deploy without setting the `DATABASE_URL` variable. Your deployment will fail if the application cannot connect to the database.
-        :::
+        - **Key**: `DATABASE_URL`
+        - **Value**: Paste your Prisma Postgres connection URL, e.g. by copying it from the `.env` file in your Nuxt project.
+      :::warning
+      Do not deploy without setting the `DATABASE_URL` variable. Your deployment will fail if the application cannot connect to the database.
+      :::
 5. Click the **Deploy** button. Vercel will build your project and deploy it to a live URL.
 6. Open the live URL provided by Vercel and verify that your application is working:
    - If you've added a user in Prisma Studio, their name should appear on the live site.

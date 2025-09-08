@@ -1,10 +1,10 @@
 <ApiTable
-rows=`,
-      `stroke: var(--color-$); /_ $ _/`,
-]),
-["stroke-(<custom-property>)", "stroke: var(<custom-property>);"],
-["stroke-[<color>]", "stroke: <color>;"],
-]}
+  rows=`,
+      `stroke: var(--color-$); /* $ */`,
+    ]),
+    ["stroke-(<custom-property>)", "stroke: var(<custom-property>);"],
+    ["stroke-[<color>]", "stroke: <color>;"],
+  ]}
 />
 
 ## Examples

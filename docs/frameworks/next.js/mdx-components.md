@@ -13,14 +13,14 @@ Use the file `mdx-components.tsx` (or `.js`) in the root of your project to defi
 
 ```tsx filename="mdx-components.tsx" switcher
 
-const components: MDXComponents =
+const components: MDXComponents = 
 
   return components
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components =
+const components = 
 
   return components
 }
@@ -34,14 +34,14 @@ The file must export a single function named `useMDXComponents`. This function d
 
 ```tsx filename="mdx-components.tsx" switcher
 
-const components: MDXComponents =
+const components: MDXComponents = 
 
   return components
 }
 ```
 
 ```js filename="mdx-components.js" switcher
-const components =
+const components = 
 
   return components
 }

@@ -11,7 +11,7 @@ The `page` file allows you to define UI that is **unique** to a route. You can c
   searchParams,
 }: >
   searchParams: Promise<>
-})
+}) 
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
@@ -49,11 +49,11 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 }
 ```
 
-| Example Route                        | URL         | `params`    |
-| ------------------------------------ | ----------- | ----------- |
-| `app/shop/[slug]/page.js`            | `/shop/1`   | `Promise<>` |
+| Example Route                        | URL         | `params`                                |
+| ------------------------------------ | ----------- | --------------------------------------- |
+| `app/shop/[slug]/page.js`            | `/shop/1`   | `Promise<>`                |
 | `app/shop/[category]/[item]/page.js` | `/shop/1/2` | `Promise<>` |
-| `app/shop/[...slug]/page.js`         | `/shop/1/2` | `Promise<>` |
+| `app/shop/[...slug]/page.js`         | `/shop/1/2` | `Promise<>`         |
 
 - Since the `params` prop is a promise, you must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access the values.
   - In version 14 and earlier, `params` was a synchronous prop. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
@@ -66,7 +66,7 @@ A promise that resolves to an object containing the [search parameters](https://
 
   searchParams,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/shop/page.js" switcher
@@ -82,7 +82,7 @@ Client Component **pages** can also access `searchParams` using React’s [`use`
 
   searchParams,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/page.jsx" switcher
@@ -92,11 +92,11 @@ Client Component **pages** can also access `searchParams` using React’s [`use`
 }
 ```
 
-| Example URL     | `searchParams` |
-| --------------- | -------------- |
-| `/shop?a=1`     | `Promise<>`    |
-| `/shop?a=1&b=2` | `Promise<>`    |
-| `/shop?a=1&a=2` | `Promise<>`    |
+| Example URL     | `searchParams`                |
+| --------------- | ----------------------------- |
+| `/shop?a=1`     | `Promise<>`         |
+| `/shop?a=1&b=2` | `Promise<>` |
+| `/shop?a=1&a=2` | `Promise<>`  |
 
 - Since the `searchParams` prop is a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access the values.
   - In version 14 and earlier, `searchParams` was a synchronous prop. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.

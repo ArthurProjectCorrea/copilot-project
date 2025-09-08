@@ -27,7 +27,7 @@ const getCachedUser = unstable_cache(
 ## Parameters
 
 ```jsx
-const data = unstable_cache(fetchData, keyParts, options)();
+const data = unstable_cache(fetchData, keyParts, options)()
 ```
 
 - `fetchData`: This is an asynchronous function that fetches the data you want to cache. It must be a function that returns a `Promise`.
@@ -48,10 +48,10 @@ const data = unstable_cache(fetchData, keyParts, options)();
 }: >
 })  = await params
   const getCachedUser = unstable_cache(
-    async () =>
+    async () => 
     },
     [userId], // add the user ID to the cache key
-
+    
   )
 
   //...
@@ -65,7 +65,7 @@ const data = unstable_cache(fetchData, keyParts, options)();
     async () => ;
     },
     [userId], // add the user ID to the cache key
-
+    
   );
 
   //...

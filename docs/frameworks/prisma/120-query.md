@@ -62,6 +62,7 @@ In the above example, a call to `prisma.user.findMany` triggers `query.user.find
   This is a type-safe object that you can mutate before the query happens. You can mutate any of the properties in `args`. Exception: you cannot mutate `include` or `select` because that would change the expected output type and break type safety.
 
 - `query`: a promise for the result of the query.
+
   - You can use `await` and then mutate the result of this promise, because its value is type-safe. TypeScript catches any unsafe mutations on the object.
 
 ### Modify a specific operation in all models of your schema
@@ -69,7 +70,7 @@ In the above example, a call to `prisma.user.findMany` triggers `query.user.find
 To extend the queries in all the models of your schema, use `$allModels` instead of a specific model name. For example:
 
 ```ts
-const prisma = new PrismaClient().$extends()
+const prisma = new PrismaClient().$extends() 
 
         return query(args)
       },
@@ -109,7 +110,7 @@ For example, you can use the `$allOperations` method to log queries as follows:
 
 ```ts
 const prisma = new PrismaClient().$extends() ,
-
+          
         )
       )
       return result
@@ -140,7 +141,7 @@ To apply custom behavior to a specific top-level raw query operation, use the na
 You can use `await` and then mutate the result of the `query` promise.
 
 ```ts
-const prisma = new PrismaClient().$extends()
+const prisma = new PrismaClient().$extends() 
 
         return user
       },
@@ -156,7 +157,7 @@ You can wrap your extended queries into a [batch transaction](/orm/prisma-client
 The following example extends `findFirst` so that it runs in a batch transaction.
 
 ```ts
-const transactionExtension = Prisma.defineExtension((prisma) =>
+const transactionExtension = Prisma.defineExtension((prisma) => 
   prisma.$extends() ,
       },
     },

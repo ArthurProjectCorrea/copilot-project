@@ -17,7 +17,7 @@ const user = await prisma.user.findUnique(,
 **Mongoose**
 
 ```ts
-const result = await User.findById(1);
+const result = await User.findById(1)
 ```
 
 ## Fetching selected scalars of single objects
@@ -33,7 +33,7 @@ const user = await prisma.user.findUnique(,
 **Mongoose**
 
 ```ts
-const user = await User.findById(1).select(['name']);
+const user = await User.findById(1).select(['name'])
 ```
 
 ## Fetching relations
@@ -43,7 +43,7 @@ const user = await User.findById(1).select(['name']);
 **Mongoose**
 
 ```ts
-const userWithPost = await User.findById(2).populate('post');
+const userWithPost = await User.findById(2).populate('post')
 ```
 
 ## Filtering for concrete values
@@ -59,7 +59,7 @@ const posts = await prisma.post.findMany(,
 **Mongoose**
 
 ```ts
-const posts = await Post.find();
+const posts = await Post.find()
 ```
 
 ## Other filter criteria
@@ -107,13 +107,13 @@ const page = prisma.post.findMany(,
 Offset pagination:
 
 ```ts
-const cc = prisma.post.findMany();
+const cc = prisma.post.findMany()
 ```
 
 **Mongoose**
 
 ```ts
-const posts = await Post.find();
+const posts = await Post.find()
 ```
 
 ## Creating objects
@@ -151,7 +151,7 @@ const user = prisma.user.delete(,
 **Mongoose**
 
 ```ts
-await User.deleteOne();
+await User.deleteOne()
 ```
 
 ## Batch deletes

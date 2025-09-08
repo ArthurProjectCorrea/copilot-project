@@ -12,7 +12,6 @@ _Externally managed tables_ (or _external tables_ for short) in Prisma ORM are t
 Sometimes, you might not want Prisma ORM to manage specific tables—such as ones handled by another team or service.
 
 Some concrete use cases for this are:
-
 - auth services like Clerk or Auth0 that manage specific tables with user and session data
 - storage services like Supabase Storage with tables for storing metadata about buckets and objects
 - a microservice-based organization where specific teams own specific tables in the database
@@ -36,14 +35,13 @@ On the other hand, this flexibility enables you to represent only part of the un
 ## Workflow
 
 If you want to use external tables, here's the main workflow:
-
 1. Declare the name of the external tables in your [Prisma Config file](/orm/reference/prisma-config-reference)
 1. Update your Prisma schema (e.g. via `npx prisma db pull`)
 1. Re-generate Prisma Client with `npx prisma generate`
 1. You can now query the external table using Prisma Client but it will be ignored by Prisma Migrate
 1. When the table gets changed (by whoever owns it):
-   1. Re-introspect your database using `npx prisma db pull` or manually update the models in your prisma file
-   1. Re-generate Prisma Client with `npx prisma generate`
+    1. Re-introspect your database using `npx prisma db pull` or manually update the models in your prisma file
+    1. Re-generate Prisma Client with `npx prisma generate`
 
 ## Prisma Config syntax
 
@@ -95,14 +93,14 @@ Relationships from an external table to a managed table, where the external tabl
 Assume you have the following Prisma schema which only contains the `posts` table:
 
 ```prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model posts
+model posts 
 ```
 
-You have created that `posts` table already via a prior migration.
+You have created that `posts` table already via a prior migration. 
 You now also have a `users` table and `role` enum in your database which you want to treat as externally managed.
 
 So the tables in your PostgreSQL database in the default `public` schema look like this:
@@ -147,8 +145,7 @@ Enable use of externally managed tables via the `tables.external` property:
 ### 2. Update the Prisma schema
 
 Next, you need to update your Prisma schema. You can do this either:
-
-- by manually creating the models
+- by manually creating the models 
 - or by using [introspection](/orm/prisma-schema/introspection):
 
 ```terminal
@@ -158,12 +155,12 @@ npx prisma db pull
 The `users` table is now in your Prisma schema:
 
 ```prisma
-model posts
+model posts 
 
 // highlight-start
-model users
+model users 
 
-enum role
+enum role 
 // highlight-end
 ```
 
@@ -180,7 +177,7 @@ npx prisma generate
 You can now query the external `users` table with Prisma Client:
 
 ```ts
-await prisma.users.findMany();
+await prisma.users.findMany()
 ```
 
 ### 5. Add a relationship
@@ -190,11 +187,11 @@ Let's say you now want to add an author relationship from `posts` onto `users`.
 First update your Prisma schema.
 
 ```prisma
-model posts
+model posts 
 
-model users
+model users 
 
-enum role
+enum role 
 ```
 
 Then add a `migrations.initShadowDb` script so Prisma knows about the `users` table during migrations.

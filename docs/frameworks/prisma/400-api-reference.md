@@ -9,7 +9,7 @@ toc: true
 The Accelerate API reference documentation is based on the following schema:
 
 ```prisma
-model User
+model User 
 ```
 
 All example are based on the `User` model.
@@ -22,12 +22,11 @@ With the Accelerate extension for Prisma Client, you can use the `cacheStrategy`
 
 The `cacheStrategy` parameter takes an option with the following keys:
 
-| Option | Example    | Type       | Required | Description                                                                                                                                                                                                                                                                                                                                            |
-| ------ | ---------- | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `swr`  | `60`       | `Int`      | No       | The stale-while-revalidate time in seconds.                                                                                                                                                                                                                                                                                                            |
-| `ttl`  | `60`       | `Int`      | No       | The time-to-live time in seconds.                                                                                                                                                                                                                                                                                                                      |
-| `tags` | `["user"]` | `String[]` | No       | The `tag` serves as a variable to control the invalidation of specific queries within your application. It is an optional array of strings to [invalidate](/postgres/database/api-reference/caching-api#accelerateinvalidate) the cache, with each tag containing only alphanumeric characters and underscores, and a maximum length of 64 characters. |
-
+| Option | Example | Type  | Required | Description                                 |
+| ------ | ------- | ----- | -------- | ------------------------------------------- |
+| `swr`  | `60`    | `Int` | No       | The stale-while-revalidate time in seconds. |
+| `ttl`  | `60`    | `Int` | No       | The time-to-live time in seconds.           |
+| `tags` | `["user"]` | `String[]` | No | The `tag` serves as a variable to control the invalidation of specific queries within your application. It is an optional array of strings to [invalidate](/postgres/database/api-reference/caching-api#accelerateinvalidate) the cache, with each tag containing only alphanumeric characters and underscores, and a maximum length of 64 characters.
 |
 
 ### Examples
@@ -42,7 +41,6 @@ await prisma.user.findMany(,
   // highlight-end
 });
 ```
-
 ### Supported Prisma Client operations
 
 The following is a list of all read query operations that support `cacheStrategy`:
@@ -77,16 +75,16 @@ console.dir(info)
 The `info` object is of type `AccelerateInfo` and follows the interface below:
 
 ```ts
-interface AccelerateInfo
+interface AccelerateInfo 
 ```
 
-| Property       | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| -------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property       | Type                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cacheStatus`  | `"ttl" \| "swr" \| "miss" \| "none" ` | The cache status of the response.<br/><ul><li>`ttl` indicates a cache hit within the `ttl` duration and no database query was executed</li><li>`swr` indicates a cache hit within the `swr` duration and the data is being refreshed by Accelerate in the background </li><li>`miss` indicates that both `ttl` and `swr` have expired and the database query was executed by the request </li><li> `none` indicates that no cache strategy was specified and the database query was executed by the request</li></ul> |
-| `lastModified` | `Date`                                | The date the response was last refreshed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `region`       | `String`                              | The data center region that received the request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `requestId`    | `String`                              | Unique identifier of the request. Useful for troubleshooting.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `signature`    | `String`                              | The unique signature of the Prisma operation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `lastModified` | `Date`                                                       | The date the response was last refreshed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `region`       | `String`                                                     | The data center region that received the request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `requestId`    | `String`                                                     | Unique identifier of the request. Useful for troubleshooting.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `signature`    | `String`                                                     | The unique signature of the Prisma operation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ## `$accelerate.invalidate`
 
@@ -98,7 +96,7 @@ To invalidate cached query results on-demand, a paid plan is required. Each plan
 
 :::
 
-### Example
+### Example 
 
 To invalidate the query below:
 
@@ -114,7 +112,7 @@ You need to provide the cache tag in the `$accelerate.invalidate` API:
 ```ts
 try );
   // highlight-end
-} catch (e)
+} catch (e) 
   }
   throw e;
 }
@@ -142,7 +140,7 @@ await prisma.user.findMany(,
 Just call the `$accelerate.invalidateAll` API:
 
 ```ts
-try  catch (e)
+try  catch (e) 
   }
   throw e;
 }

@@ -17,7 +17,7 @@ You can use TypeScript and import types in your Next.js configuration by using `
 
 ```ts filename="next.config.ts"
 
-const nextConfig: NextConfig =
+const nextConfig: NextConfig = 
 
 ```
 
@@ -29,7 +29,9 @@ When using the `next.config.js` file, you can add some type checking in your IDE
 // @ts-check
 
 /** @type  */
-const nextConfig = (module.exports = nextConfig);
+const nextConfig = 
+
+module.exports = nextConfig
 ```
 
 ### Statically Typed Links
@@ -44,7 +46,7 @@ To opt-into this feature, `typedRoutes` need to be enabled and the project needs
 
 ```ts filename="next.config.ts"
 
-const nextConfig: NextConfig =
+const nextConfig: NextConfig = 
 
 ```
 
@@ -74,14 +76,14 @@ To accept `href` in a custom component wrapping `next/link`, use a generic:
 
 ```tsx
 
-function Card<T extends string>(: )
+function Card<T extends string>(: ) 
 ```
 
 You can also type a simple data structure and iterate to render links:
 
 ```ts filename="components/nav-items.ts"
 
-type NavItem<T extends string = string> =
+type NavItem<T extends string = string> = 
 
   ,
   ,
@@ -95,7 +97,7 @@ Then, map over the items to render `Link`s:
 
   return (
     <nav>
-
+      
     </nav>
   )
 }

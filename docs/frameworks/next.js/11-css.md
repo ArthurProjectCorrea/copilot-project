@@ -43,13 +43,13 @@ For example, `base-button.module.css` will be ordered before `page.module.css` s
 
 ```tsx filename="page.tsx" switcher
 
-  return
+  return 
 }
 ```
 
 ```jsx filename="page.js" switcher
 
-  return
+  return 
 }
 ```
 

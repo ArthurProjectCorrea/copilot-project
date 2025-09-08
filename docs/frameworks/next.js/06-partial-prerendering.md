@@ -115,7 +115,7 @@ Routes that don't have `experimental_ppr` will default to `false` and will not b
 
 ### Dynamic APIs
 
-When using Dynamic APIs that require looking at the incoming request, Next.js will opt into dynamic rendering for the route. To continue using PPR, wrap the component with Suspense. For example, the ``component is dynamic because it uses the`cookies` API:
+When using Dynamic APIs that require looking at the incoming request, Next.js will opt into dynamic rendering for the route. To continue using PPR, wrap the component with Suspense. For example, the `` component is dynamic because it uses the `cookies` API:
 
 ```jsx filename="app/user.js" switcher
 
@@ -131,14 +131,14 @@ When using Dynamic APIs that require looking at the incoming request, Next.js wi
 }
 ```
 
-The `component will be streamed while any other content inside` will be prerendered and become part of the static shell.
+The `` component will be streamed while any other content inside `` will be prerendered and become part of the static shell.
 
 ```tsx filename="app/page.tsx" switcher
 
   return (
     <section>
       <h1>This will be prerendered</h1>
-
+      
     </section>
   )
 }
@@ -149,7 +149,7 @@ The `component will be streamed while any other content inside` will be prerende
   return (
     <section>
       <h1>This will be prerendered</h1>
-
+      
     </section>
   )
 }
@@ -163,7 +163,7 @@ Components only opt into dynamic rendering when the value is accessed. For examp
 
   searchParams,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/page.js" switcher
@@ -171,7 +171,7 @@ Components only opt into dynamic rendering when the value is accessed. For examp
   return (
     <section>
       <h1>This will be prerendered</h1>
-
+      
     </section>
   )
 }
@@ -183,7 +183,7 @@ Inside of the table component, accessing the value from `searchParams` will make
 
   searchParams,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/table.js" switcher

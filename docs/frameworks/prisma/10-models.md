@@ -60,9 +60,9 @@ Models represent the entities of your application domain. Models are represented
 A blogging platform can be extended with the following models:
 
 ```prisma
-model Comment
+model Comment 
 
-model Tag
+model Tag 
 ```
 
 ### Mapping model names to tables or collections
@@ -70,13 +70,13 @@ model Tag
 Prisma model [naming conventions (singular form, PascalCase)](/orm/reference/prisma-schema-reference#naming-conventions) do not always match table names in the database. A common approach for naming tables/collections in databases is to use plural form and [snake_case](https://en.wikipedia.org/wiki/Snake_case) notation - for example: `comments`. When you introspect a database with a table named `comments`, the result Prisma model will look like this:
 
 ```prisma
-model comments
+model comments 
 ```
 
 However, you can still adhere to the naming convention without renaming the underlying `comments` table in the database by using the [`@@map`](/orm/reference/prisma-schema-reference#map-1) attribute:
 
 ```prisma
-model Comment
+model Comment 
 ```
 
 With this model definition, Prisma ORM automatically maps the `Comment` model to the `comments` table in the underlying database.
@@ -146,7 +146,7 @@ Refer to the [relations documentation](/orm/prisma-schema/data-model/relations) 
 Version [2.17.0](https://github.com/prisma/prisma/releases/tag/2.17.0) and later support **native database type attributes** (type attributes) that describe the underlying database type:
 
 ```prisma highlight=3;normal
-model Post
+model Post 
 ```
 
 Type attributes are:
@@ -234,7 +234,7 @@ In relational databases, an ID can be defined by a single field using the [`@id`
 In the following example, the `User` ID is represented by the `id` integer field:
 
 ```prisma highlight=2;normal
-model User
+model User 
 ```
 
 ##### Composite IDs
@@ -242,7 +242,7 @@ model User
 In the following example, the `User` ID is represented by a combination of the `firstName` and `lastName` fields:
 
 ```prisma highlight=7;normal
-model User
+model User 
 ```
 
 By default, the name of this field in Prisma Client queries will be `firstName_lastName`.
@@ -250,7 +250,7 @@ By default, the name of this field in Prisma Client queries will be `firstName_l
 You can also provide your own name for the composite ID using the [`@@id`](/orm/reference/prisma-schema-reference#id-1) attribute's `name` field:
 
 ```prisma highlight=7;normal
-model User
+model User 
 ```
 
 The `firstName_lastName` field will now be named `fullName` instead.
@@ -260,7 +260,7 @@ The `firstName_lastName` field will now be named `fullName` instead.
 In the following example, users are uniquely identified by a `@unique` field. Because the `email` field functions as a unique identifier for the model (which is required), it must be mandatory:
 
 ```prisma highlight=2;normal
-model User
+model User 
 ```
 
 #### Defining IDs in MongoDB
@@ -270,13 +270,13 @@ The MongoDB connector has [specific rules for defining an ID field](/orm/referen
 In the following example, the `User` ID is represented by the `id` string field that accepts an auto-generated `ObjectId`:
 
 ```prisma highlight=2;normal
-model User
+model User 
 ```
 
 In the following example, the `User` ID is represented by the `id` string field that accepts something other than an `ObjectId` - for example, a unique username:
 
 ```prisma highlight=2;normal
-model User
+model User 
 ```
 
 ### Defining a default value
@@ -308,7 +308,7 @@ By default, the name of this field in Prisma Client queries will be `authorId_ti
 You can also provide your own name for the composite unique constraint using the [`@@unique`](/orm/prisma-schema/data-model/database-mapping#constraint-and-index-names) attribute's `name` field:
 
 ```prisma highlight=10;normal
-model Post
+model Post 
 ```
 
 The `authorId_title` field will now be named `authorTitle` instead.
@@ -320,19 +320,19 @@ When using the MongoDB provider in version `3.12.0` and later, you can define a 
 The following example defines a multi-column unique constraint based on the `email` field of the `User` model and the `number` field of the `Address` composite type which is used in `User.address`:
 
 ```prisma file=schema.prisma showLineNumbers
-type Address
+type Address 
 
-model User
+model User 
 ```
 
 This notation can be chained if there is more than one nested composite type:
 
 ```prisma file=schema.prisma showLineNumbers
-type City
+type City 
 
-type Address
+type Address 
 
-model User
+model User 
 ```
 
 ### Defining an index
@@ -340,7 +340,7 @@ model User
 You can define indexes on one or multiple fields of your models via the [`@@index`](/orm/reference/prisma-schema-reference#index) on a model. The following example defines a multi-column index based on the `title` and `content` field:
 
 ```prisma
-model Post
+model Post 
 ```
 
 #### Defining composite type indexes
@@ -350,19 +350,19 @@ When using the MongoDB provider in version `3.12.0` and later, you can define an
 The following example defines a multi-column index based on the `email` field of the `User` model and the `number` field of the `Address` composite type:
 
 ```prisma file=schema.prisma showLineNumbers
-type Address
+type Address 
 
-model User
+model User 
 ```
 
 This notation can be chained if there is more than one nested composite type:
 
 ```prisma file=schema.prisma showLineNumbers
-type City
+type City 
 
-type Address
+type Address 
 
-model User
+model User 
 ```
 
 ## Defining enums
@@ -380,9 +380,9 @@ Composite types (known as [embedded documents](https://www.mongodb.com/docs/manu
 To define a composite type, use the `type` block. As an example, take the following schema:
 
 ```prisma file=schema.prisma showLineNumbers
-model Product
+model Product 
 
-type Photo
+type Photo 
 ```
 
 In this case, the `Product` model has a list of `Photo` composite types stored in `photos`.

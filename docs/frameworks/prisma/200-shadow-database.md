@@ -61,7 +61,7 @@ In some cases it might make sense (e.g. when [creating and dropping databases is
 3. Add the [`shadowDatabaseUrl`](/orm/reference/prisma-schema-reference#datasource) field reading this environment variable:
 
 ```prisma highlight=4;normal
-datasource db
+datasource db 
 ```
 
 > **Important**: Do not use the exact same values for `url` and `shadowDatabaseUrl` as that might delete all the data in your database.
@@ -75,7 +75,7 @@ Some cloud providers do not allow you to drop and create databases with SQL. Som
 3. Add the [`shadowDatabaseUrl`](/orm/reference/prisma-schema-reference#datasource) field reading this environment variable:
 
 ```prisma highlight=4;normal
-datasource db
+datasource db 
 ```
 
 > **Important**: Do not use the same values for `url` and `shadowDatabaseUrl`.
@@ -84,11 +84,11 @@ datasource db
 
 In order to create and delete the shadow database when using `migrate dev`, Prisma Migrate currently requires that the database user defined in your `datasource` has permission to **create databases**.
 
-| Database             | Database user requirements                                                                                                                                                                                             |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SQLite               | No special requirements.                                                                                                                                                                                               |
-| MySQL/MariaDB        | Database user must have `CREATE, ALTER, DROP, REFERENCES ON *.*` privileges                                                                                                                                            |
-| PostgreSQL           | The user must be a super user or have `CREATEDB` privilege. See `CREATE ROLE` ([PostgreSQL official documentation](https://www.postgresql.org/docs/12/sql-createrole.html))                                            |
+| Database             | Database user requirements                                                                                                                                                                                            |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SQLite               | No special requirements.                                                                                                                                                                                              |
+| MySQL/MariaDB        | Database user must have `CREATE, ALTER, DROP, REFERENCES ON *.*` privileges                                                                                                                                           |
+| PostgreSQL           | The user must be a super user or have `CREATEDB` privilege. See `CREATE ROLE` ([PostgreSQL official documentation](https://www.postgresql.org/docs/12/sql-createrole.html))                                           |
 | Microsoft SQL Server | The user must be a site admin or have the `SERVER` securable. See the [official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver15). |
 
 > If you use a cloud-hosted database for development and can not use these permissions, see: [Cloud-hosted shadow databases](#cloud-hosted-shadow-databases-must-be-created-manually)

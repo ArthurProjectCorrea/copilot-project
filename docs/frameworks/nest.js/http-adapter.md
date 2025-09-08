@@ -54,7 +54,9 @@ const instance = httpAdapter.getInstance();
 To execute an action when the server begins listening for incoming requests, you can subscribe to the `listen$` stream, as demonstrated below:
 
 ```typescript
-this.httpAdapterHost.listen$.subscribe(() => console.log('HTTP server is listening'));
+this.httpAdapterHost.listen$.subscribe(() =>
+  console.log('HTTP server is listening'),
+);
 ```
 
 Additionally, the `HttpAdapterHost` provides a `listening` boolean property that indicates whether the server is currently active and listening:

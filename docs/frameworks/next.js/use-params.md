@@ -12,7 +12,7 @@ description: API Reference for the useParams hook.
 
   // Route -> /shop/[tag]/[item]
   // URL -> /shop/shoes/nike-air-max-97
-  // `params` ->
+  // `params` -> 
   console.log(params)
 
   return '...'
@@ -26,7 +26,7 @@ description: API Reference for the useParams hook.
 
   // Route -> /shop/[tag]/[item]
   // URL -> /shop/shoes/nike-air-max-97
-  // `params` ->
+  // `params` -> 
   console.log(params)
 
   return '...'
@@ -36,7 +36,7 @@ description: API Reference for the useParams hook.
 ## Parameters
 
 ```tsx
-const params = useParams();
+const params = useParams()
 ```
 
 `useParams` does not take any parameters.
@@ -53,12 +53,12 @@ const params = useParams();
 
 For example:
 
-| Route                           | URL         | `useParams()` |
-| ------------------------------- | ----------- | ------------- |
-| `app/shop/page.js`              | `/shop`     | ``            |
-| `app/shop/[slug]/page.js`       | `/shop/1`   | ``            |
-| `app/shop/[tag]/[item]/page.js` | `/shop/1/2` | ``            |
-| `app/shop/[...slug]/page.js`    | `/shop/1/2` | ``            |
+| Route                           | URL         | `useParams()`             |
+| ------------------------------- | ----------- | ------------------------- |
+| `app/shop/page.js`              | `/shop`     | ``                      |
+| `app/shop/[slug]/page.js`       | `/shop/1`   | ``           |
+| `app/shop/[tag]/[item]/page.js` | `/shop/1/2` | `` |
+| `app/shop/[...slug]/page.js`    | `/shop/1/2` | ``    |
 
 ## Version History
 

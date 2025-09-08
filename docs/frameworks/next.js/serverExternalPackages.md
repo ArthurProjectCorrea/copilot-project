@@ -9,7 +9,9 @@ These pages will then use native Node.js `require` to resolve the dependency.
 
 ```js filename="next.config.js"
 /** @type  */
-const nextConfig = (module.exports = nextConfig);
+const nextConfig = 
+
+module.exports = nextConfig
 ```
 
 Next.js includes a [short list of popular packages](https://github.com/vercel/next.js/blob/canary/packages/next/src/lib/server-external-packages.json) that currently are working on compatibility and automatically opt-ed out:

@@ -97,12 +97,17 @@ By default, only [CORS-safelisted methods](https://fetch.spec.whatwg.org/#method
 ```typescript
 const methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']; // OR comma-delimited string 'GET,POST,PUT,PATH,DELETE'
 
-const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
-  cors: { methods },
-});
+const app = await NestFactory.create<NestFastifyApplication>(
+  AppModule,
+  new FastifyAdapter(),
+  { cors: { methods } },
+);
 
 // OR alternatively, you can use the `enableCors` method
-const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+const app = await NestFactory.create<NestFastifyApplication>(
+  AppModule,
+  new FastifyAdapter(),
+);
 app.enableCors({ methods });
 ```
 
@@ -275,8 +280,8 @@ export class DogHealthIndicator extends HealthIndicator {
     return firstValueFrom(
       this.httpService.get<Dog[]>('https://example.com/dog').pipe(
         map((response) => response.data),
-        map((dogs) => dogs.filter((dog) => dog.state === DogState.BAD_BOY))
-      )
+        map((dogs) => dogs.filter((dog) => dog.state === DogState.BAD_BOY)),
+      ),
     );
   }
 }
@@ -290,7 +295,7 @@ export class DogHealthIndicator {
   constructor(
     private readonly httpService: HttpService,
     //  Inject the `HealthIndicatorService` provided by the `TerminusModule`
-    private readonly healthIndicatorService: HealthIndicatorService
+    private readonly healthIndicatorService: HealthIndicatorService,
   ) {}
 
   async isHealthy(key: string) {

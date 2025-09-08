@@ -46,25 +46,23 @@ Create a loading state by adding a `loading.js` file inside a folder.
 ```tsx filename="app/dashboard/loading.tsx" switcher
 
   // You can add any UI inside Loading, including a Skeleton.
-  return
+  return 
 }
 ```
 
 ```jsx filename="app/dashboard/loading.js" switcher
 
   // You can add any UI inside Loading, including a Skeleton.
-  return
+  return 
 }
 ```
 
 In the same folder, `loading.js` will be nested inside `layout.js`. It will automatically wrap the `page.js` file and any children below in a `
-
+      
     </section>
-
-)
+  )
 }
-
-````
+```
 
 ```jsx filename="app/dashboard/page.js" switcher
 
@@ -74,7 +72,7 @@ In the same folder, `loading.js` will be nested inside `layout.js`. It will auto
     </section>
   )
 }
-````
+```
 
 By using Suspense, you get the benefits of:
 

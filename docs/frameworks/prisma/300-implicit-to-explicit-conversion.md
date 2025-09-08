@@ -17,9 +17,9 @@ This will guide you through the process of converting an implicit many-to-many r
 Consider these models with an implicit many-to-many relationship via the `posts` and `author` fields:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 In the above models, a `User` can have multiple posts and a `Post` can have multiple authors.
@@ -27,11 +27,11 @@ In the above models, a `User` can have multiple posts and a `Post` can have mult
 To convert the implicit relation to an explicit one, we need to create a [relation table](/orm/prisma-schema/data-model/relations/many-to-many-relations#relation-tables). The relation table will contain foreign keys referencing both tables involved in the many-to-many relation. In our example, we'll create a new model called `UserPost`. Our updated `schema.prisma` file would look like this:
 
 ```prisma highlight=15-24;add
-model User
+model User 
 
-model Post
+model Post 
 
-model UserPost
+model UserPost 
 ```
 
 If you are using Prisma Migrate, then you can invoke this command:
@@ -63,7 +63,7 @@ async function main() ,
     }
 
     console.log("Data migration completed.");
-  } catch (e)
+  } catch (e) 
 }
 
 main()
@@ -74,9 +74,9 @@ main()
 Once the data is migrated to the relation table, you can remove the implicit relation columns ( `posts` in `User` model and `author` in `Post` model ) as shown below:
 
 ```prisma highlight=4,11;delete
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 After making the change in schema file, you can invoke this command:

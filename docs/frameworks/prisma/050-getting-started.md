@@ -15,11 +15,11 @@ To get started with Prisma Migrate in a development environment:
 1.  Create a Prisma schema:
 
     ```prisma file=schema.prisma showLineNumbers
-    datasource db
-
-    model User
-
-    model Post
+    datasource db 
+    
+    model User 
+    
+    model Post 
     ```
 
     :::tip
@@ -27,6 +27,7 @@ To get started with Prisma Migrate in a development environment:
     You can use [native type mapping attributes](/orm/prisma-migrate/workflows/native-database-types) in your schema to decide which exact database type to create (for example, `String` can map to `varchar(100)` or `text`).
 
     :::
+
     1.  Create the first migration:
 
     Your Prisma schema is now in sync with your database schema and you have initialized a migration history:
@@ -40,7 +41,7 @@ To get started with Prisma Migrate in a development environment:
 1.  Add additional fields to your schema:
 
     ```prisma highlight=3;add
-    model User
+    model User 
     ```
 
 1.  Create the second migration:
@@ -89,19 +90,19 @@ To create a baseline migration:
 
 1. If you have a `prisma/migrations` folder, delete, move, rename, or archive this folder.
 1. Run the following command to create a `migrations` directory inside with your preferred name. This example will use `0_init` for the migration name:
-   ```terminal
-   mkdir -p prisma/migrations/0_init
-   ```
-   :::note
-   The `0_` is important because Prisma Migrate applies migrations in a [lexicographic order](https://en.wikipedia.org/wiki/Lexicographic_order). You can use a different value such as the current timestamp.
-   ::::
+    ```terminal
+    mkdir -p prisma/migrations/0_init
+    ```
+    :::note
+    The `0_` is important because Prisma Migrate applies migrations in a [lexicographic order](https://en.wikipedia.org/wiki/Lexicographic_order). You can use a different value such as the current timestamp.
+    ::::
 1. Generate a migration and save it to a file using `prisma migrate diff`:
-   ```terminal no-lines
-   npx prisma migrate diff \
-   --from-empty \
-   --to-schema-datamodel prisma/schema.prisma \
-   --script > prisma/migrations/0_init/migration.sql
-   ```
+    ```terminal no-lines
+    npx prisma migrate diff \
+    --from-empty \
+    --to-schema-datamodel prisma/schema.prisma \
+    --script > prisma/migrations/0_init/migration.sql
+    ```
 1. Review the generated migration.
 
 ### Work around features not supported by Prisma Schema Language
@@ -110,22 +111,20 @@ To include [unsupported database features](/orm/prisma-migrate/workflows/unsuppo
 
 1. Open the `migration.sql` file generated in the [Create a baseline migration](#create-a-baseline-migration) section.
 1. Modify the generated SQL. For example:
+  - If the changes are minor, you can append additional custom SQL to the generated migration. The following example creates a partial index:
+    ```sql
+    /* Generated migration SQL */
 
-- If the changes are minor, you can append additional custom SQL to the generated migration. The following example creates a partial index:
-
-  ```sql
-  /* Generated migration SQL */
-
-  --add-start
-  CREATE UNIQUE INDEX tests_success_constraint ON posts (subject, target)
-    WHERE success;
-  --add-end
-  ```
-
-- If the changes are significant, it can be easier to replace the entire migration file with the result of a database dump ([`mysqldump`](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html), [`pg_dump`](https://www.postgresql.org/docs/12/app-pgdump.html)). When using `pg_dump` for this, you'll need to update the `search_path` as follows with this command: `SELECT pg_catalog.set_config('search_path', '', false);`; otherwise you'll run into the following error: `The underlying table for model '_prisma_migrations' does not exist.`
-  `    :::info
-Note that the order of the tables matters when creating all of them at once, since foreign keys are created at the same step. Therefore, either re-order them or move constraint creation to the last step after all tables are created, so you won't face`can't create constraint` errors
-  :::
+    --add-start
+    CREATE UNIQUE INDEX tests_success_constraint ON posts (subject, target)
+      WHERE success;
+    --add-end
+    ```
+  - If the changes are significant, it can be easier to replace the entire migration file with the result of a database dump ([`mysqldump`](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html), [`pg_dump`](https://www.postgresql.org/docs/12/app-pgdump.html)). When using `pg_dump` for this, you'll need to update the `search_path` as follows with this command: `SELECT pg_catalog.set_config('search_path', '', false);`; otherwise you'll run into the following error: `The underlying table for model '_prisma_migrations' does not exist.`
+`
+    :::info
+    Note that the order of the tables matters when creating all of them at once, since foreign keys are created at the same step. Therefore, either re-order them or move constraint creation to the last step after all tables are created, so you won't face `can't create constraint` errors
+    :::
 
 ### Apply the initial migrations
 

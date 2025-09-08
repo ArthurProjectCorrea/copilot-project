@@ -18,11 +18,11 @@ In an explicit m-n relation, the **relation table is represented as a model in t
 The relation table `CategoriesOnPosts` connects related `Post` and `Category` records. In this example, the model representing the relation table also **defines additional fields** that describe the `Post`/`Category` relationship - who assigned the category (`assignedBy`), and when the category was assigned (`assignedAt`):
 
 ```prisma
-model Post
+model Post 
 
-model Category
+model Category 
 
-model CategoriesOnPosts
+model CategoriesOnPosts 
 ```
 
 The underlying SQL looks like this:
@@ -195,6 +195,7 @@ Implicit m-n relations:
 - Do **not** require the `@relation` attribute unless you need to [disambiguate relations](/orm/prisma-schema/data-model/relations#disambiguating-relations) with a name, e.g. `@relation("MyRelation")` or `@relation(name: "MyRelation")`.
 - If you do use the `@relation` attribute, you cannot use the `references`, `fields`, `onUpdate` or `onDelete` arguments. This is because these take a fixed value for implicit m-n-relations and cannot be changed.
 - Require both models to have a single `@id`. Be aware that:
+
   - You cannot use a [multi-field ID](/orm/reference/prisma-schema-reference#id-1)
   - You cannot use a `@unique` in place of an `@id`
 
@@ -295,9 +296,9 @@ CREATE INDEX "_UserDislikedVideos_B_index" ON "_UserDislikedVideos"("B");
 If you run `prisma db pull` on this database, the Prisma CLI will generate the following schema through introspection:
 
 ```prisma
-model User
+model User 
 
-model Video
+model Video 
 ```
 
 #### Configuring the name of the relation table in implicit many-to-many relations
@@ -305,9 +306,9 @@ model Video
 When using Prisma Migrate, you can configure the name of the relation table that's managed by Prisma ORM using the `@relation` attribute. For example, if you want the relation table to be called `_MyRelationTable` instead of the default name `_CategoryToPost`, you can specify it as follows:
 
 ```prisma
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 ### Relation tables
@@ -326,9 +327,9 @@ In MongoDB, m-n-relations are represented by:
 The following example demonstrates a m-n-relation between posts and categories:
 
 ```prisma
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 Prisma ORM validates m-n-relations in MongoDB with the following rules:

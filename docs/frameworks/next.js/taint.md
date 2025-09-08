@@ -53,12 +53,13 @@ It is recommended to model your data and APIs so that sensitive data is not retu
 In this case, the `getUserDetails` function returns data about a given user. We taint the user object reference, so that it cannot cross a Server-Client boundary. For example, assuming `UserCard` is a Client Component.
 
 ```ts switcher
-function getUserDetails(id: string): UserDetails;
+
+function getUserDetails(id: string): UserDetails 
 ```
 
 ```js switcher
 
-function getUserDetails(id)
+function getUserDetails(id) 
 ```
 
 We can still access individual fields from the tainted `userDetails` object.
@@ -71,7 +72,7 @@ We can still access individual fields from the tainted `userDetails` object.
   const userDetails = await getUserDetails(id)
 
   return (
-
+    
   )
 }
 ```
@@ -82,7 +83,7 @@ We can still access individual fields from the tainted `userDetails` object.
   const userDetails = await getUserDetails(id)
 
   return (
-
+    
   )
 }
 ```
@@ -93,7 +94,7 @@ Now, passing the entire object to the Client Component will throw an error.
 
   params,
 }: >
-})
+}) 
 ```
 
 ```jsx switcher
@@ -102,7 +103,7 @@ Now, passing the entire object to the Client Component will throw an error.
   const userDetails = await getUserDetails(id)
 
   // Throws an error
-  return
+  return 
 }
 ```
 
@@ -113,12 +114,13 @@ In this case, we can access the server configuration by awaiting calls to `confi
 We can taint the `config.SERVICE_API_KEY` value.
 
 ```ts switcher
-function getSystemConfig(): SystemConfig;
+
+function getSystemConfig(): SystemConfig 
 ```
 
 ```js switcher
 
-function getSystemConfig()
+function getSystemConfig() 
 ```
 
 We can still access other properties of the `systemConfig` object.
@@ -127,7 +129,7 @@ We can still access other properties of the `systemConfig` object.
 
   const systemConfig = await getSystemConfig()
 
-  return
+  return 
 }
 ```
 
@@ -139,7 +141,7 @@ However, passing `SERVICE_API_KEY` to `ClientDashboard` throws an error.
   // Someone makes a mistake in a PR
   const version = systemConfig.SERVICE_API_KEY
 
-  return
+  return 
 }
 ```
 
@@ -153,7 +155,7 @@ Whereas, a value derived from a tainted unique value, will be exposed to the cli
   // Someone makes a mistake in a PR
   const version = `version::$`
 
-  return
+  return 
 }
 ```
 

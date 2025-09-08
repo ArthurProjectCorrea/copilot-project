@@ -12,13 +12,13 @@ pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb-no
 pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/introspection-node-mongodb
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/connect-your-database-
 ---
-
+ 
 ## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 In this case, the `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`:

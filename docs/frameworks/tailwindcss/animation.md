@@ -1,14 +1,14 @@
 <ApiTable
-rows=
-}
-`,
+  rows=
+        }
+      `,
     ],
     [
       "animate-ping",
       dedent`
-animation: var(--animate-ping); /_ ping 1s cubic-bezier(0, 0, 0.2, 1) infinite _/
+        animation: var(--animate-ping); /* ping 1s cubic-bezier(0, 0, 0.2, 1) infinite */
 
-        @keyframes ping
+        @keyframes ping 
         }
       `,
     ],
@@ -17,7 +17,7 @@ animation: var(--animate-ping); /_ ping 1s cubic-bezier(0, 0, 0.2, 1) infinite _
       dedent`
         animation: var(--animate-pulse); /* pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite */
 
-        @keyframes pulse
+        @keyframes pulse 
         }
       `,
     ],
@@ -26,8 +26,8 @@ animation: var(--animate-ping); /_ ping 1s cubic-bezier(0, 0, 0.2, 1) infinite _
       dedent`
         animation: var(--animate-bounce); /* bounce 1s infinite */
 
-        @keyframes bounce
-          50%
+        @keyframes bounce 
+          50% 
         }
       `,
     ],

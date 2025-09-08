@@ -14,7 +14,7 @@ This guide shows you how to automatically create and delete [Prisma Postgres](ht
 
 ![GitHub Actions comment](/img/guides/github-comment.png)
 
-After the PR is closed, the database is automatically deleted. This allows you to test changes in isolation without affecting the main development database.
+After the PR is closed, the database is automatically deleted. This allows you to test changes in isolation without affecting the main development database. 
 
 ## Prerequisites
 
@@ -61,22 +61,22 @@ npx prisma init --db --output ../src/generated/prisma
 
 This creates:
 
-- A `prisma/` directory with `schema.prisma`
-- A `.env` file with `DATABASE_URL`
-- A generated client in `src/generated/prisma`
+* A `prisma/` directory with `schema.prisma`
+* A `.env` file with `DATABASE_URL`
+* A generated client in `src/generated/prisma`
 
 ### 2.2. Define your Prisma schema
 
 Edit `prisma/schema.prisma` to:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 ### 2.3. Run initial migration and generate client
@@ -174,15 +174,15 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: 'Action to perform'
+        description: "Action to perform"
         required: true
-        default: 'provision'
+        default: "provision"
         type: choice
         options:
           - provision
           - cleanup
       database_name:
-        description: 'Database name (for testing, will be sanitized)'
+        description: "Database name (for testing, will be sanitized)"
         required: false
         type: string
 
@@ -204,11 +204,11 @@ Now you will be adding the provision and cleanup jobs to this workflow. These jo
 
 Now add a job to provision the database when the PR is opened or when triggered manually. The provision job:
 
-- Installs dependencies
-- Checks for existing databases
-- Creates a new one if needed
-- Seeds the database
-- Comments on the PR with status
+* Installs dependencies
+* Checks for existing databases
+* Creates a new one if needed
+* Seeds the database
+* Comments on the PR with status
 
 Append the following under the `jobs:` key in your workflow file:
 
@@ -226,8 +226,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
 
       - name: Install Dependencies
         run: npm install
@@ -365,70 +365,70 @@ jobs:
 
 When a pull request is closed, you can automatically remove the associated database by adding a cleanup job. The cleanup job:
 
-- Finds the database by name
-- Deletes it from the Prisma Postgres project
-- Can also be triggered manually with `action: cleanup`
+* Finds the database by name
+* Deletes it from the Prisma Postgres project
+* Can also be triggered manually with `action: cleanup`
 
 Append the following to your `jobs:` section, after the `provision-database` job:
 
 ```yaml file=.github/workflows/prisma-postgres-management.yml
-cleanup-database:
-  if: (github.event_name == 'pull_request' && github.event.action == 'closed') || (github.event_name == 'workflow_dispatch' && inputs.action == 'cleanup')
-  runs-on: ubuntu-latest
-  timeout-minutes: 5
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+  cleanup-database:
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed') || (github.event_name == 'workflow_dispatch' && inputs.action == 'cleanup')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Validate Environment Variables
-      run: |
-        if [ -z "$}" ]; then
-          echo "Error: PRISMA_POSTGRES_SERVICE_TOKEN secret is not set"
-          exit 1
-        fi
-        if [ -z "$}" ]; then
-          echo "Error: PRISMA_PROJECT_ID secret is not set"
-          exit 1
-        fi
+      - name: Validate Environment Variables
+        run: |
+          if [ -z "$}" ]; then
+            echo "Error: PRISMA_POSTGRES_SERVICE_TOKEN secret is not set"
+            exit 1
+          fi
+          if [ -z "$}" ]; then
+            echo "Error: PRISMA_PROJECT_ID secret is not set"
+            exit 1
+          fi
 
-    - name: Sanitize Database Name
-      run: |
-        # Sanitize the database name
-        DB_NAME="$(echo "$}" | tr '/' '_' | tr '-' '_' | tr '[:upper:]' '[:lower:]')"
-        echo "DB_NAME=$DB_NAME" >> $GITHUB_ENV
+      - name: Sanitize Database Name
+        run: |
+          # Sanitize the database name
+          DB_NAME="$(echo "$}" | tr '/' '_' | tr '-' '_' | tr '[:upper:]' '[:lower:]')"
+          echo "DB_NAME=$DB_NAME" >> $GITHUB_ENV
 
-    - name: Delete Database
-      run: |
-        echo "Fetching all databases..."
-        RESPONSE=$(curl -s -X GET \
-          -H "Authorization: Bearer $}" \
-          -H "Content-Type: application/json" \
-          "https://api.prisma.io/v1/projects/$}/databases")
-
-        echo "Looking for database with name: $}"
-
-        # Extract database ID using jq to properly parse JSON
-        DB_EXISTS=$(echo "$RESPONSE" | jq -r ".data[]? | select(.name == \"$}\") | .id")
-
-        if [ ! -z "$DB_EXISTS" ] && [ "$DB_EXISTS" != "null" ]; then
-          echo "Database $} exists with ID: $DB_EXISTS. Deleting..."
-          DELETE_RESPONSE=$(curl -s -X DELETE \
+      - name: Delete Database
+        run: |
+          echo "Fetching all databases..."
+          RESPONSE=$(curl -s -X GET \
             -H "Authorization: Bearer $}" \
             -H "Content-Type: application/json" \
-            "https://api.prisma.io/v1/databases/$DB_EXISTS")
-          
-          echo "Delete API Response: $DELETE_RESPONSE"
-          
-          if echo "$DELETE_RESPONSE" | grep -q '"error":'; then
-            ERROR_MSG=$(echo "$DELETE_RESPONSE" | jq -r '.message // "Unknown error"')
-            echo "Failed to delete database: $ERROR_MSG"
-            exit 1
+            "https://api.prisma.io/v1/projects/$}/databases")
+
+          echo "Looking for database with name: $}"
+
+          # Extract database ID using jq to properly parse JSON
+          DB_EXISTS=$(echo "$RESPONSE" | jq -r ".data[]? | select(.name == \"$}\") | .id")
+
+          if [ ! -z "$DB_EXISTS" ] && [ "$DB_EXISTS" != "null" ]; then
+            echo "Database $} exists with ID: $DB_EXISTS. Deleting..."
+            DELETE_RESPONSE=$(curl -s -X DELETE \
+              -H "Authorization: Bearer $}" \
+              -H "Content-Type: application/json" \
+              "https://api.prisma.io/v1/databases/$DB_EXISTS")
+            
+            echo "Delete API Response: $DELETE_RESPONSE"
+            
+            if echo "$DELETE_RESPONSE" | grep -q '"error":'; then
+              ERROR_MSG=$(echo "$DELETE_RESPONSE" | jq -r '.message // "Unknown error"')
+              echo "Failed to delete database: $ERROR_MSG"
+              exit 1
+            else
+              echo "Database deletion initiated successfully"
+            fi
           else
-            echo "Database deletion initiated successfully"
+            echo "No existing database found with name $}"
           fi
-        else
-          echo "No existing database found with name $}"
-        fi
 ```
 
 This completes your Prisma Postgres management workflow setup. In the next step, you'll configure the required GitHub secrets to authenticate with the Prisma API.
@@ -438,14 +438,13 @@ This completes your Prisma Postgres management workflow setup. In the next step,
 Initialize a git repository and push to [GitHub](https://github.com/):
 
 If you don't have a repository in GitHub yet, [create one on GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository). Once the repository is ready, run the following commands:
-
-```terminal
-git add .
-git commit -m "Initial commit with Prisma Postgres integration"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<repository-name>.git
-git push -u origin main
-```
+   ```terminal
+   git add .
+   git commit -m "Initial commit with Prisma Postgres integration"
+   git branch -M main
+   git remote add origin https://github.com/<your-username>/<repository-name>.git
+   git push -u origin main
+   ```
 
 :::note
 
@@ -475,13 +474,13 @@ curl -X POST https://api.prisma.io/v1/projects \
   -d ""
 ```
 
-:::note
+:::note 
 
 Make sure to replace the `$PRISMA_POSTGRES_SERVICE_TOKEN` variable with the service token you stored earlier.
 
 :::
 
-Replace the $PRISMA_POSTGRES_SERVICE_TOKEN with the service token and the `$PROJECT_NAME`with a name for your project (e.g.,`my-gha-preview`). The script will create a new Prisma Postgres project in the `us-east-1` region.
+Replace the $PRISMA_POSTGRES_SERVICE_TOKEN with the service token and the `$PROJECT_NAME` with a name for your project (e.g., `my-gha-preview`). The script will create a new Prisma Postgres project in the `us-east-1` region.
 
 The CLI output will then look like this:
 
@@ -501,10 +500,10 @@ To add secrets:
 2. Navigate to **Settings**.
 3. Click and expand the **Secrets and variables** section.
 4. Click **Actions**.
-5. Click **New repository secret**.
-6. Add the following:
-   - `PRISMA_PROJECT_ID` - Your Prisma project ID from the Prisma Console.
-   - `PRISMA_POSTGRES_SERVICE_TOKEN` - Your service token.
+3. Click **New repository secret**.
+4. Add the following:
+   * `PRISMA_PROJECT_ID` - Your Prisma project ID from the Prisma Console.
+   * `PRISMA_POSTGRES_SERVICE_TOKEN` - Your service token.
 
 These secrets will be accessed in the workflow file via `env`.
 
@@ -525,7 +524,7 @@ You can test the setup in two ways:
 1. Go to the **Actions** tab in your repository.
 2. Select the **Prisma Postgres Management API Workflow** on the left sidebar.
 3. Click the **Run workflow** dropdown
-4. Choose `provision` as the action and optionally provide a custom database name. You can also choose `cleanup` to delete an _existing_ database.
+4. Choose `provision` as the action and optionally provide a custom database name. You can also choose `cleanup` to delete an *existing* database.
 5. Click **Run workflow**.
 
 ## Next steps
@@ -534,8 +533,8 @@ You now have a fully automated GitHub Actions setup for managing ephemeral Prism
 
 This gives you:
 
-- Isolated databases for every pull request.
-- Automatic schema sync and seed.
-- Cleanup of unused databases after merges.
+* Isolated databases for every pull request.
+* Automatic schema sync and seed.
+* Cleanup of unused databases after merges.
 
 This setup improves confidence in changes and reduces the risk of shared database conflicts. You can extend this by integrating test suites, or integrating it in your workflow.

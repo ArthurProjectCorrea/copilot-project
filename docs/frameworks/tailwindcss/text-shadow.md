@@ -1,10 +1,10 @@
-import from "@/components/content.tsx";
+import  from "@/components/content.tsx";
 
 <ApiTable
-rows=`,
-      `--tw-text-shadow-color var(--color-$); /_ $ _/`,
-]),
-]}
+  rows=`,
+      `--tw-text-shadow-color var(--color-$); /* $ */`,
+    ]),
+  ]}
 />
 
 ## Examples

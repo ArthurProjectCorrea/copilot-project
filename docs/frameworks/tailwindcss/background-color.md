@@ -1,12 +1,12 @@
-import from "@/components/content.tsx";
+import  from "@/components/content.tsx";
 
 <ApiTable
-rows=`,
-      `background-color: var(--color-$); /_ $ _/`,
-]),
-["bg-(<custom-property>)", "background-color: var(<custom-property>);"],
-["bg-[<value>]", "background-color: <value>;"],
-]}
+  rows=`,
+      `background-color: var(--color-$); /* $ */`,
+    ]),
+    ["bg-(<custom-property>)", "background-color: var(<custom-property>);"],
+    ["bg-[<value>]", "background-color: <value>;"],
+  ]}
 />
 
 ## Examples

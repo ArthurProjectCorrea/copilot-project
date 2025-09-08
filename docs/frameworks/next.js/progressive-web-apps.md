@@ -63,7 +63,7 @@ First, let's create the main page component in `app/page.tsx`. We'll break it do
 ```tsx switcher
 'use client'
 
-function urlBase64ToUint8Array(base64String: string)
+function urlBase64ToUint8Array(base64String: string) 
   return outputArray
 }
 ```
@@ -71,7 +71,7 @@ function urlBase64ToUint8Array(base64String: string)
 ```jsx switcher
 'use client'
 
-function urlBase64ToUint8Array(base64String)
+function urlBase64ToUint8Array(base64String) 
   return outputArray
 }
 ```
@@ -79,7 +79,7 @@ function urlBase64ToUint8Array(base64String)
 Let’s now add a component to manage subscribing, unsubscribing, and sending push notifications.
 
 ```tsx switcher
-function PushNotificationManager()
+function PushNotificationManager() 
   }, [])
 
   async function registerServiceWorker() )
@@ -93,12 +93,12 @@ function PushNotificationManager()
     await subscribeUser(serializedSub)
   }
 
-  async function unsubscribeFromPush()
+  async function unsubscribeFromPush() 
 
-  async function sendTestNotification()
+  async function sendTestNotification() 
   }
 
-  if (!isSupported)
+  if (!isSupported) 
 
   return (
     <div>
@@ -124,7 +124,7 @@ function PushNotificationManager()
 ```
 
 ```jsx switcher
-function PushNotificationManager()
+function PushNotificationManager() 
   }, []);
 
   async function registerServiceWorker() );
@@ -137,12 +137,12 @@ function PushNotificationManager()
     await subscribeUser(sub);
   }
 
-  async function unsubscribeFromPush()
+  async function unsubscribeFromPush() 
 
-  async function sendTestNotification()
+  async function sendTestNotification() 
   }
 
-  if (!isSupported)
+  if (!isSupported) 
 
   return (
     <div>
@@ -172,18 +172,18 @@ Finally, let’s create a component to show a message for iOS devices to instruc
 ```tsx switcher
 function InstallPrompt() , [])
 
-  if (isStandalone)
+  if (isStandalone) 
 
   return (
     <div>
       <h3>Install App</h3>
       <button>Add to Home Screen</button>
-
+      
             ⎋
           </span>
           and then "Add to Home Screen"
           <span role="img" aria-label="plus icon">
-
+            
             ➕
           </span>
           .
@@ -204,18 +204,18 @@ function InstallPrompt() , [])
 ```jsx switcher
 function InstallPrompt() , []);
 
-  if (isStandalone)
+  if (isStandalone) 
 
   return (
     <div>
       <h3>Install App</h3>
       <button>Add to Home Screen</button>
-
+      
             ⎋
           </span>
           and then "Add to Home Screen"
           <span role="img" aria-label="plus icon">
-
+            
             ➕
           </span>
           .
@@ -253,21 +253,21 @@ let subscription: PushSubscription | null = null
   subscription = sub
   // In a production environment, you would want to store the subscription in a database
   // For example: await db.subscriptions.create()
-  return
+  return 
 }
 
   subscription = null
   // In a production environment, you would want to remove the subscription from the database
   // For example: await db.subscriptions.delete( })
-  return
+  return 
 }
 
-  if (!subscription)
+  if (!subscription) 
 
   try )
     )
-    return
-  } catch (error)
+    return 
+  } catch (error) 
   }
 }
 ```
@@ -295,7 +295,7 @@ let subscription= null;
   return ;
 }
 
-  if (!subscription)
+  if (!subscription) 
 
   try )
     );

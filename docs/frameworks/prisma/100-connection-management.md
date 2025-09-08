@@ -14,10 +14,10 @@ It is not necessary to call [`$connect()`](/orm/reference/prisma-client-referenc
 If you need the first request to respond instantly and cannot wait for a lazy connection to be established, you can explicitly call `prisma.$connect()` to establish a connection to the data source:
 
 ```ts
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 // run inside `async` function
-await prisma.$connect();
+await prisma.$connect()
 ```
 
 ## `$disconnect()`
@@ -49,7 +49,7 @@ The following script creates a new instance of `PrismaClient`, performs a task, 
 const prisma = new PrismaClient()
 const emailService = new EmailService()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )

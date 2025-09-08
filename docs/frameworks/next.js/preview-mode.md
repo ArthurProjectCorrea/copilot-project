@@ -190,7 +190,7 @@ https://<your-site>/api/preview?secret=<token>&slug=<path>
 - `path`: Specifies the path the cookie should be applied under. Defaults to `/` enabling preview mode for all paths.
 
 ```js
-setPreviewData(data);
+setPreviewData(data, )
 ```
 
 ### Clear the Preview Mode cookies

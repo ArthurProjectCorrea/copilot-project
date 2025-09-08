@@ -15,11 +15,11 @@ By default, when a query returns records (as opposed to a count), the result inc
 As an example, consider this schema:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 
-enum Role
+enum Role 
 ```
 
 A query to the `User` model will include the `id`, `email`, `name` and `role` fields (because these are _scalar_ fields), but not the `posts` field (because that's a _relation_ field):
@@ -41,13 +41,13 @@ Since version [5.9.0](https://github.com/prisma/prisma/releases/tag/5.9.0), when
 All following examples on this page are based on the following schema:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-enum Role
+enum Role 
 ```
 
 ## Return the default fields
@@ -67,14 +67,13 @@ The following query uses a nested `select` to select each user's `name` and the 
 The following query uses `select` within an `include`, and returns _all_ user fields and each post's `title` field:
 
 You can nest your queries arbitrarily deep. The following query fetches:
-
 - the `title` of a `Post`
 - the `name` of the related `User`
 - the `biography` of the related `Profile`
 
 :::note
 
-Be careful when deeply nesting relations because the underlying database query may become slow due it needing to access a lot of different tables. To ensure your queries always have optimal speed, consider adding a caching layer with [Prisma Accelerate](/accelerate) or use [Prisma Optimize](/optimize/) to get query insights and recommendations for performance optimizations.
+Be careful when deeply nesting relations because the underlying database query may become slow due it needing to access a lot of different tables. To ensure your queries always have optimal speed, consider adding a caching layer with [Prisma Accelerate](/accelerate) or use [Prisma Optimize](/optimize/) to get query insights and recommendations for performance optimizations.  
 
 :::
 

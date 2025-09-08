@@ -216,7 +216,9 @@ The `useClass` syntax allows you to dynamically determine a class that a token s
 const configServiceProvider = {
   provide: ConfigService,
   useClass:
-    process.env.NODE_ENV === 'development' ? DevelopmentConfigService : ProductionConfigService,
+    process.env.NODE_ENV === 'development'
+      ? DevelopmentConfigService
+      : ProductionConfigService,
 };
 
 @Module({

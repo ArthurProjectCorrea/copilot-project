@@ -9,7 +9,6 @@ metaDescription: How to use Prisma ORM with multiple database schemas
 PostgreSQL, CockroachDB, and SQL Server allow you to organize database tables into named groups. These groups are known as _schemas_ and act as a _namespace_ for logically grouping tables (e.g. to avoid name collisions or to have clearer domain separation) and let you define foreign key constraints across them. To avoid ambiguity, this page will refer to these namespaces as _database schemas_.
 
 This page explains how to:
-
 - include multiple database schemas in your Prisma schema
 - apply your schema changes to your database with Prisma Migrate
 - introspect an existing database with multiple database schemas
@@ -26,9 +25,9 @@ Multi-schema feature is only supported for PostgreSQL, CockroachDB, and SQL Serv
 To use multiple database schemas in your Prisma schema file, add the names of your database schemas to an array in the `schemas` field, in the `datasource` block. The following example adds a `"base"` and a `"shop"` schema:
 
 ```prisma file=schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 You do not need to change your connection string. The `schema` value of your connection string is the default database schema that Prisma Client connects to and uses for raw queries. All other Prisma Client queries use the schema of the model or enum that you are querying.
@@ -36,11 +35,11 @@ You do not need to change your connection string. The `schema` value of your con
 To designate that a model or enum belongs to a specific database schema, add the `@@schema` attribute with the name of the database schema as a parameter. In the following example, the `User` model is part of the `"base"` schema, and the `Order` model and `Size` enum are part of the `"shop"` schema:
 
 ```prisma file=schema.prisma
-model User
+model User 
 
-model Order
+model Order 
 
-enum Size
+enum Size 
 ```
 
 ### Tables with the same name in different database schemas
@@ -50,9 +49,9 @@ If you have tables with the same name in different database schemas, you will ne
 For example, consider a situation where the `Config` table in the `base` database schema has the same name as the `Config` table in the `users` database schema. To avoid name conflicts, give the models in your Prisma schema unique names (`BaseConfig` and `UserConfig`) and use the `@@map` attribute to map each model to the corresponding table name:
 
 ```prisma file=schema.prisma
-model BaseConfig
+model BaseConfig 
 
-model UserConfig
+model UserConfig 
 ```
 
 ## How to apply your schema changes with Prisma Migrate
@@ -62,15 +61,15 @@ You can use Prisma Migrate (or `prisma db push`) to apply changes to a Prisma sc
 As an example, add a `Profile` model to the `base` schema above:
 
 ```prisma file=schema.prisma
-model User
+model User 
 
 //add-start
-model Profile
+model Profile 
 //add-end
 
-model Order
+model Order 
 
-enum Size
+enum Size 
 ```
 
 You can then apply this schema change to your database. For example, you can use `migrate dev` to create and apply your schema changes as a migration:

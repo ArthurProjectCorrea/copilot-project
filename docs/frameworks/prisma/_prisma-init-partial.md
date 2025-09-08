@@ -15,7 +15,7 @@ Next, set up your Prisma ORM project by creating your [Prisma Schema](/orm/prism
 This command does a few things:
 
 - Creates a new directory called `prisma` that contains a file called `schema.prisma`, which contains the Prisma Schema with your database connection variable and schema models.
-- Sets the `datasource` to and the output to a custom location, respectively.
+- Sets the `datasource` to  and the output to a custom location, respectively.
 - Creates the [`.env` file](/orm/more/development-environment/environment-variables) in the root directory of the project, which is used for defining environment variables (such as your database connection)
 
 Note that the default schema created by `prisma init` uses PostgreSQL as the `provider`. If you didn't specify a provider with the `datasource-provider` option, you need to edit the `datasource` block to use the <code></code> provider instead:

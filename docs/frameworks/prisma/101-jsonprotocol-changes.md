@@ -17,13 +17,13 @@ In Prisma ORM 5, `jsonProtocol` is the default and only protocol in Prisma Clien
 Prisma ORM 4 and lower:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Prisma ORM 5:
 
 ```prisma
-generator client
+generator client 
 ```
 
 ### Improved error messages
@@ -42,7 +42,7 @@ Invalid `prisma.user.create()` invocation in
 
   18 const prisma = new PrismaClient()
   19
-  20 for (const u of userData)
+  20 for (const u of userData) 
            }
          }
        })
@@ -129,7 +129,7 @@ prisma.user.findMany(,
 When using the following schema:
 
 ```prisma
-model User
+model User 
 ```
 
 Prisma ORM 4 and lower:
@@ -155,7 +155,7 @@ prisma.user.findMany(,
 With the following schema:
 
 ```prisma
-model Post
+model Post 
 ```
 
 Prisma ORM 4 and lower:
@@ -185,9 +185,9 @@ Operations on lists of [Composite types](/orm/prisma-schema/data-model/models#de
 With the following schema:
 
 ```prisma
-model Post
+model Post 
 
-type Comment
+type Comment 
 ```
 
 Prisma ORM 4 and lower:

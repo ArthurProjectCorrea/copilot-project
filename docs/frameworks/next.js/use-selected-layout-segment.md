@@ -66,7 +66,7 @@ You can use `useSelectedLayoutSegment` to create an active link component that c
 
   slug,
   children,
-}: )
+}: ) 
 ```
 
 ```jsx filename="app/blog/blog-nav-link.js" switcher
@@ -80,7 +80,7 @@ You can use `useSelectedLayoutSegment` to create an active link component that c
   const isActive = slug === segment
 
   return (
-
+    
   )
 }
 ```
@@ -90,7 +90,7 @@ You can use `useSelectedLayoutSegment` to create an active link component that c
 
   children,
 }: ) >
-
+          
         </div>
       ))}
       <div></div>
@@ -106,7 +106,7 @@ You can use `useSelectedLayoutSegment` to create an active link component that c
   return (
     <div>
       >
-
+          
         </div>
       ))}
       <div></div>

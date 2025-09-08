@@ -23,13 +23,13 @@ A common approach for naming tables/collections in databases for example is to u
 As an example, when you [introspect](/orm/prisma-schema/introspection) a database with a table named `comments`, the resulting Prisma model will look like this:
 
 ```prisma
-model comments
+model comments 
 ```
 
 However, you can still choose `Comment` as the name of the model (e.g. to follow the naming convention) without renaming the underlying `comments` table in the database by using the [`@@map`](/orm/reference/prisma-schema-reference#map-1) attribute:
 
 ```prisma highlight=4;normal
-model Comment
+model Comment 
 ```
 
 With this modified model definition, Prisma Client automatically maps the `Comment` model to the `comments` table in the underlying database.
@@ -39,7 +39,7 @@ With this modified model definition, Prisma Client automatically maps the `Comme
 You can also [`@map`](/orm/reference/prisma-schema-reference#map) a column/field name:
 
 ```prisma highlight=2-4;normal
-model Comment
+model Comment 
 ```
 
 This way the `comment_text` column is not available under `prisma.comment.comment_text` in the Prisma Client API, but can be accessed via `prisma.comment.content`.
@@ -49,7 +49,7 @@ This way the `comment_text` column is not available under `prisma.comment.commen
 You can also `@map` an enum value, or `@@map` an enum:
 
 ```prisma highlight=3,5;normal
-enum Type
+enum Type 
 ```
 
 ## Constraint and index names
@@ -71,12 +71,12 @@ Prisma ORM naming convention was chosen to align with PostgreSQL since it is det
 
 Prisma ORM always uses the database names of entities when generating the default index and constraint names. If a model is remapped to a different name in the data model via `@@map` or `@map`, the default name generation will still take the name of the _table_ in the database as input. The same is true for fields and _columns_.
 
-| Entity            | Convention   | Example                        |
-| ----------------- | ------------ | ------------------------------ |
-| Primary Key       | \\\_pkey     | `User_pkey`                    |
-| Unique Constraint | \\\_\\\_key  | `User_firstName_last_Name_key` |
-| Non-Unique Index  | \\\_\\\_idx  | `User_age_idx`                 |
-| Foreign Key       | \\\_\\\_fkey | `User_childName_fkey`          |
+| Entity            | Convention                        | Example                        |
+| ----------------- | --------------------------------- | ------------------------------ |
+| Primary Key       | \\_pkey                 | `User_pkey`                    |
+| Unique Constraint | \\_\\_key  | `User_firstName_last_Name_key` |
+| Non-Unique Index  | \\_\\_idx  | `User_age_idx`                 |
+| Foreign Key       | \\_\\_fkey | `User_childName_fkey`          |
 
 Since most databases have a length limit for entity names, the names will be trimmed if necessary to not violate the database limits. We will shorten the part before the `_suffix` as necessary so that the full name is at most the maximum length permitted.
 
@@ -91,9 +91,9 @@ If you introspect a database the names for indexes and constraints will be added
 The following schema defines three constraints (`@id`, `@unique`, and `@relation`) and one index (`@@index`):
 
 ```prisma highlight=2,8,11,13;normal
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 Since no explicit names are provided via `map` arguments Prisma will assume they follow our default naming convention.
@@ -115,9 +115,9 @@ You can use the `map` argument to define **custom constraint and index names** i
 The following example adds custom names to one `@id` and the `@@index`:
 
 ```prisma highlight=2,13;normal
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 The following table lists the name of each constraint and index in the underlying database:
@@ -136,7 +136,7 @@ Additionally to `map`, the `@@id` and `@@unique` attributes take an optional `na
 On a model like:
 
 ```prisma
-model User
+model User 
 ```
 
 the default API for selecting on that primary key uses a generated combination of the fields:

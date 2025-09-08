@@ -18,7 +18,7 @@ slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-dat
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 The `url` is [set via an environment variable](/orm/prisma-schema/overview#accessing-environment-variables-from-the-schema), the following example connection URL [uses SQL authentication](/orm/overview/databases/sql-server), but there are [other ways to format your connection URL](/orm/overview/databases/sql-server)

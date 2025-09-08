@@ -30,9 +30,9 @@ This section describes how to generate a down migration SQL file along with the 
 As an example, take the following Prisma schema with a `User` and `Post` model as a starting point:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 You will need to create the down migration first, before creating the corresponding up migration.
@@ -42,22 +42,24 @@ You will need to create the down migration first, before creating the correspond
 1. Edit your Prisma schema to make the changes you require for your up migration. In this example, you will add a new `Profile` model:
 
    ```prisma file=schema.prisma highlight=8-14;add|20;add showLineNumbers
-   model Post
+   model Post 
    //add-start
-
-   model Profile
+   
+   model Profile 
    //add-end
-
-   model User
+   
+   model User 
    ```
 
 2. Generate the SQL file for the down migration. To do this, you will use `migrate diff` to make a comparison:
+
    - from the newly edited schema
    - to the state of the schema after the last migration
 
    and output this to a SQL script, `down.sql`.
 
    There are two potential options for specifying the 'to' state:
+
    - Using `--to-migrations`: this makes a comparison to the state of the migrations given in the migrations directory. This is the preferred option, as it is more robust, but it requires a [shadow database](/orm/prisma-migrate/understanding-prisma-migrate/shadow-database). To use this option, run:
 
      ```terminal wrap

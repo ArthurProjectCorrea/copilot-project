@@ -44,7 +44,7 @@ Since Next.js extends the [Web `fetch()` API](https://developer.mozilla.org/docs
 Configure how the request should interact with Next.js [Data Cache](/docs/app/guides/caching#data-cache).
 
 ```ts
-fetch(`https://...`);
+fetch(`https://...`, )
 ```
 
 - **`auto no cache`** (default): Next.js fetches the resource from the remote server on every request in development, but will fetch once during `next build` because the route will be statically prerendered. If [Dynamic APIs](/docs/app/getting-started/partial-prerendering#dynamic-rendering) are detected on the route, Next.js will fetch the resource on every request.

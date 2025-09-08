@@ -15,13 +15,13 @@ slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-database
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 You will also need to set the relation mode type to `prisma` in order to [emulate foreign key constraints](/orm/overview/databases/planetscale#option-1-emulate-relations-in-prisma-client) in the `datasource` block:
 
 ```prisma file=schema.prisma highlight=4;add showLineNumbers
-datasource db
+datasource db 
 ```
 
 > **Note**: Since February 2024, you can alternatively [use foreign key constraints on a database-level in PlanetScale](/orm/overview/databases/planetscale#option-2-enable-foreign-key-constraints-in-the-planetscale-database-settings), which omits the need for setting `relationMode = "prisma"`.

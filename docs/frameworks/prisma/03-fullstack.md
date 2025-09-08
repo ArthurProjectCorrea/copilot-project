@@ -27,13 +27,13 @@ If you want to learn how to build an app with Next.js and Prisma ORM, check out 
 Assume you have a Prisma schema that looks similar to this:
 
 ```prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 You can now implement the logic for querying your database using [Prisma Client API](/orm/prisma-client) inside `getServerSideProps`, `getStaticProps`, API routes, or using API libraries such as [tRPC](https://trpc.io/) and [GraphQL](https://graphql.org/).
@@ -74,10 +74,10 @@ You can then fetch data and display it in your frontend.
 
 You can find several ready-to-run examples that show how to fullstack apps with Prisma Client in the [`prisma-examples`](https://github.com/prisma/prisma-examples/) repository.
 
-| **Example**                                              | **Description**                                                   |
-| :------------------------------------------------------- | :---------------------------------------------------------------- |
-| [Next.js](https://pris.ly/e/orm/nextjs)                  | Fullstack Next.js 15 app                                          |
-| [Next.js (GraphQL)](https://pris.ly/e/ts/graphql-nextjs) | Fullstack Next.js app using GraphQL Yoga, Pothos, & Apollo Client |
-| [Remix](https://pris.ly/e/ts/remix)                      | Fullstack Remix app using actions and loaders                     |
-| [SvelteKit](https://pris.ly/e/ts/sveltekit)              | Fullstack Sveltekit app using actions and loaders                 |
-| [Nuxt](https://pris.ly/e/ts/rest-nuxtjs)                 | Fullstack Nuxt app using API routes                               |
+| **Example**                                                                                                                    | **Description**                                                                                       |
+| :----------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| [Next.js](https://pris.ly/e/orm/nextjs)                | Fullstack Next.js 15 app                                                                               |
+| [Next.js (GraphQL)](https://pris.ly/e/ts/graphql-nextjs)                           | Fullstack Next.js app using GraphQL Yoga, Pothos, & Apollo Client                                     |
+| [Remix](https://pris.ly/e/ts/remix)                                                | Fullstack Remix app using actions and loaders                                                         |
+| [SvelteKit](https://pris.ly/e/ts/sveltekit)                                        | Fullstack Sveltekit app using actions and loaders                                                     |
+| [Nuxt](https://pris.ly/e/ts/rest-nuxtjs)                                | Fullstack Nuxt app using API routes                                                                   |

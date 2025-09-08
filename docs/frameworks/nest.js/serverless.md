@@ -227,7 +227,11 @@ async function bootstrap(): Promise<Handler> {
   return serverlessExpress({ app: expressApp });
 }
 
-export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
+export const handler: Handler = async (
+  event: any,
+  context: Context,
+  callback: Callback,
+) => {
   server = server ?? (await bootstrap());
   return server(event, context, callback);
 };
@@ -333,7 +337,11 @@ export const handler: Handler = async (
 You could also pass the `event` object down to, let's say, `EventsService` provider that could process it and return a corresponding value (depending on the input value and your business logic).
 
 ```typescript
-export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
+export const handler: Handler = async (
+  event: any,
+  context: Context,
+  callback: Callback,
+) => {
   const appContext = await NestFactory.createApplicationContext(AppModule);
   const eventsService = appContext.get(EventsService);
   return eventsService.process(event);

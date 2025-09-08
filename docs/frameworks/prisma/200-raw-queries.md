@@ -1,7 +1,7 @@
 ---
-title: 'Raw queries'
-metaTitle: 'Raw queries'
-metaDescription: 'Learn how you can send raw SQL and MongoDB queries to your database using the raw() methods from the Prisma Client API.'
+title: "Raw queries"
+metaTitle: "Raw queries"
+metaDescription: "Learn how you can send raw SQL and MongoDB queries to your database using the raw() methods from the Prisma Client API."
 ---
 
 :::warning
@@ -48,14 +48,14 @@ const result = await prisma.$queryRaw`SELECT * FROM User`;
 The method is implemented as a [tagged template](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates), which allows you to pass a template literal where you can easily insert your [variables](#using-variables). In turn, Prisma Client creates prepared statements that are safe from SQL injections:
 
 ```ts no-lines
-const email = 'emelie@prisma.io';
+const email = "emelie@prisma.io";
 const result = await prisma.$queryRaw`SELECT * FROM User WHERE email = $`;
 ```
 
 You can also use the [`Prisma.sql`](#tagged-template-helpers) helper, in fact, the `$queryRaw` method will **only accept** a template string or the `Prisma.sql` helper:
 
 ```ts no-lines
-const email = 'emelie@prisma.io';
+const email = "emelie@prisma.io";
 const result = await prisma.$queryRaw(Prisma.sql`SELECT * FROM User WHERE email = $`);
 ```
 
@@ -66,31 +66,31 @@ Be aware that:
 - Template variables cannot be used inside SQL string literals. For example, the following query would **not** work:
 
   ```ts no-lines
-  const name = 'Bob';
+  const name = "Bob";
   await prisma.$queryRaw`SELECT 'My name is $';`;
   ```
 
   Instead, you can either pass the whole string as a variable, or use string concatenation:
 
   ```ts no-lines
-  const name = 'My name is Bob';
+  const name = "My name is Bob";
   await prisma.$queryRaw`SELECT $;`;
   ```
 
   ```ts no-lines
-  const name = 'Bob';
+  const name = "Bob";
   await prisma.$queryRaw`SELECT 'My name is ' || $;`;
   ```
 
 - Template variables can only be used for data values (such as `email` in the example above). Variables cannot be used for identifiers such as column names, table names or database names, or for SQL keywords. For example, the following two queries would **not** work:
 
   ```ts no-lines
-  const myTable = 'user';
+  const myTable = "user";
   await prisma.$queryRaw`SELECT * FROM $;`;
   ```
 
   ```ts no-lines
-  const ordering = 'desc';
+  const ordering = "desc";
   await prisma.$queryRaw`SELECT * FROM Table ORDER BY $;`;
   ```
 
@@ -103,7 +103,10 @@ Be aware that:
 `$queryRaw` returns an array. Each object corresponds to a database record:
 
 ```json5
-[, ,]
+[
+  ,
+  ,
+]
 ```
 
 You can also [type the results of `$queryRaw`](#typing-queryraw-results).
@@ -134,7 +137,7 @@ If you are selecting **specific fields** of the model or want to include relatio
 When you type the results of `$queryRaw`, the raw data might not always match the suggested TypeScript type. For example, the following Prisma model includes a `Boolean` field named `published`:
 
 ```prisma highlight=3;normal
-model Post
+model Post 
 ```
 
 The following query returns all posts. It then prints out the value of the `published` field for each `Post`:
@@ -154,7 +157,7 @@ For regular CRUD queries, the Prisma Client query engine standardizes the return
 [It is not possible to interpolate table names](#considerations). This means that you cannot use dynamic table names with `$queryRaw`. Instead, you must use [`$queryRawUnsafe`](#queryrawunsafe), as follows:
 
 ```ts
-let userTable = 'User';
+let userTable = "User";
 let result = await prisma.$queryRawUnsafe(`SELECT * FROM $`);
 ```
 
@@ -169,13 +172,13 @@ The following query returns all fields for each record in the `User` table:
 ```ts
 // import the generated `User` type from the `@prisma/client` module
 
-const result = await prisma.$queryRawUnsafe('SELECT * FROM User');
+const result = await prisma.$queryRawUnsafe("SELECT * FROM User");
 ```
 
 You can also run a parameterized query. The following example returns all users whose email contains the string `emelie@prisma.io`:
 
 ```ts
-prisma.$queryRawUnsafe('SELECT * FROM users WHERE email = $1', 'emelie@prisma.io');
+prisma.$queryRawUnsafe("SELECT * FROM users WHERE email = $1", "emelie@prisma.io");
 ```
 
 > **Note**: Prisma sends JavaScript integers to PostgreSQL as `INT8`. This might conflict with your user-defined functions that accept only `INT4` as input. If you use a parameterized `$queryRawUnsafe` query in conjunction with a PostgreSQL database, update the input types to `INT8`, or cast your query parameters to `INT4`.
@@ -217,31 +220,31 @@ Be aware that:
 - Template variables cannot be used inside SQL string literals. For example, the following query would **not** work:
 
   ```ts no-lines
-  const name = 'Bob';
+  const name = "Bob";
   await prisma.$executeRaw`UPDATE user SET greeting = 'My name is $';`;
   ```
 
   Instead, you can either pass the whole string as a variable, or use string concatenation:
 
   ```ts no-lines
-  const name = 'My name is Bob';
+  const name = "My name is Bob";
   await prisma.$executeRaw`UPDATE user SET greeting = $;`;
   ```
 
   ```ts no-lines
-  const name = 'Bob';
+  const name = "Bob";
   await prisma.$executeRaw`UPDATE user SET greeting = 'My name is ' || $;`;
   ```
 
 - Template variables can only be used for data values (such as `email` in the example above). Variables cannot be used for identifiers such as column names, table names or database names, or for SQL keywords. For example, the following two queries would **not** work:
 
   ```ts no-lines
-  const myTable = 'user';
+  const myTable = "user";
   await prisma.$executeRaw`UPDATE $ SET active = true;`;
   ```
 
   ```ts no-lines
-  const ordering = 'desc';
+  const ordering = "desc";
   await prisma.$executeRaw`UPDATE User SET active = true ORDER BY $;`;
   ```
 
@@ -274,8 +277,8 @@ The same can be written as a parameterized query:
 
 ```ts
 const result = prisma.$executeRawUnsafe(
-  'UPDATE User SET active = $1 WHERE emailValidated = $2',
-  'yin@prisma.io',
+  "UPDATE User SET active = $1 WHERE emailValidated = $2",
+  "yin@prisma.io",
   true
 );
 ```
@@ -386,6 +389,7 @@ const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = $;`;
 Prisma Client specifically uses [SQL Template Tag](https://github.com/blakeembrey/sql-template-tag), which exposes a number of helpers. For example, the following query uses `join()` to pass in a list of IDs:
 
 ```ts
+
 const ids = [1, 3, 5, 10, 20];
 const result = await prisma.$queryRaw`SELECT * FROM User WHERE id IN ($)`;
 ```
@@ -419,7 +423,7 @@ await prisma.$executeRawUnsafe('ALTER USER prisma WITH PASSWORD "$1"', password}
 [`Unsupported` types](/orm/reference/prisma-schema-reference#unsupported) need to be cast to Prisma Client supported types before using them in `$queryRaw` or `$queryRawUnsafe`. For example, take the following model, which has a `location` field with an `Unsupported` type:
 
 ```tsx
-model Country
+model Country 
 ```
 
 The following query on the unsupported field will **not** work:
@@ -507,7 +511,9 @@ console.log(result);
 
 ```ts
 const inputString = `'Sarah' UNION SELECT id, title FROM "Post"`;
-const result = await prisma.$queryRaw(Prisma.raw(`SELECT id, name FROM "User" WHERE name = $`));
+const result = await prisma.$queryRaw(
+  Prisma.raw(`SELECT id, name FROM "User" WHERE name = $`)
+);
 console.log(result);
 ```
 
@@ -570,10 +576,10 @@ In the following example we have two variables to parameterize. The example is s
 const query1 = `SELECT id, name FROM "User" WHERE name = `; // The first parameter would be inserted after this string
 const query2 = ` OR name = `; // The second parameter would be inserted after this string
 
-const inputString1 = 'Fred';
+const inputString1 = "Fred";
 const inputString2 = `'Sarah' UNION SELECT id, title FROM "Post"`;
 
-const query = Prisma.sql([query1, query2, ''], inputString1, inputString2);
+const query = Prisma.sql([query1, query2, ""], inputString1, inputString2);
 const result = await prisma.$queryRaw(query);
 console.log(result);
 ```
@@ -615,7 +621,7 @@ The following example concatenates `query` and `inputString`. Prisma Client ❌ 
 
 ```ts
 const inputString = '"Sarah" UNION SELECT id, title, content FROM Post'; // SQL Injection
-const query = 'SELECT id, name, email FROM User WHERE name = ' + inputString;
+const query = "SELECT id, name, email FROM User WHERE name = " + inputString;
 const result = await prisma.$queryRawUnsafe(query);
 
 console.log(result);
@@ -628,10 +634,10 @@ As an alternative to tagged templates, `$queryRawUnsafe` supports standard param
 The following example is safe ✅ from SQL Injection:
 
 ```ts
-const userName = 'Sarah';
-const email = 'sarah@prisma.io';
+const userName = "Sarah";
+const email = "sarah@prisma.io";
 const result = await prisma.$queryRawUnsafe(
-  'SELECT * FROM User WHERE (name = $1 OR email = $2)',
+  "SELECT * FROM User WHERE (name = $1 OR email = $2)",
   userName,
   email
 );
@@ -648,8 +654,8 @@ As with tagged templates, Prisma Client escapes all variables when they are prov
 When you use `ILIKE`, the `%` wildcard character(s) should be included in the variable itself, not the query (`string`). This example is safe ✅ from SQL Injection.
 
 ```ts
-const userName = 'Sarah';
-const emailFragment = 'prisma.io';
+const userName = "Sarah";
+const emailFragment = "prisma.io";
 const result = await prisma.$queryRawUnsafe(
   'SELECT * FROM "User" WHERE (name = $1 OR email ILIKE $2)',
   userName,
@@ -754,11 +760,10 @@ const result = await prisma.user.aggregateRaw( },
 #### Caveats
 
 When working with custom objects like `ObjectId` or `Date,` you will have to pass them according to the [MongoDB extended JSON Spec](https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/#type-representations).
-Example:
-
+Example: 
 ```ts no-lines
 const result = await prisma.user.aggregateRaw( } }
-//                     ^ notice the $oid convention here
+//                     ^ notice the $oid convention here 
   ],
 });
 

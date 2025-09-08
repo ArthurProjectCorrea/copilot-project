@@ -73,10 +73,13 @@ interface BasicCommandOptions {
 @Command({ name: 'basic', description: 'A parameter parse' })
 export class BasicCommand extends CommandRunner {
   constructor(private readonly logService: LogService) {
-    super();
+    super()
   }
 
-  async run(passedParam: string[], options?: BasicCommandOptions): Promise<void> {
+  async run(
+    passedParam: string[],
+    options?: BasicCommandOptions,
+  ): Promise<void> {
     if (options?.boolean !== undefined && options?.boolean !== null) {
       this.runWithBoolean(passedParam, options.boolean);
     } else if (options?.number) {

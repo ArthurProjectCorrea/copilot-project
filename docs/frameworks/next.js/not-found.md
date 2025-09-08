@@ -11,12 +11,12 @@ Invoking the `notFound()` function throws a `NEXT_HTTP_ERROR_FALLBACK;404` error
 
 ```jsx filename="app/user/[id]/page.js"
 
-async function fetchUser(id)
+async function fetchUser(id) 
 
   const  = await params
   const user = await fetchUser(id)
 
-  if (!user)
+  if (!user) 
 
   // ...
 }

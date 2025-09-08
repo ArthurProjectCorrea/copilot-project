@@ -35,13 +35,13 @@ When navigating to the new page, there's no full page reload or browser loading 
 
 ```tsx filename="app/ui/nav-link.tsx" switcher
 
-  return
+  return 
 }
 ```
 
 ```jsx filename="app/ui/nav-link.js" switcher
 
-  return
+  return 
 }
 ```
 
@@ -55,10 +55,10 @@ Automatic prefetching runs only in production. Disable with `prefetch=` or use t
 ## Manual prefetch
 
 ```tsx
-'use client';
+'use client'
 
-const router = useRouter();
-router.prefetch('/pricing');
+const router = useRouter()
+router.prefetch('/pricing')
 ```
 
 Call `router.prefetch()` to warm routes outside the viewport or in response to analytics, hover, scroll, etc.
@@ -76,7 +76,7 @@ For example, you might have to only trigger prefetches on hover, instead of when
 
   href,
   children,
-}: )
+}: ) 
 ```
 
 `prefetch=` restores default (static) prefetching once the user shows intent.
@@ -84,8 +84,7 @@ For example, you might have to only trigger prefetches on hover, instead of when
 ## Extending or ejecting link
 
 You can extend the `
-
-````
+```
 
 However, this means static routes will only be fetched on click, and dynamic routes will wait for the server to render before navigating.
 
@@ -96,8 +95,8 @@ To reduce resource usage without disabling prefetch entirely, you can defer pref
 
   href,
   children,
-}: )
-````
+}: ) 
+```
 
 ```jsx filename="app/ui/hover-prefetch-link.js" switcher
 'use client'
@@ -105,7 +104,7 @@ To reduce resource usage without disabling prefetch entirely, you can defer pref
   const [active, setActive] = useState(false)
 
   return (
-
+    
   )
 }
 ```

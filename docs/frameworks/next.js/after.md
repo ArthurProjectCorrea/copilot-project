@@ -102,17 +102,17 @@ If you want your users to be able to run `after`, you will have to provide your 
 When `after` is called, Next.js will access `waitUntil` like this:
 
 ```jsx
-const RequestContext = globalThis[Symbol.for('@next/request-context')];
-const contextValue = RequestContext?.get();
-const waitUntil = contextValue?.waitUntil;
+const RequestContext = globalThis[Symbol.for('@next/request-context')]
+const contextValue = RequestContext?.get()
+const waitUntil = contextValue?.waitUntil
 ```
 
 Which means that `globalThis[Symbol.for('@next/request-context')]` is expected to contain an object like this:
 
 ```tsx
-type NextRequestContext =
+type NextRequestContext = 
 
-type NextRequestContextValue =
+type NextRequestContextValue = 
 ```
 
 Here is an example of the implementation.
@@ -126,7 +126,7 @@ const RequestContext: NextRequestContext = ,
 }
 globalThis[Symbol.for('@next/request-context')] = RequestContext
 
-const handler = (req, res) =>
+const handler = (req, res) => 
   // Provide the value
   return RequestContextStorage.run(contextValue, () => nextJsHandler(req, res))
 }

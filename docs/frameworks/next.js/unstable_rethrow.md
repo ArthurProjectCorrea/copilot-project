@@ -11,7 +11,7 @@ For example, calling the `notFound` function will throw an internal Next.js erro
 ```tsx filename="@/app/ui/component.tsx"
 
   try )
-  } catch (err)
+  } catch (err) 
 }
 ```
 
@@ -20,7 +20,7 @@ You can use `unstable_rethrow` API to re-throw the internal error and continue w
 ```tsx filename="@/app/ui/component.tsx"
 
   try )
-  } catch (err)
+  } catch (err) 
 }
 ```
 

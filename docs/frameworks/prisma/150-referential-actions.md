@@ -57,9 +57,9 @@ The following example would result in a cascading delete, meaning that if the `U
 #### A blog schema example
 
 ```prisma highlight=4;add
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 ### Using Migration
@@ -85,9 +85,9 @@ The following example uses the below blog schema with a 1-m relationship between
 This means that if a user has a post, that user (and their posts) **cannot** be deleted.
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Prior to upgrading, the error code you would receive when trying to delete a user which has posts would be `P2014` and it's message:
@@ -100,7 +100,7 @@ const prisma = new PrismaClient()
 
 async function main() ,
     })
-  } catch (error)
+  } catch (error) 
     }
   }
 }
@@ -118,9 +118,9 @@ To make sure you are checking for the correct errors in your code, modify your c
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
     })
-  } catch (error)
+  } catch (error) 
     }
   }
 }

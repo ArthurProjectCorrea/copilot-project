@@ -40,7 +40,7 @@ If your own code or any external npm dependencies require features not supported
 To include polyfills, you can import them into the [`instrumentation-client.js` file](/docs/app/api-reference/file-conventions/instrumentation-client).
 
 ```ts filename="instrumentation-client.ts"
-import './polyfills';
+import './polyfills'
 ```
 
 #### In Pages Router
@@ -50,14 +50,14 @@ In this case, you should add a top-level import for the **specific polyfill** yo
 ```tsx filename="pages/_app.tsx" switcher
 import './polyfills'
 
-  return
+  return 
 }
 ```
 
 ```jsx filename="pages/_app.jsx" switcher
 import './polyfills'
 
-  return
+  return 
 }
 ```
 

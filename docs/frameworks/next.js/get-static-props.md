@@ -7,7 +7,7 @@ Exporting a function called `getStaticProps` will pre-render a page at build tim
 
 ```tsx filename="pages/index.tsx" switcher
 
-type Repo =
+type Repo = 
 
   const res = await fetch('https://api.github.com/repos/vercel/next.js')
   const repo = await res.json()
@@ -15,7 +15,7 @@ type Repo =
 }) satisfies GetStaticProps<>
 
   repo,
-}: InferGetStaticPropsType<typeof getStaticProps>)
+}: InferGetStaticPropsType<typeof getStaticProps>) 
 ```
 
 ```jsx filename="pages/index.js" switcher
@@ -37,7 +37,7 @@ The `context` parameter is an object containing the following keys:
 
 | Name               | Description                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `params`           | Contains the route parameters for pages using [dynamic routes](/docs/pages/building-your-application/routing/dynamic-routes). For example, if the page name is `[id].js`, then `params` will look like ``. You should use this together with `getStaticPaths`, which we'll explain later.                                                                                                                                            |
+| `params`           | Contains the route parameters for pages using [dynamic routes](/docs/pages/building-your-application/routing/dynamic-routes). For example, if the page name is `[id].js`, then `params` will look like ``. You should use this together with `getStaticPaths`, which we'll explain later.                                                                                                                                 |
 | `preview`          | (Deprecated for `draftMode`) `preview` is `true` if the page is in the [Preview Mode](/docs/pages/guides/preview-mode) and `false` otherwise.                                                                                                                                                                                                                                                                                        |
 | `previewData`      | (Deprecated for `draftMode`) The [preview](/docs/pages/guides/preview-mode) data set by `setPreviewData`.                                                                                                                                                                                                                                                                                                                            |
 | `draftMode`        | `draftMode` is `true` if the page is in the [Draft Mode](/docs/pages/guides/draft-mode) and `false` otherwise.                                                                                                                                                                                                                                                                                                                       |
@@ -99,7 +99,7 @@ The `notFound` boolean allows the page to return a `404` status and [404 Page](/
   const res = await fetch(`https://.../data`)
   const data = await res.json()
 
-  if (!data)
+  if (!data) 
   }
 
   return , // will be passed to the page component as props
@@ -159,7 +159,7 @@ function Blog() </h3>
   const postsDirectory = path.join(process.cwd(), 'posts')
   const filenames = await fs.readdir(postsDirectory)
 
-  const posts = filenames.map(async (filename) =>
+  const posts = filenames.map(async (filename) => 
   })
   // By returning  }, the Blog component
   // will receive `posts` as a prop at build time

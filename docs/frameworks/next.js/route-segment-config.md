@@ -29,10 +29,12 @@ The Route Segment options allows you to configure the behavior of a [Page](/docs
 Enable [Partial Prerendering (PPR)](/docs/app/getting-started/partial-prerendering) for a layout or page.
 
 ```tsx filename="layout.tsx | page.tsx " switcher
+
 // true | false
 ```
 
 ```jsx filename="layout.js | page.js " switcher
+
 // true | false
 ```
 
@@ -41,10 +43,12 @@ Enable [Partial Prerendering (PPR)](/docs/app/getting-started/partial-prerenderi
 Change the dynamic behavior of a layout or page to fully static or fully dynamic.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
+
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 ```
 
@@ -91,10 +95,12 @@ Control what happens when a dynamic segment is visited that was not generated wi
 Set the default revalidation time for a layout or page. This option does not override the `revalidate` value set by individual `fetch` requests.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+
 // false | 0 | number
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
+
 // false | 0 | number
 ```
 
@@ -123,11 +129,13 @@ By default, Next.js **will cache** any `fetch()` requests that are reachable **b
 `fetchCache` allows you to override the default `cache` option of all `fetch` requests in a layout or page.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+
 // 'auto' | 'default-cache' | 'only-cache'
 // 'force-cache' | 'force-no-store' | 'default-no-store' | 'only-no-store'
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
+
 // 'auto' | 'default-cache' | 'only-cache'
 // 'force-cache' | 'force-no-store' | 'default-no-store' | 'only-no-store'
 ```
@@ -157,10 +165,12 @@ By default, Next.js **will cache** any `fetch()` requests that are reachable **b
 We recommend using the Node.js runtime for rendering your application, and the Edge runtime for Middleware.
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+
 // 'nodejs' | 'edge'
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
+
 // 'nodejs' | 'edge'
 ```
 
@@ -170,10 +180,12 @@ We recommend using the Node.js runtime for rendering your application, and the E
 ### `preferredRegion`
 
 ```tsx filename="layout.tsx | page.tsx | route.ts" switcher
+
 // 'auto' | 'global' | 'home' | ['iad1', 'sfo1']
 ```
 
 ```js filename="layout.js | page.js | route.js" switcher
+
 // 'auto' | 'global' | 'home' | ['iad1', 'sfo1']
 ```
 

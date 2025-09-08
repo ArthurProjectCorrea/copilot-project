@@ -32,17 +32,17 @@ Next.js extends the [`fetch` API](#fetch) to automatically **memoize** requests 
 For example, if you need to use the same data across a route (e.g. in a Layout, Page, and multiple components), you do not have to fetch data at the top of the tree, and forward props between components. Instead, you can fetch data in the components that need it without worrying about the performance implications of making multiple requests across the network for the same data.
 
 ```tsx filename="app/example.tsx" switcher
-async function getItem();
+async function getItem() 
 
 // This function is called twice, but only executed the first time
-const item = await getItem(); // cache MISS
+const item = await getItem() // cache MISS
 
 // The second call could be anywhere in your route
-const item = await getItem(); // cache HIT
+const item = await getItem() // cache HIT
 ```
 
 ```jsx filename="app/example.js" switcher
-async function getItem()
+async function getItem() 
 
 // This function is called twice, but only executed the first time
 const item = await getItem() // cache MISS
@@ -157,7 +157,7 @@ Data can be revalidated on-demand by path ([`revalidatePath`](#revalidatepath)) 
 If you do _not_ want to cache the response from `fetch`, you can do the following:
 
 ```js
-let data = await fetch('https://api.vercel.app/blog');
+let data = await fetch('https://api.vercel.app/blog', )
 ```
 
 ## Full Route Cache
@@ -358,7 +358,7 @@ You can opt individual `fetch` into caching by setting the `cache` option to `fo
 
 ```jsx
 // Opt into caching
-fetch(`https://...`);
+fetch(`https://...`, )
 ```
 
 See the [`fetch` API Reference](/docs/app/api-reference/functions/fetch) for more options.
@@ -392,7 +392,7 @@ Then, call `revalidateTag` with a tag to purge the cache entry:
 
 ```jsx
 // Revalidate entries with a specific tag
-revalidateTag('a');
+revalidateTag('a')
 ```
 
 There are two places you can use `revalidateTag`, depending on what you're trying to achieve:
@@ -405,7 +405,7 @@ There are two places you can use `revalidateTag`, depending on what you're tryin
 `revalidatePath` allows you manually revalidate data **and** re-render the route segments below a specific path in a single operation. Calling the `revalidatePath` method revalidates the Data Cache, which in turn invalidates the Full Route Cache.
 
 ```jsx
-revalidatePath('/');
+revalidatePath('/')
 ```
 
 There are two places you can use `revalidatePath`, depending on what you're trying to achieve:

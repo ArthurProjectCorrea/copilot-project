@@ -7,7 +7,7 @@ We expose a built-in component for appending elements to the `head` of the page:
 
 ```jsx
 
-function IndexPage()
+function IndexPage() 
 
 ```
 
@@ -17,7 +17,7 @@ To avoid duplicate tags in your `head` you can use the `key` property, which wil
 
 ```jsx
 
-function IndexPage()
+function IndexPage() 
 
 ```
 

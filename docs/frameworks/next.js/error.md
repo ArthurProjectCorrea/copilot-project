@@ -14,7 +14,7 @@ An **error** file allows you to handle unexpected runtime errors and display fal
 
   error,
   reset,
-}:
+}: 
   reset: () => void
 }) , [error])
 
@@ -86,7 +86,7 @@ An error component can use the `reset()` function to prompt the user to attempt 
 
   error,
   reset,
-}:
+}: 
   reset: () => void
 }) >Try again</button>
     </div>
@@ -119,7 +119,7 @@ While less common, you can handle errors in the root layout or template using `g
 
   error,
   reset,
-}:
+}: 
   reset: () => void
 }) >Try again</button>
       </body>
@@ -152,23 +152,23 @@ The `GracefullyDegradingErrorBoundary` is an example of a custom error boundary 
 ```tsx filename="app/dashboard/error.tsx" switcher
 'use client'
 
-interface ErrorBoundaryProps
+interface ErrorBoundaryProps 
 
-interface ErrorBoundaryState
+interface ErrorBoundaryState 
 
   ErrorBoundaryProps,
   ErrorBoundaryState
->
+> 
     this.contentRef = React.createRef()
   }
 
-  static getDerivedStateFromError(_: Error): ErrorBoundaryState
+  static getDerivedStateFromError(_: Error): ErrorBoundaryState 
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo)
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) 
   }
 
-  render()
+  render() 
             suppressHydrationWarning
             dangerouslySetInnerHTML=}
           />
@@ -190,17 +190,17 @@ interface ErrorBoundaryState
 ```jsx filename="app/dashboard/error.js" switcher
 'use client'
 
-class GracefullyDegradingErrorBoundary extends Component
+class GracefullyDegradingErrorBoundary extends Component 
     this.contentRef = createRef()
   }
 
-  static getDerivedStateFromError(_)
+  static getDerivedStateFromError(_) 
   }
 
-  componentDidCatch(error, errorInfo)
+  componentDidCatch(error, errorInfo) 
   }
 
-  render()
+  render() 
             suppressHydrationWarning
             dangerouslySetInnerHTML=}
           />

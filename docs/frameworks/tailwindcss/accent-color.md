@@ -1,12 +1,12 @@
-import from "@/components/content.tsx";
+import  from "@/components/content.tsx";
 
 <ApiTable
-rows=`,
-      `accent-color: var(--color-$); /_ $ _/`,
-]),
-["accent-<custom-property>", "accent-color: var(<custom-property>);"],
-["accent-[<value>]", "accent-color: <value>;"],
-]}
+  rows=`,
+      `accent-color: var(--color-$); /* $ */`,
+    ]),
+    ["accent-<custom-property>", "accent-color: var(<custom-property>);"],
+    ["accent-[<value>]", "accent-color: <value>;"],
+  ]}
 />
 
 ## Examples

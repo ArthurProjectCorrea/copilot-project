@@ -9,7 +9,7 @@ description: Fetch dynamic data on the server for your React component with getI
 
 ```tsx filename="pages/index.tsx" switcher
 
-Page.getInitialProps = async (ctx: NextPageContext) =>
+Page.getInitialProps = async (ctx: NextPageContext) => 
 }
 
   return stars
@@ -17,7 +17,7 @@ Page.getInitialProps = async (ctx: NextPageContext) =>
 ```
 
 ```jsx filename="pages/index.js" switcher
-Page.getInitialProps = async (ctx) =>
+Page.getInitialProps = async (ctx) => 
 }
 
   return stars

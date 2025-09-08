@@ -40,7 +40,7 @@ async function main() )
 The following example illustrates how you can add custom arguments, to a method in an extension:
 
 ```ts highlight=16
-type CacheStrategy =
+type CacheStrategy = 
 
 const prisma = new PrismaClient().$extends(,
     },

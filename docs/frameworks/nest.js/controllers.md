@@ -449,7 +449,7 @@ const app = await NestFactory.create<NestFastifyApplication>(
   AppModule,
   new FastifyAdapter({
     querystringParser: (str) => qs.parse(str),
-  })
+  }),
 );
 ```
 

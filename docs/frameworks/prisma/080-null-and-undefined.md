@@ -22,7 +22,7 @@ Prisma ORM 5.20.0 introduces a new Preview feature called `strictUndefinedChecks
 To enable this feature, add the following to your Prisma schema:
 
 ```prisma
-generator client
+generator client 
 ```
 
 ### Using strict undefined checks
@@ -55,8 +55,8 @@ prisma.user.deleteMany(
 Invalid \`prisma.user.deleteMany()\` invocation in
 /client/tests/functional/strictUndefinedChecks/test.ts:0:0
   XX })
-  XX
-  XX test('throws on undefined input field', async () =>
+  XX 
+  XX test('throws on undefined input field', async () => 
        })
 Invalid value for argument \`where\`: explicitly \`undefined\` values are not allowed."
 ```
@@ -128,7 +128,7 @@ Using `undefined` as a value in a filter essentially tells Prisma Client you hav
 An equivalent way to write the above query would be:
 
 ```ts
-const users = await prisma.user.findMany();
+const users = await prisma.user.findMany()
 ```
 
 This query will select every row from the `User` table.
@@ -158,7 +158,7 @@ In this scenario, the query will return the very first record in the database.
 Another way to represent the above query is:
 
 ```ts
-const user = await prisma.user.findFirst();
+const user = await prisma.user.findFirst()
 ```
 
 Although this section's examples focused on the `findFirst` function, the same concepts apply to any function that affects a single record.
@@ -168,13 +168,13 @@ Although this section's examples focused on the `findFirst` function, the same c
 For this example, consider a database based on the following Prisma schema:
 
 ```prisma
-model User
+model User 
 ```
 
 In the following GraphQL mutation that updates a user, both `authorEmail` and `name` accept `null`. From a GraphQL perspective, this means that fields are **optional**:
 
 ```ts
-type Mutation
+type Mutation 
 ```
 
 However, if you pass `null` values for `authorEmail` or `authorName` on to Prisma Client, the following will happen:
@@ -213,9 +213,9 @@ The following table provides a high-level overview of how the different operator
 This example shows how an `undefined` parameter impacts the results returned by a query that uses the [`OR`](/orm/reference/prisma-client-reference#or) operator.
 
 ```ts
-interface FormData
+interface FormData 
 
-const formData: FormData =
+const formData: FormData = 
 
 const users = await prisma.user.findMany(,
       },
@@ -235,17 +235,9 @@ if you pass in an `undefined` value.
 > as passing nothing at all, meaning the `findMany` query in the example will run without any filters and return all the users.
 
 ```ts
-interface FormData
+interface FormData 
 
-const formData: FormData =
-
-const users = await prisma.user.findMany(,
-      },
-    ],
-  },
-})
-
-// returns:
+const formData: FormData = 
 
 const users = await prisma.user.findMany(,
       },
@@ -253,5 +245,13 @@ const users = await prisma.user.findMany(,
   },
 })
 
-// returns:
+// returns: 
+
+const users = await prisma.user.findMany(,
+      },
+    ],
+  },
+})
+
+// returns: 
 ```

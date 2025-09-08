@@ -20,16 +20,16 @@ If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or dep
 **When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
 When using this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
-This setup can simplify deployments in serverless or edge runtimes. If you adopt the no-Rust-engine setup, you can ignore subsequent sections about `binaryTargets`, copying/packaging native engine files, and pruning `libquery_engine-*` artifacts.
+This setup can simplify deployments in serverless or edge runtimes. If you adopt the no-Rust-engine setup, you can ignore subsequent sections about `binaryTargets`, copying/packaging native engine files, and pruning `libquery_engine-*` artifacts. 
 
 Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
 
@@ -95,7 +95,7 @@ To get around this, you need to directly reference the needed files in your code
 
 ```ts file=app.ts showLineNumbers
 
-if (process.env.NODE_ENV !== 'production')
+if (process.env.NODE_ENV !== 'production') 
 ```
 
 ## Deploying with the Serverless Framework
@@ -170,7 +170,7 @@ In your `webpack.config.js`, make sure that you set `externals` to `nodeExternal
 ```javascript file=webpack.config.js highlight=1,5;normal; showLineNumbers
 const nodeExternals = require('webpack-node-externals')
 
-module.exports =
+module.exports = 
 ```
 
 Update the `plugins` property in your `webpack.config.js` file to include the `copy-webpack-plugin`:
@@ -250,7 +250,12 @@ While SST supports `.env` files, [it is not recommended](https://v2.sst.dev/conf
 The SST guide [available here](https://v2.sst.dev/config#overview) is a step-by-step guide to get started with `Config`. Assuming you have created a new secret called `DATABASE_URL` and have [bound that secret to your app](https://v2.sst.dev/config#bind-the-config), you can set up `PrismaClient` with the following:
 
 ```ts file=prisma.ts showLineNumbers
-const globalForPrisma = (global as unknown as globalForPrisma.prisma) || new PrismaClient();
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+const globalForPrisma = global as unknown as 
+
+  globalForPrisma.prisma ||
+  new PrismaClient()
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
 ```

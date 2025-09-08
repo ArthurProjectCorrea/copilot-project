@@ -32,13 +32,13 @@ It will prompt you to customize your setup. Choose the defaults:
 
 :::info
 
-- _Would you like to use TypeScript?_ `Yes`
-- _Would you like to use ESLint?_ `Yes`
-- _Would you like to use Tailwind CSS?_ `Yes`
-- _Would you like your code inside a `src/` directory?_ `No`
-- _Would you like to use App Router?_ (recommended) `Yes`
-- _Would you like to use Turbopack for `next dev`?_ `Yes`
-- _Would you like to customize the import alias (`@/_`by default)?*`No`
+- *Would you like to use TypeScript?* `Yes`
+- *Would you like to use ESLint?* `Yes`
+- *Would you like to use Tailwind CSS?* `Yes`
+- *Would you like your code inside a `src/` directory?* `No`
+- *Would you like to use App Router?* (recommended) `Yes`
+- *Would you like to use Turbopack for `next dev`?* `Yes`
+- *Would you like to customize the import alias (`@/*` by default)?* `No`
 
 :::
 
@@ -113,7 +113,7 @@ const geistMono = Geist_Mono();
 };
 
   children,
-}: Readonly<>)
+}: Readonly<>) 
 ```
 
 Create a `Navbar` component which will be used to display the Sign In and Sign Up buttons as well as the User Button once a user is signed in:
@@ -132,7 +132,7 @@ const geistMono = Geist_Mono();
 };
 
   children,
-}: Readonly<>)
+}: Readonly<>) 
 
 //add-start
 const Navbar = () => ;
@@ -150,7 +150,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../app/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for the database like "My Clerk NextJS Project"
 :::
@@ -164,14 +163,14 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -288,15 +287,15 @@ ngrok http 3000
 
 Copy the ngrok `Forwarding URL`. This will be used to set the webhook URL in Clerk.
 
-Navigate to the **_Webhooks_** section of your Clerk application located near the bottom of the **_Configure_** tab under **_Developers_**.
+Navigate to the ***Webhooks*** section of your Clerk application located near the bottom of the ***Configure*** tab under ***Developers***.
 
-Click **_Add Endpoint_** and paste the ngrok URL into the **_Endpoint URL_** field and add `/api/webhooks/clerk` to the end of the URL. It should look similar to this:
+Click ***Add Endpoint*** and paste the ngrok URL into the ***Endpoint URL*** field and add `/api/webhooks/clerk` to the end of the URL. It should look similar to this:
 
 ```text
 https://a60b-99-42-62-240.ngrok-free.app/api/webhooks/clerk
 ```
 
-Copy the **_Signing Secret_** and add it to your `.env` file:
+Copy the ***Signing Secret*** and add it to your `.env` file:
 
 ```dotenv file=.env showLineNumbers
 # Prisma
@@ -320,9 +319,8 @@ npx prisma studio
 :::note
 
 If you don't see a user record, there are a few things to check:
-
 - Delete your user from the Users tab in Clerk and try again.
-- Check your ngrok URL and ensure it's correct _(it will change everytime you restart ngrok)_.
+- Check your ngrok URL and ensure it's correct *(it will change everytime you restart ngrok)*.
 - Check your Clerk webhook is pointing to the correct ngrok URL.
 - Make sure you've added `/api/webhooks/clerk` to the end of the URL.
 
@@ -477,7 +475,6 @@ You'll be using a form to create a post and call the `POST` route you created ea
 ```
 
 On submit:
-
 - It sends a `POST` request to the `/api/posts` route
 - Clears the input fields
 - Reloads the page to show the new post
@@ -555,9 +552,9 @@ Finally, render the form and post list:
   return (
     //add-start
     <main className="max-w-2xl mx-auto p-4">
-
+      
       <div className="mt-8">
-
+        
             className="p-4 border border-zinc-800 rounded mt-4">
             <h2 className="font-bold"></h2>
             <p className="mt-2"></p>

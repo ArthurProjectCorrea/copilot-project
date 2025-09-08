@@ -19,5 +19,5 @@ When you're using a [multi-file Prisma schema](/orm/prisma-schema/overview/locat
 :::
 
 ```prisma
-datasource db
+datasource db 
 ```

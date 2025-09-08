@@ -54,11 +54,11 @@ We suggest to move the contents of prisma/.env to .env to consolidate your env v
 
 The following table describes where the Prisma CLI looks for the `.env` file:
 
-| **Command**                                     | **schema location**                                                          | **`.env` file locations checked, in order**               |
+| **Command**                                     | **schema location**                                                     | **`.env` file locations checked, in order**               |
 | :---------------------------------------------- | :--------------------------------------------------------------------------- | :-------------------------------------------------------- |
 | `prisma [command]`                              | `./prisma/schema.prisma`                                                     | `./.env`<br />`./prisma/.env`                             |
 | `prisma [command] --schema=./a/b/schema.prisma` | `./a/b/schema.prisma`                                                        | `./.env`<br />`./a/b/.env`<br />`./prisma/.env`           |
-| `prisma [command]`                              | `"prisma": `                                                                 | `.env`<br /> `./path/to/schema/.env`<br />`./prisma/.env` |
+| `prisma [command]`                              | `"prisma": `                             | `.env`<br /> `./path/to/schema/.env`<br />`./prisma/.env` |
 | `prisma [command]`                              | No schema (for example, when running `prisma db pull` in an empty directory) | `./.env`<br />`./prisma/.env`                             |
 
 Any environment variables defined in that `.env` file will automatically be loaded when running a Prisma CLI command.
@@ -98,33 +98,37 @@ This will make the environment variable `DATABASE_URL_WITH_SCHEMA` with value `p
 If you want environment variables to be evaluated at runtime, you need to load them manually in your application code (for example, by using [`dotenv`](https://github.com/motdotla/dotenv)):
 
 ```ts
-dotenv.config(); // Load the environment variables
-console.log(`The connection URL is $`);
+
+dotenv.config() // Load the environment variables
+console.log(`The connection URL is $`)
 ```
 
 If you are using a custom file name for your environment variables, you can configure `dotenv` to use that filename:
 
 ```ts
-var envFile = path.resolve(join(__dirname, 'myenv.env'));
-dotenv.config(); // Load the environment variables
-console.log(`The connection URL is $`);
+
+var envFile = path.resolve(join(__dirname, "myenv.env"))
+dotenv.config() // Load the environment variables
+console.log(`The connection URL is $`)
 ```
 
 If you need variable expansion across environment files, you can additionally use [`dotenv-expand`](https://github.com/motdotla/dotenv-expand):
 
 ```ts
-const dotenvExpand = require('dotenv-expand');
 
-var envFile = path.resolve(join(__dirname, 'myenv.env'));
-var mySqlEnv = dotenv.config();
-dotenvExpand.expand(mySqlEnv);
+const dotenvExpand = require('dotenv-expand')
+
+var envFile = path.resolve(join(__dirname, "myenv.env"))
+var mySqlEnv = dotenv.config()
+dotenvExpand.expand(mySqlEnv)
 ```
 
 If you are using multiple `.env` files, you can refernce an environment file in your project's code depending on the environment you are running in.
 
 ```ts
-const envFile = process.env.NODE_ENV === 'development' ? '.env.development' : '.env.production';
-config();
+
+const envFile = process.env.NODE_ENV === 'development' ? '.env.development' : '.env.production'
+config()
 ```
 
 ### Manually set environment variables

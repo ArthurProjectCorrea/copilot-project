@@ -15,14 +15,14 @@ If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or dep
 **When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
 When using this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). If you use this setup, you do not need to configure `binaryTargets` in your Prisma schema below.
 

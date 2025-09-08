@@ -1,7 +1,7 @@
 ---
-title: 'Comprehensive Guide to Using Prisma ORM with Next.js'
-sidebar_label: 'Using Prisma ORM with Next.js'
-description: 'Learn best practices, monorepo strategies, and dynamic usage techniques for Prisma ORM in Next.js applications.'
+title: "Comprehensive Guide to Using Prisma ORM with Next.js"
+sidebar_label: "Using Prisma ORM with Next.js"
+description: "Learn best practices, monorepo strategies, and dynamic usage techniques for Prisma ORM in Next.js applications."
 tags:
   - Prisma
   - Next.js
@@ -62,7 +62,7 @@ Monorepos allow multiple projects to share code and dependencies, making them a 
 - **Use NPM Scripts for Generation**:
 
   ```json
-
+    
     }
   ```
 

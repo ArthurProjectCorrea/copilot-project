@@ -8,9 +8,9 @@ tocDepth: 3
 In Prisma schema, relations between records are defined with the [`@relation`](/orm/reference/prisma-schema-reference#relation) attribute. For example, in the following schema there is a one-to-many relation between the `User` and `Post` models:
 
 ```prisma file=schema.prisma highlight=4,5,10;normal showLineNumbers
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 Prisma ORM has two _relation modes_, `foreignKeys` and `prisma`, that specify how relations between records are enforced.
@@ -60,7 +60,7 @@ Some databases, such as MongoDB or [PlanetScale](/orm/overview/databases/planets
 To set the relation mode, add the `relationMode` field in the `datasource` block:
 
 ```prisma file=schema.prisma highlight=4,9;add showLineNumbers
-datasource db
+datasource db 
 ```
 
 For relational databases, the available options are:
@@ -161,11 +161,11 @@ The `prisma` relation mode does not use foreign keys, so no indexes are created 
 If you do not add the index manually, queries might require full table scans. This can be slow, and also expensive on database providers that bill per accessed row. To help avoid this, Prisma ORM warns you when your schema contains fields that are used in a `@relation` that does not have an index defined. For example, take the following schema with a relation between the `User` and `Post` models:
 
 ```prisma file=schema.prisma showLineNumbers
-datasource db
+datasource db 
 
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 Prisma ORM displays the following warning when you run `prisma format` or `prisma validate`:
@@ -177,7 +177,7 @@ With `relationMode = "prisma"`, no foreign keys are used, so relation fields wil
 To fix this, add an index to your `Post` model:
 
 ```prisma file=schema.prisma highlight=6;add showLineNumbers
-model Post
+model Post 
 ```
 
 If you use the [Prisma VS Code extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) (or our [language server in another editor](/orm/more/development-environment/editor-setup)), the warning is augmented with a Quick Fix that adds the required index for you:

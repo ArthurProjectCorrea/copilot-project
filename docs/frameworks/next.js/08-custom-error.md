@@ -48,7 +48,7 @@ function Error()  occurred on server`
   )
 }
 
-Error.getInitialProps = () =>
+Error.getInitialProps = () => 
 }
 
 ```
@@ -69,7 +69,7 @@ If you want to render the built-in error page you can by importing the `Error` c
   }
 }
 
-  if (errorCode)
+  if (errorCode) 
 
   return <div>Next stars: </div>
 }

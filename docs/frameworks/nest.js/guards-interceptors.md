@@ -69,7 +69,8 @@ As mentioned, the [custom decorators](/custom-decorators) feature works as expec
 
 ```typescript
 export const User = createParamDecorator(
-  (data: unknown, ctx: ExecutionContext) => GqlExecutionContext.create(ctx).getContext().user
+  (data: unknown, ctx: ExecutionContext) =>
+    GqlExecutionContext.create(ctx).getContext().user,
 );
 ```
 
@@ -129,7 +130,7 @@ class ExpressGraphQLDriver extends AbstractGraphQLDriver {
       graphqlHTTP({
         schema: options.schema,
         graphiql: true,
-      })
+      }),
     );
   }
 

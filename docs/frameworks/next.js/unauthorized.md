@@ -29,7 +29,7 @@ module.exports = ,
 
   const session = await verifySession()
 
-  if (!session)
+  if (!session) 
 
   // Render the dashboard for authenticated users
   return (
@@ -45,7 +45,7 @@ module.exports = ,
 
   const session = await verifySession()
 
-  if (!session)
+  if (!session) 
 
   // Render the dashboard for authenticated users
   return (
@@ -71,7 +71,7 @@ You can use `unauthorized` function to display the `unauthorized.js` file with a
 
   const session = await verifySession()
 
-  if (!session)
+  if (!session) 
 
   return <div>Dashboard</div>
 }
@@ -81,7 +81,7 @@ You can use `unauthorized` function to display the `unauthorized.js` file with a
 
   const session = await verifySession()
 
-  if (!session)
+  if (!session) 
 
   return <div>Dashboard</div>
 }
@@ -93,7 +93,7 @@ You can use `unauthorized` function to display the `unauthorized.js` file with a
     <main>
       <h1>401 - Unauthorized</h1>
       <p>Please log in to access this page.</p>
-
+      
     </main>
   )
 }
@@ -105,7 +105,7 @@ You can use `unauthorized` function to display the `unauthorized.js` file with a
     <main>
       <h1>401 - Unauthorized</h1>
       <p>Please log in to access this page.</p>
-
+      
     </main>
   )
 }
@@ -121,7 +121,7 @@ You can invoke `unauthorized` in Server Actions to ensure only authenticated use
   const session = await verifySession()
 
   // If the user is not authenticated, return a 401
-  if (!session)
+  if (!session) 
 
   // Proceed with mutation
   // ...
@@ -134,7 +134,7 @@ You can invoke `unauthorized` in Server Actions to ensure only authenticated use
   const session = await verifySession()
 
   // If the user is not authenticated, return a 401
-  if (!session)
+  if (!session) 
 
   // Proceed with mutation
   // ...
@@ -151,7 +151,7 @@ You can use `unauthorized` in Route Handlers to ensure only authenticated users 
   const session = await verifySession()
 
   // If no session exists, return a 401 and render unauthorized.tsx
-  if (!session)
+  if (!session) 
 
   // Fetch data
   // ...
@@ -163,7 +163,7 @@ You can use `unauthorized` in Route Handlers to ensure only authenticated users 
   const session = await verifySession()
 
   // If the user is not authenticated, return a 401 and render unauthorized.tsx
-  if (!session)
+  if (!session) 
 
   // Fetch data
   // ...

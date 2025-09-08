@@ -252,7 +252,8 @@ export class CaslAbilityFactory {
 
     return build({
       // Read https://casl.js.org/v6/en/guide/subject-type-detection#use-classes-as-subject-types for details
-      detectSubjectType: (item) => item.constructor as ExtractSubjectType<Subjects>,
+      detectSubjectType: (item) =>
+        item.constructor as ExtractSubjectType<Subjects>,
     });
   }
 }
@@ -367,17 +368,22 @@ Now let's create a `PoliciesGuard` that will extract and execute all the policy 
 export class PoliciesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-    private caslAbilityFactory: CaslAbilityFactory
+    private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const policyHandlers =
-      this.reflector.get<PolicyHandler[]>(CHECK_POLICIES_KEY, context.getHandler()) || [];
+      this.reflector.get<PolicyHandler[]>(
+        CHECK_POLICIES_KEY,
+        context.getHandler(),
+      ) || [];
 
     const { user } = context.switchToHttp().getRequest();
     const ability = this.caslAbilityFactory.createForUser(user);
 
-    return policyHandlers.every((handler) => this.execPolicyHandler(handler, ability));
+    return policyHandlers.every((handler) =>
+      this.execPolicyHandler(handler, ability),
+    );
   }
 
   private execPolicyHandler(handler: PolicyHandler, ability: AppAbility) {

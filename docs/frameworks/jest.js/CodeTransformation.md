@@ -80,25 +80,25 @@ interface SyncTransformer<TransformerConfig = unknown> {
   getCacheKey?: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => string;
 
   getCacheKeyAsync?: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => Promise<string>;
 
   process: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => TransformedSource;
 
   processAsync?: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => Promise<TransformedSource>;
 }
 
@@ -108,25 +108,25 @@ interface AsyncTransformer<TransformerConfig = unknown> {
   getCacheKey?: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => string;
 
   getCacheKeyAsync?: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => Promise<string>;
 
   process?: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => TransformedSource;
 
   processAsync: (
     sourceText: string,
     sourcePath: string,
-    options: TransformOptions<TransformerConfig>
+    options: TransformOptions<TransformerConfig>,
   ) => Promise<TransformedSource>;
 }
 
@@ -134,9 +134,10 @@ type Transformer<TransformerConfig = unknown> =
   | SyncTransformer<TransformerConfig>
   | AsyncTransformer<TransformerConfig>;
 
-type TransformerCreator<X extends Transformer<TransformerConfig>, TransformerConfig = unknown> = (
-  transformerConfig?: TransformerConfig
-) => X;
+type TransformerCreator<
+  X extends Transformer<TransformerConfig>,
+  TransformerConfig = unknown,
+> = (transformerConfig?: TransformerConfig) => X;
 
 type TransformerFactory<X extends Transformer> = {
   createTransformer: TransformerCreator<X>;

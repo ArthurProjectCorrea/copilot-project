@@ -18,7 +18,7 @@ slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-dat
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 The `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`. You now need to adjust the connection URL to point to your own database.
@@ -33,11 +33,11 @@ postgresql://USER:PASSWORD@HOST:PORT/DATABASE?PARAMETERS
 
 Here's a short explanation of each component:
 
-- `USER`: The name of your database user
-- `PASSWORD`: The password for your database user
-- `PORT`: The port where your database server is running. The default for CockroachDB is `26257`.
-- `DATABASE`: The name of the database
-- `PARAMETERS`: Any additional connection parameters. See the CockroachDB documentation [here](https://www.cockroachlabs.com/docs/stable/connection-parameters.html#additional-connection-parameters).
+-   `USER`: The name of your database user
+-   `PASSWORD`: The password for your database user
+-   `PORT`: The port where your database server is running. The default for CockroachDB is `26257`.
+-   `DATABASE`: The name of the database
+-   `PARAMETERS`: Any additional connection parameters. See the CockroachDB documentation [here](https://www.cockroachlabs.com/docs/stable/connection-parameters.html#additional-connection-parameters).
 
 For a [CockroachDB Serverless](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html) or [Cockroach Dedicated](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart-trial-cluster) database hosted on [CockroachDB Cloud](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart/), the [connection URL](/orm/reference/connection-urls) looks similar to this:
 

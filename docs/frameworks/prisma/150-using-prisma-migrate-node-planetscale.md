@@ -11,17 +11,17 @@ pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-data
 pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-node-planetscale
 slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-
 ---
-
+ 
 ## Creating the database schema
 
 In this guide, you'll use Prisma's [`db push` command](/orm/prisma-migrate/workflows/prototyping-your-schema) to create the tables in your database. Add the following Prisma data model to your Prisma schema in `prisma/schema.prisma`:
 
 ```prisma file=prisma/schema.prisma copy showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 You are now ready to push your new schema to your database. Connect to your `main` branch using the instructions in [Connect your database](/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-planetscale).

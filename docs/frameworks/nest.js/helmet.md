@@ -23,20 +23,17 @@ app.use(helmet());
 > warning **Warning** When using `helmet`, `@apollo/server` (4.x), and the [Apollo Sandbox](https://docs.nestjs.com/graphql/quick-start#apollo-sandbox), there may be a problem with [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) on the Apollo Sandbox. To solve this issue configure the CSP as shown below:
 >
 > ```typescript
-> app.use(
->   helmet({
->     crossOriginEmbedderPolicy: false,
->     contentSecurityPolicy: {
->       directives: {
->         imgSrc: [`'self'`, 'data:', 'apollo-server-landing-page.cdn.apollographql.com'],
->         scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
->         manifestSrc: [`'self'`, 'apollo-server-landing-page.cdn.apollographql.com'],
->         frameSrc: [`'self'`, 'sandbox.embed.apollographql.com'],
->       },
+> app.use(helmet({
+>   crossOriginEmbedderPolicy: false,
+>   contentSecurityPolicy: {
+>     directives: {
+>       imgSrc: [`'self'`, 'data:', 'apollo-server-landing-page.cdn.apollographql.com'],
+>       scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+>       manifestSrc: [`'self'`, 'apollo-server-landing-page.cdn.apollographql.com'],
+>       frameSrc: [`'self'`, 'sandbox.embed.apollographql.com'],
 >     },
->   })
-> );
-> ```
+>   },
+> }));
 
 #### Use with Fastify
 
@@ -49,31 +46,36 @@ $ npm i --save @fastify/helmet
 [fastify-helmet](https://github.com/fastify/fastify-helmet) should not be used as a middleware, but as a [Fastify plugin](https://www.fastify.io/docs/latest/Reference/Plugins/), i.e., by using `app.register()`:
 
 ```typescript
-import helmet from '@fastify/helmet';
+import helmet from '@fastify/helmet'
 // somewhere in your initialization file
-await app.register(helmet);
+await app.register(helmet)
 ```
 
 > warning **Warning** When using `apollo-server-fastify` and `@fastify/helmet`, there may be a problem with [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) on the GraphQL playground, to solve this collision, configure the CSP as shown below:
 >
 > ```typescript
 > await app.register(fastifyHelmet, {
->   contentSecurityPolicy: {
->     directives: {
->       defaultSrc: [`'self'`, 'unpkg.com'],
->       styleSrc: [
->         `'self'`,
->         `'unsafe-inline'`,
->         'cdn.jsdelivr.net',
->         'fonts.googleapis.com',
->         'unpkg.com',
->       ],
->       fontSrc: [`'self'`, 'fonts.gstatic.com', 'data:'],
->       imgSrc: [`'self'`, 'data:', 'cdn.jsdelivr.net'],
->       scriptSrc: [`'self'`, `https: 'unsafe-inline'`, `cdn.jsdelivr.net`, `'unsafe-eval'`],
->     },
->   },
-> });
+>    contentSecurityPolicy: {
+>      directives: {
+>        defaultSrc: [`'self'`, 'unpkg.com'],
+>        styleSrc: [
+>          `'self'`,
+>          `'unsafe-inline'`,
+>          'cdn.jsdelivr.net',
+>          'fonts.googleapis.com',
+>          'unpkg.com',
+>        ],
+>        fontSrc: [`'self'`, 'fonts.gstatic.com', 'data:'],
+>        imgSrc: [`'self'`, 'data:', 'cdn.jsdelivr.net'],
+>        scriptSrc: [
+>          `'self'`,
+>          `https: 'unsafe-inline'`,
+>          `cdn.jsdelivr.net`,
+>          `'unsafe-eval'`,
+>        ],
+>      },
+>    },
+>  });
 >
 > // If you are not going to use CSP at all, you can use this:
 > await app.register(fastifyHelmet, {

@@ -16,14 +16,14 @@ If Prisma's Rust engine binaries cause large bundle sizes, slow builds, or deplo
 **When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
 When using this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
 :::
@@ -34,7 +34,7 @@ This section covers _general_ things you need to be aware of when deploying to C
 
 ### Using Prisma Postgres
 
-You can use Prisma Postgres and deploy to Cloudflare Workers.
+You can use Prisma Postgres and deploy to Cloudflare Workers. 
 
 After you create a Worker, run:
 
@@ -105,7 +105,7 @@ If your application uses PostgreSQL, we recommend using [Prisma Postgres](/postg
 First, ensure that the `DATABASE_URL` is set as the `url` of the `datasource` in your Prisma schema:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 #### Development
@@ -136,7 +136,7 @@ There are several options for achieving this:
   ```
 - Create a script in `package.json` that reads `.dev.vars` via [`dotenv`](https://www.npmjs.com/package/dotenv-cli). You can then execute `prisma` commands as follows: `npm run env -- npx prisma migrate dev`. Here's a reference for the script:
   ```js file=package.json
-  "scripts":
+  "scripts":  
   ```
 - Duplicate the `DATABASE_URL` and any other relevant env vars into a new file called `.env` which can then be used by Prisma ORM.
 
@@ -207,7 +207,7 @@ You'll further need a database instance of your database provider of choice avai
 We'll use the default `User` model for the example below:
 
 ```prisma
-model User
+model User 
 ```
 
 ### PostgreSQL (traditional)
@@ -228,9 +228,9 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
 
 ```prisma file=schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable to the value of your database connection string. You'll do this in a file called `.dev.vars` used by Cloudflare:
@@ -361,9 +361,9 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
 
 ```prisma file=schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable to the value of your database connection string. You'll do this in a file called `.dev.vars` used by Cloudflare:
@@ -470,9 +470,9 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
 
 ```prisma file=schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable to the value of your database connection string. You'll do this in a file called `.dev.vars` used by Cloudflare:

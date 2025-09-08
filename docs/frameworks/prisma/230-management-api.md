@@ -6,7 +6,7 @@ metaDescription: 'Management API reference documentation for Prisma Postgres.'
 
 ## Overview
 
-This page covers the Prisma Management API which enables you to programmatically manage [platform](/platform/about) resources (e.g. projects or Prisma Postgres instances) in [Prisma Console](https://console.prisma.io).
+This page covers the Prisma Management API which enables you to programmatically manage [platform](/platform/about) resources (e.g. projects or Prisma Postgres instances) in [Prisma Console](https://console.prisma.io). 
 
 :::tip OpenAPI
 An interactive [**OpenAPI 3.1 specification** is available here](https://api.prisma.io/v1/swagger-editor), where you can explore endpoints, request/response bodies, and detailed examples.
@@ -18,7 +18,7 @@ We have three guides to help you use the Management API for common scenarios:
 - [Getting started with the Prisma Management API](/guides/management-api-basic)
 - [Provisioning preview databases with GitHub Actions and Prisma Postgres](/guides/github-actions)
 - [Partner database provisioning & user claim flow](/guides/management-api)
-  :::
+:::
 
 ## Base URL
 
@@ -39,7 +39,6 @@ https://api.prisma.io/v1/projects/
 ### Bearer tokens
 
 The Prisma Postgres API uses _Bearer Token Authentication_ and supports two kinds of tokens:
-
 - Service tokens (manually created in your [Prisma Console](https://console.prisma.io) workspace)
 - OAuth 2 access tokens
 
@@ -57,7 +56,7 @@ You can create a service token to use the Management API like this:
 2. Navigate to your workspace.
 3. Navigate to the **Settings** page of your workspace and select **Service Tokens**.
 4. Click **New Service Token**.
-5. Copy the generated token and store it in a safe location for future use.
+5. Copy the generated token and store it in a safe location for future use. 
 
 #### Creating OAuth credentials
 
@@ -98,13 +97,13 @@ curl --location "https://api.prisma.io/v1/projects" \
 
 1. In the **Authorization** tab, set type to **OAuth 2.0**.
 2. Click **Get New Access Token** and fill in the details:
-   - **Token Name**: Any name
-   - **Grant Type**: Authorization Code
-   - **Callback URL**: `http://localhost:8789/swagger/oauth2-redirect.html`
-   - **Auth URL** / **Access Token URL**: Your local OAuth URLs
-   - **Client ID / Secret**: From the script output
-   - **Scope**: (as needed)
-3. After completing the flow, use the token in your requests.
+    - **Token Name**: Any name
+    - **Grant Type**: Authorization Code
+    - **Callback URL**: `http://localhost:8789/swagger/oauth2-redirect.html`
+    - **Auth URL** / **Access Token URL**: Your local OAuth URLs
+    - **Client ID / Secret**: From the script output
+    - **Scope**: (as needed)
+1. After completing the flow, use the token in your requests.
 
 </details>
 
@@ -161,11 +160,9 @@ Retrieve all projects.
 Create a new project.
 
 - **Request body**:
-
   ```json
-
+  
   ```
-
 - **Responses**:
   - `201 Created`: Project created
   - `401 Unauthorized`
@@ -200,11 +197,9 @@ Transfer a project to a new workspace owner.
 - **Path parameters**:
   - `id`: Project ID
 - **Request body**:
-
   ```json
-
+  
   ```
-
 - **Responses**:
   - `200 OK`
   - `401 Unauthorized`
@@ -213,7 +208,7 @@ Transfer a project to a new workspace owner.
 ### Databases
 
 #### `GET /projects//databases`
-
+  
 Retrieve all databases for a project.
 
 - **Path parameters**:
@@ -233,16 +228,13 @@ Create a new database.
 - **Path parameters**:
   - `projectId`: Project ID
 - **Request body**:
-
   ```json
-
+  
   }
   ```
-
   :::note
-  Use `fromDatabase` only when creating the database from an existing one or a backup.
+   Use `fromDatabase` only when creating the database from an existing one or a backup.
   :::
-
 - **Responses**:
   - `201 Created`
   - `400 Default database already exists`
@@ -294,9 +286,8 @@ Create a new connection string.
 - **Path parameters**:
   - `databaseId`: Database ID
 - **Request body**:
-
   ```json
-
+  
   ```
 
 - **Responses**:

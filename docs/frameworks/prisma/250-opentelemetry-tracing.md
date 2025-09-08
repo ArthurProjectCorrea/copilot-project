@@ -88,7 +88,7 @@ npm install @opentelemetry/api@latest --save
 Tracing was added in version `4.2.0` of Prisma ORM as a Preview feature. For versions of Prisma ORM between `4.2.0` and `6.1.0`, you need to enable the `tracing` Preview feature in your Prisma schema file.
 
 ```prisma
-generator client
+generator client 
 ```
 
 </details>
@@ -103,7 +103,7 @@ npm install @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-ot
 
 ### Step 3: Register tracing in your application
 
-The following code provides two examples of configuring OpenTelemetry tracing in Prisma:
+The following code provides two examples of configuring OpenTelemetry tracing in Prisma: 
 
 1. Using `@opentelemetry/sdk-trace-node` (existing example), which gives fine-grained control over tracing setup.
 2. Using `@opentelemetry/sdk-node`, which offers a simpler configuration and aligns with OpenTelemetry's JavaScript getting started guide.
@@ -155,18 +155,16 @@ const sdk = new NodeSDK(),
 sdk.start()
 
 // Handle graceful shutdown
-process.on('SIGTERM', async () =>  catch (err)  finally
+process.on('SIGTERM', async () =>  catch (err)  finally 
 })
 ```
 
 Choose the `NodeSDK` approach if:
-
 - You are starting with OpenTelemetry and want a simplified setup.
 - You need to quickly integrate tracing with minimal boilerplate.
 - You are using an OTLP-compatible tracing backend like Honeycomb, Jaeger, or Datadog.
 
 Choose the `NodeTracerProvider` approach if:
-
 - You need detailed control over how spans are created, processed, and exported.
 - You are using custom span processors or exporters.
 - Your application requires specific instrumentation or sampling strategies.
@@ -252,13 +250,13 @@ When you perform an interactive transaction, you'll see the following spans in a
 As an example, take the following Prisma schema:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model User
+model User 
 
-model Audit
+model Audit 
 ```
 
 Given the following interactive transaction:
@@ -304,7 +302,7 @@ For example, to add HTTP and [ExpressJS](https://expressjs.com/) tracing, add th
 // Imports
 
 // Register your auto-instrumentors
-registerInstrumentations();
+registerInstrumentations()
 ```
 
 For a full list of available instrumentation, take a look at the [OpenTelemetry Registry](https://opentelemetry.io/ecosystem/registry/?language=js&component=instrumentation).
@@ -337,7 +335,7 @@ You can configure your tracing configuration to use the appropriate span process
 import  from '@opentelemetry/sdk-trace-base';
 
 const spanProcessors = [];
-if (process.env.NODE_ENV === 'production')  else
+if (process.env.NODE_ENV === 'production')  else 
 
 const provider = new NodeTracerProvider();
 ```
@@ -362,7 +360,9 @@ const provider = new NodeTracerProvider(),
 The order in which you set up tracing matters. In your application, ensure that you register tracing and instrumentation before you import any instrumented dependencies. For example:
 
 ```ts
-registerTracing();
+
+registerTracing()
 
 // You must import any dependencies after you register tracing.
+
 ```

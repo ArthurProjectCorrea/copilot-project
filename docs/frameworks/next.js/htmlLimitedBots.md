@@ -7,12 +7,12 @@ The `htmlLimitedBots` config allows you to specify a list of user agents that sh
 
 ```ts filename="next.config.ts" switcher
 
-const config: NextConfig =
+const config: NextConfig = 
 
 ```
 
 ```js filename="next.config.js" switcher
-module.exports =
+module.exports = 
 ```
 
 ## Default list

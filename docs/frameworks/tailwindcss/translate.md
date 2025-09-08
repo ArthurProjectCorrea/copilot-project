@@ -1,5 +1,5 @@
 <ApiTable
-rows=-<number>`, css("calc(var(--spacing) * <number>)")],
+  rows=-<number>`, css("calc(var(--spacing) * <number>)")],
         [`-$-<number>`, css("calc(var(--spacing) * -<number>)")],
         [`$-<fraction>`, css("calc(<fraction> * 100%)")],
         [`-$-<fraction>`, css("calc(<fraction> * -100%)")],
@@ -11,10 +11,10 @@ rows=-<number>`, css("calc(var(--spacing) * <number>)")],
         [`$-[<value>]`, css("<value>")],
       ];
     }),
-    [`translate-z-<number>`, `translate: var(--tw-translate-x) var(--tw-translate-y) calc(var(--spacing) _ <number>);`],
+    [`translate-z-<number>`, `translate: var(--tw-translate-x) var(--tw-translate-y) calc(var(--spacing) * <number>);`],
     [
       `-translate-z-<number>`,
-      `translate: var(--tw-translate-x) var(--tw-translate-y) calc(var(--spacing) _ -<number>);`,
+      `translate: var(--tw-translate-x) var(--tw-translate-y) calc(var(--spacing) * -<number>);`,
     ],
     [`translate-z-px`, `translate: var(--tw-translate-x) var(--tw-translate-y) 1px;`],
     [`-translate-z-px`, `translate: var(--tw-translate-x) var(--tw-translate-y) -1px;`],
@@ -23,8 +23,8 @@ rows=-<number>`, css("calc(var(--spacing) * <number>)")],
       `translate: var(--tw-translate-x) var(--tw-translate-y) var(<custom-property>);`,
     ],
     [`translate-z-[<value>]`, `translate: var(--tw-translate-x) var(--tw-translate-y) <value>;`],
-["translate-none", "translate: none;"],
-]}
+    ["translate-none", "translate: none;"],
+  ]}
 />
 
 ## Examples

@@ -1,7 +1,7 @@
 ---
 title: 'Repeated query'
 metaTitle: 'Optimize Recommendations: Repeated query'
-metaDescription: 'Learn about the recommendation provided by Optimize for repeated queries.'
+metaDescription: "Learn about the recommendation provided by Optimize for repeated queries."
 tocDepth: 3
 toc: true
 ---

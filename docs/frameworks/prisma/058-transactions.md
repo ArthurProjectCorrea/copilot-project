@@ -123,7 +123,7 @@ await prisma.$transaction(
     prisma.resource.deleteMany( }),
     prisma.resource.createMany(),
   ],
-
+  
 )
 ```
 
@@ -177,7 +177,7 @@ function transfer(from: string, to: string, amount: number) ,
   })
 }
 
-async function main()
+async function main() 
 
 main()
 ```
@@ -190,7 +190,7 @@ To catch the exception, you can wrap `$transaction` in a try-catch block:
 
 ```js
 try )
-} catch (err)
+} catch (err) 
 ```
 
 #### Transaction options
@@ -206,7 +206,7 @@ For example:
 ```ts
 await prisma.$transaction(
   async (tx) => ,
-
+  
 )
 ```
 
@@ -228,9 +228,12 @@ To set the transaction isolation level, use the `isolationLevel` option in the s
 For sequential operations:
 
 ```ts
-await prisma.$transaction([
-  // Prisma Client operations running in a transaction...
-]);
+await prisma.$transaction(
+  [
+    // Prisma Client operations running in a transaction...
+  ],
+  
+)
 ```
 
 For an interactive transaction:
@@ -238,7 +241,7 @@ For an interactive transaction:
 ```jsx
 await prisma.$transaction(
   async (prisma) => ,
-
+  
 )
 ```
 
@@ -312,10 +315,10 @@ To avoid transaction write conflicts and deadlocks on a transaction:
              prisma.post.createMany(,
              }),
            ],
-
+           
          )
          break
-       } catch (error)
+       } catch (error) 
          throw error
        }
      }
@@ -330,12 +333,11 @@ If you wrap a `$transaction` inside a call to `Promise.all()`, the queries insid
 await prisma.$transaction(async (prisma) => )
 ```
 
-This may be counterintuitive because `Promise.all()` usually _parallelizes_ the calls passed into it.
+ This may be counterintuitive because `Promise.all()` usually _parallelizes_ the calls passed into it.
 
 The reason for this behaviour is that:
-
 - One transaction means that all queries inside it have to be run on the same connection.
-- A database connection can only ever execute one query at a time.
+- A database connection can only ever execute one query at a time. 
 - As one query blocks the connection while it is doing its work, putting a transaction into `Promise.all` effectively means that queries should be ran one after another.
 
 ## Dependent writes
@@ -389,9 +391,9 @@ Consider the Slack sign-up flow, which:
 This scenario can be represented by the following schema - note that users can belong to many teams, and teams can have many users (a many-to-many relationship):
 
 ```prisma
-model Team
+model Team 
 
-model User
+model User 
 ```
 
 The most straightforward approach is to create a team, then create and attach a user to that team:
@@ -535,9 +537,9 @@ You are building a service like gmail.com, and your customer wants a **"Mark as 
 In the following schema, a `User` can have many received emails (a one-to-many relationship):
 
 ```ts
-model User
+model User 
 
-model Email
+model Email 
 ```
 
 Based on this schema, you can use `updateMany` to mark all unread emails as read:
@@ -573,7 +575,7 @@ The `$transaction([])` API is generic solution to independent writes that allows
 Its also worth noting that operations are executed according to the order they are placed in the transaction.
 
 ```ts
-await prisma.$transaction([iRunFirst, iRunSecond, iRunThird]);
+await prisma.$transaction([iRunFirst, iRunSecond, iRunThird])
 ```
 
 > **Note**: Using a query in a transaction does not influence the order of operations in the query itself.
@@ -592,11 +594,11 @@ Consider the `$transaction([])` API if:
 GDPR and other privacy legislation give users the right to request that an organization deletes all of their personal data. In the following example schema, a `User` can have many posts and private messages:
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 
-model PrivateMessage
+model PrivateMessage 
 ```
 
 If a user invokes the right to be forgotten, we must delete three records: the user record, private messages, and posts. It is critical that _all_ delete operations succeed together or not at all, which makes this a use case for a transaction. However, using a single bulk operation like `deleteMany` is not possible in this scenario because we need to delete across three models. Instead, we can use the `$transaction([])` API to run three operations together - two `deleteMany` and one `delete`:
@@ -630,9 +632,9 @@ await prisma.team.create(,
 Instead of auto-generating IDs, change the `id` fields of `Team` and `User` to a `String` (if you do not provide a value, a UUID is generated automatically). This example uses UUIDs:
 
 ```prisma highlight=2,9;delete|3,10;add
-model Team
+model Team 
 
-model User
+model User 
 ```
 
 Refactor the sign-up flow example to use the `$transaction([])` API instead of nested writes:
@@ -698,7 +700,7 @@ Idempotency is something you can and should actively design into your applicatio
 You are creating an upgrade flow for Slack that allows teams to unlock paid features. Teams can choose between different plans and pay per user, per month. You use Stripe as your payment gateway, and extend your `Team` model to store a `stripeCustomerId`. Subscriptions are managed in Stripe.
 
 ```prisma highlight=5;normal
-model Team
+model Team 
 ```
 
 The upgrade flow looks like this:
@@ -733,6 +735,7 @@ This example has a problem: you can only run the logic _once_. Consider the foll
 2. Updating the team **fails** - the team is not marked as a customer in the Slack database
 3. The customer is charged by Stripe, but paid features are not unlocked in Slack because the team lacks a valid `customerId`
 4. Running the same code again either:
+
    - Results in an error because the team (defined by `externalId`) already exists - Stripe never returns a customer ID
    - If `externalId` is not subject to a unique constraint, Stripe creates yet another subscription (**not idempotent**)
 
@@ -789,9 +792,9 @@ Avoiding locks in an application with a high number of concurrent requests makes
 You are creating a booking system for a cinema. Each movie has a set number of seats. The following schema models movies and seats:
 
 ```ts
-model Seat
+model Seat 
 
-model Movie
+model Movie 
 ```
 
 The following sample code finds the first available seat and assigns that seat to a user:
@@ -825,7 +828,7 @@ However, this code suffers from the "double-booking problem" - it is possible fo
 Even though Sorcha has successfully booked the seat, the system ultimately stores Ellen's claim. To solve this problem with optimistic concurrency control, add a `version` field to the seat:
 
 ```prisma highlight=7;normal
-model Seat
+model Seat 
 ```
 
 Next, adjust the code to check the `version` field before updating:
@@ -854,7 +857,7 @@ const seats = await client.seat.updateMany(,
   where: ,
 })
 
-if (seats.count === 0)
+if (seats.count === 0) 
 //highlight-end
 ```
 
@@ -900,7 +903,7 @@ async function transfer(from: string, to: string, amount: number) ,
   })
 }
 
-async function main()
+async function main() 
 
 main()
 ```

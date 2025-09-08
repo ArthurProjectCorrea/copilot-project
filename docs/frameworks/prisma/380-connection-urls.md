@@ -40,7 +40,7 @@ Here are examples for the connection URLs of the databases Prisma ORM supports:
 
 ### Prisma Postgres
 
-[Prisma Postgres](/postgres) is a managed PostgreSQL service running on unikernels. There are several ways to connect to Prisma Postgres:
+[Prisma Postgres](/postgres) is a managed PostgreSQL service running on unikernels. There are several ways to connect to Prisma Postgres: 
 
 - via direct TCP connections (lets you connect via any ORM or database tool)
 - via [Prisma Accelerate](/accelerate) (only supported with Prisma ORM)
@@ -67,13 +67,13 @@ DATABASE_URL="postgres://2f9881cc7eef46f094ac913df34c1fb441502fe66cbe28cc48998d4
 When connecting via Prisma Accelerate, the connection string doesn't require a user/password like a conventional connection string does. Instead, authentication works via an API key:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db  
 ```
 
 In this snippet, `API_KEY` is a placeholder for the API key you are receiving when setting up a new Prismas Postgres instance via the [Prisma Console](https://console.prisma.io). Here is an example for what a real connection URL to Prisma Postgres may look like:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 #### Local Prisma Postgres
@@ -81,7 +81,7 @@ datasource db
 The connection string for connecting to a [local Prisma Postgres](/postgres/database/local-development) instance mirrors the structure of a remote instance via Accelerate:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db  
 ```
 
 However, in this case the `API_KEY` doesn't provide authentication details. Instead, it encodes information about the local Prisma Postgres instance. You can obtain a local connection string via the [`prisma dev`](/orm/reference/prisma-cli-reference#dev) command.
@@ -89,37 +89,37 @@ However, in this case the `API_KEY` doesn't provide authentication details. Inst
 ### PostgreSQL
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 ### MySQL
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 ### Microsoft SQL Server
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 ### SQLite
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 ### CockroachDB
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 ### MongoDB
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 ## .env
@@ -127,7 +127,7 @@ datasource db
 You can also provide the connection URL as an environment variable:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 ```
 
 You can then either set the environment variable in your terminal or by providing a [dotenv](https://github.com/motdotla/dotenv) file named `.env`. This will automatically be picked up by the Prisma CLI.

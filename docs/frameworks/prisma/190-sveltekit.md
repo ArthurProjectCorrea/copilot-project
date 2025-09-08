@@ -6,6 +6,7 @@ sidebar_label: 'SvelteKit'
 image: '/img/guides/prisma-sveltekit-cover.png'
 completion_time: '15 min'
 community_section: true
+
 ---
 
 ## Introduction
@@ -15,7 +16,6 @@ Prisma ORM simplifies database access with type-safe queries, and when paired wi
 In this guide, you'll learn to integrate Prisma ORM with a Prisma Postgres database in a SvelteKit project from scratch. You can find a complete example of this guide on [GitHub](https://github.com/prisma/prisma-examples/tree/latest/orm/sveltekit).
 
 ## Prerequisites
-
 - [Node.js 18+](https://nodejs.org)
 - [Svelte VSCode extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) (Recommended by Svelte)
 
@@ -33,12 +33,12 @@ It will prompt you to customize your setup. Here are the options you'll choose:
 
 :::info
 
-- _Which template would you like?_ `SvelteKit minimal`
-- _Add type checking with TypeScript?_ `Yes, using TypeScript syntax`
-- _What would you like to add to your project?_
+- *Which template would you like?* `SvelteKit minimal`
+- *Add type checking with TypeScript?* `Yes, using TypeScript syntax`
+- *What would you like to add to your project?* 
   - `prettier`
   - `eslint`
-- _Which package manager do you want to install dependencies with?_ `npm`
+- *Which package manager do you want to install dependencies with?* `npm`
 
 :::
 
@@ -62,7 +62,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output src/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My SvelteKit Project"
 :::
@@ -79,14 +78,14 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models and change the generator to use the `prisma-client` provider:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -99,7 +98,6 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
-
 ### 2.4. Seed the database
 
 Add some seed data to populate the database with sample users and posts.
@@ -134,10 +132,10 @@ Now, tell Prisma how to run this script by updating your `package.json`:
 ```json file=package.json
 ,
   //add-start
-  "prisma":
+  "prisma": 
   //add-end
 	"devDependencies": ,
-	"dependencies":
+	"dependencies": 
 }
 ```
 
@@ -202,7 +200,7 @@ Update your `findMany()` call like this:
 
 	return ;
 }
-```
+```  
 
 Now, every user in the result will also include a `posts` array.
 
@@ -211,7 +209,8 @@ Now, every user in the result will also include a `posts` array.
 In `src/routes/+page.svelte`, strip the file down to the basics and add a `<script>` fragment. The file should look like this:
 
 ```html file=src/routes/+page.svelte
-<script lang="ts"></script>
+<script lang="ts">
+</script>
 
 <h1>SvelteKit + Prisma</h1>
 ```
@@ -220,8 +219,8 @@ We need to grab the data exported from `+page.server.ts`:
 
 ```html file=src/routes/+page.svelte
 <script lang="ts">
-  //add-next-line
-  let = $props();
+//add-next-line
+	let  = $props();
 </script>
 
 <h1>SvelteKit + Prisma</h1>
@@ -231,18 +230,18 @@ Now that we have the data, let's map through the users and their posts with Svel
 
 ```html file=src/routes/+page.svelte
 <script lang="ts">
-  let = $props();
+	let  = $props();
 </script>
 
 <h1>SvelteKit + Prisma</h1>
 
 //add-start
 
-<h2></h2>
-
-<ul>
-  <li><a href=""></a></li>
-</ul>
+  <h2></h2>
+  
+    <ul>
+      <li><a href=></a></li>
+    </ul>
 
 //add-end
 ```

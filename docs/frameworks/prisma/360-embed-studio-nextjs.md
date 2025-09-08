@@ -26,7 +26,7 @@ Embedding Prisma Studio can be useful in scenarios such as:
 
 :::note
 
-[**Embeddable Prisma Studio**](/postgres/database/prisma-studio/embedding-studio) is _free_ and licensed under Apache 2.0.
+[**Embeddable Prisma Studio**](/postgres/database/prisma-studio/embedding-studio) is *free* and licensed under Apache 2.0.
 
 ✔️ Free to use in production
 ⚠️ Prisma branding must remain visible and unchanged
@@ -40,7 +40,7 @@ Currently, Embedded Prisma Studio supports [**Prisma Postgres**](/postgres), wit
 
 - [Node.js 18+](https://nodejs.org)
 - Basic knowledge of React and Next.js
-- A Prisma Postgres database
+- A Prisma Postgres database 
 
 ## 1. Setting up Next.js
 
@@ -93,7 +93,7 @@ npx prisma init --db --output ../app/generated/prisma
 
 :::info
 
-You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My \***\*\_\_\*\*** Project"
+You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My __________ Project"
 
 :::
 
@@ -109,15 +109,15 @@ The `prisma init --db` command creates:
 Open `prisma/schema.prisma` and replace the content with:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
 
-model User
+model User 
 
-model Post
+model Post 
 
 //add-end
 ```
@@ -166,7 +166,7 @@ Add a seed script to your `package.json`:
 ```json file=package.json
 ,
   // add-end
-  "scripts":
+  "scripts": 
   // ... rest of package.json
 }
 ```
@@ -179,7 +179,7 @@ npx prisma db seed
 
 ## 3. Setting up the embedded Prisma Studio in your app
 
-Now that you have Prisma ORM and Prisma Postgres set up, you can embed Prisma Studio in your Next.js app.
+Now that you have Prisma ORM and Prisma Postgres set up, you can embed Prisma Studio in your Next.js app. 
 
 ### 3.1. Install the Prisma Studio Core package
 
@@ -210,7 +210,7 @@ Create a `components` folder and add a new file called `StudioWrapper.tsx`. This
 'use client';
 import "@prisma/studio-core/ui/index.css";
 
-interface StudioWrapperProps
+interface StudioWrapperProps 
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -228,7 +228,7 @@ interface StudioWrapperProps
       </header>
       <main className="max-w-7xl mx-auto">
         <div className="h-[calc(100vh-80px)]">
-
+          
         </div>
       </main>
     </div>
@@ -250,7 +250,7 @@ const CORS_HEADERS = ;
 
   return Response.json(
     ,
-
+    
   );
 }
 
@@ -287,7 +287,7 @@ Open the `app/page.tsx` file and replace the existing code to render the embedde
 // Dynamically import Studio with no SSR to avoid hydration issues
 const Studio = dynamic(
   () => import("@prisma/studio-core/ui").then(mod => mod.Studio),
-
+  
 );
 
 // Loading component
@@ -311,7 +311,7 @@ const ClientOnlyStudio = () => );
 };
 
   return (
-
+    
   );
 }
 ```

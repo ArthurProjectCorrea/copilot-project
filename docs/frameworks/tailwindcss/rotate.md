@@ -1,5 +1,5 @@
 <ApiTable
-rows=-<number>`, `rotate: <number>deg;`],
+  rows=-<number>`, `rotate: <number>deg;`],
       [`-$-<number>`, `rotate: calc(<number>deg * -1);`],
       [`$-(<custom-property>)`, `rotate: var(<custom-property>);`],
       [`$-[<value>]`, `rotate: <value>;`],
@@ -13,8 +13,8 @@ rows=-<number>`, `rotate: <number>deg;`],
       [`-$-<number>`, `transform: $;`],
       [`$-(<custom-property>)`, `transform: $;`],
       [`$-[<value>]`, `transform: $;`],
-]),
-]}
+    ]),
+  ]}
 />
 
 ## Examples

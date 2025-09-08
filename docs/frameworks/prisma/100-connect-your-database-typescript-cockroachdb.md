@@ -1,29 +1,24 @@
 ---
-title: 'Connect your existing database using TypeScript and CockroachDB'
+title: 'Connect your database using TypeScript and CockroachDB'
 sidebar_label: 'Connect your database'
-metaTitle: 'Connect your existing database using TypeScript and CockroachDB'
-metaDescription: 'Connect your existing database to your project using TypeScript and CockroachDB'
+metaTitle: 'Connect your database using TypeScript and CockroachDB'
+metaDescription: 'Connect your database to your project using TypeScript and CockroachDB'
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
 sidebar_class_name: 'hidden-sidebar tech-switch'
 hide_table_of_contents: true
-toc: false
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-cockroachdb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-cockroachdb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-cockroachdb
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-cockroachdb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-
 ---
-
-## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 The `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`. You now need to adjust the connection URL to point to your own database.
-
-<h3 id="connection-url">Connection URL</h3>
 
 The [format of the connection URL](/orm/reference/connection-urls) for your database depends on the database you use. CockroachDB uses the PostgreSQL connection URL format, which has the following structure (the parts spelled all-uppercased are _placeholders_ for your specific connection details):
 

@@ -92,7 +92,7 @@ To add case-insensitive filtering to a new column, you will need to modify the m
 Taking the following Prisma Schema model:
 
 ```prisma
-model User
+model User 
 ```
 
 and using `prisma migrate dev --create-only` to create the following migration file:
@@ -123,7 +123,7 @@ Since columns cannot be updated in SQLite, `COLLATE NOCASE` can only be added to
 Taking the following Prisma Schema model:
 
 ```prisma
-model User
+model User 
 ```
 
 and using `prisma migrate dev --create-only` to create an empty migration file, you will need to rename the current `User` table and create a new `User` table with `COLLATE NOCASE`.

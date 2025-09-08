@@ -51,5 +51,4 @@ Note that a fixed version of SQLite is shipped with every Prisma ORM release.
 | PlanetScale                  | \*      |
 | Cloudflare D1 (Preview)      | \*      |
 | Aiven (MySQL & Postgres)     | \*      |
-
 &sup1; This does not include support for [Data API for Aurora Serverless](https://github.com/prisma/prisma/issues/1964).

@@ -83,10 +83,15 @@ Once metadata is attached to providers in this way, `DiscoveryService` makes it 
 const providers = this.discoveryService.getProviders();
 
 const [provider] = providers.filter(
-  (item) => this.discoveryService.getMetadataByDecorator(FeatureFlag, item) === 'experimental'
+  (item) =>
+    this.discoveryService.getMetadataByDecorator(FeatureFlag, item) ===
+    'experimental',
 );
 
-console.log('Providers with the "experimental" feature flag metadata:', provider);
+console.log(
+  'Providers with the "experimental" feature flag metadata:',
+  provider,
+);
 ```
 
 #### Conclusion

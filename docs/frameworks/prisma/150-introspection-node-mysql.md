@@ -1,6 +1,6 @@
 ---
 title: 'Introspection for MySQL in a JavaScript project'
-sidebar_label: 'Introspection'
+sidebar_label:  'Introspection'
 metaTitle: 'Introspection with Prisma ORM, JavaScript, and MySQL'
 metaDescription: 'Introspect your existing project with Prisma ORM, JavaScript, and MySQL'
 langSwitcher: ['typescript', 'node']
@@ -90,11 +90,11 @@ After the introspection is complete, your Prisma schema is updated:
 The data model now looks similar to this (note that the fields on the models have been reordered for better readability):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 :::info
@@ -107,20 +107,20 @@ Prisma ORM's data model is a declarative representation of your database schema 
 
 Right now, there's a few minor "issues" with the data model:
 
-- The `User` relation field is uppercased and therefore doesn't adhere to Prisma's [naming conventions](/orm/reference/prisma-schema-reference#naming-conventions-1) . To express more "semantics", it would also be nice if this field was called `author` to _describe_ the relationship between `User` and `Post` better.
-- The `Post` and `Profile` relation fields on `User` as well as the `User` relation field on `Profile` are all uppercased. To adhere to Prisma's [naming conventions](/orm/reference/prisma-schema-reference#naming-conventions-1) , both fields should be lowercased to `post`, `profile` and `user`.
-- Even after lowercasing, the `post` field on `User` is still slightly misnamed. That's because it actually refers to a [list](/orm/prisma-schema/data-model/models#type-modifiers) of posts – a better name therefore would be the plural form: `posts`.
+-   The `User` relation field is uppercased and therefore doesn't adhere to Prisma's [naming conventions](/orm/reference/prisma-schema-reference#naming-conventions-1) . To express more "semantics", it would also be nice if this field was called `author` to _describe_ the relationship between `User` and `Post` better.
+-   The `Post` and `Profile` relation fields on `User` as well as the `User` relation field on `Profile` are all uppercased. To adhere to Prisma's [naming conventions](/orm/reference/prisma-schema-reference#naming-conventions-1) , both fields should be lowercased to `post`, `profile` and `user`.
+-   Even after lowercasing, the `post` field on `User` is still slightly misnamed. That's because it actually refers to a [list](/orm/prisma-schema/data-model/models#type-modifiers) of posts – a better name therefore would be the plural form: `posts`.
 
 These changes are relevant for the generated Prisma Client API where using lowercased relation fields `author`, `posts`, `profile` and `user` will feel more natural and idiomatic to JavaScript/TypeScript developers. You can therefore [configure your Prisma Client API](/orm/prisma-client/setup-and-configuration/custom-model-and-field-names).
 
 Because [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) are _virtual_ (i.e. they _do not directly manifest in the database_), you can manually rename them in your Prisma schema without touching the database:
 
 ```prisma file=prisma/schema.prisma highlight=8,17,24,25;edit showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 In this example, the database schema did follow the [naming conventions](/orm/reference/prisma-schema-reference#naming-conventions) for Prisma ORM models (only the virtual relation fields that were generated from introspection did not adhere to them and needed adjustment). This optimizes the ergonomics of the generated Prisma Client API.
@@ -130,7 +130,7 @@ Sometimes though, you may want to make additional changes to the names of the co
 Assume you obtained the following model from introspection that's based on _snake_case_ notation:
 
 ```prisma no-lines
-model my_user
+model my_user 
 ```
 
 If you generated a Prisma Client API for this model, it would pick up the _snake_case_ notation in its API:
@@ -143,7 +143,7 @@ const user = await prisma.my_user.create(,
 If you don't want to use the table and column names from your database in your Prisma Client API, you can configure them with [`@map` and `@@map`](/orm/prisma-schema/data-model/models#mapping-model-names-to-tables-or-collections):
 
 ```prisma no-lines
-model MyUser
+model MyUser 
 ```
 
 With this approach, you can name your model and its fields whatever you like and use the `@map` (for field names) and `@@map` (for models names) to point to the underlying tables and columns. Your Prisma Client API now looks as follows:

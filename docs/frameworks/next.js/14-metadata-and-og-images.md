@@ -33,7 +33,8 @@ There are two default `meta` tags that are always added even if a route doesn't 
 - The [meta viewport tag](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag) sets the viewport width and scale for the website to adjust for different devices.
 
 ```html
-<meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
 
 The other metadata fields can be defined with the `Metadata` object (for [static metadata](#static-metadata)) or the `generateMetadata` function (for [generated metadata](#generated-metadata)).
@@ -76,7 +77,7 @@ type Props = >
     res.json()
   )
 
-  return
+  return 
 }
 
 ```
@@ -90,7 +91,7 @@ type Props = >
     res.json()
   )
 
-  return
+  return 
 }
 
 ```
@@ -128,8 +129,8 @@ There may be cases where you need to fetch the **same** data for metadata and th
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
 
   params,
-}:
-})
+}: 
+}) 
 }
 
   const post = await getPost(params.slug)
@@ -140,7 +141,7 @@ There may be cases where you need to fetch the **same** data for metadata and th
 ```jsx filename="app/blog/[slug]/page.js" switcher
 
   const post = await getPost(params.slug)
-  return
+  return 
 }
 
   const post = await getPost(params.slug)
@@ -199,7 +200,7 @@ For example, to generate a unique OG image for each blog post, add a `opengraph-
       <div
         style=}
       >
-
+        
       </div>
     )
   )
@@ -224,7 +225,7 @@ For example, to generate a unique OG image for each blog post, add a `opengraph-
       <div
         style=}
       >
-
+        
       </div>
     )
   )

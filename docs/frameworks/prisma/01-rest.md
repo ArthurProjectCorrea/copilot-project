@@ -29,13 +29,13 @@ Here's a non-exhaustive list of libraries and frameworks you can use with Prisma
 Assume you have a Prisma schema that looks similar to this:
 
 ```prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 You can now implement route controller (e.g. using Express) that use the generated [Prisma Client API](/orm/prisma-client) to perform a database operation when an incoming HTTP request arrives. This page only shows few sample code snippets; if you want to run these code snippets, you can use a [REST API example](https://pris.ly/e/ts/rest-express).
@@ -54,7 +54,7 @@ Note that the `feed` endpoint in this case returns a nested JSON response of `Po
 
 ```json
 [
-
+  
   }
 ]
 ```
@@ -95,10 +95,10 @@ app.delete(`/post/:id`, async (req, res) =>  = req.params
 
 You can find several ready-to-run examples that show how to implement a REST API with Prisma Client, as well as build full applications, in the [`prisma-examples`](https://github.com/prisma/prisma-examples/) repository.
 
-| **Example**                                    | **Stack**    | **Description**                           |
-| ---------------------------------------------- | ------------ | ----------------------------------------- |
-| [`express`](https://pris.ly/e/ts/rest-express) | Backend only | REST API with Express for TypeScript      |
-| [`fastify`](https://pris.ly/e/ts/rest-fastify) | Backend only | REST API using Fastify and Prisma Client. |
-| [`hapi`](https://pris.ly/e/ts/rest-hapi)       | Backend only | REST API using hapi and Prisma Client     |
-| [`nestjs`](https://pris.ly/e/ts/rest-nestjs)   | Backend only | Nest.js app (Express) with a REST API     |
-| [`nextjs`](https://pris.ly/e/orm/nextjs)       | Fullstack    | Next.js app (React) with a REST API       |
+| **Example**                                                                                                                   | **Stack**    | **Description**                                |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------- |
+| [`express`](https://pris.ly/e/ts/rest-express)                               | Backend only | REST API with Express for TypeScript           |
+| [`fastify`](https://pris.ly/e/ts/rest-fastify)                               | Backend only | REST API using Fastify and Prisma Client.      |
+| [`hapi`](https://pris.ly/e/ts/rest-hapi)                                     | Backend only | REST API using hapi and Prisma Client          |
+| [`nestjs`](https://pris.ly/e/ts/rest-nestjs)                                 | Backend only | Nest.js app (Express) with a REST API          |
+| [`nextjs`](https://pris.ly/e/orm/nextjs)                                     | Fullstack    | Next.js app (React) with a REST API            |

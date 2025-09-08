@@ -1,7 +1,7 @@
 ---
-title: 'Serverless driver'
-metaTitle: 'Serverless driver'
-metaDescription: 'The serverless driver enables direct access to Prisma Postgres via HTTP.'
+title: "Serverless driver"
+metaTitle: "Serverless driver"
+metaDescription: "The serverless driver enables direct access to Prisma Postgres via HTTP."
 tocDepth: 3
 toc: true
 sidebar_class_name: early-access-badge
@@ -29,7 +29,7 @@ The recommended API for most users is the `ppg` function, which returns a high-l
 
 ```ts
 
-type Post =
+type Post = 
 
 const sql = ppg("prisma+postgres://accelerate.prisma-data.net/?api_key=...");
 
@@ -46,7 +46,7 @@ The `ppg` function returns a high-level SQL client implemented as a template lit
 ```ts
 function ppg(connectionString: string, deserialize?: Deserialize): Sql;
 
-interface Sql
+interface Sql 
 type Deserialize = (value: unknown, oid: unknown) => unknown;
 ```
 
@@ -71,9 +71,9 @@ The `ppg` function accepts the following arguments:
 
 ```ts
 
-type Post =
+type Post = 
 
-type User =
+type User = 
 
 const sql = ppg("prisma+postgres://accelerate.prisma-data.net/?api_key=...");
 
@@ -88,7 +88,7 @@ const user: User[] = await sql<User>`SELECT * FROM "User" WHERE "id" = $`
 The `Client` class provides more low-level control and should be used with more care:
 
 ```ts
-class Client implements Queryable
+class Client implements Queryable 
 ```
 
 The `query` function it exposes:
@@ -99,6 +99,7 @@ The `query` function it exposes:
 #### Usage
 
 ```ts
+
 const client = new Client();
 
 const posts = await client.query('SELECT * FROM "Post" WHERE "authorId" = $1', [1]);
@@ -111,7 +112,7 @@ This query returns an object of this structure:
     ,
     ,
     ,
-
+    
   ],
   rows: [ [ 1, 'Hello World', 'This is the content of the post', true, 1 ] ]
 }

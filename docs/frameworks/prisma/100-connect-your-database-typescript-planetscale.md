@@ -18,13 +18,13 @@ slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-dat
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 You will also need to [set the relation mode type to `prisma`](/orm/prisma-schema/data-model/relations/relation-mode#emulate-relations-in-prisma-orm-with-the-prisma-relation-mode) in the `datasource` block:
 
 ```prisma file=schema.prisma highlight=4;add showLineNumbers
-datasource db
+datasource db 
 ```
 
 The `url` is [set via an environment variable](/orm/prisma-schema/overview#accessing-environment-variables-from-the-schema) which is defined in `.env`:
@@ -45,10 +45,10 @@ mysql://USER:PASSWORD@HOST:PORT/DATABASE
 
 Here's a short explanation of each component:
 
-- `USER`: The name of your database user
-- `PASSWORD`: The password for your database user
-- `PORT`: The port where your database server is running (typically `3306` for MySQL)
-- `DATABASE`: The name of the [database](https://dev.mysql.com/doc/refman/8.0/en/creating-database.html)
+-   `USER`: The name of your database user
+-   `PASSWORD`: The password for your database user
+-   `PORT`: The port where your database server is running (typically `3306` for MySQL)
+-   `DATABASE`: The name of the [database](https://dev.mysql.com/doc/refman/8.0/en/creating-database.html)
 
 For a database hosted with PlanetScale, the [connection URL](/orm/reference/connection-urls) looks similar to this:
 

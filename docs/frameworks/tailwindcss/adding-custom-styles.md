@@ -10,7 +10,7 @@ If you want to change things like your color palette, spacing scale, typography 
 
 ```css
 /* [!code filename:CSS] */
-@theme;
+@theme 
 ```
 
 Learn more about customizing your theme in the [theme variables documentation](/docs/theme).
@@ -101,7 +101,9 @@ Arbitrary _variants_ are like arbitrary values but for doing on-the-fly selector
 <!-- [!code filename:HTML] -->
 <!-- [!code word:\[&\:nth-child(-n+3)\]] -->
 <ul role="list">
+  
   <li class="lg:[&:nth-child(-n+3)]:hover:underline"></li>
+  
 </ul>
 ```
 
@@ -192,7 +194,7 @@ While Tailwind is designed to handle the bulk of your styling needs, there is no
 @import "tailwindcss";
 
 /* [!code highlight:4] */
-.my-custom-style
+.my-custom-style 
 ```
 
 ### Adding base styles
@@ -215,9 +217,9 @@ If you want to add your own default base styles for specific HTML elements, use 
 ```css
 /* [!code filename:CSS] */
 /* [!code highlight:2] */
-@layer base
+@layer base 
 
-  h2
+  h2 
   /* [!code highlight:2] */
 }
 ```
@@ -231,7 +233,7 @@ Traditionally these would be classes like `card`, `btn`, `badge` — that kind o
 ```css
 /* [!code filename:CSS] */
 /* [!code highlight:2] */
-@layer components
+@layer components 
   /* [!code highlight:2] */
 }
 ```
@@ -253,7 +255,7 @@ The `components` layer is also a good place to put custom styles for any third-p
 
 ```css
 /* [!code filename:CSS] */
-@layer components
+@layer components 
 }
 ```
 
@@ -273,7 +275,7 @@ Use the `@utility` directive to add a custom utility to your project:
 
 ```css
 /* [!code filename:CSS] */
-@utility content-auto;
+@utility content-auto 
 ```
 
 You can now use this utility in your HTML:
@@ -304,7 +306,7 @@ If your custom utility is more complex than a single class name, use nesting to 
 
 ```css
 /* [!code filename:CSS] */
-@utility scrollbar-hidden
+@utility scrollbar-hidden 
 }
 ```
 
@@ -314,7 +316,7 @@ In addition to registering simple utilities with the `@utility` directive, you c
 
 ```css
 /* [!code filename:CSS] */
-@utility tab-*;
+@utility tab-* 
 ```
 
 The special `--value()` function is used to resolve the utility value.
@@ -325,7 +327,9 @@ Use the `--value(--theme-key-*)` syntax to resolve the utility value against a s
 
 ```css
 /* [!code filename:CSS] */
-@theme @utility tab-*;
+@theme 
+
+@utility tab-* 
 ```
 
 This will match utilities like `tab-2`, `tab-4`, and `tab-github`.
@@ -336,7 +340,7 @@ To resolve the value as a bare value, use the `--value()` syntax, where `` is th
 
 ```css
 /* [!code filename:CSS] */
-@utility tab-*;
+@utility tab-* 
 ```
 
 This will match utilities like `tab-1` and `tab-76`.
@@ -347,7 +351,7 @@ To support literal values, use the `--value('literal')` syntax (notice the quote
 
 ```css
 /* [!code filename:CSS] */
-@utility tab-*;
+@utility tab-* 
 ```
 
 This will match utilities like `tab-inherit`, `tab-initial`, and `tab-unset`.
@@ -358,7 +362,7 @@ To support arbitrary values, use the `--value([])` syntax (notice the square bra
 
 ```css
 /* [!code filename:CSS] */
-@utility tab-*;
+@utility tab-* 
 ```
 
 This will match utilities like `tab-[1]` and `tab-[76]`. If you want to support any data type, you can use `--value([*])`.
@@ -369,23 +373,27 @@ All three forms of the `--value()` function can be used within a rule as multipl
 
 ```css
 /* [!code filename:CSS] */
-@theme @utility tab-*;
+@theme 
+
+@utility tab-* 
 ```
 
 This makes it possible to treat the value differently in each case if necessary, for example translating a bare integer to a percentage:
 
 ```css
 /* [!code filename:CSS] */
-@utility opacity-*;
+@utility opacity-* 
 ```
 
 The `--value()` function can also take multiple arguments and resolve them left to right if you don't need to treat the return value differently in different cases:
 
 ```css
 /* [!code filename:CSS] */
-@theme @utility tab-* 
+@theme 
 
-@utility opacity-*;
+@utility tab-* 
+
+@utility opacity-* 
 ```
 
 #### Negative values
@@ -397,7 +405,7 @@ To support negative values, register separate positive and negative utilities in
 @utility inset-* 
 
 /* [!code highlight:4] */
-@utility -inset-*;
+@utility -inset-* 
 ```
 
 #### Modifiers
@@ -406,7 +414,7 @@ Modifiers are handled using the `--modifier()` function which works exactly like
 
 ```css
 /* [!code filename:CSS] */
-@utility text-*;
+@utility text-* 
 ```
 
 If a modifier isn't present, any declaration depending on a modifier is just not included in the output.
@@ -417,7 +425,7 @@ To handle fractions, we rely on the CSS `ratio` data type. If this is used with 
 
 ```css
 /* [!code filename:CSS] */
-@utility aspect-*;
+@utility aspect-* 
 ```
 
 This will match utilities like `aspect-square`, `aspect-3/4`, and `aspect-[7/9]`.
@@ -427,7 +435,7 @@ This will match utilities like `aspect-square`, `aspect-3/4`, and `aspect-[7/9]`
 In addition to using the variants that ship with Tailwind, you can also add your own custom variants using the `@custom-variant` directive:
 
 ```css
-@custom-variant theme-midnight
+@custom-variant theme-midnight 
 }
 ```
 
@@ -449,7 +457,7 @@ You can create variants using the shorthand syntax when nesting isn't required:
 When a custom variant has multiple rules, they can be nested within each other:
 
 ```css
-@custom-variant any-hover
+@custom-variant any-hover 
   }
 }
 ```

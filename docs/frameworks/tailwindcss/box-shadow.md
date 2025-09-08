@@ -1,7 +1,7 @@
-import from "@/components/content.tsx";
+import  from "@/components/content.tsx";
 
 <ApiTable
-rows=`,
+  rows=`,
       `--tw-shadow-color: var(--color-$); /* $ */`,
     ]),
     // Inset shadows
@@ -43,9 +43,9 @@ rows=`,
     ["inset-ring-transparent", "--tw-inset-ring-color: transparent;"],
     ...Object.entries(colors).map(([name, value]) => [
       `inset-ring-$`,
-      `--tw-inset-ring-color: var(--color-$); /_ $ _/`,
-]),
-]}
+      `--tw-inset-ring-color: var(--color-$); /* $ */`,
+    ]),
+  ]}
 />
 
 ## Examples

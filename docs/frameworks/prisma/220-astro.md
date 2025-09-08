@@ -15,7 +15,6 @@ Prisma ORM offers type-safe database access, and [Astro](https://astro.build/) i
 In this guide, you'll learn to integrate Prisma ORM with a Prisma Postgres database in an Astro project from scratch. You can find a complete example of this guide on [GitHub](https://github.com/prisma/prisma-examples/tree/latest/orm/astro).
 
 ## Prerequisites
-
 - [Node.js 18+](https://nodejs.org)
 - [Astro VSCode extension (recommended)](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode)
 
@@ -26,13 +25,12 @@ Create a new Astro project:
 ```terminal
 npx create-astro@latest
 ```
-
 :::info
 
-- _Where should we create your new project?_ `astro-prisma`
-- _How would you like to start your new project?_ `Use minimal (empty) template `
-- _Install dependencies? (recommended)_ `Yes`
-- _Initialize a new git repository? (optional)_ `Yes`
+- *Where should we create your new project?* `astro-prisma`
+- *How would you like to start your new project?* `Use minimal (empty) template `
+- *Install dependencies? (recommended)* `Yes`
+- *Initialize a new git repository? (optional)* `Yes`
 
 :::
 
@@ -47,7 +45,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../src/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My Astro Project"
 :::
@@ -61,14 +58,14 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models and change the generator to use the `prisma-client` provider:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -81,7 +78,6 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
-
 ### 2.4. Seed the database
 
 Let's add some seed data to populate the database with sample users and posts.
@@ -119,7 +115,7 @@ Now, tell Prisma how to run this script by updating your `package.json`:
   "prisma": ,
   //add-end
   "dependencies": ,
-  "devDependencies":
+  "devDependencies": 
 }
 ```
 

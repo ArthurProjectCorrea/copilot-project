@@ -10,7 +10,7 @@ community_section: true
 
 ## Overview
 
-It helps developers write code faster by:
+ It helps developers write code faster by:
 
 - Providing context-aware [code completion](https://docs.tabnine.com/main/getting-started/getting-the-most-from-tabnines-code-completion) suggestions in the editor for small, repetitive coding tasks
 - Offering an integrated [chat](https://docs.tabnine.com/main/getting-started/getting-the-most-from-tabnine-chat) for higher-level tasks and detailed instructions
@@ -24,12 +24,12 @@ AI editors like Tabnine are powerful tools that can drastically improve develope
 - Generating CRUD functionality and other boilerplate code
 - Generating plain SQL queries that can be used with [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql)
 - Generating code for unit and integrations tests
-- Guiding through major refactorings
+- Guiding through major refactorings 
 - Generating seeding scripts
 
 ### Leveraging the Prisma schema
 
-Because Prisma has its own [schema](/orm/prisma-schema), Tabnine can understand the basic shape of your data and help you write code for the other parts of your stack.
+Because Prisma has its own [schema](/orm/prisma-schema), Tabnine can understand the basic shape of your data and help you write code for the other parts of your stack. 
 
 We therefore recommend that you start out by defining your Prisma schema and then use Tabnine to build the application layer around it (inluding API calls, DTOs, business logic, 3rd party integrations, ...).
 
@@ -37,7 +37,7 @@ We therefore recommend that you start out by defining your Prisma schema and the
 
 ### How Tabnine helps
 
-Designing a database schema from scratch involves a lot of boilerplate and can be time-consuming.
+Designing a database schema from scratch involves a lot of boilerplate and can be time-consuming. 
 
 Tabnine can accelerate this process by:
 
@@ -55,17 +55,17 @@ _Define a Prisma schema for a SaaS application with User, Organization, and Subs
 #### Generated code
 
 ```prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model User
+model User 
 
-model Organization
+model Organization 
 
-model Subscription
+model Subscription 
 
-enum Status
+enum Status 
 ```
 
 ## Constructing and optimizing database queries
@@ -92,7 +92,7 @@ _Generate a Prisma query to fetch all active users from an organization with an 
 const activeUsers = await prisma.user.findMany(
     }
   },
-  include:
+  include: 
 });
 ```
 
@@ -154,7 +154,7 @@ _Generate CRUD functionality for a Next.js app based on the User model from the 
 
 ```ts filename=app/components/User.tsx
 
-interface User
+interface User 
 
 const User: React.FC = () => );
 
@@ -178,7 +178,7 @@ const User: React.FC = () => );
       <h2>Users</h2>
       <ul>
         >
-             () - Org ID:
+             () - Org ID: 
             <button onClick=>Delete</button>
           </li>
         ))}
@@ -213,9 +213,9 @@ const User: React.FC = () => );
 
 ### How Tabnine helps
 
-While Prisma provides a high-level API for querying, sometimes a developer may need to drop down to raw SQL for more low-level control of a query. In these cases, they can use [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) which provides full type safety for raq SQL queries in Prisma ORM.
+While Prisma provides a high-level API for querying, sometimes a developer may need to drop down to raw SQL for more low-level control of a query. In these cases, they can use [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) which provides full type safety for raq SQL queries in Prisma ORM. 
 
-One common use case are aggregation queries, such as calculating percentages of different subscription statuses in the schema example above.
+One common use case are aggregation queries, such as calculating percentages of different subscription statuses in the schema example above. 
 
 Tabnine can assist by:
 
@@ -223,7 +223,7 @@ Tabnine can assist by:
 - Structuring complex aggregations without manual trial and error.
 - Integrating the queries in your application code.
 
-### Example: Calculating the percentages of active, expired, and paused subscriptions
+### Example: Calculating the percentages of active, expired, and paused subscriptions  
 
 #### Prompt
 
@@ -232,7 +232,7 @@ _Generate a SQL query that returns the percentage of subscriptions that are Acti
 #### Generated SQL query
 
 ```sql file=prisma/sql/subscriptionsReport.sql
-SELECT
+SELECT 
   status,
   COUNT(*) * 100.0 / (SELECT COUNT(*) FROM "Subscription") AS percentage
 FROM "Subscription"
@@ -242,10 +242,11 @@ GROUP BY status;
 #### Application code
 
 ```ts
+
 const prisma = new PrismaClient();
 
-const usersWithPostCounts = await prisma.$queryRawTyped(subscriptionsReport());
-console.log(usersWithPostCounts);
+const usersWithPostCounts = await prisma.$queryRawTyped(subscriptionsReport())
+console.log(usersWithPostCounts)
 ```
 
 ## Generating code for unit and integration tests
@@ -261,7 +262,7 @@ Tabnine can drastically speed up writing tests by:
 - Helping structure test cases to follow best practices.
 - Providing integration test scaffolding for testing Prisma with a real or in-memory database.
 
-### Example: Writing a unit test for a Prisma service
+### Example: Writing a unit test for a Prisma service  
 
 #### Prompt
 
@@ -272,7 +273,7 @@ _Generate a Jest unit test for a Prisma service function that fetches all active
 ```ts filename=__tests__/userService.test.ts
 
 test('should return only active users', async () => ,
-
+    
   ]);
 
   const users = await getActiveUsers();
@@ -281,11 +282,11 @@ test('should return only active users', async () => ,
 });
 ```
 
-## Guiding through major refactorings
+## Guiding through major refactorings  
 
 ### How Tabnine helps
 
-Thanks to Prisma ORM's type safe queries, refactoring are more safe and predictable than with other ORMs: After making schema changes, the generated Prisma Client code will be updated and the TypeScript compiler will highlight all places that need a change.
+Thanks to Prisma ORM's type safe queries, refactoring are more safe and predictable than with other ORMs: After making schema changes, the generated Prisma Client code will be updated and the TypeScript compiler will highlight all places that need a change. 
 
 However, there may still be more difficult situations during a refactoring, e.g. when business logic or complex queries need to be adjusted.
 
@@ -296,7 +297,7 @@ Tabnine can assist during refactorings by:
 - Providing function rewrites to simplify and optimize logic.
 - Suggesting breaking changes that need to be handled across your codebase.
 
-### Example: Refactoring a Prisma query after a schema change
+### Example: Refactoring a Prisma query after a schema change  
 
 #### Prompt
 
@@ -337,10 +338,10 @@ _Generate a Prisma seed script for populating User, Organization, and Subscripti
 
 const prisma = new PrismaClient();
 
-async function main()
+async function main() 
       },
       users: ,
-
+          
         ]
       }
     }

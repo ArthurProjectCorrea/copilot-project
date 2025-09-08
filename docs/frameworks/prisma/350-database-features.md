@@ -21,13 +21,13 @@ These features are _only_ for relational databases. Supported features for NoSQL
 
 | Constraint    | Supported |                                      Prisma schema                                       | Prisma Client | Prisma Migrate |
 | ------------- | :-------: | :--------------------------------------------------------------------------------------: | :-----------: | :------------: |
-| `PRIMARY KEY` |    ✔️     |      [`@id` and `@@id`](/orm/prisma-schema/data-model/models#defining-an-id-field)       |      ✔️       |       ✔️       |
-| `FOREIGN KEY` |    ✔️     |        [Relation fields](/orm/prisma-schema/data-model/relations#relation-fields)        |      ✔️       |       ✔️       |
-| `UNIQUE`      |   ✔️\*    | [`@unique` and `@@unique`](/orm/prisma-schema/data-model/models#defining-a-unique-field) |      ✔️       |       ✔️       |
-| `CHECK`       |    ✔️†    |                                         Not yet                                          |      ✔️       |    Not yet     |
-| `NOT NULL`    |    ✔️     |                [`?`](/orm/prisma-schema/data-model/models#type-modifiers)                |      ✔️       |       ✔️       |
-| `DEFAULT`     |    ✔️     |       [`@default`](/orm/prisma-schema/data-model/models#defining-a-default-value)        |      ✔️       |       ✔️       |
-| `EXCLUDE`     |    ✔️‡    |                                         Not yet                                          |      ✔️       |    Not yet     |
+| `PRIMARY KEY` |     ✔️     |      [`@id` and `@@id`](/orm/prisma-schema/data-model/models#defining-an-id-field)       |      ✔️        |       ✔️        |
+| `FOREIGN KEY` |     ✔️     |        [Relation fields](/orm/prisma-schema/data-model/relations#relation-fields)        |      ✔️        |       ✔️        |
+| `UNIQUE`      |     ✔️\*   | [`@unique` and `@@unique`](/orm/prisma-schema/data-model/models#defining-a-unique-field) |      ✔️        |       ✔️        |
+| `CHECK`       |     ✔️†    |                                         Not yet                                          |      ✔️        |    Not yet     |
+| `NOT NULL`    |     ✔️     |                [`?`](/orm/prisma-schema/data-model/models#type-modifiers)                |      ✔️        |       ✔️        |
+| `DEFAULT`     |     ✔️     |       [`@default`](/orm/prisma-schema/data-model/models#defining-a-default-value)        |      ✔️        |       ✔️        |
+| `EXCLUDE`     |     ✔️‡    |                                         Not yet                                          |      ✔️        |    Not yet     |
 
 > \* [Caveats apply when using the `UNIQUE` constraint with Microsoft SQL Server](/orm/overview/databases/sql-server#data-model-limitations)
 > † Only supported in MySQL in [version 8 and higher](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html).
@@ -37,51 +37,51 @@ These features are _only_ for relational databases. Supported features for NoSQL
 
 | Deletion behavior | Supported | Prisma schema | Prisma Client | Prisma Migrate |
 | ----------------- | :-------: | :-----------: | :-----------: | :------------: |
-| `CASCADE`         |    ✔️     |      ✔️       |      ✔️       |       ✔️       |
-| `RESTRICT`        |   ✔️\*    |      ✔️       |      ✔️       |       ✔️       |
-| `NO ACTION`       |    ✔️     |      ✔️       |      ✔️       |       ✔️       |
-| `SET DEFAULT`     |    ✔️     |      ✔️       |      ✔️       |       ✔️       |
-| `SET NULL`        |    ✔️     |      ✔️       |      ✔️       |       ✔️       |
+| `CASCADE`         |     ✔️     |       ✔️       |       ✔️       |       ✔️        |
+| `RESTRICT`        |     ✔️\*   |       ✔️       |       ✔️       |       ✔️        |
+| `NO ACTION`       |     ✔️     |       ✔️       |       ✔️       |       ✔️        |
+| `SET DEFAULT`     |     ✔️     |       ✔️       |       ✔️       |       ✔️        |
+| `SET NULL`        |     ✔️     |       ✔️       |       ✔️       |       ✔️        |
 
 > \* `RESTRICT` is not supported in Microsoft SQL Server.
 
 ### Indexes
 
-| Index          |                Supported                 |                                                Prisma schema                                                | Prisma Client | Prisma Migrate |
-| -------------- | :--------------------------------------: | :---------------------------------------------------------------------------------------------------------: | :-----------: | :------------: |
-| `UNIQUE`       |                    ✔️                    |          [`@unique` and `@@unique`](/orm/prisma-schema/data-model/models#defining-a-unique-field)           |      ✔️       |       ✔️       |
-| `USING`        |             PostgreSQL only              | [`type`](/orm/prisma-schema/data-model/indexes#configuring-the-access-type-of-indexes-with-type-postgresql) |      ✔️       |       ✔️       |
-| `WHERE`        |                    ✔️                    |                                                   Not yet                                                   |      ✔️       |    Not yet     |
-| `(expression)` |                    ✔️                    |                                                   Not yet                                                   |      ✔️       |    Not yet     |
-| `INCLUDE`      | PostgreSQL and Microsoft SQL Server only |                                                   Not yet                                                   |      ✔️       |    Not yet     |
+| Index          |    Supported    |                                                Prisma schema                                                | Prisma Client | Prisma Migrate |
+| -------------- | :-------------: | :---------------------------------------------------------------------------------------------------------: | :-----------: | :------------: |
+| `UNIQUE`       |        ✔️        |            [`@unique` and `@@unique`](/orm/prisma-schema/data-model/models#defining-a-unique-field)         |       ✔️       |        ✔️       |
+| `USING`        | PostgreSQL only | [`type`](/orm/prisma-schema/data-model/indexes#configuring-the-access-type-of-indexes-with-type-postgresql) |       ✔️       |        ✔️       |
+| `WHERE`        |        ✔️        |                                                   Not yet                                                   |       ✔️       |    Not yet     |
+| `(expression)` |        ✔️        |                                                   Not yet                                                   |       ✔️       |    Not yet     |
+| `INCLUDE`      | PostgreSQL and Microsoft SQL Server only |                    Not yet                                                         |       ✔️       |    Not yet     |
 
 Algorithm specified via `USING`:
 
 | Index type (Algorithm) | Supported | Prisma schema | Prisma Client | Prisma Migrate |
 | ---------------------- | :-------: | :-----------: | :-----------: | :------------: |
-| B-tree                 |    ✔️     |      ✔️†      |      ✔️       |    Not yet     |
-| Hash                   |    ✔️     |      ✔️†      |      ✔️       |    Not yet     |
-| GiST                   |   ✔️\*    |      ✔️†      |     ✔️\*      |    Not yet     |
-| GIN                    |   ✔️\*    |      ✔️†      |     ✔️\*      |    Not yet     |
-| BRIN                   |   ✔️\*    |      ✔️†      |     ✔️\*      |    Not yet     |
-| SP-GiST                |   ✔️\*    |      ✔️†      |     ✔️\*      |    Not yet     |
+| B-tree                 |     ✔️     |       ✔️†      |       ✔️       |    Not yet     |
+| Hash                   |     ✔️     |       ✔️†      |       ✔️       |    Not yet     |
+| GiST                   |    ✔️\*    |       ✔️†      |      ✔️\*      |    Not yet     |
+| GIN                    |    ✔️\*    |       ✔️†      |      ✔️\*      |    Not yet     |
+| BRIN                   |    ✔️\*    |       ✔️†      |      ✔️\*      |    Not yet     |
+| SP-GiST                |    ✔️\*    |       ✔️†      |      ✔️\*      |    Not yet     |
 
 - \* Not supported for MySQL and SQLite
 - † Available with the PostgreSQL connector only in Prisma ORM versions `4.0.0` and later.
 
 ### Misc
 
-| Feature                           |                Supported                 |                                   Prisma schema                                    | Prisma Client | Prisma Migrate |
-| --------------------------------- | :--------------------------------------: | :--------------------------------------------------------------------------------: | :-----------: | :------------: |
-| Autoincrementing IDs              |                    ✔️                    | [`autoincrement()`](/orm/prisma-schema/data-model/models#defining-a-default-value) |      ✔️       |       ✔️       |
-| Arrays                            |             PostgreSQL only              |            [`[]`](/orm/prisma-schema/data-model/models#type-modifiers)             |      ✔️       |       ✔️       |
-| Enums                             |                  ✔️\*†                   |           [`enum`](/orm/prisma-schema/data-model/models#defining-enums)            |      ✔️       |       ✔️       |
-| Native database types             |                    ✔️                    |                                         ✔️                                         |      ✔️       |    Not yet     |
-| SQL Views                         |                    ✔️                    |                                      Not yet                                       |    Not yet    |    Not yet     |
-| JSON support                      |                   ✔️†                    |                                         ✔️                                         |      ✔️       |       ✔️       |
-| Fuzzy/Phrase full text search     |                   ✔️‡                    |                                      Not yet                                       |    Not yet    |    Not yet     |
-| Table inheritance                 | PostgreSQL and Microsoft SQL Server only |                                      Not yet                                       |      ✔️       |    Not yet     |
-| Authorization and user management |                   ✔️‡                    |                                      Not yet                                       |    Not yet    |    Not yet     |
+| Feature                           | Supported |                                   Prisma schema                                    | Prisma Client | Prisma Migrate |
+| --------------------------------- | :-------: | :--------------------------------------------------------------------------------: | :-----------: | :------------: |
+| Autoincrementing IDs              |     ✔️     | [`autoincrement()`](/orm/prisma-schema/data-model/models#defining-a-default-value) |       ✔️       |        ✔️       |
+| Arrays                            | PostgreSQL only |      [`[]`](/orm/prisma-schema/data-model/models#type-modifiers)             |       ✔️       |        ✔️       |
+| Enums                             |    ✔️\*†   |           [`enum`](/orm/prisma-schema/data-model/models#defining-enums)            |       ✔️       |        ✔️       |
+| Native database types             |     ✔️     |                                          ✔️                                         |       ✔️       |     Not yet    |
+| SQL Views                         |     ✔️     |                                      Not yet                                       |    Not yet    |     Not yet    |
+| JSON support                      |     ✔️†    |                                          ✔️                                         |       ✔️       |        ✔️       |
+| Fuzzy/Phrase full text search     |     ✔️‡    |                                      Not yet                                       |    Not yet    |     Not yet    |
+| Table inheritance                 | PostgreSQL and Microsoft SQL Server only |       Not yet                                       |       ✔️       |     Not yet    |
+| Authorization and user management |     ✔️‡    |                                      Not yet                                       |    Not yet    |     Not yet    |
 
 - \* Not supported by Microsoft SQL Server
 - † JSON and Enum types are supported in SQLite as of Prisma ORM 6.2.0.

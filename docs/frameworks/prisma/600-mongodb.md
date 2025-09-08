@@ -39,13 +39,10 @@ MongoDB's document-based structure and flexible schema means that using Prisma O
 - **Enabling replication**: Prisma ORM uses [MongoDB transactions](https://www.mongodb.com/docs/manual/core/transactions/) internally to avoid partial writes on nested queries. When using transactions, MongoDB requires replication of your data set to be enabled. To do this, you will need to configure a [replica set](https://www.mongodb.com/docs/manual/replication/) — this is a group of MongoDB processes that maintain the same data set. Note that it is still possible to use a single database, by creating a replica set with only one node in it. If you use MongoDB's [Atlas](https://www.mongodb.com/atlas/database) hosting service, the replica set is configured for you, but if you are running MongoDB locally you will need to set up a replica set yourself. For more information, see MongoDB's [guide to deploying a replica set](https://www.mongodb.com/docs/manual/tutorial/deploy-replica-set/).
 
 ### Performance considerations for large collections
-
-#### Problem
-
+#### Problem 
 When working with large MongoDB collections through Prisma, certain operations can become slow and resource-intensive. In particular, operations that require scanning the entire collection, such as `count()`, can hit query execution time limits and significantly impact performance as your dataset grows.
 
 #### Solution
-
 To address performance issues with large MongoDB collections, consider the following approaches:
 
 1. For large collections, consider using MongoDB's `estimatedDocumentCount()` instead of `count()`. This method is much faster as it uses metadata about the collection. You can use Prisma's `runCommandRaw` method to execute this command.
@@ -65,7 +62,7 @@ These iterative tasks of updating the schema and the database can result in inco
 **Scenario**: you need to include a phone number for users, as well as an email. You currently have the following `User` model in your `schema.prisma` file:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model User
+model User 
 ```
 
 There are a number of strategies you could use for migrating this schema:
@@ -75,11 +72,11 @@ There are a number of strategies you could use for migrating this schema:
   In our scenario above, you can add an optional `phoneNumber` field to the `User` model in your Prisma schema:
 
   ```prisma file=prisma/schema.prisma highlight=4;add showLineNumbers
-  model User
+  model User 
   ```
 
-  Then regenerate your Prisma Client using the `npx prisma generate` command.
-
+  Then regenerate your Prisma Client using the `npx prisma generate` command. 
+  
   Next, update your application to reflect the new field, and redeploy your app.
 
   As the `phoneNumber` field is optional, you can still query the old users where the phone number has not been defined. The records in the database will be updated "on demand" as the application's users begin to enter their phone number in the new field.
@@ -87,7 +84,7 @@ There are a number of strategies you could use for migrating this schema:
   Another option is to add a default value on a required field, for example:
 
   ```prisma file=prisma/schema.prisma highlight=4;add showLineNumbers
-  model User
+  model User 
   ```
 
   Then when you encounter a missing `phoneNumber`, the value will be coerced into `000-000-0000`.
@@ -116,17 +113,17 @@ As an example, take a MongoDB database with two collections, `User` and `Post`. 
 On introspection with `db pull`, this is pulled in to the Prisma Schema as follows:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 This is missing the relation between the `User` and `Post` models. To fix this, manually add a `user` field to the `Post` model with a `@relation` attribute using `userId` as the `fields` value, linking it to the `User` model, and a `posts` field to the `User` model as the back relation:
 
 ```prisma file=prisma/schema.prisma highlight=5;add|11;add showLineNumbers
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 For more information on how to use relations in Prisma ORM, see [our documentation](/orm/prisma-schema/data-model/relations).
@@ -136,7 +133,7 @@ For more information on how to use relations in Prisma ORM, see [our documentati
 To understand how MongoDB distinguishes between `null` and missing fields, consider the example of a `User` model with an optional `name` field:
 
 ```ts
-model User
+model User 
 ```
 
 First, try creating a record with the `name` field explicitly set to `null`. Prisma ORM will return `name: null` as expected:
@@ -181,7 +178,7 @@ For more information on how to set up and manage a MongoDB database, see the [Pr
 To connect to a MongoDB server, configure the [`datasource`](/orm/prisma-schema/overview/data-sources) block in your [Prisma Schema](/orm/prisma-schema):
 
 ```prisma file=schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 The fields passed to the `datasource` block are:
@@ -207,13 +204,13 @@ mongodb://USERNAME:PASSWORD@HOST/DATABASE
 
 The following components make up the _base URL_ of your database:
 
-| Name     | Placeholder | Description                                                                                                                                                                                                                                                                                                                                                        |
-| :------- | :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| User     | `USERNAME`  | Name of your database user, e.g. `janedoe`                                                                                                                                                                                                                                                                                                                         |
-| Password | `PASSWORD`  | Password for your database user                                                                                                                                                                                                                                                                                                                                    |
+| Name     | Placeholder | Description                                                                                                                                                                                                                                                                                                                                                |
+| :------- | :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User     | `USERNAME`  | Name of your database user, e.g. `janedoe`                                                                                                                                                                                                                                                                                                                 |
+| Password | `PASSWORD`  | Password for your database user                                                                                                                                                                                                                                                                                                                            |
 | Host     | `HOST`      | The host where a [`mongod`](https://www.mongodb.com/docs/manual/reference/program/mongod/#mongodb-binary-bin.mongod) instance is running. If you are running a sharded cluster this will a [`mongos`](https://www.mongodb.com/docs/manual/reference/program/mongos/#mongodb-binary-bin.mongos) instance. This can be a hostname, IP address or UNIX domain socket. |
-| Port     | `PORT`      | Port on which your database server is running, e.g. `1234`. If none is provided the default `27017` is used.                                                                                                                                                                                                                                                       |
-| Database | `DATABASE`  | Name of the database to use. If none is specified but the `authSource` option is set then the `authSource` database name is used. If neither the database in the connection string nor the `authSource` option is specified then it defaults to `admin`                                                                                                            |
+| Port     | `PORT`      | Port on which your database server is running, e.g. `1234`. If none is provided the default `27017` is used.                                                                                                                                                                                                                                               |
+| Database | `DATABASE`  | Name of the database to use. If none is specified but the `authSource` option is set then the `authSource` database name is used. If neither the database in the connection string nor the `authSource` option is specified then it defaults to `admin`                                                                                                    |
 
 #### Arguments
 
@@ -251,13 +248,13 @@ Any field (most commonly IDs and relation scalar fields) that maps to an `Object
 Here is an example that uses `String`:
 
 ```prisma
-model User
+model User 
 ```
 
 And here is another example that uses `Bytes`:
 
 ```prisma
-model User
+model User 
 ```
 
 See also: [Defining ID fields in MongoDB](/orm/prisma-schema/data-model/models#defining-ids-in-mongodb)
@@ -271,7 +268,8 @@ npm install --save bson
 ```
 
 ```ts
-const id = new ObjectId();
+
+const id = new ObjectId()
 ```
 
 ## Differences to connectors for relational databases
@@ -311,7 +309,7 @@ Invalid `prisma.post.create()` invocation in
 →  9 await prisma.post.create(
   Error in connector: Database error. error code: unknown, error message: Transactions are not supported by this deployment
     at cb (/node_modules/@prisma/client/runtime/index.js:34804:17)
-    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5) 
 ```
 
 To resolve this, we suggest you change your deployment to one with a replica set configured.
@@ -365,5 +363,5 @@ When introspecting a MongoDB database, Prisma ORM uses the relevant [scalar type
 [Introspection](/orm/prisma-schema/introspection) adds native database types that are **not yet supported** as [`Unsupported`](/orm/reference/prisma-schema-reference#unsupported) fields:
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```

@@ -102,7 +102,7 @@ When you're now accessing `context.prisma` inside of a resolver, you now have ac
 The `User` type in our sample GraphQL schema is defined as follows:
 
 ```graphql
-type User implements Node
+type User implements Node 
 ```
 
 This type has two relations:
@@ -137,7 +137,7 @@ Thanks to these extra resolvers, you'll now be able to nest relations in your Gr
 
 ```graphql
 
-    profile
+    profile 
   }
 }
 ```
@@ -147,7 +147,7 @@ Thanks to these extra resolvers, you'll now be able to nest relations in your Gr
 The `Post` type in our sample GraphQL schema is defined as follows:
 
 ```graphql
-type Post implements Node
+type Post implements Node 
 ```
 
 This type has two relations:
@@ -183,7 +183,7 @@ Thanks to these extra resolvers, you'll now be able to nest relations in your Gr
 
 ```graphql
 
-    categories
+    categories 
   }
 }
 ```
@@ -193,7 +193,7 @@ Thanks to these extra resolvers, you'll now be able to nest relations in your Gr
 The `Profile` type in our sample GraphQL schema is defined as follows:
 
 ```graphql
-type Profile implements Node
+type Profile implements Node 
 ```
 
 This type has one relation: The `user` field denotes a 1-n relation to `User`.
@@ -226,7 +226,7 @@ Thanks to this extra resolver, you'll now be able to nest relations in your Grap
 The `Category` type in our sample GraphQL schema is defined as follows:
 
 ```graphql
-type Category implements Node
+type Category implements Node 
 ```
 
 This type has one relation: The `posts` field denotes a m-n relation to `Post`.
@@ -270,7 +270,7 @@ In our sample API, the `users` query from the sample GraphQL schema is defined a
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Query
+type Query 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -331,8 +331,8 @@ const resolvers =  = args
       const skipValue = skip || 0
       const prisma2Skip = Boolean(before) ? skipValue + 1 : skipValue
       const prisma2Take = Boolean(last) ? -last : first
-      const prisma2Before =
-      const prisma2After =
+      const prisma2Before = 
+      const prisma2After = 
       const prisma2Cursor =
         !Boolean(before) && !Boolean(after)
           ? undefined
@@ -355,7 +355,7 @@ The `posts` query is defined and implemented as follows.
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Query
+type Query 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -406,9 +406,9 @@ In our sample app, the `user` query is defined and implemented as follows.
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Query
+type Query 
 
-input UserUniqueInput
+input UserUniqueInput 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -439,7 +439,7 @@ const resolvers = )
 You can now send the respective query via the GraphQL Playground:
 
 ```graphql
-)
+) 
 }
 ```
 
@@ -454,7 +454,7 @@ In the sample app, the `createUser` mutation from the sample GraphQL schema is d
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -480,7 +480,7 @@ const resolvers = )
 You can now write your first mutation against the new API, e.g.:
 
 ```graphql
-mutation )
+mutation ) 
 }
 ```
 
@@ -491,7 +491,7 @@ In the sample app, the `createDraft` mutation is defined and implemented as foll
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -528,7 +528,7 @@ const resolvers = ,
 You can now send the respective mutation via the GraphQL Playground:
 
 ```graphql
-mutation
+mutation 
   }
 }
 ```
@@ -540,7 +540,7 @@ In the sample app, the `updateBio` mutation is defined and implemented as follow
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -579,9 +579,9 @@ const resolvers = ,
 You can now send the respective mutation via the GraphQL Playground :
 
 ```graphql
-mutation
+mutation 
     bio: "I like turtles"
-  )
+  ) 
   }
 }
 ```
@@ -593,7 +593,7 @@ In our sample app, the `addPostToCategories` mutation is defined and implemented
 ##### SDL schema definition with `prisma-binding`
 
 ```graphql
-type Mutation
+type Mutation 
 ```
 
 ##### Resolver implementation with `prisma-binding`
@@ -633,7 +633,7 @@ const resolvers = ))
 You can now send the respective query via the GraphQL Playground:
 
 ```graphql
-mutation
+mutation 
   }
 }
 ```

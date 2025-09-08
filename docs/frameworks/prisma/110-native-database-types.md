@@ -12,11 +12,11 @@ Each Prisma ORM type maps to a default underlying database type - for example, t
 In the following example, the `name` and `title` fields have a `@db.VarChar(X)` type attribute:
 
 ```prisma highlight=8,14;normal
-datasource db
+datasource db 
 
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 Prisma Migrate uses the specified types when it creates a migration:

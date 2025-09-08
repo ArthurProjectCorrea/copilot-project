@@ -8,7 +8,7 @@ When exporting a function called `getStaticPaths` from a page that uses [Dynamic
 ```tsx filename="pages/repo/[name].tsx" switcher
 import type  from 'next'
 
-type Repo =
+type Repo = 
 
   return ,
       }, // See the "paths" section below
@@ -23,7 +23,7 @@ type Repo =
 }) satisfies GetStaticProps<>
 
   repo,
-}: InferGetStaticPropsType<typeof getStaticProps>)
+}: InferGetStaticPropsType<typeof getStaticProps>) 
 ```
 
 ```jsx filename="pages/repo/[name].js" switcher
@@ -84,7 +84,7 @@ When `next build` is run, Next.js will check if `getStaticPaths` returned `fallb
 The following example pre-renders one blog post per page called `pages/posts/[id].js`. The list of blog posts will be fetched from a CMS and returned by `getStaticPaths`. Then, for each page, it fetches the post data from a CMS using [`getStaticProps`](/docs/pages/building-your-application/data-fetching/get-static-props).
 
 ```jsx filename="pages/posts/[id].js"
-function Post()
+function Post() 
 
 // This function gets called at build time
 
@@ -98,7 +98,7 @@ function Post()
 
   // We'll pre-render only these paths at build time.
   //  means other routes should 404.
-  return
+  return 
 }
 
 // This also gets called at build time
@@ -172,7 +172,7 @@ The following example showcases using `isFallback`:
 
 ```jsx filename="pages/posts/[id].js"
 
-function Post()
+function Post() 
 
   // Render post...
 }

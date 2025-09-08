@@ -38,7 +38,9 @@ If you run into a bug or have feedback, create a GitHub issue [here](https://git
 The `url` property also accepts an array of values, i.e. an array of all your database replicas you would like to configure:
 
 ```ts
-const prisma = new PrismaClient().$extends(readReplicas());
+const prisma = new PrismaClient().$extends(
+  readReplicas()
+)
 ```
 
 If you have more than one read replica configured, a database replica will be randomly selected to execute your query.
@@ -48,7 +50,7 @@ If you have more than one read replica configured, a database replica will be ra
 You can use the `$primary()` method to explicitly execute a read operation against your primary database:
 
 ```ts
-const posts = await prisma.$primary().post.findMany();
+const posts = await prisma.$primary().post.findMany()
 ```
 
 ## Executing operations against a database replica

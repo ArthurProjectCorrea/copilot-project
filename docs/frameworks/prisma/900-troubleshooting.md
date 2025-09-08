@@ -9,7 +9,7 @@ toc: true
 
 This guide helps resolve common issues when working with Prisma Postgres.
 
-## The `--db` option is not recognized when running `prisma init`
+## The `--db` option is not recognized when running `prisma init` 
 
 ### Problem
 
@@ -33,7 +33,7 @@ npx prisma@latest init --db
 
 This ensures that you're using the most up-to-date CLI, preventing issues with outdated command syntax.
 
-## Warning: In production, we recommend using `prisma generate --no-engine`
+##  Warning: In production, we recommend using `prisma generate --no-engine`
 
 ### Problem
 

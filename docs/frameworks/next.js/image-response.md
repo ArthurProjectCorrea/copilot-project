@@ -63,7 +63,7 @@ Please refer to [Satori’s documentation](https://github.com/vercel/satori#css)
           </div>
         </div>
       ),
-
+      
     )
   } catch (e) `)
     return new Response(`Failed to generate the image`, )
@@ -95,7 +95,7 @@ You can use `ImageResponse` in a [`opengraph-image.tsx`](/docs/app/api-reference
       </div>
     ),
     // ImageResponse options
-
+    
   )
 }
 ```

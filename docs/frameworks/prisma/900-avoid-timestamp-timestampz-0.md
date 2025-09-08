@@ -1,7 +1,7 @@
 ---
 title: 'Using timestamp(0) or timestamptz(0)'
 metaTitle: 'Optimize Recommendations: Avoid usage of `timestamp(0)` or `timestamptz(0)`'
-metaDescription: 'Learn about the recommendation provided by Optimize for using `timestamp(0)` or `timestamptz(0)` native type.'
+metaDescription: "Learn about the recommendation provided by Optimize for using `timestamp(0)` or `timestamptz(0)` native type."
 tocDepth: 3
 toc: true
 ---
@@ -11,11 +11,11 @@ Optimize provides recommendations to help you identify and resolve performance i
 The `@db.Timestamp(0)` and `@db.Timestamptz(0)` native types have been used within the following `User` model:
 
 ```prisma
-model User
+model User 
 ```
 
 ### Why this is a problem
 
-When using a `@db.Timestamp(n)` or `@db.Timestamptz(n)` column with a precision of `0`, the database rounds the time to the nearest whole second, which can lead to unexpected results.
+When using a `@db.Timestamp(n)` or `@db.Timestamptz(n)` column with a precision of `0`, the database rounds the time to the nearest whole second, which can lead to unexpected results. 
 
 For example, if you insert the current time, such as `15:30:45.678`, into a column with this precision, it will round up to `15:30:46`. This behavior can cause the recorded time to appear up to half a second in the future compared to the original time, which may be surprising when precise time accuracy is critical.

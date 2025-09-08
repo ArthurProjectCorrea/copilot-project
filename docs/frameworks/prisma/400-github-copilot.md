@@ -56,7 +56,7 @@ You can tailor Copilot Chat's behavior in your repository by [adding a `.github/
 <details>
 <summary>Example `.github/copilot-instructions.md` for Prisma</summary>
 
-````text
+```text
 # GitHub Copilot Instructions for Prisma Workspace
 
 ## General Guidelines
@@ -84,7 +84,7 @@ You can tailor Copilot Chat's behavior in your repository by [adding a `.github/
 * **IDs & keys**:
 
   ```prisma
-  model Post
+  model Post 
   /```
 * **Composite keys & uniques**:
 
@@ -96,7 +96,7 @@ You can tailor Copilot Chat's behavior in your repository by [adding a `.github/
 * **Soft deletes & audit**:
 
   ```prisma
-  model Base
+  model Base 
   /```
 
 ### 2. Indexing & Constraints
@@ -175,7 +175,7 @@ You can tailor Copilot Chat's behavior in your repository by [adding a `.github/
 * **Catch specific errors**:
 
   ```ts
-  try  catch (e)
+  try  catch (e) 
   }
   /```
 * **Wrap in service-level errors** to add context before bubbling up.
@@ -208,11 +208,11 @@ You can tailor Copilot Chat's behavior in your repository by [adding a `.github/
 * **Pin preview features** in `schema.prisma`:
 
   ```prisma
-  generator client
+  generator client 
   /```
 * **Version pinning**: match CLI and client versions in `package.json`.
 
-````
+```
 
 </details>
 

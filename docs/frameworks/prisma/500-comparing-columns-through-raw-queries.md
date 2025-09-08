@@ -23,7 +23,7 @@ Comparing values from two columns in the same table can be achieved by using [ra
 One use case for comparing values from different columns would be retrieving posts that have more comments than likes; in this case, you need to compare the values of `commentsCount` and `likesCount`.
 
 ```prisma
-model Post
+model Post 
 ```
 
 Queries (depending upon which database) could look something like:
@@ -34,7 +34,7 @@ _PostgreSQL / CockroachDB_
 
 const prisma = new PrismaClient()
 
-async function initiateNumbersComparisonRawQuery()
+async function initiateNumbersComparisonRawQuery() 
 
 await initiateNumbersComparisonRawQuery()
 ```
@@ -45,7 +45,7 @@ _MySQL_
 
 const prisma = new PrismaClient()
 
-async function initiateNumbersComparisonRawQuery()
+async function initiateNumbersComparisonRawQuery() 
 
 await initiateNumbersComparisonRawQuery()
 ```
@@ -56,7 +56,7 @@ _Sqlite_
 
 const prisma = new PrismaClient()
 
-async function initiateNumbersComparisonRawQuery()
+async function initiateNumbersComparisonRawQuery() 
 
 await initiateNumbersComparisonRawQuery()
 ```
@@ -66,7 +66,9 @@ Running the above queries (depending upon the database) would filter posts that 
 _Query Response_
 
 ```js
-[,];
+;[
+  ,
+]
 ```
 
 ### Comparing date values
@@ -76,7 +78,7 @@ Similarly, if you need to compare dates, you could also achieve the same thing u
 For example, a use case could be to get all projects completed after the due date.
 
 ```prisma
-model Project
+model Project 
 ```
 
 Queries (depending upon the database) could look something like:
@@ -87,7 +89,7 @@ _PostgreSQL / CockroachDB_
 
 const prisma = new PrismaClient()
 
-async function initiateDatesComparisonRawQuery()
+async function initiateDatesComparisonRawQuery() 
 
 await initiateDatesComparisonRawQuery()
 ```
@@ -98,7 +100,7 @@ _MySQL_
 
 const prisma = new PrismaClient()
 
-async function initiateDatesComparisonRawQuery()
+async function initiateDatesComparisonRawQuery() 
 
 await initiateDatesComparisonRawQuery()
 ```
@@ -109,7 +111,7 @@ _Sqlite_
 
 const prisma = new PrismaClient()
 
-async function initiateDatesComparisonRawQuery()
+async function initiateDatesComparisonRawQuery() 
 
 await initiateDatesComparisonRawQuery()
 ```
@@ -119,5 +121,7 @@ Running the above query would fetch projects where `completedDate` is after the 
 _Query Response_
 
 ```js
-[,];
+;[
+  ,
+]
 ```

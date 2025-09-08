@@ -26,7 +26,7 @@ Union types are a convenient feature in TypeScript that allows developers to wor
 In TypeScript, union types look as follows:
 
 ```ts no-copy
-type Activity = Video | Article;
+type Activity = Video | Article
 ```
 
 While [it's currently not possible to model union types in the Prisma schema](https://github.com/prisma/prisma/issues/2505), you can use them with Prisma ORM by using table inheritance and some additional type definitions.
@@ -42,11 +42,11 @@ For example, if both the `Video` and `Article` models from above should have a s
 In a simple Prisma schema, this would look as follows. Note that we're adding a `User` model as well to illustrate how this can work with relations:
 
 ```prisma file=schema.prisma showLineNumbers
-model Video
+model Video 
 
-model Article
+model Article 
 
-model User
+model User 
 ```
 
 Let's investigate how we can model this using table inheritance.
@@ -67,11 +67,11 @@ You can learn about the tradeoffs of both approaches [below](#tradeoffs-between-
 Using STI, the above scenario can be modeled as follows:
 
 ```prisma
-model Activity
+model Activity 
 
-enum ActivityType
+enum ActivityType 
 
-model User
+model User 
 ```
 
 A few things to note:
@@ -104,8 +104,9 @@ When querying for videos and articles like that, TypeScript will still only reco
 If you want to have type safety for these objects, you need to define dedicated types for them. You can do this, for example, by using the generated `Activity` type and the TypeScript `Omit` utility type to remove properties from it:
 
 ```ts
-type Video = Omit<Activity, 'body' | 'type'>;
-type Article = Omit<Activity, 'duration' | 'type'>;
+
+type Video = Omit<Activity, 'body' | 'type'>
+type Article = Omit<Activity, 'duration' | 'type'>
 ```
 
 In addition, it will be helpful to create mapping functions that convert an object of type `Activity` to the `Video` and `Article` types:
@@ -137,15 +138,15 @@ You can use [Prisma Client extensions](/orm/prisma-client/client-extensions) to 
 Using MTI, the above scenario can be modeled as follows:
 
 ```prisma
-model Activity
+model Activity 
 
-model Video
+model Video 
 
-model Article
+model Article 
 
-enum ActivityType
+enum ActivityType 
 
-model User
+model User 
 ```
 
 A few things to note:
@@ -177,7 +178,7 @@ Depending on your needs, you may also query the other way around by filtering on
 ```ts
 // Query all videos
 const videoActivities = await prisma.activity.findMany(
-  include:
+  include: 
 })
 ```
 
@@ -206,7 +207,7 @@ const videoWithActivity = Prisma.validator<Prisma.VideoDefaultArgs>()(,
 type VideoWithActivity = Prisma.VideoGetPayload<typeof videoWithActivity>
 
 // Map to `Video` type
-function toVideo(a: VideoWithActivity): Video
+function toVideo(a: VideoWithActivity): Video 
 }
 ```
 

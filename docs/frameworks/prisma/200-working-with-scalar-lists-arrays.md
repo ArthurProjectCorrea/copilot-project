@@ -83,6 +83,7 @@ This means that records you might expect to see are not returned. Consider the f
   - ✔ Empty arrays, such as `[]`
 
   The query does not return:
+
   - ✘ `NULL` arrays, even though they do not contain `"databases"`
 
 The following query returns all posts where `tags` is empty:

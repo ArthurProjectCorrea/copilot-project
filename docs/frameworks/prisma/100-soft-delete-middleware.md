@@ -12,13 +12,13 @@ Add a field named `deleted` to the `Post` model. You can choose between two fiel
 - `Boolean` with a default value of `false`:
 
   ```prisma highlight=4;normal
-  model Post
+  model Post 
   ```
 
 - Create a nullable `DateTime` field so that you know exactly _when_ a record was marked as deleted - `NULL` indicates that a record has not been deleted. In some cases, storing when a record was removed may be a regulatory requirement:
 
   ```prisma highlight=4;normal
-  model Post
+  model Post 
   ```
 
 > **Note**: Using two separate fields (`isDeleted` and `deletedDate`) may result in these two fields becoming out of sync - for example, a record may be marked as deleted but have no associated date.)
@@ -39,9 +39,9 @@ Run the following sample to test the soft delete middleware:
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
       }
-      if (params.action == 'deleteMany')  else
+      if (params.action == 'deleteMany')  else 
         }
       }
     }
@@ -189,12 +189,12 @@ In this option:
 
 Option two uses Prisma Client middleware to prevent soft deleted records from being returned. The following table describes how the middleware affects each query:
 
-| **Query**      | **Middleware logic**                                                                                                                                                                                                                                                                                                                                                                            | **Changes to return type** |
-| :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------- | --- |
-| `findUnique()` | 🔧 Change query to `findFirst` (because you cannot apply `deleted: false` filters to `findUnique()`) <br /> 🔧 Add `where: ` filter to exclude soft deleted posts <br />🔧 From version 5.0.0, you can use `findUnique()` to apply `delete: false` filters since [non unique fields are exposed](/orm/reference/prisma-client-reference#filter-on-non-unique-fields-with-userwhereuniqueinput). | No change                  |     |
-| `findMany`     | 🔧 Add `where: ` filter to exclude soft deleted posts by default <br />🔧 Allow developers to **explicitly request** soft deleted posts by specifying `deleted: true`                                                                                                                                                                                                                           | No change                  |
-| `update`       | 🔧 Change query to `updateMany` (because you cannot apply `deleted: false` filters to `update`) <br /> 🔧 Add `where: ` filter to exclude soft deleted posts                                                                                                                                                                                                                                    | ``instead of`Post`         |
-| `updateMany`   | 🔧 Add `where: ` filter to exclude soft deleted posts                                                                                                                                                                                                                                                                                                                                           | No change                  |
+| **Query**      | **Middleware logic**                                                                                                                                                                                                                                                                                                                                                                                              | **Changes to return type**       |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------- |
+| `findUnique()` | 🔧 Change query to `findFirst` (because you cannot apply `deleted: false` filters to `findUnique()`) <br /> 🔧 Add `where: ` filter to exclude soft deleted posts <br />🔧 From version 5.0.0, you can use `findUnique()` to apply `delete: false` filters since [non unique fields are exposed](/orm/reference/prisma-client-reference#filter-on-non-unique-fields-with-userwhereuniqueinput). | No change                        |     |
+| `findMany`     | 🔧 Add `where: ` filter to exclude soft deleted posts by default <br />🔧 Allow developers to **explicitly request** soft deleted posts by specifying `deleted: true`                                                                                                                                                                                                                           | No change                        |
+| `update`       | 🔧 Change query to `updateMany` (because you cannot apply `deleted: false` filters to `update`) <br /> 🔧 Add `where: ` filter to exclude soft deleted posts                                                                                                                                                                                                                                    | `` instead of `Post` |
+| `updateMany`   | 🔧 Add `where: ` filter to exclude soft deleted posts                                                                                                                                                                                                                                                                                                                                           | No change                        |
 
 - **Is it not possible to utilize soft delete with `findFirstOrThrow()` or `findUniqueOrThrow()`?**<br />
   From version [5.1.0](https://github.com/prisma/prisma/releases/5.1.0), you can apply soft delete `findFirstOrThrow()` or `findUniqueOrThrow()` by using middleware.
@@ -209,33 +209,33 @@ Run the following sample to see how middleware affects each query:
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
       if (
         params.action === 'findFirstOrThrow' ||
         params.action === 'findUniqueOrThrow'
-      )
-        } else
+      ) 
+        } else 
         }
       }
-      if (params.action === 'findMany')
-        } else
-        }
-      }
-    }
-    return next(params)
-  })
-
-  prisma.$use(async (params, next) =>
-      if (params.action == 'updateMany')  else
+      if (params.action === 'findMany') 
+        } else 
         }
       }
     }
     return next(params)
   })
 
-  prisma.$use(async (params, next) =>
+  prisma.$use(async (params, next) => 
+      if (params.action == 'updateMany')  else 
+        }
       }
-      if (params.action == 'deleteMany')  else
+    }
+    return next(params)
+  })
+
+  prisma.$use(async (params, next) => 
+      }
+      if (params.action == 'deleteMany')  else 
         }
       }
     }
@@ -336,8 +336,8 @@ async function main()
           ')' +
           '\u001b[0m')
   )
-  try  catch (error)
-  try  catch (error)
+  try  catch (error) 
+  try  catch (error) 
   console.log()
   console.log(
     'findMany: ' +

@@ -13,7 +13,7 @@ Use utilities like `tracking-tight` and `tracking-wide` to set the letter spacin
 Using negative values doesn't make a ton of sense with the named letter spacing scale Tailwind includes out of the box, but if you've customized your scale to use numbers it can be useful:
 
 ```css
-@theme;
+@theme 
 ```
 
 To use a negative letter spacing value, prefix the class name with a dash to convert it to a negative value:

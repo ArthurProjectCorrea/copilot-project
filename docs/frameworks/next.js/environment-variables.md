@@ -34,13 +34,15 @@ npm install @next/env
 ```
 
 ```tsx filename="envConfig.ts" switcher
-const projectDir = process.cwd();
-loadEnvConfig(projectDir);
+
+const projectDir = process.cwd()
+loadEnvConfig(projectDir)
 ```
 
 ```jsx filename="envConfig.js" switcher
-const projectDir = process.cwd();
-loadEnvConfig(projectDir);
+
+const projectDir = process.cwd()
+loadEnvConfig(projectDir)
 ```
 
 Then, you can import the configuration where needed. For example:
@@ -92,7 +94,7 @@ This will tell Next.js to replace all references to `process.env.NEXT_PUBLIC_ANA
 // It will be transformed at build time to `setupAnalyticsService('abcdefghijk')`.
 setupAnalyticsService(process.env.NEXT_PUBLIC_ANALYTICS_ID)
 
-function HomePage()
+function HomePage() 
 
 ```
 
@@ -100,12 +102,12 @@ Note that dynamic lookups will _not_ be inlined, such as:
 
 ```js
 // This will NOT be inlined, because it uses a variable
-const varName = 'NEXT_PUBLIC_ANALYTICS_ID';
-setupAnalyticsService(process.env[varName]);
+const varName = 'NEXT_PUBLIC_ANALYTICS_ID'
+setupAnalyticsService(process.env[varName])
 
 // This will NOT be inlined, because it uses a variable
-const env = process.env;
-setupAnalyticsService(env.NEXT_PUBLIC_ANALYTICS_ID);
+const env = process.env
+setupAnalyticsService(env.NEXT_PUBLIC_ANALYTICS_ID)
 ```
 
 ### Runtime Environment Variables

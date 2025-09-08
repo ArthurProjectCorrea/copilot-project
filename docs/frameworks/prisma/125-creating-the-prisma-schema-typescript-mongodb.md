@@ -10,24 +10,24 @@ pagination_prev: getting-started/setup-prisma/start-from-scratch/mongodb/connect
 pagination_next: getting-started/setup-prisma/start-from-scratch/mongodb/install-prisma-client-typescript-mongodb
 slugSwitch: /getting-started/setup-prisma/start-from-scratch/mongodb/creating-the-prisma-schema-
 ---
-
+ 
 ## Update the Prisma schema
 
 Open the `prisma/schema.prisma` file and replace the default contents with the following:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 
-model Comment
+model Comment 
 
 // Address is an embedded document
-type Address
+type Address 
 ```
 
 There are also a number of subtle differences in how the schema is setup when compared to relational databases like PostgreSQL.

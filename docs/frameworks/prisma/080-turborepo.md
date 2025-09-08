@@ -12,7 +12,7 @@ tags:
 community_section: true
 ---
 
-Prisma is a powerful ORM for managing databases, and [Turborepo](https://turbo.build/) simplifies monorepo workflows. By combining these tools, you can create a scalable, modular architecture for your projects.
+Prisma is a powerful ORM for managing databases, and [Turborepo](https://turbo.build/) simplifies monorepo workflows. By combining these tools, you can create a scalable, modular architecture for your projects. 
 
 This guide will show you how to set up Prisma as a standalone package in a Turborepo monorepo, enabling efficient configuration, type sharing, and database management across multiple apps.
 
@@ -23,7 +23,6 @@ This guide will show you how to set up Prisma as a standalone package in a Turbo
 - Integrating the Prisma package into other applications in the monorepo.
 
 ### Prerequisites
-
 - [Node.js 18+](https://nodejs.org/)
 
 ## 1. Set up your project
@@ -38,7 +37,7 @@ You'll be prompted to select your package manager, this guide will use `npm`:
 
 :::info
 
-- _Which package manager do you want to use?_ `npm`
+- *Which package manager do you want to use?* `npm`
 
 :::
 
@@ -87,14 +86,14 @@ This will create several files inside `packages/database`:
 In the `packages/database/prisma/schema.prisma` file, add the following models:
 
 ```prisma file=packages/database/prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -122,7 +121,7 @@ Let's add some scripts to the `package.json` inside `packages/database`:
 ,
   //add-end
   "devDependencies": ,
-  "dependencies":
+  "dependencies": 
 }
 
 ```
@@ -137,7 +136,7 @@ Let's also add these scripts to `turbo.json` in the root and ensure that `DATABA
   //add-start
   "db:generate": ,
   "db:migrate": ,
-  "db:deploy":
+  "db:deploy": 
   //add-end
 }
 ```
@@ -152,7 +151,7 @@ To generate the types from Prisma schema, from the project root run:
 
 ### 2.4. Export the Prisma client and types
 
-Next, export the generated types and an instance of `PrismaClient` so it can used in your applications.
+Next, export the generated types and an instance of `PrismaClient` so it can used in your applications. 
 
 In the `packages/database` directory, create a `src` folder and add a `client.ts` file. This file will define an instance of `PrismaClient`:
 
@@ -175,7 +174,7 @@ If you're not using a bundler, use the [Compiled Packages](https://turborepo.com
   "devDependencies": ,
   "dependencies": ,
   //add-start
-  "exports":
+  "exports": 
   //add-end
 }
 
@@ -184,7 +183,6 @@ If you're not using a bundler, use the [Compiled Packages](https://turborepo.com
 By completing these steps, you'll make the Prisma types and `PrismaClient` instance accessible throughout the monorepo.
 
 ## 3. Import the `database` package in the web app
-
 The `turborepo-prisma` project should have an app called `web` at `apps/web`. Add the `database` dependency to `apps/web/package.json`:
 
 Run your package manager's install command inside the `apps/web` directory:
@@ -195,10 +193,10 @@ In the `apps/web/app` directory, open the `page.tsx` file and add the following 
 
 ```tsx file=apps/web/app/page.tsx
 
-  const user = await prisma.user.findFirst()
+  const user = await prisma.user.findFirst() 
   return (
     <div className=>
-
+      
     </div>
   );
 }
@@ -223,9 +221,9 @@ Keep in mind that Turborepo [recommends using separate `.env` files for each pac
 
 ## 4. Configure task dependencies in Turborepo
 
-The `db:generate` and `db:deploy` scripts are not yet optimized for the monorepo setup but are essential for the `dev` and `build` tasks.
+The `db:generate` and `db:deploy` scripts are not yet optimized for the monorepo setup but are essential for the `dev` and `build` tasks. 
 
-If a new developer runs `turbo dev` on an application without first running `db:generate`, they will encounter errors.
+If a new developer runs `turbo dev` on an application without first running `db:generate`, they will encounter errors. 
 
 To prevent this, ensure that `db:generate` is always executed before running `dev` or `build`. Additionally, make sure both `db:deploy` and `db:generate` are executed before `db:build`. Here's how to configure this in your `turbo.json` file:
 
@@ -236,7 +234,7 @@ To prevent this, ensure that `db:generate` is always executed before running `de
     "dev": ,
     "db:generate": ,
     "db:migrate": ,
-    "db:deploy":
+    "db:deploy": 
   }
 }
 
@@ -247,7 +245,6 @@ To prevent this, ensure that `db:generate` is always executed before running `de
 :::warning
 
 Before starting the development server, note that if you are using Next.js v15.2.0, do not use Turbopack as there is a known [issue](https://github.com/vercel/next.js/issues/76497). Remove Turbopack from your dev script by updating your `apps/web/package.json`
-
 ```json file=apps/web/package.json
 "script":
 ```
@@ -264,7 +261,7 @@ No user added yet
 
 :::note
 
-You can add users to your database by creating a seed script or manually by using [Prisma Studio](/orm/tools/prisma-studio).
+You can add users to your database by creating a seed script or manually by using [Prisma Studio](/orm/tools/prisma-studio). 
 
 To use Prisma Studio to add manually data via a GUI, navigate inside the `packages/database` directory and run `prisma studio` using your package manager:
 

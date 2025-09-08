@@ -11,7 +11,7 @@ You can use `getServerSideProps` by exporting it from a Page Component. The exam
 
 ```tsx filename="pages/index.tsx" switcher
 
-type Repo =
+type Repo = 
 
   // Fetch data from external API
   const res = await fetch('https://api.github.com/repos/vercel/next.js')

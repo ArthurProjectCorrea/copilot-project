@@ -1,6 +1,6 @@
 ---
 title: 'Introspection for MySQL in a TypeScript project'
-sidebar_label: 'Introspection'
+sidebar_label:  'Introspection'
 metaTitle: 'Introspection with Prisma ORM, TypeScript, and MySQL'
 metaDescription: 'Introspect your existing project with Prisma ORM, TypeScript, and MySQL'
 langSwitcher: ['typescript', 'node']
@@ -90,11 +90,11 @@ After the introspection is complete, your Prisma schema is updated:
 The data model now looks similar to this (note that the fields on the models have been reordered for better readability):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 :::info
@@ -116,11 +116,11 @@ These changes are relevant for the generated Prisma Client API where using lower
 Because [relation fields](/orm/prisma-schema/data-model/relations#relation-fields) are _virtual_ (i.e. they _do not directly manifest in the database_), you can manually rename them in your Prisma schema without touching the database:
 
 ```prisma file=prisma/schema.prisma highlight=8,17,24,25;edit showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 In this example, the database schema did follow the [naming conventions](/orm/reference/prisma-schema-reference#naming-conventions) for Prisma ORM models (only the virtual relation fields that were generated from introspection did not adhere to them and needed adjustment). This optimizes the ergonomics of the generated Prisma Client API.
@@ -130,7 +130,7 @@ Sometimes though, you may want to make additional changes to the names of the co
 Assume you obtained the following model from introspection that's based on _snake_case_ notation:
 
 ```prisma no-lines
-model my_user
+model my_user 
 ```
 
 If you generated a Prisma Client API for this model, it would pick up the _snake_case_ notation in its API:
@@ -143,7 +143,7 @@ const user = await prisma.my_user.create(,
 If you don't want to use the table and column names from your database in your Prisma Client API, you can configure them with [`@map` and `@@map`](/orm/prisma-schema/data-model/models#mapping-model-names-to-tables-or-collections):
 
 ```prisma no-lines
-model MyUser
+model MyUser 
 ```
 
 With this approach, you can name your model and its fields whatever you like and use the `@map` (for field names) and `@@map` (for models names) to point to the underlying tables and columns. Your Prisma Client API now looks as follows:

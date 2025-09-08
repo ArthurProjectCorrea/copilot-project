@@ -27,7 +27,7 @@ const  = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -49,7 +49,7 @@ The following examples are all based on the models in the Prisma schema.
 Inside the `main` function, add the following query to read all `User` records from the database and print the result:
 
 ```js file=index.js showLineNumbers
-async function main()
+async function main() 
 ```
 
 Now run the code with this command:

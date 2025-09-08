@@ -1,7 +1,7 @@
 ---
 title: 'Excessive number of rows returned'
 metaTitle: 'Optimize Recommendations: Excessive number of rows returned'
-metaDescription: 'Learn about the recommendation provided by Optimize for excessive number of rows returned.'
+metaDescription: "Learn about the recommendation provided by Optimize for excessive number of rows returned."
 tocDepth: 3
 toc: true
 ---

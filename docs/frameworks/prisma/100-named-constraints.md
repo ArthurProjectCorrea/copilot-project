@@ -21,9 +21,9 @@ To keep existing names, run `prisma db pull` against the target environment. Thi
 1. Example schema:
 
    ```prisma
-   model User
-
-   model Post
+   model User 
+   
+   model Post 
    ```
 
 1. Introspect your **development database** to populate the Prisma schema with constraint and index names in your underlying database _that do not match Prisma ORM's naming convention_:
@@ -35,9 +35,9 @@ To keep existing names, run `prisma db pull` against the target environment. Thi
    In this example, the highlighted constraints did not conform to Prisma ORM's default naming convention and now include the `map` attribute field:
 
    ```prisma highlight=11;normal
-   model User
-
-   model Post
+   model User 
+   
+   model Post 
    ```
 
 ## Option 2: I want to use Prisma ORM's default constraint and index names
@@ -51,9 +51,9 @@ Afterwards, do not forget to `prisma migrate deploy` against your production env
 1. Example schema:
 
    ```prisma
-   model User
-
-   model Post
+   model User 
+   
+   model Post 
    ```
 
 1. Run the `prisma migrate dev` command to generate a new migration:
@@ -88,13 +88,13 @@ In the following example, the `Post` model has a foreign key constraint with a c
 #### Development environment:
 
 ```prisma highlight=5;normal
-model Post
+model Post 
 ```
 
 #### Production environment:
 
 ```prisma highlight=5;normal
-model Post
+model Post 
 ```
 
 ### Aligning your environments if their constraint or index names differ

@@ -1,9 +1,9 @@
 <ApiTable
-rows=-<number>`, `$: calc(var(--spacing) * <number>);`],
+  rows=-<number>`, `$: calc(var(--spacing) * <number>);`],
     [`$-px`, `$: 1px;`],
     [`$-(<custom-property>)`, `$: var(<custom-property>);`],
     [`$-[<value>]`, `$: <value>;`],
-])}
+  ])}
 />
 
 ## Examples

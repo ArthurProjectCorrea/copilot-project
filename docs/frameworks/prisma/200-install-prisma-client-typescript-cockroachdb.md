@@ -1,13 +1,13 @@
 ---
-title: 'Install Prisma Client in an existing TypeScript project (CockroachDB)'
+title: 'Install Prisma Client (TypeScript and CockroachDB)'
 sidebar_label: 'Install Prisma Client'
-metaTitle: 'Install Prisma Client in your existing project using TypeScript and CockroachDB'
-metaDescription: 'Install and generate Prisma Client in your existing TypeScript and CockroachDB project'
+metaTitle: 'Install Prisma Client: TypeScript and CockroachDB'
+metaDescription: 'Install and generate Prisma Client in your project using TypeScript and CockroachDB'
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-hide_table_of_contents: true
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
 sidebar_class_name: hidden-sidebar
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases/baseline-your-database-typescript-cockroachdb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-typescript-cockroachdb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/install-prisma-client-
+hide_table_of_contents: true
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-cockroachdb
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-typescript-cockroachdb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-
 ---

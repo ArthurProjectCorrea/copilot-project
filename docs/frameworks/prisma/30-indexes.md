@@ -10,13 +10,16 @@ tocDepth: 3
 You can configure indexes, unique constraints, and primary key constraints with the following attribute arguments:
 
 - The [`length` argument](#configuring-the-length-of-indexes-with-length-mysql) allows you to specify a maximum length for the subpart of the value to be indexed on `String` and `Bytes` types
+
   - Available on the `@id`, `@@id`, `@unique`, `@@unique` and `@@index` attributes
   - MySQL only
 
 - The [`sort` argument](#configuring-the-index-sort-order-with-sort) allows you to specify the order that the entries of the constraint or index are stored in the database
+
   - Available on the `@unique`, `@@unique` and `@@index` attributes in all databases, and on the `@id` and `@@id` attributes in SQL Server
 
 - The [`type` argument](#configuring-the-access-type-of-indexes-with-type-postgresql) allows you to support index access methods other than PostgreSQL's default `BTree` access method
+
   - Available on the `@@index` attribute
   - PostgreSQL only
   - Supported index access methods: `Hash`, `Gist`, `Gin`, `SpGist` and `Brin`
@@ -36,7 +39,7 @@ The `length` argument is available on the `@id`, `@@id`, `@unique`, `@@unique` a
 As an example, the following data model declares an `id` field with a maximum length of 3000 characters:
 
 ```prisma file=schema.prisma showLineNumbers
-model Id
+model Id 
 ```
 
 This is not valid in MySQL because it exceeds MySQL's index storage limit and therefore Prisma ORM rejects the data model. The generated SQL would be rejected by the database.
@@ -50,7 +53,7 @@ CREATE TABLE `Id` (
 The `length` argument allows you to specify that only a subpart of the `id` value represents the primary key. In the example below, the first 100 characters are used:
 
 ```prisma file=schema.prisma showLineNumbers
-model Id
+model Id 
 ```
 
 Prisma Migrate is able to create constraints and indexes with the `length` argument if specified in your data model. This means that you can create indexes and constraints on values of Prisma schema type `Byte` and `String`. If you don't specify the argument the index is treated as covering the full value as before.
@@ -60,7 +63,7 @@ Introspection will fetch these limits where they are present in your existing da
 The `length` argument can also be used on compound primary keys, using the `@@id` attribute, as in the example below:
 
 ```prisma file=schema.prisma showLineNumbers
-model CompoundId
+model CompoundId 
 ```
 
 A similar syntax can be used for the `@@unique` and `@@index` attributes.
@@ -87,7 +90,7 @@ CREATE TABLE `Unique` (
 would be introspected as
 
 ```prisma file=schema.prisma showLineNumbers
-model Unique
+model Unique 
 ```
 
 Note that in PostgreSQL, while you cannot specify sort order on unique constraints directly, you can create a unique index with a sort order that will enforce uniqueness:
@@ -100,7 +103,7 @@ CREATE UNIQUE INDEX "unique_index_desc" ON "Unique" ("unique" DESC);
 The `sort` argument can also be used on compound indexes:
 
 ```prisma file=schema.prisma showLineNumbers
-model CompoundUnique
+model CompoundUnique 
 ```
 
 ### Example: using `sort` and `length` together
@@ -108,7 +111,7 @@ model CompoundUnique
 The following example demonstrates the use of the `sort` and `length` arguments to configure indexes and constraints for a `Post` model:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 ### Configuring the access type of indexes with `type` (PostgreSQL)
@@ -122,7 +125,7 @@ The `Hash` type will store the index data in a format that is much faster to sea
 As an example, the following model adds an index with a `type` of `Hash` to the `value` field:
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```
 
 This translates to the following SQL commands:
@@ -145,7 +148,7 @@ An indexed field can define the operator class, which defines the operators hand
 As an example, the following model adds a `Gin` index to the `value` field, with `JsonbPathOps` as the class of operators allowed to use the index:
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```
 
 This translates to the following SQL commands:
@@ -187,7 +190,7 @@ The GiST index type is used for implementing indexing schemes for user-defined t
 As an example, the following model adds a `Gist` index to the `value` field with `InetOps` as the operators that will be using the index:
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```
 
 This translates to the following SQL commands:
@@ -223,7 +226,7 @@ As with GiST, SP-GiST is important as a building block for user-defined types, a
 As an example, the following model adds a `SpGist` index to the `value` field with `TextOps` as the operators using the index:
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```
 
 This translates to the following SQL commands:
@@ -260,7 +263,7 @@ The BRIN index type is useful if you have lots of data that does not change afte
 As an example, the following model adds a `Brin` index to the `value` field with `Int4BloomOps` as the operators that will be using the index:
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```
 
 This translates to the following SQL commands:
@@ -347,7 +350,7 @@ The `clustered` argument is available to configure (non)clustered indexes in SQL
 As an example, the following model configures the `@id` to be non-clustered (instead of the clustered default):
 
 ```prisma file=schema.prisma showLineNumbers
-model Example
+model Example 
 ```
 
 This translates to the following SQL commands:
@@ -392,7 +395,7 @@ The `fullTextIndex` preview feature provides support for introspection and migra
 To enable the `fullTextIndex` preview feature, add the `fullTextIndex` feature flag to the `generator` block of the `schema.prisma` file:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 ```
 
 ### Examples
@@ -400,17 +403,17 @@ generator client
 The following example demonstrates adding a `@@fulltext` index to the `title` and `content` fields of a `Post` model:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 ```
 
 On MongoDB, you can use the `@@fulltext` index attribute (via the `fullTextIndex` preview feature) with the `sort` argument to add fields to your full-text index in ascending or descending order. The following example adds a `@@fulltext` index to the `title` and `content` fields of the `Post` model, and sorts the `title` field in descending order:
 
 ```prisma file=schema.prisma showLineNumbers
-generator js
+generator js 
 
-datasource db
+datasource db 
 
-model Post
+model Post 
 ```
 
 ### Upgrading from previous versions

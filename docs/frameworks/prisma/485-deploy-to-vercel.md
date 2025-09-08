@@ -18,14 +18,14 @@ If Prisma's Rust engine binaries cause large bundle sizes, slow builds, or deplo
 **When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
 When using this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
 :::
@@ -59,7 +59,7 @@ If your application uses PostgreSQL, we recommend using [Prisma Postgres](/postg
 First, ensure that the `DATABASE_URL` is set as the `url` of the `datasource` in your Prisma schema:
 
 ```prisma
-datasource db
+datasource db 
 ```
 
 #### Development
@@ -110,7 +110,7 @@ npx prisma init --output ../app/generated/prisma
 We'll use the default `User` model for the example below:
 
 ```prisma
-model User
+model User 
 ```
 
 ### Vercel Postgres
@@ -120,7 +120,7 @@ If you are using Vercel Postgres, you need to:
 - use the `@prisma/adapter-neon` database adapter (via the `driverAdapters` Preview feature) because Vercel Postgres uses [Neon](https://neon.tech/) under the hood
 - be aware that Vercel by default calls the environment variable for the database connection string `POSTGRES_PRISMA_URL` while the default name used in the Prisma docs is typically `DATABASE_URL`; using Vercel's naming, you need to set the following fields on your `datasource` block:
   ```prisma
-  datasource db
+  datasource db 
   ```
 
 #### 1. Configure Prisma schema & database connection
@@ -134,9 +134,9 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `POSTGRES_PRISMA_URL` and the `directUrl` to the `POSTGRES_URL_NON_POOLING` environment variable. You also need to enable the `driverAdapters` feature flag:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, you need to set the `POSTGRES_PRISMA_URL` and `POSTGRES_URL_NON_POOLING` environment variable to the values of your database connection.
@@ -241,9 +241,9 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable in your `.env` file that's used both by Prisma and Next.js to read your env vars:
@@ -345,9 +345,9 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable in your `.env` file that's used both by Prisma and Next.js to read your env vars:
@@ -438,10 +438,11 @@ At this point, you can get the URL of the deployed application from the Vercel D
 
 Use `attachDatabasePool` together with [Prisma's driver adapters](/orm/overview/databases/database-drivers) to safely manage connections in Fluid:
 
-```ts
-const pool = new Pool();
+```ts 
 
-attachDatabasePool(pool);
+const pool = new Pool()
 
-const prisma = new PrismaClient();
+attachDatabasePool(pool)
+
+const prisma = new PrismaClient()
 ```

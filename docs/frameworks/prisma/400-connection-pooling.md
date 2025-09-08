@@ -61,8 +61,8 @@ You can configure the minimum and maximum query response size, query duration, a
 
 Prisma Postgres has a default global timeout of `10s` for each query, configurable using the slider labeled **Query duration**, based on your subscription plan:
 
-| Plan          | Free               | Starter            | Pro                | Business           |
-| ------------- | ------------------ | ------------------ | ------------------ | ------------------ |
+| Plan          | Free            | Starter         | Pro            | Business        |
+|---------------|-----------------|-----------------|----------------|-----------------|
 | Query timeout | Up to `10` seconds | Up to `10` seconds | Up to `20` seconds | Up to `60` seconds |
 
 See the [error reference](/postgres/database/api-reference/error-reference#p6004-querytimeout) and our [pricing page](https://www.prisma.io/pricing) for more information.
@@ -76,8 +76,8 @@ While you can increase the query timeout, it's recommended to inspect and optimi
 
 Prisma Postgres has a default global timeout of `15s` for each [interactive transaction](/orm/prisma-client/queries/transactions#interactive-transactions), configurable using the slider labeled **Transaction duration**, based on your subscription plan:
 
-| Plan                          | Free               | Starter            | Pro                | Business           |
-| ----------------------------- | ------------------ | ------------------ | ------------------ | ------------------ |
+| Plan                          | Free           | Starter       | Pro          | Business      |
+|-------------------------------|----------------|---------------|--------------|---------------|
 | Interactive transaction limit | Up to `15` seconds | Up to `15` seconds | Up to `30` seconds | Up to `90` seconds |
 
 See the [error reference](/postgres/database/api-reference/error-reference#p6004-querytimeout) and our [pricing page](https://www.prisma.io/pricing#accelerate) for more information.
@@ -87,7 +87,7 @@ When you set a higher interactive transaction timeout in the Prisma Console, you
 ```ts
 await prisma.$transaction(
   async (tx) => ,
-
+  
 );
 ```
 
@@ -101,9 +101,9 @@ While you can increase the interactive transaction timeout limit, it's recommend
 
 Prisma Postgres has a default global response size limit of `5MB`, configurable using the slider labeled **Response size**, based on your subscription plan:
 
-| Plan       | Free        | Starter     | Pro          | Business     |
-| ---------- | ----------- | ----------- | ------------ | ------------ |
-| Query size | Up to `5MB` | Up to `5MB` | Up to `10MB` | Up to `20MB` |
+| Plan       | Free         | Starter       | Pro          | Business      |
+|------------|--------------|---------------|--------------|---------------|
+| Query size | Up to `5MB`  | Up to `5MB`   | Up to `10MB` | Up to `20MB`  |
 
 See the [error reference](/postgres/database/api-reference/error-reference#p6009-responsesizelimitexceeded) and our [pricing page](https://www.prisma.io/pricing#accelerate) for more information.
 
@@ -136,10 +136,10 @@ Autoscaling is automatically enabled **when your Accelerate connection limit is 
 
 Your environment's maximum connection limit is based on your [Prisma Data Platform plan](https://www.prisma.io/pricing):
 
-| Plan       | Max Connection Limit                 |
-| ---------- | ------------------------------------ |
-| Free       | `10`                                 |
-| Starter    | `10`                                 |
-| Pro        | `100`                                |
-| Business   | `1000`                               |
-| Enterprise | [Contact Us](mailto:sales@prisma.io) |
+| Plan        | Max Connection Limit                 |
+|-------------|--------------------------------------|
+| Free        | `10`                                   |
+| Starter     | `10`                                  |
+| Pro         | `100`                                 |
+| Business    | `1000`                                |
+| Enterprise  | [Contact Us](mailto:sales@prisma.io) |

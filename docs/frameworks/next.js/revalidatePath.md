@@ -90,7 +90,8 @@ This pattern ensures that both the specific page and any other pages using the s
 ### Revalidating a specific URL
 
 ```ts
-revalidatePath('/blog/post-1');
+
+revalidatePath('/blog/post-1')
 ```
 
 This will invalidate one specific URL for revalidation on the next page visit.
@@ -98,9 +99,10 @@ This will invalidate one specific URL for revalidation on the next page visit.
 ### Revalidating a Page path
 
 ```ts
-revalidatePath('/blog/[slug]', 'page');
+
+revalidatePath('/blog/[slug]', 'page')
 // or with route groups
-revalidatePath('/(main)/blog/[slug]', 'page');
+revalidatePath('/(main)/blog/[slug]', 'page')
 ```
 
 This will invalidate any URL that matches the provided `page` file for revalidation on the next page visit. This will _not_ invalidate pages beneath the specific page. For example, `/blog/[slug]` won't invalidate `/blog/[slug]/[author]`.
@@ -108,9 +110,10 @@ This will invalidate any URL that matches the provided `page` file for revalidat
 ### Revalidating a Layout path
 
 ```ts
-revalidatePath('/blog/[slug]', 'layout');
+
+revalidatePath('/blog/[slug]', 'layout')
 // or with route groups
-revalidatePath('/(main)/post/[slug]', 'layout');
+revalidatePath('/(main)/post/[slug]', 'layout')
 ```
 
 This will invalidate any URL that matches the provided `layout` file for revalidation on the next page visit. This will cause pages beneath with the same layout to be invalidated and revalidated on the next visit. For example, in the above case, `/blog/[slug]/[another]` would also be invalidated and revalidated on the next visit.
@@ -118,7 +121,8 @@ This will invalidate any URL that matches the provided `layout` file for revalid
 ### Revalidating all data
 
 ```ts
-revalidatePath('/', 'layout');
+
+revalidatePath('/', 'layout')
 ```
 
 This will purge the Client-side Router Cache, and invalidate the Data Cache for revalidation on the next page visit.

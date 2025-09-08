@@ -258,7 +258,7 @@ In order to introspect your database, you need to tell Prisma ORM how to connect
 Create a new file named `schema.prisma` and add the following code to it:
 
 ```prisma file=schema.prisma showLineNumbers
-datasource db
+datasource db 
 ```
 
 The database connection URL is set via an environment variable. The Prisma CLI automatically supports the [`dotenv`](https://github.com/motdotla/dotenv) format which automatically picks up environment variables defined in a file named `.env`.
@@ -284,17 +284,17 @@ npx prisma db pull
 This command introspects your database and for each table adds a Prisma model to the Prisma schema:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model anotherproduct
+model anotherproduct 
 
-model lastproduct
+model lastproduct 
 
-model product
+model product 
 
-model secondtolastproduct
+model secondtolastproduct 
 ```
 
 ## 7. Generate Prisma Client
@@ -304,7 +304,7 @@ To validate whether the check constraints work, you'll now generate Prisma Clien
 First, add a `generator` block to your Prisma schema (typically added right below the `datasource` block):
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 ```
 
 Run the following command to install and generate Prisma Client in your project:

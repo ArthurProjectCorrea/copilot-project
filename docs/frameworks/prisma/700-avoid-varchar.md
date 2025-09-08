@@ -1,7 +1,7 @@
 ---
 title: 'Using @db.VarChar(n)'
 metaTitle: 'Optimize Recommendations: Avoid usage of `@db.VarChar(n)`'
-metaDescription: 'Learn about the recommendation provided by Optimize for using `@db.VarChar(n)` native type.'
+metaDescription: "Learn about the recommendation provided by Optimize for using `@db.VarChar(n)` native type."
 tocDepth: 3
 toc: true
 ---
@@ -11,7 +11,7 @@ Optimize provides recommendations to help you identify and resolve performance i
 The `@db.VarChar(n)` native type has been used within the `Item` model on the name field:
 
 ```prisma
-model Item
+model Item 
 ```
 
 ### Why this is a problem

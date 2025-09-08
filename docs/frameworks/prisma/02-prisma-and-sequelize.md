@@ -29,7 +29,7 @@ const user = await prisma.user.findUnique(,
 **Sequelize**
 
 ```ts
-const user = await User.findByPk(id);
+const user = await User.findByPk(id)
 ```
 
 ### Fetching selected scalars of single objects
@@ -45,7 +45,7 @@ const user = await prisma.user.findUnique(,
 **Sequelize**
 
 ```ts
-const user = await User.findByPk(1);
+const user = await User.findByPk(1, )
 ```
 
 :::tip
@@ -137,7 +137,7 @@ const page = await prisma.post.findMany(,
 Offset pagination:
 
 ```ts
-const cc = await prisma.post.findMany();
+const cc = await prisma.post.findMany()
 ```
 
 **Sequelize**
@@ -155,7 +155,7 @@ const posts = await Post.findAll(,
 Offset pagination:
 
 ```ts
-const posts = await Post.findAll();
+const posts = await Post.findAll()
 ```
 
 ### Creating objects
@@ -193,7 +193,7 @@ const user = await prisma.user.delete(,
 **Sequelize**
 
 ```ts
-await user.destroy();
+await user.destroy()
 ```
 
 ### Batch updates
@@ -211,7 +211,7 @@ const user = await prisma.user.updateMany(,
 
 ```ts
 const updatedUsers = await User.update(,
-  where:
+  where: 
   },
 })
 ```

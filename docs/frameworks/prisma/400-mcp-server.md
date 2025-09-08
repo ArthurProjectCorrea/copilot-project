@@ -8,7 +8,7 @@ toc: true
 
 ## Overview
 
-The [Model-Context-Protocol](https://modelcontextprotocol.io/introduction) (MCP) gives LLMs a way to call APIs and thus access external systems in a well-defined manner.
+The [Model-Context-Protocol](https://modelcontextprotocol.io/introduction) (MCP) gives LLMs a way to call APIs and thus access external systems in a well-defined manner. 
 
 Prisma's provides two MCP servers: a _local_ and a _remote_ one. See below for specific information on each.
 
@@ -85,9 +85,9 @@ If you're using VS Code, you can use [VS Code agent mode](https://code.visualstu
 - `migrate-dev`: Creates and executes a migration via the `prisma migrate dev --name <name>` command. The LLM will provide the `<name>` option.
 - `migrate-reset`: Resets your database via the `prisma migrate reset --force` command.
 - `Prisma-Postgres-account-status`: Checks your authentication status with [Prisma Console](https://console.prisma.io) via the `platform auth show --early-access` command.
-- `Create-Prisma-Postgres-Database`: Creates a new Prisma Postgres database via the `'init --db --name' <name> '--region' <region> '--non-interactive'` command. The LLM will provide the `<name>` and `<region>` options.
+- `Create-Prisma-Postgres-Database`: Creates a new Prisma Postgres database via the `'init --db --name' <name> '--region' <region> '--non-interactive'` command.  The LLM will provide the `<name>` and `<region>` options.
 - `Prisma-Login`: Authenticates with [Prisma Console](https://console.prisma.io) via the `platform auth login --early-access` command.
-- `Prisma-Studio`: Open Prisma Studio via the `prisma studio` command.
+- `Prisma-Studio`: Open Prisma Studio via the `prisma studio` command. 
 
 ### Usage
 
@@ -102,7 +102,6 @@ The local Prisma MCP server follows the standard JSON-based configuration for MC
 ### Sample prompts
 
 Here are some sample prompts you can use when the MCP server is running:
-
 - "Log me into the Prisma Console."
 - "Create a database in the US region."
 - "Create a new `Product` table in my database."
@@ -113,32 +112,30 @@ AI tools have different ways of integrating MCP servers. In most cases, there ar
 
 In this section, we're covering the config formats of the most popular AI tools.
 
-### VS Code
+### VS Code 
 
 Install the Prisma MCP server in VS Code with a single click using the link below:
 
 <a
-href="vscode:mcp/install?%7B%22name%22%3A%22prisma-postgres%22%2C%22gallery%22%3Atrue%2C%22url%22%3A%22https%3A%2F%2Fmcp.prisma.io%2Fmcp%22%7D"
-aria-label="Install Prisma MCP server in VS Code"
-style=}
-
->   <span style=}>
-
+  href="vscode:mcp/install?%7B%22name%22%3A%22prisma-postgres%22%2C%22gallery%22%3Atrue%2C%22url%22%3A%22https%3A%2F%2Fmcp.prisma.io%2Fmcp%22%7D"
+  aria-label="Install Prisma MCP server in VS Code"
+  style=}
+>
+  <span style=}>
     VS CODE
-
   </span>
   <span style=}>
     INSTALL PRISMA MCP SERVER
   </span>
 </a>
 
-This will prompt you to open VS Code. Once opened, you'll be guided to install the Prisma MCP server directly into your VS Code configuration.
+This will prompt you to open VS Code. Once opened, you'll be guided to install the Prisma MCP server directly into your VS Code configuration. 
 
 If your browser blocks the link, [you can set it up manually](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server-to-your-workspace) by creating a `.vscode/mcp.json` file in your workspace and adding:
 
 ```json file=.vscode/mcp.json
 ,
-    "Prisma-Remote":
+    "Prisma-Remote": 
   }
 }
 ```
@@ -162,22 +159,21 @@ This will prompt you to open the Cursor app in your browser. Once opened, you'll
 #### Add via Cursor Settings UI
 
 When opening the **Cursor Settings**, you can add the Prisma MCP Server as follows:
-
 1. Select **MCP** in the settings sidenav
 1. Click **+ Add new global MCP server**
 1. Add the `Prisma` snippet to the `mcpServers` JSON object:
-   ```json
-   ,
-       "Prisma-Remote":
-     }
-   }
-   ```
+    ```json
+    ,
+        "Prisma-Remote": 
+      }
+    }
+    ```
 
 #### Global configuration
 
-Adding it via the **Cursor Settings** settings will modify the global `~/.cursor/mcp.json` config file. In this case, the Prisma MCP server will be available in _all_ your Cursor projects:
+Adding it via the  **Cursor Settings** settings will modify the global `~/.cursor/mcp.json` config file. In this case, the Prisma MCP server will be available in _all_ your Cursor projects:
 
-```json file=~/.cursor/mcp.json
+```json file=\~/.cursor/mcp.json
 ,
     "Prisma-Remote": ,
     // other MCP servers
@@ -191,7 +187,7 @@ If you want the Prisma MCP server to be available only in specific Cursor projec
 
 ```json file=.cursor/mcp.json
 ,
-    "Prisma-Remote":
+    "Prisma-Remote": 
     // other MCP servers
   }
 }
@@ -208,20 +204,19 @@ Use the Prisma MCP plugin from the [Windsurf MCP Plugin Store](https://docs.wind
 #### Add via Windsurf Settings UI
 
 When opening the **Windsurf Settings** (via **Windsurf - Settings** > **Advanced Settings or Command Palette** > **Open Windsurf Settings Page**), you can add the Prisma MCP Server as follows:
-
 1. Select **Cascade** in the settings sidenav
 1. Click **Add Server**
 1. Add the `Prisma-Local` and/or `Prisma-Remote` snippets to the `mcpServers` JSON object:
-   ```json
-   ,
-       "Prisma-Remote":
-     }
-   }
-   ```
+    ```json
+    ,
+        "Prisma-Remote": 
+      }
+    }
+    ```
 
 #### Global configuration
 
-Adding it via the **Windsurf Settings** will modify the global `~/.codeium/windsurf/mcp_config.json` config file. Alternatively, you can also manually add it to that file:
+Adding it via the  **Windsurf Settings** will modify the global `~/.codeium/windsurf/mcp_config.json` config file. Alternatively, you can also manually add it to that file:
 
 ```json file=~/.codeium/windsurf/mcp_config.json
 ,
@@ -287,10 +282,8 @@ Alternatively, you can add the _remote_ MCP server as an [integration](https://w
 1. In a new chat, find the **Connect apps** field in the main Claude UI below the input prompt field
 1. Click **+ Add integration**
 1. Enter the following:
-
-- **Integration name**: `Prisma Postgres`
-- **Integration URL**: `https://mcp.prisma.io/mcp`
-
+  - **Integration name**: `Prisma Postgres` 
+  - **Integration URL**: `https://mcp.prisma.io/mcp` 
 1. Click **Add**
 
 ### OpenAI Agents SDK
@@ -314,7 +307,7 @@ async def main():
     ) as local_server, MCPServerStdio(
         params=
     ) as remote_server:
-
+        
         # Optional: list tools from both servers
         local_tools = await local_server.list_tools()
         remote_tools = await remote_server.list_tools()

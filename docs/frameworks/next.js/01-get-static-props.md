@@ -7,7 +7,7 @@ If you export a function called `getStaticProps` (Static Site Generation) from a
 
 ```tsx filename="pages/index.tsx" switcher
 
-type Repo =
+type Repo = 
 
   const res = await fetch('https://api.github.com/repos/vercel/next.js')
   const repo = await res.json()
@@ -15,7 +15,7 @@ type Repo =
 }) satisfies GetStaticProps<>
 
   repo,
-}: InferGetStaticPropsType<typeof getStaticProps>)
+}: InferGetStaticPropsType<typeof getStaticProps>) 
 ```
 
 ```jsx filename="pages/index.js" switcher

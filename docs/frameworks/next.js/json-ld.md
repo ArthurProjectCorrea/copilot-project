@@ -17,16 +17,16 @@ Review your organization's recommended approach to sanitize potentially dangerou
   const  = await params
   const product = await getProduct(id)
 
-  const jsonLd =
+  const jsonLd = 
 
   return (
     <section>
-
+      
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML=}
       />
-
+      
     </section>
   )
 }
@@ -37,16 +37,16 @@ Review your organization's recommended approach to sanitize potentially dangerou
   const  = await params
   const product = await getProduct(id)
 
-  const jsonLd =
+  const jsonLd = 
 
   return (
     <section>
-
+      
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML=}
       />
-
+      
     </section>
   )
 }
@@ -58,5 +58,5 @@ You can type your JSON-LD with TypeScript using community packages like [`schema
 
 ```tsx
 
-const jsonLd: WithContext<Product> =
+const jsonLd: WithContext<Product> = 
 ```

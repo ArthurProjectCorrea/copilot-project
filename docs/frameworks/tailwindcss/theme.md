@@ -12,10 +12,10 @@ For example, you can add a new color to your project by defining a theme variabl
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* [!code highlight:4] */
-@theme;
+@theme 
 ```
 
 Now you can use utility classes like `bg-mint-500`, `text-mint-500`, or `fill-mint-500` in your HTML:
@@ -56,7 +56,7 @@ For example, theme variables defined in the `--font-*` namespace determine all o
 
 ```css
 /* [!code filename:./node_modules/tailwindcss/theme.css] */
-@theme;
+@theme 
 ```
 
 The `font-sans`, `font-serif`, and `font-mono` utilities only exist by default because Tailwind's default theme defines the `--font-sans`, `--font-serif`, and `--font-mono` theme variables.
@@ -65,9 +65,9 @@ If another theme variable like `--font-poppins` were defined, a `font-poppins` u
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 ```html
@@ -84,9 +84,9 @@ Some theme variables are used to define variants rather than utilities. For exam
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 Now you can use the `3xl:*` variant to only trigger a utility when the viewport is 120rem or wider:
@@ -120,16 +120,16 @@ Here's what you're actually importing when you import `tailwindcss`:
 @layer theme, base, components, utilities;
 
 /* [!code highlight:2] */
-@import './theme.css' layer(theme);
-@import './preflight.css' layer(base);
-@import './utilities.css' layer(utilities);
+@import "./theme.css" layer(theme);
+@import "./preflight.css" layer(base);
+@import "./utilities.css" layer(utilities);
 ```
 
 That `theme.css` file includes the default color palette, type scale, shadows, fonts, and more:
 
 ```css
 /* [!code filename:node_modules/tailwindcss/theme.css] */
-@theme;
+@theme 
 ```
 
 This is why utilities like `bg-red-200`, `font-serif`, and `shadow-sm` exist out of the box — they're driven by the default theme, not hardcoded into the framework like `flex-col` or `pointer-events-none`.
@@ -146,9 +146,9 @@ Use `@theme` to define new theme variables and extend the default theme:
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 This makes a new `font-script` utility class available that you can use in your HTML, just like the default `font-sans` or `font-mono` utilities:
@@ -167,9 +167,9 @@ Override a default theme variable value by redefining it within `@theme`:
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 Now the `sm:*` variant will trigger at 30rem instead of the default 40rem viewport size:
@@ -186,9 +186,9 @@ To completely override an entire namespace in the default theme, set the entire 
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 When you do this, all of the default utilities that use that namespace _(like `bg-red-500`)_ will be removed, and only your custom values _(like `bg-midnight`)_ will be available.
@@ -201,9 +201,9 @@ To completely disable the default theme and use only custom values, set the glob
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 Now none of the default utility classes that are driven by theme variables will be available, and you'll only be able to use utility classes matching your custom theme variables like `font-body` and `text-dusk`.
@@ -216,8 +216,8 @@ Define the `@keyframes` rules for your `--animate-*` theme variables within `@th
 /* [!code filename:app.css] */
 @import "tailwindcss";
 
-@theme
-    100%
+@theme 
+    100% 
   }
 }
 ```
@@ -230,17 +230,17 @@ When defining theme variables that reference other variables, use the `inline` o
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* [!code word:inline] */
-@theme inline;
+@theme inline 
 ```
 
 Using the `inline` option, the utility class will use the theme variable _value_ instead of referencing the actual theme variable:
 
 ```css
 /* [!code filename:dist.css] */
-.font-sans
+.font-sans 
 ```
 
 Without using `inline`, your utility classes might resolve to unexpected values because of how variables are resolved in CSS.
@@ -267,9 +267,9 @@ By default only used CSS variables will be generated in the final CSS output. If
 ```css
 /* [!code filename:app.css] */
 /* [!code word:static] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme static;
+@theme static 
 ```
 
 ### Sharing across projects
@@ -278,16 +278,16 @@ Since theme variables are defined in CSS, sharing them across projects is just a
 
 ```css
 /* [!code filename:./packages/brand/theme.css] */
-@theme;
+@theme 
 ```
 
 Then you can use `@import` to include your theme variables in other projects:
 
 ```css
 /* [!code filename:./packages/admin/app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 /* [!code highlight:2] */
-@import '../brand/theme.css';
+@import "../brand/theme.css";
 ```
 
 You can put shared theme variables like this in their own package in monorepo setups or even publish them to NPM and import them just like any other third-party CSS files.
@@ -298,7 +298,7 @@ All of your theme variables are turned into regular CSS variables when you compi
 
 ```css
 /* [!code filename:dist.css] */
-:root;
+:root 
 ```
 
 This makes it easy to reference all of your design tokens in any of your custom CSS or inline styles.
@@ -317,11 +317,11 @@ Use your theme variables to get access to your design tokens when you're writing
 /* [!code word:var(--text-xl)] */
 @import "tailwindcss";
 
-@layer components
+@layer components 
 
-    h1
+    h1 
 
-    h2
+    h2 
   }
 }
 ```
@@ -363,7 +363,7 @@ If you need access to a resolved CSS variable value in JS, you can use `getCompu
 ```js
 // [!code filename:spaghetti.js]
 let styles = getComputedStyle(document.documentElement);
-let shadow = styles.getPropertyValue('--shadow-xl');
+let shadow = styles.getPropertyValue("--shadow-xl");
 ```
 
 ## Default theme variable reference
@@ -372,18 +372,18 @@ For reference, here's a complete list of the theme variables included by default
 
 ```css
 /* [!code filename:tailwindcss/theme.css] */
-@theme
+@theme 
   }
 
-  @keyframes ping
+  @keyframes ping 
   }
 
-  @keyframes pulse
+  @keyframes pulse 
   }
 
-  @keyframes bounce
+  @keyframes bounce 
 
-    50%
+    50% 
   }
 }
 ```

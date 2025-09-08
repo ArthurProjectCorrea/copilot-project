@@ -408,7 +408,9 @@ Based on this `.proto` file, let's define the `HelloService` interface:
 ```typescript
 interface HelloService {
   bidiHello(upstream: Observable<HelloRequest>): Observable<HelloResponse>;
-  lotsOfGreetings(upstream: Observable<HelloRequest>): Observable<HelloResponse>;
+  lotsOfGreetings(
+    upstream: Observable<HelloRequest>,
+  ): Observable<HelloResponse>;
 }
 
 interface HelloRequest {

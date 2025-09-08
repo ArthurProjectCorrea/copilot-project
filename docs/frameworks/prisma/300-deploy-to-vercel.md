@@ -19,14 +19,14 @@ If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or dep
 **When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
 When using this architecture:
 
-- No Rust query engine binary is downloaded or shipped.
-- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+* No Rust query engine binary is downloaded or shipped.
+* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
 :::
@@ -54,7 +54,7 @@ If you see `prisma: command not found` errors during your deployment to Vercel, 
 Another option to avoid an outdated Prisma Client is to use [a custom output path](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path) and check your client into version control. This way each deployment is guaranteed to include the correct Prisma Client.
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 ```
 
 ### Deploying Prisma in Monorepos on Vercel
@@ -63,7 +63,6 @@ If you are using Prisma inside a monorepo (e.g., with TurboRepo) and deploying t
 For more details on how Prisma interacts with different bundlers like Webpack and Parcel, see our [Module bundlers](/orm/prisma-client/deployment/module-bundlers#overview) page.
 
 The usage of this plugin becomes obsolet if:
-
 - you are using [Prisma ORM without Rust engines](/orm/prisma-client/setup-and-configuration/no-rust-engine) (via the `queryCompiler` feature flag)
 - you are using the [new `prisma-client` generator](/orm/prisma-schema/overview/generators#prisma-client-preview)
 
@@ -123,10 +122,11 @@ For more information on connection management for serverless environments, refer
 
 Use `attachDatabasePool` together with [Prisma's driver adapters](/orm/overview/databases/database-drivers) to safely manage connections in Fluid:
 
-```ts
-const pool = new Pool();
+```ts 
 
-attachDatabasePool(pool);
+const pool = new Pool()
 
-const prisma = new PrismaClient();
+attachDatabasePool(pool)
+
+const prisma = new PrismaClient()
 ```

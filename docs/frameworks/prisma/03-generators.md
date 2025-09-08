@@ -1,13 +1,13 @@
 ---
-title: 'Generators'
-metaTitle: 'Generators (Reference)'
-metaDescription: 'Generators in your Prisma schema specify what assets are generated when the `prisma generate` command is invoked. This page explains how to configure generators.'
+title: "Generators"
+metaTitle: "Generators (Reference)"
+metaDescription: "Generators in your Prisma schema specify what assets are generated when the `prisma generate` command is invoked. This page explains how to configure generators."
 ---
 
 A Prisma schema can have one or more generators, represented by the [`generator`](/orm/reference/prisma-schema-reference#generator) block:
 
 ```prisma
-generator client
+generator client 
 ```
 
 A generator determines which assets are created when you run the `prisma generate` command.
@@ -31,7 +31,7 @@ The generator for Prisma's JavaScript Client accepts multiple additional propert
 - `binaryTargets`: Engine binary targets for `prisma-client-js` (for example, `debian-openssl-1.1.x` if you are deploying to Ubuntu 18+, or `native` if you are working locally)
 
 ```prisma
-generator client
+generator client 
 ```
 
 ### Binary targets
@@ -43,7 +43,7 @@ As of [v6.7.0](https://pris.ly/release/6.7.0), Prisma ORM has the `queryCompiler
 **When enabled, your Prisma Client will be generated [without a Rust-based query engine binary](/orm/prisma-client/setup-and-configuration/no-rust-engine)**:
 
 ```prisma
-generator client
+generator client 
 ```
 
 Note that the [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is required alongside `queryCompiler`.
@@ -63,7 +63,7 @@ The `native` binary target is special. It doesn't map to a concrete operating sy
 As an example, assume you're running **macOS** and you specify the following generator:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 ```
 
 In that case, Prisma Client detects your operating system and finds the right binary file for it based on the [list of supported operating systems](/orm/reference/prisma-schema-reference#binarytargets-options) .
@@ -99,7 +99,7 @@ Follow these steps to use the new `prisma-client` generator in your project.
 Update your [`generator`](/orm/prisma-schema/overview/generators) block:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 ```
 
 The **`output` option is required** and tells Prisma ORM where to put the generated Prisma Client code. You can choose any location suitable for your project structure. For instance, if you have the following layout:
@@ -148,6 +148,7 @@ In the future, you can safely include the generated directory in version control
 After generating the Prisma Client, import it from the path you specified:
 
 ```ts file=src/index.ts
+
 const prisma = new PrismaClient();
 ```
 
@@ -174,18 +175,18 @@ If you're importing types generated for your enums, you can do so as follows:
 Use the following options in the `generator client ` block. Only `output` is required. The other fields have defaults or are inferred from your environment and `tsconfig.json`.
 
 ```prisma file=schema.prisma
-generator client
+generator client 
 ```
 
 Below are the options for the `prisma-client` generator:
 
-| **Option**               | **Default**               | **Description**                                                                                                                                                        |
-| ------------------------ | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `output` (**required**)  |                           | Directory where Prisma Client is generated, e.g. `../src/generated/prisma`.                                                                                            |
+| **Option**               | **Default**               | **Description**                                                                                                                                                                                 |
+| ------------------------ | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `output` (**required**)  |                           | Directory where Prisma Client is generated, e.g. `../src/generated/prisma`.                                                                                                                     |
 | `runtime`                | `nodejs`                  | Target runtime environment. <br />Supported values: <br />`nodejs`, `deno`, `bun`, `workerd` (alias `cloudflare`), `vercel-edge` (alias `edge-light`), `react-native`. |
-| `moduleFormat`           | Inferred from environment | Module format (`esm` or `cjs`). Determines whether `import.meta.url` or `__dirname` is used.                                                                           |
-| `generatedFileExtension` | `ts`                      | File extension for generated TypeScript files (`ts`, `mts`, `cts`).                                                                                                    |
-| `importFileExtension`    | Inferred from environment | File extension used in **import statements**. Can be `ts`, `mts`, `cts`, `js`, `mjs`, `cjs`, or empty (for bare imports).                                              |
+| `moduleFormat`           | Inferred from environment | Module format (`esm` or `cjs`). Determines whether `import.meta.url` or `__dirname` is used.                                                                                                    |
+| `generatedFileExtension` | `ts`                      | File extension for generated TypeScript files (`ts`, `mts`, `cts`).                                                                                                                             |
+| `importFileExtension`    | Inferred from environment | File extension used in **import statements**. Can be `ts`, `mts`, `cts`, `js`, `mjs`, `cjs`, or empty (for bare imports).                                                                       |
 
 :::note
 
@@ -231,17 +232,17 @@ generated/
 
 To see what the new `prisma-client` generator looks like in practice, check out our minimal and [ready-to-run examples](https://github.com/prisma/prisma-examples):
 
-| Example                                                                                                                                                            | Framework      | Bundler           | Runtime                                          | Monorepo  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------- | ------------------------------------------------ | --------- |
-| [`nextjs-starter-webpack`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack)                                   | Next.js 15     | Webpack           | Node.js                                          | n/a       |
-| [`nextjs-starter-turbopack`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-turbopack)                               | Next.js 15     | Turbopack (alpha) | Node.js                                          | n/a       |
-| [`nextjs-starter-webpack-monorepo`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack-monorepo)                 | Next.js 15     | Webpack           | Node.js                                          | pnpm      |
+| Example                                                                                                                                                            | Framework      | Bundler           | Runtime                                              | Monorepo  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------- | ---------------------------------------------------- | --------- |
+| [`nextjs-starter-webpack`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack)                                   | Next.js 15     | Webpack           | Node.js                                              | n/a       |
+| [`nextjs-starter-turbopack`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-turbopack)                               | Next.js 15     | Turbopack (alpha) | Node.js                                              | n/a       |
+| [`nextjs-starter-webpack-monorepo`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack-monorepo)                 | Next.js 15     | Webpack           | Node.js                                              | pnpm      |
 | [`nextjs-starter-webpack-with-middleware`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack-with-middleware)   | Next.js 15     | Webpack           | Node.js (main pages), `vercel-edge` (middleware) | n/a       |
-| [`nextjs-starter-webpack-turborepo`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack-turborepo)               | Next.js 15     | Webpack           | Node.js                                          | turborepo |
-| [`react-router-starter-nodejs`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/react-router-starter-nodejs)                         | React Router 7 | Vite 6            | Node.js                                          | n/a       |
-| [`react-router-starter-cloudflare-workerd`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/react-router-starter-cloudflare-workerd) | React Router 7 |                   |                                                  | n/a       |
-| [`nuxt3-starter-nodejs`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nuxt3-starter-nodejs)                                       | Nuxt 3         | Vite 6            | Node.js                                          | n/a       |
-| [`deno`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/deno-deploy)                                                                | None           | None              | Deno 2                                           | n/a       |
+| [`nextjs-starter-webpack-turborepo`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nextjs-starter-webpack-turborepo)               | Next.js 15     | Webpack           | Node.js                                              | turborepo |
+| [`react-router-starter-nodejs`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/react-router-starter-nodejs)                         | React Router 7 | Vite 6            | Node.js                                              | n/a       |
+| [`react-router-starter-cloudflare-workerd`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/react-router-starter-cloudflare-workerd) | React Router 7 |                   |                                                      | n/a       |
+| [`nuxt3-starter-nodejs`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/nuxt3-starter-nodejs)                                       | Nuxt 3         | Vite 6            | Node.js                                              | n/a       |
+| [`deno`](https://github.com/prisma/prisma-examples/tree/latest/generator-prisma-client/deno-deploy)                                                         | None           | None              | Deno 2                                               | n/a       |
 
 ## Community generators
 

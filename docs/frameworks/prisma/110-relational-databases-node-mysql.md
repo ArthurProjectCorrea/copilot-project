@@ -6,7 +6,7 @@ metaDescription: 'Learn how to add Prisma ORM to an existing Node.js project by 
 hide_table_of_contents: true
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-sidebar_custom_props:
+sidebar_custom_props: 
 sidebar_class_name: hidden-sidebar
 pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-node-mysql
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases-

@@ -56,7 +56,7 @@ Exports of `Mocked*` utility types from `jest-mock` package have changed. `Maybe
 
 ## TypeScript
 
-import TypeScriptExamplesNote from './\_TypeScriptExamplesNote.md';
+import TypeScriptExamplesNote from './_TypeScriptExamplesNote.md';
 
 <TypeScriptExamplesNote />
 

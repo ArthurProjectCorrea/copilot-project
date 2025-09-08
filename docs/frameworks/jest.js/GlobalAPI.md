@@ -5,7 +5,7 @@ title: Globals
 
 In your test files, Jest puts each of these methods and objects into the global environment. You don't have to require or import anything to use them. However, if you prefer explicit imports, you can do `import {describe, expect, test} from '@jest/globals'`.
 
-import TypeScriptExamplesNote from './\_TypeScriptExamplesNote.md';
+import TypeScriptExamplesNote from './_TypeScriptExamplesNote.md';
 
 <TypeScriptExamplesNote />
 
@@ -41,13 +41,13 @@ afterAll(() => {
 });
 
 test('can find things', () => {
-  return globalDatabase.find('thing', {}, (results) => {
+  return globalDatabase.find('thing', {}, results => {
     expect(results.length).toBeGreaterThan(0);
   });
 });
 
 test('can insert a thing', () => {
-  return globalDatabase.insert('thing', makeThing(), (response) => {
+  return globalDatabase.insert('thing', makeThing(), response => {
     expect(response.success).toBeTruthy();
   });
 });
@@ -81,13 +81,13 @@ afterEach(() => {
 });
 
 test('can find things', () => {
-  return globalDatabase.find('thing', {}, (results) => {
+  return globalDatabase.find('thing', {}, results => {
     expect(results.length).toBeGreaterThan(0);
   });
 });
 
 test('can insert a thing', () => {
-  return globalDatabase.insert('thing', makeThing(), (response) => {
+  return globalDatabase.insert('thing', makeThing(), response => {
     expect(response.success).toBeTruthy();
   });
 });
@@ -116,14 +116,14 @@ beforeAll(() => {
   // Clears the database and adds some testing data.
   // Jest will wait for this promise to resolve before running tests.
   return globalDatabase.clear().then(() => {
-    return globalDatabase.insert({ testData: 'foo' });
+    return globalDatabase.insert({testData: 'foo'});
   });
 });
 
 // Since we only set up the database once in this example, it's important
 // that our tests don't modify it.
 test('can find things', () => {
-  return globalDatabase.find('thing', {}, (results) => {
+  return globalDatabase.find('thing', {}, results => {
     expect(results.length).toBeGreaterThan(0);
   });
 });
@@ -152,18 +152,18 @@ beforeEach(() => {
   // Clears the database and adds some testing data.
   // Jest will wait for this promise to resolve before running tests.
   return globalDatabase.clear().then(() => {
-    return globalDatabase.insert({ testData: 'foo' });
+    return globalDatabase.insert({testData: 'foo'});
   });
 });
 
 test('can find things', () => {
-  return globalDatabase.find('thing', {}, (results) => {
+  return globalDatabase.find('thing', {}, results => {
     expect(results.length).toBeGreaterThan(0);
   });
 });
 
 test('can insert a thing', () => {
-  return globalDatabase.insert('thing', makeThing(), (response) => {
+  return globalDatabase.insert('thing', makeThing(), response => {
     expect(response.success).toBeTruthy();
   });
 });
@@ -201,7 +201,7 @@ This isn't required - you can write the `test` blocks directly at the top level.
 You can also nest `describe` blocks if you have a hierarchy of tests:
 
 ```js
-const binaryStringToNumber = (binString) => {
+const binaryStringToNumber = binString => {
   if (!/^[01]+$/.test(binString)) {
     throw new CustomError('Not a binary number.');
   }
@@ -281,10 +281,10 @@ describe.each([
 
 ```js
 describe.each([
-  { a: 1, b: 1, expected: 2 },
-  { a: 1, b: 2, expected: 3 },
-  { a: 2, b: 1, expected: 3 },
-])('.add($a, $b)', ({ a, b, expected }) => {
+  {a: 1, b: 1, expected: 2},
+  {a: 1, b: 2, expected: 3},
+  {a: 2, b: 1, expected: 3},
+])('.add($a, $b)', ({a, b, expected}) => {
   test(`returns ${expected}`, () => {
     expect(a + b).toBe(expected);
   });
@@ -317,7 +317,7 @@ describe.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('$a + $b', ({ a, b, expected }) => {
+`('$a + $b', ({a, b, expected}) => {
   test(`returns ${expected}`, () => {
     expect(a + b).toBe(expected);
   });
@@ -388,7 +388,7 @@ describe.only.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', ({a, b, expected}) => {
   test('passes', () => {
     expect(a + b).toBe(expected);
   });
@@ -457,7 +457,7 @@ describe.skip.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', ({a, b, expected}) => {
   test('will not be run', () => {
     expect(a + b).toBe(expected); // will not be run
   });
@@ -486,7 +486,7 @@ If a **promise is returned** from `test`, Jest will wait for the promise to reso
 
 ```js
 test('has lemon in it', () => {
-  return fetchBeverageList().then((list) => {
+  return fetchBeverageList().then(list => {
     expect(list).toContain('lemon');
   });
 });
@@ -586,7 +586,7 @@ test.concurrent.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', async ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', async ({a, b, expected}) => {
   expect(a + b).toBe(expected);
 });
 ```
@@ -623,7 +623,7 @@ test.concurrent.only.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', async ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', async ({a, b, expected}) => {
   expect(a + b).toBe(expected);
 });
 
@@ -664,7 +664,7 @@ test.concurrent.skip.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', async ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', async ({a, b, expected}) => {
   expect(a + b).toBe(expected); // will not be run
 });
 
@@ -717,10 +717,10 @@ test.each([
 
 ```js
 test.each([
-  { a: 1, b: 1, expected: 2 },
-  { a: 1, b: 2, expected: 3 },
-  { a: 2, b: 1, expected: 3 },
-])('.add($a, $b)', ({ a, b, expected }) => {
+  {a: 1, b: 1, expected: 2},
+  {a: 1, b: 2, expected: 3},
+  {a: 2, b: 1, expected: 3},
+])('.add($a, $b)', ({a, b, expected}) => {
   expect(a + b).toBe(expected);
 });
 ```
@@ -743,7 +743,7 @@ test.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', ({a, b, expected}) => {
   expect(a + b).toBe(expected);
 });
 ```
@@ -796,10 +796,10 @@ Example:
 
 ```js
 test.failing.each([
-  { a: 1, b: 1, expected: 2 },
-  { a: 1, b: 2, expected: 3 },
-  { a: 2, b: 1, expected: 3 },
-])('.add($a, $b)', ({ a, b, expected }) => {
+  {a: 1, b: 1, expected: 2},
+  {a: 1, b: 2, expected: 3},
+  {a: 2, b: 1, expected: 3},
+])('.add($a, $b)', ({a, b, expected}) => {
   expect(a + b).toBe(expected);
 });
 ```
@@ -884,7 +884,7 @@ test.only.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', ({a, b, expected}) => {
   expect(a + b).toBe(expected);
 });
 
@@ -947,7 +947,7 @@ test.skip.each`
   ${1} | ${1} | ${2}
   ${1} | ${2} | ${3}
   ${2} | ${1} | ${3}
-`('returns $expected when $a is added to $b', ({ a, b, expected }) => {
+`('returns $expected when $a is added to $b', ({a, b, expected}) => {
   expect(a + b).toBe(expected); // will not be run
 });
 
@@ -993,12 +993,12 @@ For simplicity `test.each` is picked for the examples, but the type inference is
 The array of objects API is most verbose, but it makes the type inference a painless task. A `table` can be inlined:
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
 test.each([
-  { name: 'a', path: 'path/to/a', count: 1, write: true },
-  { name: 'b', path: 'path/to/b', count: 3 },
-])('inline table', ({ name, path, count, write }) => {
+  {name: 'a', path: 'path/to/a', count: 1, write: true},
+  {name: 'b', path: 'path/to/b', count: 3},
+])('inline table', ({name, path, count, write}) => {
   // arguments are typed as expected, e.g. `write: boolean | undefined`
 });
 ```
@@ -1006,15 +1006,15 @@ test.each([
 Or declared separately as a variable:
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
 const table = [
-  { a: 1, b: 2, expected: 'three', extra: true },
-  { a: 3, b: 4, expected: 'seven', extra: false },
-  { a: 5, b: 6, expected: 'eleven' },
+  {a: 1, b: 2, expected: 'three', extra: true},
+  {a: 3, b: 4, expected: 'seven', extra: false},
+  {a: 5, b: 6, expected: 'eleven'},
 ];
 
-test.each(table)('table as a variable', ({ a, b, expected, extra }) => {
+test.each(table)('table as a variable', ({a, b, expected, extra}) => {
   // again everything is typed as expected, e.g. `extra: boolean | undefined`
 });
 ```
@@ -1024,7 +1024,7 @@ test.each(table)('table as a variable', ({ a, b, expected, extra }) => {
 The array of arrays style will work smoothly with inlined tables:
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
 test.each([
   [1, 2, 'three', true],
@@ -1038,7 +1038,7 @@ test.each([
 However, if a table is declared as a separate variable, it must be typed as an array of tuples for correct type inference (this is not needed only if all elements of a row are of the same type):
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
 const table: Array<[number, number, string, boolean?]> = [
   [1, 2, 'three', true],
@@ -1056,14 +1056,14 @@ test.each(table)('table as a variable example', (a, b, expected, extra) => {
 If all input values are of the same type, the template literal API will type the arguments correctly:
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
 test.each`
   a    | b    | expected
   ${1} | ${2} | ${3}
   ${3} | ${4} | ${7}
   ${5} | ${6} | ${11}
-`('template literal example same type', ({ a, b, expected }) => {
+`('template literal example same type', ({a, b, expected}) => {
   // all arguments are of type `number` because all inputs (a, b, expected) are of type `number`
 });
 ```
@@ -1071,14 +1071,14 @@ test.each`
 If the inputs have different types, the arguments will be typed as a union of all the input types (i.e. type of the variables inside the template literal):
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
 test.each`
   a    | b    | expected
   ${1} | ${2} | ${'three'}
   ${3} | ${4} | ${'seven'}
   ${5} | ${6} | ${'eleven'}
-`('template literal example different types', ({ a, b, expected }) => {
+`('template literal example different types', ({a, b, expected}) => {
   // all arguments are of type `number | string` because some inputs (a, b) are of type `number` and some others (expected) are of type `string`
 });
 ```
@@ -1086,14 +1086,14 @@ test.each`
 Otherwise, if you want each argument to have the right type, you have to explicitly provide the generic type argument:
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
-test.each<{ a: number; b: number; expected: string; extra?: boolean }>`
+test.each<{a: number; b: number; expected: string; extra?: boolean}>`
   a    | b    | expected    | extra
   ${1} | ${2} | ${'three'}  | ${true}
   ${3} | ${4} | ${'seven'}  | ${false}
   ${5} | ${6} | ${'eleven'}
-`('template literal example', ({ a, b, expected, extra }) => {
+`('template literal example', ({a, b, expected, extra}) => {
   // all arguments are typed as expected, e.g. `a: number`, `expected: string`, `extra: boolean | undefined`
 });
 ```
@@ -1103,14 +1103,14 @@ test.each<{ a: number; b: number; expected: string; extra?: boolean }>`
 Keep in mind the variables inside the template literal are not type checked, so you have to ensure that their types are correct.
 
 ```ts
-import { test } from '@jest/globals';
+import {test} from '@jest/globals';
 
-test.each<{ a: number; expected: string }>`
+test.each<{a: number; expected: string}>`
   a                            | expected
   ${1}                         | ${'one'}
   ${'will not raise TS error'} | ${'two'}
   ${3}                         | ${'three'}
-`('template literal with wrongly typed input', ({ a, expected }) => {
+`('template literal with wrongly typed input', ({a, expected}) => {
   // all arguments are typed as stated in the generic: `a: number`, `expected: string`
   // WARNING: `a` is of type `number` but will be a string in the 2nd test case.
 });

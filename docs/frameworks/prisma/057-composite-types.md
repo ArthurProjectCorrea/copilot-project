@@ -10,21 +10,21 @@ tocDepth: 3
 We’ll use this schema for the examples that follow:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-datasource db
+datasource db 
 
-model Product
+model Product 
 
-model Order
+model Order 
 
-enum Color
+enum Color 
 
-enum Size
+enum Size 
 
-type Photo
+type Photo 
 
-type Address
+type Address 
 ```
 
 In this schema, the `Product` model has a `Photo[]` composite type, and the `Order` model has two composite `Address` types. The `shippingAddress` is required, but the `billingAddress` is optional.
@@ -55,7 +55,7 @@ In our example schema, suppose that you add a required field to `photo`. This fi
 
 ```prisma file=schema.prisma highlight=4;add
 ...
-type Photo
+type Photo 
 
 ...
 ```
@@ -63,7 +63,7 @@ type Photo
 Suppose that you then run `npx prisma db push` to [update your database](/orm/reference/prisma-cli-reference#db-push) and regenerate your Prisma Client with `npx prisma generate`. Then, you run the following application code:
 
 ```ts
-console.dir(await prisma.product.findMany());
+console.dir(await prisma.product.findMany(), )
 ```
 
 The `bitDepth` field has no content because you have only just added this field, so the query returns the default value of `8`.
@@ -435,9 +435,9 @@ Note that you can [use Prisma ORM relations to work around this issue](#use-pris
 For example, in the following schema, `MailBox` has a composite type, `addresses`, which has a `@@unique` constraint on the `email` field.
 
 ```prisma
-type Address
+type Address 
 
-model MailBox
+model MailBox 
 ```
 
 The following code creates a record with two identical values in `address`. MongoDB does not throw an error in this situation, and it stores `alice@prisma.io` in `addresses` twice.
@@ -461,9 +461,9 @@ In the example above, MongoDB did not enforce the unique constraint on a nested 
 In the following example, MongoDB enforces unique values in a record. There is a relation between `Mailbox` and the `Address` model. Also, the `name` field in the `Address` model has a unique constraint.
 
 ```prisma
-model Address
+model Address 
 
-model Mailbox
+model Mailbox 
 ```
 
 ```ts

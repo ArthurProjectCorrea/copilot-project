@@ -20,21 +20,21 @@ The following ecommerce schema will be used throughout the guide. This varies fr
 ```prisma file=schema.prisma showLineNumbers
 // Can have 1 customer
 // Can have many order details
-model CustomerOrder
+model CustomerOrder 
 
 // Can have 1 order
 // Can have many products
-model OrderDetails
+model OrderDetails 
 
 // Can have many order details
 // Can have 1 category
-model Product
+model Product 
 
 // Can have many products
-model Category
+model Category 
 
 // Can have many orders
-model Customer
+model Customer 
 ```
 
 </details>
@@ -206,9 +206,9 @@ beforeAll(async () => , ],
 
 afterAll(async () => )
 
-it('should create 1 new customer with 1 order', async () =>
+it('should create 1 new customer with 1 order', async () => 
   // The new orders details
-  const order: OrderInput =
+  const order: OrderInput = 
 
   // Create the order and customer
   await createOrder(order)
@@ -228,9 +228,9 @@ it('should create 1 new customer with 1 order', async () =>
   expect(newOrder).toHaveProperty('customerId', 2)
 })
 
-it('should create 1 order with an existing customer', async () =>
+it('should create 1 order with an existing customer', async () => 
   // The new orders details
-  const order: OrderInput =
+  const order: OrderInput = 
 
   // Create the order and connect the existing customer
   await createOrder(order)
@@ -244,9 +244,9 @@ it('should create 1 order with an existing customer', async () =>
   expect(newOrder).toHaveProperty('customerId', 1)
 })
 
-it("should show 'Out of stock' message if productId doesn't exit", async () =>
+it("should show 'Out of stock' message if productId doesn't exit", async () => 
   // The new orders details
-  const order: OrderInput =
+  const order: OrderInput = 
 
   // The productId supplied doesn't exit so the function should return an "Out of stock" message
   await expect(createOrder(order)).resolves.toEqual(new Error('Out of stock'))

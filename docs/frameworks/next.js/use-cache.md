@@ -140,11 +140,11 @@ Any components imported and nested in `page` file will inherit the cache behavio
 ```tsx filename="app/page.tsx" switcher
 'use cache'
 
-async function Users()
+async function Users() 
 
   return (
     <main>
-
+      
     </main>
   )
 }
@@ -153,11 +153,11 @@ async function Users()
 ```jsx filename="app/page.js" switcher
 'use cache'
 
-async function Users()
+async function Users() 
 
   return (
     <main>
-
+      
     </main>
   )
 }
@@ -181,7 +181,7 @@ You can use `use cache` at the component level to cache any fetches or computati
   return //...
 }
 
-interface BookingsProps
+interface BookingsProps 
 ```
 
 ```jsx filename="app/components/bookings.js" highlight= switcher
@@ -224,11 +224,11 @@ If you need to pass non-serializable arguments to a cacheable function, you can 
 
   const uncachedData = await getData()
   return (
-
+    
   )
 }
 
-async function CacheComponent(: )
+async function CacheComponent(: ) 
     </div>
   )
 }
@@ -238,11 +238,11 @@ async function CacheComponent(: )
 
   const uncachedData = await getData()
   return (
-
+    
   )
 }
 
-async function CacheComponent()
+async function CacheComponent() 
     </div>
   )
 }
@@ -252,22 +252,22 @@ You can also pass Server Actions through cached components to Client Components 
 
 ```tsx filename="app/page.tsx" switcher
 
-  const performUpdate = async () =>
+  const performUpdate = async () => 
 
-  return
+  return 
 }
 
-async function CachedComponent(: )
+async function CachedComponent(: ) 
 ```
 
 ```jsx filename="app/page.js" switcher
 
-  const performUpdate = async () =>
+  const performUpdate = async () => 
 
-  return
+  return 
 }
 
-async function CachedComponent()
+async function CachedComponent() 
 ```
 
 ```tsx filename="app/ClientComponent.tsx" switcher

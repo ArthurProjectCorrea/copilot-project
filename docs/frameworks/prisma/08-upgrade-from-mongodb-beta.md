@@ -61,9 +61,9 @@ And you should see your Prisma schema in `prisma/schema.prisma` populated with y
 The generated Prisma Client from a freshly introspected Prisma 1 based MongoDB database may not have the best API. You can adjust the model names and fields, just be sure to `@map` and `@@map` the original name to the underlying database collection and field names:
 
 ```diff
-- model posts
+- model posts 
 
-- model users
+- model users 
 ```
 
 Take caution in doing these renames because you need to make sure the Prisma Schema still maps properly to the underlying database collections and field names.
@@ -85,13 +85,14 @@ $ npx prisma generate
 Create a simple `test.ts` script to verify that Prisma Client can read and write to your application. Note that this guide is using the example in the [Prisma 1 examples repository](https://github.com/prisma/prisma1-examples/tree/master/typescript/docker-mongodb), but the code will change depending on your application.
 
 ```ts
-const prisma = new PrismaClient();
 
-async function main();
+const prisma = new PrismaClient()
+
+async function main() 
 
 main()
   .catch(console.error)
-  .finally(() => prisma.$disconnect());
+  .finally(() => prisma.$disconnect())
 ```
 
 Make sure `ts-node` is installed globally and run:
@@ -106,7 +107,7 @@ You should see a list of your data:
 [
   ,
   ,
-
+  
 ]
 ```
 

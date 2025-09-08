@@ -103,7 +103,7 @@ You can use React's [`use` hook](https://react.dev/reference/react/use) to [stre
   const posts = getPosts()
 
   return (
-
+    
   )
 }
 ```
@@ -114,7 +114,7 @@ You can use React's [`use` hook](https://react.dev/reference/react/use) to [stre
   const posts = getPosts()
 
   return (
-
+    
   )
 }
 ```
@@ -148,26 +148,24 @@ Then, in your Client Component, use the `use` hook to read the promise:
 ```
 
 In the example above, the `<Posts>` component is wrapped in a [`
-
-</main>
-</div>
-)
+      </main>
+    </div>
+  )
 }
-
-````
+```
 
 ```jsx filename="app/blog/page.js" switcher
 
   return (
     <div>
-
+      
       <header>
         <h1>Welcome to the Blog</h1>
         <p>Read the latest posts below.</p>
       </header>
       <main>
-
-````
+        
+```
 
 ### Creating meaningful loading states
 
@@ -274,7 +272,7 @@ async function getAlbums(username: string) /albums`)
   return (
     <>
       <h1></h1>
-
+      
     </>
   )
 }
@@ -301,7 +299,7 @@ async function getAlbums(username) /albums`)
   return (
     <>
       <h1></h1>
-
+      
     </>
   )
 }
@@ -313,7 +311,7 @@ async function getAlbums(username) /albums`)
 
 You can preload data by creating an utility function that you eagerly call above blocking requests. `<Item>` conditionally renders based on the `checkIsAvailable()` function.
 
-You can call `preload()` before `checkIsAvailable()` to eagerly initiate `data dependencies. By the time` is rendered, its data has already been fetched.
+You can call `preload()` before `checkIsAvailable()` to eagerly initiate `` data dependencies. By the time `` is rendered, its data has already been fetched.
 
 ```tsx filename="app/item/[id]/page.tsx" switcher
 

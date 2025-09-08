@@ -1,7 +1,7 @@
 ---
 title: 'Queries on unindexed columns'
 metaTitle: 'Optimize Recommendations: Queries on unindexed columns'
-metaDescription: 'Learn about the recommendation provided by Optimize for queries on unindexed columns.'
+metaDescription: "Learn about the recommendation provided by Optimize for queries on unindexed columns."
 tocDepth: 3
 toc: true
 ---
@@ -25,7 +25,7 @@ await prisma.user.count(
 
 An index allows the database to retrieve data more quickly, similar to how an index in a book helps you locate information without reading every page.
 
-When using Prisma with a `where` property, if no indexes are defined for the relevant columns, the database may need to scan every row in the table (a _“full table scan”_) to find matches. This can be undesirable for several reasons:
+When using Prisma with a `where` property, if no indexes are defined for the relevant columns, the database may need to scan every row in the table (a *“full table scan”*) to find matches. This can be undesirable for several reasons:
 
 ### User experience
 
@@ -39,7 +39,7 @@ For large datasets, if the database must scan the entire table to find matching 
 
 :::warning
 
-While these issues might not appear in development due to smaller datasets, they can become _significant_ problems in production, where datasets are typically much larger.
+While these issues might not appear in development due to smaller datasets, they can become *significant* problems in production, where datasets are typically much larger.
 
 :::
 
@@ -70,6 +70,6 @@ Indexes create a data structure that stores the indexed column's values along wi
 
 :::warning
 
-Even if you index a column, the database may not always use it. Many database management systems, such as PostgreSQL and MySQL, have a _query optimizer_ that evaluates multiple execution plans and selects the one it estimates to be most efficient. In some cases, this may involve ignoring an existing index in favor of a different execution plan that it determines will perform better for that specific query.
+Even if you index a column, the database may not always use it. Many database management systems, such as PostgreSQL and MySQL, have a *query optimizer* that evaluates multiple execution plans and selects the one it estimates to be most efficient. In some cases, this may involve ignoring an existing index in favor of a different execution plan that it determines will perform better for that specific query.
 
 :::

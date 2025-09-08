@@ -86,9 +86,9 @@ TURSO_DATABASE_URL="libsql://turso-prisma-db-user.turso.io"
 To get started, enable the `driverAdapters` Preview feature flag:
 
 ```prisma highlight=3;add
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 Generate Prisma Client:
@@ -143,7 +143,7 @@ LIBSQL_DATABASE_TOKEN="..."
 
 ### 3. Set up Prisma Config file
 
-Make sure that you have a [`prisma.config.ts`](/orm/reference/prisma-config-reference) file for your project. Then, set up the [migration driver adapter](/orm/reference/prisma-config-reference#adapter) to use `PrismaLibSQL`:
+Make sure that you have a [`prisma.config.ts`](/orm/reference/prisma-config-reference)  file for your project. Then, set up the [migration driver adapter](/orm/reference/prisma-config-reference#adapter) to use `PrismaLibSQL`:
 
 ```ts file=prisma.config.ts
 
@@ -212,12 +212,11 @@ app.use(async (req, res, next) => )
 
 app.listen(3000, () => console.log(`Server ready at http://localhost:3000`))
 ```
-
 It could be also implemented as a [Prisma Client extension](/orm/prisma-client/client-extensions). The below example shows auto-syncing after create, update or delete operation is performed.
 
 ```ts highlight=5-8
-const prisma = new PrismaClient().$extends()
-
+const prisma = new PrismaClient().$extends() 
+        
         return result
       }
     }

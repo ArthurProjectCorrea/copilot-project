@@ -45,7 +45,7 @@ Here's what the generated CSS looks like for the `hover:bg-sky-700` class:
 
 ```css
 /* [!code filename: Generated CSS] */
-.hover\:bg-sky-700
+.hover\:bg-sky-700 
 }
 ```
 
@@ -58,7 +58,7 @@ This is different from how you'd write traditional CSS, where a single class wou
 <button class="btn">Save changes</button>
 
 <style>
-  .btn
+  .btn 
   }
 </style>
 ```
@@ -80,7 +80,7 @@ In the example above, the `sm:` prefix makes sure that `grid-cols-3` only trigge
 
 ```css
 /* [!code filename: Generated CSS] */
-.sm\:grid-cols-3
+.sm\:grid-cols-3 
 }
 ```
 
@@ -94,7 +94,7 @@ Just like with hover states or media queries, the important thing to understand 
 
 ```css
 /* [!code filename: Generated CSS] */
-.dark\:bg-gray-800
+.dark\:bg-gray-800 
 }
 ```
 
@@ -116,8 +116,8 @@ Both of these effects rely on the `filter` property in CSS, so Tailwind uses CSS
 
 ```css
 /* [!code filename:Generated CSS] */
-.blur-sm
-.grayscale
+.blur-sm 
+.grayscale 
 ```
 
 The generated CSS above is slightly simplified, but the trick here is that each utility sets a CSS variable just for the effect it's meant to apply. Then the `filter` property looks at all of these variables, falling back to nothing if the variable hasn't been set.
@@ -193,7 +193,7 @@ It does this by scanning all of the files in your project looking for any symbol
 
   return (
     <button type="button" className=`}>
-
+      
     </button>
   );
 }
@@ -229,7 +229,7 @@ Inline styles are still very useful in Tailwind CSS projects, particularly when 
       style=}
       className="rounded-md px-3 py-1.5 font-medium"
     >
-
+      
     </button>
   );
 }
@@ -258,7 +258,7 @@ Another useful pattern is setting CSS variables based on dynamic sources using i
       // [!code classes:bg-(--bg-color),text-(--text-color),hover:bg-(--bg-color-hover)]
       className="bg-(--bg-color) text-(--text-color) hover:bg-(--bg-color-hover) ..."
     >
-
+      
     </button>
   );
 }

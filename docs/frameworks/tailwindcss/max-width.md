@@ -1,14 +1,14 @@
 <ApiTable
-rows=
-@media (width >= 48rem)
-@media (width >= 64rem)
-@media (width >= 80rem)
-@media (width >= 96rem)
-`,
-],
-["max-w-(<custom-property>)", "max-width: var(<custom-property>);"],
-["max-w-[<value>]", "max-width: <value>;"],
-]}
+  rows=
+        @media (width >= 48rem) 
+        @media (width >= 64rem) 
+        @media (width >= 80rem) 
+        @media (width >= 96rem) 
+      `,
+    ],
+    ["max-w-(<custom-property>)", "max-width: var(<custom-property>);"],
+    ["max-w-[<value>]", "max-width: <value>;"],
+  ]}
 />
 
 ## Examples

@@ -25,14 +25,14 @@ By understanding and harnessing this mechanism, you can ensure that your databas
 Below you will find an example of how to evaluate Prisma Accelerate using a sample model:
 
 ```prisma
-model Notes
+model Notes 
 ```
 
 ```typescript
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
-function calculateStatistics(numbers: number[]):
+function calculateStatistics(numbers: number[]):  
 
   // Sort the array in ascending order
   numbers.sort((a, b) => a - b)
@@ -45,13 +45,13 @@ function calculateStatistics(numbers: number[]):
   const p75 = getPercentile(numbers, 75)
   const p99 = getPercentile(numbers, 99)
 
-  return
+  return 
 }
 
-function getPercentile(numbers: number[], percentile: number): number
+function getPercentile(numbers: number[], percentile: number): number 
 
   const index = (percentile / 100) * (numbers.length - 1)
-  if (Number.isInteger(index))  else
+  if (Number.isInteger(index))  else 
 }
 
 async function main() )
@@ -86,7 +86,7 @@ To evaluate Accelerate’s edge caching, you can modify the above script with th
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
-function calculateStatistics(numbers: number[]):
+function calculateStatistics(numbers: number[]):  
 
   // Sort the array in ascending order
   numbers.sort((a, b) => a - b)
@@ -99,13 +99,13 @@ function calculateStatistics(numbers: number[]):
   const p75 = getPercentile(numbers, 75)
   const p99 = getPercentile(numbers, 99)
 
-  return
+  return 
 }
 
-function getPercentile(numbers: number[], percentile: number): number
+function getPercentile(numbers: number[], percentile: number): number 
 
   const index = (percentile / 100) * (numbers.length - 1)
-  if (Number.isInteger(index))  else
+  if (Number.isInteger(index))  else 
 }
 
 async function main() ,

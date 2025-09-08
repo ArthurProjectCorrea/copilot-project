@@ -51,7 +51,6 @@ Interactive mode does not accept any CLI arguments or read API keys from the env
 ### Steps
 
 1. Open a terminal and run:
-
 ```bash
 npx @prisma/ppg-tunnel migrate-from-ea
 ```
@@ -82,17 +81,14 @@ In your terminal, run `npx @prisma/ppg-tunnel` to establish a secure tunnel to y
 If you already have a `.env` file in your current directory with `DATABASE_URL` set, the tunnel CLI will automatically pick it up—no need to manually export it. However, if you haven't set up a `.env` file, you'll need to set the `DATABASE_URL` environment variable explicitly.
 
 To set environment variable (with your actual EA database URL):
-
 ```bash
 
 ```
-
 :::note
 If you explicitly set `DATABASE_URL` in your terminal, that value will take precedence over the one in your `.env` file.
 :::
 
 Run the tunnel:
-
 ```bash
 npx @prisma/ppg-tunnel --host 127.0.0.1  --port 5432
 ```
@@ -123,7 +119,6 @@ Copy the port number from the terminal output, you’ll need it in the next step
 ### 1.2. Creating the Backup with `pg_dump`
 
 With the tunnel running, you can now dump the EA database by running the following command:
-
 ```bash
 PGSSLMODE=disable \
 pg_dump \
@@ -152,10 +147,9 @@ This should create your backup file named `mydatabase.bak` in the current direct
 ## 2. Create a new GA database
 
 Next, create your GA (General Availability) database:
-
-1. Visit [console.prisma.io](https://console.prisma.io) and sign in (or create an account).
-2. Create a Prisma Postgres database in the region of your choice.
-3. Copy the Database URL for later use.
+1.	Visit [console.prisma.io](https://console.prisma.io) and sign in (or create an account).
+2.	Create a Prisma Postgres database in the region of your choice.
+3.	Copy the Database URL for later use.
 
 Prisma Postgres GA uses PostgreSQL 17, so you’ll be restoring your EA backup into this new environment.
 
@@ -166,13 +160,11 @@ Prisma Postgres GA uses PostgreSQL 17, so you’ll be restoring your EA backup i
 Open a new terminal (or stop the previous tunnel) and connect to your GA database:
 
 Set environment variables for the new GA database:
-
 ```bash
 
 ```
 
 Run the tunnel:
-
 ```bash
 npx @prisma/ppg-tunnel --host 127.0.0.1 --port 5432
 ```

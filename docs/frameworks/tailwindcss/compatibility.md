@@ -24,8 +24,8 @@ Tailwind will automatically bundle other CSS files you include with `@import`, w
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
-@import './typography.css';
+@import "tailwindcss";
+@import "./typography.css";
 ```
 
 In this example, the `typography.css` file will be bundled into your compiled CSS for you by Tailwind, without any other tooling like Sass or `postcss-import`.
@@ -37,7 +37,7 @@ All modern browsers support [native CSS variables](https://developer.mozilla.org
 ```css
 /* [!code filename:typography.css] */
 /* [!code word:var(--text-base)] */
-.typography
+.typography 
 ```
 
 Tailwind relies on CSS variables heavily internally, so if you can use Tailwind in your project, you can use native CSS variables.
@@ -48,8 +48,8 @@ Under the hood Tailwind uses [Lightning CSS](https://lightningcss.dev/) to proce
 
 ```css
 /* [!code filename:typography.css] */
-.typography
-  img
+.typography 
+  img 
 }
 ```
 
@@ -58,9 +58,9 @@ Tailwind flattens that nested CSS for you so it can be understood by all modern 
 ```css
 [!code filename:output.css]
 /* prettier-ignore */
-.typography p
+.typography p 
 
-.typography img
+.typography img 
 ```
 
 Native CSS nesting support is also very good these days, so you don't really need a preprocessor for nesting even if you aren't using Tailwind.
@@ -113,14 +113,14 @@ This means features like `@apply` won't work the way you expect unless you expli
 /* [!code highlight:2] */
 @reference "../app.css";
 
-button
+button 
 ```
 
 Alternatively, you can also just use CSS variables instead of `@apply` which has the added benefit of letting Tailwind skip processing those files and will improve your build performance:
 
 ```css
 /* [!code filename:Button.module.css] */
-button
+button 
 ```
 
 ## Vue, Svelte, and Astro
@@ -141,7 +141,7 @@ If you do use `<style>` blocks, make sure to import your global styles as refere
   /* [!code highlight:2] */
   @reference "../app.css";
 
-  button
+  button 
 </style>
 ```
 
@@ -154,6 +154,6 @@ Or just use your globally defined CSS variables instead of features like `@apply
 </template>
 
 <style scoped>
-  button
+  button 
 </style>
 ```

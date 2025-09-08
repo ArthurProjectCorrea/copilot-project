@@ -11,7 +11,7 @@ To add a custom [field](#add-a-custom-field-to-query-results) or [method](#add-a
 
 ```ts
 const prisma = new PrismaClient().$extends(,
-        compute()
+        compute() 
       },
     },
   },
@@ -141,11 +141,9 @@ const xprisma = prisma.$extends(,
 const user = await xprisma.user.findFirstOrThrow(,
 })
 ```
-
 In this case, omitting both `password` and `sanitizedPassword` will exclude both from the result as well as prevent the `password` field from being read from the database.
 
 ## Limitation
-
 As of now, Prisma Client's result extension component does not support relation fields. This means that you cannot create custom fields or methods based on related models or fields in a relational relationship (e.g., user.posts, post.author). The needs parameter can only reference scalar fields within the same model. Follow [issue #20091 on GitHub](https://github.com/prisma/prisma/issues/20091).
 
 ```ts

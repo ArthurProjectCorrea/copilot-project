@@ -14,12 +14,12 @@ Prisma Client throws different kinds of errors. The following lists the exceptio
 
 Prisma Client throws a `PrismaClientKnownRequestError` exception if the query engine returns a known error related to the request - for example, a unique constraint violation.
 
-| **Property**    | **Description**                                                                           |
-| :-------------- | :---------------------------------------------------------------------------------------- |
-| `code`          | A Prisma-specific [error code](#error-codes).                                             |
+| **Property**    | **Description**                                                                                                  |
+| :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| `code`          | A Prisma-specific [error code](#error-codes).                                                                    |
 | `meta`          | Additional information about the error - for example, the field that caused the error: `` |
-| `message`       | Error message associated with [error code](#error-codes).                                 |
-| `clientVersion` | Version of Prisma Client (for example, `2.19.0`)                                          |
+| `message`       | Error message associated with [error code](#error-codes).                                                        |
+| `clientVersion` | Version of Prisma Client (for example, `2.19.0`)                                                                 |
 
 ### `PrismaClientUnknownRequestError`
 
@@ -78,15 +78,15 @@ Prisma Client throws a `PrismaClientValidationError` exception if validation fai
 
 #### `P1000`
 
-"Authentication failed against database server at `, the provided database credentials for ` are not valid. Please make sure to provide valid database credentials for the database server at ``."
+"Authentication failed against database server at ``, the provided database credentials for `` are not valid. Please make sure to provide valid database credentials for the database server at ``."
 
 #### `P1001`
 
-"Can't reach database server at `:` Please make sure your database server is running at `:`."
+"Can't reach database server at ``:`` Please make sure your database server is running at ``:``."
 
 #### `P1002`
 
-"The database server at `:` was reached but timed out. Please try again. Please make sure your database server is running at `:`. "
+"The database server at ``:`` was reached but timed out. Please try again. Please make sure your database server is running at ``:``. "
 
 #### `P1003`
 
@@ -94,7 +94,7 @@ Prisma Client throws a `PrismaClientValidationError` exception if validation fai
 
 "Database `.` does not exist on the database server at `:`."
 
-"Database ``does not exist on the database server at`:`."
+"Database `` does not exist on the database server at `:`."
 
 #### `P1008`
 
@@ -102,11 +102,11 @@ Prisma Client throws a `PrismaClientValidationError` exception if validation fai
 
 #### `P1009`
 
-"Database ``already exists on the database server at`:`"
+"Database `` already exists on the database server at `:`"
 
 #### `P1010`
 
-"User `was denied access on the database`"
+"User `` was denied access on the database ``"
 
 #### `P1011`
 
@@ -121,23 +121,23 @@ Prisma Client throws a `PrismaClientValidationError` exception if validation fai
 Possible P1012 error messages:
 
 - "Argument `` is missing."
-- "Function `` takes arguments, but received ."
-- "Argument ``is missing in attribute`@`."
-- "Argument `is missing in data source block`."
-- "Argument `is missing in generator block`."
+- "Function `` takes  arguments, but received ."
+- "Argument `` is missing in attribute `@`."
+- "Argument `` is missing in data source block ``."
+- "Argument `` is missing in generator block ``."
 - "Error parsing attribute `@`: "
 - "Attribute `@` is defined twice."
-- "The model with database name `could not be defined because another model with this name exists:`"
+- "The model with database name `` could not be defined because another model with this name exists: ``"
 - "`` is a reserved scalar type name and can not be used."
-- "The `` cannot be defined because a with that name already exists."
+- "The  `` cannot be defined because a  with that name already exists."
 - "Key `` is already defined in ."
 - "Argument `` is already specified as unnamed argument."
 - "Argument `` is already specified."
 - "No such argument.""
-- "Field `is already defined on model`."
-- "Field `in model` can't be a list. The current connector does not support lists of primitive types."
+- "Field `` is already defined on model ``."
+- "Field `` in model `` can't be a list. The current connector does not support lists of primitive types."
 - "The index name `` is declared multiple times. With the current connector index names have to be globally unique."
-- "Value `is already defined on enum`."
+- "Value `` is already defined on enum ``."
 - "Attribute not known: `@`."
 - "Function not known: ``."
 - "Datasource provider not known: ``."
@@ -148,10 +148,10 @@ Possible P1012 error messages:
 - "Type `` is not a built-in type."
 - "Unexpected token. Expected one of: "
 - "Environment variable not found: ."
-- "Expected a value, but received value ``."
-- "Expected a value, but failed while parsing ``: ."
+- "Expected a  value, but received  value ``."
+- "Expected a  value, but failed while parsing ``: ."
 - "Error validating model ``: "
-- "Error validating field `in model`: "
+- "Error validating field `` in model ``: "
 - "Error validating datasource ``: \"
 - "Error validating enum ``: "
 - "Error validating: "
@@ -170,7 +170,7 @@ Possible P1012 error messages:
 
 #### `P1016`
 
-"Your raw query had an incorrect number of parameters. Expected: `, actual: `."
+"Your raw query had an incorrect number of parameters. Expected: ``, actual: ``."
 
 #### `P1017`
 
@@ -200,11 +200,11 @@ Possible P1012 error messages:
 
 #### `P2005`
 
-"The value `stored in the database for the field` is invalid for the field's type"
+"The value `` stored in the database for the field `` is invalid for the field's type"
 
 #### `P2006`
 
-"The provided value `for` field `` is not valid"
+"The provided value `` for `` field `` is not valid"
 
 #### `P2007`
 
@@ -212,15 +212,15 @@ Possible P1012 error messages:
 
 #### `P2008`
 
-"Failed to parse the query `at`"
+"Failed to parse the query `` at ``"
 
 #### `P2009`
 
-"Failed to validate the query: `at`"
+"Failed to validate the query: `` at ``"
 
 #### `P2010`
 
-"Raw query failed. Code: `. Message: `"
+"Raw query failed. Code: ``. Message: ``"
 
 #### `P2011`
 
@@ -232,11 +232,11 @@ Possible P1012 error messages:
 
 #### `P2013`
 
-"Missing the required argument `for field` on ``."
+"Missing the required argument `` for field `` on ``."
 
 #### `P2014`
 
-"The change you are trying to make would violate the required relation '\' between the `and` models."
+"The change you are trying to make would violate the required relation '\' between the `` and `` models."
 
 #### `P2015`
 
@@ -248,7 +248,7 @@ Possible P1012 error messages:
 
 #### `P2017`
 
-"The records for relation `between the` and `` models are not connected."
+"The records for relation `` between the `` and `` models are not connected."
 
 #### `P2018`
 
@@ -408,7 +408,7 @@ Original error: \<br />\"
 
 #### `P3019`
 
-"The datasource provider `specified in your schema does not match the one specified in the migration_lock.toml,`. Please remove your current migration directory and start a new migration history with prisma migrate dev. Read more: [https://pris.ly/d/migrate-provider-switch](https://pris.ly/d/migrate-provider-switch)"
+"The datasource provider `` specified in your schema does not match the one specified in the migration_lock.toml, ``. Please remove your current migration directory and start a new migration history with prisma migrate dev. Read more: [https://pris.ly/d/migrate-provider-switch](https://pris.ly/d/migrate-provider-switch)"
 
 #### `P3020`
 

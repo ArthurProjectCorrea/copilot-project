@@ -178,8 +178,8 @@ export class CatsService {
         catchError((error: AxiosError) => {
           this.logger.error(error.response.data);
           throw 'An error happened!';
-        })
-      )
+        }),
+      ),
     );
     return data;
   }

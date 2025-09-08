@@ -41,8 +41,8 @@ For example, to create a layout that accepts your index page as child, add a `la
 ```tsx filename="app/layout.tsx" switcher
 
   children,
-}: )
-
+}: ) 
+        
         <main></main>
       </body>
     </html>
@@ -87,7 +87,7 @@ To create nested routes, you can nest folders inside each other. For example, to
 
   return (
     <ul>
-
+      
     </ul>
   )
 }
@@ -100,7 +100,7 @@ To create nested routes, you can nest folders inside each other. For example, to
 
   return (
     <ul>
-
+      
     </ul>
   )
 }
@@ -109,14 +109,14 @@ To create nested routes, you can nest folders inside each other. For example, to
 You can continue nesting folders to create nested routes. For example, to create a route for a specific blog post, create a new `[slug]` folder inside `blog` and add a `page` file:
 
 ```tsx filename="app/blog/[slug]/page.tsx" switcher
-function generateStaticParams()
+function generateStaticParams() 
 
   return <h1>Hello, Blog Post Page!</h1>
 }
 ```
 
 ```jsx filename="app/blog/[slug]/page.js" switcher
-function generateStaticParams()
+function generateStaticParams() 
 
   return <h1>Hello, Blog Post Page!</h1>
 }
@@ -193,7 +193,7 @@ In a Server Component **page**, you can access search parameters using the [`sea
 
   searchParams,
 }: >
-})
+}) 
 ```
 
 ```jsx filename="app/page.jsx" switcher
@@ -217,14 +217,12 @@ Learn more about `useSearchParams` in [statically rendered](/docs/app/api-refere
 ## Linking between pages
 
 You can use the [`
-
-</li>
-))}
-</ul>
-)
+        </li>
+      ))}
+    </ul>
+  )
 }
-
-````
+```
 
 ```jsx filename="app/ui/post.js" highlight=  switcher
 
@@ -233,13 +231,13 @@ You can use the [`
   return (
     <ul>
       >
-
+          
         </li>
       ))}
     </ul>
   )
 }
-````
+```
 
 > **Good to know**: `<Link>` is the primary way to navigate between routes in Next.js. You can also use the [`useRouter` hook](/docs/app/api-reference/functions/use-router) for more advanced navigation.
 

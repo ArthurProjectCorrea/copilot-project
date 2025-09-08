@@ -30,7 +30,7 @@ Scale to millions of queries per day without infrastructure changes. Efficiently
 
 ### Get started with Accelerate today
 
-Accelerate integrates seamlessly with your Prisma ORM project through the `@prisma/extension-accelerate` client extension. Get started quickly with our [setup guide](/accelerate/getting-started) and instantly access full edge environment support, connection pooling, and global caching.
+Accelerate integrates seamlessly with your Prisma ORM project through the `@prisma/extension-accelerate`  client extension. Get started quickly with our [setup guide](/accelerate/getting-started) and instantly access full edge environment support, connection pooling, and global caching.
 
 ```tsx
 

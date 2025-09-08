@@ -1,7 +1,7 @@
 ---
-title: 'Cache API'
-metaTitle: 'Prisma Postgres: Cache API Reference'
-metaDescription: 'Cache API reference documentation for Prisma Postgres.'
+title: "Cache API"
+metaTitle: "Prisma Postgres: Cache API Reference"
+metaDescription: "Cache API reference documentation for Prisma Postgres."
 ---
 
 ## Overview
@@ -9,7 +9,7 @@ metaDescription: 'Cache API reference documentation for Prisma Postgres.'
 The Prisma Postgres API reference documentation is based on the following schema:
 
 ```prisma
-model User
+model User 
 ```
 
 All example are based on the `User` model.
@@ -81,7 +81,7 @@ Notice the `info` property of the response object. This is where the request inf
 The `info` object is of type `AccelerateInfo` and follows the interface below:
 
 ```ts
-interface AccelerateInfo
+interface AccelerateInfo 
 ```
 
 | Property       | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -118,7 +118,7 @@ You need to provide the cache tag in the `$accelerate.invalidate` API:
 ```ts
 try );
   // highlight-end
-} catch (e)
+} catch (e) 
   }
   throw e;
 }
@@ -146,7 +146,7 @@ await prisma.user.findMany(,
 Just call the `$accelerate.invalidateAll` API:
 
 ```ts
-try  catch (e)
+try  catch (e) 
   }
   throw e;
 }

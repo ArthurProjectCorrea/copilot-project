@@ -5,7 +5,7 @@ metaTitle: 'Introduction to Prisma Client'
 metaDescription: 'Learn how to set up Prisma Client.'
 ---
 
-import from '@site/src/components/Icon';
+import  from '@site/src/components/Icon';
 
 ## Set up
 
@@ -14,11 +14,11 @@ import from '@site/src/components/Icon';
 In order to set up Prisma Client, you need a [Prisma schema file](/orm/prisma-schema) with your database connection, the Prisma Client generator, and at least one model:
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model User
+model User 
 ```
 
 Also make sure to [install the Prisma CLI](/orm/tools/prisma-cli#installation):

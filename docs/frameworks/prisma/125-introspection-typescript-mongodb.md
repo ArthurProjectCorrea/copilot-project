@@ -1,6 +1,6 @@
 ---
 title: 'Introspection for MongoDB in a TypeScript project'
-sidebar_label: 'Introspection'
+sidebar_label:  'Introspection'
 metaTitle: 'Introspection: MongoDB and TypeScript'
 metaDescription: 'Introspection your MongoDB database with Prisma ORM'
 langSwitcher: ['typescript', 'node']
@@ -10,7 +10,7 @@ pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb/co
 pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/install-prisma-client-typescript-mongodb
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/introspection-
 ---
-
+ 
 # Introspection
 
 Prisma ORM introspects a MongoDB schema by sampling the data stored in the given database and inferring the schema of that data.
@@ -46,9 +46,9 @@ npx prisma init --datasource-provider mongodb --output ../generated/prisma
 Initializing Prisma ORM will create a `prisma/schema.prisma` file. Edit this file to use MongoDB:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 Next you'll need to adjust your `.env` file to point the `DATABASE_URL` to your MongoDB database
@@ -64,13 +64,13 @@ npx prisma db pull
 This command introspects our database and writes the inferred schema into your `prisma/schema.prisma` file:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 ## Tweaking the Schema
@@ -78,13 +78,13 @@ model User
 To be able to join data using Prisma Client, you can add the [`@relation`](/orm/reference/prisma-schema-reference#relation) attributes to our models:
 
 ```prisma file=prisma/schema.prisma highlight=14;add|20;add showLineNumbers
-datasource db
+datasource db 
 
-generator client
+generator client 
 
-model Post
+model Post 
 
-model User
+model User 
 ```
 
 :::tip

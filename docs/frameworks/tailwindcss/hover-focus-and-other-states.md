@@ -8,17 +8,17 @@ For example, to apply the `bg-sky-700` class on hover, use the `hover:bg-sky-700
 When writing CSS the traditional way, a single class name would do different things based on the current state:
 
 ```css
-.btn-primary
+.btn-primary 
 
-.btn-primary:hover
+.btn-primary:hover 
 ```
 
 In Tailwind, rather than adding the styles for a hover state to an existing class, you add another class to the element that _only_ does something on hover:
 
 ```css
-.bg-sky-500
+.bg-sky-500 
 
-.hover\:bg-sky-700:hover
+.hover\:bg-sky-700:hover 
 ```
 
 Notice how `hover:bg-sky-700` _only_ defines styles for the `:hover` state? It does nothing by default, but as soon as you hover over an element with that class, the background color will change to `sky-700`.
@@ -150,12 +150,10 @@ The `in-*` variant works similarly to `group` except you don't need to add `grou
 <!-- [!code --:3] -->
 <div tabindex="0" class="group">
   <div class="opacity-50 group-focus:opacity-100">
-    <!-- [!code ++:3] -->
-    <div tabindex="0">
-      <div class="opacity-50 in-focus:opacity-100">
-        <!-- ... -->
-      </div>
-    </div>
+<!-- [!code ++:3] -->
+<div tabindex="0">
+  <div class="opacity-50 in-focus:opacity-100">
+    <!-- ... -->
   </div>
 </div>
 ```
@@ -322,9 +320,7 @@ Tailwind also includes a `motion-safe` variant that only adds styles when the us
 <!-- [!code classes:motion-safe:hover:-translate-x-0.5] -->
 <!-- [!code classes:motion-safe:transition] -->
 <!-- Using `motion-reduce` can mean lots of "undoing" styles -->
-<button
-  class="transition hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ..."
->
+<button class="transition hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ...">
   Save changes
 </button>
 
@@ -389,10 +385,7 @@ Use the `portrait` and `landscape` variants to conditionally add styles when the
     <!-- ... -->
   </div>
   <div class="landscape:hidden">
-    <p>
-      This experience is designed to be viewed in landscape. Please rotate your device to view the
-      site.
-    </p>
+    <p>This experience is designed to be viewed in landscape. Please rotate your device to view the site.</p>
   </div>
 </div>
 ```
@@ -404,10 +397,7 @@ Use the `noscript` variant to conditionally add styles based on whether the user
 ```html
 <!-- [!code classes:noscript:block] -->
 <div class="hidden noscript:block">
-  <p>
-    This experience requires JavaScript to function. Please enable JavaScript in your browser
-    settings.
-  </p>
+  <p>This experience requires JavaScript to function. Please enable JavaScript in your browser settings.</p>
 </div>
 ```
 
@@ -445,9 +435,7 @@ For terseness, if you only need to check if a property is supported (and not a s
 
 ```html
 <!-- [!code classes:supports-backdrop-filter:bg-black/25,supports-backdrop-filter:backdrop-blur] -->
-<div
-  class="bg-black/75 supports-backdrop-filter:bg-black/25 supports-backdrop-filter:backdrop-blur ..."
->
+<div class="bg-black/75 supports-backdrop-filter:bg-black/25 supports-backdrop-filter:backdrop-blur ...">
   <!-- ... -->
 </div>
 ```
@@ -464,7 +452,7 @@ Use the `not-supports-[...]` variant to style things based on whether a certain 
 You can configure shortcuts for common `@supports` rules you're using in your project by creating a new variant in the `supports-*` namespace:
 
 ```css
-@custom-variant supports-grid
+@custom-variant supports-grid 
 }
 ```
 
@@ -653,1487 +641,1485 @@ Learn more about adding custom variants in the [adding custom variants documenta
 
 A quick reference table of every single variant included in Tailwind by default.
 
-<span className="text-gray-400">&</span>:hover "}
-</code>
-
-</td>
-</tr>
-<tr>
-<td>
-<a href="#focus" className="whitespace-nowrap">
-focus
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:focus
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#focus-within" className="whitespace-nowrap">
-focus-within
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:focus-within
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#focus-visible" className="whitespace-nowrap">
-focus-visible
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:focus-visible
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#active" className="whitespace-nowrap">
-active
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:active
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#visited" className="whitespace-nowrap">
-visited
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:visited
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#target" className="whitespace-nowrap">
-target
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:target
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#styling-direct-children" className="whitespace-nowrap">
-_
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-:is(<span className="text-gray-400">&</span> )
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#styling-all-descendants" className="whitespace-nowrap">
-\*\*
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-:is(<span className="text-gray-400">&</span> )
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#has" className="whitespace-nowrap">
-has-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:has(<span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#styling-based-on-parent-state" className="whitespace-nowrap">
-group-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:is(:where(.group)<span className="text-gray-400">...</span> _)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#styling-based-on-sibling-state" className="whitespace-nowrap">
-peer-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:is(:where(.peer)<span className="text-gray-400">...</span> ~ _)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#implicit-groups" className="whitespace-nowrap">
-in-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-:where(<span className="text-gray-400">...</span>) <span className="text-gray-400">&</span>
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#not" className="whitespace-nowrap">
-not-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:not(<span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#styling-inert-elements" className="whitespace-nowrap">
-inert
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:is([inert], [inert] _)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#first" className="whitespace-nowrap">
-first
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:first-child
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#last" className="whitespace-nowrap">
-last
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:last-child
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#only" className="whitespace-nowrap">
-only
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:only-child
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#odd" className="whitespace-nowrap">
-odd
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:nth-child(odd)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#even" className="whitespace-nowrap">
-even
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:nth-child(even)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#first-of-type" className="whitespace-nowrap">
-first-of-type
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:first-of-type
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#last-of-type" className="whitespace-nowrap">
-last-of-type
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:last-of-type
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#only-of-type" className="whitespace-nowrap">
-only-of-type
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:only-of-type
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#nth" className="whitespace-nowrap">
-nth-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:nth-child(<span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#nth-last" className="whitespace-nowrap">
-nth-last-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:nth-last-child(<span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#nth-of-type" className="whitespace-nowrap">
-nth-of-type-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:nth-of-type(<span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#nth-last-of-type" className="whitespace-nowrap">
-nth-last-of-type-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:nth-last-of-type(<span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#empty" className="whitespace-nowrap">
-empty
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:empty
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#disabled" className="whitespace-nowrap">
-disabled
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:disabled
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#enabled" className="whitespace-nowrap">
-enabled
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:enabled
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#checked" className="whitespace-nowrap">
-checked
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:checked
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#indeterminate" className="whitespace-nowrap">
-indeterminate
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:indeterminate
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#default" className="whitespace-nowrap">
-default
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:default
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#optional" className="whitespace-nowrap">
-optional
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:optional
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#required" className="whitespace-nowrap">
-required
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:required
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#valid" className="whitespace-nowrap">
-valid
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:valid
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#invalid" className="whitespace-nowrap">
-invalid
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:invalid
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#user-valid" className="whitespace-nowrap">
-user-valid
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:user-valid
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#user-invalid" className="whitespace-nowrap">
-user-invalid
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:user-invalid
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#in-range" className="whitespace-nowrap">
-in-range
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:in-range
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#out-of-range" className="whitespace-nowrap">
-out-of-range
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:out-of-range
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#placeholder-shown" className="whitespace-nowrap">
-placeholder-shown
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:placeholder-shown
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#placeholder-shown" className="whitespace-nowrap">
-details-content
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:details-content
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#autofill" className="whitespace-nowrap">
-autofill
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:autofill
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#read-only" className="whitespace-nowrap">
-read-only
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:read-only
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#before-and-after" className="whitespace-nowrap">
-before
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::before
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#before-and-after" className="whitespace-nowrap">
-after
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::after
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#first-line-and-first-letter" className="whitespace-nowrap">
-first-letter
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::first-letter
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#first-line-and-first-letter" className="whitespace-nowrap">
-first-line
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::first-line
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#marker" className="whitespace-nowrap">
-marker
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::marker, <span className="text-gray-400">&</span> _::marker
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#selection" className="whitespace-nowrap">
-selection
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::selection
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#file" className="whitespace-nowrap">
-file
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::file-selector-button
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#backdrop" className="whitespace-nowrap">
-backdrop
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::backdrop
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#placeholder" className="whitespace-nowrap">
-placeholder
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>::placeholder
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-sm
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 40rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-md
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 48rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-lg
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 64rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 80rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-2xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 96rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-min-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (width <span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-max-sm
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 40rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-max-md
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 48rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-max-lg
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 64rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-max-xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 80rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-max-2xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (width 96rem)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-max-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (width <span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@3xs
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 16rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@2xs
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 18rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@xs
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 20rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@sm
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 24rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@md
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 28rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@lg
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 32rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 36rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@2xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 42rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@3xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 48rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@4xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 56rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@5xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 64rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@6xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 72rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@7xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 80rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@min-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width <span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-3xs
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 16rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-2xs
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 18rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-xs
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 20rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-sm
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 24rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-md
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 28rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-lg
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 32rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 36rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-2xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 42rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-3xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 48rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-4xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 56rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-5xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 64rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-6xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 72rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-7xl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width 80rem)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#responsive-breakpoints" className="whitespace-nowrap">
-@max-[<span className="text-gray-400">...</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@container (width <span className="text-gray-400">...</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#prefers-color-scheme" className="whitespace-nowrap">
-dark
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (prefers-color-scheme: dark)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#prefers-reduced-motion" className="whitespace-nowrap">
-motion-safe
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (prefers-reduced-motion: no-preference)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#prefers-reduced-motion" className="whitespace-nowrap">
-motion-reduce
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (prefers-reduced-motion: reduce)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#prefers-contrast" className="whitespace-nowrap">
-contrast-more
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (prefers-contrast: more)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#prefers-contrast" className="whitespace-nowrap">
-contrast-less
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (prefers-contrast: less)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#forced-colors" className="whitespace-nowrap">
-forced-colors
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (forced-colors: active)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#inverted-colors" className="whitespace-nowrap">
-inverted-colors
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (inverted-colors: inverted)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#pointer-and-any-pointer" className="whitespace-nowrap">
-pointer-fine
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (pointer: fine)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#pointer-and-any-pointer" className="whitespace-nowrap">
-pointer-coarse
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (pointer: coarse)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#pointer-and-any-pointer" className="whitespace-nowrap">
-pointer-none
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (pointer: none)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#pointer-and-any-pointer" className="whitespace-nowrap">
-any-pointer-fine
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (any-pointer: fine)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#pointer-and-any-pointer" className="whitespace-nowrap">
-any-pointer-coarse
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (any-pointer: coarse)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#pointer-and-any-pointer" className="whitespace-nowrap">
-any-pointer-none
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (any-pointer: none)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#orientation" className="whitespace-nowrap">
-portrait
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (orientation: portrait)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#orientation" className="whitespace-nowrap">
-landscape
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@media (orientation: landscape)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#scripting" className="whitespace-nowrap">
-noscript
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media (scripting: none)</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#print" className="whitespace-nowrap">
-print
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@media print</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#supports" className="whitespace-nowrap">
-supports-[<span className="text-gray-400">&hellip;</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-@supports (<span className="text-gray-400">&hellip;</span>)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-busy
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-busy="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-checked
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-checked="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-disabled
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-disabled="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-expanded
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-expanded="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-hidden
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-hidden="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-pressed
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-pressed="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-readonly
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-readonly="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-required
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-required="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-selected
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-selected="true"]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#aria-states" className="whitespace-nowrap">
-aria-[<span className="text-gray-400">&hellip;</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[aria-<span className="text-gray-400">&hellip;</span>]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#data-attributes" className="whitespace-nowrap">
-data-[<span className="text-gray-400">&hellip;</span>]
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>[data-<span className="text-gray-400">&hellip;</span>]
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#rtl-support" className="whitespace-nowrap">
-rtl
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:where(:dir(rtl), [dir="rtl"], [dir="rtl"] _)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#rtl-support" className="whitespace-nowrap">
-ltr
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:where(:dir(ltr), [dir="ltr"], [dir="ltr"] \*)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#openclosed-state" className="whitespace-nowrap">
-open
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">
-<span className="text-gray-400">&</span>:is([open], :popover-open, :open)
-</code>
-</td>
-</tr>
-<tr>
-<td>
-<a href="#starting-style" className="whitespace-nowrap">
-starting
-</a>
-</td>
-<td>
-<code className="whitespace-nowrap before:content-none after:content-none">@starting-style</code>
-</td>
-</tr>
-</tbody>
-
+ <span className="text-gray-400">&</span>:hover "}
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#focus" className="whitespace-nowrap">
+            focus
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:focus
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#focus-within" className="whitespace-nowrap">
+            focus-within
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:focus-within
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#focus-visible" className="whitespace-nowrap">
+            focus-visible
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:focus-visible
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#active" className="whitespace-nowrap">
+            active
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:active
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#visited" className="whitespace-nowrap">
+            visited
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:visited
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#target" className="whitespace-nowrap">
+            target
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:target
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#styling-direct-children" className="whitespace-nowrap">
+            *
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            :is(<span className="text-gray-400">&</span> )
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#styling-all-descendants" className="whitespace-nowrap">
+            **
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            :is(<span className="text-gray-400">&</span> )
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#has" className="whitespace-nowrap">
+            has-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:has(<span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#styling-based-on-parent-state" className="whitespace-nowrap">
+            group-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:is(:where(.group)<span className="text-gray-400">...</span> *)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#styling-based-on-sibling-state" className="whitespace-nowrap">
+            peer-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:is(:where(.peer)<span className="text-gray-400">...</span> ~ *)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#implicit-groups" className="whitespace-nowrap">
+            in-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            :where(<span className="text-gray-400">...</span>) <span className="text-gray-400">&</span>
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#not" className="whitespace-nowrap">
+            not-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:not(<span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#styling-inert-elements" className="whitespace-nowrap">
+            inert
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:is([inert], [inert] *)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#first" className="whitespace-nowrap">
+            first
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:first-child
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#last" className="whitespace-nowrap">
+            last
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:last-child
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#only" className="whitespace-nowrap">
+            only
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:only-child
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#odd" className="whitespace-nowrap">
+            odd
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:nth-child(odd)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#even" className="whitespace-nowrap">
+            even
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:nth-child(even)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#first-of-type" className="whitespace-nowrap">
+            first-of-type
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:first-of-type
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#last-of-type" className="whitespace-nowrap">
+            last-of-type
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:last-of-type
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#only-of-type" className="whitespace-nowrap">
+            only-of-type
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:only-of-type
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#nth" className="whitespace-nowrap">
+            nth-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:nth-child(<span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#nth-last" className="whitespace-nowrap">
+            nth-last-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:nth-last-child(<span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#nth-of-type" className="whitespace-nowrap">
+            nth-of-type-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:nth-of-type(<span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#nth-last-of-type" className="whitespace-nowrap">
+            nth-last-of-type-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:nth-last-of-type(<span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#empty" className="whitespace-nowrap">
+            empty
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:empty
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#disabled" className="whitespace-nowrap">
+            disabled
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:disabled
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#enabled" className="whitespace-nowrap">
+            enabled
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:enabled
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#checked" className="whitespace-nowrap">
+            checked
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:checked
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#indeterminate" className="whitespace-nowrap">
+            indeterminate
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:indeterminate
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#default" className="whitespace-nowrap">
+            default
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:default
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#optional" className="whitespace-nowrap">
+            optional
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:optional
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#required" className="whitespace-nowrap">
+            required
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:required
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#valid" className="whitespace-nowrap">
+            valid
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:valid
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#invalid" className="whitespace-nowrap">
+            invalid
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:invalid
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#user-valid" className="whitespace-nowrap">
+            user-valid
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:user-valid
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#user-invalid" className="whitespace-nowrap">
+            user-invalid
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:user-invalid
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#in-range" className="whitespace-nowrap">
+            in-range
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:in-range
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#out-of-range" className="whitespace-nowrap">
+            out-of-range
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:out-of-range
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#placeholder-shown" className="whitespace-nowrap">
+            placeholder-shown
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:placeholder-shown
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#placeholder-shown" className="whitespace-nowrap">
+            details-content
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:details-content
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#autofill" className="whitespace-nowrap">
+            autofill
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:autofill
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#read-only" className="whitespace-nowrap">
+            read-only
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:read-only
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#before-and-after" className="whitespace-nowrap">
+            before
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::before
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#before-and-after" className="whitespace-nowrap">
+            after
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::after
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#first-line-and-first-letter" className="whitespace-nowrap">
+            first-letter
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::first-letter
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#first-line-and-first-letter" className="whitespace-nowrap">
+            first-line
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::first-line
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#marker" className="whitespace-nowrap">
+            marker
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::marker, <span className="text-gray-400">&</span> *::marker
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#selection" className="whitespace-nowrap">
+            selection
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::selection
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#file" className="whitespace-nowrap">
+            file
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::file-selector-button
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#backdrop" className="whitespace-nowrap">
+            backdrop
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::backdrop
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#placeholder" className="whitespace-nowrap">
+            placeholder
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>::placeholder
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            sm
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  40rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            md
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  48rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            lg
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  64rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  80rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            2xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  96rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            min-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (width  <span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            max-sm
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  40rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            max-md
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  48rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            max-lg
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  64rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            max-xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  80rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            max-2xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (width  96rem)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            max-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (width  <span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @3xs
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  16rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @2xs
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  18rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @xs
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  20rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @sm
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  24rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @md
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  28rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @lg
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  32rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  36rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @2xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  42rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @3xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  48rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @4xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  56rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @5xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  64rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @6xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  72rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @7xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  80rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @min-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  <span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-3xs
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  16rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-2xs
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  18rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-xs
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  20rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-sm
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  24rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-md
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  28rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-lg
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  32rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  36rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-2xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  42rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-3xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  48rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-4xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  56rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-5xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  64rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-6xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  72rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-7xl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  80rem)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#responsive-breakpoints" className="whitespace-nowrap">
+            @max-[<span className="text-gray-400">...</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @container (width  <span className="text-gray-400">...</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#prefers-color-scheme" className="whitespace-nowrap">
+            dark
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (prefers-color-scheme: dark)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#prefers-reduced-motion" className="whitespace-nowrap">
+            motion-safe
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (prefers-reduced-motion: no-preference)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#prefers-reduced-motion" className="whitespace-nowrap">
+            motion-reduce
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (prefers-reduced-motion: reduce)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#prefers-contrast" className="whitespace-nowrap">
+            contrast-more
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (prefers-contrast: more)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#prefers-contrast" className="whitespace-nowrap">
+            contrast-less
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (prefers-contrast: less)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#forced-colors" className="whitespace-nowrap">
+            forced-colors
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (forced-colors: active)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#inverted-colors" className="whitespace-nowrap">
+            inverted-colors
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (inverted-colors: inverted)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#pointer-and-any-pointer" className="whitespace-nowrap">
+            pointer-fine
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (pointer: fine)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#pointer-and-any-pointer" className="whitespace-nowrap">
+            pointer-coarse
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (pointer: coarse)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#pointer-and-any-pointer" className="whitespace-nowrap">
+            pointer-none
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (pointer: none)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#pointer-and-any-pointer" className="whitespace-nowrap">
+            any-pointer-fine
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (any-pointer: fine)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#pointer-and-any-pointer" className="whitespace-nowrap">
+            any-pointer-coarse
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (any-pointer: coarse)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#pointer-and-any-pointer" className="whitespace-nowrap">
+            any-pointer-none
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (any-pointer: none)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#orientation" className="whitespace-nowrap">
+            portrait
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (orientation: portrait)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#orientation" className="whitespace-nowrap">
+            landscape
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @media (orientation: landscape)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#scripting" className="whitespace-nowrap">
+            noscript
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media (scripting: none)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#print" className="whitespace-nowrap">
+            print
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@media print</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#supports" className="whitespace-nowrap">
+            supports-[<span className="text-gray-400">&hellip;</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            @supports (<span className="text-gray-400">&hellip;</span>)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-busy
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-busy="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-checked
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-checked="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-disabled
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-disabled="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-expanded
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-expanded="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-hidden
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-hidden="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-pressed
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-pressed="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-readonly
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-readonly="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-required
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-required="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-selected
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-selected="true"]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#aria-states" className="whitespace-nowrap">
+            aria-[<span className="text-gray-400">&hellip;</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[aria-<span className="text-gray-400">&hellip;</span>]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#data-attributes" className="whitespace-nowrap">
+            data-[<span className="text-gray-400">&hellip;</span>]
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>[data-<span className="text-gray-400">&hellip;</span>]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#rtl-support" className="whitespace-nowrap">
+            rtl
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#rtl-support" className="whitespace-nowrap">
+            ltr
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:where(:dir(ltr), [dir="ltr"], [dir="ltr"] *)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#openclosed-state" className="whitespace-nowrap">
+            open
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">
+            <span className="text-gray-400">&</span>:is([open], :popover-open, :open)
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#starting-style" className="whitespace-nowrap">
+            starting
+          </a>
+        </td>
+        <td>
+          <code className="whitespace-nowrap before:content-none after:content-none">@starting-style</code>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
 
@@ -2198,9 +2184,7 @@ Style a link when it has already been visited using the `visited` variant:
 
 ```html
 <!-- [!code classes:visited:text-purple-600] -->
-<a href="https://seinfeldquotes.com" class="text-blue-600 visited:text-purple-600 ...">
-  Inspiration
-</a>
+<a href="https://seinfeldquotes.com" class="text-blue-600 visited:text-purple-600 ..."> Inspiration </a>
 ```
 
 #### :target
@@ -2221,11 +2205,11 @@ Style an element if it's the first child using the `first` variant:
 ```svelte
 <!-- [!code classes:first:pt-0] -->
 <ul>
-
+  
     <li class="py-4 first:pt-0 ...">
       <!-- ... -->
     </li>
-
+  
 </ul>
 ```
 
@@ -2236,11 +2220,11 @@ Style an element if it's the last child using the `last` variant:
 ```svelte
 <!-- [!code classes:last:pb-0] -->
 <ul>
-
+  
     <li class="py-4 last:pb-0 ...">
       <!-- ... -->
     </li>
-
+  
 </ul>
 ```
 
@@ -2251,11 +2235,11 @@ Style an element if it's the only child using the `only` variant:
 ```svelte
 <!-- [!code classes:only:py-0] -->
 <ul>
-
+  
     <li class="py-4 only:py-0 ...">
       <!-- ... -->
     </li>
-
+  
 </ul>
 ```
 
@@ -2266,11 +2250,11 @@ Style an element if it's an oddly numbered child using the `odd` variant:
 ```svelte
 <!-- [!code classes:odd:bg-gray-100] -->
 <table>
-
+  
     <tr class="bg-white odd:bg-gray-100 ...">
       <!-- ... -->
     </tr>
-
+  
 </table>
 ```
 
@@ -2281,11 +2265,11 @@ Style an element if it's an evenly numbered child using the `even` variant:
 ```svelte
 <!-- [!code classes:even:bg-gray-100] -->
 <table>
-
+  
     <tr class="bg-white even:bg-gray-100 ...">
       <!-- ... -->
     </tr>
-
+  
 </table>
 ```
 
@@ -2297,11 +2281,11 @@ Style an element if it's the first child of its type using the `first-of-type` v
 <!-- [!code classes:first-of-type:ml-6] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="ml-2 first-of-type:ml-6 ...">
       <!-- ... -->
     </a>
-
+  
 </nav>
 ```
 
@@ -2313,11 +2297,11 @@ Style an element if it's the last child of its type using the `last-of-type` var
 <!-- [!code classes:last-of-type:mr-6] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="mr-2 last-of-type:mr-6 ...">
       <!-- ... -->
     </a>
-
+  
   <button>More</button>
 </nav>
 ```
@@ -2330,11 +2314,11 @@ Style an element if it's the only child of its type using the `only-of-type` var
 <!-- [!code classes:only-of-type:mx-6] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="mx-2 only-of-type:mx-6 ...">
       <!-- ... -->
     </a>
-
+  
   <button>More</button>
 </nav>
 ```
@@ -2347,11 +2331,11 @@ Style an element at a specific position using the `nth` variant:
 <!-- [!code classes:nth-3:mx-6,nth-[3n+1]:mx-7] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="mx-2 nth-3:mx-6 nth-[3n+1]:mx-7 ...">
       <!-- ... -->
     </a>
-
+  
   <button>More</button>
 </nav>
 ```
@@ -2364,11 +2348,11 @@ Style an element at a specific position from the end using the `nth-last` varian
 <!-- [!code classes:nth-last-3:mx-6,nth-last-[3n+1]:mx-7] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="mx-2 nth-last-3:mx-6 nth-last-[3n+1]:mx-7 ...">
       <!-- ... -->
     </a>
-
+  
   <button>More</button>
 </nav>
 ```
@@ -2381,11 +2365,11 @@ Style an element at a specific position, of the same type using the `nth-of-type
 <!-- [!code classes:nth-of-type-3:mx-6,nth-of-type-[3n+1]:mx-7] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="mx-2 nth-of-type-3:mx-6 nth-of-type-[3n+1]:mx-7 ...">
       <!-- ... -->
     </a>
-
+  
   <button>More</button>
 </nav>
 ```
@@ -2398,11 +2382,11 @@ Style an element at a specific position from the end, of the same type using the
 <!-- [!code classes:nth-last-of-type-3:mx-6,nth-last-of-type-[3n+1]:mx-7] -->
 <nav>
   <img src="/logo.svg" alt="Vandelay Industries" />
-
+  
     <a href="#" class="mx-2 nth-last-of-type-3:mx-6 nth-last-of-type-[3n+1]:mx-7 ...">
       <!-- ... -->
     </a>
-
+  
   <button>More</button>
 </nav>
 ```
@@ -2414,9 +2398,9 @@ Style an element if it has no content using the `empty` variant:
 ```svelte
 <!-- [!code classes:empty:hidden] -->
 <ul>
-
+  
     <li class="empty:hidden ..."></li>
-
+  
 </ul>
 ```
 

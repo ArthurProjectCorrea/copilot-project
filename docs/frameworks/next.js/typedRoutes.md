@@ -9,5 +9,7 @@ Support for [statically typed links](/docs/app/api-reference/config/typescript#s
 
 ```js filename="next.config.js"
 /** @type  */
-const nextConfig = (module.exports = nextConfig);
+const nextConfig = 
+
+module.exports = nextConfig
 ```

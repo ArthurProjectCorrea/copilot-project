@@ -16,10 +16,17 @@ To instruct what should happen when Apollo/Mercurius encounters your directive, 
 import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
 import { defaultFieldResolver, GraphQLSchema } from 'graphql';
 
-export function upperDirectiveTransformer(schema: GraphQLSchema, directiveName: string) {
+export function upperDirectiveTransformer(
+  schema: GraphQLSchema,
+  directiveName: string,
+) {
   return mapSchema(schema, {
     [MapperKind.OBJECT_FIELD]: (fieldConfig) => {
-      const upperDirective = getDirective(schema, fieldConfig, directiveName)?.[0];
+      const upperDirective = getDirective(
+        schema,
+        fieldConfig,
+        directiveName,
+      )?.[0];
 
       if (upperDirective) {
         const { resolve = defaultFieldResolver } = fieldConfig;

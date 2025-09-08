@@ -6,7 +6,7 @@ description: The maximum length of the headers that are emitted by React and add
 During static rendering, React can emit headers that can be added to the response. These can be used to improve performance by allowing the browser to preload resources like fonts, scripts, and stylesheets. The default value is `6000`, but you can override this value by configuring the `reactMaxHeadersLength` option in `next.config.js`:
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```
 
 > **Good to know**: This option is only available in App Router.

@@ -31,13 +31,13 @@ It will prompt you to customize your setup. Choose the defaults:
 
 :::info
 
-- _Would you like to use TypeScript?_ `Yes`
-- _Would you like to use ESLint?_ `Yes`
-- _Would you like to use Tailwind CSS?_ `Yes`
-- _Would you like your code inside a `src/` directory?_ `Yes`
-- _Would you like to use App Router?_ `Yes`
-- _Would you like to use Turbopack?_ `Yes`
-- _Would you like to customize the import alias (`@/_`by default)?*`No`
+- *Would you like to use TypeScript?* `Yes`  
+- *Would you like to use ESLint?* `Yes`  
+- *Would you like to use Tailwind CSS?* `Yes`  
+- *Would you like your code inside a `src/` directory?* `Yes`  
+- *Would you like to use App Router?* `Yes`  
+- *Would you like to use Turbopack?* `Yes`
+- *Would you like to customize the import alias (`@/*` by default)?* `No`
 
 :::
 
@@ -62,7 +62,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../src/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My Better-Auth Project"
 :::
@@ -166,7 +165,6 @@ If your application runs on a port other than `3000`, you must add it to the `tr
   trustedOrigins: ['http://localhost:3001'],
 })
 ```
-
 :::
 
 ### 3.2. Add Better-Auth models to your schema
@@ -178,7 +176,6 @@ Run the following command:
 ```terminal
 npx @better-auth/cli generate
 ```
-
 :::note
 It will ask for confirmation to overwrite your existing Prisma schema. Select `y`.
 :::
@@ -186,13 +183,13 @@ It will ask for confirmation to overwrite your existing Prisma schema. Select `y
 This will add the following models:
 
 ```prisma
-model User
+model User 
 
-model Session
+model Session 
 
-model Account
+model Account 
 
-model Verification
+model Verification 
 ```
 
 ### 3.3. Migrate the database
@@ -293,7 +290,7 @@ Now, import the `signUp` function from your Better-Auth client and add the `hand
   //add-start
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) );
 
-    if (res.error)  else
+    if (res.error)  else 
   }
   //add-end
 
@@ -315,7 +312,7 @@ To inform the user of any issues, add an element that conditionally renders when
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) );
 
-    if (res.error)  else
+    if (res.error)  else 
   }
 
   return (
@@ -340,7 +337,7 @@ Finally, add the HTML form with input fields for the user's name, email, and pas
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) );
 
-    if (res.error)  else
+    if (res.error)  else 
   }
 
   return (
@@ -435,7 +432,7 @@ Add the `handleSubmit` function, this time importing and using the `signIn.email
   //add-start
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) );
 
-    if (res.error)  else
+    if (res.error)  else 
   }
   //add-end
 
@@ -457,7 +454,7 @@ Add the conditional error message display.
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) );
 
-    if (res.error)  else
+    if (res.error)  else 
   }
 
   return (
@@ -482,7 +479,7 @@ Finally, add the form fields for email and password and a sign-in button.
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) );
 
-    if (res.error)  else
+    if (res.error)  else 
   }
 
   return (
@@ -568,7 +565,7 @@ To protect this route, use a `useEffect` hook. This effect checks if the session
   const  = useSession();
 
   //add-start: redirect if not signed in
-  useEffect(() =>
+  useEffect(() => 
   }, [isPending, session, router]);
   //add-end
 
@@ -588,7 +585,7 @@ To provide a better user experience, add loading and redirecting states while th
   const router = useRouter();
   const  = useSession();
 
-  useEffect(() =>
+  useEffect(() => 
   }, [isPending, session, router]);
 
   //add-start: loading and redirect states
@@ -614,7 +611,7 @@ Finally, if the user is authenticated, display their name and email from the `se
   const router = useRouter();
   const  = useSession();
 
-  useEffect(() =>
+  useEffect(() => 
   }, [isPending, session, router]);
 
   if (isPending)
@@ -631,14 +628,14 @@ Finally, if the user is authenticated, display their name and email from the `se
       <h1 className="text-2xl font-bold">Dashboard</h1>
       <p>Welcome, !</p>
       <p>Email: </p>
-
+      
       <button
         onClick=
         className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200"
       >
         Sign Out
       </button>
-
+      
     </main>
   );
 }

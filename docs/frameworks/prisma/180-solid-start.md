@@ -15,7 +15,6 @@ Prisma ORM streamlines database access with type-safe queries and a smooth devel
 In this guide, you'll learn how to integrate Prisma ORM with a Prisma Postgres database in a SolidStart project from scratch. You can find a complete example of this guide on [GitHub](https://github.com/prisma/prisma-examples/tree/latest/orm/solid-start).
 
 ## Prerequisites
-
 - [Node.js 18+](https://nodejs.org)
 
 ## 1. Set up your project
@@ -23,17 +22,17 @@ In this guide, you'll learn how to integrate Prisma ORM with a Prisma Postgres d
 Begin by creating a new SolidStart app. In your terminal, run:
 
 ```terminal
-npm init solid@latest
+npm init solid@latest 
 ```
 
 Use the following options when prompted:
 
 :::info
 
-- _Project name:_ `my-solid-prisma-app`
-- _Is this a SolidStart project:_ `Yes`
-- _Template:_ `bare`
-- _Use TypeScript:_ `Yes`
+- *Project name:* `my-solid-prisma-app`
+- *Is this a SolidStart project:* `Yes`
+- *Template:* `bare`
+- *Use TypeScript:* `Yes`
 
 :::
 
@@ -71,7 +70,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../src/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My SolidStart Project"
 :::
@@ -88,14 +86,14 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models and change the generator to use the `prisma-client` provider:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 
-model Post
+model Post 
 //add-end
 ```
 
@@ -108,7 +106,6 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
-
 ### 2.4. Seed the database
 
 Let's add some seed data to populate the database with sample users and posts.
@@ -143,11 +140,11 @@ Now, tell Prisma how to run this script by updating your `package.json`:
 ```json file=package.json
 ,
   //add-start
-  "prisma":
+  "prisma": 
   //add-end
   "dependencies": ,
   "engines": ,
-  "devDependencies":
+  "devDependencies": 
 }
 ```
 
@@ -227,15 +224,13 @@ const fetchUsers = async () => ;
 ### 3.4. Display the Data
 
 To show the users and their posts, use SolidJS's `
-
-</div>
-)}
-</For>
-//add-end
-</main>
-);
+          </div>
+        )}
+      </For>
+      //add-end
+    </main>
+  );
 }
-
 ```
 
 :::info

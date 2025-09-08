@@ -28,11 +28,11 @@ For example, a blog could include the following route `pages/blog/[slug].js` whe
 }
 ```
 
-| Route                  | Example URL | `params` |
-| ---------------------- | ----------- | -------- |
-| `pages/blog/[slug].js` | `/blog/a`   | ``       |
-| `pages/blog/[slug].js` | `/blog/b`   | ``       |
-| `pages/blog/[slug].js` | `/blog/c`   | ``       |
+| Route                  | Example URL | `params`        |
+| ---------------------- | ----------- | --------------- |
+| `pages/blog/[slug].js` | `/blog/a`   | `` |
+| `pages/blog/[slug].js` | `/blog/b`   | `` |
+| `pages/blog/[slug].js` | `/blog/c`   | `` |
 
 ## Catch-all Segments
 
@@ -40,11 +40,11 @@ Dynamic Segments can be extended to **catch-all** subsequent segments by adding 
 
 For example, `pages/shop/[...slug].js` will match `/shop/clothes`, but also `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`, and so on.
 
-| Route                     | Example URL   | `params` |
-| ------------------------- | ------------- | -------- |
-| `pages/shop/[...slug].js` | `/shop/a`     | ``       |
-| `pages/shop/[...slug].js` | `/shop/a/b`   | ``       |
-| `pages/shop/[...slug].js` | `/shop/a/b/c` | ``       |
+| Route                     | Example URL   | `params`                    |
+| ------------------------- | ------------- | --------------------------- |
+| `pages/shop/[...slug].js` | `/shop/a`     | ``           |
+| `pages/shop/[...slug].js` | `/shop/a/b`   | ``      |
+| `pages/shop/[...slug].js` | `/shop/a/b/c` | `` |
 
 ## Optional Catch-all Segments
 
@@ -54,9 +54,9 @@ For example, `pages/shop/[[...slug]].js` will **also** match `/shop`, in additio
 
 The difference between **catch-all** and **optional catch-all** segments is that with optional, the route without the parameter is also matched (`/shop` in the example above).
 
-| Route                       | Example URL   | `params` |
-| --------------------------- | ------------- | -------- |
+| Route                       | Example URL   | `params`                    |
+| --------------------------- | ------------- | --------------------------- |
 | `pages/shop/[[...slug]].js` | `/shop`       | ``       |
-| `pages/shop/[[...slug]].js` | `/shop/a`     | ``       |
-| `pages/shop/[[...slug]].js` | `/shop/a/b`   | ``       |
-| `pages/shop/[[...slug]].js` | `/shop/a/b/c` | ``       |
+| `pages/shop/[[...slug]].js` | `/shop/a`     | ``           |
+| `pages/shop/[[...slug]].js` | `/shop/a/b`   | ``      |
+| `pages/shop/[[...slug]].js` | `/shop/a/b/c` | `` |

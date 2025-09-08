@@ -68,7 +68,7 @@ this.eventEmitter.emit(
   new OrderCreatedEvent({
     orderId: 1,
     payload: {},
-  })
+  }),
 );
 ```
 
@@ -149,7 +149,10 @@ To avoid this issue, you can use the `waitUntilReady` method of the `EventEmitte
 
 ```typescript
 await this.eventEmitterReadinessWatcher.waitUntilReady();
-this.eventEmitter.emit('order.created', new OrderCreatedEvent({ orderId: 1, payload: {} }));
+this.eventEmitter.emit(
+  'order.created',
+  new OrderCreatedEvent({ orderId: 1, payload: {} }),
+);
 ```
 
 > info **Note** This is only necessary for events emitted before the `onApplicationBootstrap` lifecycle hook is complete.

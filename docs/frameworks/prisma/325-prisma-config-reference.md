@@ -1,8 +1,8 @@
 ---
-title: 'Prisma Config reference'
-metaTitle: 'Reference documentation for the prisma config file'
-metaDescription: 'This page gives an overview of all Prisma config options available for use.'
-sidebar_label: 'Prisma Config'
+title: "Prisma Config reference"
+metaTitle: "Reference documentation for the prisma config file"
+metaDescription: "This page gives an overview of all Prisma config options available for use."
+sidebar_label: "Prisma Config"
 ---
 
 ## Overview
@@ -12,26 +12,24 @@ The Prisma Config file configures the Prisma CLI, including subcommands like `mi
 You can define your config in either of two ways:
 
 - Using the `defineConfig` helper:
-
   ```ts
   import path from "node:path";
   import  from "prisma/config";
 
   export default defineConfig(,
     views: ,
-    typedSql:
+    typedSql: 
   });
   ```
 
 - Using TypeScript's `satisfies` operator with the `PrismaConfig` type:
-
   ```ts
   import path from "node:path";
   import type  from "prisma";
 
   export default ,
     views: ,
-    typedSql:
+    typedSql: 
   } satisfies PrismaConfig;
   ```
 
@@ -70,8 +68,8 @@ Prisma Config files can be named as `prisma.config.*` or `.config/prisma.*` with
 
 :::tip[Recommendation]
 
-- Use **`prisma.config.ts`** for small TypeScript projects.
-- Use **`.config/prisma.ts`** for larger TypeScript projects with multiple configuration files (following the [`.config` directory proposal](https://github.com/pi0/config-dir)).
+- Use **`prisma.config.ts`** for small TypeScript projects.  
+- Use **`.config/prisma.ts`** for larger TypeScript projects with multiple configuration files (following the [`.config` directory proposal](https://github.com/pi0/config-dir)).  
 
 :::
 
@@ -85,20 +83,12 @@ Configures how Prisma ORM locates and loads your schema file(s). Can be a file o
 | -------- | -------- | -------- | ---------------------------------------------- |
 | `schema` | `string` | No       | `./prisma/schema.prisma` and `./schema.prisma` |
 
-### `migrate`
-
-Configures how Prisma Migrate communicates with your underlying database. See sub-options below for details.
-
-| Property  | Type     | Required | Default |
-| --------- | -------- | -------- | ------- |
-| `migrate` | `object` | No       | ``      |
-
 ### `adapter`
 
 A function that returns a Prisma driver adapter instance which is used by the Prisma CLI to run migrations. The function should return a `Promise` that resolves to a valid Prisma driver adapter.
 
-| Property  | Type                                                   | Required | Default |
-| --------- | ------------------------------------------------------ | -------- | ------- |
+| Property          | Type                                                           | Required | Default |
+| ----------------- | -------------------------------------------------------------- | -------- | ------- |
 | `adapter` | `() => Promise<SqlMigrationAwareDriverAdapterFactory>` | No       | none    |
 
 Example using the Prisma ORM D1 driver adapter:
@@ -171,7 +161,7 @@ These options declare tables and enums in your database that are **managed exter
 });
 ```
 
-Learn more about the [`externalTables` feature here](/orm/prisma-schema/data-model/externally-managed-tables).
+Learn more about the [`externalTables` feature here](/orm/prisma-schema/data-model/externally-managed-tables). 
 
 ### `migrations.path`
 
@@ -215,7 +205,7 @@ This option allows you to define SQL statements that Prisma runs on the **shadow
 });
 ```
 
-Learn more about the [`externalTables` feature here](/orm/prisma-schema/data-model/externally-managed-tables).
+Learn more about the [`externalTables` feature here](/orm/prisma-schema/data-model/externally-managed-tables). 
 
 ### `views.path`
 

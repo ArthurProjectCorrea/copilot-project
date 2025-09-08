@@ -93,9 +93,9 @@ Use the `--breakpoint-*` theme variables to customize your breakpoints:
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 This updates the `2xl` breakpoint to use `100rem` instead of the default `96rem`, and creates new `xs` and `3xl` breakpoints that can be used in your markup:
@@ -122,18 +122,18 @@ To remove a default breakpoint, reset its value to the `initial` keyword:
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 You can also reset all of the default breakpoints using `--breakpoint-*: initial`, then define all of your breakpoints from scratch:
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 Learn more removing default theme values in the [theme documentation](/docs/theme).
@@ -227,9 +227,9 @@ Use the `--container-*` theme variables to customize your container sizes:
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@theme;
+@theme 
 ```
 
 This adds a new `8xl` container query variant that can be used in your markup:

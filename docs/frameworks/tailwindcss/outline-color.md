@@ -1,10 +1,10 @@
 <ApiTable
-rows=`,
-      `outline-color: var(--color-$); /_ $ _/`,
-]),
-["outline-(<custom-property>)", "outline-color: var(<custom-property>);"],
-["outline-[<value>]", "outline-color: <value>;"],
-]}
+  rows=`,
+      `outline-color: var(--color-$); /* $ */`,
+    ]),
+    ["outline-(<custom-property>)", "outline-color: var(<custom-property>);"],
+    ["outline-[<value>]", "outline-color: <value>;"],
+  ]}
 />
 
 ## Examples

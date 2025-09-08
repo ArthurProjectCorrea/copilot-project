@@ -10,7 +10,7 @@ metaDescriptions: Common problems and solutions when defining relations in the P
 In the following implicit many-to-many self-relation, the lexicographic order of relation fields in `a_eats` (1) and `b_eatenBy` (2):
 
 ```prisma highlight=4,5;normal
-model Animal
+model Animal 
 ```
 
 The resulting relation table in SQL looks as follows, where `A` represents prey (`a_eats`) and `B` represents predators (`b_eatenBy`):
@@ -25,7 +25,7 @@ The following query returns a salmon's prey and predators:
 Now change the order of the relation fields:
 
 ```prisma highlight=4,5;normal
-model Animal
+model Animal 
 ```
 
 Migrate your changes and re-generate Prisma Client. When you run the same query with the updated field names, Prisma Client returns incorrect data (salmon now eats bears and gets eaten by plankton):
@@ -54,11 +54,11 @@ The back relation fields are missing from the `Post` to `PostCategories` and `Ca
 ```prisma
 // This example schema shows how NOT to define an explicit m-n relation
 
-model Post
+model Post 
 
-model PostCategories
+model PostCategories 
 
-model Category
+model Category 
 ```
 
 To fix this the `Post` model needs to have a many relation field defined with the relation table `PostCategories`. The same applies to the `Category` model.
@@ -66,11 +66,11 @@ To fix this the `Post` model needs to have a many relation field defined with th
 This is because the relation model forms a 1-to-many relationship with the other two models its joining.
 
 ```prisma highlight=5,21;add|4,20;delete
-model Post
+model Post 
 
-model PostCategories
+model PostCategories 
 
-model Category
+model Category 
 ```
 
 ## Using the `@relation` attribute with a many-to-many relationship
@@ -78,9 +78,9 @@ model Category
 It might seem logical to add a `@relation("Post")` annotation to a relation field on your model when composing an implicit many-to-many relationship.
 
 ```prisma
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 This however tells Prisma ORM to expect **two** separate one-to-many relationships. See [disambiguating relations](/orm/prisma-schema/data-model/relations#disambiguating-relations) for more information on using the `@relation` attribute.
@@ -88,17 +88,17 @@ This however tells Prisma ORM to expect **two** separate one-to-many relationshi
 The following example is the correct way to define an implicit many-to-many relationship.
 
 ```prisma highlight=4,11;delete|5,12;add
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 The `@relation` annotation can also be used to [name the underlying relation table](/orm/prisma-schema/data-model/relations/many-to-many-relations#configuring-the-name-of-the-relation-table-in-implicit-many-to-many-relations) created on a implicit many-to-many relationship.
 
 ```prisma
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 ## Using m-n relations in databases with enforced primary keys

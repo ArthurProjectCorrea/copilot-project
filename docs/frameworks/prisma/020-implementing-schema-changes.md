@@ -71,7 +71,7 @@ Let's walk through a sample scenario with three developers sharing schema change
 Ania adds a new field:
 
 ```prisma
-model User
+model User 
 ```
 
 And generates a migration:
@@ -85,7 +85,7 @@ npx prisma migrate dev --name new-field
 Javier adds a new model:
 
 ```prisma
-model Tag
+model Tag 
 ```
 
 And generates a migration:
@@ -111,9 +111,9 @@ The migration history now has two new migrations:
 2. Review the merged schema:
 
 ```prisma
-model User
+model User 
 
-model Tag
+model Tag 
 ```
 
 ### 4.2. Generate your migration
@@ -125,7 +125,6 @@ npx prisma migrate dev
 ```
 
 This will:
-
 1. Apply your team's migrations
 2. Create a new migration for your changes
 3. Apply your new migration
@@ -133,7 +132,6 @@ This will:
 ### 4.3. Commit changes
 
 Commit:
-
 - The merged `schema.prisma`
 - Your new migration file
 
@@ -145,6 +143,5 @@ Now that you understand team schema management, you can:
 - Explore [deployment workflows](/orm/prisma-migrate/workflows/development-and-production)
 
 For more information:
-
 - [Prisma Migrate documentation](/orm/prisma-migrate)
 - [Team development workflows](/orm/prisma-migrate/workflows/team-development)

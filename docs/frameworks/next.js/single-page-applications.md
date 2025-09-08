@@ -46,7 +46,7 @@ For example, update your root layout to call the Promise, but do _not_ await it.
 import  from './user' // some server-side function
 
   children,
-}: )
+}: ) 
 ```
 
 ```jsx filename="app/layout.js" switcher
@@ -58,7 +58,7 @@ import  from './user' // some server-side function
   return (
     <html lang="en">
       <body>
-
+        
       </body>
     </html>
   )
@@ -78,14 +78,14 @@ type UserContextType = ;
 const UserContext = createContext<UserContextType | null>(null);
 
   let context = useContext(UserContext);
-  if (context === null)
+  if (context === null) 
   return context;
 }
 
   children,
   userPromise
 }: ) }>
-
+      
     </UserContext.Provider>
   );
 }
@@ -97,13 +97,13 @@ const UserContext = createContext<UserContextType | null>(null);
 const UserContext = createContext(null)
 
   let context = useContext(UserContext)
-  if (context === null)
+  if (context === null) 
   return context
 }
 
   return (
     <UserContext.Provider value=}>
-
+      
     </UserContext.Provider>
   )
 }
@@ -144,20 +144,19 @@ With SWR 2.3.0 (and React 19+), you can gradually adopt server features alongsid
 - **Mixed:** `useSWR(key, fetcher)` + RSC-provided data
 
 For example, wrap your application with `
-)
+  )
 }
-
-````
+```
 
 ```js filename="app/layout.js" switcher
 
 import  from './user' // some server-side function
 
   return (
-
+    
   )
 }
-````
+```
 
 Because this is a Server Component, `getUser()` can securely read cookies, headers, or talk to your database. No separate API route is needed. Client components below the `<SWRConfig>` can call `useSWR()` with the same key to retrieve the user data. The component code with `useSWR` **does not require any changes** from your existing client-fetching solution.
 
@@ -187,12 +186,12 @@ The `fallback` data can be prerendered and included in the initial HTML response
 
 Since the initial `fallback` data is automatically handled by Next.js, you can now delete any conditional logic previously needed to check if `data` was `undefined`. When the data is loading, the closest `<Suspense>` boundary will be suspended.
 
-|                      | SWR | RSC | RSC + SWR |
-| -------------------- | --- | --- | --------- |
-| SSR data             |     |     |           |
-| Streaming while SSR  |     |     |           |
-| Deduplicate requests |     |     |           |
-| Client-side features |     |     |           |
+|                      | SWR                 | RSC                 | RSC + SWR           |
+| -------------------- | ------------------- | ------------------- | ------------------- |
+| SSR data             |  |  |  |
+| Streaming while SSR  |  |  |  |
+| Deduplicate requests |  |  |  |
+| Client-side features |  |  |  |
 
 ### SPAs with React Query
 
@@ -205,7 +204,8 @@ Learn more in the [React Query documentation](https://tanstack.com/query/latest/
 Client components are [prerendered](https://github.com/reactwg/server-components/discussions/4) during `next build`. If you want to disable prerendering for a Client Component and only load it in the browser environment, you can use [`next/dynamic`](/docs/app/guides/lazy-loading#nextdynamic):
 
 ```jsx
-const ClientOnlyComponent = dynamic(() => import('./component'));
+
+const ClientOnlyComponent = dynamic(() => import('./component'), )
 ```
 
 This can be useful for third-party libraries that rely on browser APIs like `window` or `document`. You can also add a `useEffect` that checks for the existence of these APIs, and if they do not exist, return `null` or a loading state which would be prerendered.
@@ -261,11 +261,13 @@ You can progressively adopt Server Actions while still using Client Components. 
 For example, create your first Server Action:
 
 ```tsx filename="app/actions.ts" switcher
-'use server';
+'use server'
+
 ```
 
 ```js filename="app/actions.js" switcher
-'use server';
+'use server'
+
 ```
 
 You can import and use a Server Action from the client, similar to calling a JavaScript function. You do not need to create an API endpoint manually:
@@ -297,7 +299,7 @@ To enable a static export, update your configuration:
 
 ```ts filename="next.config.ts"
 
-const nextConfig: NextConfig =
+const nextConfig: NextConfig = 
 
 ```
 

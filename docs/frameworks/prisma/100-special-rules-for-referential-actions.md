@@ -10,7 +10,7 @@ tocDepth: 3
 The following model describes a self-relation where an `Employee` can have a manager and managees, referencing entries of the same model.
 
 ```prisma
-model Employee
+model Employee 
 ```
 
 This will result in the following error:
@@ -29,7 +29,7 @@ By not defining any actions, Prisma ORM will use the following default values de
 Since the default referential action for `onUpdate` in the above relation would be `Cascade` and for `onDelete` it would be `SetNull`, it creates a cycle and the solution is to explicitly set the `onUpdate` and `onDelete` values to `NoAction`.
 
 ```prisma highlight=3;delete|4;add
-model Employee
+model Employee 
 ```
 
 ## Cyclic relation between three tables (SQL Server and MongoDB)
@@ -37,11 +37,11 @@ model Employee
 The following models describe a cyclic relation between a `Chicken`, an `Egg` and a `Fox`, where each model references the other.
 
 ```prisma
-model Chicken
+model Chicken 
 
-model Egg
+model Egg 
 
-model Fox
+model Fox 
 ```
 
 This will result in three validation errors in every relation field that is part of the cycle.
@@ -67,19 +67,19 @@ Error parsing attribute "@relation": Reference causes a cycle. One of the @relat
 As the relation fields are required, the default referential action for `onDelete` is `NoAction` but for `onUpdate` it is `Cascade`, which causes a referential action cycle. The solution is to set the `onUpdate` value to `NoAction` in any one of the relations.
 
 ```prisma highlight=3;delete|4;add
-model Chicken
+model Chicken 
 ```
 
 or
 
 ```prisma highlight=3;delete|4;add
-model Egg
+model Egg 
 ```
 
 or
 
 ```prisma highlight=3;delete|4;add
-model Fox
+model Fox 
 ```
 
 ## Multiple cascade paths between two models (SQL Server only)
@@ -87,11 +87,11 @@ model Fox
 The data model describes two different paths between same models, with both relations triggering cascading referential actions.
 
 ```prisma
-model User
+model User 
 
-model Post
+model Post 
 
-model Comment
+model Comment 
 ```
 
 The problem in this data model is how there are two paths from `Comment` to the `User`, and how the default `onUpdate` action in both relations is `Cascade`. This leads into two validation errors:
@@ -113,17 +113,17 @@ The error means that by updating a primary key in a record in the `User` model, 
 The fix is to set the `onUpdate` referential action to `NoAction` in the `writtenBy` or `post` relation fields, or from the `Post` model by changing the actions in the `author` relation:
 
 ```prisma highlight=5;delete|6;add
-model Comment
+model Comment 
 ```
 
 or
 
 ```prisma highlight=6;delete|7;add
-model Comment
+model Comment 
 ```
 
 or
 
 ```prisma highlight=4;delete|5;add
-model Post
+model Post 
 ```

@@ -6,7 +6,7 @@ metaDescription: 'Learn how to create a new TypeScript project from scratch by c
 hide_table_of_contents: true
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
-sidebar_custom_props:
+sidebar_custom_props: 
 sidebar_class_name: hidden-sidebar
 pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-prismaPostgres
 slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases-
@@ -22,7 +22,6 @@ Learn how to create a new TypeScript project with a Prisma Postgres database fro
 ## Prerequisites
 
 To successfully complete this tutorial, you need:
-
 - a [Prisma Data Platform](https://console.prisma.io/) (PDP) account
 - [Node.js](https://nodejs.org/en/) installed on your machine (see [system requirements](/orm/reference/system-requirements) for officially supported versions) (see [system requirements](/orm/reference/system-requirements) for officially supported versions)
 

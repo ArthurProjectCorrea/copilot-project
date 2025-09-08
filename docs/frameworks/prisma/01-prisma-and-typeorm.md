@@ -77,7 +77,7 @@ While each object in the returned `publishedPosts` array only carries the select
 const post = publishedPosts[0]
 
 // The TypeScript compiler has no issue with this
-if (post.content.length > 0)
+if (post.content.length > 0) 
 ```
 
 This code will result in an error at runtime:
@@ -218,7 +218,7 @@ src/index.ts:39:5 - error TS2322: Type '' is not assignable to type 'number | In
     Types of property 'gt' are incompatible.
       Type 'string' is not assignable to type 'number'.
 
-42     views:
+42     views: 
 ```
 
 ##### Type-safe definition of filters as model properties
@@ -241,7 +241,7 @@ Again, the TypeScript compiler complains with the following message to protect y
 src/index.ts:39:5 - error TS2322: Type '; viewCount: ; }' is not assignable to type 'PostWhereInput'.
   Object literal may only specify known properties, and 'viewCount' does not exist in type 'PostWhereInput'.
 
-42     viewCount:
+42     viewCount: 
 ```
 
 ### Creating new records
@@ -289,8 +289,8 @@ const user = await prisma.user.findUnique(,
 **TypeORM**
 
 ```ts
-const userRepository = getRepository(User);
-const user = await userRepository.findOne(id);
+const userRepository = getRepository(User)
+const user = await userRepository.findOne(id)
 ```
 
 ### Fetching selected scalars of single objects
@@ -306,8 +306,8 @@ const user = await prisma.user.findUnique(,
 **TypeORM**
 
 ```ts
-const userRepository = getRepository(User);
-const user = await userRepository.findOne(id);
+const userRepository = getRepository(User)
+const user = await userRepository.findOne(id, )
 ```
 
 ### Fetching relations
@@ -381,14 +381,14 @@ const page = await prisma.post.findMany(,
 Offset pagination:
 
 ```ts
-const cc = await prisma.post.findMany();
+const cc = await prisma.post.findMany()
 ```
 
 **TypeORM**
 
 ```ts
-const postRepository = getRepository(Post);
-const posts = await postRepository.find();
+const postRepository = getRepository(Post)
+const posts = await postRepository.find()
 ```
 
 ### Creating objects
@@ -415,8 +415,8 @@ const user = await prisma.user.update(,
 **TypeORM**
 
 ```ts
-const userRepository = getRepository(User);
-const updatedUser = await userRepository.update(id);
+const userRepository = getRepository(User)
+const updatedUser = await userRepository.update(id, )
 ```
 
 ### Deleting objects

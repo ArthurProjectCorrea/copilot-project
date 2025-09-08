@@ -439,7 +439,12 @@ async createMany(users: User[]) {
 With TypeORM [subscribers](https://typeorm.io/#/listeners-and-subscribers/what-is-a-subscriber), you can listen to specific entity events.
 
 ```typescript
-import { DataSource, EntitySubscriberInterface, EventSubscriber, InsertEvent } from 'typeorm';
+import {
+  DataSource,
+  EntitySubscriberInterface,
+  EventSubscriber,
+  InsertEvent,
+} from 'typeorm';
 import { User } from './user.entity';
 
 @EventSubscriber()
@@ -555,7 +560,7 @@ export class AlbumsService {
     @InjectDataSource('albumsConnection')
     private dataSource: DataSource,
     @InjectEntityManager('albumsConnection')
-    private entityManager: EntityManager
+    private entityManager: EntityManager,
   ) {}
 }
 ```
@@ -1143,7 +1148,7 @@ You can also inject the `Sequelize` instance for a given connection:
 export class AlbumsService {
   constructor(
     @InjectConnection('albumsConnection')
-    private sequelize: Sequelize
+    private sequelize: Sequelize,
   ) {}
 }
 ```

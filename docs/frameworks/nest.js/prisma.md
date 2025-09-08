@@ -299,7 +299,9 @@ import { User, Prisma } from '@prisma/client';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User | null> {
+  async user(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  ): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: userWhereUniqueInput,
     });
@@ -362,7 +364,9 @@ import { Post, Prisma } from '@prisma/client';
 export class PostsService {
   constructor(private prisma: PrismaService) {}
 
-  async post(postWhereUniqueInput: Prisma.PostWhereUniqueInput): Promise<Post | null> {
+  async post(
+    postWhereUniqueInput: Prisma.PostWhereUniqueInput,
+  ): Promise<Post | null> {
     return this.prisma.post.findUnique({
       where: postWhereUniqueInput,
     });
@@ -421,7 +425,15 @@ Finally, you'll use the services you created in the previous sections to impleme
 Replace the contents of the `app.controller.ts` file with the following code:
 
 ```typescript
-import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { UsersService } from './user.service';
 import { PostsService } from './post.service';
 import { User as UserModel, Post as PostModel } from '@prisma/client';
@@ -430,7 +442,7 @@ import { User as UserModel, Post as PostModel } from '@prisma/client';
 export class AppController {
   constructor(
     private readonly userService: UsersService,
-    private readonly postService: PostsService
+    private readonly postService: PostsService,
   ) {}
 
   @Get('post/:id')
@@ -446,7 +458,9 @@ export class AppController {
   }
 
   @Get('filtered-posts/:searchString')
-  async getFilteredPosts(@Param('searchString') searchString: string): Promise<PostModel[]> {
+  async getFilteredPosts(
+    @Param('searchString') searchString: string,
+  ): Promise<PostModel[]> {
     return this.postService.posts({
       where: {
         OR: [
@@ -463,7 +477,7 @@ export class AppController {
 
   @Post('post')
   async createDraft(
-    @Body() postData: { title: string; content?: string; authorEmail: string }
+    @Body() postData: { title: string; content?: string; authorEmail: string },
   ): Promise<PostModel> {
     const { title, content, authorEmail } = postData;
     return this.postService.createPost({
@@ -476,7 +490,9 @@ export class AppController {
   }
 
   @Post('user')
-  async signupUser(@Body() userData: { name?: string; email: string }): Promise<UserModel> {
+  async signupUser(
+    @Body() userData: { name?: string; email: string },
+  ): Promise<UserModel> {
     return this.userService.createUser(userData);
   }
 

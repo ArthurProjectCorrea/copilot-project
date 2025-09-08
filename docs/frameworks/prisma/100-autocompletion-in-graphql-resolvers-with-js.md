@@ -72,21 +72,21 @@ The final file should look something like:
 const  = require('graphql-tools')
 
 const typeDefs = `
-type User
+type User 
 
-type Post
+type Post 
 
-type Query
+type Query 
 
-type Mutation
+type Mutation 
 
-input PostWhereUniqueInput
+input PostWhereUniqueInput 
 
-input UserCreateInput
+input UserCreateInput 
 
-input PostCreateManyWithoutPostsInput
+input PostCreateManyWithoutPostsInput 
 
-input PostCreateWithoutAuthorInput
+input PostCreateWithoutAuthorInput 
 `
 
 const resolvers =  parent
@@ -171,5 +171,5 @@ const resolvers =  parent
 
 const schema = makeExecutableSchema()
 
-module.exports =
+module.exports = 
 ```

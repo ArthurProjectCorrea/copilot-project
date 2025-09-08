@@ -272,11 +272,11 @@ As a next step, you can start migrating all the GraphQL _queries_ and _mutations
 For this guide, the following sample GraphQL operations will be used:
 
 ```graphql
-input UserUniqueInput
+input UserUniqueInput 
 
-type Query
+type Query 
 
-type Mutation
+type Mutation 
 ```
 
 ### 4.1. Migrate GraphQL queries

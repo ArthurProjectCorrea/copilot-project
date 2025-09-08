@@ -5,7 +5,7 @@ metaDescription: 'This page explains how to search for text within a field.'
 sidebar_class_name: preview-badge
 ---
 
-Prisma Client supports full-text search for **PostgreSQL** databases in versions 2.30.0 and later, and **MySQL** databases in versions 3.8.0 and later. With full-text search (FTS) enabled, you can add search functionality to your application by searching for text within a database column.
+Prisma Client supports full-text search for **PostgreSQL** databases in versions 2.30.0 and later, and **MySQL** databases in versions 3.8.0 and later. With full-text search (FTS) enabled, you can add search functionality to your application by searching for text within a database column. 
 
 :::info
 
@@ -20,7 +20,7 @@ The full-text search API is currently a Preview feature. To enable this feature,
 1. Update the [`previewFeatures`](/orm/reference/preview-features) block in your schema to include the `fullTextSearchPostgres` preview feature flag:
 
    ```prisma file=schema.prisma showLineNumbers
-   generator client
+   generator client 
    ```
 
 2. Generate Prisma Client:
@@ -66,16 +66,16 @@ To get a sense of how the query format works, consider the following text:
 
 Here's how the following queries would match that text:
 
-| Query         | Match? | Explanation                             |
-| :------------ | :----- | :-------------------------------------- |
-| `fox & dog`   | Yes    | The text contains 'fox' and 'dog'       |
-| `dog & fox`   | Yes    | The text contains 'dog' and 'fox'       |
-| `dog & cat`   | No     | The text contains 'dog' but not 'cat'   |
-| `!cat`        | Yes    | 'cat' is not in the text                |
-| `fox \| cat`  | Yes    | The text contains 'fox' or 'cat'        |
-| `cat \| pig`  | No     | The text doesn't contain 'cat' or 'pig' |
-| `fox <-> dog` | Yes    | 'dog' follows 'fox' in the text         |
-| `dog <-> fox` | No     | 'fox' doesn't follow 'dog' in the text  |
+| Query                                   | Match? | Explanation                             |
+| :-------------------------------------- | :----- | :-------------------------------------- |
+| `fox & dog`                             | Yes    | The text contains 'fox' and 'dog'       |
+| `dog & fox`                             | Yes    | The text contains 'dog' and 'fox'       |
+| `dog & cat`                             | No     | The text contains 'dog' but not 'cat'   |
+| `!cat`                                  | Yes    | 'cat' is not in the text                |
+| `fox \| cat` | Yes    | The text contains 'fox' or 'cat'        |
+| `cat \| pig` | No     | The text doesn't contain 'cat' or 'pig' |
+| `fox <-> dog`                           | Yes    | 'dog' follows 'fox' in the text         |
+| `dog <-> fox`                           | No     | 'fox' doesn't follow 'dog' in the text  |
 
 For the full range of supported operations, see the [PostgreSQL full text search documentation](https://www.postgresql.org/docs/12/functions-textsearch.html).
 
@@ -106,17 +106,17 @@ To get a sense of how the query format works, consider the following text:
 
 Here's how the following queries would match that text:
 
-| Query          | Match? | Description                                                   |
-| :------------- | :----- | :------------------------------------------------------------ |
-| `+fox +dog`    | Yes    | The text contains 'fox' and 'dog'                             |
-| `+dog +fox`    | Yes    | The text contains 'dog' and 'fox'                             |
-| `+dog -cat`    | Yes    | The text contains 'dog' but not 'cat'                         |
-| `-cat`         | No     | The minus operator cannot be used on its own (see note below) |
-| `fox dog`      | Yes    | The text contains 'fox' or 'dog'                              |
-| `quic*`        | Yes    | The text contains a word starting with 'quic'                 |
-| `quick fox @2` | Yes    | 'fox' starts within a 2 word distance of 'quick'              |
-| `fox dog @2`   | No     | 'dog' does not start within a 2 word distance of 'fox'        |
-| `"jumps over"` | Yes    | The text contains the whole phrase 'jumps over'               |
+| Query          | Match? | Description                                            |
+| :------------- | :----- | :----------------------------------------------------- |
+| `+fox +dog`    | Yes    | The text contains 'fox' and 'dog'                      |
+| `+dog +fox`    | Yes    | The text contains 'dog' and 'fox'                      |
+| `+dog -cat`    | Yes    | The text contains 'dog' but not 'cat'                  |
+| `-cat`         | No     | The minus operator cannot be used on its own  (see note below)         |
+| `fox dog`      | Yes    | The text contains 'fox' or 'dog'                       |
+| `quic*`        | Yes    | The text contains a word starting with 'quic'          |
+| `quick fox @2` | Yes    | 'fox' starts within a 2 word distance of 'quick'       |
+| `fox dog @2`   | No     | 'dog' does not start within a 2 word distance of 'fox' |
+| `"jumps over"` | Yes    | The text contains the whole phrase 'jumps over'        |
 
 > **Note**: The - operator acts only to exclude rows that are otherwise matched by other search terms. Thus, a boolean-mode search that contains only terms preceded by - returns an empty result. It does not return “all rows except those containing any of the excluded terms.”
 
@@ -151,14 +151,14 @@ Prisma Client does not currently support using indexes to speed up full text sea
 
 ### MySQL
 
-For MySQL, it is necessary to add indexes to any columns you search using the `@@fulltext` argument in the `schema.prisma` file.
+For MySQL, it is necessary to add indexes to any columns you search using the `@@fulltext` argument in the `schema.prisma` file. 
 
 In the following example, one full text index is added to the `content` field of the `Blog` model, and another is added to both the `content` and `title` fields together:
 
 ```prisma file=schema.prisma showLineNumbers
-generator client
+generator client 
 
-model Blog
+model Blog 
 ```
 
 The first index allows searching the `content` field for occurrences of the word 'cat':

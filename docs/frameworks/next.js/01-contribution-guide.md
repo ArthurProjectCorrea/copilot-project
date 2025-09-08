@@ -145,8 +145,7 @@ Since most of the features in the **App Router** and **Pages Router** are comple
 
 To avoid content duplication and risk the content becoming out of sync, we use the `source` field to pull content from one page into another. For example, the `
 }
-
-`````
+```
 
 Always run examples locally before committing them. This will ensure that the code is up-to-date and working.
 
@@ -157,9 +156,8 @@ Code blocks should have a header that includes the language and the `filename`. 
 ````mdx filename="code-example.mdx"
 ```bash filename="Terminal"
 npx create-next-app
-`````
-
-`````
+```
+````
 
 Most examples in the docs are written in `tsx` and `jsx`, and a few in `bash`. However, you can use any supported language, here's the [full list](https://github.com/shikijs/shiki/blob/main/docs/languages.md#all-languages).
 
@@ -191,7 +189,7 @@ Currently, we write TS and JS examples one after the other, and link them with `
 ```jsx filename="app/page.js" switcher
 
 ```
-`````
+````
 
 > **Good to know**: We plan to automatically compile TypeScript snippets to JavaScript in the future. In the meantime, you can use [transform.tools](https://transform.tools/typescript-to-javascript).
 
@@ -201,9 +199,9 @@ Code lines can be highlighted. This is useful when you want to draw attention to
 
 **Single Line:** `highlight=`
 
-```tsx filename="app/page.tsx"
+```tsx filename="app/page.tsx" 
 
-  return
+  return 
 }
 ```
 
@@ -211,7 +209,7 @@ Code lines can be highlighted. This is useful when you want to draw attention to
 
 ```tsx filename="app/page.tsx" highlight=
 
-  return
+  return 
 }
 ```
 
@@ -219,7 +217,7 @@ Code lines can be highlighted. This is useful when you want to draw attention to
 
 ```tsx filename="app/page.tsx" highlight=
 
-  return
+  return 
 }
 ```
 
@@ -293,7 +291,7 @@ The diagrams currently live in the `/public` folder in our private Next.js site.
 
 ## Custom Components and HTML
 
-These are the React Components available for the docs: `(next/image),`, `, `, and ``. We do not allow raw HTML in the docs besides the `<details>` tag.
+These are the React Components available for the docs: `` (next/image), ``, ``, ``, and ``. We do not allow raw HTML in the docs besides the `<details>` tag.
 
 If you have ideas for new components, please open a [GitHub issue](https://github.com/vercel/next.js/issues/new/choose).
 

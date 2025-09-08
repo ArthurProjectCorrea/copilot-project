@@ -22,10 +22,10 @@ One way of achieving this would be to define these types manually in your applic
 
 ```ts
 // 1: Define a type that includes the relation to `Post`
-type UserWithPosts =
+type UserWithPosts = 
 
 // 2: Define a type that only contains a subset of the scalar fields
-type UserPersonalData =
+type UserPersonalData = 
 ```
 
 While this is certainly feasible, this approach increases the maintenance burden upon changes to the Prisma schema as you need to manually maintain the types. A cleaner solution to this is to use the `UserGetPayload` type that is generated and exposed by Prisma Client under the `Prisma` namespace in combination with the [`validator`](/orm/prisma-client/type-safety/prisma-validator).
@@ -85,5 +85,5 @@ const usersWithPosts: UsersWithPosts = await getUsersWithPosts()
 You can use native the TypeScript utility type [`Awaited`](https://www.typescriptlang.org/docs/handbook/utility-types.html#awaitedtype) and [`ReturnType`](https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype) to solve the problem elegantly:
 
 ```ts
-type UsersWithPosts = Awaited<ReturnType<typeof getUsersWithPosts>>;
+type UsersWithPosts = Awaited<ReturnType<typeof getUsersWithPosts>>
 ```

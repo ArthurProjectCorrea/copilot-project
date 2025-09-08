@@ -51,9 +51,9 @@ Ensure that the data source in your `schema.prisma` file is configured to use th
 
 ```prisma
 // schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 ```
 
 ### Generate Prisma Client in a `postinstall` script in `package.json`
@@ -106,37 +106,35 @@ In this section, you are going to add Prisma Postgres to the starter project _on
 1. Clone the Next.js Platform Starter repo that was added to your GitHub account in step 1.
 1. Navigate into the project directory, e.g.: `cd next-platform-starter`.
 1. Install the Prisma CLI as a development dependency:
-   ```terminal
-   npm install prisma --save-dev
-   ```
+    ```terminal
+    npm install prisma --save-dev
+    ```
 1. Initialize Prisma ORM to create Prisma schema and `.env` file:
-   ```terminal
-   npx prisma init
-   ```
+    ```terminal
+    npx prisma init
+    ```
 
 #### 3.2. Run migration and create sample data
 
 1. Open the newly created `schema.prisma` file and add the following model to it:
+    ```prisma file=schema.prisma
+    generator client 
 
-   ```prisma file=schema.prisma
-   generator client
+    datasource db 
 
-   datasource db
-
-   // add-start
-   model User
-   // add-end
-   ```
-
+    // add-start
+    model User 
+    // add-end
+    ```
 1. Open the newly created `.env` file and paste the `DATABASE_URL` environment variable from the previous section into it.
 1. Run your first migration to map the `User` model to the database:
-   ```terminal
-   npx prisma migrate dev --name init
-   ```
+    ```terminal
+    npx prisma migrate dev --name init
+    ```
 1. Create (at least) one `User` record in the database with Prisma Studio:
-   ```terminal
-   npx prisma studio
-   ```
+    ```terminal
+    npx prisma studio
+    ```
 
 #### 3.3. Update application code to query and show `User` records
 
@@ -182,7 +180,7 @@ As mentioned [above](#generate-prisma-client-in-a-postinstall-script-in-packagej
 ```json file=package.json
 ,
     "dependencies": ,
-    "devDependencies":
+    "devDependencies": 
 }
 ```
 

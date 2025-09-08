@@ -80,9 +80,9 @@ The Prisma schema currently looks as follows:
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 :::tip
@@ -108,7 +108,7 @@ npx prisma db pull
 If you're using the [sample project](https://github.com/prisma/migrate-from-drizzle-to-prisma) the following model would be created:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model todo
+model todo 
 ```
 
 The generated Prisma model represents a database table. Prisma models are the foundation for your programmatic Prisma Client API which allows you to send queries to your database.
@@ -161,7 +161,7 @@ You can adjust the naming by _mapping_ the Prisma model and field names to the e
 Here's an example on how you could modify the model above:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model Todo
+model Todo 
 ```
 
 ## Step 3. Install and generate Prisma Client
@@ -172,7 +172,7 @@ As a next step, you can install Prisma Client in your project so that you can st
 npm install @prisma/client
 ```
 
-After installing, you need to run `generate` in order to have your schema reflected in TypeScript types and autocomplete.
+After installing, you need to run `generate` in order to have your schema reflected in TypeScript types and autocomplete. 
 
 ```terminal
 npx prisma generate
@@ -347,11 +347,11 @@ Unlike Drizzle, Prisma ORM allows you to [model many-to-many relations _implicit
 This schema is equivalent to the following Prisma schema:
 
 ```prisma file=schema.prisma
-model Post
+model Post 
 
-model Category
+model Category 
 
-model PostToCategories
+model PostToCategories 
 ```
 
 In this Prisma schema, the many-to-many relation is modeled _explicitly_ via the relation table `PostToCategories`.
@@ -359,9 +359,9 @@ In this Prisma schema, the many-to-many relation is modeled _explicitly_ via the
 By instead adhering to the conventions for Prisma ORM relation tables, the relation could look as follows:
 
 ```prisma file=schema.prisma showLineNumbers
-model Post
+model Post 
 
-model Category
+model Category 
 ```
 
 This would also result in a more ergonomic and less verbose Prisma Client API to modify the records in this relation, because you have a direct path from `Post` to `Category` (and the other way around) instead of needing to traverse the `PostToCategories` model first.

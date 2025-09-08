@@ -1,7 +1,7 @@
 ---
 title: 'Get started with the Prisma Management API'
-metaTitle: 'Get started with the Prisma Management API'
-description: 'Learn how to get started with the Prisma Management API'
+metaTitle: "Get started with the Prisma Management API"
+description: "Learn how to get started with the Prisma Management API"
 sidebar_label: 'Programmatically manage Prisma Postgres'
 image: '/img/guides/neon-connection-pooling.png'
 completion_time: '15 min'
@@ -10,7 +10,7 @@ community_section: true
 
 ## Overview
 
-This guide walks you through setting up a basic TypeScript project that uses the [Prisma Postgres Management API](/postgres/introduction/management-api) to create a new [Prisma Console project](/platform/about#project) with a [Prisma Postgres](/postgres/introduction/overview) database, and print out all connection details.
+This guide walks you through setting up a basic TypeScript project that uses the [Prisma Postgres Management API](/postgres/introduction/management-api) to create a new [Prisma Console project](/platform/about#project) with a [Prisma Postgres](/postgres/introduction/overview) database, and print out all connection details. 
 
 You'll authenticate via a [service token](/postgres/introduction/management-api#bearer-tokens), set up your environment, and run a script to interact with the API.
 
@@ -95,7 +95,7 @@ dotenv.config();
 const API_URL = 'https://api.prisma.io/v1';
 const SERVICE_TOKEN = process.env.PRISMA_SERVICE_TOKEN;
 
-if (!SERVICE_TOKEN)
+if (!SERVICE_TOKEN) 
 
 // Set HTTP headers to be used in this script
 const headers = `,
@@ -107,7 +107,7 @@ async function main() `;
   const createProjectRes = await axios.post(
     `$/projects`,
     ,
-
+    
   );
   const project = createProjectRes.data;
   console.log('Created project: \n', project);
@@ -118,7 +118,7 @@ async function main() `;
     console.log(`- Created at: $`);
     console.log(`- API key: $`);
     console.log(`- Prisma Postgres connection string: $`);
-
+    
     if (key.ppgDirectConnection) `);
       console.log(`  - Host: $`);
       console.log(`  - Username: $`);

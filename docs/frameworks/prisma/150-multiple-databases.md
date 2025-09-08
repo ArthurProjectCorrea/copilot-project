@@ -44,7 +44,7 @@ For completeness, those are:
 - No `src` directory
 - App Router
 - Turbopack
-- Default custom import alias: `@/*`
+- Default custom import alias: `@/*` 
 
 :::
 
@@ -120,12 +120,12 @@ PPG_USER_DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=eyJ
 Open `prisma-user-database/schema.prisma` file and update it to define a `User` model. Also, set the environment variable and specify a [custom `output` directory](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path) for the generated Prisma Client:
 
 ```prisma file=prisma-user-database/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model User
+model User 
 //add-end
 ```
 
@@ -159,12 +159,12 @@ PPG_POST_DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=eyJ
 Edit the `prisma-post-database/schema.prisma` file to define a `Post` model. Also, update the datasource URL and set a [custom `output` directory](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path):
 
 ```prisma file=prisma-post-database/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model Post
+model Post 
 //add-end
 ```
 
@@ -281,7 +281,7 @@ Modify your application code to fetch data from both databases. Update the `app/
             User Data
           </h2>
           <pre className="whitespace-pre-wrap text-sm text-gray-700">
-
+            
           </pre>
         </section>
 
@@ -290,7 +290,7 @@ Modify your application code to fetch data from both databases. Update the `app/
             Post Data
           </h2>
           <pre className="whitespace-pre-wrap text-sm text-gray-700">
-
+            
           </pre>
         </section>
       </div>
@@ -343,25 +343,25 @@ Deploy your app by following these steps:
    git push -u origin main
    ```
    :::note
-   Replace `<your-username>` and `<repository-name>` with your GitHub username and the name of your repository.
+    Replace `<your-username>` and `<repository-name>` with your GitHub username and the name of your repository.
    :::
 2. Log in to [Vercel](https://vercel.com/) and navigate to your [Dashboard](https://vercel.com/docs/dashboard-features).
-3. Create a new project. Follow Vercel's [Import an existing project](https://vercel.com/docs/getting-started-with-vercel/import) guide, but stop at [step 3](https://vercel.com/docs/getting-started-with-vercel/import#optionally-configure-any-settings) where you will configure environment variables _before_ clicking **Deploy**.
+3.  Create a new project. Follow Vercel's [Import an existing project](https://vercel.com/docs/getting-started-with-vercel/import) guide, but stop at [step 3](https://vercel.com/docs/getting-started-with-vercel/import#optionally-configure-any-settings) where you will configure environment variables _before_ clicking **Deploy**.
 4. Configure the `DATABASE_URL` environment variable:
-   1. Expand the **Environment variables** section.
-   1. Add the `PPG_USER_DATABASE_URL` environment variable:
-      - **Key**: `PPG_USER_DATABASE_URL`
-      - **Value**: Paste your user database connection URL, e.g. by copying it from the `.env` file in your project.
-   1. Add the `PPG_POST_DATABASE_URL` environment variable:
-      - **Key**: `PPG_POST_DATABASE_URL`
-      - **Value**: Paste your post database connection URL, e.g. by copying it from the `.env` file in your project.
-        :::warning
-        Do not deploy without setting the environment variables. Your deployment will fail if the application cannot connect to the databases.
-        :::
+    1. Expand the **Environment variables** section.
+    1. Add the `PPG_USER_DATABASE_URL` environment variable:
+        - **Key**: `PPG_USER_DATABASE_URL`
+        - **Value**: Paste your user database connection URL, e.g. by copying it from the `.env` file in your project.
+    1. Add the `PPG_POST_DATABASE_URL` environment variable:
+        - **Key**: `PPG_POST_DATABASE_URL`
+        - **Value**: Paste your post database connection URL, e.g. by copying it from the `.env` file in your project.
+      :::warning
+      Do not deploy without setting the environment variables. Your deployment will fail if the application cannot connect to the databases.
+      :::
 5. Click the **Deploy** button. Vercel will build your project and deploy it to a live URL.
 
 Open the live URL provided by Vercel and verify that your application is working.
-
+  
 Congratulations! You have deployed an application that uses multiple Prisma Clients to query two different databases, and it is now live and fully operational on Vercel.
 
 ## Next steps
@@ -374,7 +374,7 @@ In this guide, you learned how to use multiple databases using Prisma ORM in a s
 - Instantiating and integrating multiple Prisma Clients into your application.
 - Deploying your multi-database application to Vercel.
 
-This approach allows you to maintain a clear separation of data models and simplifies multi-tenant or multi-database scenarios.
+This approach allows you to maintain a clear separation of data models and simplifies multi-tenant or multi-database scenarios. 
 
 For further improvements in managing your project, consider using a monorepo setup. Check out our related guides:
 

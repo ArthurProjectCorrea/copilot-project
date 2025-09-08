@@ -29,8 +29,7 @@ NestJS itself does not provide any built-in abstraction for `AsyncLocalStorage`,
 })
 export class AlsModule {}
 ```
-
-> info **Hint** `AsyncLocalStorage` is imported from `async_hooks`.
+>  info **Hint** `AsyncLocalStorage` is imported from `async_hooks`.
 
 2. We're only concerned with HTTP, so let's use a middleware to wrap the `next` function with `AsyncLocalStorage#run`. Since a middleware is the first thing that the request hits, this will make the `store` available in all enhancers and the rest of the system.
 
@@ -227,7 +226,6 @@ export interface MyClsStore extends ClsStore {
 ```
 
 > info **hint** It it also possible to let the package automatically generate a Request ID and access it later with `cls.getId()`, or to get the whole Request object using `cls.get(CLS_REQ)`.
-
 #### Testing
 
 Since the `ClsService` is just another injectable provider, it can be entirely mocked out in unit tests.

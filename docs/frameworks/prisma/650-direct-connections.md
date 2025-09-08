@@ -1,7 +1,7 @@
 ---
-title: 'Direct connections'
-metaTitle: 'Direct connections (TCP)'
-metaDescription: 'Learn about connecting directly to your Prisma Postgres database via direct TCP.'
+title: "Direct connections"
+metaTitle: "Direct connections (TCP)"
+metaDescription: "Learn about connecting directly to your Prisma Postgres database via direct TCP."
 tocDepth: 3
 toc: true
 sidebar_class_name: preview-badge
@@ -9,7 +9,7 @@ sidebar_class_name: preview-badge
 
 ## Overview
 
-Prisma Postgres is the perfect choice for your applications, whether you connect to it via [Prisma ORM](/orm) or any other ORM, database library / tool of your choice. If you use it with Prisma ORM, Prisma Postgres comes with built-in connection pooling and an integrated caching layer (powered by [Prisma Accelerate](/accelerate/)).
+Prisma Postgres is the perfect choice for your applications, whether you connect to it via [Prisma ORM](/orm) or any other ORM, database library / tool of your choice. If you use it with Prisma ORM, Prisma Postgres comes with built-in connection pooling and an integrated caching layer (powered by [Prisma Accelerate](/accelerate/)). 
 
 If you connect to it via another tool, you can do so with a [direct connection string](#connection-string) following the conventional PostgreSQL format.
 
@@ -58,9 +58,9 @@ Prisma Postgres closes idle connections after an extended period of time. If tha
 
 While direct connections are in Early Access, the following connection limits apply:
 
-|                      | Free   | Starter | Pro    | Business |
-| -------------------- | ------ | ------- | ------ | -------- |
-| **Connection limit** | Max 10 | Max 10  | Max 50 | Max 100  |
+|                                      | Free             | Starter          | Pro              | Business         |
+| ------------------------------------ | ---------------- | ---------------- | ---------------- | ---------------- |
+| **Connection limit**                 | Max 10            | Max 10           | Max 50           | Max 100           |
 
 ### Query and transaction timeouts
 
@@ -68,8 +68,8 @@ While direct connections are in Early Access, the following timeouts apply:
 
 |                                      | Free             | Starter          | Pro              | Business         |
 | ------------------------------------ | ---------------- | ---------------- | ---------------- | ---------------- |
-| **Query timeout**                    | Up to 10 seconds | Up to 10 seconds | Up to 10 seconds | Up to 10 seconds |
-| **Interactive transactions timeout** | Up to 15 seconds | Up to 15 seconds | Up to 15 seconds | Up to 15 seconds |
+| **Query timeout**                    | Up to 10 seconds  | Up to 10 seconds | Up to 10 seconds | Up to 10 seconds |
+| **Interactive transactions timeout** | Up to 15 seconds  | Up to 15 seconds | Up to 15 seconds | Up to 15 seconds |
 
 ### Limited user permissions
 

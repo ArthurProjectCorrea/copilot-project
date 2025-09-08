@@ -118,7 +118,7 @@ For Firefox:
 4. Click **Inspect** to open the debugger
 5. Go to the **Debugger** tab
 
-Debugging server-side code works similarly to client-side debugging. When searching for files (`Ctrl+P`/`⌘+P`), your source files will have paths starting with `webpack:///./` (where ``will be replaced with the name of your application according to your`package.json` file).
+Debugging server-side code works similarly to client-side debugging. When searching for files (`Ctrl+P`/`⌘+P`), your source files will have paths starting with `webpack:///./` (where `` will be replaced with the name of your application according to your `package.json` file).
 
 ### Inspect Server Errors with Browser DevTools
 

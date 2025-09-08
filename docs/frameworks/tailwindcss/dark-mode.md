@@ -12,7 +12,7 @@ If you want your dark theme to be driven by a CSS selector instead of the `prefe
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* [!code highlight:2] */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -41,7 +41,7 @@ To use a data attribute instead of a class to activate dark mode, just override 
 
 ```css
 /* [!code filename:app.css] */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* [!code highlight:2] */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
@@ -72,19 +72,19 @@ Here's a simple example of how you can support light mode, dark mode, as well as
 // [!code filename:spaghetti.js]
 // On page load or when changing themes, best to add inline in `head` to avoid FOUC
 document.documentElement.classList.toggle(
-  'dark',
-  localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
 );
 
 // Whenever the user explicitly chooses light mode
-localStorage.theme = 'light';
+localStorage.theme = "light";
 
 // Whenever the user explicitly chooses dark mode
-localStorage.theme = 'dark';
+localStorage.theme = "dark";
 
 // Whenever the user explicitly chooses to respect the OS preference
-localStorage.removeItem('theme');
+localStorage.removeItem("theme");
 ```
 
 Again you can manage this however you like, even storing the preference server-side in a database and rendering the class on the server — it's totally up to you.

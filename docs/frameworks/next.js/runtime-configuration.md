@@ -34,6 +34,6 @@ console.log(serverRuntimeConfig.mySecret)
 // Will be available on both server-side and client-side
 console.log(publicRuntimeConfig.staticFolder)
 
-function MyImage()
+function MyImage() 
 
 ```

@@ -9,9 +9,9 @@ community_section: true
 
 When working with large database schemas in Prisma applications, a simple change in the type definition strategy can deliver massive performance improvements:
 
-| Approach             | Types                     | Instantiations            | Memory                    | Compile Time              |
-| -------------------- | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| **Direct Reference** | 269,597                   | 2,772,929                 | 395MB                     | 1.86s                     |
+| Approach | Types | Instantiations | Memory | Compile Time |
+|----------|-------|----------------|--------|--------------|
+| **Direct Reference** | 269,597 | 2,772,929 | 395MB | 1.86s |
 | **typeof technique** | 222 (**99.9% reduction**) | 152 (**99.9% reduction**) | 147MB (**62% reduction**) | 0.41s (**78% reduction**) |
 
 (Performance was verified using `tsc --noEmit --extendedDiagnostics`.)
@@ -24,9 +24,9 @@ The performance measurements were conducted using a deliberately complex Prisma 
 
 ```prisma
 // Example of the test schema structure
-model Tree1
+model Tree1 
 
-model Tree2
+model Tree2 
 
 // ... continues through Tree30 with similar interconnected patterns
 ```
@@ -53,14 +53,13 @@ The solution involves using TypeScript's `typeof` operator instead of direct typ
 
 ```typescript
 
-const saveFn = async (prismaClient: PrismaClient) =>
+const saveFn = async (prismaClient: PrismaClient) => 
 
 const client = new PrismaClient()
 await saveFn(client)
 ```
 
 **Performance impact:**
-
 - Types: 269,597
 - Instantiations: 2,772,929
 - Memory usage: 394,718K
@@ -70,14 +69,13 @@ await saveFn(client)
 
 ```typescript
 
-const saveFn = async (prismaClient: typeof client) =>
+const saveFn = async (prismaClient: typeof client) => 
 
 const client = new PrismaClient()
 await saveFn(client)
 ```
 
 **Performance impact:**
-
 - Types: 222
 - Instantiations: 152
 - Memory usage: 146,854K

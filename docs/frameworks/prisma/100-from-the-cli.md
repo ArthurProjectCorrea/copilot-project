@@ -23,7 +23,7 @@ Once this command terminated:
 - You're logged into Prisma Data Platform.
 - A new Prisma Postgres instance was created.
 - The `prisma/` folder was created with an empty `schema.prisma` file.
-- The `DATABASE_URL` env var was set in a `.env` file.
+- The `DATABASE_URL` env var was set in a  `.env` file.
 
 ## 1. Organize your project directory
 
@@ -81,7 +81,7 @@ npm install @prisma/extension-accelerate
 
 ### 2.3. Create a TypeScript script
 
-Create an `index.ts` file in the root directory, this will be used to query your application with Prisma ORM:
+Create an `index.ts` file in the root directory, this will be used to query your application with Prisma ORM: 
 
 ```terminal
 touch index.ts
@@ -92,9 +92,9 @@ touch index.ts
 Update your `prisma/schema.prisma` file to include a simple `User` model:
 
 ```prisma file=prisma/schema.prisma
-model User
+model User 
 
-model Post
+model Post 
 ```
 
 After adding the models, migrate your database using [Prisma Migrate](/orm/prisma-migrate):
@@ -111,7 +111,7 @@ Paste the following boilerplate into `index.ts`:
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -153,7 +153,7 @@ Delete the previous Prisma ORM query and add the new `findMany` query instead:
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
@@ -175,7 +175,7 @@ First, adjust your script to include the nested query:
 const prisma = new PrismaClient().$extends(withAccelerate())
 
 async function main() ,
-
+          
         ],
       },
     },
@@ -224,7 +224,7 @@ Prisma ORM comes with a built-in GUI to view and edit the data in your database.
 npx prisma studio
 ```
 
-With Prisma Postgres, you can also directly use Prisma Studio inside the [Console](https://console.prisma.io) by selecting the **Studio** tab in your project.
+With Prisma Postgres, you can also directly use Prisma Studio inside the [Console](https://console.prisma.io) by selecting the **Studio** tab in your project. 
 
 ### Build a fullstack app with Next.js
 

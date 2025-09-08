@@ -1,7 +1,7 @@
 ---
-title: 'Static IP'
-metaTitle: 'Enable Static IP for Prisma Accelerate'
-metaDescription: 'Learn enabling Static IP for Prisma Accelerate.'
+title: "Static IP"
+metaTitle: "Enable Static IP for Prisma Accelerate"
+metaDescription: "Learn enabling Static IP for Prisma Accelerate."
 ---
 
 You can enable static IP for Accelerate when your security setup requires IP allowlisting or if you're implementing firewalls that only permit access from trusted IPs, ensuring controlled and secure database connections.
@@ -33,7 +33,7 @@ Enabling static IP for Accelerate will provide you with a list of static IPv4 an
 
 Once you have these addresses, configure your database firewall to allow incoming connections only from these IPs and any other trusted IPs that need access to your database.
 
-:::note
+:::note 
 
 Since you cannot enable static IP for an existing Accelerate-enabled environment, we recommend opting for static IP when enabling Accelerate in a new environment. Use the same database URL as your existing Accelerate environment to instantly access static IP support for Accelerate.
 

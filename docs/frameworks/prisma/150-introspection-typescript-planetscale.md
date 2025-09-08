@@ -1,6 +1,6 @@
 ---
 title: 'Introspection for PlanetScale in a TypeScript project'
-sidebar_label: 'Introspection'
+sidebar_label:  'Introspection'
 metaTitle: 'Introspection with Prisma ORM, TypeScript, and PlanetScale'
 metaDescription: 'Introspect your existing project with Prisma ORM, TypeScript, and PlanetScale'
 langSwitcher: ['typescript', 'node']
@@ -97,11 +97,11 @@ After the introspection is complete, your Prisma schema is updated:
 The data model now looks similar to this:
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 :::info
@@ -115,11 +115,11 @@ Prisma's data model is a declarative representation of your database schema and 
 You will then need to add in any missing relations between your data using [relation fields](/orm/prisma-schema/data-model/relations#relation-fields):
 
 ```prisma file=prisma/schema.prisma highlight=8,17,27,28;add showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 ```
 
 After this, run introspection on your database for a second time:
@@ -142,7 +142,7 @@ Sometimes though, you may want to make additional changes to the names of the co
 Assume you obtained the following model from introspection that's based on _snake_case_ notation:
 
 ```prisma no-lines
-model my_user
+model my_user 
 ```
 
 If you generated a Prisma Client API for this model, it would pick up the _snake_case_ notation in its API:
@@ -155,7 +155,7 @@ const user = await prisma.my_user.create(,
 If you don't want to use the table and column names from your database in your Prisma Client API, you can configure them with [`@map` and `@@map`](/orm/prisma-schema/data-model/models#mapping-model-names-to-tables-or-collections):
 
 ```prisma no-lines
-model MyUser
+model MyUser 
 ```
 
 With this approach, you can name your model and its fields whatever you like and use the `@map` (for field names) and `@@map` (for models names) to point to the underlying tables and columns. Your Prisma Client API now looks as follows:

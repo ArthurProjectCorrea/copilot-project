@@ -6,7 +6,7 @@ metaDescription: 'Step-by-step guide to connecting a MySQL database to an existi
 hide_table_of_contents: true
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-sidebar_custom_props:
+sidebar_custom_props: 
 sidebar_class_name: hidden-sidebar
 pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-mysql
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases-
@@ -45,4 +45,3 @@ Before you begin, ensure you have:
 
 ```bash
 npm install prisma --save-dev
-```

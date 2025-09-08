@@ -15,7 +15,6 @@ Prisma ORM streamlines database access with type-safe queries, and when paired w
 In this guide, you'll learn to build a chat application using AI SDK with Next.js and Prisma ORM to store chat sessions and messages in a Prisma Postgres database. You can find a complete example of this guide on [GitHub](https://github.com/prisma/prisma-examples/tree/latest/orm/ai-sdk-nextjs).
 
 ## Prerequisites
-
 - [Node.js 18+](https://nodejs.org)
 - An [OpenAI API key](https://platform.openai.com/api-keys) or other AI provider API key
 
@@ -31,13 +30,13 @@ It will prompt you to customize your setup. Choose the defaults:
 
 :::info
 
-- _Would you like to use TypeScript?_ `Yes`
-- _Would you like to use ESLint?_ `Yes`
-- _Would you like to use Tailwind CSS?_ `Yes`
-- _Would you like your code inside a `src/` directory?_ `No`
-- _Would you like to use App Router?_ (recommended) `Yes`
-- _Would you like to use Turbopack for `next dev`?_ `Yes`
-- _Would you like to customize the import alias (`@/_`by default)?*`No`
+- *Would you like to use TypeScript?* `Yes`
+- *Would you like to use ESLint?* `Yes`
+- *Would you like to use Tailwind CSS?* `Yes`
+- *Would you like your code inside a `src/` directory?* `No`
+- *Would you like to use App Router?* (recommended) `Yes`
+- *Would you like to use Turbopack for `next dev`?* `Yes`
+- *Would you like to customize the import alias (`@/*` by default)?* `No`
 
 :::
 
@@ -58,7 +57,6 @@ Once installed, initialize Prisma in your project:
 ```terminal
 npx prisma init --db --output ../app/generated/prisma
 ```
-
 :::info
 You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My Next.js AI SDK Project"
 :::
@@ -75,16 +73,16 @@ This will create:
 In the `prisma/schema.prisma` file, add the following models:
 
 ```prisma file=prisma/schema.prisma
-generator client
+generator client 
 
-datasource db
+datasource db 
 
 //add-start
-model Session
+model Session 
 
-model Message
+model Message 
 
-enum MessageRole
+enum MessageRole 
 //add-end
 ```
 
@@ -130,8 +128,8 @@ To use AI SDK, you'll need to obtain an API key from [OpenAI](https://platform.o
 1. Navigate to [OpenAI API Keys](https://platform.openai.com/api-keys)
 2. Click on `Create new secret key`
 3. Fill in the form:
-   - Give your key a name like `Next.js AI SDK Project`
-   - Select `All` access
+    - Give your key a name like `Next.js AI SDK Project`
+    - Select `All` access
 4. Click on `Create secret key`
 5. Copy the API key
 6. Add the API key to the `.env` file:
@@ -197,7 +195,7 @@ Create a new file at `lib/save-chat.ts` to save the chat sessions and messages t
 touch lib/save-chat.ts
 ```
 
-To start, create a basic function called `saveChat` that will be used to save the chat sessions and messages to the database.
+To start, create a basic function called `saveChat` that will be used to save the chat sessions and messages to the database. 
 
 Pass into it the `messages` and `id` parameters typed as `UIMessage[]` and `string` respectively:
 
@@ -236,7 +234,7 @@ Add the logic to save the messages to the database. You'll only be saving the la
   //add-start
   const lastTwoMessages = messages.slice(-2);
 
-  for (const msg of lastTwoMessages)
+  for (const msg of lastTwoMessages) 
 
     await prisma.message.create(,
     });
@@ -298,7 +296,7 @@ Start by importing the required dependencies and setting up the state variables 
   //add-start
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const  = useChat();
   //add-end
 }
@@ -313,11 +311,11 @@ Create a `useEffect` hook that will automatically fetch and display any previous
 
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const  = useChat();
 
   //add-start
-  useEffect(() =>
+  useEffect(() => 
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
@@ -337,17 +335,17 @@ Build the UI components that will show a loading indicator while fetching data a
 
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const  = useChat();
 
-  useEffect(() =>
+  useEffect(() => 
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
   }, [setMessages]);
 
   //add-start
-  if (isLoading)
+  if (isLoading) 
 
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
@@ -376,16 +374,16 @@ Now we need to create the input interface that allows users to type and send mes
 
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
+  
   const  = useChat();
 
-  useEffect(() =>
+  useEffect(() => 
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
   }, [setMessages]);
 
-  if (isLoading)
+  if (isLoading) 
 
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">

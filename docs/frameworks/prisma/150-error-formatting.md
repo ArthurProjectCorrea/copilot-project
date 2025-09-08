@@ -27,5 +27,5 @@ In order to configure these different error formatting levels, there are two opt
 Alternatively, use the `PrismaClient` [`errorFormat`](/orm/reference/prisma-client-reference#errorformat) parameter to set the error format:
 
 ```ts
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 ```

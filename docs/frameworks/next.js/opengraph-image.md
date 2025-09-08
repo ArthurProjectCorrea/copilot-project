@@ -186,11 +186,11 @@ An object containing the [dynamic route parameters](/docs/app/api-reference/file
 }
 ```
 
-| Route                                      | URL         | `params`    |
-| ------------------------------------------ | ----------- | ----------- |
-| `app/shop/opengraph-image.js`              | `/shop`     | `undefined` |
-| `app/shop/[slug]/opengraph-image.js`       | `/shop/1`   | ``          |
-| `app/shop/[tag]/[item]/opengraph-image.js` | `/shop/1/2` | ``          |
+| Route                                      | URL         | `params`                  |
+| ------------------------------------------ | ----------- | ------------------------- |
+| `app/shop/opengraph-image.js`              | `/shop`     | `undefined`               |
+| `app/shop/[slug]/opengraph-image.js`       | `/shop/1`   | ``           |
+| `app/shop/[tag]/[item]/opengraph-image.js` | `/shop/1/2` | `` |
 
 ### Returns
 
@@ -205,7 +205,7 @@ You can optionally configure the image's metadata by exporting `alt`, `size`, an
 | Option                        | Type                                                                                                            |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | [`alt`](#alt)                 | `string`                                                                                                        |
-| [`size`](#size)               | ``                                                                                                              |
+| [`size`](#size)               | ``                                                                             |
 | [`contentType`](#contenttype) | `string` - [image MIME type](https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types) |
 
 #### `alt`
@@ -233,7 +233,8 @@ You can optionally configure the image's metadata by exporting `alt`, `size`, an
 ```
 
 ```html filename="<head> output"
-<meta property="og:image:width" content="1200" /> <meta property="og:image:height" content="630" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 ```
 
 #### `contentType`
@@ -278,10 +279,10 @@ This example uses the `params` object and external data to generate the image.
       <div
         style=}
       >
-
+        
       </div>
     ),
-
+    
   )
 }
 ```
@@ -301,10 +302,10 @@ This example uses the `params` object and external data to generate the image.
       <div
         style=}
       >
-
+        
       </div>
     ),
-
+    
   )
 }
 ```
@@ -359,7 +360,7 @@ Passing an `ArrayBuffer` to the `src` attribute of an `<img>` element is not par
       <div
         style=}
       >
-
+        
         <img src= height="100" />
       </div>
     )

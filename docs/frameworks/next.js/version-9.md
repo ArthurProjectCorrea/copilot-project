@@ -33,14 +33,14 @@ Removing `getInitialProps` from `pages/_app.js` (when possible) is important to 
 The following `getInitialProps` does nothing and may be removed:
 
 ```js
-class MyApp extends App )
+class MyApp extends App ) 
 
-    if (Component.getInitialProps)
+    if (Component.getInitialProps) 
 
-    return
+    return 
   }
 
-  render()
+  render() 
 }
 ```
 
@@ -84,7 +84,11 @@ You must rename a non-Next.js-purposed `config` export to something different.
 Dynamic components will not render anything by default while loading. You can still customize this behavior by setting the `loading` property:
 
 ```jsx
-const DynamicComponentWithCustomLoading = dynamic(() => import('../components/hello2'));
+
+const DynamicComponentWithCustomLoading = dynamic(
+  () => import('../components/hello2'),
+  
+)
 ```
 
 ### `withAmp` has been removed in favor of an exported configuration object
@@ -103,7 +107,7 @@ To perform this migration by hand, or view what the codemod will produce, see be
 
 ```jsx
 
-function Home()
+function Home() 
 
 // or
 
@@ -129,7 +133,7 @@ Previously, exporting `pages/about.js` would result in `out/about/index.html`. T
 You can revert to the previous behavior by creating a `next.config.js` with the following content:
 
 ```js filename="next.config.js"
-module.exports =
+module.exports = 
 ```
 
 ### `pages/api/` is treated differently
@@ -161,7 +165,7 @@ const HelloBundle = dynamic(
   ),
 })
 
-function DynamicBundle()
+function DynamicBundle() 
 
 ```
 
@@ -178,6 +182,6 @@ function HelloBundle() </h1>
   )
 }
 
-function DynamicBundle()
+function DynamicBundle() 
 
 ```

@@ -55,9 +55,9 @@ Previous versions of Prisma ORM used to create a _unique index_ on these two col
 As an example, consider the following Prisma schema with an implicit m-n relation between `Post` and `Tag` models:
 
 ```prisma
-model Post
+model Post 
 
-model Tag
+model Tag 
 ```
 
 In this case, Prisma ORM maintains the following relation table for you under the hood:
@@ -70,7 +70,7 @@ CREATE TABLE "_PostToTag" (
 );
 
 -- CreateIndex
--- highlight-next-line
+-- highlight-next-line 
 CREATE UNIQUE INDEX "_PostToTag_AB_unique" ON "_PostToTag"("A", "B");
 
 -- CreateIndex
@@ -91,7 +91,7 @@ CREATE TABLE "_PostToTag" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
 
-    -- highlight-next-line
+    -- highlight-next-line 
     CONSTRAINT "_PostToTag_AB_pkey" PRIMARY KEY ("A","B")
 );
 
@@ -132,24 +132,24 @@ The [`fullTextSearch`](/orm/prisma-client/queries/full-text-search) Preview feat
 #### Before
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 #### After
 
 ```prisma file=schema.prisma
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 ### Usage of `Buffer`
 
 In an effort to improve compatibility between Prisma and new modern JavaScript runtimes, we're gradually moving away from Node.js-specific APIs in favor of standard JavaScript.
 
-Prisma v6 replaces the usage of [`Buffer`](https://nodejs.org/api/buffer.html) with [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) to represent fields of type `Bytes`. Make sure to replace all your occurrences of the `Buffer` type with the new `Uint8Array`.
+Prisma v6 replaces the usage of [`Buffer`](https://nodejs.org/api/buffer.html)  with [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) to represent fields of type `Bytes`. Make sure to replace all your occurrences of the `Buffer` type with the new `Uint8Array`.
 
 <details>
 <summary>Expand to view how to convert between <code>Buffer</code> and <code>Uint8Array</code></summary>
@@ -190,9 +190,9 @@ In Prisma v6, we removed the `NotFoundError` in favor of `PrismaClientKnownReque
 try ,
   });
   console.log(user);
-} catch (error)
+} catch (error) 
   // highlight-end
-  else
+  else 
 }
 ```
 
@@ -204,9 +204,9 @@ try ,
 try ,
   });
   console.log(user);
-} catch (error)
+} catch (error)  
   // highlight-end
-  else
+  else 
 }
 ```
 
@@ -223,7 +223,7 @@ In this release, we are promoting a number of [Preview](/orm/more/releases#previ
 If you use the [full-text index](/orm/prisma-schema/data-model/indexes#full-text-indexes-mysql-and-mongodb) feature in your app, you can now remove `fullTextIndex` from the `previewFeatures` in your Prisma schema:
 
 ```prisma
-generator client
+generator client 
 ```
 
 ### `fullTextSearch`
@@ -231,11 +231,11 @@ generator client
 If you use the [full-text search](/orm/prisma-client/queries/full-text-search) feature with **MySQL** in your app, you can now remove `fullTextSearch` from the `previewFeatures` in your Prisma schema:
 
 ```prisma
-generator client
+generator client 
 ```
 
 If you are using it with **PostgreSQL**, you need to update the name of the feature flag to `fullTextSearchPostgres`:
 
 ```prisma
-generator client
+generator client 
 ```

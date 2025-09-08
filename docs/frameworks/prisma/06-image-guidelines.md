@@ -19,6 +19,7 @@ You can take screenshots with your favorite tool. We find it very easy to use Sn
 - Use full-screen screenshots only when needed.
 - Apply a centered shadow on the entire image canvas. If not, a screenshot with a white-background UI blends with the default white background of Prisma Docs.
 - In SnagIt, you can add a shadow with **Effects** > **Shadow** and configure its parameters as listed below.
+
   - Position: Centered
   - Color: Black
   - Opacity: 75%
@@ -32,9 +33,9 @@ You can take screenshots with your favorite tool. We find it very easy to use Sn
     :::
 
     <img
-    src=
-    alt="SnagIt - Screenshot canvas shadow"
-    width="250"
+      src=
+      alt="SnagIt - Screenshot canvas shadow"
+      width="250"
     />
 
 ### Annotations
@@ -42,9 +43,9 @@ You can take screenshots with your favorite tool. We find it very easy to use Sn
 If you can, avoid annotations. If necessary, apply annotations that are minimal and similar in style to the screenshot below.
 
 <img
-src=
-alt="Data Browser - Save multiple changes"
-width="650px"
+  src=
+  alt="Data Browser - Save multiple changes"
+  width="650px"
 />
 
 For details, see the sections below. Again, we suggest the use of SnagIt as a best practice.
@@ -58,9 +59,9 @@ For details, see the sections below. Again, we suggest the use of SnagIt as a be
 - Apply a white outline on the text. This ensures that the black text will be visible in Dark mode.
 
 <img
-src=
-alt="SnagIt - Screenshot text annotations"
-width="250"
+  src=
+  alt="SnagIt - Screenshot text annotations"
+  width="250"
 />
 
 #### Arrow and line annotations
@@ -69,9 +70,9 @@ width="250"
 - If you have text annotations that use arrows or lines to point to an area on the screenshot, a small part of the line or arrow should appear on the canvas (and outside of the screenshot).
 - Apply a centered shadow on each pointer and make the shadow color white. This ensures that the part of the line that is outside of the screenshot remains visible in Dark mode.
   <img
-  src=
-  alt="SnagIt - Screenshot arrow line annotations"
-  width="450"
+    src=
+    alt="SnagIt - Screenshot arrow line annotations"
+    width="450"
   />
 
 ### File type and path
@@ -151,5 +152,9 @@ For full-width images, use the shorter image MDX component:`![]()`.
 If you need to shrink an image by width, use the `<img>` component.
 
 ```html
-<img src="alt" ="SnagIt - Screenshot text annotations" width="250" />
+<img
+  src=
+  alt="SnagIt - Screenshot text annotations"
+  width="250"
+/>
 ```

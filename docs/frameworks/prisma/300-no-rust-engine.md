@@ -1,7 +1,7 @@
 ---
-title: 'No Rust engine'
-metaTitle: 'Use Prisma ORM without Rust engines'
-metaDescription: 'Learn how to use Prisma ORM without Rust engines'
+title: "No Rust engine"
+metaTitle: "Use Prisma ORM without Rust engines"
+metaDescription: "Learn how to use Prisma ORM without Rust engines"
 sidebar_class_name: preview-badge
 ---
 
@@ -28,7 +28,7 @@ The main technical differences if you're using Prisma ORM without a Rust engine 
 Usage of the new architecture requires the `driverAdapters` and `queryCompiler` feature flags to be set:
 
 ```prisma file=schema.prisma
-generator client
+generator client 
 ```
 
 ### 2. Re-generate Prisma Client

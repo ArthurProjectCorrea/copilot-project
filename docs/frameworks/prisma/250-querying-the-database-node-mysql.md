@@ -1,47 +1,41 @@
 ---
-title: 'Querying the database using JavaScript and MySQL'
+title: 'Query your existing MySQL database with JavaScript and Prisma ORM'
 sidebar_label: 'Querying the database'
-metaTitle: 'Querying the database using JavaScript and MySQL'
-metaDescription: 'Write data to and query the database using JavaScript and MySQL'
+metaTitle: 'Query your existing MySQL database with JavaScript and Prisma ORM'
+metaDescription: 'Write data to and query the MySQL database with your JavaScript and Prisma ORM project'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
 hide_table_of_contents: true
 sidebar_class_name: hidden-sidebar
-pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-node-mysql
-pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/next-steps
-slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-
+pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases/install-prisma-client-node-mysql
+pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/evolve-your-schema-node-mysql
+slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-
 ---
 
 ## Write your first query with Prisma Client
 
-Now that you have generated [Prisma Client](/orm/prisma-client), you can start writing queries to read and write data in your database. For the purpose of this guide, you'll use a plain Node.js script to explore some basic features of Prisma Client.
+Now that you have generated Prisma Client, you can start writing queries to read and write data in your database.
+
+If you're building a REST API, you can use Prisma Client in your route handlers to read and write data in the database based on incoming HTTP requests. If you're building a GraphQL API, you can use Prisma Client in your resolvers to read and write data in the database based on incoming queries and mutations.
+
+For the purpose of this guide however, you'll just create a plain Node.js script to learn how to send queries to your database using Prisma Client. Once you have an understanding of how the API works, you can start integrating it into your actual application code (e.g. REST route handlers or GraphQL resolvers).
 
 Create a new file named `index.js` and add the following code to it:
 
-```js file=index.js copy showLineNumbers
-const  = require('./generated/prisma')
+```js file=index.js showLineNumbers
+const  = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-async function main()
+async function main() 
 
 main()
   .then(async () => )
   .catch(async (e) => )
 ```
 
-Here's a quick overview of the different parts of the code snippet:
-
-1. Import the `PrismaClient` constructor from the `@prisma/client` node module
-1. Instantiate `PrismaClient`
-1. Define an `async` function named `main` to send queries to the database
-1. Call the `main` function
-1. Close the database connections when the script terminates
-
-Inside the `main` function, add the following query to read all `User` records from the database and print the result:
-
-```js file=index.js highlight=2;delete|3,4; showLineNumbers
-async function main()
+```js file=index.js
+async function main() 
 ```
 
 Now run the code with this command:
@@ -50,19 +44,21 @@ Now run the code with this command:
 node index.js
 ```
 
-This should print an empty array because there are no `User` records in the database yet:
+If you created a database using the schema from the database introspection step, the query should print an empty array because there are no `User` records in the database yet.
 
-```json no-lines
+```no-copy
 []
 ```
 
+If you introspected an existing database with records, the query should return an array of JavaScript objects.
+
 ## Write data into the database
 
-The `findMany` query you used in the previous section only _reads_ data from the database (although it was still empty). In this section, you'll learn how to write a query to _write_ new records into the `Post` and `User` tables.
+The `findMany` query you used in the previous section only _reads_ data from the database. In this section, you'll learn how to write a query to _write_ new records into the `Post` and `User` tables.
 
 Adjust the `main` function to send a `create` query to the database:
 
-```js file=index.js highlight=2-21;add copy showLineNumbers
+```js file=index.js showLineNumbers
 async function main() ,
       },
       profile: ,
@@ -73,7 +69,6 @@ async function main() ,
   const allUsers = await prisma.user.findMany(,
   })
   console.dir(allUsers, )
-  //add-end
 }
 ```
 
@@ -87,42 +82,9 @@ Run the code with this command:
 node index.js
 ```
 
-The output should look similar to this:
-
-```js no-lines
-[
-
-    ],
-    profile:
-  }
-]
-```
-
-The query added new records to the `User` and the `Post` tables:
-
-**User**
-
-| **id** | **email**           | **name**  |
-| :----- | :------------------ | :-------- |
-| `1`    | `"alice@prisma.io"` | `"Alice"` |
-
-**Post**
-
-| **id** | **createdAt**              |       **updatedAt**        | **title**       | **content** | **published** | **authorId** |
-| :----- | :------------------------- | :------------------------: | :-------------- | :---------- | :------------ | :----------- |
-| `1`    | `2020-03-21T16:45:01.246Z` | `2020-03-21T16:45:01.246Z` | `"Hello World"` | `null`      | `false`       | `1`          |
-
-**Profile**
-
-| **id** | **bio**            | **userId** |
-| :----- | :----------------- | :--------- |
-| `1`    | `"I like turtles"` | `1`        |
-
-> **Note**: The numbers in the `authorId` column on `Post` and `userId` column on `Profile` both reference the `id` column of the `User` table, meaning the `id` value `1` column therefore refers to the first (and only) `User` record in the database.
-
 Before moving on to the next section, you'll "publish" the `Post` record you just created using an `update` query. Adjust the `main` function as follows:
 
-```js file=index.js copy showLineNumbers
+```js file=index.js showLineNumbers
 async function main() ,
     data: ,
   })
@@ -135,19 +97,3 @@ Now run the code using the same command as before:
 ```terminal copy
 node index.js
 ```
-
-You will see the following output:
-
-```js no-lines
-
-```
-
-The `Post` record with an `id` of `1` now got updated in the database:
-
-**Post**
-
-| **id** | **title**       | **content** | **published** | **authorId** |
-| :----- | :-------------- | :---------- | :------------ | :----------- |
-| `1`    | `"Hello World"` | `null`      | `true`        | `1`          |
-
-Fantastic, you just wrote new data into your database for the first time using Prisma Client 🚀

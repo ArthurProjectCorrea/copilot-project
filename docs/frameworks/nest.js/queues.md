@@ -165,7 +165,7 @@ const job = await this.audioQueue.add(
   {
     foo: 'bar',
   },
-  { delay: 3000 } // 3 seconds delayed
+  { delay: 3000 }, // 3 seconds delayed
 );
 ```
 
@@ -177,7 +177,7 @@ const job = await this.audioQueue.add(
   {
     foo: 'bar',
   },
-  { lifo: true }
+  { lifo: true },
 );
 ```
 
@@ -189,7 +189,7 @@ const job = await this.audioQueue.add(
   {
     foo: 'bar',
   },
-  { priority: 2 }
+  { priority: 2 },
 );
 ```
 
@@ -306,7 +306,9 @@ import { Job } from 'bullmq';
 export class AudioConsumer {
   @OnWorkerEvent('active')
   onActive(job: Job) {
-    console.log(`Processing job ${job.id} of type ${job.name} with data ${job.data}...`);
+    console.log(
+      `Processing job ${job.id} of type ${job.name} with data ${job.data}...`,
+    );
   }
 
   // ...
@@ -318,7 +320,11 @@ You can see the complete list of events and their arguments as properties of Wor
 QueueEvent listeners must use the `@QueueEventsListener(queue)` decorator and extend the `QueueEventsHost` class provided by `@nestjs/bullmq`. To listen for an event, use the `@OnQueueEvent(event)` decorator with the event you want to be handled. For example, to listen to the event emitted when a job enters the active state in the `audio` queue, use the following construct:
 
 ```typescript
-import { QueueEventsHost, QueueEventsListener, OnQueueEvent } from '@nestjs/bullmq';
+import {
+  QueueEventsHost,
+  QueueEventsListener,
+  OnQueueEvent,
+} from '@nestjs/bullmq';
 
 @QueueEventsListener('audio')
 export class AudioEventsListener extends QueueEventsHost {
@@ -649,7 +655,7 @@ const job = await this.audioQueue.add(
   {
     foo: 'bar',
   },
-  { delay: 3000 } // 3 seconds delayed
+  { delay: 3000 }, // 3 seconds delayed
 );
 ```
 
@@ -660,7 +666,7 @@ const job = await this.audioQueue.add(
   {
     foo: 'bar',
   },
-  { lifo: true }
+  { lifo: true },
 );
 ```
 
@@ -671,7 +677,7 @@ const job = await this.audioQueue.add(
   {
     foo: 'bar',
   },
-  { priority: 2 }
+  { priority: 2 },
 );
 ```
 

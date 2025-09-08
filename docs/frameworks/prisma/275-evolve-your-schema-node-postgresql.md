@@ -11,7 +11,7 @@ pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational
 pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/next-steps
 slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/evolve-your-schema-
 ---
-
+ 
 ## Add a `Tag` model to your schema
 
 In this section, you will evolve your Prisma schema and then generate and apply the migration to your database with [`prisma migrate dev`](/orm/reference/prisma-cli-reference#migrate-dev).
@@ -27,13 +27,13 @@ For the purpose of this guide, we'll make the following changes to the Prisma sc
 Once you've made the changes to your schema, your schema should resemble the one below:
 
 ```prisma file=prisma/schema.prisma highlight=9,27-31;edit showLineNumbers
-model Post
+model Post 
 
-model Profile
+model Profile 
 
-model User
+model User 
 //edit-start
-model Tag
+model Tag 
 //edit-end
 ```
 

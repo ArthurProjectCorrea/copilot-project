@@ -1,7 +1,7 @@
 ---
 title: 'Using @db.Money'
 metaTitle: 'Optimize Recommendations: Avoid usage of `@db.Money`'
-metaDescription: 'Learn about the recommendation provided by Optimize for using `@db.Money` native type.'
+metaDescription: "Learn about the recommendation provided by Optimize for using `@db.Money` native type."
 tocDepth: 3
 toc: true
 ---
@@ -11,12 +11,12 @@ Optimize provides recommendations to help you identify and resolve performance i
 The following model uses the `@db.Money` native type:
 
 ```prisma
-model Item
+model Item 
 ```
 
 ## What is the problem?
 
-The `@db.Money` data type in PostgreSQL is not ideal for storing monetary values. Internally, `@db.Money` is implemented as an integer, which offers speed but lacks flexibility. It handles fractional values and rounding in unexpected ways, which can lead to inaccuracies.
+The `@db.Money` data type in PostgreSQL is not ideal for storing monetary values. Internally, `@db.Money` is implemented as an integer, which offers speed but lacks flexibility. It handles fractional values and rounding in unexpected ways, which can lead to inaccuracies. 
 
 Additionally, the `@db.Money` type does not store any information about the associated currency. Instead, it relies on the global `lc_monetary` locale setting, which may not be suitable for all use cases.
 

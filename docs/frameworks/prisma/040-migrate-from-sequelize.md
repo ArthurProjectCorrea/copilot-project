@@ -56,9 +56,9 @@ The Prisma schema currently looks as follows:
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db
+datasource db 
 
-generator client
+generator client 
 ```
 
 :::tip
@@ -137,10 +137,10 @@ Update your Express controllers to use Prisma Client. For example, here's how to
 ```typescript
 
   async create(req: Request, res: Response)  = req.body
-
+    
     const result = await prisma.user.create(,
     })
-
+    
     return res.json(result)
   }
 }
@@ -156,6 +156,5 @@ Now that you've migrated to Prisma ORM, you can:
 - Add automated tests using Prisma's testing utilities
 
 For more information:
-
 - [Prisma ORM documentation](/orm)
 - [Prisma Client API reference](/orm/prisma-client)
