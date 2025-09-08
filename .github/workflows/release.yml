@@ -22,6 +22,7 @@ jobs:
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js 20.x
         uses: actions/setup-node@v4
@@ -97,7 +98,6 @@ jobs:
           commit: 'chore(release): publish packages'
           createGithubReleases: true
           setupGitUser: true
-          commitMode: git-cli
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
