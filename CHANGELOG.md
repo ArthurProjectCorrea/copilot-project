@@ -1,5 +1,11 @@
 # copilot-project
 
+## 2.1.0
+
+### Minor Changes
+
+- 4eded48: Add complete Tailwind CSS documentation sync system, major architectural reorganization with unified CLI system, comprehensive CI/CD pipeline improvements with robust error handling, and complete framework documentation automation for all 5 supported frameworks
+
 ## 2.0.0
 
 ### Major Changes
