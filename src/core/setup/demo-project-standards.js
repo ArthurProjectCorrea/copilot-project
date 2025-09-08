@@ -74,7 +74,7 @@ class StandardsDemo {
             console.log('❌ Opção inválida. Tente novamente.\n');
         }
       } catch (error) {
-        console.error(`❌ Erro: ${error.message}\n`);
+        console.error(`❌ Erro: ${error instanceof Error ? error.message : String(error)}\n`);
       }
 
       console.log('\n' + '='.repeat(50) + '\n');

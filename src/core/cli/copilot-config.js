@@ -5,7 +5,7 @@
  * Este script pode ser executado diretamente após a instalação do pacote
  */
 
-const { initGithubConfig } = require('./init-github-config.js');
+const { initGithubConfig } = require('../setup/init-github-config.js');
 const fs = require('fs');
 const path = require('path');
 

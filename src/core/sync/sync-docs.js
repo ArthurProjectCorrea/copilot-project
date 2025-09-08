@@ -20,7 +20,10 @@ function loadDocsConfig() {
     }
     return JSON.parse(fs.readFileSync(configPath, 'utf8'));
   } catch (error) {
-    console.error('❌ Error loading docs-config.json:', error.message);
+    console.error(
+      '❌ Error loading docs-config.json:',
+      error instanceof Error ? error.message : String(error)
+    );
     process.exit(1);
   }
 }
@@ -234,13 +237,18 @@ function getRepositoryFiles(owner, repo, sourcePath, callback, retries = 5) {
         console.log(`📡 Response status: ${response.statusCode}`);
 
         // Handle redirects
-        if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
+        if (
+          response.statusCode &&
+          response.statusCode >= 300 &&
+          response.statusCode < 400 &&
+          response.headers.location
+        ) {
           console.log(`🔄 Following redirect to: ${response.headers.location}`);
           return attemptRequest(response.headers.location, remainingRetries);
         }
 
         // Handle non-200 responses
-        if (response.statusCode !== 200) {
+        if (response.statusCode && response.statusCode !== 200) {
           if (response.statusCode === 404) {
             return callback(
               new Error(`Repository or path not found (404): ${owner}/${repo}/${sourcePath}`)
