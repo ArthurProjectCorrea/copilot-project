@@ -2,7 +2,7 @@
 
 ## Overview
 
-Get up and running with @copilot-kit/chat-integration in under 5 minutes. This guide covers the essential steps to enhance your GitHub Copilot Chat experience.
+Get up and running with @arthurcorreadev/copilot-chat-integration in under 5 minutes. This guide covers the essential steps to enhance your GitHub Copilot Chat experience.
 
 ## Prerequisites Check
 
@@ -24,10 +24,10 @@ node --version && git --version && code --version
 
 ```bash
 # Global installation (recommended)
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 
 # Or use pnpm
-pnpm add -g @copilot-kit/chat-integration
+pnpm add -g @arthurcorreadev/copilot-chat-integration
 ```
 
 ### Step 2: Navigate to Your Project
@@ -242,7 +242,7 @@ npm init -y
 git init
 
 # Install and configure everything
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 copilot-chat setup
 
 # Your project now has:
@@ -269,10 +269,10 @@ copilot-chat validate
 
 ```bash
 # Install globally for all team members
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 
 # Add to project for consistency
-npm install --save-dev @copilot-kit/chat-integration
+npm install --save-dev @arthurcorreadev/copilot-chat-integration
 
 # Add to package.json scripts
 {
@@ -300,7 +300,7 @@ copilot-chat config
 
 ```bash
 # Use npx instead of global install
-npx @copilot-kit/chat-integration setup
+npx @arthurcorreadev/copilot-chat-integration setup
 ```
 
 ### Documentation Not Syncing

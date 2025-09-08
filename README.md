@@ -1,6 +1,6 @@
 # 🤖 Copilot Project - Framework Documentation Automation
 
-[![npm version](https://badge.fury.io/js/@copilot-kit%2Fchat-integration.svg)](https://www.npmjs.com/package/@copilot-kit/chat-integration)
+[![npm version](https://badge.fury.io/js/@copilot-kit%2Fchat-integration.svg)](https://www.npmjs.com/package/@arthurcorreadev/copilot-chat-integration)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js CI](https://github.com/ArthurProjectCorrea/copilot-project/workflows/CI/badge.svg)](https://github.com/ArthurProjectCorrea/copilot-project/actions)
 
@@ -39,13 +39,13 @@ Transform your development experience with AI-powered assistance that understand
 
 ```bash
 # Using npm
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 
 # Using pnpm
-pnpm add -g @copilot-kit/chat-integration
+pnpm add -g @arthurcorreadev/copilot-chat-integration
 
 # Using yarn
-yarn global add @copilot-kit/chat-integration
+yarn global add @arthurcorreadev/copilot-chat-integration
 ```
 
 ### One-Command Setup
@@ -58,7 +58,7 @@ cd my-awesome-project
 copilot-chat setup
 
 # Or use npx for one-time usage
-npx @copilot-kit/chat-integration setup
+npx @arthurcorreadev/copilot-chat-integration setup
 ```
 
 ### Chat-Only Integration
@@ -68,7 +68,7 @@ npx @copilot-kit/chat-integration setup
 copilot-chat config
 
 # Or using npx
-npx @copilot-kit/chat-integration config
+npx @arthurcorreadev/copilot-chat-integration config
 ```
 
 ## 📋 Available Commands
@@ -114,7 +114,7 @@ mkdir my-ai-app && cd my-ai-app
 npm init -y
 
 # Install and configure everything
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 copilot-chat setup
 
 # Make your first standardized commit
@@ -209,13 +209,13 @@ copilot-chat demo
 
 ## 🏗️ Supported Frameworks
 
-| Framework        | Documentation Source         | Local Path                                                                | Chat Mode                 |
-| ---------------- | ---------------------------- | ------------------------------------------------------------------------- | ------------------------- |
-| **Jest**         | facebook/jest                | `node_modules/@copilot-kit/chat-integration/docs/frameworks/jest.js/`     | `@workspace /jest`        |
-| **NestJS**       | nestjs/docs.nestjs.com       | `node_modules/@copilot-kit/chat-integration/docs/frameworks/nest.js/`     | `@workspace /nest`        |
-| **Next.js**      | vercel/next.js               | `node_modules/@copilot-kit/chat-integration/docs/frameworks/next.js/`     | `@workspace /next`        |
-| **Prisma**       | prisma/docs                  | `node_modules/@copilot-kit/chat-integration/docs/frameworks/prisma/`      | `@workspace /prisma`      |
-| **Tailwind CSS** | tailwindlabs/tailwindcss.com | `node_modules/@copilot-kit/chat-integration/docs/frameworks/tailwindcss/` | `@workspace /tailwindcss` |
+| Framework        | Documentation Source         | Local Path                                                                            | Chat Mode                 |
+| ---------------- | ---------------------------- | ------------------------------------------------------------------------------------- | ------------------------- |
+| **Jest**         | facebook/jest                | `node_modules/@arthurcorreadev/copilot-chat-integration/docs/frameworks/jest.js/`     | `@workspace /jest`        |
+| **NestJS**       | nestjs/docs.nestjs.com       | `node_modules/@arthurcorreadev/copilot-chat-integration/docs/frameworks/nest.js/`     | `@workspace /nest`        |
+| **Next.js**      | vercel/next.js               | `node_modules/@arthurcorreadev/copilot-chat-integration/docs/frameworks/next.js/`     | `@workspace /next`        |
+| **Prisma**       | prisma/docs                  | `node_modules/@arthurcorreadev/copilot-chat-integration/docs/frameworks/prisma/`      | `@workspace /prisma`      |
+| **Tailwind CSS** | tailwindlabs/tailwindcss.com | `node_modules/@arthurcorreadev/copilot-chat-integration/docs/frameworks/tailwindcss/` | `@workspace /tailwindcss` |
 
 ## 🔄 Documentation Sync
 
@@ -321,7 +321,7 @@ npm cache clean --force
 node --version
 
 # Reinstall with verbose logging
-npm install -g @copilot-kit/chat-integration --verbose
+npm install -g @arthurcorreadev/copilot-chat-integration --verbose
 ```
 
 **Copilot Chat Not Recognizing Modes**

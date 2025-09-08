@@ -368,12 +368,12 @@ ${this.isTypeScript ? ');' : '];'}`;
     console.log('🤖 Instalando GitHub Copilot Project...');
 
     try {
-      const cmd = `${this.packageManager} add @copilot-kit/chat-integration`;
+      const cmd = `${this.packageManager} add @arthurcorreadev/copilot-chat-integration`;
       execSync(cmd, { stdio: 'inherit' });
       console.log('✅ Instalação concluída com sucesso!');
     } catch (error) {
       console.error(
-        '⚠️ Falha ao instalar @copilot-kit/chat-integration:',
+        '⚠️ Falha ao instalar @arthurcorreadev/copilot-chat-integration:',
         error instanceof Error ? error.message : String(error)
       );
     }

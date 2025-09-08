@@ -147,7 +147,7 @@ Comprehensive architecture documentation for the Copilot Project, covering syste
 ### Package Installation Flow
 
 ```
-User runs: npm install -g @copilot-kit/chat-integration
+User runs: npm install -g @arthurcorreadev/copilot-chat-integration
     ↓
 NPM downloads package from registry
     ↓
@@ -213,7 +213,7 @@ Global cache update complete
 ### Package Distribution Structure
 
 ```
-@copilot-kit/chat-integration/
+@arthurcorreadev/copilot-chat-integration/
 ├── index.js                 # Main entry point (minimal)
 ├── package.json             # Package metadata
 ├── README.md               # User documentation
@@ -244,7 +244,7 @@ Global cache update complete
 
 ```
 Global Installation:
-/usr/local/lib/node_modules/@copilot-kit/chat-integration/
+/usr/local/lib/node_modules/@arthurcorreadev/copilot-chat-integration/
 
 System Binaries:
 /usr/local/bin/copilot-chat

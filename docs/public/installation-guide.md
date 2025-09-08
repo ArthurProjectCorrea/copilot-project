@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide covers all installation methods for @copilot-kit/chat-integration, system requirements, and troubleshooting common installation issues.
+This guide covers all installation methods for @arthurcorreadev/copilot-chat-integration, system requirements, and troubleshooting common installation issues.
 
 ## System Requirements
 
@@ -43,13 +43,13 @@ Install globally to use the CLI commands from anywhere:
 
 ```bash
 # Using npm
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 
 # Using pnpm (recommended)
-pnpm add -g @copilot-kit/chat-integration
+pnpm add -g @arthurcorreadev/copilot-chat-integration
 
 # Using yarn
-yarn global add @copilot-kit/chat-integration
+yarn global add @arthurcorreadev/copilot-chat-integration
 ```
 
 **Verification:**
@@ -72,18 +72,18 @@ Install in specific projects for team-wide consistency:
 cd your-project-directory
 
 # Install as dev dependency
-npm install --save-dev @copilot-kit/chat-integration
+npm install --save-dev @arthurcorreadev/copilot-chat-integration
 
 # Or using pnpm
-pnpm add -D @copilot-kit/chat-integration
+pnpm add -D @arthurcorreadev/copilot-chat-integration
 ```
 
 **Usage with npx:**
 
 ```bash
 # Run without global installation
-npx @copilot-kit/chat-integration setup
-npx @copilot-kit/chat-integration config
+npx @arthurcorreadev/copilot-chat-integration setup
+npx @arthurcorreadev/copilot-chat-integration config
 ```
 
 ### 3. CI/CD Installation
@@ -93,7 +93,7 @@ For automated environments:
 ```yaml
 # GitHub Actions example
 - name: Install Copilot Integration
-  run: npm install -g @copilot-kit/chat-integration
+  run: npm install -g @arthurcorreadev/copilot-chat-integration
 
 # Or as project dependency
 - name: Install dependencies
@@ -108,7 +108,7 @@ The package includes automatic setup via postinstall hook:
 
 ```bash
 # This runs automatically after installation
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 # → Automatically creates .github/ structure if in a Git repository
 ```
 
@@ -148,7 +148,7 @@ copilot-chat sync jest
 
 ```bash
 # Option 1: Use npx instead of global install
-npx @copilot-kit/chat-integration setup
+npx @arthurcorreadev/copilot-chat-integration setup
 
 # Option 2: Configure npm to use different directory
 mkdir ~/.npm-global
@@ -159,7 +159,7 @@ source ~/.bashrc
 # Option 3: Use Node Version Manager
 # Install nvm, then:
 nvm install node
-npm install -g @copilot-kit/chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 ```
 
 **Solution for Windows:**
@@ -182,7 +182,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 npm config get registry
 
 # Use different registry if needed
-npm install -g @copilot-kit/chat-integration --registry https://registry.npmjs.org/
+npm install -g @arthurcorreadev/copilot-chat-integration --registry https://registry.npmjs.org/
 
 # Clear npm cache
 npm cache clean --force
@@ -209,8 +209,8 @@ nvm use --lts
 npm list -g --depth=0
 
 # Reinstall if needed
-npm uninstall -g @copilot-kit/chat-integration
-npm install -g @copilot-kit/chat-integration
+npm uninstall -g @arthurcorreadev/copilot-chat-integration
+npm install -g @arthurcorreadev/copilot-chat-integration
 ```
 
 ### GitHub Token Issues
@@ -301,7 +301,7 @@ sudo pacman -S nodejs npm
 
 ```bash
 # Global upgrade
-npm update -g @copilot-kit/chat-integration
+npm update -g @arthurcorreadev/copilot-chat-integration
 
 # Check new version
 copilot-chat --version
@@ -320,7 +320,7 @@ copilot-chat --version
 cp -r .github .github.backup
 
 # Upgrade
-npm update -g @copilot-kit/chat-integration
+npm update -g @arthurcorreadev/copilot-chat-integration
 
 # Validate after upgrade
 copilot-chat validate
@@ -335,10 +335,10 @@ mv .github.backup .github
 
 ```bash
 # Remove global package
-npm uninstall -g @copilot-kit/chat-integration
+npm uninstall -g @arthurcorreadev/copilot-chat-integration
 
 # Remove project-specific installation
-npm uninstall @copilot-kit/chat-integration
+npm uninstall @arthurcorreadev/copilot-chat-integration
 
 # Clean up configuration (optional)
 rm -rf .github/chatmodes/

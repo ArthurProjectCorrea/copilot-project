@@ -501,9 +501,9 @@ We use [Changesets](https://github.com/changesets/changesets) for automated vers
 pnpm changeset
 
 # Example prompts and responses:
-? Which packages would you like to include? @copilot-kit/chat-integration
+? Which packages would you like to include? @arthurcorreadev/copilot-chat-integration
 ? Which packages should have a major bump? (none)
-? Which packages should have a minor bump? @copilot-kit/chat-integration
+? Which packages should have a minor bump? @arthurcorreadev/copilot-chat-integration
 ? Please enter a summary: Add support for new framework documentation sync
 ```
 
@@ -511,7 +511,7 @@ pnpm changeset
 
 ```yaml
 ---
-'@copilot-kit/chat-integration': minor
+'@arthurcorreadev/copilot-chat-integration': minor
 ---
 Add support for Vue.js framework documentation sync with improved error handling and performance optimizations. This includes:
   - Vue.js framework detection
@@ -631,7 +631,7 @@ gh pr create --base main --title "hotfix: critical security fix"
 
 ```bash
 # Use appropriate language tags
-npm install @copilot-kit/chat-integration
+npm install @arthurcorreadev/copilot-chat-integration
 ```
 ````
 
@@ -790,7 +790,7 @@ console.log('Memory usage:', {
 
 ```bash
 # Unlink and relink
-npm unlink -g @copilot-kit/chat-integration
+npm unlink -g @arthurcorreadev/copilot-chat-integration
 npm link
 ```
 

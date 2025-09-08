@@ -84,7 +84,7 @@ Example changeset:
 
 ```yaml
 ---
-'@copilot-kit/chat-integration': minor
+'@arthurcorreadev/copilot-chat-integration': minor
 ---
 Add support for new framework documentation sync with improved error handling and performance optimizations.
 ```
@@ -161,7 +161,7 @@ npm login
 npm publish
 
 # Verify publication
-npm view @copilot-kit/chat-integration
+npm view @arthurcorreadev/copilot-chat-integration
 ```
 
 #### 4. Create GitHub Release
@@ -186,7 +186,7 @@ gh release create v1.2.3 \
 
 ```json
 {
-  "name": "@copilot-kit/chat-integration",
+  "name": "@arthurcorreadev/copilot-chat-integration",
   "version": "2.0.0",
   "description": "Enhanced GitHub Copilot Chat integration with framework documentation sync",
   "main": "index.js",
@@ -243,9 +243,9 @@ ls -la package/
 **Public NPM Registry** (default):
 
 - URL: `https://registry.npmjs.org/`
-- Package: `@copilot-kit/chat-integration`
+- Package: `@arthurcorreadev/copilot-chat-integration`
 - Visibility: Public
-- Installation: `npm install -g @copilot-kit/chat-integration`
+- Installation: `npm install -g @arthurcorreadev/copilot-chat-integration`
 
 **GitHub Packages** (alternative):
 
@@ -271,7 +271,7 @@ Following [Semantic Versioning](https://semver.org/):
 
 ```bash
 # Latest stable version
-npm install -g @copilot-kit/chat-integration@latest
+npm install -g @arthurcorreadev/copilot-chat-integration@latest
 ```
 
 **Beta Release**:
@@ -279,7 +279,7 @@ npm install -g @copilot-kit/chat-integration@latest
 ```bash
 # Beta versions for testing
 npm publish --tag beta
-npm install -g @copilot-kit/chat-integration@beta
+npm install -g @arthurcorreadev/copilot-chat-integration@beta
 ```
 
 **Development Release**:
@@ -287,7 +287,7 @@ npm install -g @copilot-kit/chat-integration@beta
 ```bash
 # Alpha/development versions
 npm publish --tag alpha
-npm install -g @copilot-kit/chat-integration@alpha
+npm install -g @arthurcorreadev/copilot-chat-integration@alpha
 ```
 
 ## GitHub Actions Workflows
@@ -429,7 +429,7 @@ services:
 
 ```bash
 # Monitor NPM downloads
-npm view @copilot-kit/chat-integration
+npm view @arthurcorreadev/copilot-chat-integration
 
 # Check GitHub releases
 gh release list
@@ -444,13 +444,13 @@ gh issue list --label "release-feedback"
 
 ```bash
 # Deprecate problematic version
-npm deprecate @copilot-kit/chat-integration@2.1.0 "Critical bug - use 2.0.0 instead"
+npm deprecate @arthurcorreadev/copilot-chat-integration@2.1.0 "Critical bug - use 2.0.0 instead"
 
 # Unpublish if within 24 hours
-npm unpublish @copilot-kit/chat-integration@2.1.0
+npm unpublish @arthurcorreadev/copilot-chat-integration@2.1.0
 
 # Promote previous version as latest
-npm dist-tag add @copilot-kit/chat-integration@2.0.0 latest
+npm dist-tag add @arthurcorreadev/copilot-chat-integration@2.0.0 latest
 ```
 
 #### GitHub Rollback
@@ -528,7 +528,7 @@ echo "coverage/" >> .npmignore
 npm whoami
 
 # Verify package name availability
-npm view @copilot-kit/chat-integration
+npm view @arthurcorreadev/copilot-chat-integration
 
 # Check for conflicts
 npm publish --dry-run
@@ -551,7 +551,7 @@ gh run view <run-id> --log
 
 ```bash
 # Check current version
-npm view @copilot-kit/chat-integration version
+npm view @arthurcorreadev/copilot-chat-integration version
 
 # Check local version
 node -p "require('./package.json').version"

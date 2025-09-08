@@ -235,7 +235,7 @@ function parseConfig(config) {
 
 ```bash
 # Commands should be copy-pastable
-npm install @copilot-kit/chat-integration
+npm install @arthurcorreadev/copilot-chat-integration
 ```
 ````
 
@@ -611,14 +611,14 @@ Links to related documentation.
 
 ```bash
 # Include commands exactly as users should type them
-npm install @copilot-kit/chat-integration
+npm install @arthurcorreadev/copilot-chat-integration
 copilot-chat setup
 ```
 ````
 
 ```javascript
 // Provide complete code samples
-const { ConfigManager } = require('@copilot-kit/chat-integration');
+const { ConfigManager } = require('@arthurcorreadev/copilot-chat-integration');
 
 async function main() {
   try {

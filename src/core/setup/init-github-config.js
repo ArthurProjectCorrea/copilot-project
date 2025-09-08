@@ -5,7 +5,7 @@ const crypto = require('crypto');
 // Configuração dos diretórios e arquivos
 const CONFIG = {
   directories: ['chatmodes', 'instructions', 'prompts'],
-  packageName: '@copilot-kit/chat-integration',
+  packageName: '@arthurcorreadev/copilot-chat-integration',
   copyRulesFile: 'copy-rules.json',
 };
 
@@ -265,10 +265,10 @@ function initGithubConfig(forceRun = false) {
     }
   }
 
-  // Durante desenvolvimento do @copilot-kit/chat-integration, pula a execução a menos que seja forçada
+  // Durante desenvolvimento do @arthurcorreadev/copilot-chat-integration, pula a execução a menos que seja forçada
   if (isSourceProject && !forceRun && !isInstall) {
     console.log(
-      '💡 This appears to be the source @copilot-kit/chat-integration. Skipping initialization.'
+      '💡 This appears to be the source @arthurcorreadev/copilot-chat-integration. Skipping initialization.'
     );
     console.log('💡 Use --force flag to run anyway for testing purposes.');
     return;
@@ -289,7 +289,7 @@ function initGithubConfig(forceRun = false) {
     console.error(`Expected path: ${sourceGithubPath}`);
     if (!isSourceProject) {
       console.log(
-        '💡 Make sure @copilot-kit/chat-integration is properly installed as a dependency.'
+        '💡 Make sure @arthurcorreadev/copilot-chat-integration is properly installed as a dependency.'
       );
     }
     process.exit(1);

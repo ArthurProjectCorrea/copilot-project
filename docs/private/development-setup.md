@@ -217,7 +217,7 @@ cd ../test-project
 copilot-chat setup
 
 # Clean up
-npm unlink -g @copilot-kit/chat-integration
+npm unlink -g @arthurcorreadev/copilot-chat-integration
 cd ../copilot-project
 ```
 
@@ -408,7 +408,7 @@ copilot-chat config
 
 ```bash
 # Relink package
-npm unlink -g @copilot-kit/chat-integration
+npm unlink -g @arthurcorreadev/copilot-chat-integration
 npm link
 ```
 

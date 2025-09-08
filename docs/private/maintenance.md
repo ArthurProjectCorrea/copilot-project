@@ -26,10 +26,10 @@ gh pr list --state open --limit 10
 
 ```bash
 # Verify package is installable
-npm view @copilot-kit/chat-integration
+npm view @arthurcorreadev/copilot-chat-integration
 
 # Test CLI functionality
-npx @copilot-kit/chat-integration --help
+npx @arthurcorreadev/copilot-chat-integration --help
 
 # Check documentation sync status
 pnpm run docs:sync:status
@@ -155,10 +155,10 @@ jobs:
       - name: Monitor Package Health
         run: |
           echo "NPM package status:"
-          npm view @copilot-kit/chat-integration
+          npm view @arthurcorreadev/copilot-chat-integration
 
           echo "Download statistics:"
-          npm view @copilot-kit/chat-integration --json
+          npm view @arthurcorreadev/copilot-chat-integration --json
 ```
 
 #### Alert System
@@ -241,7 +241,7 @@ class MetricsCollector {
   }
 
   async getPackageMetrics() {
-    const packageInfo = await this.npmView('@copilot-kit/chat-integration');
+    const packageInfo = await this.npmView('@arthurcorreadev/copilot-chat-integration');
     return {
       version: packageInfo.version,
       downloads: packageInfo.downloads,
@@ -511,7 +511,7 @@ git commit -m "chore(release): version packages"
 
 ```bash
 # Verify NPM publication
-npm view @copilot-kit/chat-integration
+npm view @arthurcorreadev/copilot-chat-integration
 
 # Check GitHub release
 gh release list

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('🚀 Running @copilot-kit/chat-integration postinstall script...');
+console.log('🚀 Running @arthurcorreadev/copilot-chat-integration postinstall script...');
 
 // More robust directory detection for both npm and pnpm
 let destDir = process.cwd();
@@ -41,7 +41,7 @@ const packageJsonPath = path.join(destDir, 'package.json');
 if (fs.existsSync(packageJsonPath)) {
   try {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    if (packageJson.name === '@copilot-kit/chat-integration') {
+    if (packageJson.name === '@arthurcorreadev/copilot-chat-integration') {
       console.log('🔄 Detected installation in source project, skipping postinstall...');
       process.exit(0);
     }
