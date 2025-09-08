@@ -1,5 +1,11 @@
 # copilot-project
 
+## 2.1.1
+
+### Patch Changes
+
+- ec0862e: Atualização de arquivos de documentação privada e pública, ajustes nos scripts de configuração do projeto e remoção do script prepack do package.json para corrigir problemas de publicação no npm e melhorar a confiabilidade do setup.
+
 ## 2.1.0
 
 ### Minor Changes
