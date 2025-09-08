@@ -1,10 +1,11 @@
-# TypeScript Examples Note
+:::info
 
-This documentation includes examples that work with both JavaScript and TypeScript.
-When using TypeScript, make sure to:
+The TypeScript examples from this page will only work as documented if you explicitly import Jest APIs:
 
-1. Install type definitions: `npm install --save-dev @types/jest`
-2. Configure your `tsconfig.json` to include Jest globals
-3. Use proper TypeScript syntax in your test files
+```ts
+import { expect, jest, test } from '@jest/globals';
+```
 
-For more TypeScript-specific guidance, refer to the Jest TypeScript documentation.
+Consult the [Getting Started](GettingStarted.md#using-typescript) guide for details on how to setup Jest with TypeScript.
+
+:::
