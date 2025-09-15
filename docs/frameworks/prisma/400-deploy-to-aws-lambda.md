@@ -15,23 +15,24 @@ While a deployment framework is not required to deploy to AWS Lambda, this guide
 
 :::tip Use Prisma ORM without Rust binaries
 
-If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
-
-**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+If Prisma ORM's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can use it without them using this configuration of your `generator` block:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+Prisma ORM without Rust binaries has been [Generally Available](/orm/more/releases#generally-available-ga) since [v6.16.0](https://pris.ly/release/6.16.0).
+
+Note that you need to use a [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) in this case.
+
 When using this architecture:
 
-* No Rust query engine binary is downloaded or shipped.
-* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
-This setup can simplify deployments in serverless or edge runtimes. If you adopt the no-Rust-engine setup, you can ignore subsequent sections about `binaryTargets`, copying/packaging native engine files, and pruning `libquery_engine-*` artifacts. 
+This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
 
-Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+Curious why we moved away from the Rust engine? Take a look at why we transitioned from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in this [blog post](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks).
 
 :::
 
@@ -95,7 +96,7 @@ To get around this, you need to directly reference the needed files in your code
 
 ```ts file=app.ts showLineNumbers
 
-if (process.env.NODE_ENV !== 'production') 
+if (process.env.NODE_ENV !== 'production')
 ```
 
 ## Deploying with the Serverless Framework
@@ -170,7 +171,7 @@ In your `webpack.config.js`, make sure that you set `externals` to `nodeExternal
 ```javascript file=webpack.config.js highlight=1,5;normal; showLineNumbers
 const nodeExternals = require('webpack-node-externals')
 
-module.exports = 
+module.exports =
 ```
 
 Update the `plugins` property in your `webpack.config.js` file to include the `copy-webpack-plugin`:
@@ -250,12 +251,7 @@ While SST supports `.env` files, [it is not recommended](https://v2.sst.dev/conf
 The SST guide [available here](https://v2.sst.dev/config#overview) is a step-by-step guide to get started with `Config`. Assuming you have created a new secret called `DATABASE_URL` and have [bound that secret to your app](https://v2.sst.dev/config#bind-the-config), you can set up `PrismaClient` with the following:
 
 ```ts file=prisma.ts showLineNumbers
+const globalForPrisma = (global as unknown as globalForPrisma.prisma) || new PrismaClient();
 
-const globalForPrisma = global as unknown as 
-
-  globalForPrisma.prisma ||
-  new PrismaClient()
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
-
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 ```

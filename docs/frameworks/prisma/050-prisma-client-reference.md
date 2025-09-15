@@ -9,34 +9,37 @@ toc: true
 
 :::tip Use Prisma ORM without Rust binaries
 
-If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
-
-**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+If Prisma ORM's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can use it without them using this configuration of your `generator` block:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+Prisma ORM without Rust binaries has been [Generally Available](/orm/more/releases#generally-available-ga) since [v6.16.0](https://pris.ly/release/6.16.0).
+
+Note that you need to use a [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) in this case.
+
 When using this architecture:
 
-* No Rust query engine binary is downloaded or shipped.
-* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
+
+Curious why we moved away from the Rust engine? Take a look at why we transitioned from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in this [blog post](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks).
 
 :::
 
 The Prisma Client API reference documentation is based on the following schema:
 
 ```prisma
-model User 
+model User
 
-model ExtendedProfile 
+model ExtendedProfile
 
-model Post 
+model Post
 
-enum Role 
+enum Role
 ```
 
 All example generated types (such as `UserSelect` and `UserWhereUniqueInput`) are based on the `User` model.
@@ -57,9 +60,9 @@ From version 5.2.0 and upwards, you can also use the [`datasourceUrl`](#datasour
 
 #### Properties
 
-| Example property | Example value                 | Description                                                    |
-| ---------------- | ----------------------------- | -------------------------------------------------------------- |
-| `db`             | `` | The database [connection URL](/orm/reference/connection-urls). |
+| Example property | Example value | Description                                                    |
+| ---------------- | ------------- | -------------------------------------------------------------- |
+| `db`             | ``            | The database [connection URL](/orm/reference/connection-urls). |
 
 #### Remarks
 
@@ -80,7 +83,7 @@ const prisma = new PrismaClient(,
 Based on the following `datasource` block:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 ### `datasourceUrl`
@@ -96,7 +99,6 @@ Programmatically overrides the [`datasource`](#datasources) block in the `schema
 #### Examples
 
 ```ts
-
 const prisma = new PrismaClient();
 ```
 
@@ -106,19 +108,19 @@ Determines the type and level of logging. See also: [Logging](/orm/prisma-client
 
 #### Options
 
-| Option                   | Example                                                                  |
-| ------------------------ | ------------------------------------------------------------------------ |
-| Array of log levels      | `[ "info", "query" ]`                                                    |
-| Array of log definitions | `[ , ]` |
+| Option                   | Example               |
+| ------------------------ | --------------------- |
+| Array of log levels      | `[ "info", "query" ]` |
+| Array of log definitions | `[ , ]`               |
 
 ##### Log levels
 
-| Name    | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name    | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `query` | Logs all queries run by Prisma. <br /><br /> For relational databases this logs all SQL queries. Example: <br />`prisma:query SELECT "public"."User"."id", "public"."User"."email" FROM "public"."User" WHERE ("public"."User"."id") IN (SELECT "t0"."id" FROM "public"."User" AS "t0" INNER JOIN "public"."Post" AS "j0" ON ("j0"."authorId") = ("t0"."id") WHERE ("j0"."views" > $1 AND "t0"."id" IS NOT NULL)) OFFSET $2` <br /><br /> For MongoDB this logs queries using the [`mongosh` shell](https://www.mongodb.com/docs/mongodb-shell/#mongodb-binary-bin.mongosh) format. Example: <br /> `prisma:query db.User.deleteMany(, })` |
-| `info`  | Example: <br />`prisma:info Started http server on http://127.0.0.1:58471`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `warn`  | Warnings.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `error` | Errors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `info`  | Example: <br />`prisma:info Started http server on http://127.0.0.1:58471`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `warn`  | Warnings.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `error` | Errors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 ##### Emit formats
 
@@ -206,16 +208,15 @@ Defines an instance of a [driver adapter](/orm/overview/databases/database-drive
 
 :::info
 
-This is available from version 5.4.0 and newer behind the `driverAdapters` feature flag.
+This is available from version 5.4.0 and newer as a Preview feature behind the `driverAdapters` feature flag. It has been Generally Available since 6.16.0.
 
 :::
 
 #### Example
 
-The example below uses the [Neon driver adapter](/orm/overview/databases/neon#how-to-use-neons-serverless-driver-with-prisma-orm-preview)
+The example below uses the [Neon driver adapter](/orm/overview/databases/neon#how-to-use-neons-serverless-driver-with-prisma-orm)
 
 ```ts
-
 dotenv.config();
 const connectionString = `$`;
 
@@ -289,7 +290,7 @@ const prisma = new PrismaClient(,
 
 Use model queries to perform CRUD operations on your models. See also: [CRUD](/orm/prisma-client/queries/crud)
 
-> **Note**: It's a best practice to always validate and sanitize any untrusted user data before passing it into Prisma queries. Failure to do so can lead to SQL injection or other injection vulnerabilities if the type checks are bypassed. Make sure user-supplied values cannot inadvertently bypass critical checks. We strongly recommend performing type checking and input validation at the application layer.  For more details, see [Custom Validation](/orm/prisma-client/queries/custom-validation) section.
+> **Note**: It's a best practice to always validate and sanitize any untrusted user data before passing it into Prisma queries. Failure to do so can lead to SQL injection or other injection vulnerabilities if the type checks are bypassed. Make sure user-supplied values cannot inadvertently bypass critical checks. We strongly recommend performing type checking and input validation at the application layer. For more details, see [Custom Validation](/orm/prisma-client/queries/custom-validation) section.
 
 ### `findUnique()`
 
@@ -308,21 +309,21 @@ Use model queries to perform CRUD operations on your models. See also: [CRUD](/o
 
 #### Options
 
-| Name                            | Example type (`User`)    | Required | Description                                                                                                                                                                                                                                                                                  |
-| ------------------------------- | ------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `where`                         | `UserWhereUniqueInput`   | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                        |
-| `select`                        | `XOR<UserSelect, null>`  | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
-| `include`                       | `XOR<UserInclude, null>` | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
-| `omit`                          | `XOR<UserOmit, null>`    | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
-| `relationLoadStrategy`          | `'join'` or `'query'`    | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
+| Name                   | Example type (`User`)    | Required | Description                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `where`                | `UserWhereUniqueInput`   | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                         |
+| `select`               | `XOR<UserSelect, null>`  | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
+| `include`              | `XOR<UserInclude, null>` | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
+| `omit`                 | `XOR<UserOmit, null>`    | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
+| `relationLoadStrategy` | `'join'` or `'query'`    | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
 
 #### Return type
 
-| Return type               | Example                    | Description                                                                                                                                                         |
-| ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| JavaScript object (typed) | `User`                     |                                                                                                                                                                     |
-| JavaScript object (plain) | `` | Use `select` and `include` to determine which fields to return.                                                                                                     |
-| `null`                    | `null`                     | Record not found                                                                                                                                                    |
+| Return type               | Example | Description                                                     |
+| ------------------------- | ------- | --------------------------------------------------------------- |
+| JavaScript object (typed) | `User`  |                                                                 |
+| JavaScript object (plain) | ``      | Use `select` and `include` to determine which fields to return. |
+| `null`                    | `null`  | Record not found                                                |
 
 #### Examples
 
@@ -347,7 +348,7 @@ const result = await prisma.user.findUnique(,
 <summary>Expand for example User model with a @@unique block</summary>
 
 ```prisma
-model User 
+model User
 ```
 
 </details>
@@ -365,7 +366,7 @@ const result = await prisma.user.findUnique(,
 <summary>Expand for example User model with an @@id block</summary>
 
 ```prisma
-model User 
+model User
 ```
 
 </details>
@@ -380,7 +381,7 @@ const result = await prisma.user.findUnique(,
 
 `findUniqueOrThrow()` retrieves a single record in the same way as [`findUnique()`](#findunique). However, if the query does not find the requested record, it throws a `PrismaClientKnownRequestError`.
 
-Note that [before Prisma v6](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-6#removed-notfounderror), it would throw a `NotFoundError: No User found error`. 
+Note that [before Prisma v6](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-6#removed-notfounderror), it would throw a `NotFoundError: No User found error`.
 
 Here’s an example of its usage:
 
@@ -421,11 +422,11 @@ await prisma.user.findUniqueOrThrow(,
 
 #### Return type
 
-| Return type               | Example                    | Description                                                                                                                                                         |
-| ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| JavaScript object (typed) | `User`                     | Specifies which properties to include on the returned object.                                                                                                       |
-| JavaScript object (plain) | `` | Use `select` and `include` to determine which fields to return.                                                                                                     |
-| `null`                    | `null`                     | Record not found                                                                                                                                                    |
+| Return type               | Example | Description                                                     |
+| ------------------------- | ------- | --------------------------------------------------------------- |
+| JavaScript object (typed) | `User`  | Specifies which properties to include on the returned object.   |
+| JavaScript object (plain) | ``      | Use `select` and `include` to determine which fields to return. |
+| `null`                    | `null`  | Record not found                                                |
 
 #### Remarks
 
@@ -469,7 +470,7 @@ main();
 
 `findFirstOrThrow()` retrieves a single data record in the same way as [`findFirst()`](#findfirst). However, if the query does not find a record, it throws a `PrismaClientKnownRequestError`.
 
-Note that [before Prisma v6](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-6#removed-notfounderror), it would throw a `NotFoundError: No User found error`. 
+Note that [before Prisma v6](/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-6#removed-notfounderror), it would throw a `NotFoundError: No User found error`.
 
 `findFirstOrThrow()` differs from `findFirst()` as follows:
 
@@ -488,26 +489,26 @@ Note that [before Prisma v6](/orm/more/upgrade-guides/upgrading-versions/upgradi
 
 #### Options
 
-| Name                   | Type                                                          | Required | Description                                                                                                                                                                                                                                                                                  |
-| ---------------------- | ------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `select`               | `XOR<PostSelect, null>`                                       | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
-| `include`              | `XOR<PostInclude, null>`                                      | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
-| `omit`                 | `XOR<PostOmit, null>`                                         | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
-| `relationLoadStrategy` | `'join'` or `'query'`                                         | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
-| `where`                | `UserWhereInput`                                              | No       | Wraps _all_ model fields in a type so that the list can be filtered by any property.                                                                                                                                                                                                         |
-| `orderBy`              | `XOR`ByInput>, PostOrderByInput>` | No       | Lets you order the returned list by any property.                                                                                                                                                                                                                                            |
-| `cursor`               | `UserWhereUniqueInput`                                        | No       | Specifies the position for the list (the value typically specifies an `id` or another unique value).                                                                                                                                                                                         |
-| `take`                 | `number`                                                      | No       | Specifies how many objects should be returned in the list (as seen from the _beginning_ (positive value) or _end_ (negative value) **either** of the list **or** from the `cursor` position if mentioned)                                                                                    |
-| `skip`                 | `number`                                                      | No       | Specifies how many of the returned objects in the list should be skipped.                                                                                                                                                                                                                    |
-| `distinct`             | `Enumerable<UserDistinctFieldEnum>`                           | No       | Lets you filter out duplicate rows by a specific field - for example, return only distinct `Post` titles.                                                                                                                                                                                    |
+| Name                   | Type                                | Required | Description                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `select`               | `XOR<PostSelect, null>`             | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
+| `include`              | `XOR<PostInclude, null>`            | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
+| `omit`                 | `XOR<PostOmit, null>`               | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
+| `relationLoadStrategy` | `'join'` or `'query'`               | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
+| `where`                | `UserWhereInput`                    | No       | Wraps _all_ model fields in a type so that the list can be filtered by any property.                                                                                                                                                                                                         |
+| `orderBy`              | `XOR`ByInput>, PostOrderByInput>`   | No       | Lets you order the returned list by any property.                                                                                                                                                                                                                                            |
+| `cursor`               | `UserWhereUniqueInput`              | No       | Specifies the position for the list (the value typically specifies an `id` or another unique value).                                                                                                                                                                                         |
+| `take`                 | `number`                            | No       | Specifies how many objects should be returned in the list (as seen from the _beginning_ (positive value) or _end_ (negative value) **either** of the list **or** from the `cursor` position if mentioned)                                                                                    |
+| `skip`                 | `number`                            | No       | Specifies how many of the returned objects in the list should be skipped.                                                                                                                                                                                                                    |
+| `distinct`             | `Enumerable<UserDistinctFieldEnum>` | No       | Lets you filter out duplicate rows by a specific field - for example, return only distinct `Post` titles.                                                                                                                                                                                    |
 
 #### Return type
 
-| Return type                     | Example                      | Description                                                     |
-| ------------------------------- | ---------------------------- | --------------------------------------------------------------- |
-| JavaScript array object (typed) | `User[]`                     |                                                                 |
-| JavaScript array object (plain) | `[]` | Use `select` and `include` to determine which fields to return. |
-| Empty array                     | `[]`                         | No matching records found.                                      |
+| Return type                     | Example  | Description                                                     |
+| ------------------------------- | -------- | --------------------------------------------------------------- |
+| JavaScript array object (typed) | `User[]` |                                                                 |
+| JavaScript array object (plain) | `[]`     | Use `select` and `include` to determine which fields to return. |
+| Empty array                     | `[]`     | No matching records found.                                      |
 
 #### Examples
 
@@ -526,20 +527,20 @@ const user = await prisma.user.findMany(,
 
 #### Options
 
-| Name                    | Type                                                     | Required | Description                                                                                                                                                                                                                                                                                  |
-| ----------------------- | -------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`                  | `XOR`UserUncheckedCreateInput>` | **Yes**  | Wraps all the model fields in a type so that they can be provided when creating new records. It also includes relation fields which lets you perform (transactional) nested inserts. Fields that are marked as optional or have default values in the datamodel are optional.                |
-| [`select`](#select)     | `XOR<UserSelect, null>`                                  | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
-| [`include`](#include)   | `XOR<UserInclude, null>`                                 | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
-| [`omit`](#omit) | `XOR<UserOmit, null>`                                    | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
-| `relationLoadStrategy`  | `'join'` or `'query'`                                    | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
+| Name                   | Type                            | Required | Description                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`                 | `XOR`UserUncheckedCreateInput>` | **Yes**  | Wraps all the model fields in a type so that they can be provided when creating new records. It also includes relation fields which lets you perform (transactional) nested inserts. Fields that are marked as optional or have default values in the datamodel are optional.                |
+| [`select`](#select)    | `XOR<UserSelect, null>`         | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
+| [`include`](#include)  | `XOR<UserInclude, null>`        | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
+| [`omit`](#omit)        | `XOR<UserOmit, null>`           | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
+| `relationLoadStrategy` | `'join'` or `'query'`           | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
 
 #### Return type
 
-| Return type               | Example                        | Description                                                     |
-| ------------------------- | ------------------------------ | --------------------------------------------------------------- |
-| JavaScript object (typed) | `User`                         |                                                                 |
-| JavaScript object (plain) | `` | Use `select` and `include` to determine which fields to return. |
+| Return type               | Example | Description                                                     |
+| ------------------------- | ------- | --------------------------------------------------------------- |
+| JavaScript object (typed) | `User`  |                                                                 |
+| JavaScript object (plain) | ``      | Use `select` and `include` to determine which fields to return. |
 
 #### Remarks
 
@@ -566,22 +567,22 @@ The following example results in **two** `INSERT` statements:
 
 #### Options
 
-| Name                    | Type                                                   | Required | Description                                                                                                                                                                                                                                                                                  |
-| ----------------------- | ------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`                  | `XOR`UserUncheckedUpdateInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when updating an existing record. Fields that are marked as optional or have default values in the datamodel are optional.                                                                                                    |
-| `where`                 | `UserWhereUniqueInput`                                 | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                        |
-| [`select`](#select)     | `XOR<UserSelect, null>`                                | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
-| [`include`](#include)   | `XOR<UserInclude, null>`                               | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
-| [`omit`](#omit) | `XOR<UserOmit, null>`                                  | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0.                                                                                                                                                                         |
-| `relationLoadStrategy`  | `'join'` or `'query'`                                  | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
+| Name                   | Type                            | Required | Description                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`                 | `XOR`UserUncheckedUpdateInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when updating an existing record. Fields that are marked as optional or have default values in the datamodel are optional.                                                                                                    |
+| `where`                | `UserWhereUniqueInput`          | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                         |
+| [`select`](#select)    | `XOR<UserSelect, null>`         | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
+| [`include`](#include)  | `XOR<UserInclude, null>`        | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
+| [`omit`](#omit)        | `XOR<UserOmit, null>`           | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0.                                                                                                                                                                         |
+| `relationLoadStrategy` | `'join'` or `'query'`           | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
 
 #### Return type
 
-| Return type                | Example                        | Description                                                     |
-| -------------------------- | ------------------------------ | --------------------------------------------------------------- |
-| JavaScript object (typed)  | `User`                         |                                                                 |
-| JavaScript object (plain)  | `` | Use `select` and `include` to determine which fields to return. |
-| `RecordNotFound` exception |                                | Exception is thrown if record does not exist.                   |
+| Return type                | Example | Description                                                     |
+| -------------------------- | ------- | --------------------------------------------------------------- |
+| JavaScript object (typed)  | `User`  |                                                                 |
+| JavaScript object (plain)  | ``      | Use `select` and `include` to determine which fields to return. |
+| `RecordNotFound` exception |         | Exception is thrown if record does not exist.                   |
 
 #### Remarks
 
@@ -607,22 +608,22 @@ const user = await prisma.user.update(,
 
 #### Options
 
-| Name                    | Type                                                    | Required | Description                                                                                                                                                                                                                                                                                  |
-| ----------------------- | ------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `create`                | `XOR`UserUncheckedCreateInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when creating new records. It also includes relation fields which lets you perform (transactional) nested inserts. Fields that are marked as optional or have default values in the datamodel are optional.                   |
-| `update`                | `XOR`UserUncheckedUpdateInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when updating an existing record. Fields that are marked as optional or have default values in the datamodel are optional.                                                                                                    |
-| `where`                 | `UserWhereUniqueInput`                                  | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                        |
-| [`select`](#select)     | `XOR<UserSelect, null>`                                 | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
-| [`include`](#include)   | `XOR<UserInclude, null>`                                | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
-| [`omit`](#omit) | `XOR<UserOmit, null>`                                   | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
-| `relationLoadStrategy`  | `'join'` or `'query'`                                   | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
+| Name                   | Type                            | Required | Description                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `create`               | `XOR`UserUncheckedCreateInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when creating new records. It also includes relation fields which lets you perform (transactional) nested inserts. Fields that are marked as optional or have default values in the datamodel are optional.                   |
+| `update`               | `XOR`UserUncheckedUpdateInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when updating an existing record. Fields that are marked as optional or have default values in the datamodel are optional.                                                                                                    |
+| `where`                | `UserWhereUniqueInput`          | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                         |
+| [`select`](#select)    | `XOR<UserSelect, null>`         | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
+| [`include`](#include)  | `XOR<UserInclude, null>`        | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
+| [`omit`](#omit)        | `XOR<UserOmit, null>`           | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
+| `relationLoadStrategy` | `'join'` or `'query'`           | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
 
 #### Return type
 
-| Return type               | Example                        | Description                                                     |
-| ------------------------- | ------------------------------ | --------------------------------------------------------------- |
-| JavaScript object (typed) | `User`                         |                                                                 |
-| JavaScript object (plain) | `` | Use `select` and `include` to determine which fields to return. |
+| Return type               | Example | Description                                                     |
+| ------------------------- | ------- | --------------------------------------------------------------- |
+| JavaScript object (typed) | `User`  |                                                                 |
+| JavaScript object (plain) | ``      | Use `select` and `include` to determine which fields to return. |
 
 #### Remarks
 
@@ -697,7 +698,7 @@ If your query does not meet these criteria, then Prisma Client handles the upser
 The following examples use this schema:
 
 ```prisma
-model User 
+model User
 ```
 
 The following `upsert` query meets all of the criteria, so Prisma Client uses a database upsert.
@@ -759,21 +760,21 @@ To delete records that match a certain criteria, use [`deleteMany`](#deletemany)
 
 #### Options
 
-| Name                    | Type                     | Required | Description                                                                                                                                                                                                                                                                                  |
-| ----------------------- | ------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `where`                 | `UserWhereUniqueInput`   | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                        |
-| [`select`](#select)     | `XOR<UserSelect, null>`  | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
-| [`include`](#include)   | `XOR<UserInclude, null>` | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
-| [`omit`](#omit) | `XOR<UserOmit, null>`    | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
-| `relationLoadStrategy`  | `'join'` or `'query'`    | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
+| Name                   | Type                     | Required | Description                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `where`                | `UserWhereUniqueInput`   | **Yes**  | Wraps all fields of a model so that a record can be selected ([learn more](#filter-on-non-unique-fields-with-userwhereuniqueinput)). <br></br>Before version 4.5.0, this type only wraps _unique_ fields of a model.                                                                         |
+| [`select`](#select)    | `XOR<UserSelect, null>`  | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned object.                                                                                                                                                                                    |
+| [`include`](#include)  | `XOR<UserInclude, null>` | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned object.                                                                                                                                                                    |
+| [`omit`](#omit)        | `XOR<UserOmit, null>`    | No       | Specifies which properties to exclude on the returned object. In [Preview](/orm/more/releases#preview) since 5.13.0                                                                                                                                                                          |
+| `relationLoadStrategy` | `'join'` or `'query'`    | No       | **Default: `join`**. Specifies the [load strategy](/orm/prisma-client/queries/relation-queries#relation-load-strategies-preview) for a relation query. Only available in combination with `include` (or `select` on a relation field). In [Preview](/orm/more/releases#preview) since 5.9.0. |
 
 #### Return type
 
-| Return type                | Example                        | Description                                                                                                   |
-| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| JavaScript object (typed)  | `User`                         | The `User` record that was deleted.                                                                           |
-| JavaScript object (plain)  | `` | Data from the `User` record that was deleted. Use `select` and `include` to determine which fields to return. |
-| `RecordNotFound` exception |                                | Throws an exception if record does not exist.                                                                 |
+| Return type                | Example | Description                                                                                                   |
+| -------------------------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| JavaScript object (typed)  | `User`  | The `User` record that was deleted.                                                                           |
+| JavaScript object (plain)  | ``      | Data from the `User` record that was deleted. Use `select` and `include` to determine which fields to return. |
+| `RecordNotFound` exception |         | Throws an exception if record does not exist.                                                                 |
 
 #### Remarks
 
@@ -805,9 +806,9 @@ The following query deletes a specific user record and uses `select` to return t
 
 #### Return type
 
-| Return type    | Example        | Description                               |
-| -------------- | -------------- | ----------------------------------------- |
-| `BatchPayload` | `` | A count of the number of records created. |
+| Return type    | Example | Description                               |
+| -------------- | ------- | ----------------------------------------- |
+| `BatchPayload` | ``      | A count of the number of records created. |
 
 #### Remarks
 
@@ -839,13 +840,13 @@ This feature is available in Prisma ORM version 5.14.0 and later for PostgreSQL,
 
 #### Options
 
-| Name              | Type                              | Required | Description                                                                                                                                                                                                                                             |
-| ----------------- | --------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`            | `Enumerable<UserCreateManyInput>` | **Yes**  | Wraps all the model fields in a type so that they can be provided when creating new records. Fields that are marked as optional or have default values in the datamodel are optional.                                    |
-| [`select`](#select)            | `XOR<UserSelect, null>`  | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned objects.                                                                                 |
-| [`omit`](#omit)        | `XOR<UserOmit, null>`    | No       | Specifies which properties to exclude on the returned objects. In [Preview](/orm/more/releases#preview) since 5.13.0. Mutually exclusive with `select`.                                            |
-| [`include`](#include)          | `XOR<UserInclude, null>` | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned objects.                                                                                 |
-| `skipDuplicates?` | `boolean`                         | No       | Do not insert records with unique fields or ID fields that already exist. Only supported by databases that support [`ON CONFLICT DO NOTHING`](https://www.postgresql.org/docs/9.5/sql-insert.html#SQL-ON-CONFLICT). This excludes MongoDB and SQLServer |
+| Name                  | Type                              | Required | Description                                                                                                                                                                                                                                             |
+| --------------------- | --------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`                | `Enumerable<UserCreateManyInput>` | **Yes**  | Wraps all the model fields in a type so that they can be provided when creating new records. Fields that are marked as optional or have default values in the datamodel are optional.                                                                   |
+| [`select`](#select)   | `XOR<UserSelect, null>`           | No       | [Specifies which properties to include](/orm/prisma-client/queries/select-fields) on the returned objects.                                                                                                                                              |
+| [`omit`](#omit)       | `XOR<UserOmit, null>`             | No       | Specifies which properties to exclude on the returned objects. In [Preview](/orm/more/releases#preview) since 5.13.0. Mutually exclusive with `select`.                                                                                                 |
+| [`include`](#include) | `XOR<UserInclude, null>`          | No       | [Specifies which relations should be eagerly loaded](/orm/prisma-client/queries/relation-queries) on the returned objects.                                                                                                                              |
+| `skipDuplicates?`     | `boolean`                         | No       | Do not insert records with unique fields or ID fields that already exist. Only supported by databases that support [`ON CONFLICT DO NOTHING`](https://www.postgresql.org/docs/9.5/sql-insert.html#SQL-ON-CONFLICT). This excludes MongoDB and SQLServer |
 
 #### Remarks
 
@@ -857,10 +858,10 @@ This feature is available in Prisma ORM version 5.14.0 and later for PostgreSQL,
 
 #### Return type
 
-| Return type | Example | Description |
-| ----------- | ------- | ----------- |
-| JavaScript array object (typed) | `User[]` |     |
-| JavaScript array object (plain) | `[]` | Use `select`, `omit` and `include` to determine which fields to return. |
+| Return type                     | Example  | Description                                                             |
+| ------------------------------- | -------- | ----------------------------------------------------------------------- |
+| JavaScript array object (typed) | `User[]` |                                                                         |
+| JavaScript array object (plain) | `[]`     | Use `select`, `omit` and `include` to determine which fields to return. |
 
 #### Examples
 
@@ -872,17 +873,17 @@ This feature is available in Prisma ORM version 5.14.0 and later for PostgreSQL,
 
 #### Options
 
-| Name    | Type                                                                    | Required | Description                                                                                                                                                                                         |
-| ------- | ----------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name    | Type                                | Required | Description                                                                                                                                                                                         |
+| ------- | ----------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data`  | `XOR`UserUncheckedUpdateManyInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when updating an existing record. Fields that are marked as optional or have default values in the datamodel are optional on `data`. |
-| `where` | `UserWhereInput`                                                        | No       | Wraps _all_ fields of a model so that the list can be filtered by any property. If you do not filter the list, all records will be updated.                                                         |
-| `limit` | `number`                                                                | No       | Limits the number of records to update.                                                                                                                                                    |
+| `where` | `UserWhereInput`                    | No       | Wraps _all_ fields of a model so that the list can be filtered by any property. If you do not filter the list, all records will be updated.                                                         |
+| `limit` | `number`                            | No       | Limits the number of records to update.                                                                                                                                                             |
 
 #### Return type
 
-| Return type    | Example        | Description                   |
-| -------------- | -------------- | ----------------------------- |
-| `BatchPayload` | `` | The count of updated records. |
+| Return type    | Example | Description                   |
+| -------------- | ------- | ----------------------------- |
+| `BatchPayload` | ``      | The count of updated records. |
 
 ```ts
 
@@ -934,17 +935,17 @@ This feature is available in Prisma ORM version 6.2.0 and later for PostgreSQL, 
 
 #### Options
 
-| Name    | Type                                                                    | Required | Description                                                                                                                                                                                         |
-| ------- | ----------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name    | Type                                | Required | Description                                                                                                                                                                                         |
+| ------- | ----------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data`  | `XOR`UserUncheckedUpdateManyInput>` | **Yes**  | Wraps all the fields of the model so that they can be provided when updating an existing record. Fields that are marked as optional or have default values in the datamodel are optional on `data`. |
-| `where` | `UserWhereInput`                                                        | No       | Wraps _all_ fields of a model so that the list can be filtered by any property. If you do not filter the list, all records will be updated.                                                         |
+| `where` | `UserWhereInput`                    | No       | Wraps _all_ fields of a model so that the list can be filtered by any property. If you do not filter the list, all records will be updated.                                                         |
 
 #### Return type
 
-| Return type | Example | Description |
-| ----------- | ------- | ----------- |
-| JavaScript array object (typed) | `User[]` |     |
-| JavaScript array object (plain) | `[]` | Use `select`, `omit` and `include` to determine which fields to return. |
+| Return type                     | Example  | Description                                                             |
+| ------------------------------- | -------- | ----------------------------------------------------------------------- |
+| JavaScript array object (typed) | `User[]` |                                                                         |
+| JavaScript array object (plain) | `[]`     | Use `select`, `omit` and `include` to determine which fields to return. |
 
 #### Examples
 
@@ -959,13 +960,13 @@ This feature is available in Prisma ORM version 6.2.0 and later for PostgreSQL, 
 | Name    | Type             | Required | Description                                                                  |
 | ------- | ---------------- | -------- | ---------------------------------------------------------------------------- |
 | `where` | `UserWhereInput` | No       | Wraps _all_ fields of a model so that the list can be filtered by any field. |
-| `limit` | `Int`            | No       | Limits the number of records deleted.                                         |
+| `limit` | `Int`            | No       | Limits the number of records deleted.                                        |
 
 #### Return type
 
-| Return type    | Example        | Description                   |
-| -------------- | -------------- | ----------------------------- |
-| `BatchPayload` | `` | The count of deleted records. |
+| Return type    | Example | Description                   |
+| -------------- | ------- | ----------------------------- |
+| `BatchPayload` | ``      | The count of deleted records. |
 
 ```ts
 
@@ -1003,20 +1004,20 @@ See [Filter conditions and operators](#filter-conditions-and-operators) for exam
 
 #### Options
 
-| Name      | Type                                                          | Required | Description                                                                                                                                                                                               |
-| --------- | ------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `where`   | `UserWhereInput`                                              | No       | Wraps _all_ model fields in a type so that the list can be filtered by any property.                                                                                                                      |
+| Name      | Type                              | Required | Description                                                                                                                                                                                               |
+| --------- | --------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `where`   | `UserWhereInput`                  | No       | Wraps _all_ model fields in a type so that the list can be filtered by any property.                                                                                                                      |
 | `orderBy` | `XOR`ByInput>, PostOrderByInput>` | No       | Lets you order the returned list by any property.                                                                                                                                                         |
-| `cursor`  | `UserWhereUniqueInput`                                        | No       | Specifies the position for the list (the value typically specifies an `id` or another unique value).                                                                                                      |
-| `take`    | `number`                                                      | No       | Specifies how many objects should be returned in the list (as seen from the _beginning_ (positive value) or _end_ (negative value) **either** of the list **or** from the `cursor` position if mentioned) |
-| `skip`    | `number`                                                      | No       | Specifies how many of the returned objects in the list should be skipped.                                                                                                                                 |
+| `cursor`  | `UserWhereUniqueInput`            | No       | Specifies the position for the list (the value typically specifies an `id` or another unique value).                                                                                                      |
+| `take`    | `number`                          | No       | Specifies how many objects should be returned in the list (as seen from the _beginning_ (positive value) or _end_ (negative value) **either** of the list **or** from the `cursor` position if mentioned) |
+| `skip`    | `number`                          | No       | Specifies how many of the returned objects in the list should be skipped.                                                                                                                                 |
 
 #### Return type
 
-| Return type                    | Example                  | Description                   |
-| ------------------------------ | ------------------------ | ----------------------------- |
-| `number`                       | `29`                     | The count of records.         |
-| `UserCountAggregateOutputType` | `` | Returned if `select` is used. |
+| Return type                    | Example | Description                   |
+| ------------------------------ | ------- | ----------------------------- |
+| `number`                       | `29`    | The count of records.         |
+| `UserCountAggregateOutputType` | ``      | Returned if `select` is used. |
 
 #### Examples
 
@@ -1212,7 +1213,7 @@ You can learn more about join strategies [here](/orm/prisma-client/queries/relat
 Because the `relationLoadStrategy` option is currently in Preview, you need to enable it via the `relationJoins` preview feature flag in your Prisma schema file:
 
 ```prisma
-generator client 
+generator client
 ```
 
 After adding this flag, you need to run `prisma generate` again to re-generate Prisma Client. The `relationJoins` feature is currently available on PostgreSQL, CockroachDB and MySQL.
@@ -1274,7 +1275,7 @@ The following examples demonstrate how to use the [`validator`](/orm/prisma-clie
 
   ```ts
   // UserWhereUniqueInput
-  const whereEmailIsUnique = Prisma.validator<Prisma.UserWhereUniqueInput>()()
+  const whereEmailIsUnique = Prisma.validator<Prisma.UserWhereUniqueInput>()();
   ```
 
 - `PostScalarWhereInput`
@@ -1468,7 +1469,7 @@ The following example returns all distinct `city` _and_ `country` field combinat
 
 ## `nativeDistinct`
 
-Enabling `nativeDistinct` in your Prisma schema pushes the `distinct` operation to the database layer 
+Enabling `nativeDistinct` in your Prisma schema pushes the `distinct` operation to the database layer
 (where supported). This can significantly improve performance. However, note that:
 
 - Some databases may not fully support DISTINCT on certain field combinations.
@@ -1477,7 +1478,7 @@ Enabling `nativeDistinct` in your Prisma schema pushes the `distinct` operation 
 To enable `nativeDistinct`:
 
 ```prisma showLineNumbers
-generator client 
+generator client
 ```
 
 See [Preview Features](/orm/reference/preview-features/client-preview-features#preview-features-promoted-to-general-availability) for more details.
@@ -1619,6 +1620,7 @@ A nested `connect` query connects a record to an existing related record by spec
   ```
   The required connected records were not found. Expected 1 records to be connected, found 0.
   ```
+
 - When using `set` and `connect` together, the order in which they are applied significantly impacts the result. If `set` is used before `connect`, the connected records will only reflect the final state established by the `connect` operation, as `set` clears all existing connections before `connect` establishes new ones. Conversely, if `connect` is applied before `set`, the `set` operation will override the `connect` action by clearing all connected records and replacing them with its own specified state.
 
 #### Examples
@@ -1712,7 +1714,7 @@ The following example:
 
 ```ts
 const user = await prisma.profile.create(,
-        create: 
+        create:
     },
   },
 })
@@ -1770,7 +1772,6 @@ A nested `disconnect` query breaks the connection between a parent record and a 
 
 - `disconnect` is only available if the relation is optional.
 - If the relationship you are attempting to disconnect does not exist:
-
   - ([In 2.21.0 and later](https://github.com/prisma/prisma/releases/tag/2.21.0)), the operation does nothing
   - (Before [2.21.0](https://github.com/prisma/prisma/releases/tag/2.21.0)) Prisma Client throws an exception if the provided ID or unique identifier is not connected:
 
@@ -2014,7 +2015,7 @@ const result = await prisma.user.findMany(,
 
 ```ts
 await prisma.user.findMany( },
-      
+
     ]
   }
 })
@@ -2670,10 +2671,7 @@ Use `set` to overwrite the value of a composite type.
 
 - The `set` keyword is optional - you can set the value directly:
   ```ts
-  photos: [
-    ,
-    ,
-  ];
+  photos: [, ,];
   ```
 
 #### Examples
@@ -2789,7 +2787,7 @@ When matching optional fields, you need to distinguish between undefined (missin
 
 The ordering of fields and lists matters when using `equals`:
 
-- For fields, `` and `` are not considered equal
+- For fields, `and` are not considered equal
 - For lists, `[ ,  ]` and `[ ,  ]` are not considered equal
 
 #### Examples
@@ -2920,21 +2918,21 @@ A race conditions occurs when two or more operations must be done in sequence in
 
 The value _should_ be `23`, but the two clients did not read and write to the `postCount` field in sequence. Atomic operations on update combine read and write into a single operation, which prevents a race condition:
 
-| Client   | Operation                   | Value              |
-| :------- | :-------------------------- | :----------------- |
-| Client 1 | **Get and set** field value | `21` &rarr; `22`   |
+| Client   | Operation                   | Value               |
+| :------- | :-------------------------- | :------------------ |
+| Client 1 | **Get and set** field value | `21` &rarr; `22`    |
 | Client 2 | **Get and set** field value | `22` &rarr; `23` ✔ |
 
 </details>
 
 ### Operators
 
-| Option      | Description                                                   |
-| :---------- | :------------------------------------------------------------ |
-| `increment` | Adds `n` to the current value.                                |
-| `decrement` | Subtacts `n` from the current value.                          |
-| `multiply`  | Multiplies the current value by `n`.                          |
-| `divide`    | Divides the current value by `n`.                             |
+| Option      | Description                                    |
+| :---------- | :--------------------------------------------- |
+| `increment` | Adds `n` to the current value.                 |
+| `decrement` | Subtacts `n` from the current value.           |
+| `multiply`  | Multiplies the current value by `n`.           |
+| `divide`    | Divides the current value by `n`.              |
 | `set`       | Sets the current field value. Identical to ``. |
 
 ### Remarks
@@ -2976,11 +2974,11 @@ The examples in this section assumes that the value of the `pet` field is:
 
 ```json
 ,
-      
+
     ]
   },
   "fostered": ,
-  "owned": 
+  "owned":
 }
 ```
 
@@ -3299,7 +3297,7 @@ To perform optimistic concurrency control, we recommend that you use a `version`
 In the following example, `updateOne` and `updateTwo` first read the same record and then attempt to update it. The database only executes these updates if the value in `version` is the same as the value when it did the initial read. When the database executes the first of these updates (which might be `updateOne` or `updateTwo`, depending on timing), it increments the value in `version`. This means that the database does not execute the second update because the value in `version` has changed.
 
 ```prisma
-model User 
+model User
 ```
 
 ```ts
@@ -3317,7 +3315,7 @@ function updateTwo() );
   });
 }
 
-function main() 
+function main()
 ```
 
 ### Permission checks
@@ -3353,7 +3351,7 @@ In the following example, we test `id`, a unique field, in conjunction with `ema
 ```ts
 await prisma.user.update(, ] },
         // ^^^ Valid: the expression specifies a unique field (`id`) outside of any boolean operators
-  data: 
+  data:
 })
 
 // SQL equivalent:
@@ -3365,7 +3363,7 @@ The following example is not valid, because there is no unique field outside of 
 ```ts
 await prisma.user.update(, ] },
         // ^^^ Invalid: the expressions does not contain a unique field outside of boolean operators
-  data: 
+  data:
 })
 ```
 
@@ -3384,7 +3382,7 @@ Prisma Client automatically uses a unique filter to select the appropriate relat
 
 ```ts
 await prisma.user.update(,
-  data: 
+  data:
       // From Prisma version 4.5.0, you can also do the following:
       update: , data:  } }
     }
@@ -3409,7 +3407,7 @@ await prisma.user.update(,
 
 ```ts
 await prisma.user.update(,
-  data: 
+  data:
     }
   }
 })
@@ -3419,7 +3417,7 @@ await prisma.user.update(,
 
 ```ts
 await prisma.user.update(,
-  data: 
+  data:
     }
   }
 })

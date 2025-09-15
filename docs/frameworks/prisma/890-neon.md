@@ -10,7 +10,7 @@ This guide explains how to:
 
 - [Connect Prisma ORM using Neon's connection pooling feature](#how-to-use-neons-connection-pooling)
 - [Resolve connection timeout issues](#resolving-connection-timeouts)
-- [Use Neon's serverless driver with Prisma ORM](#how-to-use-neons-serverless-driver-with-prisma-orm-preview)
+- [Use Neon's serverless driver with Prisma ORM](#how-to-use-neons-serverless-driver-with-prisma-orm)
 
 ## What is Neon?
 
@@ -61,7 +61,7 @@ DIRECT_URL="postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.
 You can then update your `schema.prisma` to use the new direct URL:
 
 ```prisma file=schema.prisma highlight=4;add showLineNumbers
-datasource db 
+datasource db
 ```
 
 More information about the `directUrl` field can be found [here](/orm/reference/prisma-schema-reference#fields).
@@ -97,7 +97,7 @@ Another possible cause of connection timeouts is Prisma ORM's [connection pool](
 DATABASE_URL=postgres://daniel:<password>@ep-mute-rain-952417.us-east-2.aws.neon.tech/neondb?connect_timeout=15&pool_timeout=15
 ```
 
-## How to use Neon's serverless driver with Prisma ORM (Preview)
+## How to use Neon's serverless driver with Prisma ORM
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over HTTP or WebSockets in place of TCP.
 
@@ -105,25 +105,11 @@ You can use Prisma ORM along with the Neon serverless driver using a [driver ada
 
 :::info
 
-This feature is available in Preview from Prisma ORM versions 5.4.2 and later.
+This feature has been Generally Available since Prisma ORM [v6.16.0](https://pris.ly/release/6.16.0).
 
 :::
 
-To get started, enable the `driverAdapters` Preview feature flag:
-
-```prisma
-generator client 
-
-datasource db 
-```
-
-Generate Prisma Client:
-
-```terminal
-npx prisma generate
-```
-
-Install the Prisma ORM adapter for Neon:
+To get started, istall the Prisma ORM adapter for Neon:
 
 ```terminal
 npm install @prisma/adapter-neon
@@ -132,12 +118,11 @@ npm install @prisma/adapter-neon
 Update your Prisma Client instance:
 
 ```ts
+dotenv.config();
+const connectionString = `$`;
 
-dotenv.config()
-const connectionString = `$`
-
-const adapter = new PrismaNeon()
-const prisma = new PrismaClient()
+const adapter = new PrismaNeon();
+const prisma = new PrismaClient();
 ```
 
 You can then use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before, using the connection string defined in the Prisma schema.

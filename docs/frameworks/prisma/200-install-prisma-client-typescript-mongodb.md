@@ -1,16 +1,16 @@
 ---
-title: 'Install Prisma Client in an existing TypeScript project (MongoDB)'
+title: 'Install Prisma Client (TypeScript and MongoDB)'
 sidebar_label: 'Install Prisma Client'
-metaTitle: 'Install Prisma Client in your existing project: TypeScript and MongoDB'
-metaDescription: 'Install and generate Prisma Client in your existing project using a MongoDB database and TypeScript.'
+metaTitle: 'Install Prisma Client: TypeScript and MongoDB'
+metaDescription: 'Install and generate Prisma Client in your project using TypeScript and MongoDB'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['mongodb']
 hide_table_of_contents: true
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb/introspection-typescript-mongodb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/querying-the-database-typescript-mongodb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/install-prisma-client-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/mongodb/creating-the-prisma-schema-typescript-mongodb
+pagination_next: getting-started/setup-prisma/start-from-scratch/mongodb/querying-the-database-typescript-mongodb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/mongodb/install-prisma-client-
 ---
- 
+
 ## Install and generate Prisma Client
 
 To get started with Prisma Client, you need to install the `@prisma/client` package:
@@ -19,8 +19,12 @@ To get started with Prisma Client, you need to install the `@prisma/client` pack
 npm install @prisma/client
 ```
 
-The install command invokes `prisma generate` for you which reads your Prisma schema and generates a version of Prisma Client that is _tailored_ to your models.
+Then, run `prisma generate` which reads your Prisma schema and generates the Prisma Client.
+
+```terminal copy
+npx prisma generate
+```
 
 ![Install and generate Prisma Client](/img/getting-started/prisma-client-install-and-generate.png)
 
-Whenever you make changes to your Prisma schema in the future, you manually need to invoke `prisma generate` in order to accommodate the changes in your Prisma Client API.
+Whenever you update your Prisma schema, you will need to run the `prisma db push` command to create new indexes and regenerate Prisma Client.

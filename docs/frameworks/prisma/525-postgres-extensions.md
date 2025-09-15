@@ -1,7 +1,7 @@
 ---
-title: "Postgres extensions"
-metaTitle: "Postgres extensions"
-metaDescription: "Learn about using Postgres extensions with Prisma Postgres"
+title: 'Postgres extensions'
+metaTitle: 'Postgres extensions'
+metaDescription: 'Learn about using Postgres extensions with Prisma Postgres'
 tocDepth: 3
 toc: true
 sidebar_class_name: early-access-badge
@@ -9,17 +9,19 @@ sidebar_class_name: early-access-badge
 
 ## Overview
 
-Prisma Postgres supports the following [PostgreSQL extensions](https://www.postgresql.org/docs/current/sql-createextension.html):
+Prisma Postgres supports [PostgreSQL extensions](https://www.postgresql.org/docs/current/sql-createextension.html), such as:
 
 - [`pgvector`](https://github.com/pgvector/pgvector)
-- [`pg_stat_statements`](https://www.postgresql.org/docs/current/pgstatstatements.html)
 - [`citext`](https://www.postgresql.org/docs/current/citext.html)
 - [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html)
 - [`fuzzystrmatch`](https://www.postgresql.org/docs/current/fuzzystrmatch.html)
-- [`unaccent`](https://www.postgresql.org/docs/current/unaccent.html)
 - [`pg_search`](https://pgxn.org/dist/pg_search)
+- [`pgcrypto`](https://www.postgresql.org/docs/current/pgcrypto.html)
+- [`contrib`](https://www.postgresql.org/docs/current/contrib.html) extensions
 
-Support for [more extensions](#other-extensions-are-coming-soon) will follow soon. If there are specific extensions you'd like to see in Prisma Postgres, [fill out this form](https://pris.ly/i-want-extensions).
+See below for a [full list of supported extensions](#all-supported-extensions).
+
+If there are specific extensions you'd like to see in Prisma Postgres, [fill out this form](https://pris.ly/i-want-extensions).
 
 :::warning
 
@@ -29,7 +31,7 @@ Postgres extensions support in Prisma Postgres is currently in [Early Access](/p
 
 ## Using extensions with Prisma ORM
 
-Some extensions may already be supported by Prisma Postgres but not yet by Prisma ORM. Native support for some Postgres extensions in Prisma ORM is coming soon. In the meantime, you can still use these extensions with Prisma ORM by using [customized migrations](/orm/prisma-migrate/workflows/customizing-migrations) and [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) (or another mechanism to send [raw SQL](/orm/prisma-client/using-raw-sql) via in Prisma ORM). 
+Some extensions may already be supported by Prisma Postgres but not yet by Prisma ORM. Native support for some Postgres extensions in Prisma ORM is coming soon. In the meantime, you can still use these extensions with Prisma ORM by using [customized migrations](/orm/prisma-migrate/workflows/customizing-migrations) and [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) (or another mechanism to send [raw SQL](/orm/prisma-client/using-raw-sql) via in Prisma ORM).
 
 Let's walk through an example with `pgvector`.
 
@@ -59,6 +61,7 @@ CREATE TABLE "Document" (
 ```
 
 In this case, you:
+
 - install the `pgvector` extension in your database using the `CREATE EXTENSION` statement
 - create a `Document` table that uses the `VECTOR` type from that extension
 
@@ -81,7 +84,7 @@ The [warning in the CLI output of the command is expected](/orm/prisma-schema/in
 You Prisma schema will now contain the `Document` model:
 
 ```prisma
-model Document 
+model Document
 ```
 
 Because the `VECTOR` type is not yet natively supported by Prisma ORM, it's represented as an [`Unsupported`](/orm/prisma-schema/data-model/models#unsupported-types) type.
@@ -101,13 +104,20 @@ You can also use [TypedSQL](/orm/prisma-client/using-raw-sql/typedsql) for type-
 
 ## Temporary limitations
 
-### `pgvector` is only available on newly created Prisma Postgres instances
+### Limited availability of extensions
 
-For now, `pgvector` is only available on *newly created* Prisma Postgres instances. It will be rolled out for *existing* instances soon.
+Extensions are supported on:
 
-### No Prisma Studio support for `pgvector`
+- _all_ instances on Pro and Business plans
+- _all_ instances on Free and Starter plans created after August 12th, 2025
 
-Prisma Studio currently doesn't support tables where types of the `pgvector` extensions are used. It will show the following error:
+Remaining instances will receive support for extensions soon.
+
+If you're using an instance today where PostgreSQL extensions are not supported and you need an extension, [reach out to us](mailto:support@prisma.io) for help.
+
+### No Prisma Studio support for special data types from extensions
+
+Prisma Studio currently doesn't support tables where special types from PostgreSQL extensions are used. It will show an error similar to this one for `pgvector`:
 
 <details>
 <summary>Show Prisma Studio error message</summary>
@@ -122,12 +132,62 @@ Prisma Studio currently doesn't support tables where types of the `pgvector` ext
 
 </details>
 
+## All supported extensions
+
+Here’s the full list with corrected URLs:
+
+- [`amcheck`](https://www.postgresql.org/docs/current/amcheck.html)
+- [`autoinc`](https://www.postgresql.org/docs/current/contrib-spi.html)
+- [`bloom`](https://www.postgresql.org/docs/current/bloom.html)
+- [`btree_gin`](https://www.postgresql.org/docs/current/btree-gin.html)
+- [`btree_gist`](https://www.postgresql.org/docs/current/btree-gist.html)
+- [`citext`](https://www.postgresql.org/docs/current/citext.html)
+- [`cube`](https://www.postgresql.org/docs/current/cube.html)
+- [`dblink`](https://www.postgresql.org/docs/current/dblink.html)
+- [`dict_int`](https://www.postgresql.org/docs/current/dict-int.html)
+- [`dict_xsyn`](https://www.postgresql.org/docs/current/dict-xsyn.html)
+- [`earthdistance`](https://www.postgresql.org/docs/current/earthdistance.html)
+- [`file_fdw`](https://www.postgresql.org/docs/current/file-fdw.html)
+- [`fuzzystrmatch`](https://www.postgresql.org/docs/current/fuzzystrmatch.html)
+- [`hstore`](https://www.postgresql.org/docs/current/hstore.html)
+- [`insert_username`](https://www.postgresql.org/docs/current/contrib-spi.html)
+- [`intagg`](https://www.postgresql.org/docs/current/intagg.html)
+- [`intarray`](https://www.postgresql.org/docs/current/intarray.html)
+- [`isn`](https://www.postgresql.org/docs/current/isn.html)
+- [`lo`](https://www.postgresql.org/docs/current/lo.html)
+- [`ltree`](https://www.postgresql.org/docs/current/ltree.html)
+- [`moddatetime`](https://www.postgresql.org/docs/current/contrib-spi.html)
+- [`pageinspect`](https://www.postgresql.org/docs/current/pageinspect.html)
+- [`pg_buffercache`](https://www.postgresql.org/docs/current/pgbuffercache.html)
+- [`pg_freespacemap`](https://www.postgresql.org/docs/current/pgfreespacemap.html)
+- [`pg_prewarm`](https://www.postgresql.org/docs/current/pgprewarm.html)
+- [`pg_search`](https://pgxn.org/dist/pg_search/)
+- [`pg_stat_statements`](https://www.postgresql.org/docs/current/pgstatstatements.html)
+- [`pg_surgery`](https://www.postgresql.org/docs/current/pgsurgery.html)
+- [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html)
+- [`pg_visibility`](https://www.postgresql.org/docs/current/pgvisibility.html)
+- [`pg_walinspect`](https://www.postgresql.org/docs/current/pgwalinspect.html)
+- [`pgcrypto`](https://www.postgresql.org/docs/current/pgcrypto.html)
+- [`pgrowlocks`](https://www.postgresql.org/docs/current/pgrowlocks.html)
+- [`pgstattuple`](https://www.postgresql.org/docs/current/pgstattuple.html)
+- [`plpgsql`](https://www.postgresql.org/docs/current/plpgsql.html)
+- [`postgres_fdw`](https://www.postgresql.org/docs/current/postgres-fdw.html)
+- [`refint`](https://www.postgresql.org/docs/current/contrib-spi.html)
+- [`seg`](https://www.postgresql.org/docs/current/seg.html)
+- [`sslinfo`](https://www.postgresql.org/docs/current/sslinfo.html)
+- [`tablefunc`](https://www.postgresql.org/docs/current/tablefunc.html)
+- [`tcn`](https://www.postgresql.org/docs/current/tcn.html)
+- [`tsm_system_rows`](https://www.postgresql.org/docs/current/tsm-system-rows.html)
+- [`tsm_system_time`](https://www.postgresql.org/docs/current/tsm-system-time.html)
+- [`unaccent`](https://www.postgresql.org/docs/current/unaccent.html)
+- [`uuid-ossp`](https://www.postgresql.org/docs/current/uuid-ossp.html)
+- [`vector`](https://github.com/pgvector/pgvector)
+- [`xml2`](https://www.postgresql.org/docs/current/xml2.html)
+
 ## Other extensions are coming soon
 
 Support for the following extensions is going to come soon:
 
-- [`pgcrypto`](https://www.postgresql.org/docs/current/pgcrypto.html)
 - [`postgis`](https://postgis.net/)
-- [`contrib`](https://www.postgresql.org/docs/current/contrib.html) extensions
 
 If there are specific extensions you'd like to see, [fill out this form](https://pris.ly/i-want-extensions).

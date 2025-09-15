@@ -14,19 +14,20 @@ In Prisma ORM 7, Prisma Client will no longer be generated in `node_modules` by 
 
 :::tip Use Prisma ORM without Rust binaries
 
-If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
-
-**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+If Prisma ORM's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can use it without them using this configuration of your `generator` block:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+Prisma ORM without Rust binaries has been [Generally Available](/orm/more/releases#generally-available-ga) since [v6.16.0](https://pris.ly/release/6.16.0).
+
+Note that you need to use a [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) in this case.
+
 When using this architecture:
 
-* No Rust query engine binary is downloaded or shipped.
-* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
 
@@ -43,7 +44,7 @@ To generate and instantiate Prisma Client:
 1. Add the following `generator` definition to your Prisma schema:
 
    ```prisma
-   generator client 
+   generator client
    ```
 
    :::note
@@ -66,11 +67,11 @@ To generate and instantiate Prisma Client:
 
 1. You can now [instantiate Prisma Client](/orm/prisma-client/setup-and-configuration/instantiate-prisma-client) in your code:
 
-    ```ts
-    import  from 'app/generated/prisma/client'
-    const prisma = new PrismaClient()
-    // use `prisma` in your application to read and write data in your DB
-    ```
+   ```ts
+   import  from 'app/generated/prisma/client'
+   const prisma = new PrismaClient()
+   // use `prisma` in your application to read and write data in your DB
+   ```
 
 > **Important**: You need to re-run the `prisma generate` command after every change that's made to your Prisma schema to update the generated Prisma Client code.
 
@@ -91,7 +92,7 @@ We strongly recommend you define a custom `output` path. In Prisma ORM version `
 You can also specify a custom `output` path on the `generator` configuration, for example (assuming your `schema.prisma` file is located at the default `prisma` subfolder):
 
 ```prisma
-generator client 
+generator client
 ```
 
 After running `prisma generate` for that schema file, the Prisma Client package will be located in:
@@ -106,9 +107,9 @@ To import the `PrismaClient` from a custom location (for example, from a file na
 
 ```
 
-:::note 
+:::note
 
-For improved compatibility with ECMAScript modules (ESM) and to ensure consistent behaviour of Prisma ORM across different Node.js runtimes, you can also use the [`prisma-client` generator](/orm/prisma-schema/overview/generators#prisma-client-preview) (Preview). This generator is specifically designed to handle common challenges with module resolution and runtime variations, providing a smoother integration experience and less friction with bundlers.
+For improved compatibility with ECMAScript modules (ESM) and to ensure consistent behaviour of Prisma ORM across different Node.js runtimes, you can also use the newer [`prisma-client`](/orm/prisma-schema/overview/generators#prisma-client) generator. This generator is specifically designed to handle common challenges with module resolution and runtime variations, providing a smoother integration experience and less friction with bundlers.
 
 :::
 

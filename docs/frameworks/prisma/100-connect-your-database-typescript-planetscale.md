@@ -1,31 +1,30 @@
 ---
-title: 'Connect your existing database using TypeScript and PlanetScale'
+title: 'Connect your database using TypeScript and PlanetScale'
 sidebar_label: 'Connect your database'
-metaTitle: 'Connect your existing database using TypeScript and PlanetScale'
-metaDescription: 'Connect your existing database to your project using TypeScript and PlanetScale'
+metaTitle: 'Connect your database using TypeScript and PlanetScale'
+metaDescription: 'Connect your database to your project using TypeScript and PlanetScale'
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
 sidebar_class_name: hidden-sidebar
 hide_table_of_contents: true
-toc: false
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-planetscale
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-planetscale
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-planetscale
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-planetscale
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-
 ---
-
-## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db 
+datasource db
 ```
 
-You will also need to [set the relation mode type to `prisma`](/orm/prisma-schema/data-model/relations/relation-mode#emulate-relations-in-prisma-orm-with-the-prisma-relation-mode) in the `datasource` block:
+You will also need to set the relation mode type to `prisma` in order to [emulate foreign key constraints](/orm/overview/databases/planetscale#option-1-emulate-relations-in-prisma-client) in the `datasource` block:
 
 ```prisma file=schema.prisma highlight=4;add showLineNumbers
-datasource db 
+datasource db
 ```
+
+> **Note**: Since February 2024, you can alternatively [use foreign key constraints on a database-level in PlanetScale](/orm/overview/databases/planetscale#option-2-enable-foreign-key-constraints-in-the-planetscale-database-settings), which omits the need for setting `relationMode = "prisma"`.
 
 The `url` is [set via an environment variable](/orm/prisma-schema/overview#accessing-environment-variables-from-the-schema) which is defined in `.env`:
 
@@ -35,8 +34,6 @@ DATABASE_URL="mysql://janedoe:mypassword@server.us-east-2.psdb.cloud/mydb?sslacc
 
 You now need to adjust the connection URL to point to your own database.
 
-<h3 id="connection-url">Connection URL</h3>
-
 The [format of the connection URL](/orm/reference/connection-urls) for your database typically depends on the database you use. PlanetScale uses the MySQL connection URL format, which has the following structure (the parts spelled all-uppercased are _placeholders_ for your specific connection details):
 
 ```no-lines
@@ -45,10 +42,10 @@ mysql://USER:PASSWORD@HOST:PORT/DATABASE
 
 Here's a short explanation of each component:
 
--   `USER`: The name of your database user
--   `PASSWORD`: The password for your database user
--   `PORT`: The port where your database server is running (typically `3306` for MySQL)
--   `DATABASE`: The name of the [database](https://dev.mysql.com/doc/refman/8.0/en/creating-database.html)
+- `USER`: The name of your database user
+- `PASSWORD`: The password for your database user
+- `PORT`: The port where your database server is running (typically `3306` for MySQL)
+- `DATABASE`: The name of the [database](https://dev.mysql.com/doc/refman/8.0/en/creating-database.html)
 
 For a database hosted with PlanetScale, the [connection URL](/orm/reference/connection-urls) looks similar to this:
 

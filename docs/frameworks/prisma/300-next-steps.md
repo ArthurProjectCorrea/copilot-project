@@ -1,11 +1,11 @@
 ---
-title: 'Next steps after adding Prisma ORM to your existing project'
+title: 'Next steps after adding Prisma ORM to an existing project using MongoDB'
 sidebar_label: 'Next steps'
-metaTitle: 'Next steps after adding Prisma ORM to your existing project'
-metaDescription: 'Next steps to take now that you have successfully added Prisma ORM to your relational database project'
+metaTitle: 'Next steps after adding Prisma ORM to an existing project using MongoDB'
+metaDescription: 'Next steps to take now that you have successfully added Prisma ORM to your existing Node.js or TypeScript project.'
 hide_table_of_contents: true
 ---
- 
+
 This section lists a number of potential next steps you can now take from here. Feel free to explore these or read the [Introduction](/orm/overview/introduction/what-is-prisma) page to get a high-level overview of Prisma ORM.
 
 ### Continue exploring the Prisma Client API
@@ -26,9 +26,7 @@ Here are a few suggestions for a number of more queries you can send with Prisma
 **Filter all `Post` records that contain `"hello"`**
 
 ```js
-const filteredPosts = await prisma.post.findMany(,
-      ,
-    ],
+const filteredPosts = await prisma.post.findMany( },  }],
   },
 })
 ```
@@ -45,11 +43,11 @@ const post = await prisma.post.create(,
 **Use the fluent relations API to retrieve the `Post` records of a `User` by traversing the relations**
 
 ```js
-const posts = await prisma.profile
+const user = await prisma.comment
   .findUnique(,
   })
+  .post()
   .user()
-  .posts()
 ```
 
 **Delete a `User` record**
@@ -73,31 +71,14 @@ The Prisma blog features comprehensive tutorials about Prisma ORM, check out our
 
 Prisma Studio is a visual editor for the data in your database. Run `npx prisma studio` in your terminal.
 
-### Get query insights and analytics with Prisma Optimize
-
-[Prisma Optimize](/optimize) helps you generate insights and provides recommendations that can help you make your database queries faster. [Try it out now!](/optimize/getting-started)
-
-Optimize aims to help developers of all skill levels write efficient database queries, reducing database load and making applications more responsive.
-
-### Change the database schema (e.g. add more tables)
-
-To evolve the app, you need to follow the same flow of the tutorial:
-
-1. Manually adjust your database schema using SQL
-1. Re-introspect your database
-1. Optionally re-configure your Prisma Client API
-1. Re-generate Prisma Client
-
-![Introspect workflow](/img/getting-started/prisma-evolve-app-workflow.png)
-
 ### Try a Prisma ORM example
 
 The [`prisma-examples`](https://github.com/prisma/prisma-examples/) repository contains a number of ready-to-run examples:
 
-| Demo                                                                                                                | Stack        | Description                                                                                         |
-| :------------------------------------------------------------------------------------------------------------------ | :----------- | --------------------------------------------------------------------------------------------------- |
-| [`nextjs`](https://pris.ly/e/orm/nextjs) | Fullstack    | Simple [Next.js](https://nextjs.org/) app                                |
-| [`nextjs-graphql`](https://pris.ly/e/ts/graphql-nextjs)                 | Fullstack    | Simple [Next.js](https://nextjs.org/) app (React) with a GraphQL API                                |
-| [`graphql-nexus`](https://pris.ly/e/ts/graphql-nexus) | Backend only | GraphQL server based on [`@apollo/server`](https://www.apollographql.com/docs/apollo-server) |
-| [`express`](https://pris.ly/e/ts/rest-express)                     | Backend only | Simple REST API with Express.JS                                                                     |
-| [`grpc`](https://pris.ly/e/ts/grpc)                                     | Backend only | Simple gRPC API                                                                                     |
+| Demo                                                    | Stack        | Description                                                                                  |
+| :------------------------------------------------------ | :----------- | -------------------------------------------------------------------------------------------- |
+| [`nextjs`](https://pris.ly/e/orm/nextjs)                | Fullstack    | Simple [Next.js](https://nextjs.org/) app                                                    |
+| [`nextjs-graphql`](https://pris.ly/e/ts/graphql-nextjs) | Fullstack    | Simple [Next.js](https://nextjs.org/) app (React) with a GraphQL API                         |
+| [`graphql-nexus`](https://pris.ly/e/ts/graphql-nexus)   | Backend only | GraphQL server based on [`@apollo/server`](https://www.apollographql.com/docs/apollo-server) |
+| [`express`](https://pris.ly/e/ts/rest-express)          | Backend only | Simple REST API with Express.JS                                                              |
+| [`grpc`](https://pris.ly/e/ts/grpc)                     | Backend only | Simple gRPC API                                                                              |

@@ -11,21 +11,25 @@ This page covers everything you need to know to deploy an app with Prisma ORM to
 
 :::tip Use Prisma ORM without Rust binaries
 
-If Prisma's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
-
-**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+If Prisma ORM's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can use it without them using this configuration of your `generator` block:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+Prisma ORM without Rust binaries has been [Generally Available](/orm/more/releases#generally-available-ga) since [v6.16.0](https://pris.ly/release/6.16.0).
+
+Note that you need to use a [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) in this case.
+
 When using this architecture:
 
-* No Rust query engine binary is downloaded or shipped.
-* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
-This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
+
+Curious why we moved away from the Rust engine? Take a look at why we transitioned from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in this [blog post](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks).
+
 :::
 
 ## General considerations when deploying to Cloudflare Workers
@@ -34,7 +38,7 @@ This section covers _general_ things you need to be aware of when deploying to C
 
 ### Using Prisma Postgres
 
-You can use Prisma Postgres and deploy to Cloudflare Workers. 
+You can use Prisma Postgres and deploy to Cloudflare Workers.
 
 After you create a Worker, run:
 
@@ -105,7 +109,7 @@ If your application uses PostgreSQL, we recommend using [Prisma Postgres](/postg
 First, ensure that the `DATABASE_URL` is set as the `url` of the `datasource` in your Prisma schema:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Development
@@ -136,7 +140,7 @@ There are several options for achieving this:
   ```
 - Create a script in `package.json` that reads `.dev.vars` via [`dotenv`](https://www.npmjs.com/package/dotenv-cli). You can then execute `prisma` commands as follows: `npm run env -- npx prisma migrate dev`. Here's a reference for the script:
   ```js file=package.json
-  "scripts":  
+  "scripts":
   ```
 - Duplicate the `DATABASE_URL` and any other relevant env vars into a new file called `.env` which can then be used by Prisma ORM.
 
@@ -207,14 +211,14 @@ You'll further need a database instance of your database provider of choice avai
 We'll use the default `User` model for the example below:
 
 ```prisma
-model User 
+model User
 ```
 
 ### PostgreSQL (traditional)
 
 If you are using a traditional PostgreSQL database that's accessed via TCP and the `pg` driver, you need to:
 
-- use the `@prisma/adapter-pg` database adapter (via the `driverAdapters` Preview feature)
+- use the `@prisma/adapter-pg` database adapter (learn more [here](/orm/overview/databases/postgresql#using-the-node-postgres-driver))
 - set `node_compat = true` in `wrangler.toml` (see the [Cloudflare docs](https://developers.cloudflare.com/workers/runtime-apis/nodejs/))
 
 #### 1. Configure Prisma schema & database connection
@@ -225,12 +229,12 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 
 :::
 
-First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
+First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable:
 
 ```prisma file=schema.prisma
-generator client 
+generator client
 
-datasource db 
+datasource db
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable to the value of your database connection string. You'll do this in a file called `.dev.vars` used by Cloudflare:
@@ -337,7 +341,7 @@ The command will output the URL where you can access the deployed Worker.
 
 If you are using a PlanetScale database, you need to:
 
-- use the `@prisma/adapter-planetscale` database adapter (via the `driverAdapters` Preview feature)
+- use the `@prisma/adapter-planetscale` database adapter (learn more [here](/orm/overview/databases/planetscale#how-to-use-the-planetscale-serverless-driver-with-prisma-orm-preview))
 - manually remove the conflicting `cache` field:
 
   ```ts
@@ -358,12 +362,12 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 
 :::
 
-First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
+First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable:
 
 ```prisma file=schema.prisma
-generator client 
+generator client
 
-datasource db 
+datasource db
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable to the value of your database connection string. You'll do this in a file called `.dev.vars` used by Cloudflare:
@@ -457,7 +461,7 @@ The command will output the URL where you can access the deployed Worker.
 
 If you are using a Neon database, you need to:
 
-- use the `@prisma/adapter-neon` database adapter (via the `driverAdapters` Preview feature)
+- use the `@prisma/adapter-neon` database adapter (learn more [here](/orm/overview/databases/neon#how-to-use-neons-serverless-driver-with-prisma-orm))
 
 #### 1. Configure Prisma schema & database connection
 
@@ -467,12 +471,12 @@ If you don't have a project to deploy, follow the instructions in the [Prerequis
 
 :::
 
-First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable. You also need to enable the `driverAdapters` feature flag:
+First, ensure that the database connection is configured properly. In your Prisma schema, set the `url` of the `datasource` block to the `DATABASE_URL` environment variable:
 
 ```prisma file=schema.prisma
-generator client 
+generator client
 
-datasource db 
+datasource db
 ```
 
 Next, you need to set the `DATABASE_URL` environment variable to the value of your database connection string. You'll do this in a file called `.dev.vars` used by Cloudflare:

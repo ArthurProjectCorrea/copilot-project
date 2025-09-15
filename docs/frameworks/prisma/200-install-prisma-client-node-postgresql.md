@@ -1,13 +1,13 @@
 ---
-title: 'Install Prisma Client in an existing JavaScript project (PostgreSQL)'
+title: 'Install Prisma Client (JavaScript and PostgreSQL)'
 sidebar_label: 'Install Prisma Client'
-metaTitle: 'Install Prisma Client in your existing project using JavaScript and PostgreSQL'
-metaDescription: 'Install and generate Prisma Client in your existing JavaScript and PostgreSQL project'
+metaTitle: 'Install Prisma Client: JavaScript and PostgreSQL'
+metaDescription: 'Install and generate Prisma Client in your project using JavaScript and PostgreSQL'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-hide_table_of_contents: true
 sidebar_class_name: hidden-sidebar
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases/baseline-your-database-node-postgresql
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-node-postgresql
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/install-prisma-client-
+hide_table_of_contents: true
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-node-postgresql
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-node-postgresql
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-
 ---

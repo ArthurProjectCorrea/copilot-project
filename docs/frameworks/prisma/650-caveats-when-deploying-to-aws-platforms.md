@@ -39,22 +39,29 @@ This error happens because AWS Elastic Beanstalk doesn't install `devDependencie
 ## AWS RDS Postgres
 
 When using Prisma ORM with AWS RDS Postgres, you may encounter connection issues or the following error during migration or runtime:
+
 ```bash
 Error: P1010: User <username> was denied access on the database <database>
 ```
+
 ### Cause
+
 AWS RDS enforces SSL connections by default, and Prisma parses the database connection string with `rejectUnauthorized: true`, which requires a valid SSL certificate. If the certificate is not configured properly, Prisma cannot connect to the database.
 
 ### Solution
+
 To resolve this issue, update the `DATABASE_URL` environment variable to include the `sslmode=no-verify` option. This bypasses strict SSL certificate verification and allows Prisma to connect to the database. Update your `.env` file as follows:
 
 ```bash
 DATABASE_URL=postgresql://<username>:<password>@<host>/<database>?sslmode=no-verify&schema=public
 ```
+
 ### Why This Works
+
 The `sslmode=no-verify` setting passes `rejectUnauthorized: false` to the SSL configuration via the [pg-connection-string](https://github.com/brianc/node-postgres/blob/95d7e620ef8b51743b4cbca05dd3c3ce858ecea7/packages/pg-connection-string/README.md?plain=1#L71) package. This disables strict certificate validation, allowing Prisma to establish a connection with the RDS database.
 
 ### Note
+
 While using `sslmode=no-verify` can be a quick fix, it bypasses SSL verification and might not meet security requirements for production environments. In such cases, ensure that a valid SSL certificate is properly configured.
 
 ## AWS Lambda upload limit
@@ -66,15 +73,17 @@ AWS Lambda defines an **deployment package upload limit**, which includes:
 
 :::note
 
-As of [v6.7.0](https://pris.ly/release/6.7.0), Prisma ORM has the `queryCompiler` Preview feature.
+As of [v6.16.0](https://pris.ly/release/6.16.0), Prisma ORM can be used without Rust engines in production applications. Learn more [here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
 
-**When enabled, your Prisma Client will be generated [without a Rust-based query engine binary](/orm/prisma-client/setup-and-configuration/no-rust-engine)**:
+**When enabled, your Prisma Client will be generated without a Rust-based query engine binary**:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is required alongside `queryCompiler`.
+Note that [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) are required if you want to use Prisma ORM without Rust engines.
+
+You can [read about the performance and DX improvements](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks) of this change on our blog.
 
 :::
 
@@ -92,7 +101,6 @@ Prisma CLI downloads additional engine binaries that are **not required** in pro
    ```
 
    In this scenario:
-
    - Keep `node_modules/.prisma/client/query-engine-rhel-openssl-3.0.x`, which is the engine file used by AWS Lambda
    - Delete `node_modules/.prisma/client/query-engine-debian-openssl-1.1.x`, which is only required locally
 

@@ -1,13 +1,13 @@
 ---
-title: 'Install Prisma Client in an existing JavaScript project (PlanetScale)'
+title: 'Install Prisma Client (JavaScript and PlanetScale)'
 sidebar_label: 'Install Prisma Client'
-metaTitle: 'Install Prisma Client in your existing project using JavaScript and PlanetScale'
-metaDescription: 'Install and generate Prisma Client in your existing JavaScript and PlanetScale project'
+metaTitle: 'Install Prisma Client: JavaScript and PlanetScale'
+metaDescription: 'Install and generate Prisma Client in your project using JavaScript and PlanetScale'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-hide_table_of_contents: true
 sidebar_class_name: hidden-sidebar
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-node-planetscale
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-node-planetscale
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/install-prisma-client-
+hide_table_of_contents: true
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-node-planetscale
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-node-planetscale
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-
 ---

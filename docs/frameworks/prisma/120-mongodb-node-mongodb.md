@@ -1,18 +1,18 @@
 ---
-title: 'Add Prisma ORM to an existing MongoDB project using JavaScript'
+title: 'Start from scratch with Prisma ORM using MongoDB and JavaScript'
 sidebar_label: 'MongoDB'
-metaTitle: 'Add Prisma ORM to an existing MongoDB project using JavaScript (15 min)'
-metaDescription: 'Learn how to add Prisma ORM to an existing Node.js project by connecting it to your MongoDB database and generating a Prisma Client for database access.'
-toc: false
-langSwitcher: ['typescript', 'node']
+metaTitle: 'Start from scratch with Prisma ORM using MongoDB and JavaScript (15 min)'
+metaDescription: 'Learn how to create a new Node.js project from scratch by connecting Prisma ORM to your MongoDB database and generating a Prisma Client for database access.'
 hide_table_of_contents: true
+langSwitcher: ['typescript', 'node']
 dbSwitcher: ['mongodb']
+sidebar_custom_props:
 sidebar_class_name: hidden-sidebar
-pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/connect-your-database-node-mongodb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb-
+pagination_next: getting-started/setup-prisma/start-from-scratch/mongodb/connect-your-database-node-mongodb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/mongodb-
 ---
 
-Learn how to add Prisma ORM to an existing Node.js or TypeScript project by connecting it to your database and generating a Prisma Client for database access. The following tutorial introduces you to [Prisma CLI](/orm/tools/prisma-cli), [Prisma Client](/orm/prisma-client), and [Prisma Introspection](/orm/prisma-schema/introspection).
+Learn how to create a new Node.js or TypeScript project from scratch by connecting Prisma ORM to your MongoDB database and generating a Prisma Client for database access. The following tutorial introduces you to the [Prisma CLI](/orm/tools/prisma-cli) and [Prisma Client](/orm/prisma-client).
 
 ## Prerequisites
 
@@ -21,22 +21,24 @@ In order to successfully complete this guide, you need:
 - [Node.js](https://nodejs.org/en/) installed on your machine (see [system requirements](/orm/reference/system-requirements) for officially supported versions)
 - Access to a MongoDB 4.2+ server with a replica set deployment. We recommend using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-Make sure you have your database [connection URL](/orm/reference/connection-urls) (that includes your authentication credentials) at hand! If you don't have a database server running and just want to explore Prisma ORM, check out the [Quickstart](/getting-started/quickstart-sqlite).
+Make sure you have your database [connection URL](/orm/reference/connection-urls) at hand. If you don't have a database server running and just want to explore Prisma ORM, check out the [Quickstart](/getting-started/quickstart-sqlite).
 
 > See [System requirements](/orm/reference/system-requirements) for exact version requirements.
 
-## Set up Prisma ORM
+## Create project setup
 
-As a first step, navigate into it your project directory that contains the `package.json` file.
-
-Next, add the Prisma CLI as a development dependency to your project:
+As a first step, create a project directory and navigate into it:
 
 ```terminal copy
+mkdir hello-prisma
+cd hello-prisma
+```
+
+Next, initialize a Node.js project and add the Prisma CLI as a development dependency to it:
+
+```terminal copy
+npm init -y
 npm install prisma --save-dev
 ```
 
-:::note
-
-If your project contains multiple directories with `package.json` files (e.g., `frontend`, `backend`, etc.), note that Prisma ORM is specifically designed for use in the API/backend layer. To set up Prisma, navigate to the appropriate backend directory containing the relevant `package.json` file and configure Prisma there.
-
-:::
+This creates a `package.json` with an initial setup for a Node.js app.

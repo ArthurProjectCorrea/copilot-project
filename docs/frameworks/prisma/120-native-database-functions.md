@@ -6,14 +6,14 @@ metaDescription: How to enable PostgreSQL native database functions for projects
 
 ## How to install a PostgreSQL extension as part of a migration
 
-This section describes how to add a SQL command to a migration file to activate a PostgreSQL extension. If you manage PostgreSQL extensions in your Prisma Schema with the `postgresqlExtensions` preview feature instead, see [How to migrate PostgreSQL extensions](/orm/prisma-schema/postgresql-extensions#how-to-migrate-postgresql-extensions).
+This section describes how to add a SQL command to a migration file to activate a PostgreSQL extension. If you manage PostgreSQL extensions in your Prisma Schema with the `postgresqlExtensions` preview feature instead, see [How to migrate PostgreSQL extensions](/orm/prisma-schema/postgresql-extensions).
 
 The following example demonstrates how to install the `pgcrypto` extension as part of a migration:
 
 1. Add the field with the native database function to your schema:
 
    ```prisma
-   model User 
+   model User
    ```
 
    If you include a cast operator (such as `::TEXT`), you must surround the entire function with parentheses:

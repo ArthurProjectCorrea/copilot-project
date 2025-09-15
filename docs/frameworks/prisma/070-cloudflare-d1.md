@@ -49,15 +49,15 @@ npm install --save-dev prisma
 
 ## 2. Configure Prisma schema
 
-In your Prisma schema, add the `driverAdapters` Preview feature to the `generator` block and set the `provider` of the `datasource` to `sqlite`. If you just bootstrapped the Prisma schema with `prisma init`, also be sure to add the following `User` model to it:
+In your Prisma schema, set the `provider` of the `datasource` to `sqlite`. If you just bootstrapped the Prisma schema with `prisma init`, also be sure to add the following `User` model to it:
 
 ```prisma file=prisma/schema.prisma
-generator client 
+generator client
 
-datasource db 
+datasource db
 
 //add-start
-model User 
+model User
 //add-end
 ```
 
@@ -125,13 +125,14 @@ We recommend using `prisma migrate` in order to keep your data in D1 migrated. H
 ### 5.1 Add needed environment variables
 
 In order to use the Prisma D1 adapter, you'll need to add a few secrets to a `.env` file:
+
 - `DATABASE_URL`: A path to your local D1 instance. Usually `"file:./prisma/db.sqlite"`.
 - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID, fetched via `npx wrangler whoami`
 - `CLOUDFLARE_DATABASE_ID`: The ID of your database, retrieved [during D1 database creation](#4-create-a-d1-database).
 - `CLOUDFLARE_D1_TOKEN`: This API token is used by Prisma ORM to communicate with your D1 instance directly. To create this, follow these steps:
   1. Visit https://dash.cloudflare.com/profile/api-tokens
   2. Click "Create Token"
-  3. On the *Custom token* section click on  "Get started".
+  3. On the _Custom token_ section click on "Get started".
   4. Fill out the template: Make sure you use a recognizable name
   5. For the Permissions, add the `Account / D1 / Edit` permission.
   6. Click "Continue to summary" and then "Create Token".
@@ -169,7 +170,7 @@ As of [Prisma ORM v6.11.0](https://github.com/prisma/prisma/releases/tag/6.11.0)
 
 :::
 
-This will allow `prisma migrate` to interact with your D1 database. 
+This will allow `prisma migrate` to interact with your D1 database.
 
 ### 4.3 Run your first migration
 
@@ -238,7 +239,7 @@ npm run dev
 Now you can open your browser at [`http://localhost:8787`](http://localhost:8787/) to see the result of the database query:
 
 ```js no-copy
-;[]
+[];
 ```
 
 ## 7. Set the `DATABASE_URL` environment variable and deploy the Worker
@@ -258,7 +259,7 @@ Make sure to [upload the `.dev.vars` file to your Cloudflare Worker environment]
 Your deployed Worker is accessible via `https://prisma-d1-example.USERNAME.workers.dev`. If you navigate your browser to that URL, you should see the following data that's queried from your remote D1 database:
 
 ```js no-copy
-;[]
+[];
 ```
 
 ## Next steps
@@ -271,6 +272,7 @@ Now that you've set up Prisma ORM with Cloudflare D1, you can:
 - Add automated tests
 
 For more information:
+
 - [Prisma ORM documentation](/orm)
 - [Prisma Client API reference](/orm/prisma-client)
 - [Cloudflare D1 documentation](https://developers.cloudflare.com/d1)

@@ -8,7 +8,7 @@ With this guide, you can learn how to build and deploy a simple application to [
 
 This guide covers the use of Prisma CLI with Deno CLI, Deno Deploy, Prisma Client, and Prisma Postgres.
 
-:::info 
+:::info
 
 This guide demonstrates how to deploy an application to Deno Deploy with a Prisma Postgres database, but you can also use [your own database with Prisma Accelerate](/accelerate/getting-started#prerequisites).
 
@@ -16,21 +16,24 @@ This guide demonstrates how to deploy an application to Deno Deploy with a Prism
 
 :::tip Use Prisma ORM without Rust binaries
 
-If Prisma's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
-
-**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+If Prisma ORM's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can use it without them using this configuration of your `generator` block:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+Prisma ORM without Rust binaries has been [Generally Available](/orm/more/releases#generally-available-ga) since [v6.16.0](https://pris.ly/release/6.16.0).
+
+Note that you need to use a [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) in this case.
+
 When using this architecture:
 
-* No Rust query engine binary is downloaded or shipped.
-* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
-This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
+
+Curious why we moved away from the Rust engine? Take a look at why we transitioned from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in this [blog post](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks).
 
 :::
 
@@ -63,17 +66,17 @@ This command:
 - Creates a `prisma` directory containing a `schema.prisma` file for your database models.
 - Creates a `.env` file with your `DATABASE_URL` (e.g., for Prisma Postgres it should have something similar to `DATABASE_URL="prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI..."`).
 
-Edit the `prisma/schema.prisma` file to define a `Log` model, add a custom `output` path and [the `prisma-client` generator](/orm/prisma-schema/overview/generators#prisma-client-preview) with `deno` as the `runtime`:
+Edit the `prisma/schema.prisma` file to define a `Log` model, add a custom `output` path and [the `prisma-client` generator](/orm/prisma-schema/overview/generators#prisma-client) with `deno` as the `runtime`:
 
 ```prisma file=schema.prisma highlight=3-4,12-23;add showLineNumbers
-generator client 
+generator client
 
-datasource db 
+datasource db
 
 //add-start
-model Log 
+model Log
 
-enum Level 
+enum Level
 //add-end
 ```
 
@@ -190,7 +193,7 @@ Use the GitHub repository to add your application to Deno Deploy:
 1. Select `index.ts` as the entry point to your project.
 1. Click `Create & Deploy`.
 
-The deployment should fail as you have to add the `DATABASE_URL` environment variable. 
+The deployment should fail as you have to add the `DATABASE_URL` environment variable.
 
 Locate and navigate to the settings for the project.
 
@@ -198,7 +201,7 @@ Locate and navigate to the settings for the project.
    1. For **KEY**, enter `DATABASE_URL`.
    1. For **VALUE**, paste the database connection string.
 1. Click **Save**.<br />
-   
+
 You have to add some code and create another commit to trigger a re-dployment.
 
 Add the following code in your `index.ts` file:
@@ -229,7 +232,7 @@ serve(handler);
 Commit the new changes:
 
 ```terminal
-git add . 
+git add .
 git commit -m "add log"
 git push origin main
 ```

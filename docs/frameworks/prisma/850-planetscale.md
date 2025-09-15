@@ -62,7 +62,7 @@ In Prisma ORM versions 3.1.1 and later, you can [emulate relations in Prisma Cli
 To enable emulation of relations in Prisma Client, set the `relationMode` field to `"prisma"` in the `datasource` block:
 
 ```prisma file=schema.prisma
-datasource db 
+datasource db
 ```
 
 If you use relations in your Prisma schema with the default `"foreignKeys"` option for the `relationMode` field, PlanetScale will error and Prisma ORM output the [P3021 error message](/orm/reference/error-reference#p3021) when it tries to create foreign keys. (In versions before 2.27.0 it will output a raw database error.)
@@ -72,9 +72,9 @@ If you use relations in your Prisma schema with the default `"foreignKeys"` opti
 When [you emulate relations in Prisma Client](#option-1-emulate-relations-in-prisma-client), you need to create your own indexes. As an example of a situation where you would want to add an index, take this schema for a blog with posts and comments:
 
 ```prisma file=schema.prisma
-model Post 
+model Post
 
-model Comment 
+model Comment
 ```
 
 The `postId` field in the `Comment` model refers to the corresponding `id` field in the `Post` model. However this is not implemented as a foreign key in PlanetScale, so the column doesn't have an automatic index. This means that some queries may not be well optimized. For example, if you query for all comments with a certain post `id`, PlanetScale may have to do a full table lookup. This could be slow, and also expensive because PlanetScale's billing model charges for the number of rows read.
@@ -82,9 +82,9 @@ The `postId` field in the `Comment` model refers to the corresponding `id` field
 To avoid this, you can define an index on the `postId` field using [Prisma ORM's `@@index` argument](/orm/reference/prisma-schema-reference#index):
 
 ```prisma file=schema.prisma highlight=15;add
-model Post 
+model Post
 
-model Comment 
+model Comment
 ```
 
 You can then add this change to your schema [using `db push`](#how-to-make-schema-changes-with-db-push).
@@ -100,9 +100,9 @@ You can then use Prisma ORM and define relations in your Prisma schema without t
 In that case, you can define a relation as with other database that supports foreign key constraints, for example:
 
 ```prisma file=schema.prisma
-model Post 
+model Post
 
-model Comment 
+model Comment
 ```
 
 With this approach, it is _not_ necessary to:
@@ -121,9 +121,9 @@ As an example, let's say you decide to decide to add a new `excerpt` field to th
 Next, add the following to your `schema.prisma` file:
 
 ```prisma file=schema.prisma highlight=5;edit
-model Post 
+model Post
 
-model Comment 
+model Comment
 ```
 
 To push these changes, navigate to your project directory in your terminal and run
@@ -143,31 +143,31 @@ For more examples, see PlanetScale's tutorial on [automatic migrations with Pris
 After introspecting with `npx prisma db pull`, the schema you get may be missing some relations. For example, the following schema is missing a relation between the `User` and `Post` models:
 
 ```prisma file=schema.prisma
-model Post 
+model Post
 
-model User 
+model User
 ```
 
 In this case you need to add the relation in manually:
 
 ```prisma file=schema.prisma highlight=6,16;add
-model Post 
+model Post
 
-model User 
+model User
 ```
 
 For a more detailed example, see the [Getting Started guide for PlanetScale](/getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-planetscale).
 
 ## How to define shard keys in your Prisma schema (Preview)
 
-[Sharding](https://planetscale.com/docs/vitess/sharding) is a popular technique to scale up when database load grows. 
+[Sharding](https://planetscale.com/docs/vitess/sharding) is a popular technique to scale up when database load grows.
 
 As of [v6.10.0](https://github.com/prisma/prisma/releases/tag/6.10.0), Prisma ORM supports sharding on PlanetScale natively (as a [Preview](/orm/more/releases#preview) feature) via the [`@shardKey`](/orm/reference/prisma-schema-reference#shardkey) and [`@@shardKey`](/orm/reference/prisma-schema-reference#shardkey-1) attributes in the Prisma schema which you can apply to the fields in your models that should serve as shard keys in your database setup.
 
 In order to use the shard key attributes, you need to specify the `shardKeys` Preview feature on your `generator`:
 
 ```prisma
-generator client 
+generator client
 ```
 
 Now you can use the `@shardKey` and `@@shardKey` attributes:
@@ -175,13 +175,13 @@ Now you can use the `@shardKey` and `@@shardKey` attributes:
 **Single-column shard key**
 
 ```prisma
-model User 
+model User
 ```
 
 **Multi-column shard key**
 
 ```prisma
-model User 
+model User
 ```
 
 ## How to use the PlanetScale serverless driver with Prisma ORM (Preview)
@@ -192,21 +192,9 @@ You can use Prisma ORM along with the PlanetScale serverless driver using the [`
 
 :::info
 
-This feature is available in Preview from Prisma ORM versions 5.4.2 and later.
+This feature has been Generally Available since Prisma ORM [v6.16.0](https://pris.ly/release/6.16.0).
 
 :::
-
-To get started, enable the `driverAdapters` Preview feature flag:
-
-```prisma
-generator client 
-```
-
-Generate Prisma Client:
-
-```bash
-npx prisma generate
-```
 
 :::info
 
@@ -220,7 +208,7 @@ DATABASE_URL='mysql://johndoe:strongpassword@aws.connect.psdb.cloud/clear_nights
 
 Install the Prisma ORM adapter for PlanetScale, PlanetScale serverless driver and `undici` packages:
 
-```bash
+```terminal
 npm install @prisma/adapter-planetscale undici
 ```
 
@@ -233,12 +221,11 @@ When using a Node.js version below 18, you must provide a custom fetch function 
 Update your Prisma Client instance to use the PlanetScale serverless driver:
 
 ```ts
+dotenv.config();
+const connectionString = `$`;
 
-dotenv.config()
-const connectionString = `$`
-
-const adapter = new PrismaPlanetScale()
-const prisma = new PrismaClient()
+const adapter = new PrismaPlanetScale();
+const prisma = new PrismaClient();
 ```
 
 You can then use Prisma Client as you normally would with full type-safety. Prisma Migrate, introspection, and Prisma Studio will continue working as before using the connection string defined in the Prisma schema.

@@ -1,29 +1,24 @@
 ---
-title: 'Connect your existing database using JavaScript and CockroachDB'
+title: 'Connect your database using JavaScript and CockroachDB'
 sidebar_label: 'Connect your database'
-metaTitle: 'Connect your existing database using JavaScript and CockroachDB'
-metaDescription: 'Connect your database to your existing project using JavaScript and CockroachDB'
+metaTitle: 'Connect your database using JavaScript and CockroachDB'
+metaDescription: 'Connect your database to your project using JavaScript and CockroachDB'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-toc: false
 hide_table_of_contents: true
 sidebar_class_name: hidden-sidebar
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases-node-cockroachdb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-node-cockroachdb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases-node-cockroachdb
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-node-cockroachdb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-
 ---
-
-## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db 
+datasource db
 ```
 
 The `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`. You now need to adjust the connection URL to point to your own database.
-
-<h3 id="connection-url">Connection URL</h3>
 
 The [format of the connection URL](/orm/reference/connection-urls) for your database depends on the database you use. CockroachDB uses the PostgreSQL connection URL format, which has the following structure (the parts spelled all-uppercased are _placeholders_ for your specific connection details):
 
@@ -33,11 +28,11 @@ postgresql://USER:PASSWORD@HOST:PORT/DATABASE?PARAMETERS
 
 Here's a short explanation of each component:
 
--   `USER`: The name of your database user
--   `PASSWORD`: The password for your database user
--   `PORT`: The port where your database server is running. The default for CockroachDB is `26257`.
--   `DATABASE`: The name of the database
--   `PARAMETERS`: Any additional connection parameters. See the CockroachDB documentation [here](https://www.cockroachlabs.com/docs/stable/connection-parameters.html#additional-connection-parameters).
+- `USER`: The name of your database user
+- `PASSWORD`: The password for your database user
+- `PORT`: The port where your database server is running. The default for CockroachDB is `26257`.
+- `DATABASE`: The name of the database
+- `PARAMETERS`: Any additional connection parameters. See the CockroachDB documentation [here](https://www.cockroachlabs.com/docs/stable/connection-parameters.html#additional-connection-parameters).
 
 For a [CockroachDB Serverless](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html) or [Cockroach Dedicated](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart-trial-cluster) database hosted on [CockroachDB Cloud](https://www.cockroachlabs.com/docs/cockroachcloud/quickstart/), the [connection URL](/orm/reference/connection-urls) looks similar to this:
 

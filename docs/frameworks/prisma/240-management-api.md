@@ -31,7 +31,7 @@ Before diving into implementation, let's clarify the main concepts involved in t
 - **Tokens**: There are two main types of tokens:
   - **Service token**: Issued to your partner integration, scoped to provision and manage databases on your own workspace.
   - **OAuth 2 access token**: Obtained via OAuth 2 when a user authenticates with your app; it is scoped to the user's workspace and used to transfer project/database ownership to that workspace.
-  
+
 ## How to become a partner
 
 To use the Prisma Postgres Management API, you first need to set up as a partner:
@@ -60,15 +60,12 @@ To provision a new Prisma Postgres database for your users as a partner, follow 
 1. **Gather required information**: Prepare the necessary details for provisioning, such as region, database name, and any other options your application requires. This information may come from user input or be determined by your application logic.
 2. **Authenticate your integration**: Use your service token to authenticate API requests from your backend. This token authenticates your app as an approved partner.
 3. **Send a database provisioning request**: Make a `POST` request to the Management API endpoint to create a new project with a default database. For example:
-
-```ts
-const prismaResponse = await fetch('https://api.prisma.io/v1/projects', ,
-  body: JSON.stringify(),
-});
-```
-
+   ```ts
+   const prismaResponse = await fetch('https://api.prisma.io/v1/projects', ,
+     body: JSON.stringify(),
+   });
+   ```
 4. **Handle the response**: If successful, the API will return the new project's details, including database connection strings and a `project_id`. Store these securely and display them to your user as needed.
-
 5. **(Optional) Store project metadata**: You may want to associate the `project_id` with your user in your own database for future reference.
 
 ## Database claim flow

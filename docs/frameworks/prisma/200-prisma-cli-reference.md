@@ -1,8 +1,8 @@
 ---
-title: "Prisma CLI reference"
-metaTitle: "Prisma CLI reference"
-metaDescription: "This page gives an overview of all available Prisma CLI commands, explains their options and shows numerous usage examples."
-sidebar_label: "Prisma CLI"
+title: 'Prisma CLI reference'
+metaTitle: 'Prisma CLI reference'
+metaDescription: 'This page gives an overview of all available Prisma CLI commands, explains their options and shows numerous usage examples.'
+sidebar_label: 'Prisma CLI'
 tocDepth: 3
 ---
 
@@ -32,7 +32,7 @@ The `version` command recognizes the following options to modify its behavior:
 
 ### `init`
 
-Bootstraps a fresh Prisma ORM project within the current directory. 
+Bootstraps a fresh Prisma ORM project within the current directory.
 
 The `init` command does not interpret any existing files. Instead, it creates a `prisma` directory containing a bare-bones `schema.prisma` file within your current directory.
 
@@ -40,16 +40,16 @@ By default, the project sets up a [local Prisma Postgres](/postgres/database/loc
 
 #### Arguments
 
-| Argument                 | Required | Description                                                                                                                                                                                     | Default                       |
-| ------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `--datasource-provider`  | No       | Specifies the value for the `provider` field in the `datasource` block. Options are `prisma+postgres`, `sqlite`, `postgresql`, `mysql`, `sqlserver`, `mongodb` and `cockroachdb`.               | `postgresql`                  |
-| `--db`                   | No       | Shorthand syntax for `--datasource-provider prisma+postgres`; creates a new [Prisma Postgres](/postgres) instance. Requires authentication in the [PDP Console](https://console.prisma.io).     |                               |
-| `--prompt` (or `--vibe`) | No       | Scaffolds a Prisma schema based on the prompt and deploys it to a fresh Prisma Postgres instance. Requires authentication in the [PDP Console](https://console.prisma.io).                      |                               |
-| `--url`                  | No       | Define a custom `datasource` url.                                                                                                                                                                 |                               |
-| `--generator-provider`   | No       | Define the generator provider to use.                                                                                                                                                           | `prisma-client-js`            |
-| `--preview-feature`      | No       | Define the [Preview features](/orm/reference/preview-features) to use. To define multiple Preview features, you have to provide the flag multiple times for each Preview feature. See examples. |                               |
-| `--output`               | No       | Specifies the [output location for the generated client](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path).                                       | `node_modules/.prisma/client` |
-| `--with-model`           | No       | Adds a simple `User` model to the initial Prisma schema. Available since version `5.14.0`.                                                                                                      |                               |
+| Argument                 | Required | Description                                                                                                                                                                                     | Default               |
+| ------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| `--datasource-provider`  | No       | Specifies the value for the `provider` field in the `datasource` block. Options are `prisma+postgres`, `sqlite`, `postgresql`, `mysql`, `sqlserver`, `mongodb` and `cockroachdb`.               | `postgresql`          |
+| `--db`                   | No       | Shorthand syntax for `--datasource-provider prisma+postgres`; creates a new [Prisma Postgres](/postgres) instance. Requires authentication in the [PDP Console](https://console.prisma.io).     |                       |
+| `--prompt` (or `--vibe`) | No       | Scaffolds a Prisma schema based on the prompt and deploys it to a fresh Prisma Postgres instance. Requires authentication in the [PDP Console](https://console.prisma.io).                      |                       |
+| `--url`                  | No       | Define a custom `datasource` url.                                                                                                                                                               |                       |
+| `--generator-provider`   | No       | Define the generator provider to use.                                                                                                                                                           | `prisma-client-js`    |
+| `--preview-feature`      | No       | Define the [Preview features](/orm/reference/preview-features) to use. To define multiple Preview features, you have to provide the flag multiple times for each Preview feature. See examples. |                       |
+| `--output`               | No       | Specifies the [output location for the generated client](/orm/prisma-client/setup-and-configuration/generating-prisma-client#using-a-custom-output-path).                                       | `../generated/prisma` |
+| `--with-model`           | No       | Adds a simple `User` model to the initial Prisma schema. Available since version `5.14.0`.                                                                                                      |                       |
 
 #### Examples
 
@@ -93,9 +93,9 @@ An initial `schema.prisma` file to define your schema in:
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client 
+generator client
 
-datasource db 
+datasource db
 ```
 
 **`.env`**
@@ -142,9 +142,9 @@ A minimal `schema.prisma` file to define your schema in:
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db 
+datasource db
 
-generator client 
+generator client
 ```
 
 **`.env`**
@@ -176,7 +176,7 @@ The `generate` command is most often used to generate Prisma Client with the `pr
 To use the `generate` command, you must add a generator definition in your `schema.prisma` file. The `prisma-client-js` generator, used to generate Prisma Client, can be added by including the following in your `schema.prisma` file:
 
 ```prisma
-generator client 
+generator client
 ```
 
 #### Options
@@ -285,11 +285,11 @@ npx prisma@latest debug
 
 ## `dev`
 
-The `dev` command starts a [local Prisma Postgres](/postgres/database/local-development) database that you can run Prisma ORM commands against. It is useful for development and testing purposes and also allows you to switch to [Prisma Postgres](/postgres) in production easily. 
+The `dev` command starts a [local Prisma Postgres](/postgres/database/local-development) database that you can run Prisma ORM commands against. It is useful for development and testing purposes and also allows you to switch to [Prisma Postgres](/postgres) in production easily.
 
 ### Arguments
 
-| Argument              | Required | Description                                                                                                                                        | Default |
+| Argument              | Required | Description                                                                                                                                         | Default |
 | --------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `--name` (or `-n`)    | No       | Enables targeting a specific database instance. [Learn more](/postgres/database/local-development#using-different-local-prisma-postgres-instances). |         |
 | `--port` (or `-p`)    | No       | Main port number the local Prisma Postgres HTTP server will listen on.                                                                              | `51213` |
@@ -354,7 +354,7 @@ Before using the `db pull` command, you must define a valid [`datasource`](/orm/
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Options
@@ -396,7 +396,7 @@ Before using the `db push` command, you must define a valid [datasource](/orm
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Options
@@ -475,7 +475,7 @@ Before using the `db execute` command, if you do not use the `--url` option you 
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Options
@@ -777,7 +777,7 @@ Before using the `migrate diff` command, if you are using the `--from-schema-dat
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Options
@@ -881,7 +881,7 @@ Before using the `studio` command, you must define a valid [`datasource`](/orm/p
 For example, the following `datasource` defines a SQLite database file within the current directory:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Options
@@ -967,15 +967,15 @@ The [`create-db`](https://create-db.prisma.io/) command provisions a temporary [
 
 You can run the following variants:
 
-| Command               | Description                                   |
-| --------------------- | --------------------------------------------- |
+| Command                      | Description                                   |
+| ---------------------------- | --------------------------------------------- |
 | `npx create-db@latest`       | Creates a temporary Prisma Postgres database. |
 | `npx create-pg@latest`       | Alias for `npx create-db`.                    |
 | `npx create-postgres@latest` | Alias for `npx create-db`.                    |
 
 Each database created with these commands:
 
-* Is available for **24 hours** by default.
-* Can be **claimed for free** to make it permanent using the URL displayed in the CLI output.
+- Is available for **24 hours** by default.
+- Can be **claimed for free** to make it permanent using the URL displayed in the CLI output.
 
 For full usage details, options (such as `--region` and `--interactive`), and examples, see the [documentation](/postgres/introduction/npx-create-db).

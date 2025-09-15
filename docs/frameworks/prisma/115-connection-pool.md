@@ -14,15 +14,17 @@ Relational database connectors use Prisma ORM's own connection pool, and the Mon
 
 :::note
 
-As of [v6.7.0](https://pris.ly/release/6.7.0), Prisma ORM has the `queryCompiler` Preview feature.
+As of [v6.16.0](https://pris.ly/release/6.16.0), Prisma ORM can be used without Rust engines in production applications. Learn more [here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
 
-**When enabled, your Prisma Client will be generated [without a Rust-based query engine binary](/orm/prisma-client/setup-and-configuration/no-rust-engine)**:
+**When enabled, your Prisma Client will be generated without a Rust-based query engine binary**:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is required alongside `queryCompiler`. When using the `queryCompiler` Preview feature, the connection pool is maintained by the native JS database driver you're using.
+Note that [driver adapters](/orm/overview/databases/database-drivers#driver-adapters) are required if you want to use Prisma ORM without Rust engines. In this scenario, the connection pool is maintained by the native JS database driver you're using.
+
+You can [read about the performance and DX improvements](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks) of this change on our blog.
 
 :::
 
@@ -62,7 +64,7 @@ Although the formula represents a good starting point, the [recommended connecti
 You can specify the number of connections by explicitly setting the `connection_limit` parameter in your database connection URL. For example, with the following `datasource` configuration in your [Prisma schema](/orm/prisma-schema) the connection pool will have exactly five connections:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Viewing the connection pool size
@@ -90,7 +92,7 @@ The default connection pool timeout is 10 seconds. If the Query Engine does not 
 You can specify the pool timeout by explicitly setting the `pool_timeout` parameter in your database connection URL. In the following example, the pool times out after `2` seconds:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 #### Disabling the connection pool timeout
@@ -98,7 +100,7 @@ datasource db
 You disable the connection pool timeout by setting the `pool_timeout` parameter to `0`:
 
 ```prisma
-datasource db 
+datasource db
 ```
 
 You can choose to [disable the connection pool timeout if queries **must** remain in the queue](/orm/prisma-client/setup-and-configuration/databases-connections#disabling-the-pool-timeout) - for example, if you are importing a large number of records in parallel and are confident that the queue will not use up all available RAM before the job is complete.

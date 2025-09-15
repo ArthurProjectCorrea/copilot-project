@@ -14,7 +14,7 @@ By default, the SQLite connector contains a database driver responsible for conn
 To connect to a SQLite database file, you need to configure a [`datasource`](/orm/prisma-schema/overview/data-sources) block in your [Prisma schema](/orm/prisma-schema):
 
 ```prisma file=schema.prisma
-datasource db 
+datasource db
 ```
 
 The fields passed to the `datasource` block are:
@@ -26,40 +26,23 @@ The fields passed to the `datasource` block are:
 
 As of [`v5.4.0`](https://github.com/prisma/prisma/releases/tag/5.4.0), you can use Prisma ORM with database drivers from the JavaScript ecosystem (instead of using Prisma ORM's built-in drivers). You can do this by using a [driver adapter](/orm/overview/databases/database-drivers).
 
-For SQLite, [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3) is one of the most popular drivers in the JavaScript ecosystem. 
+For SQLite, [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3) is one of the most popular drivers in the JavaScript ecosystem.
 
 This section explains how you can use it with Prisma ORM and the `@prisma/adapter-better-sqlite3` driver adapter.
 
-### 1. Enable the `driverAdapters` Preview feature flag
+### 1. Install the dependencies
 
-Since driver adapters are currently in [Preview](/orm/more/releases#preview), you need to enable its feature flag on the `datasource` block in your Prisma schema:
-
-```prisma file=schema.prisma
-generator client 
-
-datasource db 
-```
-
-Once you have added the feature flag to your schema, re-generate Prisma Client:
-
-```terminal
-npx prisma generate
-```
-
-### 2. Install the dependencies
-
-Next, install Prisma ORM's driver adapter for `better-sqlite3`:
+First, install Prisma ORM's driver adapter for `better-sqlite3`:
 
 ```terminal
 npm install @prisma/adapter-better-sqlite3
 ```
 
-### 3. Instantiate Prisma Client using the driver adapter
+### 2. Instantiate Prisma Client using the driver adapter
 
-Finally, when you instantiate Prisma Client, you need to pass an instance of Prisma ORM's driver adapter to the `PrismaClient` constructor:
+Now, when you instantiate Prisma Client, you need to pass an instance of Prisma ORM's driver adapter to the `PrismaClient` constructor:
 
 ```ts
-
 const adapter = new PrismaBetterSQLite3();
 const prisma = new PrismaClient();
 ```
@@ -72,18 +55,18 @@ The SQLite connector maps the [scalar types](/orm/prisma-schema/data-model/model
 
 ### Native type mapping from Prisma ORM to SQLite
 
-| Prisma ORM | SQLite        |
-| ---------- | ------------- |
-| `String`   | `TEXT`        |
-| `Boolean`  | `BOOLEAN`     |
-| `Int`      | `INTEGER`     |
-| `BigInt`   | `INTEGER`     |
-| `Float`    | `REAL`        |
-| `Decimal`  | `DECIMAL`     |
-| `DateTime` | `NUMERIC`     |
-| `Json`     | `JSONB`       |
-| `Bytes`    | `BLOB`        |
-| `Enum`     | `TEXT`        |
+| Prisma ORM | SQLite    |
+| ---------- | --------- |
+| `String`   | `TEXT`    |
+| `Boolean`  | `BOOLEAN` |
+| `Int`      | `INTEGER` |
+| `BigInt`   | `INTEGER` |
+| `Float`    | `REAL`    |
+| `Decimal`  | `DECIMAL` |
+| `DateTime` | `NUMERIC` |
+| `Json`     | `JSONB`   |
+| `Bytes`    | `BLOB`    |
+| `Enum`     | `TEXT`    |
 
 :::note
 
@@ -119,17 +102,17 @@ try migrating the 'int' column type to BIGINT
 The connection URL of a SQLite connector points to a file on your file system. For example, the following two paths are equivalent because the `.db` is in the same directory:
 
 ```prisma file=schema.prisma
-datasource db 
+datasource db
 ```
 
 is the same as:
 
 ```prisma file=schema.prisma
-datasource db 
+datasource db
 ```
 
 You can also target files from the root or any other place in your file system:
 
 ```prisma file=schema.prisma
-datasource db 
+datasource db
 ```

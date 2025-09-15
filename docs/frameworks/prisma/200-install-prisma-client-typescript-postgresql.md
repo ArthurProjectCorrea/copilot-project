@@ -1,12 +1,26 @@
 ---
-title: 'Install Prisma Client in an existing TypeScript project (PostgreSQL)'
+title: 'Install Prisma Client (TypeScript and PostgreSQL)'
 sidebar_label: 'Install Prisma Client'
-metaTitle: 'Install Prisma Client in your existing project using TypeScript and PostgreSQL'
-metaDescription: 'Install and generate Prisma Client in your existing TypeScript and PostgreSQL project'
+metaTitle: 'Install Prisma Client: TypeScript and PostgreSQL'
+metaDescription: 'Install and generate Prisma Client in your project using TypeScript and PostgreSQL'
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
 hide_table_of_contents: true
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases/baseline-your-database-typescript-postgresql
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-typescript-postgresql
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/install-prisma-client-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgresql
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-typescript-postgresql
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-
 ---
+
+These commands serve different purposes in managing your database schema with Prisma. Here’s a breakdown of when and why to use each:
+
+#### `npx prisma migrate dev`
+
+- **Purpose:** This command generates and applies a new migration based on your Prisma schema changes. It creates migration files that keep a history of changes.
+- **Use Case:** Use this when you want to maintain a record of database changes, which is essential for production environments or when working in teams. It allows for version control of your database schema.
+- **Benefits:** This command also includes checks for applying migrations in a controlled manner, ensuring data integrity.
+
+#### `npx prisma db push`
+
+- **Purpose:** This command is used to push your current Prisma schema to the database directly. It applies any changes you've made to your schema without creating migration files.
+- **Use Case:** It’s particularly useful during the development phase when you want to quickly sync your database schema with your Prisma schema without worrying about migration history.
+- **Caution:** It can overwrite data if your schema changes affect existing tables or columns, so it’s best for early-stage development or prototyping.

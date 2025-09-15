@@ -10,7 +10,7 @@ By default, the PostgreSQL connector contains a database driver responsible for 
 
 :::info
 
-Need a Postgres instance yesterday? 
+Need a Postgres instance yesterday?
 
 With [Prisma Postgres](https://www.prisma.io/postgres?utm_source=docs&utm_campaign=postgresql) you can get a database running on bare-metal in three clicks. Connection pooling, query caching, and automated backups are all included. [Visit the Console](https://console.prisma.io?utm_source=docs&utm_campaign=postgresql) to get started today.
 
@@ -23,7 +23,7 @@ Want any even faster way to get started with Prisma Postgres? Just run `npx pris
 To connect to a PostgreSQL database server, you need to configure a [`datasource`](/orm/prisma-schema/overview/data-sources) block in your [Prisma schema](/orm/prisma-schema):
 
 ```prisma file=schema.prisma
-datasource db 
+datasource db
 ```
 
 The fields passed to the `datasource` block are:
@@ -39,37 +39,20 @@ For PostgreSQL, [`node-postgres`](https://node-postgres.com) (`pg`) is one of th
 
 This section explains how you can use it with Prisma ORM and the `@prisma/adapter-pg` driver adapter.
 
-### 1. Enable the `driverAdapters` Preview feature flag
+### 1. Install the dependencies
 
-Since driver adapters are currently in [Preview](/orm/more/releases#preview), you need to enable its feature flag on the `datasource` block in your Prisma schema:
-
-```prisma file=schema.prisma
-generator client 
-
-datasource db 
-```
-
-Once you have added the feature flag to your schema, re-generate Prisma Client:
-
-```terminal
-npx prisma generate
-```
-
-### 2. Install the dependencies
-
-Next, install Prisma ORM's driver adapter for `pg`:
+First, install Prisma ORM's driver adapter for `pg`:
 
 ```terminal
 npm install @prisma/adapter-pg
 ```
 
-### 3. Instantiate Prisma Client using the driver adapter
+### 2. Instantiate Prisma Client using the driver adapter
 
-Finally, when you instantiate Prisma Client, you need to pass an instance of Prisma ORM's driver adapter to the `PrismaClient` constructor:
+Now, when you instantiate Prisma Client, you need to pass an instance of Prisma ORM's driver adapter to the `PrismaClient` constructor:
 
 ```ts
-
-const connectionString = `$`
+const connectionString = `$`;
 
 const adapter = new PrismaPg();
 const prisma = new PrismaClient();
@@ -86,7 +69,7 @@ You can specify a [PostgreSQL schema](https://www.postgresql.org/docs/current/dd
 ```ts
 const adapter = new PrismaPg(
   ,
-  
+
 )
 ```
 
@@ -134,7 +117,7 @@ The following arguments can be used:
 | `pool_timeout`         | No       | `10`                   | Maximum number of seconds to wait for a new connection from the pool, `0` means no timeout                                                                                 |
 | `sslmode`              | No       | `prefer`               | Configures whether to use TLS. Possible values: `prefer`, `disable`, `require`                                                                                             |
 | `sslcert`              | No       |                        | Path of the server certificate. Certificate paths are [resolved relative to the `./prisma folder`](/orm/prisma-schema/overview/data-sources#securing-database-connections) |
-| `sslrootcert`      | No       |                        | Path of the root certificate. Certificate paths are [resolved relative to the `./prisma folder`](/orm/prisma-schema/overview/data-sources#securing-database-connections)   |
+| `sslrootcert`          | No       |                        | Path of the root certificate. Certificate paths are [resolved relative to the `./prisma folder`](/orm/prisma-schema/overview/data-sources#securing-database-connections)   |
 | `sslidentity`          | No       |                        | Path to the PKCS12 certificate                                                                                                                                             |
 | `sslpassword`          | No       |                        | Password that was used to secure the PKCS12 file                                                                                                                           |
 | `sslaccept`            | No       | `accept_invalid_certs` | Configures whether to check for missing values in the certificate. Possible values: `accept_invalid_certs`, `strict`                                                       |
@@ -269,7 +252,7 @@ The PostgreSQL connector maps the [scalar types](/orm/prisma-schema/data-model/m
 [Introspection](/orm/prisma-schema/introspection) adds native database types that are **not yet supported** as [`Unsupported`](/orm/reference/prisma-schema-reference#unsupported) fields:
 
 ```prisma file=schema.prisma
-model Device 
+model Device
 ```
 
 ## Prepared statement caching

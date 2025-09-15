@@ -10,40 +10,43 @@ You can deploy an application that uses Prisma ORM to the edge. Depending on whi
 
 Here is a brief overview of all the edge function providers that are currently supported by Prisma ORM:
 
-| Provider / Product     | Supported natively with Prisma ORM                      | Supported with Prisma Postgres (and Prisma Accelerate)|
-| ---------------------- | ------------------------------------------------------- | -------------------------------- |
-| Vercel Edge Functions  | ✅ (Preview; only compatible drivers)                   | ✅                               |
-| Vercel Edge Middleware | ✅ (Preview; only compatible drivers)                   | ✅                               |
-| Cloudflare Workers     | ✅ (Preview; only compatible drivers)                   | ✅                               |
-| Cloudflare Pages       | ✅ (Preview; only compatible drivers)                   | ✅                               |
-| Deno Deploy            | [Not yet](https://github.com/prisma/prisma/issues/2452) | ✅                               |
+| Provider / Product     | Supported natively with Prisma ORM                      | Supported with Prisma Postgres (and Prisma Accelerate) |
+| ---------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Vercel Edge Functions  | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Vercel Edge Middleware | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Cloudflare Workers     | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Cloudflare Pages       | ✅ (Preview; only compatible drivers)                   | ✅                                                     |
+| Deno Deploy            | [Not yet](https://github.com/prisma/prisma/issues/2452) | ✅                                                     |
 
 Deploying edge functions that use Prisma ORM on Cloudflare and Vercel is currently in [Preview](/orm/more/releases#preview).
 
 :::note
 
-If Prisma’s Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can switch to the [`queryCompiler`](/orm/prisma-client/setup-and-configuration/no-rust-engine) Preview feature introduced in [v6.7.0](https://pris.ly/release/6.7.0).
-
-**When enabled, Prisma Client is generated without a Rust-based query engine binary**, reducing build artifacts and removing native binary dependencies:
+If Prisma ORM's Rust engine binaries cause large bundle sizes, slow builds, or deployment issues (for example, in serverless or edge environments), you can use it without them using this configuration of your `generator` block:
 
 ```prisma
-generator client 
+generator client
 ```
 
-Note that the [`driverAdapters`](/orm/overview/databases/database-drivers#driver-adapters) Preview feature is **required** alongside `queryCompiler`.
+Prisma ORM without Rust binaries has been [Generally Available](/orm/more/releases#generally-available-ga) since [v6.16.0](https://pris.ly/release/6.16.0).
+
+Note that you need to use a [driver adapter](/orm/overview/databases/database-drivers#driver-adapters) in this case.
+
 When using this architecture:
 
-* No Rust query engine binary is downloaded or shipped.
-* The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
+- No Rust query engine binary is downloaded or shipped.
+- The database connection pool is maintained by the native JS database driver you install (e.g., `@prisma/adapter-pg` for PostgreSQL).
 
 This setup can simplify deployments in:
 
-* Serverless functions
-* Edge runtimes
-* Read-only filesystem environments
-* CI/CD pipelines with strict size limits
+- Serverless functions
+- Edge runtimes
+- Read-only filesystem environments
+- CI/CD pipelines with strict size limits
 
-Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine). Curious why we're moving away from the Rust engine? Take a look at why we're transitioning from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in our [blog post](https://www.prisma.io/blog/try-the-new-rust-free-version-of-prisma-orm-early-access).
+This setup can simplify deployments in serverless or edge runtimes. Learn more in the [docs here](/orm/prisma-client/setup-and-configuration/no-rust-engine).
+
+Curious why we moved away from the Rust engine? Take a look at why we transitioned from Rust binary engines to an all-TypeScript approach for a faster, lighter Prisma ORM in this [blog post](https://www.prisma.io/blog/prisma-orm-without-rust-latest-performance-benchmarks).
 
 :::
 

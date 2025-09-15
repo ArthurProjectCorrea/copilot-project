@@ -14,7 +14,7 @@ By default, the MySQL connector contains a database driver responsible for conne
 To connect to a MySQL database server, you need to configure a [`datasource`](/orm/prisma-schema/overview/data-sources) block in your [Prisma schema](/orm/prisma-schema):
 
 ```prisma file=schema.prisma showLineNumbers
-datasource db 
+datasource db
 ```
 
 The fields passed to the `datasource` block are:
@@ -26,40 +26,23 @@ The fields passed to the `datasource` block are:
 
 As of [`v5.4.0`](https://github.com/prisma/prisma/releases/tag/5.4.0), you can use Prisma ORM with database drivers from the JavaScript ecosystem (instead of using Prisma ORM's built-in drivers). You can do this by using a [driver adapter](/orm/overview/databases/database-drivers).
 
-For MySQL and MariaDB, [`mariadb`](https://github.com/mariadb-corporation/mariadb-connector-nodejs) is one of the most popular drivers in the JavaScript ecosystem. 
+For MySQL and MariaDB, [`mariadb`](https://github.com/mariadb-corporation/mariadb-connector-nodejs) is one of the most popular drivers in the JavaScript ecosystem.
 
 This section explains how you can use it with Prisma ORM and the `@prisma/adapter-mariadb` driver adapter.
 
-### 1. Enable the `driverAdapters` Preview feature flag
+### 1. Install the dependencies
 
-Since driver adapters are currently in [Preview](/orm/more/releases#preview), you need to enable its feature flag on the `datasource` block in your Prisma schema:
-
-```prisma file=schema.prisma
-generator client 
-
-datasource db 
-```
-
-Once you have added the feature flag to your schema, re-generate Prisma Client:
-
-```terminal
-npx prisma generate
-```
-
-### 2. Install the dependencies
-
-Next, install Prisma ORM's driver adapter for `mariadb`:
+First, install Prisma ORM's driver adapter for `mariadb`:
 
 ```terminal
 npm install @prisma/adapter-mariadb
 ```
 
-### 3. Instantiate Prisma Client using the driver adapter
+### 2. Instantiate Prisma Client using the driver adapter
 
-Finally, when you instantiate Prisma Client, you need to pass an instance of Prisma ORM's driver adapter to the `PrismaClient` constructor:
+Now, when you instantiate Prisma Client, you need to pass an instance of Prisma ORM's driver adapter to the `PrismaClient` constructor:
 
 ```ts
-
 const adapter = new PrismaMariaDb();
 const prisma = new PrismaClient();
 ```
@@ -85,7 +68,7 @@ The following components make up the _base URL_ of your database, they are alway
 | Name     | Placeholder | Description                                                                                                         |
 | :------- | :---------- | :------------------------------------------------------------------------------------------------------------------ |
 | Host     | `HOST`      | IP address/domain of your database server, e.g. `localhost`                                                         |
-| Port     | `PORT`      | Port on which your database server is running, e.g. `5432`  (default is `3306`, or no port when using Unix socket)  |
+| Port     | `PORT`      | Port on which your database server is running, e.g. `5432` (default is `3306`, or no port when using Unix socket)   |
 | User     | `USER`      | Name of your database user, e.g. `janedoe`                                                                          |
 | Password | `PASSWORD`  | Password for your database user                                                                                     |
 | Database | `DATABASE`  | Name of the [database](https://dev.mysql.com/doc/refman/8.0/en/creating-database.html) you want to use, e.g. `mydb` |
@@ -157,7 +140,7 @@ The MySQL connector maps the [scalar types](/orm/prisma-schema/data-model/models
 ### Native type mapping from Prisma ORM to MySQL
 
 | Prisma ORM | MySQL            | Notes                                                                                 |
-| ---------- | ---------------- | ------------------------------------------------------------------------------------- |                            
+| ---------- | ---------------- | ------------------------------------------------------------------------------------- |
 | `String`   | `VARCHAR(191)`   |                                                                                       |
 | `Boolean`  | `BOOLEAN`        | In MySQL `BOOLEAN` is a synonym for `TINYINT(1)`                                      |
 | `Int`      | `INT`            |                                                                                       |
@@ -170,7 +153,7 @@ The MySQL connector maps the [scalar types](/orm/prisma-schema/data-model/models
 
 ### Native type mapping from Prisma ORM to MariaDB
 
-| Prisma ORM | MariaDB            | Notes                                            |
+| Prisma ORM | MariaDB          | Notes                                              |
 | ---------- | ---------------- | -------------------------------------------------- |
 | `String`   | `VARCHAR(191)`   |                                                    |
 | `Boolean`  | `BOOLEAN`        | In MariaDB `BOOLEAN` is a synonym for `TINYINT(1)` |
@@ -237,7 +220,7 @@ When introspecting a MySQL database, the database types are mapped to Prisma ORM
 [Introspection](/orm/prisma-schema/introspection) adds native database types that are **not yet supported** as [`Unsupported`](/orm/reference/prisma-schema-reference#unsupported) fields:
 
 ```prisma file=schema.prisma showLineNumbers
-model Device 
+model Device
 ```
 
 ## Engine

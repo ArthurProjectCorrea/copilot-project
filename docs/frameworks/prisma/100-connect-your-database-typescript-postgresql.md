@@ -1,23 +1,20 @@
 ---
-title: 'Connect your existing database using TypeScript and PostgresSQL'
+title: 'Connect your database using TypeScript and PostgreSQL'
 sidebar_label: 'Connect your database'
-metaTitle: 'Connect your existing database using TypeScript and PostgresSQL'
-metaDescription: 'Connect your existing database to your project using TypeScript and PostgresSQL'
+metaTitle: 'Connect your database using TypeScript and PostgreSQL'
+metaDescription: 'Connect your database to your project using TypeScript and PostgreSQL'
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
 hide_table_of_contents: true
-toc: false
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-postgresql
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-postgresql
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgresql
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgresql
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-
 ---
-
-## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db 
+datasource db
 ```
 
 In this case, the `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`:
@@ -28,19 +25,24 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 
 You now need to adjust the connection URL to point to your own database.
 
-<h3 id="connection-url">Connection URL</h3>
-
 The [format of the connection URL](/orm/reference/connection-urls) for your database depends on the database you use. For PostgreSQL, it looks as follows (the parts spelled all-uppercased are _placeholders_ for your specific connection details):
 
 ```no-lines
 postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
 ```
 
-> **Note**: In most cases, you can use the [`postgres://` and `postgresql:// URI scheme designators interchangeably`](https://www.postgresql.org/docs/10/libpq-connect.html#id-1.7.3.8.3.6) - however, depending on how your database is hosted, you might need to be specific.
+Here's a short explanation of each component:
+
+- `USER`: The name of your database user
+- `PASSWORD`: The password for your database user
+- `HOST`: The name of your host name (for the local environment, it is `localhost`)
+- `PORT`: The port where your database server is running (typically `5432` for PostgreSQL)
+- `DATABASE`: The name of the [database](https://www.postgresql.org/docs/12/manage-ag-overview.html)
+- `SCHEMA`: The name of the [schema](https://www.postgresql.org/docs/12/ddl-schemas.html) inside the database
 
 If you're unsure what to provide for the `schema` parameter for a PostgreSQL connection URL, you can probably omit it. In that case, the default schema name `public` will be used.
 
-As an example, for a PostgreSQL database hosted on Heroku, the connection URL might look similar to this:
+As an example, for a PostgreSQL database hosted on Heroku, the [connection URL](/orm/reference/connection-urls) might look similar to this:
 
 ```bash file=.env
 DATABASE_URL="postgresql://opnmyfngbknppm:XXX@ec2-46-137-91-216.eu-west-1.compute.amazonaws.com:5432/d50rgmkqi2ipus?schema=hello-prisma"

@@ -1,47 +1,56 @@
 ---
-title: 'Add Prisma ORM to an existing project (TypeScript and MySQL)'
+title: 'Relational databases (TypeScript and MySQL)'
 sidebar_label: 'Relational databases'
-metaTitle: 'Integrate Prisma into a TypeScript Project with MySQL (15 min)'
-metaDescription: 'Step-by-step guide to connecting a MySQL database to an existing TypeScript project using Prisma and generating a Prisma Client.'
+metaTitle: 'Start from scratch with Prisma ORM using TypeScript and MySQL (15 min)'
+metaDescription: 'Learn how to create a new TypeScript project from scratch by connecting Prisma ORM to your MySQL database and generating a Prisma Client for database access.'
 hide_table_of_contents: true
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
-sidebar_custom_props: 
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
+sidebar_custom_props:
 sidebar_class_name: hidden-sidebar
-pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-mysql
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases-
+pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-mysql
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases-
 ---
 
-## Overview
-
-This guide walks you through integrating Prisma ORM into an existing Node.js or TypeScript project. You'll learn how to:
-
-- Connect Prisma to your MySQL database
-- Use the [Prisma CLI](/orm/tools/prisma-cli)
-- Generate a [Prisma Client](/orm/prisma-client) for database access
-- Introspect your existing database schema using [Prisma Introspection](/orm/prisma-schema/introspection)
-
-:::tip
-Migrating from another ORM? Check out our dedicated guides for [TypeORM](/guides/migrate-from-typeorm) and [Sequelize](/guides/migrate-from-sequelize).
-:::
+Learn how to create a new Node.js or TypeScript project from scratch by connecting Prisma ORM to your database and generating a Prisma Client for database access. The following tutorial introduces you to the [Prisma CLI](/orm/tools/prisma-cli), [Prisma Client](/orm/prisma-client), and [Prisma Migrate](/orm/prisma-migrate).
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+In order to successfully complete this guide, you need:
 
-- An existing Node.js project with a `package.json` file
-- [Node.js](https://nodejs.org/en/) installed (see [system requirements](/orm/reference/system-requirements))
-- A running [MySQL](https://www.mysql.com/) database with at least one table
+- [Node.js](https://nodejs.org/en/) installed on your machine (see [system requirements](/orm/reference/system-requirements) for officially supported versions)
+- a [MySQL](https://www.mysql.com/) database server running
 
-> 📌 You'll need your [database connection URL](/orm/reference/connection-urls), including credentials.
+> See [System requirements](/orm/reference/system-requirements) for exact version requirements.
 
-> 💡 Don’t have a database yet? Try our [Quickstart guide](/getting-started/quickstart-sqlite) with SQLite to explore Prisma ORM.
+Make sure you have your database [connection URL](/orm/reference/connection-urls) at hand. If you don't have a database server running and just want to explore Prisma ORM, check out the [Quickstart](/getting-started/quickstart-sqlite).
 
-## Step 1: Set Up Prisma
+## Create project setup
 
-1. Open your terminal and navigate to the project directory containing your `package.json`.
+As a first step, create a project directory and navigate into it:
 
-2. Install Prisma CLI as a development dependency:
+```terminal copy
+mkdir hello-prisma
+cd hello-prisma
+```
 
-```bash
-npm install prisma --save-dev
+Next, initialize a TypeScript project and add the Prisma CLI as a development dependency to it:
+
+```terminal copy
+npm init -y
+npm install prisma typescript tsx @types/node --save-dev
+```
+
+This creates a `package.json` with an initial setup for your TypeScript app.
+
+Next, initialize TypeScript:
+
+```terminal copy
+npx tsc --init
+```
+
+:::info
+
+See [installation instructions](/orm/tools/prisma-cli#installation) to learn how to install Prisma using a different package manager.
+
+:::

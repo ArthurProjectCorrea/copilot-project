@@ -15,11 +15,12 @@ Prisma ORM simplifies database interactions, and [TanStack Start](https://tansta
 This guide will walk you through integrating Prisma ORM with a Prisma Postgres database in a TanStack Start project from scratch.
 
 ## Prerequisites
+
 - [Node.js 18+](https://nodejs.org)
 
 ## 1. Set up your project
 
-To begin, create a new TanStack Start project. 
+To begin, create a new TanStack Start project.
 
 :::note
 
@@ -76,7 +77,7 @@ Update your `package.json` to use Vinxi's CLI. Add `"type": "module"` and modify
   "license": "ISC",
   "description": "",
   "dependencies": ,
-  "devDependencies": 
+  "devDependencies":
 }
 ```
 
@@ -119,7 +120,7 @@ touch app/routes/index.tsx
   return router
 }
 
-declare module '@tanstack/react-router' 
+declare module '@tanstack/react-router'
 }
 ```
 
@@ -142,10 +143,9 @@ import  from '@tanstack/react-start/server'
 `client.tsx` initializes the client-side logic to handle routes in the browser:
 
 ```typescript file=app/client.tsx
-
 const router = createRouter();
 
-hydrateRoot(document, );
+hydrateRoot(document);
 ```
 
 `routes/__root.tsx` defines the root route and global HTML layout for the entire application:
@@ -162,10 +162,10 @@ import  from "@tanstack/react-router";
   component: RootComponent,
 });
 
-function RootComponent() 
+function RootComponent()
 
-function RootDocument(: Readonly<>) 
-        
+function RootDocument(: Readonly<>)
+
       </body>
     </html>
   );
@@ -179,7 +179,7 @@ function RootDocument(: Readonly<>)
   component: Home,
 });
 
-function Home() 
+function Home()
 ```
 
 Now, run:
@@ -221,7 +221,7 @@ npx prisma init --db --output ../app/generated/prisma
 ```
 
 :::info
-You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My __________ Project"
+You'll need to answer a few questions while setting up your Prisma Postgres database. Select the region closest to your location and a memorable name for your database like "My ****\_\_**** Project"
 :::
 
 This will create:
@@ -233,17 +233,17 @@ This will create:
 
 ### 2.2. Define your Prisma Schema
 
-In `schema.prisma`, create a model for our posts and change the generator to use the [`prisma-client`](/orm/prisma-schema/overview/generators#prisma-client-preview) provider:
+In `schema.prisma`, create a model for our posts and change the generator to use the [`prisma-client`](/orm/prisma-schema/overview/generators#prisma-client) provider:
 
 ```prisma file=prisma/schema.prisma
-generator client 
+generator client
 
-datasource db 
+datasource db
 
 //add-start
-model User 
+model User
 
-model Post 
+model Post
 //add-end
 ```
 
@@ -256,6 +256,7 @@ Now, run the following command to create the database tables and generate the Pr
 ```terminal
 npx prisma migrate dev --name init
 ```
+
 ### 2.4. Seed the database
 
 Let's add some seed data to populate the database with sample users and posts.
@@ -297,7 +298,7 @@ Now, tell Prisma how to run this script by updating your `package.json`:
 
 ```json file=package.json
 //add-start
-"prisma": 
+"prisma":
 //add-end
 ```
 
@@ -347,7 +348,7 @@ const getUsers = createServerFn().handler(async () => ,
 });
 // add-end
 
-function Home() 
+function Home()
 ```
 
 TanStack Start allows functions to run on load with loader functions in the [`createFileRoute`](https://tanstack.com/router/latest/docs/framework/react/api/router/createFileRouteFunction) function. Fetch the users and their posts on load with this code:
@@ -364,7 +365,7 @@ const getUsers = createServerFn().handler(async () => ,
   });
 });
 
-function Home() 
+function Home()
 ```
 
 Store the response from the loader in the main component using [`Route.useLoaderData()`](https://tanstack.com/router/latest/docs/framework/react/api/router/useLoaderDataHook):
@@ -379,7 +380,7 @@ const getUsers = createServerFn().handler(async () => ,
   });
 });
 
-function Home() 
+function Home()
 ```
 
 ### 3.3 Display the users and posts
@@ -399,7 +400,7 @@ const getUsers = createServerFn().handler(async () => ,
 });
 
 function Home() >
-            
+
             <ul>
               ></li>
               ))}
