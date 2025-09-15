@@ -90,7 +90,7 @@ In v4 you import Tailwind using a regular CSS `@import` statement, not using the
 @tailwind components;
 @tailwind utilities;
 /* [!code ++:2] */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ### Removed deprecated utilities
@@ -167,10 +167,10 @@ We've changed the selector used by the [`space-x-*` and `space-y-*` utilities](/
 ```css
 /* [!code filename:CSS] */
 /* Before */
-.space-y-4 > :not([hidden]) ~ :not([hidden]) 
+.space-y-4 > :not([hidden]) ~ :not([hidden])
 
 /* Now */
-.space-y-4 > :not(:last-child) 
+.space-y-4 > :not(:last-child)
 ```
 
 You might see changes in your project if you were ever using these utilities with inline elements, or if you were adding other margins to child elements to tweak their spacing.
@@ -179,10 +179,13 @@ If this change causes any issues in your project, we recommend migrating to a fl
 
 ```html
 <!-- [!code filename:HTML] -->
-<div class="space-y-4 p-4"> <!-- [!code --] -->
-<div class="flex flex-col gap-4 p-4"> <!-- [!code ++] -->
-  <label for="name">Name</label>
-  <input type="text" name="name" />
+<div class="space-y-4 p-4">
+  <!-- [!code --] -->
+  <div class="flex flex-col gap-4 p-4">
+    <!-- [!code ++] -->
+    <label for="name">Name</label>
+    <input type="text" name="name" />
+  </div>
 </div>
 ```
 
@@ -205,7 +208,9 @@ This means you may need to explicitly use `via-none` if you want to "unset" a th
 ```html
 <!-- [!code filename:HTML] -->
 <!-- [!code classes:dark:via-none] -->
-<div class="bg-linear-to-r from-red-500 via-orange-400 to-yellow-400 dark:via-none dark:from-blue-500 dark:to-teal-400">
+<div
+  class="bg-linear-to-r from-red-500 via-orange-400 to-yellow-400 dark:via-none dark:from-blue-500 dark:to-teal-400"
+>
   <!-- ... -->
 </div>
 ```
@@ -218,7 +223,7 @@ To customize the `container` utility in v4, extend it using the `@utility` direc
 
 ```css
 /* [!code filename:CSS] */
-@utility container 
+@utility container;
 ```
 
 ### Default border color
@@ -238,7 +243,7 @@ Alternatively, add these base styles to your project to preserve the v3 behavior
 
 ```css
 /* [!code filename:CSS] */
-@layer base 
+@layer base
 }
 ```
 
@@ -269,7 +274,7 @@ Alternatively, add these theme variables to your CSS to preserve the v3 behavior
 
 ```css
 /* [!code filename:CSS] */
-@theme 
+@theme;
 ```
 
 Note though that these variables are only supported for compatibility reasons, and are not considered idiomatic usage of Tailwind CSS v4.0.
@@ -286,7 +291,7 @@ You probably won't even notice this change (it might even make your project look
 
 ```css
 /* [!code filename:CSS] */
-@layer base 
+@layer base
 }
 ```
 
@@ -298,7 +303,7 @@ If you'd like to continue using `cursor: pointer` by default, add these base sty
 
 ```css
 /* [!code filename:CSS] */
-@layer base 
+@layer base
 }
 ```
 
@@ -310,9 +315,13 @@ If you still want dialogs to be centered by default, add this CSS to your projec
 
 ```css
 /* [!code filename:CSS] */
-@layer base 
+@layer base
 }
 ```
+
+#### Hidden attribute takes priority
+
+Display classes like `block` or `flex` no longer take priority over the `hidden` attribute on an element. Remove the `hidden` attribute if you want an element to be visible to the user. Note that this does not apply to `hidden="until-found"`.
 
 ### Using a prefix
 
@@ -328,15 +337,15 @@ Prefixes now look like variants and are always at the beginning of the class nam
 When using a prefix, you should still configure your theme variables as if you aren't using a prefix:
 
 ```css }
-@import "tailwindcss" prefix(tw);
+@import 'tailwindcss' prefix(tw);
 
-@theme 
+@theme;
 ```
 
 The generated CSS variables _will_ include a prefix to avoid conflicts with any existing variables in your project:
 
 ```css }
-:root 
+:root;
 ```
 
 ### Adding custom utilities
@@ -348,10 +357,10 @@ In v4 we are using native cascade layers and no longer hijacking the `@layer` at
 ```css
 /* [!code filename:CSS] */
 /* [!code --:6] */
-@layer utilities 
+@layer utilities
 }
 /* [!code ++:4] */
-@utility tab-4 
+@utility tab-4
 ```
 
 Custom utilities are now also sorted based on the amount of properties they define. This means that component utilities like this `.btn` can be overwritten by other Tailwind utilities without additional configuration:
@@ -359,10 +368,10 @@ Custom utilities are now also sorted based on the amount of properties they defi
 ```css
 /* [!code filename:CSS] */
 /* [!code --:8] */
-@layer components 
+@layer components
 }
 /* [!code ++:6] */
-@utility btn 
+@utility btn
 ```
 
 Learn more about registering custom utilities in the [adding custom utilities documentation](/docs/adding-custom-styles#adding-custom-utilities).
@@ -408,7 +417,7 @@ In v4 we've updated the `hover` variant to only apply when the primary input dev
 
 ```css
 /* [!code filename:CSS] */
-@media (hover: hover) 
+@media (hover: hover)
 }
 ```
 
@@ -445,14 +454,14 @@ Since v4 includes CSS variables for all of your theme values, we recommend using
 
 ```css
 /* [!code filename:CSS] */
-.my-class 
+.my-class
 ```
 
 For cases where you still need to use the `theme()` function (like in media queries where CSS variables aren't supported), you should use the CSS variable name instead of the old dot notation:
 
 ```css
 /* [!code filename:CSS] */
-@media (width >= theme(screens.xl)) 
+@media (width >= theme(screens.xl));
 ```
 
 ### Using a JavaScript config file
@@ -487,7 +496,7 @@ If you need access to a resolved CSS variable value in JS, you can use `getCompu
 ```js
 // [!code filename:spaghetti.js]
 let styles = getComputedStyle(document.documentElement);
-let shadow = styles.getPropertyValue("--shadow-xl");
+let shadow = styles.getPropertyValue('--shadow-xl');
 ```
 
 ### Using @apply with Vue, Svelte, or CSS modules
@@ -506,7 +515,7 @@ To make these definitions available in these contexts, use [`@reference`](/docs/
   /* [!code highlight:2] */
   @reference "../../app.css";
 
-  h1 
+  h1
 </style>
 ```
 
@@ -519,7 +528,7 @@ Alternatively, you can use your CSS theme variables directly instead of using `@
 </template>
 
 <style>
-  h1 
+  h1
 </style>
 ```
 
