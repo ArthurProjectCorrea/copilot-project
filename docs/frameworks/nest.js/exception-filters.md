@@ -1,32 +1,66 @@
 ### Exception filters
 
-The only difference between the HTTP [exception filter](/exception-filters) layer and the corresponding web sockets layer is that instead of throwing `HttpException`, you should use `WsException`.
+The only difference between the HTTP [exception filter](/exception-filters) layer and the corresponding microservices layer is that instead of throwing `HttpException`, you should use `RpcException`.
 
 ```typescript
-throw new WsException('Invalid credentials.');
+throw new RpcException('Invalid credentials.');
 ```
 
-> info **Hint** The `WsException` class is imported from the `@nestjs/websockets` package.
+> info **Hint** The `RpcException` class is imported from the `@nestjs/microservices` package.
 
-With the sample above, Nest will handle the thrown exception and emit the `exception` message with the following structure:
+With the sample above, Nest will handle the thrown exception and return the `error` object with the following structure:
 
-```typescript
+```json
 {
-  status: 'error',
-  message: 'Invalid credentials.'
+  "status": "error",
+  "message": "Invalid credentials."
 }
 ```
 
 #### Filters
 
-Web sockets exception filters behave equivalently to HTTP exception filters. The following example uses a manually instantiated method-scoped filter. Just as with HTTP based applications, you can also use gateway-scoped filters (i.e., prefix the gateway class with a `@UseFilters()` decorator).
+Microservice exception filters behave similarly to HTTP exception filters, with one small difference. The `catch()` method must return an `Observable`.
 
 ```typescript
-@UseFilters(new WsExceptionFilter())
-@SubscribeMessage('events')
-onEvent(client, data: any): WsResponse<any> {
-  const event = 'events';
-  return { event, data };
+@@filename(rpc-exception.filter)
+import { Catch, RpcExceptionFilter, ArgumentsHost } from '@nestjs/common';
+import { Observable, throwError } from 'rxjs';
+import { RpcException } from '@nestjs/microservices';
+
+@Catch(RpcException)
+export class ExceptionFilter implements RpcExceptionFilter<RpcException> {
+  catch(exception: RpcException, host: ArgumentsHost): Observable<any> {
+    return throwError(() => exception.getError());
+  }
+}
+@@switch
+import { Catch } from '@nestjs/common';
+import { throwError } from 'rxjs';
+
+@Catch(RpcException)
+export class ExceptionFilter {
+  catch(exception, host) {
+    return throwError(() => exception.getError());
+  }
+}
+```
+
+> warning **Warning** Global microservice exception filters aren't enabled by default when using a [hybrid application](/faq/hybrid-application).
+
+The following example uses a manually instantiated method-scoped filter. Just as with HTTP based applications, you can also use controller-scoped filters (i.e., prefix the controller class with a `@UseFilters()` decorator).
+
+```typescript
+@@filename()
+@UseFilters(new ExceptionFilter())
+@MessagePattern({ cmd: 'sum' })
+accumulate(data: number[]): number {
+  return (data || []).reduce((a, b) => a + b);
+}
+@@switch
+@UseFilters(new ExceptionFilter())
+@MessagePattern({ cmd: 'sum' })
+accumulate(data) {
+  return (data || []).reduce((a, b) => a + b);
 }
 ```
 
@@ -34,27 +68,27 @@ onEvent(client, data: any): WsResponse<any> {
 
 Typically, you'll create fully customized exception filters crafted to fulfill your application requirements. However, there might be use-cases when you would like to simply extend the **core exception filter**, and override the behavior based on certain factors.
 
-In order to delegate exception processing to the base filter, you need to extend `BaseWsExceptionFilter` and call the inherited `catch()` method.
+In order to delegate exception processing to the base filter, you need to extend `BaseExceptionFilter` and call the inherited `catch()` method.
 
 ```typescript
 @@filename()
 import { Catch, ArgumentsHost } from '@nestjs/common';
-import { BaseWsExceptionFilter } from '@nestjs/websockets';
+import { BaseRpcExceptionFilter } from '@nestjs/microservices';
 
 @Catch()
-export class AllExceptionsFilter extends BaseWsExceptionFilter {
-  catch(exception: unknown, host: ArgumentsHost) {
-    super.catch(exception, host);
+export class AllExceptionsFilter extends BaseRpcExceptionFilter {
+  catch(exception: any, host: ArgumentsHost) {
+    return super.catch(exception, host);
   }
 }
 @@switch
 import { Catch } from '@nestjs/common';
-import { BaseWsExceptionFilter } from '@nestjs/websockets';
+import { BaseRpcExceptionFilter } from '@nestjs/microservices';
 
 @Catch()
-export class AllExceptionsFilter extends BaseWsExceptionFilter {
+export class AllExceptionsFilter extends BaseRpcExceptionFilter {
   catch(exception, host) {
-    super.catch(exception, host);
+    return super.catch(exception, host);
   }
 }
 ```

@@ -5,7 +5,7 @@
 - **Framework:** NestJS (backend)
 - **Repository:** [nestjs/docs.nestjs.com](https://github.com/nestjs/docs.nestjs.com)
 - **Source Path:** `content/`
-- **Last Sync:** 2025-09-15T03:04:23.723Z
+- **Last Sync:** 2025-09-15T03:39:27.366Z
 - **MDX Conversion:** Disabled
 - **File Extensions:** .md, .mdx
 

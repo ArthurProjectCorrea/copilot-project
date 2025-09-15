@@ -1,110 +1,198 @@
 ### Overview
 
-The [Nest CLI](https://github.com/nestjs/nest-cli) is a command-line interface tool that helps you to initialize, develop, and maintain your Nest applications. It assists in multiple ways, including scaffolding the project, serving it in development mode, and building and bundling the application for production distribution. It embodies best-practice architectural patterns to encourage well-structured apps.
+> info **Hint** This chapter covers the Nest Devtools integration with the Nest framework. If you are looking for the Devtools application, please visit the [Devtools](https://devtools.nestjs.com) website.
 
-#### Installation
+To start debugging your local application, open up the `main.ts` file and make sure to set the `snapshot` attribute to `true` in the application options object, as follows:
 
-**Note**: In this guide we describe using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) to install packages, including the Nest CLI. Other package managers may be used at your discretion. With npm, you have several options available for managing how your OS command line resolves the location of the `nest` CLI binary file. Here, we describe installing the `nest` binary globally using the `-g` option. This provides a measure of convenience, and is the approach we assume throughout the documentation. Note that installing **any** `npm` package globally leaves the responsibility of ensuring they're running the correct version up to the user. It also means that if you have different projects, each will run the **same** version of the CLI. A reasonable alternative is to use the [npx](https://github.com/npm/cli/blob/latest/docs/lib/content/commands/npx.md) program, built into the `npm` cli (or similar features with other package managers) to ensure that you run a **managed version** of the Nest CLI. We recommend you consult the [npx documentation](https://github.com/npm/cli/blob/latest/docs/lib/content/commands/npx.md) and/or your DevOps support staff for more information.
-
-Install the CLI globally using the `npm install -g` command (see the **Note** above for details about global installs).
-
-```bash
-$ npm install -g @nestjs/cli
+```typescript
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule, {
+    snapshot: true,
+  });
+  await app.listen(process.env.PORT ?? 3000);
+}
 ```
 
-> info **Hint** Alternatively, you can use this command `npx @nestjs/cli@latest` without installing the cli globally.
+This will instruct the framework to collect necessary metadata that will let Nest Devtools visualize your application's graph.
 
-#### Basic workflow
-
-Once installed, you can invoke CLI commands directly from your OS command line through the `nest` executable. See the available `nest` commands by entering the following:
+Next up, let's install the required dependency:
 
 ```bash
-$ nest --help
+$ npm i @nestjs/devtools-integration
 ```
 
-Get help on an individual command using the following construct. Substitute any command, like `new`, `add`, etc., where you see `generate` in the example below to get detailed help on that command:
+> warning **Warning** If you're using `@nestjs/graphql` package in your application, make sure to install the latest version (`npm i @nestjs/graphql@11`).
 
-```bash
-$ nest generate --help
+With this dependency in place, let's open up the `app.module.ts` file and import the `DevtoolsModule` that we just installed:
+
+```typescript
+@Module({
+  imports: [
+    DevtoolsModule.register({
+      http: process.env.NODE_ENV !== 'production',
+    }),
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
 ```
 
-To create, build and run a new basic Nest project in development mode, go to the folder that should be the parent of your new project, and run the following commands:
+> warning **Warning** The reason we are checking the `NODE_ENV` environment variable here is that you should never use this module in production!
 
-```bash
-$ nest new my-nest-project
-$ cd my-nest-project
-$ npm run start:dev
+Once the `DevtoolsModule` is imported and your application is up and running (`npm run start:dev`), you should be able to navigate to [Devtools](https://devtools.nestjs.com) URL and see the instrospected graph.
+
+<figure><img src="/assets/devtools/modules-graph.png" /></figure>
+
+> info **Hint** As you can see on the screenshot above, every module connects to the `InternalCoreModule`. `InternalCoreModule` is a global module that is always imported into the root module. Since it's registered as a global node, Nest automatically creates edges between all of the modules and the `InternalCoreModule` node. Now, if you want to hide global modules from the graph, you can use the "**Hide global modules**" checkbox (in the sidebar).
+
+So as we can see, `DevtoolsModule` makes your application expose an additional HTTP server (on port 8000) that the Devtools application will use to introspect your app.
+
+Just to double-check that everything works as expected, change the graph view to "Classes". You should see the following screen:
+
+<figure><img src="/assets/devtools/classes-graph.png" /></figure>
+
+To focus on a specific node, click on the rectangle and the graph will show a popup window with the **"Focus"** button. You can also use the search bar (located in the sidebar) to find a specific node.
+
+> info **Hint** If you click on the **Inspect** button, application will take you to the `/debug` page with that specific node selected.
+
+<figure><img src="/assets/devtools/node-popup.png" /></figure>
+
+> info **Hint** To export a graph as an image, click on the **Export as PNG** button in the right corner of the graph.
+
+Using the form controls located in the sidebar (on the left), you can control edges proximity to, for example, visualize a specific application sub-tree:
+
+<figure><img src="/assets/devtools/subtree-view.png" /></figure>
+
+This can be particularly useful when you have **new developers** on your team and you want to show them how your application is structured. You can also use this feature to visualize a specific module (e.g. `TasksModule`) and all of its dependencies, which can come in handy when you're breaking down a large application into smaller modules (for example, individual micro-services).
+
+You can watch this video to see the **Graph Explorer** feature in action:
+
+<figure>
+  <iframe
+    width="1000"
+    height="565"
+    src="https://www.youtube.com/embed/bW8V-ssfnvM"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+  ></iframe>
+</figure>
+
+#### Investigating the "Cannot resolve dependency" error
+
+> info **Note** This feature is supported for `@nestjs/core` >= `v9.3.10`.
+
+Probably the most common error message you might have seen is about Nest not being able to resolve dependencies of a provider. Using Nest Devtools, you can effortlessly identify the issue and learn how to resolve it.
+
+First, open up the `main.ts` file and update the `bootstrap()` call, as follows:
+
+```typescript
+bootstrap().catch((err) => {
+  fs.writeFileSync('graph.json', PartialGraphHost.toString() ?? '');
+  process.exit(1);
+});
 ```
 
-In your browser, open [http://localhost:3000](http://localhost:3000) to see the new application running. The app will automatically recompile and reload when you change any of the source files.
+Also, make sure to set the `abortOnError` to `false`:
 
-> info **Hint** We recommend using the [SWC builder](/recipes/swc) for faster builds (10x more performant than the default TypeScript compiler).
-
-#### Project structure
-
-When you run `nest new`, Nest generates a boilerplate application structure by creating a new folder and populating an initial set of files. You can continue working in this default structure, adding new components, as described throughout this documentation. We refer to the project structure generated by `nest new` as **standard mode**. Nest also supports an alternate structure for managing multiple projects and libraries called **monorepo mode**.
-
-Aside from a few specific considerations around how the **build** process works (essentially, monorepo mode simplifies build complexities that can sometimes arise from monorepo-style project structures), and built-in [library](/cli/libraries) support, the rest of the Nest features, and this documentation, apply equally to both standard and monorepo mode project structures. In fact, you can easily switch from standard mode to monorepo mode at any time in the future, so you can safely defer this decision while you're still learning about Nest.
-
-You can use either mode to manage multiple projects. Here's a quick summary of the differences:
-
-| Feature                                                    | Standard Mode                                                      | Monorepo Mode                                              |
-| ---------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------- |
-| Multiple projects                                          | Separate file system structure                                     | Single file system structure                               |
-| `node_modules` & `package.json`                            | Separate instances                                                 | Shared across monorepo                                     |
-| Default compiler                                           | `tsc`                                                              | webpack                                                    |
-| Compiler settings                                          | Specified separately                                               | Monorepo defaults that can be overridden per project       |
-| Config files like `eslint.config.mjs`, `.prettierrc`, etc. | Specified separately                                               | Shared across monorepo                                     |
-| `nest build` and `nest start` commands                     | Target defaults automatically to the (only) project in the context | Target defaults to the **default project** in the monorepo |
-| Libraries                                                  | Managed manually, usually via npm packaging                        | Built-in support, including path management and bundling   |
-
-Read the sections on [Workspaces](/cli/monorepo) and [Libraries](/cli/libraries) for more detailed information to help you decide which mode is most suitable for you.
-
-<app-banner-courses></app-banner-courses>
-
-#### CLI command syntax
-
-All `nest` commands follow the same format:
-
-```bash
-nest commandOrAlias requiredArg [optionalArg] [options]
+```typescript
+const app = await NestFactory.create(AppModule, {
+  snapshot: true,
+  abortOnError: false, // <--- THIS
+});
 ```
 
-For example:
+Now every time your application fails to bootstrap due to the **"Cannot resolve dependency"** error, you'll find the `graph.json` (that represents a partial graph) file in the root directory. You can then drag & drop this file into Devtools (make sure to switch the current mode from "Interactive" to "Preview"):
 
-```bash
-$ nest new my-nest-project --dry-run
+<figure><img src="/assets/devtools/drag-and-drop.png" /></figure>
+
+Upon successful upload, you should see the following graph & dialog window:
+
+<figure><img src="/assets/devtools/partial-graph-modules-view.png" /></figure>
+
+As you can see, the highlighted `TasksModule` is the one we should look into. Also, in the dialog window you can already see some instructions on how to fix this issue.
+
+If we switch to the "Classes" view instead, that's what we'll see:
+
+<figure><img src="/assets/devtools/partial-graph-classes-view.png" /></figure>
+
+This graph illustrates that the `DiagnosticsService` which we want to inject into the `TasksService` was not found in the context of the `TasksModule` module, and we should likely just import the `DiagnosticsModule` into the `TasksModule` module to fix this up!
+
+#### Routes explorer
+
+When you navigate to the **Routes explorer** page, you should see all of the registered entrypoints:
+
+<figure><img src="/assets/devtools/routes.png" /></figure>
+
+> info **Hint** This page shows not only HTTP routes, but also all of the other entrypoints (e.g. WebSockets, gRPC, GraphQL resolvers etc.).
+
+Entrypoints are grouped by their host controllers. You can also use the search bar to find a specific entrypoint.
+
+If you click on a specific entrypoint, **a flow graph** will be displayed. This graph shows the execution flow of the entrypoint (e.g. guards, interceptors, pipes, etc. bound to this route). This is particularly useful when you want to understand how the request/response cycle looks for a specific route, or when troubleshooting why a specific guard/interceptor/pipe is not being executed.
+
+#### Sandbox
+
+To execute JavaScript code on the fly & interact with your application in real-time, navigate to the **Sandbox** page:
+
+<figure><img src="/assets/devtools/sandbox.png" /></figure>
+
+The playground can be used to test and debug API endpoints in **real-time**, allowing developers to quickly identify and fix issues without using, for example, an HTTP client. We can also bypass the authentication layer, and so we no longer need that extra step of logging in, or even a special user account for testing purposes. For event-driven applications, we can also trigger events directly from the playground, and see how the application reacts to them.
+
+Anything that gets logged down is streamlined to the playground's console, so we can easily see what's going on.
+
+Just execute the code **on the fly** and see the results instantly, without having to rebuild the application and restart the server.
+
+<figure><img src="/assets/devtools/sandbox-table.png" /></figure>
+
+> info **Hint** To pretty display an array of objects, use the `console.table()` (or just `table()`) function.
+
+You can watch this video to see the **Interactive Playground** feature in action:
+
+<figure>
+  <iframe
+    width="1000"
+    height="565"
+    src="https://www.youtube.com/embed/liSxEN_VXKM"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+  ></iframe>
+</figure>
+
+#### Bootstrap performance analyzer
+
+To see a list of all class nodes (controllers, providers, enhancers, etc.) and their corresponding instantiation times, navigate to the **Bootstrap performance** page:
+
+<figure><img src="/assets/devtools/bootstrap-performance.png" /></figure>
+
+This page is particularly useful when you want to identify the slowest parts of your application's bootstrap process (e.g. when you want to optimize the application's startup time which is crucial for, for example, serverless environments).
+
+#### Audit
+
+To see the auto-generated audit - errors/warnings/hints that the application came up with while analyzing your serialized graph, navigate to the **Audit** page:
+
+<figure><img src="/assets/devtools/audit.png" /></figure>
+
+> info **Hint** The screenshot above doesn't show all of the available audit rules.
+
+This page comes in handy when you want to identify potential issues in your application.
+
+#### Preview static files
+
+To save a serialized graph to a file, use the following code:
+
+```typescript
+await app.listen(process.env.PORT ?? 3000); // OR await app.init()
+fs.writeFileSync('./graph.json', app.get(SerializedGraph).toString());
 ```
 
-Here, `new` is the _commandOrAlias_. The `new` command has an alias of `n`. `my-nest-project` is the _requiredArg_. If a _requiredArg_ is not supplied on the command line, `nest` will prompt for it. Also, `--dry-run` has an equivalent short-hand form `-d`. With this in mind, the following command is the equivalent of the above:
+> info **Hint** `SerializedGraph` is exported from the `@nestjs/core` package.
 
-```bash
-$ nest n my-nest-project -d
-```
+Then you can drag and drop/upload this file:
 
-Most commands, and some options, have aliases. Try running `nest new --help` to see these options and aliases, and to confirm your understanding of the above constructs.
+<figure><img src="/assets/devtools/drag-and-drop.png" /></figure>
 
-#### Command overview
-
-Run `nest <command> --help` for any of the following commands to see command-specific options.
-
-See [usage](/cli/usages) for detailed descriptions for each command.
-
-| Command    | Alias | Description                                                                                    |
-| ---------- | ----- | ---------------------------------------------------------------------------------------------- |
-| `new`      | `n`   | Scaffolds a new _standard mode_ application with all boilerplate files needed to run.          |
-| `generate` | `g`   | Generates and/or modifies files based on a schematic.                                          |
-| `build`    |       | Compiles an application or workspace into an output folder.                                    |
-| `start`    |       | Compiles and runs an application (or default project in a workspace).                          |
-| `add`      |       | Imports a library that has been packaged as a **nest library**, running its install schematic. |
-| `info`     | `i`   | Displays information about installed nest packages and other helpful system info.              |
-
-#### Requirements
-
-Nest CLI requires a Node.js binary built with [internationalization support](https://nodejs.org/api/intl.html) (ICU), such as the official binaries from the [Node.js project page](https://nodejs.org/en/download). If you encounter errors related to ICU, check that your binary meets this requirement.
-
-```bash
-node -p process.versions.icu
-```
-
-If the command prints `undefined`, your Node.js binary has no internationalization support.
+This is helpful when you want to share your graph with someone else (e.g., co-worker), or when you want to analyze it offline.
