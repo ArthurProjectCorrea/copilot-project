@@ -36,7 +36,7 @@ For example, a Client Component with `usePathname` will be rendered into HTML on
 ## Parameters
 
 ```tsx
-const pathname = usePathname()
+const pathname = usePathname();
 ```
 
 `usePathname` does not take any parameters.
@@ -67,6 +67,44 @@ function ExampleClientComponent() , [pathname, searchParams])
 'use client'
 
 function ExampleClientComponent() , [pathname, searchParams])
+}
+```
+
+### Avoid hydration mismatch with rewrites
+
+When a page is pre-rendered, the HTML is generated for the source pathname. If the page is then reached through a rewrite using `next.config` or `Middleware`, the browser URL may differ, and `usePathname()` will read the rewritten pathname on the client.
+
+To avoid hydration mismatches, design the UI so that only a small, isolated part depends on the client pathname. Render a stable fallback on the server and update that part after mount.
+
+```tsx filename="app/example-client-component.tsx" switcher
+'use client'
+
+  const pathname = usePathname()
+  const [clientPathname, setClientPathname] = useState('')
+
+  useEffect(() => , [pathname])
+
+  return (
+    <p>
+      Current pathname: <span></span>
+    </p>
+  )
+}
+```
+
+```jsx filename="app/example-client-component.js" switcher
+'use client'
+
+  const pathname = usePathname()
+  const [clientPathname, setClientPathname] = useState('')
+
+  useEffect(() => , [pathname])
+
+  return (
+    <p>
+      Current pathname: <span></span>
+    </p>
+  )
 }
 ```
 

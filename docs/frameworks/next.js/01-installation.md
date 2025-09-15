@@ -65,10 +65,12 @@ Then, add the following scripts to your `package.json` file:
 
 These scripts refer to the different stages of developing an application:
 
-- `next dev`: Starts the development server.
+- `next dev --turbopack`: Starts the development server using Turbopack.
 - `next build`: Builds the application for production.
 - `next start`: Starts the production server.
 - `eslint`: Runs ESLint.
+
+Turbopack is stable for `dev`. For production builds, Turbopack is in beta. To try it, run `next build --turbopack`. See the [Turbopack docs](/docs/app/api-reference/turbopack) for status and caveats.
 
 ### Create the `public` folder (optional)
 
@@ -78,13 +80,13 @@ You can then reference these assets using the root path (`/`). For example, `pub
 
 ```tsx filename="app/page.tsx" highlight= switcher
 
-  return 
+  return
 }
 ```
 
 ```jsx filename="app/page.js" highlight= switcher
 
-  return 
+  return
 }
 ```
 
@@ -92,7 +94,7 @@ You can then reference these assets using the root path (`/`). For example, `pub
 
 1. Run `npm run dev` to start the development server.
 2. Visit `http://localhost:3000` to view your application.
-3. Edit the  file and save it to see the updated result in your browser.
+3. Edit the file and save it to see the updated result in your browser.
 
 ## Set up TypeScript
 
@@ -142,7 +144,6 @@ These options allow you to alias project directories to absolute paths, making i
 // Before
 
 // After
-
 ```
 
 To configure absolute imports, add the `baseUrl` configuration option to your `tsconfig.json` or `jsconfig.json` file. For example:
