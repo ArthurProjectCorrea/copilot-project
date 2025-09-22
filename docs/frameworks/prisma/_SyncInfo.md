@@ -5,7 +5,7 @@
 - **Framework:** Prisma (database)
 - **Repository:** [prisma/docs](https://github.com/prisma/docs)
 - **Source Path:** `content/`
-- **Last Sync:** 2025-09-15T05:14:15.132Z
+- **Last Sync:** 2025-09-22T05:14:05.504Z
 - **MDX Conversion:** Enabled
 - **File Extensions:** .md, .mdx
 

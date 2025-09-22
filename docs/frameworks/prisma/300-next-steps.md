@@ -1,8 +1,8 @@
 ---
-title: 'Next steps after adding Prisma ORM to an existing project using MongoDB'
+title: 'Next steps with Prisma ORM and your relational database'
 sidebar_label: 'Next steps'
-metaTitle: 'Next steps after adding Prisma ORM to an existing project using MongoDB'
-metaDescription: 'Next steps to take now that you have successfully added Prisma ORM to your existing Node.js or TypeScript project.'
+metaTitle: 'Next steps after setting up Prisma ORM with your relational database'
+metaDescription: 'Next steps to take now that you have successfully added Prisma ORM to your new TypeScript or JavaScript project'
 hide_table_of_contents: true
 ---
 
@@ -43,11 +43,11 @@ const post = await prisma.post.create(,
 **Use the fluent relations API to retrieve the `Post` records of a `User` by traversing the relations**
 
 ```js
-const user = await prisma.comment
+const posts = await prisma.profile
   .findUnique(,
   })
-  .post()
   .user()
+  .posts()
 ```
 
 **Delete a `User` record**
@@ -70,6 +70,14 @@ The Prisma blog features comprehensive tutorials about Prisma ORM, check out our
 ### Explore the data in Prisma Studio
 
 Prisma Studio is a visual editor for the data in your database. Run `npx prisma studio` in your terminal.
+
+If you are using [Prisma Postgres](https://www.prisma.io/postgres), you can also directly use Prisma Studio inside the [Console](https://console.prisma.io) by selecting the **Studio** tab in your project.
+
+### Get query insights and analytics with Prisma Optimize
+
+[Prisma Optimize](/optimize) helps you generate insights and provides recommendations that can help you make your database queries faster. [Try it out now!](/optimize/getting-started)
+
+Optimize aims to help developers of all skill levels write efficient database queries, reducing database load and making applications more responsive.
 
 ### Try a Prisma ORM example
 

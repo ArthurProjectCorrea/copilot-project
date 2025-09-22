@@ -1,27 +1,25 @@
 ---
-title: 'Connect MongoDB to your existing Node.js project'
+title: 'Connect your database using JavaScript and MongoDB'
 sidebar_label: 'Connect your database (MongoDB)'
-metaTitle: 'Connect your MongoDB database'
-metaDescription: 'Connect your MongoDB database to your existing Node.js project'
+metaTitle: 'Connect your database using JavaScript and MongoDB'
+metaDescription: 'Connect your database to your project using JavaScript and MongoDB'
 langSwitcher: ['typescript', 'node']
 sidebar_class_name: hidden-sidebar
-hide_table_of_contents: true
 dbSwitcher: ['mongodb']
+hide_table_of_contents: true
 toc: false
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb-node-mongodb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/introspection-node-mongodb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/connect-your-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/mongodb-node-mongodb
+pagination_next: getting-started/setup-prisma/start-from-scratch/mongodb/creating-the-prisma-schema-node-mongodb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/mongodb/connect-your-database-
 ---
- 
-## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db 
+datasource db
 ```
 
-In this case, the `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`:
+In this case, the `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env` (the example uses a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) URL):
 
 ```bash file=.env showLineNumbers
 DATABASE_URL="mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase"

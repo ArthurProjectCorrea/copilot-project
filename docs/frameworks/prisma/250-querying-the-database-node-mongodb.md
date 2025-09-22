@@ -1,33 +1,29 @@
 ---
-title: 'Query your existing MongoDB database with JavaScript and Prisma ORM'
+title: 'Querying the database using JavaScript and MongoDB'
 sidebar_label: 'Querying the database'
-metaTitle: 'Querying the database in your existing project: MongoDB and JavaScript'
-metaDescription: 'Write data to and query your MongoDB database in your existing project.'
+metaTitle: 'Querying the database with JavaScript and MongoDB'
+metaDescription: 'Write data to and query the database using JavaScript and MongoDB'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['mongodb']
 hide_table_of_contents: true
 sidebar_class_name: hidden-sidebar
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb/install-prisma-client-node-mongodb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/next-steps
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/querying-the-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/mongodb/install-prisma-client-node-mongodb
+pagination_next: getting-started/setup-prisma/start-from-scratch/mongodb/next-steps
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/mongodb/querying-the-database-
 ---
- 
+
 ## Write your first query with Prisma Client
 
 Now that you have generated Prisma Client, you can start writing queries to read and write data in your database. For the purpose of this guide, you'll use a plain Node.js script to explore some basic features of Prisma Client.
 
-If you're building a REST API, you can use Prisma Client in your route handlers to read and write data in the database based on incoming HTTP requests. If you're building a GraphQL API, you can use Prisma Client in your resolvers to read and write data in the database based on incoming queries and mutations.
-
-For the purpose of this guide however, you'll just create a plain Node.js script to learn how to send queries to your database using Prisma Client. Once you have an understanding of how the API works, you can start integrating it into your actual application code (e.g. REST route handlers or GraphQL resolvers).
-
 Create a new file named `index.js` and add the following code to it:
 
-```js file=index.js copy
+```js file=index.js copy showLineNumbers
 const  = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-async function main() 
+async function main()
 
 main()
   .then(async () => )
@@ -45,8 +41,8 @@ Here's a quick overview of the different parts of the code snippet:
 
 Inside the `main` function, add the following query to read all `User` records from the database and print the result:
 
-```js file=index.js showLineNumbers
-async function main() 
+```js file=index.js
+async function main()
 ```
 
 Now run the code with this command:
@@ -55,7 +51,11 @@ Now run the code with this command:
 node index.js
 ```
 
-If you introspected an existing database with records, the query should return an array of JavaScript objects.
+This should print an empty array because there are no `User` records in the database yet:
+
+```json no-lines
+[]
+```
 
 ## Write data into the database
 
@@ -63,7 +63,7 @@ The `findMany` query you used in the previous section only _reads_ data from the
 
 Adjust the `main` function to send a `create` query to the database:
 
-```js file=index.js copy showLineNumbers
+```js file=index.js highlight=2-21;add copy showLineNumbers
 async function main() ,
       },
     },
@@ -72,6 +72,7 @@ async function main() ,
   const allUsers = await prisma.user.findMany(,
   })
   console.dir(allUsers, )
+  //add-end
 }
 ```
 
@@ -95,25 +96,25 @@ The output should look similar to this:
 ]
 ```
 
-The query added new records to the `User` and the `Post` collections:
+The query added new records to the `User` and the `Post` tables:
 
-**User** collection
+**User**
 
-| **\_id**                   | **email**            | **name** |
+| **id**                     | **email**            | **name** |
 | :------------------------- | :------------------- | :------- |
 | `60cc9b0e001e3bfd00a6eddf` | `"hello@prisma.com"` | `"Rich"` |
 
-**Post** collection
+**Post**
 
-| **\_id**                   | **createdAt**              | **title**         | **content**                        | **published** | **authorId**               |
+| **id**                     | **createdAt**              | **title**         | **content**                        | **published** | **authorId**               |
 | :------------------------- | :------------------------- | :---------------- | :--------------------------------- | :------------ | :------------------------- |
 | `60cc9bad005059d6007f45dd` | `2020-03-21T16:45:01.246Z` | `"My first post"` | `Lots of really interesting stuff` | `false`       | `60cc9b0e001e3bfd00a6eddf` |
 
-> **Note**: The unique identifier in the `authorId` document field on `Post` reference the `_id` document field in the `User` collection, meaning the `_id` value `60cc9b0e001e3bfd00a6eddf` column therefore refers to the first (and only) `User` record in the database.
+> **Note**: The unique IDs in the `authorId` column on `Post` reference the `id` column of the `User` table, meaning the `id` value `60cc9b0e001e3bfd00a6eddf` column therefore refers to the first (and only) `User` record in the database.
 
 Before moving on to the next section, you'll add a couple of comments to the `Post` record you just created using an `update` query. Adjust the `main` function as follows:
 
-```js file=index.js copy
+```js file=index.js copy showLineNumbers
 async function main() ,
     data: ,
             ,

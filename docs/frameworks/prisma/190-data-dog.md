@@ -21,7 +21,6 @@ In this guide, you'll learn how to set up Datadog tracing for a new Prisma proje
 ### What are spans and tracing?
 
 - **Spans** are the individual operations or units of work within a distributed system or complex application. Each database query, service call, or external request is represented by a span.
-  
 - **Tracing** ties these spans together to form a complete, end-to-end picture of a request’s lifecycle. With tracing, you can visualize bottlenecks, identify problematic queries, and pinpoint where errors occur from your queries.
 
 ### Why use Datadog with Prisma ORM?
@@ -89,9 +88,9 @@ You can use the `--db` flag to create a [new Prisma Postgres](/postgres) instanc
 
 This command does the following:
 
-- Creates a `prisma` directory with a `schema.prisma` file.  
+- Creates a `prisma` directory with a `schema.prisma` file.
 - Generates the Prisma Client in the `/src/generated/prisma` directory (as specified in the `--output` flag).
-- Creates a `.env` file at the project root with your database connection string (`DATABASE_URL`). 
+- Creates a `.env` file at the project root with your database connection string (`DATABASE_URL`).
 
 If you did not use the `--db` flag, replace the placeholder database URL in the `.env` file:
 
@@ -108,14 +107,14 @@ This extension enables you to [cache your Prisma queries](/postgres/database/cac
 Now, open `prisma/schema.prisma` and update your generator block and models. Replace the `generator` block with the following, and add a `User` and a `Post` model:
 
 ```prisma file=prisma/schema.prisma
-generator client 
+generator client
 
-datasource db 
+datasource db
 
 //add-start
-model User 
+model User
 
-model Post 
+model Post
 //add-end
 ```
 
@@ -136,7 +135,7 @@ In addition to Prisma, you will need the following packages for Datadog tracing:
 
 ```terminal
 npm install @prisma/instrumentation \
-  dd-trace 
+  dd-trace
 ```
 
 Also ensure you have development dependencies for TypeScript:
@@ -163,51 +162,13 @@ touch src/tracer.ts
 Open `src/tracer.ts` and add the following code:
 
 ```ts file=src/tracer.ts
-
-import  from "@prisma/instrumentation";
-
-const tracer = Tracer.init();
-
-const provider = new tracer.TracerProvider();
-
-// Register the provider globally
-provider.register();
-
-registerInstrumentations(),
-  ],
-  tracerProvider: provider,
-});
-
+tracer.init();
 ```
-
-:::note 
-
-If you encounter a linting error on the line `traceProvider: provider` due to incompatible types, it's likely caused by a version mismatch in the `@opentelemetry/api` package.
-
-To resolve this, add the following override to your package.json:
-```json
-//add-start
-"overrides": 
-//add-end
-```
-
-This is necessary because [`dd-trace` does not yet support version `1.9.0` or above of `@opentelemetry/api`](https://github.com/DataDog/dd-trace-js#datadog-with-opentelemetery).
-
-After updating the `package.json`, reinstall your dependencies:
-
-```terminal
-npm i
-```
-
-This should resolve the linting error.
-
-:::
 
 #### Explanation
 
-- **`Tracer.init`** configures `dd-trace` with a `service` name. This name appears in Datadog under your `APM` > `Services` list.
+- **`tracer.init`** configures `dd-trace` with a `service` name. This name appears in Datadog under your `APM` > `Services` list.
 - **`@prisma/instrumentation`** automatically logs each Prisma query as a Datadog span.
-- The `middleware: true` option ensures that each query is intercepted for instrumentation.
 
 ## 5. Instantiate Prisma and run queries
 
@@ -228,6 +189,14 @@ Unlike the `@prisma/instrumentation` package, which offers automatic tracing out
 Create a `src/index.ts` file and add code to perform queries to your database and send traces to Datadog:
 
 ```typescript file=src/index.ts
+
+import  from "@prisma/instrumentation";
+
+const provider = new tracer.TracerProvider();
+
+registerInstrumentations();
+
+provider.register();
 
 async function main() @prisma.io`;
   const user2Email = `bob$@prisma.io`;
@@ -251,13 +220,13 @@ async function main() @prisma.io`;
     console.log(
       `✅ Created users: $ ($ post) and $ ($ posts)`
     );
-  } catch (err) 
+  } catch (err)
 
   // 2. Fetch all published posts
   try ,
     });
     console.log(`✅ Retrieved $ published post(s).`);
-  } catch (err) 
+  } catch (err)
 
   // 3. Create & publish a post for Alice
   let post;
@@ -265,13 +234,13 @@ async function main() @prisma.io`;
       },
     });
     console.log(`✅ Created draft post for Alice (ID: $)`);
-  } catch (err) 
+  } catch (err)
 
   try ,
       data: ,
     });
     console.log("✅ Published Alice’s post:", post);
-  } catch (err) 
+  } catch (err)
 
   // 4. Fetch all posts by Alice
   try  },
@@ -280,7 +249,7 @@ async function main() @prisma.io`;
       `✅ Retrieved $ post(s) by Alice.`,
       alicePosts
     );
-  } catch (err) 
+  } catch (err)
 }
 
 // Entrypoint
@@ -288,6 +257,30 @@ main()
   .catch((err) => )
   .finally(async () => );
 ```
+
+:::note
+
+If you encounter a linting error on the line `tracerProvider: provider` due to incompatible types, it's likely caused by a version mismatch in the `@opentelemetry/api` package.
+
+To resolve this, add the following override to your package.json:
+
+```json
+//add-start
+"overrides":
+//add-end
+```
+
+This is necessary because [`dd-trace` does not yet support version `1.9.0` or above of `@opentelemetry/api`](https://github.com/DataDog/dd-trace-js#datadog-with-opentelemetery).
+
+After updating the `package.json`, reinstall your dependencies:
+
+```terminal
+npm i
+```
+
+This should resolve the linting error.
+
+:::
 
 ## 6. Run your queries and see the traces
 

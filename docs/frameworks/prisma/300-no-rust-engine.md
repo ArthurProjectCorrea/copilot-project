@@ -53,6 +53,36 @@ Finally, instantiate Prisma Client which you can do using the driver adapter and
 
 If you went through the previous steps, you can query your database as you're used to with Prisma Client. No other changes are needed.
 
+## Usage with Prisma Accelerate or Prisma Postgres
+
+When using the Rust-free version of Prisma ORM with [Prisma Accelerate](/accelerate) or [Prisma Postgres](/postgres), you **should not** use driver adapters. Instead, you can directly instantiate Prisma Client with the appropriate extension.
+
+### 1. Set `engineType` on the `generator` block
+
+```prisma file=schema.prisma
+generator client
+```
+
+### 2. Re-generate Prisma Client
+
+To make the configuration take effect, you need re-generate Prisma Client:
+
+```terminal
+npx prisma generate
+```
+
+### 3. Instantiate Prisma Client with Accelerate
+
+Import and instantiate Prisma Client with the Accelerate extension:
+
+```typescript
+const prisma = new PrismaClient().$extends(withAccelerate());
+```
+
+### 4. Query your database
+
+If you went through the previous steps, you can query your database as you're used to with Prisma Client. No other changes are needed.
+
 ## Usage with older versions (Preview)
 
 The Rust-free version of Prisma ORM has been in Preview from versions v6.7.0 to v.6.14.0. Expand below if you're using any of these versions and are unable to upgrade to the latest one.

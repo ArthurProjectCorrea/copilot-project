@@ -1,25 +1,23 @@
 ---
-title: 'Connect your MongoDB database to your existing TypeScript project'
+title: 'Connect your database using TypeScript and MongoDB'
 sidebar_label: 'Connect your database (MongoDB)'
-metaTitle: 'Connect your MongoDB database using TypeScript'
-metaDescription: 'Connect your MongoDB database to your existing TypeScript project'
+metaTitle: 'Connect your database using TypeScript and MongoDB'
+metaDescription: 'Connect your database to your project using TypeScript and MongoDB'
 langSwitcher: ['typescript', 'node']
 dbSwitcher: ['mongodb']
 hide_table_of_contents: true
-pagination_prev: getting-started/setup-prisma/add-to-existing-project/mongodb-typescript-mongodb
-pagination_next: getting-started/setup-prisma/add-to-existing-project/mongodb/introspection-typescript-mongodb
-slugSwitch: /getting-started/setup-prisma/add-to-existing-project/mongodb/connect-your-database-
+pagination_prev: getting-started/setup-prisma/start-from-scratch/mongodb-typescript-mongodb
+pagination_next: getting-started/setup-prisma/start-from-scratch/mongodb/creating-the-prisma-schema-typescript-mongodb
+slugSwitch: /getting-started/setup-prisma/start-from-scratch/mongodb/connect-your-database-
 ---
- 
-## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
 ```prisma file=prisma/schema.prisma showLineNumbers
-datasource db 
+datasource db
 ```
 
-In this case, the `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env`:
+In this case, the `url` is [set via an environment variable](/orm/more/development-environment/environment-variables) which is defined in `.env` (the example uses a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) URL):
 
 ```bash file=.env showLineNumbers
 DATABASE_URL="mongodb+srv://test:test@cluster0.ns1yp.mongodb.net/myFirstDatabase"

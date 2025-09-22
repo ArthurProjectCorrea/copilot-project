@@ -1,336 +1,216 @@
 ---
-title: 'Referential actions'
-metaTitle: 'Referential actions'
-metaDescription: 'Referential actions let you define the update and delete behavior of related models on the database level'
-tocDepth: 3
+title: 'Extensions'
+metaTitle: 'Prisma Client extensions'
+metaDescription: 'Extend the functionality of Prisma Client'
+toc_max_heading_level: 4
 ---
 
-## What are referential actions?
+## About Prisma Client extensions
 
-Referential actions are policies that define how a referenced record is handled by the database when you run an [`update`](/orm/prisma-client/queries/crud#update) or [`delete`](/orm/prisma-client/queries/crud#delete) query.
+When you use a Prisma Client extension, you create an _extended client_. An extended client is a lightweight variant of the standard Prisma Client that is wrapped by one or more extensions. The standard client is not mutated. You can add as many extended clients as you want to your project. [Learn more about extended clients](#extended-clients).
 
-<details>
+You can associate a single extension, or multiple extensions, with an extended client. [Learn more about multiple extensions](#multiple-extensions).
 
-<summary>Referential actions on the database level</summary>
+You can [share your Prisma Client extensions](/orm/prisma-client/client-extensions/shared-extensions) with other Prisma ORM users, and [import Prisma Client extensions developed by other users](/orm/prisma-client/client-extensions/shared-extensions#install-a-shared-packaged-extension) into your Prisma ORM project.
 
-Referential actions are features of foreign key constraints that exist to preserve referential integrity in your database.
+### Extended clients
 
-When you define relationships between data models in your Prisma schema, you use [relation fields](/orm/prisma-schema/data-model/relations#relation-fields), **which do not exist on the database**, and [scalar fields](/orm/prisma-schema/data-model/models#scalar-fields), **which do exist on the database**. These foreign keys connect the models on the database level.
+Extended clients interact with each other, and with the standard client, as follows:
 
-Referential integrity states that these foreign keys must reference an existing primary key value in the related database table. In your Prisma schema, this is generally represented by the `id` field on the related model.
+- Each extended client operates independently in an isolated instance.
+- Extended clients cannot conflict with each other, or with the standard client.
+- All extended clients and the standard client communicate with the same [Prisma ORM query engine](/orm/more/under-the-hood/engines).
+- All extended clients and the standard client share the same connection pool.
 
-By default a database will reject any operation that violates the referential integrity, for example, by deleting referenced records.
+> **Note**: The author of an extension can modify this behavior since they're able to run arbitrary code as part of an extension. For example, an extension might actually create an entirely new `PrismaClient` instance (including its own query engine and connection pool). Be sure to check the documentation of the extension you're using to learn about any specific behavior it might implement.
 
-</details>
+### Example use cases for extended clients
 
-### How to use referential actions
+Because extended clients operate in isolated instances, they can be a good way to do the following, for example:
 
-Referential actions are defined in the [`@relation`](/orm/reference/prisma-schema-reference#relation) attribute and map to the actions on the **foreign key constraint** in the underlying database. If you do not specify a referential action, [Prisma ORM falls back to a default](#referential-action-defaults).
+- Implement row-level security (RLS), where each HTTP request has its own client with its own RLS extension, customized with session data. This can keep each user entirely separate, each in a separate client.
+- Add a `user.current()` method for the `User` model to get the currently logged-in user.
+- Enable more verbose logging for requests if a debug cookie is set.
+- Attach a unique request id to all logs so that you can correlate them later, for example to help you analyze the operations that Prisma Client carries out.
+- Remove a `delete` method from models unless the application calls the admin endpoint and the user has the necessary privileges.
 
-The following model defines a one-to-many relation between `User` and `Post` and a many-to-many relation between `Post` and `Tag`, with explicitly defined referential actions:
+## Add an extension to Prisma Client
 
-```prisma file=schema.prisma highlight=10,16-17;normal showLineNumbers
-model User
+You can create an extension using two primary ways:
 
-model Post
+- Use the client-level [`$extends`](/orm/reference/prisma-client-reference#client-methods) method
 
-model TagOnPosts
+  ```ts
+  const prisma = new PrismaClient().$extends( // The extension logic for the `user` model goes inside the curly braces
+    },
+  })
+  ```
 
-model Tag
+- Use the `Prisma.defineExtension` method to define an extension and assign it to a variable, and then pass the extension to the client-level `$extends` method
+
+  ```ts
+  import  from '@prisma/client'
+
+  // Define the extension
+  const myExtension = Prisma.defineExtension( // The extension logic for the `user` model goes inside the curly braces
+    },
+  })
+
+  // Pass the extension to a Prisma Client instance
+  const prisma = new PrismaClient().$extends(myExtension)
+  ```
+
+  :::tip
+
+  This pattern is useful for when you would like to separate extensions into multiple files or directories within a project.
+
+  :::
+
+The above examples use the [`model` extension component](/orm/prisma-client/client-extensions/model) to extend the `User` model.
+
+In your `$extends` method, use the appropriate extension component or components ([`model`](/orm/prisma-client/client-extensions/model), [`client`](/orm/prisma-client/client-extensions/client), [`result`](/orm/prisma-client/client-extensions/result) or [`query`](/orm/prisma-client/client-extensions/query)).
+
+## Name an extension for error logs
+
+You can name your extensions to help identify them in error logs. To do so, use the optional field `name`. For example:
+
+```ts
+const prisma = new PrismaClient().$extends(
+ },
+})
 ```
 
-This model explicitly defines the following referential actions:
+## Multiple extensions
 
-- If you delete a `Tag`, the corresponding tag assignment is also deleted in `TagOnPosts`, using the `Cascade` referential action
-- If you delete a `User`, the author is removed from all posts by setting the field value to `Null`, because of the `SetNull` referential action. To allow this, `User` and `userId` must be optional fields in `Post`.
+You can associate an extension with an [extended client](#about-prisma-client-extensions) in one of two ways:
 
-Prisma ORM supports the following referential actions:
+- You can associate it with an extended client on its own, or
+- You can combine the extension with other extensions and associate all of these extensions with an extended client. The functionality from these combined extensions applies to the same extended client.
+  Note: [Combined extensions can conflict](#conflicts-in-combined-extensions).
 
-- [`Cascade`](#cascade)
-- [`Restrict`](#restrict)
-- [`NoAction`](#noaction)
-- [`SetNull`](#setnull)
-- [`SetDefault`](#setdefault)
+You can combine the two approaches above. For example, you might associate one extension with its own extended client and associate two other extensions with another extended client. [Learn more about how client instances interact](#extended-clients).
 
-### Referential action defaults
+### Apply multiple extensions to an extended client
 
-If you do not specify a referential action, Prisma ORM uses the following defaults:
+In the following example, suppose that you have two extensions, `extensionA` and `extensionB`. There are two ways to combine these.
 
-| Clause     | Optional relations | Mandatory relations |
-| :--------- | :----------------- | :------------------ |
-| `onDelete` | `SetNull`          | `Restrict`          |
-| `onUpdate` | `Cascade`          | `Cascade`           |
+#### Option 1: Declare the new client in one line
 
-For example, in the following schema all `Post` records must be connected to a `User` via the `author` relation:
+With this option, you apply both extensions to a new client in one line of code.
 
-```prisma highlight=4;normal
-model Post
+```ts
+// First of all, store your original Prisma Client in a variable as usual
+const prisma = new PrismaClient();
 
-model User
+// Declare an extended client that has an extensionA and extensionB
+const prismaAB = prisma.$extends(extensionA).$extends(extensionB);
 ```
 
-The schema does not explicitly define referential actions on the mandatory `author` relation field, which means that the default referential actions of `Restrict` for `onDelete` and `Cascade` for `onUpdate` apply.
+You can then refer to `prismaAB` in your code, for example `prismaAB.myExtensionMethod()`.
 
-## Caveats
+#### Option 2: Declare multiple extended clients
 
-The following caveats apply:
+The advantage of this option is that you can call any of the extended clients separately.
 
-- Referential actions are **not** supported on [implicit many-to-many relations](/orm/prisma-schema/data-model/relations/many-to-many-relations#implicit-many-to-many-relations). To use referential actions, you must define an explicit many-to-many relation and define your referential actions on the [join table](/orm/prisma-schema/data-model/relations/troubleshooting-relations#how-to-use-a-relation-table-with-a-many-to-many-relationship).
-- Certain combinations of referential actions and required/optional relations are incompatible. For example, using `SetNull` on a required relation will lead to database errors when deleting referenced records because the non-nullable constraint would be violated. See [this GitHub issue](https://github.com/prisma/prisma/issues/7909) for more information.
+```ts
+// First of all, store your original Prisma Client in a variable as usual
+const prisma = new PrismaClient();
 
-## Types of referential actions
+// Declare an extended client that has extensionA applied
+const prismaA = prisma.$extends(extensionA);
 
-The following table shows which referential action each database supports.
+// Declare an extended client that has extensionB applied
+const prismaB = prisma.$extends(extensionB);
 
-| Database      | Cascade | Restrict | NoAction | SetNull | SetDefault |
-| :------------ | :------ | :------- | :------- | :------ | :--------- |
-| PostgreSQL    | ✔️      | ✔️       | ✔️       | ✔️⌘     | ✔️         |
-| MySQL/MariaDB | ✔️      | ✔️       | ✔️       | ✔️      | ❌ (✔️†)   |
-| SQLite        | ✔️      | ✔️       | ✔️       | ✔️      | ✔️         |
-| SQL Server    | ✔️      | ❌‡      | ✔️       | ✔️      | ✔️         |
-| CockroachDB   | ✔️      | ✔️       | ✔️       | ✔️      | ✔️         |
-| MongoDB††     | ✔️      | ✔️       | ✔️       | ✔️      | ❌         |
-
-- † See [special cases for MySQL](#mysqlmariadb).
-- ⌘ See [special cases for PostgreSQL](#postgresql).
-- ‡ See [special cases for SQL Server](#sql-server).
-- †† Referential actions for MongoDB are available in Prisma ORM versions 3.7.0 and later.
-
-### Special cases for referential actions
-
-Referential actions are part of the ANSI SQL standard. However, there are special cases where some relational databases diverge from the standard.
-
-#### MySQL/MariaDB
-
-MySQL/MariaDB, and the underlying InnoDB storage engine, does not support `SetDefault`. The exact behavior depends on the database version:
-
-- In MySQL versions 8 and later, and MariaDB versions 10.5 and later, `SetDefault` effectively acts as an alias for `NoAction`. You can define tables using the `SET DEFAULT` referential action, but a foreign key constraint error is triggered at runtime.
-- In MySQL versions 5.6 and later, and MariaDB versions before 10.5, attempting to create a table definition with the `SET DEFAULT` referential action fails with a syntax error.
-
-For this reason, when you set `mysql` as the database provider, Prisma ORM warns users to replace `SetDefault` referential actions in the Prisma schema with another action.
-
-#### PostgreSQL
-
-PostgreSQL is the only database supported by Prisma ORM that allows you to define a `SetNull` referential action that refers to a non-nullable field. However, this raises a foreign key constraint error when the action is triggered at runtime.
-
-For this reason, when you set `postgres` as the database provider in the (default) `foreignKeys` relation mode, Prisma ORM warns users to mark as optional any fields that are included in a `@relation` attribute with a `SetNull` referential action. For all other database providers, Prisma ORM rejects the schema with a validation error.
-
-#### SQL Server
-
-[`Restrict`](#restrict) is not available for SQL Server databases, but you can use [`NoAction`](#noaction) instead.
-
-### `Cascade`
-
-- `onDelete: Cascade` Deleting a referenced record will trigger the deletion of referencing record.
-- `onUpdate: Cascade` Updates the relation scalar fields if the referenced scalar fields of the dependent record are updated.
-
-#### Example usage
-
-```prisma file=schema.prisma highlight=4;add showLineNumbers
-model Post
-
-model User
+// Declare an extended client that is a combination of clientA and clientB
+const prismaAB = prismaA.$extends(extensionB);
 ```
 
-##### Result of using `Cascade`
+In your code, you can call any of these clients separately, for example `prismaA.myExtensionMethod()`, `prismaB.myExtensionMethod()`, or `prismaAB.myExtensionMethod()`.
 
-If a `User` record is deleted, then their posts are deleted too. If the user's `id` is updated, then the corresponding `authorId` is also updated.
+### Conflicts in combined extensions
 
-##### How to use cascading deletes
+When you combine two or more extensions into a single extended client, then the _last_ extension that you declare takes precedence in any conflict. In the example in option 1 above, suppose there is a method called `myExtensionMethod()` defined in `extensionA` and a method called `myExtensionMethod()` in `extensionB`. When you call `prismaAB.myExtensionMethod()`, then Prisma Client uses `myExtensionMethod()` as defined in `extensionB`.
 
-<div class="videoWrapper">
-  <iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/-Nv3wSm0Ac0"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-</div>
+## Type of an extended client
 
-### `Restrict`
+You can infer the type of an extended Prisma Client instance using the [`typeof`](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html) utility as follows:
 
-- `onDelete: Restrict` Prevents the deletion if any referencing records exist.
-- `onUpdate: Restrict` Prevents the identifier of a referenced record from being changed.
+```ts
+const extendedPrismaClient = new PrismaClient().$extends();
 
-#### Example usage
-
-```prisma file=schema.prisma highlight=4;add showLineNumbers
-model Post
-
-model User
+type ExtendedPrismaClient = typeof extendedPrismaClient;
 ```
 
-##### Result of using `Restrict`
+If you're using Prisma Client as a singleton, you can get the type of the extended Prisma Client instance using the `typeof` and [`ReturnType`](https://www.typescriptlang.org/docs/handbook/utility-types.html#returntypetype) utilities as follows:
 
-`User`s with posts **cannot** be deleted. The `User`'s `id` **cannot** be changed.
+```ts
+function getExtendedClient() )
+}
 
-### `NoAction`
-
-The `NoAction` action is similar to `Restrict`, the difference between the two is dependent on the database being used:
-
-- **PostgreSQL**: `NoAction` allows the check (if a referenced row on the table exists) to be deferred until later in the transaction. See [the PostgreSQL docs](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-FK) for more information.
-- **MySQL**: `NoAction` behaves exactly the same as `Restrict`. See [the MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html#foreign-key-referential-actions) for more information.
-- **SQLite**: When a related primary key is modified or deleted, no action is taken. See [the SQLite docs](https://www.sqlite.org/foreignkeys.html#fk_actions) for more information.
-- **SQL Server**: When a referenced record is deleted or modified, an error is raised. See [the SQL Server docs](https://learn.microsoft.com/en-us/sql/relational-databases/tables/graph-edge-constraints?view=sql-server-ver15#on-delete-referential-actions-on-edge-constraints) for more information.
-- **MongoDB** (in preview from version 3.6.0): When a record is modified or deleted, nothing is done to any related records.
-
-#### Example usage
-
-```prisma file=schema.prisma highlight=4;add showLineNumbers
-model Post
-
-model User
+type ExtendedPrismaClient = ReturnType<typeof getExtendedClient>
 ```
 
-##### Result of using `NoAction`
+## Extending model types with `Prisma.Result`
 
-`User`'s with posts **cannot** be deleted. The `User`'s `id` **cannot** be changed.
+You can use the `Prisma.Result` type utility to extend model types to include properties added via client extensions. This allows you to infer the type of the extended model, including the extended properties.
 
-### `SetNull`
+### Example
 
-- `onDelete: SetNull` The scalar field of the referencing object will be set to `NULL`.
-
-- `onUpdate: SetNull` When updating the identifier of a referenced object, the scalar fields of the referencing objects will be set to `NULL`.
-
-`SetNull` will only work on optional relations. On required relations, a runtime error will be thrown since the scalar fields cannot be null.
-
-```prisma file=schema.prisma highlight=4;add showLineNumbers
-model Post
-
-model User
-```
-
-##### Result of using `SetNull`
-
-When deleting a `User`, the `authorId` will be set to `NULL` for all its authored posts.
-
-When changing a `User`'s `id`, the `authorId` will be set to `NULL` for all its authored posts.
-
-### `SetDefault`
-
-- `onDelete: SetDefault` The scalar field of the referencing object will be set to the fields default value.
-
-- `onUpdate: SetDefault` The scalar field of the referencing object will be set to the fields default value.
-
-These require setting a default for the relation scalar field with [`@default`](/orm/reference/prisma-schema-reference#default). If no defaults are provided for any of the scalar fields, a runtime error will be thrown.
-
-```prisma file=schema.prisma highlight=4,5;add showLineNumbers
-model Post
-
-model User
-```
-
-##### Result of using `SetDefault`
-
-When deleting a `User`, its existing posts' `authorUsername` field values will be set to 'anonymous'.
-
-When the `username` of a `User` changes, its existing posts' `authorUsername` field values will be set to 'anonymous'.
-
-### Database-specific requirements
-
-MongoDB and SQL Server have specific requirements for referential actions if you have [self-relations](/orm/prisma-schema/data-model/relations/referential-actions/special-rules-for-referential-actions#self-relation-sql-server-and-mongodb) or [cyclic relations](/orm/prisma-schema/data-model/relations/referential-actions/special-rules-for-referential-actions#cyclic-relation-between-three-tables-sql-server-and-mongodb) in your data model. SQL Server also has specific requirements if you have relations with [multiple cascade paths](/orm/prisma-schema/data-model/relations/referential-actions/special-rules-for-referential-actions#multiple-cascade-paths-between-two-models-sql-server-only).
-
-## Upgrade paths from versions 2.25.0 and earlier
-
-There are a couple of paths you can take when upgrading which will give different results depending on the desired outcome.
-
-If you currently use the migration workflow, you can run an introspection to check how the defaults are reflected in your schema. You can then manually update your database if you need to.
-
-You can also decide to skip checking the defaults and run a migration to update your database with the [new default values](#referential-action-defaults).
-
-The following assumes you have upgraded to 2.26.0 or newer and enabled the preview feature flag, or upgraded to 3.0.0 or newer:
-
-### Using Introspection
-
-If you [Introspect](/orm/prisma-schema/introspection) your database, the referential actions configured at the database level will be reflected in your Prisma Schema. If you have been using Prisma Migrate or `prisma db push` to manage the database schema, these are likely to be the [default values](#referential-action-defaults) from 2.25.0 and earlier.
-
-When you run an Introspection, Prisma ORM compares all the foreign keys in the database with the schema, if the SQL statements `ON DELETE` and `ON UPDATE` do **not** match the default values, they will be explicitly set in the schema file.
-
-After introspecting, you can review the non-default clauses in your schema. The most important clause to review is `onDelete`, which defaults to `Cascade` in 2.25.0 and earlier.
-
-Make sure you are happy with every case of `onDelete: Cascade` in your schema. If not, either:
-
-- Modify your Prisma schema and `db push` or `dev migrate` to change the database
-
-_or_
-
-- Manually update the underlying database if you use an introspection-only workflow
-
-The following example would result in a cascading delete, if the `User` is deleted then all of their `Post`'s will be deleted too.
-
-#### A blog schema example
-
-```prisma showLineNumbers
-model Post
-
-model User
-```
-
-### Using Migration
-
-When running a [Migration](/orm/prisma-migrate) (or the [`prisma db push`](/orm/prisma-migrate/workflows/prototyping-your-schema) command) the [new defaults](#referential-action-defaults) will be applied to your database.
-
-Explicitly defining referential actions in your Prisma schema is optional. If you do not explicitly define a referential action for a relation, Prisma ORM uses the [new defaults](#referential-action-defaults).
-
-Note that referential actions can be added on a case by case basis. This means that you can add them to one single relation and leave the rest set to the defaults by not manually specifying anything.
-
-### Checking for errors
-
-**Before** upgrading to 2.26.0 and enabling the referential actions **preview feature**, Prisma ORM prevented the deletion of records while using `delete()` or `deleteMany()` to preserve referential integrity. A custom runtime error would be thrown by Prisma Client with the error code `P2014`.
-
-**After** upgrading and enabling the referential actions **preview feature**, Prisma ORM no longer performs runtime checks. You can instead specify a custom referential action to preserve the referential integrity between relations.
-
-When you use [`NoAction`](#noaction) or [`Restrict`](#restrict) to prevent the deletion of records, the error messages will be different post 2.26.0 compared to pre 2.26.0. This is because they are now triggered by the database and **not** Prisma Client. The new error code that can be expected is `P2003`.
-
-To make sure you catch these new errors you can adjust your code accordingly.
-
-#### Example of catching errors
-
-The following example uses the below blog schema with a one-to-many relationship between `Post` and `User` and sets a [`Restrict`](#restrict) referential actions on the `author` field.
-
-This means that if a user has a post, that user (and their posts) **cannot** be deleted.
-
-```prisma file=schema.prisma showLineNumbers
-model Post
-
-model User
-```
-
-Prior to upgrading and enabling the referential actions **preview feature**, the error code you would receive when trying to delete a user which has posts would be `P2014` and it's message:
-
-> "The change you are trying to make would violate the required relation '\' between the \ and \ models."
+The following example demonstrates how to use `Prisma.Result` to extend the `User` model type to include a `__typename` property added via a client extension.
 
 ```ts
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient().$extends(,
+        compute() ,
+      },
+    },
+  },
+})
+
+type ExtendedUser = Prisma.Result<typeof prisma.user,  }, 'findFirstOrThrow'>
 
 async function main() ,
-    })
-  } catch (error)
-    }
-  }
+  })
+
+  console.log(user.__typename) // Output: 'User'
 }
 
 main()
 ```
 
-To make sure you are checking for the correct errors in your code, modify your check to look for `P2003`, which will deliver the message:
+The `Prisma.Result` type utility is used to infer the type of the extended `User` model, including the `__typename` property added via the client extension.
 
-> "Foreign key constraint failed on the field: \"
+## Limitations
 
-```ts highlight=14;delete|15;add
+### Usage of `$on` and `$use` with extended clients
 
+`$on` and `$use` are not available in extended clients. If you would like to continue using these [client-level methods](/orm/reference/prisma-client-reference#client-methods) with an extended client, you will need to hook them up before extending the client.
+
+```ts
 const prisma = new PrismaClient()
 
-async function main()
-    })
-  } catch (error)
-    }
-  }
-}
+prisma.$use(async (params, next) => )
 
-main()
+const xPrisma = prisma.$extends( })
+      },
+    },
+  },
+})
 ```
+
+To learn more, see our documentation on [`$on`](/orm/reference/prisma-client-reference#on) and [`$use`](/orm/reference/prisma-client-reference#use)
+
+### Usage of client-level methods in extended clients
+
+[Client-level methods](/orm/reference/prisma-client-reference#client-methods) do not necessarily exist on extended clients. For these clients you will need to first check for existence before using.
+
+```ts
+const xPrisma = new PrismaClient().$extends(...);
+
+if (xPrisma.$connect)
+```
+
+### Usage with nested operations
+
+The `query` extension type does not support nested read and write operations.

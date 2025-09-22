@@ -1,16 +1,19 @@
 ---
-title: 'Connect your database using TypeScript and MySQL'
+title: 'Connect your existing database using TypeScript and MySQL'
 sidebar_label: 'Connect your database'
-metaTitle: 'Connect your database using TypeScript and MySQL'
-metaDescription: 'Connect your database to your project using TypeScript and MySQL'
+metaTitle: 'Connect your existing database using TypeScript and MySQL'
+metaDescription: 'Connect your existing database to your project using TypeScript and MySQL'
 langSwitcher: ['typescript', 'node']
-dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb', 'prismaPostgres']
+dbSwitcher: ['postgresql', 'mysql', 'sqlserver', 'planetscale', 'cockroachdb']
 sidebar_class_name: hidden-sidebar
 hide_table_of_contents: true
-pagination_prev: getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-mysql
-pagination_next: getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-mysql
-slugSwitch: /getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-
+toc: false
+pagination_prev: getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-mysql
+pagination_next: getting-started/setup-prisma/add-to-existing-project/relational-databases/introspection-typescript-mysql
+slugSwitch: /getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-
 ---
+
+## Connecting your database
 
 To connect your database, you need to set the `url` field of the `datasource` block in your Prisma schema to your database [connection URL](/orm/reference/connection-urls):
 
@@ -25,6 +28,8 @@ DATABASE_URL="mysql://johndoe:randompassword@localhost:3306/mydb"
 ```
 
 You now need to adjust the connection URL to point to your own database.
+
+<h3 id="connection-url">Connection URL</h3>
 
 The [format of the connection URL](/orm/reference/connection-urls) for your database typically depends on the database you use. For MySQL, it looks as follows (the parts spelled all-uppercased are _placeholders_ for your specific connection details):
 
