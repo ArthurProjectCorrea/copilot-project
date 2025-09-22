@@ -53,7 +53,7 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 
 ```tsx filename="app/dashboard/[team]/layout.tsx" switcher
 
-  children
+  children,
   params,
 }: >
 })  = await params
@@ -66,11 +66,11 @@ A promise that resolves to an object containing the [dynamic route parameters](/
 }
 ```
 
-| Example Route                     | URL            | `params`                           |
-| --------------------------------- | -------------- | ---------------------------------- |
-| `app/dashboard/[team]/layout.js`  | `/dashboard/1` | `Promise<>`           |
+| Example Route                     | URL            | `params`    |
+| --------------------------------- | -------------- | ----------- |
+| `app/dashboard/[team]/layout.js`  | `/dashboard/1` | `Promise<>` |
 | `app/shop/[tag]/[item]/layout.js` | `/shop/1/2`    | `Promise<>` |
-| `app/blog/[...slug]/layout.js`    | `/blog/1/2`    | `Promise<>`    |
+| `app/blog/[...slug]/layout.js`    | `/blog/1/2`    | `Promise<>` |
 
 - Since the `params` prop is a promise. You must use `async/await` or React's [`use`](https://react.dev/reference/react/use) function to access the values.
   - In version 14 and earlier, `params` was a synchronous prop. To help with backwards compatibility, you can still access it synchronously in Next.js 15, but this behavior will be deprecated in the future.
@@ -245,7 +245,7 @@ To access the current pathname, you can read it inside a Client Component using 
 
   return (
     <>
-      
+
       <main></main>
     </>
   )
@@ -256,7 +256,7 @@ To access the current pathname, you can read it inside a Client Component using 
 
   return (
     <>
-      
+
       <main></main>
     </>
   )
@@ -285,7 +285,7 @@ Alternatively, when using [`fetch`](/docs/app/api-reference/functions/fetch)in N
       <nav>
 
       </nav>
-      
+
     </>
   )
 }
@@ -300,7 +300,7 @@ Alternatively, when using [`fetch`](/docs/app/api-reference/functions/fetch)in N
       <nav>
 
       </nav>
-      
+
     </>
   )
 }
@@ -339,7 +339,7 @@ Layouts do not have access to the route segments below itself. To access all rou
 
   slug,
   children,
-}: ) 
+}: )
 ```
 
 ```jsx filename="app/ui/nav-link.js" switcher
@@ -349,7 +349,7 @@ Layouts do not have access to the route segments below itself. To access all rou
   const isActive = slug === segment
 
   return (
-    
+
   )
 }
 ```
@@ -358,7 +358,7 @@ Layouts do not have access to the route segments below itself. To access all rou
 
   children,
 }: ) >
-          
+
         </div>
       ))}
       <div></div>
@@ -373,7 +373,7 @@ Layouts do not have access to the route segments below itself. To access all rou
   return (
     <div>
       >
-          
+
         </div>
       ))}
       <div></div>
@@ -445,7 +445,7 @@ Since `usePathname` is a client hook, you need to extract the nav links into a C
   return (
     <html lang="en">
       <body>
-        
+
         <main></main>
       </body>
     </html>
@@ -458,7 +458,7 @@ Since `usePathname` is a client hook, you need to extract the nav links into a C
   return (
     <html lang="en">
       <body>
-        
+
         <main></main>
       </body>
     </html>

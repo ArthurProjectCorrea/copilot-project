@@ -5,7 +5,7 @@
 - **Framework:** Next.js (framework)
 - **Repository:** [vercel/next.js](https://github.com/vercel/next.js)
 - **Source Path:** `docs/`
-- **Last Sync:** 2025-09-15T04:14:04.954Z
+- **Last Sync:** 2025-09-22T04:14:01.643Z
 - **MDX Conversion:** Enabled
 - **File Extensions:** .md, .mdx
 

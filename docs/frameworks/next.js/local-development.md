@@ -45,7 +45,6 @@ Libraries like `@material-ui/icons`, `@phosphor-icons/react`, or `react-icons` c
 // Instead of this:
 
 // Do this:
-
 ```
 
 You can often find what import pattern to use in the documentation for the icon library you're using. This example follows [`@phosphor-icons/react`](https://www.npmjs.com/package/@phosphor-icons/react#import-performance-optimization) recommendation.
@@ -168,16 +167,16 @@ It provides detailed information about the time taken for each module to compile
 1. Navigate around your application or make edits to files to reproduce the problem.
 1. Stop the Next.js development server.
 1. A file called `trace-turbopack` will be available in the `.next` folder.
-1. You can interpret the file using `next internal trace [path-to-file]`:
+1. You can interpret the file using `npx next internal trace [path-to-file]`:
 
    ```bash
-   next internal trace .next/trace-turbopack
+   npx next internal trace .next/trace-turbopack
    ```
 
    On versions where `trace` is not available, the command was named `turbo-trace-server`:
 
    ```bash
-   next internal turbo-trace-server .next/trace-turbopack
+   npx next internal turbo-trace-server .next/trace-turbopack
    ```
 
 1. Once the trace server is running you can view the trace at https://trace.nextjs.org/.

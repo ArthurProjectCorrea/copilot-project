@@ -86,6 +86,7 @@ For type completion of `params` and `searchParams`, you can type the first argum
 > - You cannot export both the `metadata` object and `generateMetadata` function from the same route segment.
 > - `fetch` requests inside `generateMetadata` are automatically [memoized](/docs/app/guides/caching#request-memoization) for the same data across `generateMetadata`, `generateStaticParams`, Layouts, Pages, and Server Components.
 > - Resolving `generateMetadata` is part of rendering the page. If the page can be pre-rendered and `generateMetadata` doesn't introduce dynamic behavior, its result is included in the page’s initial HTML.
+> - `generateMetadata` [can stream results](/docs/app/api-reference/functions/generate-metadata#streaming-metadata) to improve page load performance.
 > - React [`cache` can be used](/docs/app/guides/caching#react-cache-function) if `fetch` is unavailable.
 > - [File-based metadata](/docs/app/api-reference/file-conventions/metadata) has the higher priority and will override the `metadata` object and `generateMetadata` function.
 
@@ -98,19 +99,19 @@ For type completion of `params` and `searchParams`, you can type the first argum
 - `props` - An object containing the parameters of the current route:
   - `params` - An object containing the [dynamic route parameters](/docs/app/api-reference/file-conventions/dynamic-routes) object from the root segment down to the segment `generateMetadata` is called from. Examples:
 
-    | Route                           | URL         | `params`                  |
-    | ------------------------------- | ----------- | ------------------------- |
-    | `app/shop/[slug]/page.js`       | `/shop/1`   | ``           |
-    | `app/shop/[tag]/[item]/page.js` | `/shop/1/2` | `` |
-    | `app/shop/[...slug]/page.js`    | `/shop/1/2` | ``    |
+    | Route                           | URL         | `params` |
+    | ------------------------------- | ----------- | -------- |
+    | `app/shop/[slug]/page.js`       | `/shop/1`   | ``       |
+    | `app/shop/[tag]/[item]/page.js` | `/shop/1/2` | ``       |
+    | `app/shop/[...slug]/page.js`    | `/shop/1/2` | ``       |
 
   - `searchParams` - An object containing the current URL's [search params](https://developer.mozilla.org/docs/Learn/Common_questions/What_is_a_URL#parameters). Examples:
 
-    | URL             | `searchParams`       |
-    | --------------- | -------------------- |
-    | `/shop?a=1`     | ``         |
-    | `/shop?a=1&b=2` | `` |
-    | `/shop?a=1&a=2` | ``  |
+    | URL             | `searchParams` |
+    | --------------- | -------------- |
+    | `/shop?a=1`     | ``             |
+    | `/shop?a=1&b=2` | ``             |
+    | `/shop?a=1&a=2` | ``             |
 
 - `parent` - A promise of the resolved metadata from parent route segments.
 
@@ -156,7 +157,6 @@ The `title` attribute is used to set the title of the document. It can be define
 ```
 
 ```tsx filename="app/about/page.tsx"
-
 // Output: <title>Acme</title>
 ```
 
@@ -440,10 +440,7 @@ Any `metadata` fields that inherit the above `metadataBase` and set their own va
 <link rel="shortcut icon" href="/shortcut-icon.png" />
 <link rel="icon" href="/icon.png" />
 <link rel="apple-touch-icon" href="/apple-icon.png" />
-<link
-  rel="apple-touch-icon-precomposed"
-  href="/apple-touch-icon-precomposed.png"
-/>
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
 ```
 
 ```jsx filename="layout.js | page.js"
@@ -470,16 +467,8 @@ Any `metadata` fields that inherit the above `metadataBase` and set their own va
 <link rel="icon" href="https://example.com/icon.png" />
 <link rel="icon" href="/icon-dark.png" media="(prefers-color-scheme: dark)" />
 <link rel="apple-touch-icon" href="/apple-icon.png" />
-<link
-  rel="apple-touch-icon-precomposed"
-  href="/apple-touch-icon-precomposed.png"
-/>
-<link
-  rel="apple-touch-icon"
-  href="/apple-icon-x3.png"
-  sizes="180x180"
-  type="image/png"
-/>
+<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" />
+<link rel="apple-touch-icon" href="/apple-icon-x3.png" sizes="180x180" type="image/png" />
 ```
 
 > **Good to know**: The `msapplication-*` meta tags are no longer supported in Chromium builds of Microsoft Edge, and thus no longer needed.
@@ -590,10 +579,7 @@ Learn more about the [Twitter Card markup reference](https://developer.x.com/en/
 ```
 
 ```html filename="<head> output" hideLineNumbers
-<meta
-  name="apple-itunes-app"
-  content="app-id=myAppStoreID, app-argument=myAppArgument"
-/>
+<meta name="apple-itunes-app" content="app-id=myAppStoreID, app-argument=myAppArgument" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="Apple Web App" />
 <link
@@ -605,10 +591,7 @@ Learn more about the [Twitter Card markup reference](https://developer.x.com/en/
   media="(device-width: 768px) and (device-height: 1024px)"
   rel="apple-touch-startup-image"
 />
-<meta
-  name="apple-mobile-web-app-status-bar-style"
-  content="black-translucent"
-/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 ```
 
 ### `alternates`
@@ -626,16 +609,8 @@ Learn more about the [Twitter Card markup reference](https://developer.x.com/en/
 <link rel="canonical" href="https://nextjs.org" />
 <link rel="alternate" hreflang="en-US" href="https://nextjs.org/en-US" />
 <link rel="alternate" hreflang="de-DE" href="https://nextjs.org/de-DE" />
-<link
-  rel="alternate"
-  media="only screen and (max-width: 600px)"
-  href="https://nextjs.org/mobile"
-/>
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://nextjs.org/rss"
-/>
+<link rel="alternate" media="only screen and (max-width: 600px)" href="https://nextjs.org/mobile" />
+<link rel="alternate" type="application/rss+xml" href="https://nextjs.org/rss" />
 ```
 
 ### `appLinks`
@@ -743,8 +718,7 @@ If you want to generate multiple fb:admins meta tags you can use array value.
 ```
 
 ```html filename="<head> output" hideLineNumbers
-<meta property="fb:admins" content="12345678" />
-<meta property="fb:admins" content="87654321" />
+<meta property="fb:admins" content="12345678" /> <meta property="fb:admins" content="87654321" />
 ```
 
 ### `pinterest`
@@ -805,7 +779,7 @@ You can add type safety to your metadata by using the `Metadata` type. If you ar
 
 ```tsx filename="layout.tsx | page.tsx"
 
-  return 
+  return
 }
 ```
 
@@ -813,7 +787,7 @@ You can add type safety to your metadata by using the `Metadata` type. If you ar
 
 ```tsx filename="layout.tsx | page.tsx"
 
-  return 
+  return
 }
 ```
 
@@ -825,7 +799,7 @@ type Props = >
   searchParams: Promise<>
 }
 
-  return 
+  return
 }
 
 ```
@@ -836,7 +810,7 @@ type Props = >
 
   : Props,
   parent: ResolvingMetadata
-): Promise<Metadata> 
+): Promise<Metadata>
 }
 ```
 
@@ -946,8 +920,7 @@ There are two default `meta` tags that are always added even if a route doesn't 
 - The [meta viewport tag](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag) sets the viewport width and scale for the website to adjust for different devices.
 
 ```html
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
 
 > **Good to know**: You can overwrite the default [`viewport`](/docs/app/api-reference/functions/generate-metadata#viewport) meta tag.
@@ -966,12 +939,12 @@ If you need to customize this list, you can define them manually using the `html
 
 ```ts filename="next.config.ts" switcher
 
-const config: NextConfig = 
+const config: NextConfig =
 
 ```
 
 ```js filename="next.config.js" switcher
-module.exports = 
+module.exports =
 ```
 
 Specifying a `htmlLimitedBots` config will override the Next.js' default list, allowing you full control over what user agents should opt into this behavior.

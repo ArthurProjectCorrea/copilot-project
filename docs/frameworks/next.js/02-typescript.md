@@ -11,17 +11,17 @@ To add TypeScript to an existing project, rename a file to `.ts` / `.tsx`. Run `
 
 ## Examples
 
-### Type checking `next.config.ts`
+### Type Checking Next.js Configuration Files
 
 You can use TypeScript and import types in your Next.js configuration by using `next.config.ts`.
 
 ```ts filename="next.config.ts"
 
-const nextConfig: NextConfig = 
+const nextConfig: NextConfig =
 
 ```
 
-> **Good to know**: Module resolution in `next.config.ts` is currently limited to `CommonJS`. This may cause incompatibilities with ESM only packages being loaded in `next.config.ts`.
+Module resolution in `next.config.ts` is currently limited to CommonJS. However, ECMAScript Modules (ESM) syntax is available when [using Node.js native TypeScript resolver](#using-nodejs-native-typescript-resolver-for-nextconfigts) for Node.js v22.10.0 and higher.
 
 When using the `next.config.js` file, you can add some type checking in your IDE using JSDoc as below:
 
@@ -29,10 +29,39 @@ When using the `next.config.js` file, you can add some type checking in your IDE
 // @ts-check
 
 /** @type  */
-const nextConfig = 
-
-module.exports = nextConfig
+const nextConfig = (module.exports = nextConfig);
 ```
+
+### Using Node.js Native TypeScript Resolver for `next.config.ts`
+
+> **Note**: Available on Node.js v22.10.0+ and only when the feature is enabled. Next.js does not enable it.
+
+Next.js detects the [Node.js native TypeScript resolver](https://nodejs.org/api/typescript.html) via [`process.features.typescript`](https://nodejs.org/api/process.html#processfeaturestypescript), added in **v22.10.0**. When present, `next.config.ts` can use native ESM, including top‑level `await` and dynamic `import()`. This mechanism inherits the capabilities and limitations of Node's resolver.
+
+In Node.js versions **v22.18.0+**, `process.features.typescript` is enabled by default. For versions between **v22.10.0** and **22.17.x**, opt in with `NODE_OPTIONS=--experimental-transform-types`:
+
+```bash filename="Terminal"
+NODE_OPTIONS=--experimental-transform-types next <command>
+```
+
+#### For CommonJS Projects (Default)
+
+Although `next.config.ts` supports native ESM syntax on CommonJS projects, Node.js will still assume `next.config.ts` is a CommonJS file by default, resulting in Node.js reparsing the file as ESM when module syntax is detected. Therefore, we recommend using the `next.config.mts` file for CommonJS projects to explicitly indicate it's an ESM module:
+
+```ts filename="next.config.mts"
+
+// Top-level await and dynamic import are supported
+const flags = await import('./flags.js').then((m) => m.default ?? m)
+
+const nextConfig: NextConfig =
+
+```
+
+#### For ESM Projects
+
+When `"type"` is set to `"module"` in `package.json`, your project uses ESM. Learn more about this setting [in the Node.js docs](https://nodejs.org/api/packages.html#type). In this case, you can write `next.config.ts` directly with ESM syntax.
+
+> **Good to know**: When using `"type": "module"` in your `package.json`, all `.js` and `.ts` files in your project are treated as ESM modules by default. You may need to rename files with CommonJS syntax to `.cjs` or `.cts` extensions if needed.
 
 ### Statically Typed Links
 
@@ -46,7 +75,7 @@ To opt-into this feature, `typedRoutes` need to be enabled and the project needs
 
 ```ts filename="next.config.ts"
 
-const nextConfig: NextConfig = 
+const nextConfig: NextConfig =
 
 ```
 
@@ -76,14 +105,14 @@ To accept `href` in a custom component wrapping `next/link`, use a generic:
 
 ```tsx
 
-function Card<T extends string>(: ) 
+function Card<T extends string>(: )
 ```
 
 You can also type a simple data structure and iterate to render links:
 
 ```ts filename="components/nav-items.ts"
 
-type NavItem<T extends string = string> = 
+type NavItem<T extends string = string> =
 
   ,
   ,
@@ -97,7 +126,7 @@ Then, map over the items to render `Link`s:
 
   return (
     <nav>
-      
+
     </nav>
   )
 }
@@ -210,7 +239,7 @@ When you need to declare custom types, you might be tempted to modify `next-env.
 
 | Version   | Changes                                                                                                                              |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `v15.0.0` | [`next.config.ts`](#type-checking-nextconfigts) support added for TypeScript projects.                                               |
+| `v15.0.0` | [`next.config.ts`](#type-checking-nextjs-configuration-files) support added for TypeScript projects.                                 |
 | `v13.2.0` | Statically typed links are available in beta.                                                                                        |
 | `v12.0.0` | [SWC](/docs/architecture/nextjs-compiler) is now used by default to compile TypeScript and TSX for faster builds.                    |
 | `v10.2.1` | [Incremental type checking](https://www.typescriptlang.org/tsconfig#incremental) support added when enabled in your `tsconfig.json`. |
