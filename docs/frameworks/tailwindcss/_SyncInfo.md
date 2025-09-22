@@ -5,7 +5,7 @@
 - **Framework:** Tailwind CSS (css-framework)
 - **Repository:** [tailwindlabs/tailwindcss.com](https://github.com/tailwindlabs/tailwindcss.com)
 - **Source Path:** `src/docs`
-- **Last Sync:** 2025-09-15T06:29:38.961Z
+- **Last Sync:** 2025-09-22T06:29:08.621Z
 - **MDX Conversion:** Enabled
 - **File Extensions:** .md, .mdx
 

@@ -1,6 +1,6 @@
 Tailwind CSS includes a vast, beautiful color palette out of the box, carefully crafted by expert designers and suitable for a wide range of different design styles.
 
-<div className="my-10">
+<div className="my-10 relative">
 
 </div>
 
@@ -46,7 +46,7 @@ Colors are exposed as CSS variables in the `--color-*` namespace, so you can ref
 /* [!code word:var(--color-blue-800)] */
 @import "tailwindcss";
 
-@layer components 
+@layer components
     }
   }
 }
@@ -69,7 +69,7 @@ To quickly adjust the opacity of a color when referencing it as a variable in CS
 /* [!code word:--alpha(var(--color-gray-950) / 10%)] */
 @import "tailwindcss";
 
-@layer components 
+@layer components
 }
 ```
 
@@ -79,10 +79,10 @@ Use `@theme` to add custom colors to your project under the `--color-*` theme na
 
 ```css
 /* [!code filename:CSS] */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* [!code highlight:6] */
-@theme 
+@theme;
 ```
 
 Now utilities like `bg-midnight`, `text-tahiti`, and `fill-bermuda` will be available in your project in addition to the default colors.
@@ -95,10 +95,10 @@ Override any of the default colors by defining new theme variables with the same
 
 ```css
 /* [!code filename:CSS] */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* [!code highlight:14] */
-@theme 
+@theme;
 ```
 
 ### Disabling default colors
@@ -107,10 +107,10 @@ Disable any default color by setting the theme namespace for that color to `init
 
 ```css
 /* [!code filename:CSS] */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* [!code highlight:5] */
-@theme 
+@theme;
 ```
 
 This is especially useful for removing the corresponding CSS variables from your output for colors you don't intend to use.
@@ -121,9 +121,9 @@ Use `--color-*: initial` to completely disable all of the default colors and def
 
 ```css
 /* [!code filename:CSS] */
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@theme 
+@theme;
 ```
 
 ### Referencing other variables
@@ -134,12 +134,12 @@ Use `@theme inline` when defining colors that reference other colors:
 /* [!code filename:CSS] */
 @import "tailwindcss";
 
-:root 
+:root
 
-[data-theme="dark"] 
+[data-theme="dark"]
 
 /* [!code highlight:4] */
-@theme inline 
+@theme inline
 ```
 
 Learn more in the theme documentation on [referencing other variables](/docs/theme#referencing-other-variables).
@@ -150,7 +150,7 @@ Here's a complete list of the default colors and their values for reference:
 
 ```css
 /* [!code filename:CSS] */
-@theme 
+@theme;
 ```
 
 This can be useful if you want to reuse any of these scales but under a different name, like redefining `--color-gray-*` to use the `--color-slate-*` scale.
