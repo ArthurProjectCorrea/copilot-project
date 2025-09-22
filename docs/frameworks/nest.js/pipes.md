@@ -1,26 +1,24 @@
 ### Pipes
 
-There is no fundamental difference between [regular pipes](/pipes) and web sockets pipes. The only difference is that instead of throwing `HttpException`, you should use `WsException`. In addition, all pipes will be only applied to the `data` parameter (because validating or transforming `client` instance is useless).
+There is no fundamental difference between [regular pipes](/pipes) and microservices pipes. The only difference is that instead of throwing `HttpException`, you should use `RpcException`.
 
-> info **Hint** The `WsException` class is exposed from `@nestjs/websockets` package.
+> info **Hint** The `RpcException` class is exposed from `@nestjs/microservices` package.
 
 #### Binding pipes
 
-The following example uses a manually instantiated method-scoped pipe. Just as with HTTP based applications, you can also use gateway-scoped pipes (i.e., prefix the gateway class with a `@UsePipes()` decorator).
+The following example uses a manually instantiated method-scoped pipe. Just as with HTTP based applications, you can also use controller-scoped pipes (i.e., prefix the controller class with a `@UsePipes()` decorator).
 
 ```typescript
 @@filename()
-@UsePipes(new ValidationPipe({ exceptionFactory: (errors) => new WsException(errors) }))
-@SubscribeMessage('events')
-handleEvent(client: Client, data: unknown): WsResponse<unknown> {
-  const event = 'events';
-  return { event, data };
+@UsePipes(new ValidationPipe({ exceptionFactory: (errors) => new RpcException(errors) }))
+@MessagePattern({ cmd: 'sum' })
+accumulate(data: number[]): number {
+  return (data || []).reduce((a, b) => a + b);
 }
 @@switch
-@UsePipes(new ValidationPipe({ exceptionFactory: (errors) => new WsException(errors) }))
-@SubscribeMessage('events')
-handleEvent(client, data) {
-  const event = 'events';
-  return { event, data };
+@UsePipes(new ValidationPipe({ exceptionFactory: (errors) => new RpcException(errors) }))
+@MessagePattern({ cmd: 'sum' })
+accumulate(data) {
+  return (data || []).reduce((a, b) => a + b);
 }
 ```
