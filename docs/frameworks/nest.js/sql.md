@@ -383,7 +383,7 @@ export class UsersModule {}
 
 A database transaction symbolizes a unit of work performed within a database management system against a database, and treated in a coherent and reliable way independent of other transactions. A transaction generally represents any change in a database ([learn more](https://en.wikipedia.org/wiki/Database_transaction)).
 
-There are many different strategies to handle [TypeORM transactions](https://typeorm.io/#/transactions). We recommend using the `QueryRunner` class because it gives full control over the transaction.
+There are many different strategies to handle [TypeORM transactions](https://typeorm.io/docs/advanced-topics/transactions/). We recommend using the `QueryRunner` class because it gives full control over the transaction.
 
 First, we need to inject the `DataSource` object into a class in the normal way:
 
@@ -423,7 +423,7 @@ async createMany(users: User[]) {
 
 <app-banner-devtools></app-banner-devtools>
 
-Alternatively, you can use the callback-style approach with the `transaction` method of the `DataSource` object ([read more](https://typeorm.io/#/transactions/creating-and-using-transactions)).
+Alternatively, you can use the callback-style approach with the `transaction` method of the `DataSource` object ([read more](https://typeorm.io/docs/advanced-topics/transactions/#creating-and-using-transactions)).
 
 ```typescript
 async createMany(users: User[]) {
@@ -439,12 +439,7 @@ async createMany(users: User[]) {
 With TypeORM [subscribers](https://typeorm.io/#/listeners-and-subscribers/what-is-a-subscriber), you can listen to specific entity events.
 
 ```typescript
-import {
-  DataSource,
-  EntitySubscriberInterface,
-  EventSubscriber,
-  InsertEvent,
-} from 'typeorm';
+import { DataSource, EntitySubscriberInterface, EventSubscriber, InsertEvent } from 'typeorm';
 import { User } from './user.entity';
 
 @EventSubscriber()
@@ -560,7 +555,7 @@ export class AlbumsService {
     @InjectDataSource('albumsConnection')
     private dataSource: DataSource,
     @InjectEntityManager('albumsConnection')
-    private entityManager: EntityManager,
+    private entityManager: EntityManager
   ) {}
 }
 ```
@@ -1148,7 +1143,7 @@ You can also inject the `Sequelize` instance for a given connection:
 export class AlbumsService {
   constructor(
     @InjectConnection('albumsConnection')
-    private sequelize: Sequelize,
+    private sequelize: Sequelize
   ) {}
 }
 ```
